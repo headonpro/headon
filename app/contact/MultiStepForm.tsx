@@ -7,14 +7,6 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
-import {
   CheckCircle2,
   Mail,
   Briefcase,
@@ -34,9 +26,21 @@ import {
 } from 'lucide-react'
 import FileUploadZone from '@/components/contact/FileUploadZone'
 
+interface FormData {
+  name: string
+  email: string
+  company: string
+  phone: string
+  projectType: string
+  budget: string
+  timeline: string
+  message: string
+  files: File[]
+}
+
 interface MultiStepFormProps {
-  formData: any
-  setFormData: (data: any) => void
+  formData: FormData
+  setFormData: (data: FormData) => void
   onSubmit: (e: React.FormEvent) => void
   isSubmitting: boolean
 }

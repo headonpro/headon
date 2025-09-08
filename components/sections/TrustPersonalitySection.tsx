@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { Mail, Phone, Linkedin, Check, Quote } from 'lucide-react'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
@@ -160,7 +159,7 @@ export default function TrustPersonalitySection() {
               >
                 <Quote className="w-8 h-8 text-accent-400 mb-4" />
                 <p className="text-white/90 mb-4 italic leading-relaxed">
-                  "{testimonial.text}"
+                  &quot;{testimonial.text}&quot;
                 </p>
                 <div className="pt-4 border-t border-white/20">
                   <p className="font-semibold text-white">{testimonial.author}</p>

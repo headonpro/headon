@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { TrendingUp, Users, Clock, Star } from 'lucide-react'
-import Image from 'next/image'
 
 interface CaseStudy {
   id: string
@@ -13,7 +12,7 @@ interface CaseStudy {
   results: {
     metric: string
     value: string
-    icon: any
+    icon: React.ComponentType<{ className?: string }>
   }[]
   testimonial: string
   image?: string
@@ -152,7 +151,7 @@ export default function SuccessStoriesSection() {
 
                 {/* Testimonial */}
                 <blockquote className="border-l-4 border-primary-500 pl-4 italic text-gray-700">
-                  "{study.testimonial}"
+                  &quot;{study.testimonial}&quot;
                 </blockquote>
               </div>
             </motion.div>

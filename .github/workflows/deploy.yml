@@ -119,13 +119,13 @@ jobs:
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
             # Navigate to project directory
-            cd ~/projects/headon
+            cd /opt/headon-github
             
             # Pull latest changes
             git pull origin main
             
-            # Create .env.production from secrets
-            cat > .env.production << EOF
+            # Create .env from secrets
+            cat > .env << EOF
             NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
             NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
             SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -133,7 +133,7 @@ jobs:
             EOF
             
             # Stop existing container
-            docker-compose down || true
+            docker compose down || true
             
             # Pull latest image from registry
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
@@ -142,16 +142,16 @@ jobs:
             export DOCKER_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             
             # Start new container with the pulled image
-            docker-compose up -d
+            docker compose up -d
             
             # Clean up old images
             docker image prune -f
             
             # Check if container is running
-            docker-compose ps
+            docker compose ps
             
             # Show logs (last 50 lines)
-            docker-compose logs --tail=50
+            docker compose logs --tail=50
 
       - name: Health Check
         uses: appleboy/ssh-action@v1.0.0

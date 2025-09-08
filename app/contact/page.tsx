@@ -1,18 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -31,20 +21,14 @@ import {
   Mail, 
   CheckCircle2, 
   Star, 
-  Upload,
   Zap,
-  Users,
   Award,
-  ArrowRight,
-  Sparkles,
   Timer,
-  FileText,
   AlertCircle
 } from 'lucide-react'
 import { createBrowserClient } from '@supabase/ssr'
 import { toast } from 'sonner'
 import CalendlyWidget from '@/components/contact/CalendlyWidget'
-import FileUploadZone from '@/components/contact/FileUploadZone'
 import MultiStepForm from './MultiStepForm'
 
 // Smart Form Placeholders basierend auf Projekt-Typ
@@ -95,15 +79,10 @@ export default function ContactPage() {
     files: [] as File[]
   })
   
-  const [messagePlaceholder, setMessagePlaceholder] = useState('Erzählen Sie uns von Ihrem Projekt...')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showProjectDetails, setShowProjectDetails] = useState(true) // Alle Felder sofort sichtbar!
   const [showCalendly, setShowCalendly] = useState(false)
-  const [recentProjects, setRecentProjects] = useState(2)
   const [leadScore, setLeadScore] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
-  const [currentStep, setCurrentStep] = useState(1)
-  const totalSteps = 4
   
   // Initialize Supabase client
   const supabase = createBrowserClient(
@@ -157,14 +136,6 @@ export default function ContactPage() {
     setLeadScore(score)
   }, [formData])
 
-  const handleProjectTypeChange = (value: string) => {
-    setFormData({ ...formData, projectType: value })
-    setMessagePlaceholder(projectTypePlaceholders[value] || 'Erzählen Sie uns von Ihrem Projekt...')
-  }
-
-  const handleFilesChange = (files: File[]) => {
-    setFormData({ ...formData, files })
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -226,10 +197,10 @@ export default function ContactPage() {
         })
       }
       
-    } catch (error: any) {
+    } catch (error) {
       console.error('Submission error:', error)
       toast.error('Ein Fehler ist aufgetreten', {
-        description: error?.message || 'Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.',
+        description: (error as Error)?.message || 'Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.',
       })
     } finally {
       setIsSubmitting(false)
@@ -494,7 +465,7 @@ export default function ContactPage() {
                         ))}
                       </div>
                       <p className="text-white/90 mb-2">
-                        "{testimonial.text}"
+                        &quot;{testimonial.text}&quot;
                       </p>
                       <p className="text-sm text-white/60">- {testimonial.author}</p>
                     </CardContent>

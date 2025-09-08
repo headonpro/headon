@@ -20,7 +20,7 @@ import Link from 'next/link'
 interface Industry {
   id: string
   title: string
-  icon: any
+  icon: React.ComponentType<{ className?: string }>
   color: string
   bgGradient: string
   solutions: string[]

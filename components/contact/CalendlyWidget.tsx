@@ -5,7 +5,14 @@ import { motion } from 'framer-motion'
 
 declare global {
   interface Window {
-    Calendly: any
+    Calendly: {
+      initInlineWidget: (options: {
+        url: string
+        parentElement: HTMLElement | null
+        prefill: Record<string, unknown>
+        utm: Record<string, unknown>
+      }) => void
+    }
   }
 }
 
