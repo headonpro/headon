@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  headon-template:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+        - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+    container_name: headon-template
+    restart: unless-stopped
+    ports:
+      # Map host port 3001 to container port 3000
+      # Change host port if needed to avoid conflicts
+      - "3001:3000"
+    environment:
+      # Node environment
+      - NODE_ENV=production
+      
+      # Supabase configuration
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      
+      # Site configuration
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+    
+    # Health check to ensure container is running properly
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/api/health', (r) => {r.statusCode === 200 ? process.exit(0) : process.exit(1)}).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Resource limits (adjust based on your VPS capacity)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    
+    # Connect to shared network for inter-container communication
+    networks:
+      - web-network
+    
+    # Volume for Next.js cache persistence (optional, improves rebuild times)
+    volumes:
+      - nextjs-cache:/app/.next/cache
+
+networks:
+  web-network:
+    # Use external network that's shared with other containers (e.g., nginx, other apps)
+    external: true
+
+volumes:
+  nextjs-cache:
+    driver: local

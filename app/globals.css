@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+/* Theme Configuration */
+@theme {
+  /* Colors */
+  --color-primary-50: #e6ebf7;
+  --color-primary-100: #bccee9;
+  --color-primary-200: #8eaddb;
+  --color-primary-300: #608ccd;
+  --color-primary-400: #3e73c2;
+  --color-primary-500: #1c5ab7;
+  --color-primary-600: #1034A6;
+  --color-primary-700: #0e2d91;
+  --color-primary-800: #0c267c;
+  --color-primary-900: #091a56;
+  --color-primary: var(--color-primary-600);
+  
+  --color-secondary-50: #fff4e6;
+  --color-secondary-100: #ffe3b3;
+  --color-secondary-200: #ffd180;
+  --color-secondary-300: #ffbe4d;
+  --color-secondary-400: #ffaf26;
+  --color-secondary-500: #FF8C00;
+  --color-secondary-600: #e67e00;
+  --color-secondary-700: #cc7000;
+  --color-secondary-800: #b36200;
+  --color-secondary-900: #804600;
+  --color-secondary: var(--color-secondary-500);
+  
+  --color-accent-50: #fffacc;
+  --color-accent-100: #fff4a3;
+  --color-accent-200: #ffec7a;
+  --color-accent-300: #ffe451;
+  --color-accent-400: #ffdd2b;
+  --color-accent-500: #FFD700;
+  --color-accent-600: #e6c300;
+  --color-accent-700: #ccad00;
+  --color-accent-800: #b39800;
+  --color-accent-900: #806d00;
+  --color-accent: var(--color-accent-500);
+  
+  /* Fonts */
+  --font-heading: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-lato), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "Courier New", monospace;
+}
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Utilities */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Headlines should use Space Grotesk by default */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* Code blocks should use JetBrains Mono */
+code, pre {
+  font-family: var(--font-mono);
+}
+
+/* Custom Animations */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    transform: translateX(0%) translateY(0%);
+  }
+  25% {
+    transform: translateX(100%) translateY(-100%);
+  }
+  50% {
+    transform: translateX(-100%) translateY(100%);
+  }
+  75% {
+    transform: translateX(100%) translateY(100%);
+  }
+}
+
+.animate-blob {
+  animation: blob 10s infinite;
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 15s ease infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Electric Logo Animations */
+@keyframes lightning-flash {
+  0%, 90%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  92%, 97% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px rgba(147, 197, 253, 1));
+  }
+  95% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes lightning-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 2px rgba(96, 165, 250, 0.8));
+  }
+}
+
+@keyframes text-electric-glow {
+  0%, 100% {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(147, 197, 253, 0.05) 0%,
+      transparent 50%
+    );
+  }
+  50% {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(147, 197, 253, 0.1) 0%,
+      rgba(96, 165, 250, 0.05) 30%,
+      transparent 60%
+    );
+  }
+}
+
+@keyframes lightning-surge-hover {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-15deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(0deg);
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 1));
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1) rotate(5deg);
+    filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.6));
+  }
+}
+
+/* Lightning Bolt Classes */
+.lightning-bolt {
+  opacity: 0;
+  transform-origin: center;
+}
+
+/* Lightning bolts flash at 0s, 2s, 4s */
+.lightning-1 {
+  animation: lightning-flash 6s linear infinite;
+  animation-delay: 0s;
+}
+
+.lightning-2 {
+  animation: lightning-flash 6s linear infinite;
+  animation-delay: 2s;
+}
+
+.lightning-3 {
+  animation: lightning-flash 6s linear infinite;
+  animation-delay: 4s;
+}
+
+/* Star Spark Classes */
+.star-spark {
+  opacity: 0;
+  transform-origin: center;
+}
+
+/* Stars flash at 1s, 3s, 5s (alternating with lightning) */
+.star-1 {
+  animation: lightning-flash 6s linear infinite;
+  animation-delay: 1s;
+}
+
+.star-2 {
+  animation: lightning-flash 6s linear infinite;
+  animation-delay: 3s;
+}
+
+.star-3 {
+  animation: lightning-flash 6s linear infinite;
+  animation-delay: 5s;
+}
+
+.electric-text-glow {
+  animation: text-electric-glow 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.lightning-surge {
+  animation: lightning-surge-hover 0.4s ease-out forwards;
+}
+
+/* Optional: Add a subtle continuous pulse to the ON text area */
+.electric-on-pulse {
+  animation: lightning-pulse 2s ease-in-out infinite;
+}
