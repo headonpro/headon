@@ -12,7 +12,7 @@ interface CaseStudy {
   results: {
     metric: string
     value: string
-    icon: React.ComponentType<{ className?: string }>
+    icon: React.ComponentType<{ className?: string; strokeWidth?: number }>
   }[]
   testimonial: string
   image?: string

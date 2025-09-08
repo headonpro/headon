@@ -6,6 +6,13 @@
         "task-master-ai",
         "mcp"
       ]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ]
     }
   }
 }

@@ -296,7 +296,7 @@ export default function ContactPage() {
               className="flex items-center justify-center gap-2 text-white/80 text-sm"
             >
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span>Gestern: {recentProjects} neue Projekte gestartet</span>
+              <span>Gestern: 2 neue Projekte gestartet</span>
             </motion.div>
           </div>
         </motion.section>
