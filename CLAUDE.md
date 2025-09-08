@@ -22,12 +22,24 @@ pnpm build
 # Start production server
 pnpm start
 
-# Code quality checks
+# Code quality checks (run before committing)
 pnpm lint          # Run ESLint
 pnpm lint:fix      # Auto-fix linting issues
 pnpm format        # Format with Prettier
 pnpm format:check  # Check formatting
 pnpm type-check    # TypeScript type checking
+
+# Full pre-commit verification
+pnpm lint:fix && pnpm format && pnpm type-check && pnpm build
+```
+
+### Component Management
+```bash
+# Add new shadcn/ui component
+pnpm dlx shadcn@latest add [component-name]
+
+# Example: Add button component
+pnpm dlx shadcn@latest add button
 ```
 
 ## Architecture & Code Structure
@@ -38,33 +50,72 @@ pnpm type-check    # TypeScript type checking
 - **Styling**: Tailwind CSS v4 + shadcn/ui components
 - **Backend**: Supabase (Authentication & Database)
 - **Forms**: React Hook Form + Zod validation
+- **Animations**: Framer Motion
 - **Package Manager**: pnpm (v10.15.0 - enforced)
 
-### Key Directories
-- `app/` - Next.js App Router pages (each route is a folder with page.tsx)
-- `components/ui/` - shadcn/ui components (reusable UI primitives)
-- `components/layout/` - Header, Footer layout components
-- `components/sections/` - Page section components (Hero, CTA, etc.)
-- `components/showcase/` - Portfolio/showcase components
-- `lib/` - Utilities, Supabase client, validations, and types
+### Application Architecture
 
-### Important Patterns
+#### Routing Strategy
+- App Router with file-based routing in `app/` directory
+- Each route is a folder containing `page.tsx`
+- Layout components wrap pages for consistent structure
+- Metadata API used for SEO optimization
 
-#### Component Development
-- Use shadcn/ui CLI for new UI components: `pnpm dlx shadcn-ui@latest add [component]`
-- All components use TypeScript with strict typing
-- Styling uses Tailwind classes via the `cn()` utility from `lib/utils.ts`
+#### Data Flow
+1. **Client Components**: Interactive UI with React Hook Form
+2. **Server Components**: Data fetching from Supabase
+3. **API Routes**: Server-side operations with service role key
+4. **Form Validation**: Zod schemas validate before submission
+5. **State Management**: Local state with React hooks
 
-#### Path Aliases
-- Use `@/*` imports (maps to project root)
-- Example: `import { cn } from '@/lib/utils'`
+#### Component Hierarchy
+```
+app/layout.tsx (Root Layout)
+  └── components/layout/Header.tsx
+  └── app/[route]/page.tsx (Page Component)
+      └── components/sections/* (Page Sections)
+          └── components/ui/* (Primitive Components)
+  └── components/layout/Footer.tsx
+```
 
-#### Supabase Integration
-- Client initialized in `lib/supabase.ts`
-- Environment variables required (see below)
-- Service role key for server-side operations
+### Key Patterns
 
-### Environment Setup
+#### Styling Pattern with cn() Utility
+```typescript
+import { cn } from '@/lib/utils'
+
+// Conditional styling with Tailwind
+className={cn(
+  'base-classes',
+  variant === 'primary' && 'primary-classes',
+  disabled && 'disabled-classes'
+)}
+```
+
+#### Form Pattern with Zod Validation
+```typescript
+// 1. Define schema in lib/validations.ts
+const schema = z.object({
+  email: z.string().email(),
+  message: z.string().min(10)
+})
+
+// 2. Use in component with React Hook Form
+const form = useForm<z.infer<typeof schema>>({
+  resolver: zodResolver(schema)
+})
+```
+
+#### Supabase Client Pattern
+```typescript
+// Client-side: lib/supabase.ts
+import { createClient } from '@supabase/supabase-js'
+
+// Server-side: Use service role key for admin operations
+const supabase = createClient(url, serviceRoleKey)
+```
+
+### Environment Configuration
 Required `.env.local` variables:
 ```
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
@@ -73,38 +124,62 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-### Design System
-- **Primary Color**: Königsblau (#1034A6)
-- **Secondary Color**: Orange (#FF8C00)
-- **Accent Color**: Gold (#FFD700)
-- **Success Color**: Emerald (#10B981)
-- Responsive breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px)
+### Build Configuration
+- **Standalone Output**: Enabled for Docker deployments
+- **React Strict Mode**: Enabled for development
+- **TypeScript Build Errors**: Currently ignored (temporary)
+- **ESLint Build Errors**: Currently ignored (temporary)
+- **Image Optimization**: Configured for all HTTPS sources
 
-## Development Workflow
+## Code Standards
 
-### Adding New Pages
-1. Create folder in `app/` directory
-2. Add `page.tsx` file with default export
-3. Follow existing page structure patterns
+### TypeScript Requirements
+- Strict mode enabled in `tsconfig.json`
+- No implicit `any` types
+- Explicit return types for functions
+- Interface naming: `ComponentNameProps`
 
-### Component Best Practices
-- Mobile-first responsive design
-- Use existing UI components from `components/ui/`
-- Maintain consistent spacing using Tailwind utilities
-- Follow TypeScript strict mode requirements
+### Import Organization
+1. React/Next.js imports
+2. Third-party libraries
+3. Local components (`@/components`)
+4. Utilities (`@/lib`)
+5. Types (`@/lib/types`)
 
-### Form Handling
-- Use React Hook Form with Zod schemas
-- Validation schemas in `lib/validations.ts`
-- Type definitions in `lib/types.ts`
+### Prettier Configuration
+```json
+{
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 100
+}
+```
 
-### Code Quality
-- ESLint configured with Next.js rules
-- Prettier for consistent formatting
-- TypeScript strict mode enforced
-- Run `pnpm lint:fix` and `pnpm format` before committing
+## Docker Deployment
 
-## Deployment Notes
-- Optimized for Vercel deployment
-- Ensure all environment variables are set in production
-- Run `pnpm build` locally to verify build success before deploying
+### Local Docker Testing
+```bash
+# Build and run with Docker Compose
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop containers
+docker-compose down
+```
+
+### Production Deployment
+- CI/CD pipeline configured with GitHub Actions
+- Automatic deployment to VPS on main branch push
+- Health checks configured at `/api/health`
+- Resource limits: 1 CPU, 1GB memory
+
+## Testing Approach
+Currently no test framework configured. For testing:
+- Manual testing in development environment
+- Build verification with `pnpm build`
+- Type checking with `pnpm type-check`
+- Linting with `pnpm lint`
