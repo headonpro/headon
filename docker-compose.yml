@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   headon-template:
+    # Use image from registry if available, otherwise build locally
+    image: ${DOCKER_IMAGE:-headon-local}
     build:
       context: .
       dockerfile: Dockerfile

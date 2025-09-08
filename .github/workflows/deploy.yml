@@ -119,7 +119,7 @@ jobs:
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
             # Navigate to project directory
-            cd ~/projects/template
+            cd ~/projects/headon
             
             # Pull latest changes
             git pull origin main
@@ -133,13 +133,15 @@ jobs:
             EOF
             
             # Stop existing container
-            docker-compose down
+            docker-compose down || true
             
-            # Pull latest image (if using registry)
-            # docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            # Pull latest image from registry
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             
-            # Build and start new container
-            docker-compose build --no-cache
+            # Update docker-compose to use the new image
+            export DOCKER_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            
+            # Start new container with the pulled image
             docker-compose up -d
             
             # Clean up old images
