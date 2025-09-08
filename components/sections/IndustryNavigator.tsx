@@ -123,7 +123,14 @@ export default function IndustryNavigator() {
   }
 
   return (
-    <section className="py-24 pb-32 relative overflow-hidden -mt-1">
+    <section className="pt-40 pb-52 relative overflow-hidden -mt-1">
+      {/* Wave transition from previous section */}
+      <div className="absolute top-0 left-0 right-0 z-10">
+        <svg className="w-full h-16 md:h-24 fill-gray-50" viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path d="M0,40 C480,100 960,0 1440,60 L1440,0 L0,0 Z" />
+        </svg>
+      </div>
+      
       {/* Static gradient background similar to HeroSection */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
       
@@ -136,8 +143,9 @@ export default function IndustryNavigator() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-heading">
-            Lösungen für jede Branche
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 font-heading overflow-visible pb-1">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">Lösungen</span>
+            <span className="text-white"> für jede Branche</span>
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto">
             Wir verstehen die spezifischen Herausforderungen Ihrer Branche und liefern maßgeschneiderte digitale Lösungen
@@ -161,8 +169,8 @@ export default function IndustryNavigator() {
                   onClick={() => toggleCard(industry.id)}
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${industry.bgGradient} bg-opacity-10`}>
-                      <industry.icon className="w-8 h-8 text-accent-500" strokeWidth={1.5} />
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-accent to-secondary">
+                      <industry.icon className="w-8 h-8 text-primary" strokeWidth={1.5} />
                     </div>
                     <motion.div
                       animate={{ rotate: expandedCard === industry.id ? 180 : 0 }}
@@ -178,11 +186,11 @@ export default function IndustryNavigator() {
                   
                   <div className="flex items-center gap-4 text-sm text-white/80">
                     <span className="flex items-center gap-1">
-                      <Euro className="w-4 h-4 text-accent-500" />
+                      <Euro className="w-4 h-4 text-accent" />
                       {industry.priceRange}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4 text-accent-500" />
+                      <Clock className="w-4 h-4 text-accent" />
                       {industry.timeframe}
                     </span>
                   </div>
@@ -225,7 +233,7 @@ export default function IndustryNavigator() {
                           }}
                         >
                           <Button 
-                            className={`w-full bg-gradient-to-r ${industry.bgGradient} text-white hover:opacity-90 transition-opacity`}
+                            className="w-full bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold transition-all"
                           >
                             Sofort loslegen
                           </Button>

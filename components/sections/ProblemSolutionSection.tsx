@@ -10,22 +10,22 @@ const problems = [
     icon: Search,
     title: 'Kunden suchen dich online - finden aber nur die Konkurrenz',
     description: 'Ohne professionelle Online-Präsenz verlierst du täglich potenzielle Kunden an deine Mitbewerber.',
-    color: 'text-primary-600',
-    bgColor: 'bg-primary-600/10',
+    color: 'text-accent',
+    bgColor: 'bg-gradient-to-br from-accent to-secondary',
   },
   {
     icon: Clock,
     title: 'Du verlierst wertvolle Zeit mit manuellen Prozessen',
     description: 'Termine, Buchungen, Anfragen - alles läuft noch per Telefon oder E-Mail statt automatisiert.',
-    color: 'text-primary-600',
-    bgColor: 'bg-primary-600/10',
+    color: 'text-accent',
+    bgColor: 'bg-gradient-to-br from-accent to-secondary',
   },
   {
     icon: TrendingDown,
     title: 'Dir entgehen täglich Umsätze durch veraltete Systeme',
     description: 'Während andere 24/7 verkaufen, ist dein Geschäft nach Feierabend geschlossen.',
-    color: 'text-primary-600',
-    bgColor: 'bg-primary-600/10',
+    color: 'text-accent',
+    bgColor: 'bg-gradient-to-br from-accent to-secondary',
   },
 ]
 
@@ -41,7 +41,7 @@ export default function ProblemSolutionSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4 font-heading">
+          <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-4 font-heading">
             Kennst du das?
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -63,8 +63,10 @@ export default function ProblemSolutionSection() {
             >
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full border border-gray-100">
                 {/* Icon */}
-                <div className={`inline-flex p-4 rounded-xl ${problem.bgColor} mb-6`}>
-                  <problem.icon className={`w-8 h-8 ${problem.color}`} strokeWidth={1.5} />
+                <div className="flex justify-center mb-6">
+                  <div className={`inline-flex p-4 rounded-xl ${problem.bgColor}`}>
+                    <problem.icon className={`w-8 h-8 ${problem.color}`} strokeWidth={2.5} />
+                  </div>
                 </div>
                 
                 {/* Content */}
@@ -95,7 +97,7 @@ export default function ProblemSolutionSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
-          <div className="inline-block">
+          <div className="max-w-2xl mx-auto">
             <motion.div
               animate={{ 
                 y: [0, -5, 0],
@@ -106,7 +108,7 @@ export default function ProblemSolutionSection() {
                 ease: "easeInOut"
               }}
             >
-              <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600 mb-6">
+              <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-6">
                 Wir lösen das für dich!
               </h3>
             </motion.div>
@@ -114,7 +116,7 @@ export default function ProblemSolutionSection() {
             <Link href="/contact">
               <Button 
                 size="lg"
-                className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                className="bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
               >
                 Jetzt Lösung entdecken
                 <motion.span

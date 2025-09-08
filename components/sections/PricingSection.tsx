@@ -169,10 +169,9 @@ export default function PricingSection() {
                     <Button 
                       className={`
                         w-full py-6 text-lg font-semibold
-                        ${plan.highlighted 
-                          ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white' 
-                          : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
-                        }
+                        bg-gradient-to-r from-accent-500 to-secondary-500 
+                        hover:from-accent-600 hover:to-secondary-600 
+                        text-primary
                       `}
                     >
                       Angebot anfordern
@@ -220,7 +219,7 @@ export default function PricingSection() {
             Nicht sicher, welches Paket das richtige für Sie ist?
           </p>
           <Link href="/contact">
-            <Button variant="outline" size="lg" className="border-primary-600 text-primary-600 hover:bg-primary-50">
+            <Button size="lg" className="bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold">
               Kostenlose Beratung vereinbaren
             </Button>
           </Link>

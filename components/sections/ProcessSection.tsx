@@ -57,7 +57,7 @@ export default function ProcessSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-heading">
+          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-4 font-heading">
             Wie wir arbeiten
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -99,8 +99,8 @@ export default function ProcessSection() {
                     whileHover={{ scale: 1.1 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    <div className="p-5 rounded-full bg-gradient-to-br from-primary-600 to-primary-700">
-                      <step.icon className="w-10 h-10 text-white" strokeWidth={1.5} />
+                    <div className="p-5 rounded-full bg-primary">
+                      <step.icon className="w-10 h-10 text-accent" strokeWidth={1.5} />
                     </div>
                   </motion.div>
 
@@ -110,7 +110,7 @@ export default function ProcessSection() {
                       <h3 className="text-2xl font-bold text-gray-900 mb-1">
                         Schritt {step.id}: {step.title}
                       </h3>
-                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold text-white bg-gradient-to-r ${step.color}`}>
+                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold text-accent bg-gradient-to-r ${step.color}`}>
                         {step.subtitle}
                       </span>
                     </div>
@@ -143,7 +143,7 @@ export default function ProcessSection() {
           </p>
           <a 
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 shadow-xl hover:shadow-2xl"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold rounded-lg transition-all duration-300 shadow-xl hover:shadow-2xl"
           >
             Kostenloses Erstgespräch vereinbaren
             <motion.span

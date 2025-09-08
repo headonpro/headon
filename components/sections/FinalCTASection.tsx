@@ -92,7 +92,7 @@ export default function FinalCTASection() {
                   </p>
                   <Button 
                     onClick={() => setIsCalendarLoaded(true)}
-                    className="mt-6"
+                    className="mt-6 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold"
                   >
                     Kalender simulieren
                   </Button>
@@ -178,14 +178,14 @@ export default function FinalCTASection() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold rounded-lg transition-all"
               >
                 Kontaktformular nutzen
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a 
                 href="mailto:kontakt@headon.agency"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold rounded-lg transition-all"
               >
                 Direkt E-Mail schreiben
                 <ArrowRight className="w-4 h-4" />

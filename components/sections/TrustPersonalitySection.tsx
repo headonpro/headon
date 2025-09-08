@@ -188,7 +188,7 @@ export default function TrustPersonalitySection() {
           <Link href="/contact">
             <Button 
               size="lg"
-              className="bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
             >
               Jetzt kennenlernen
             </Button>
