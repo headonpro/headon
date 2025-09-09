@@ -37,15 +37,17 @@ export default function TrustPersonalitySection() {
         >
           <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/20">
             <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Photo Placeholder */}
+              {/* Profile Photo */}
               <div className="relative">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary-400 to-secondary-400 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <div className="text-6xl mb-2">👨‍💻</div>
-                      <p className="text-sm font-medium">Ihr direkter Ansprechpartner</p>
-                    </div>
-                  </div>
+                <div className="w-full h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-400 to-secondary-400">
+                  <Image
+                    src="/images/onur_P.webp"
+                    alt="Onur - Ihr direkter Ansprechpartner bei HEADON"
+                    width={450}
+                    height={450}
+                    className="w-full h-full object-cover object-top scale-105"
+                    priority
+                  />
                 </div>
                 {/* Decorative elements */}
                 <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent-500/20 rounded-full blur-2xl" />
