@@ -26,10 +26,10 @@ import {
   Timer,
   AlertCircle
 } from 'lucide-react'
-import { createBrowserClient } from '@supabase/ssr'
 import { toast } from 'sonner'
 import CalendlyWidget from '@/components/contact/CalendlyWidget'
 import MultiStepForm from './MultiStepForm'
+import { createClient } from '@/lib/supabase'
 
 // Smart Form Placeholders basierend auf Projekt-Typ
 const projectTypePlaceholders: Record<string, string> = {
@@ -85,10 +85,7 @@ export default function ContactPage() {
   const [isMobile, setIsMobile] = useState(false)
   
   // Initialize Supabase client
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const supabase = createClient()
 
   useEffect(() => {
     // Check if device is mobile
