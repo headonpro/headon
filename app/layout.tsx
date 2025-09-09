@@ -32,7 +32,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'HEADON.pro - Digitale Erlebnisse, die Ihr Business transformieren',
+  title: 'HEADON - Marketing Kreativagentur',
   description: 'HEADON ist eine moderne Kreativagentur, spezialisiert auf Full-Stack Web Development, Mobile Apps, UI/UX Design und Cloud-Backend Lösungen.',
   keywords: 'Web Development, Mobile Apps, UI/UX Design, React, Next.js, TypeScript, Kreativagentur',
   authors: [{ name: 'HEADON.pro' }],
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     apple: '/icons/ON_favicon_48x48.png',
   },
   openGraph: {
-    title: 'HEADON.pro - Digitale Erlebnisse, die Ihr Business transformieren',
+    title: 'HEADON - Marketing Kreativagentur',
     description: 'Moderne Kreativagentur für Web Development, Mobile Apps und UI/UX Design',
     url: 'https://headon.pro',
     siteName: 'HEADON.pro',
