@@ -9,6 +9,8 @@ const outfit = Outfit({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-outfit',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 const lato = Lato({
@@ -16,12 +18,16 @@ const lato = Lato({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-lato',
+  preload: true,
+  adjustFontFallback: true,
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-jetbrains-mono',
+  preload: false,
+  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {
