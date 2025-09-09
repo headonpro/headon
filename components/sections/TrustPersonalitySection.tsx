@@ -35,8 +35,7 @@ export default function TrustPersonalitySection() {
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto mb-16"
         >
-          <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/20">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
               {/* Profile Photo */}
               <div className="relative px-8 md:px-12">
                 <div className="w-full h-[340px] md:h-[380px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-400 to-secondary-400">
@@ -103,7 +102,6 @@ export default function TrustPersonalitySection() {
                 </div>
               </div>
             </div>
-          </div>
         </motion.div>
 
         {/* Trust Promises */}
