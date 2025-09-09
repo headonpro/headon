@@ -38,20 +38,20 @@ export default function TrustPersonalitySection() {
           <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/20">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               {/* Profile Photo */}
-              <div className="relative">
-                <div className="w-full h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-400 to-secondary-400">
+              <div className="relative px-8 md:px-12">
+                <div className="w-full h-[340px] md:h-[380px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-400 to-secondary-400">
                   <Image
                     src="/images/onur_P.webp"
                     alt="Onur - Ihr direkter Ansprechpartner bei HEADON"
-                    width={450}
-                    height={450}
+                    width={380}
+                    height={380}
                     className="w-full h-full object-cover object-top scale-105"
                     priority
                   />
                 </div>
                 {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent-500/20 rounded-full blur-2xl" />
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary-500/20 rounded-full blur-2xl" />
+                <div className="absolute -top-4 right-4 w-24 h-24 bg-accent-500/20 rounded-full blur-2xl" />
+                <div className="absolute -bottom-4 left-4 w-32 h-32 bg-primary-500/20 rounded-full blur-2xl" />
               </div>
 
               {/* Text Content */}
@@ -78,11 +78,11 @@ export default function TrustPersonalitySection() {
                 {/* Contact Options */}
                 <div className="space-y-3">
                   <a 
-                    href="mailto:kontakt@headon.agency" 
+                    href="mailto:kontakt@headon.pro" 
                     className="flex items-center gap-3 text-white/80 hover:text-accent-500 transition-colors"
                   >
                     <Mail className="w-5 h-5" />
-                    <span>kontakt@headon.agency</span>
+                    <span>kontakt@headon.pro</span>
                   </a>
                   <a 
                     href="tel:+491234567890" 
