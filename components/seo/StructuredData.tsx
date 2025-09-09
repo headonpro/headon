@@ -1,0 +1,183 @@
+import Script from 'next/script'
+
+interface StructuredDataProps {
+  type?: 'organization' | 'service' | 'breadcrumb' | 'localBusiness'
+  data?: any
+}
+
+export default function StructuredData({ type = 'organization', data }: StructuredDataProps) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://headon.pro'
+  
+  // Organization Schema - Hauptunternehmensinformationen
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'HEADON.pro',
+    alternateName: 'HEADON Digital Agency',
+    url: baseUrl,
+    logo: `${baseUrl}/headon-logo.svg`,
+    description: 'Moderne Kreativagentur spezialisiert auf Full-Stack Web Development, Mobile Apps, UI/UX Design und Cloud-Backend Lösungen.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Freiburg',
+      addressRegion: 'Baden-Württemberg',
+      postalCode: '79098',
+      addressCountry: 'DE'
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+49-XXX-XXXXXXX',
+      contactType: 'customer service',
+      areaServed: 'DE',
+      availableLanguage: ['German', 'English']
+    },
+    sameAs: [
+      'https://www.linkedin.com/company/headon-pro',
+      'https://github.com/headonpro',
+      'https://twitter.com/headonpro'
+    ],
+    founder: {
+      '@type': 'Person',
+      name: 'HEADON Team'
+    },
+    foundingDate: '2020',
+    numberOfEmployees: {
+      '@type': 'QuantitativeValue',
+      minValue: 1,
+      maxValue: 10
+    }
+  }
+
+  // LocalBusiness Schema für lokale SEO
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${baseUrl}/#business`,
+    name: 'HEADON.pro',
+    image: `${baseUrl}/headon-logo.svg`,
+    url: baseUrl,
+    telephone: '+49-XXX-XXXXXXX',
+    priceRange: '€€€',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '',
+      addressLocality: 'Freiburg',
+      addressRegion: 'BW',
+      postalCode: '79098',
+      addressCountry: 'DE'
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 47.9990,
+      longitude: 7.8421
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00'
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      bestRating: '5',
+      worstRating: '1',
+      ratingCount: '50',
+      reviewCount: '50'
+    }
+  }
+
+  // Service Schema für Dienstleistungen
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Web Development & Digital Marketing',
+    provider: {
+      '@type': 'Organization',
+      name: 'HEADON.pro'
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Germany'
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Digital Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Web Development',
+            description: 'Full-Stack Webentwicklung mit modernen Technologien'
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Mobile App Development',
+            description: 'Native und Cross-Platform Mobile Apps'
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'UI/UX Design',
+            description: 'User Interface und User Experience Design'
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Cloud Solutions',
+            description: 'Cloud-Backend und Infrastructure Solutions'
+          }
+        }
+      ]
+    }
+  }
+
+  // BreadcrumbList Schema (sollte dynamisch pro Seite sein)
+  const breadcrumbSchema = data?.breadcrumbs ? {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: data.breadcrumbs.map((item: any, index: number) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${baseUrl}${item.url}`
+    }))
+  } : null
+
+  // Wähle das richtige Schema basierend auf dem Typ
+  let selectedSchema
+  switch (type) {
+    case 'localBusiness':
+      selectedSchema = localBusinessSchema
+      break
+    case 'service':
+      selectedSchema = serviceSchema
+      break
+    case 'breadcrumb':
+      selectedSchema = breadcrumbSchema
+      break
+    case 'organization':
+    default:
+      selectedSchema = organizationSchema
+  }
+
+  if (!selectedSchema) return null
+
+  return (
+    <Script
+      id={`structured-data-${type}`}
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(selectedSchema)
+      }}
+    />
+  )
+}

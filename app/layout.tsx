@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { Toaster } from 'sonner'
+import StructuredData from '@/components/seo/StructuredData'
 
 const outfit = Outfit({ 
   subsets: ['latin'],
@@ -69,6 +70,8 @@ export default function RootLayout({
   return (
     <html lang="de" className={`${outfit.variable} ${lato.variable} ${jetbrainsMono.variable}`}>
       <body className="min-h-screen antialiased flex flex-col font-body">
+        <StructuredData type="organization" />
+        <StructuredData type="localBusiness" />
         <Header />
         <main className="flex-1">
           {children}
