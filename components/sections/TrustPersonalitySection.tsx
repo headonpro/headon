@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Mail, Phone, Linkedin, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const trustPromises = [
   "100% transparent, keine versteckten Kosten",
@@ -53,8 +54,17 @@ export default function TrustPersonalitySection() {
 
               {/* Text Content */}
               <div>
-                <h3 className="text-3xl font-bold text-white mb-4">
-                  Hallo, ich bin Ihr direkter Ansprechpartner
+                <h3 className="text-3xl font-bold text-white mb-4 flex items-center gap-2 flex-wrap">
+                  <span>Hallo, ich bin</span>
+                  <Image 
+                    src="/images/ONUR.svg" 
+                    alt="ONUR" 
+                    width={70} 
+                    height={20}
+                    className="inline-block h-[0.9em] w-auto"
+                    style={{ verticalAlign: 'middle' }}
+                  />
+                  <span>Ihr direkter Ansprechpartner</span>
                 </h3>
                 <p className="text-white/90 mb-6 leading-relaxed">
                   Bei HEADON arbeiten Sie nicht mit einem anonymen Team, sondern direkt mit mir. 

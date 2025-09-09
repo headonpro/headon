@@ -36,6 +36,15 @@ export const metadata: Metadata = {
   description: 'HEADON ist eine moderne Kreativagentur, spezialisiert auf Full-Stack Web Development, Mobile Apps, UI/UX Design und Cloud-Backend Lösungen.',
   keywords: 'Web Development, Mobile Apps, UI/UX Design, React, Next.js, TypeScript, Kreativagentur',
   authors: [{ name: 'HEADON.pro' }],
+  icons: {
+    icon: [
+      { url: '/icons/ON_favicon_16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icons/ON_favicon_32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icons/ON_favicon_48x48.png', sizes: '48x48', type: 'image/png' },
+    ],
+    shortcut: '/icons/ON_favicon_32x32.png',
+    apple: '/icons/ON_favicon_48x48.png',
+  },
   openGraph: {
     title: 'HEADON.pro - Digitale Erlebnisse, die Ihr Business transformieren',
     description: 'Moderne Kreativagentur für Web Development, Mobile Apps und UI/UX Design',
