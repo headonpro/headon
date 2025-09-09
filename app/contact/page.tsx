@@ -32,14 +32,14 @@ import MultiStepForm from './MultiStepForm'
 import { createClient } from '@/lib/supabase'
 
 // Smart Form Placeholders basierend auf Projekt-Typ
-const projectTypePlaceholders: Record<string, string> = {
-  'website-simple': 'z.B. Ich brauche eine moderne Website für mein Restaurant mit Menü, Öffnungszeiten und Kontaktinformationen...',
-  'website-complex': 'z.B. Website mit Buchungssystem und Kundenverwaltung für mein Dienstleistungsunternehmen...',
-  'mobile-app': 'z.B. App für iOS/Android mit Login und Push-Notifications für meine Kunden...',
-  'ecommerce': 'z.B. Online-Shop mit Payment-Integration und Lagerverwaltung für 500+ Produkte...',
-  'custom': 'z.B. Individuelle Lösung für spezifische Geschäftsanforderungen...',
-  'unsure': 'Beschreiben Sie Ihre Idee und wir helfen Ihnen, die beste Lösung zu finden...'
-}
+// const projectTypePlaceholders: Record<string, string> = {
+//   'website-simple': 'z.B. Ich brauche eine moderne Website für mein Restaurant mit Menü, Öffnungszeiten und Kontaktinformationen...',
+//   'website-complex': 'z.B. Website mit Buchungssystem und Kundenverwaltung für mein Dienstleistungsunternehmen...',
+//   'mobile-app': 'z.B. App für iOS/Android mit Login und Push-Notifications für meine Kunden...',
+//   'ecommerce': 'z.B. Online-Shop mit Payment-Integration und Lagerverwaltung für 500+ Produkte...',
+//   'custom': 'z.B. Individuelle Lösung für spezifische Geschäftsanforderungen...',
+//   'unsure': 'Beschreiben Sie Ihre Idee und wir helfen Ihnen, die beste Lösung zu finden...'
+// }
 
 // Lead Scoring Configuration
 const leadScoringWeights = {

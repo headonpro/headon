@@ -1,8 +1,15 @@
 import Script from 'next/script'
 
+interface BreadcrumbItem {
+  name: string
+  url: string
+}
+
 interface StructuredDataProps {
   type?: 'organization' | 'service' | 'breadcrumb' | 'localBusiness'
-  data?: any
+  data?: {
+    breadcrumbs?: BreadcrumbItem[]
+  }
 }
 
 export default function StructuredData({ type = 'organization', data }: StructuredDataProps) {
@@ -144,7 +151,7 @@ export default function StructuredData({ type = 'organization', data }: Structur
   const breadcrumbSchema = data?.breadcrumbs ? {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: data.breadcrumbs.map((item: any, index: number) => ({
+    itemListElement: data.breadcrumbs.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
