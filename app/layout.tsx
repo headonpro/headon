@@ -78,6 +78,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de" className={`${outfit.variable} ${lato.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        {/* Preload critical assets for better LCP */}
+        <link rel="preload" href="/headon-logo.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/images/onur_P.webp" as="image" type="image/webp" />
+      </head>
       <body className="min-h-screen antialiased flex flex-col font-body">
         <StructuredData type="organization" />
         <StructuredData type="localBusiness" />

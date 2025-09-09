@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react'
 import { Plus, User } from 'lucide-react'
 import AnimatedRobot from '@/components/icons/AnimatedRobot'
 import TypewriterCTA from '@/components/ui/typewriter-cta'
+import Image from 'next/image'
 
 export default function HeroSection() {
   const [isMobile, setIsMobile] = useState(false)
   const [showEasterEgg, setShowEasterEgg] = useState(false)
+  const [animationsReady, setAnimationsReady] = useState(false)
 
   useEffect(() => {
     // Check if device is mobile
@@ -19,7 +21,15 @@ export default function HeroSection() {
     checkMobile()
     window.addEventListener('resize', checkMobile)
     
-    return () => window.removeEventListener('resize', checkMobile)
+    // Start animations after initial paint
+    const animationTimer = setTimeout(() => {
+      setAnimationsReady(true)
+    }, 100)
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+      clearTimeout(animationTimer)
+    }
   }, [])
 
   useEffect(() => {
@@ -39,6 +49,17 @@ export default function HeroSection() {
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-primary-600">
+      {/* Preload critical logo for LCP optimization - hidden but loads with priority */}
+      <div className="absolute top-0 left-0 w-0 h-0 overflow-hidden opacity-0 pointer-events-none" aria-hidden="true">
+        <Image
+          src="/headon-logo.svg"
+          alt=""
+          width={200}
+          height={50}
+          priority
+        />
+      </div>
+      
       {/* Static gradient for base */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
       
@@ -47,7 +68,7 @@ export default function HeroSection() {
         {/* First animated gradient layer - simplified for mobile */}
         <motion.div 
           className="absolute inset-0 opacity-60"
-          animate={{
+          animate={animationsReady ? {
             background: isMobile ? [
               // Simpler animation for mobile
               'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
@@ -61,7 +82,7 @@ export default function HeroSection() {
               'radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
               'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
             ],
-          }}
+          } : {}}
           transition={{
             duration: isMobile ? 8 : 10,
             repeat: Infinity,
@@ -75,7 +96,7 @@ export default function HeroSection() {
         />
 
         {/* Second animated layer - only on desktop */}
-        {!isMobile && (
+        {!isMobile && animationsReady && (
           <motion.div 
             className="absolute inset-0 opacity-40"
             animate={{
