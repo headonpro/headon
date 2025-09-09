@@ -9,7 +9,11 @@ import {
   Lock,
   RefreshCw,
   Cloud,
-  Cpu
+  Cpu,
+  Gauge,
+  HardDrive,
+  TrendingUp,
+  Eye
 } from 'lucide-react'
 
 const technologies = [
@@ -67,32 +71,29 @@ const features = [
   {
     title: 'Performance-Optimierung',
     description: 'Blitzschnelle Ladezeiten durch modernste Technologien und CDN-Integration',
-    icon: '⚡'
+    icon: Gauge
   },
   {
     title: 'Backup-Strategien',
     description: 'Automatische tägliche Backups mit 30-Tage-Historie für maximale Sicherheit',
-    icon: '💾'
+    icon: HardDrive
   },
   {
     title: 'Skalierbare Architektur',
     description: 'Wächst mit Ihrem Unternehmen - von 10 bis 10.000+ Nutzern ohne Probleme',
-    icon: '📈'
+    icon: TrendingUp
   },
   {
     title: '24/7 Monitoring',
     description: 'Kontinuierliche Überwachung und proaktive Fehlerbehebung',
-    icon: '👁️'
+    icon: Eye
   }
 ]
 
 export default function TechnologyTrustSection() {
   return (
-    <section className="py-24 pb-32 relative overflow-hidden -mt-1">
-      {/* Static gradient background similar to HeroSection */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
-      
-      <div className="relative z-10 container mx-auto px-4">
+    <section className="py-24 pb-32 bg-gray-50 relative overflow-hidden -mt-1">
+      <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -101,10 +102,10 @@ export default function TechnologyTrustSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-heading">
+          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-6 font-heading pb-2">
             Modernste Technologie für Ihren Erfolg
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mt-4">
             Wir setzen auf bewährte Enterprise-Technologien, die Sicherheit, Performance und Zuverlässigkeit garantieren
           </p>
         </motion.div>
@@ -121,13 +122,22 @@ export default function TechnologyTrustSection() {
               whileHover={{ scale: 1.05, y: -5 }}
               className="group"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 h-full">
-                <div className="inline-flex p-3 rounded-lg bg-accent-500/20 mb-4">
-                  <tech.icon className="w-6 h-6 text-accent-500" strokeWidth={2} />
+              <motion.div 
+                className="bg-gradient-to-br from-primary-600/90 via-primary-500/90 to-secondary-500/90 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 h-full"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                {/* Icon */}
+                <div className="flex justify-center mb-4">
+                  <div className="inline-flex p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+                    <tech.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                  </div>
                 </div>
-                <h3 className="font-bold text-white mb-1">{tech.name}</h3>
-                <p className="text-sm text-white/80">{tech.description}</p>
-              </div>
+                
+                {/* Content */}
+                <h3 className="font-bold text-white mb-1 text-center">{tech.name}</h3>
+                <p className="text-sm text-white/90 text-center">{tech.description}</p>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -138,7 +148,7 @@ export default function TechnologyTrustSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/20"
+          className="bg-gradient-to-br from-primary-600/90 via-primary-500/90 to-secondary-500/90 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-lg"
         >
           <h3 className="text-2xl font-bold text-white mb-8 text-center">
             Zusätzliche Sicherheitsfeatures
@@ -154,12 +164,14 @@ export default function TechnologyTrustSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="flex gap-4"
               >
-                <div className="text-3xl flex-shrink-0">{feature.icon}</div>
+                <div className="flex-shrink-0">
+                  <feature.icon className="w-8 h-8 text-white" strokeWidth={2} />
+                </div>
                 <div>
                   <h4 className="font-semibold text-white mb-1">
                     {feature.title}
                   </h4>
-                  <p className="text-white/80 text-sm leading-relaxed">
+                  <p className="text-white/90 text-sm leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

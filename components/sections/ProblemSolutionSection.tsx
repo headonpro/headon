@@ -58,33 +58,33 @@ export default function ProblemSolutionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              className="relative group"
+              className="relative"
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full border border-gray-100">
-                {/* Icon */}
-                <div className="flex justify-center mb-6">
-                  <div className={`inline-flex p-4 rounded-xl ${problem.bgColor}`}>
-                    <problem.icon className={`w-8 h-8 ${problem.color}`} strokeWidth={2.5} />
-                  </div>
-                </div>
-                
+              {/* Icon outside card */}
+              <div className="flex justify-center mb-4">
+                <motion.div 
+                  className="inline-flex p-4 rounded-xl bg-primary-500 shadow-lg"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <problem.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                </motion.div>
+              </div>
+              
+              {/* Card content */}
+              <motion.div 
+                className="bg-gradient-to-br from-primary-600/90 via-primary-500/90 to-secondary-500/90 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 {/* Content */}
-                <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight">
+                <h3 className="text-xl font-bold text-white mb-3 leading-tight text-center">
                   {problem.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-white/90 leading-relaxed text-center">
                   {problem.description}
                 </p>
-                
-                {/* Decorative element */}
-                <motion.div
-                  className="absolute -z-10 inset-0 rounded-2xl bg-gradient-to-br from-primary-500/5 to-secondary-500/5"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -104,7 +104,7 @@ export default function ProblemSolutionSection() {
               }}
               transition={{
                 duration: 2,
-                repeat: Infinity,
+                repeat: 3, // 3 cycles * 2 seconds = 6 seconds total
                 ease: "easeInOut"
               }}
             >

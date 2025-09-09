@@ -1,30 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Phone, Linkedin, Check, Quote } from 'lucide-react'
+import { Mail, Phone, Linkedin, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-
-const testimonials = [
-  {
-    text: "Die Zusammenarbeit mit HEADON war erstklassig. Transparente Kommunikation, faire Preise und ein Ergebnis, das unsere Erwartungen übertroffen hat.",
-    author: "Maria Schmidt",
-    company: "Restaurant zur Linde",
-    rating: 5
-  },
-  {
-    text: "Endlich ein Partner, der mitdenkt! Die Lösungen waren nicht nur technisch top, sondern auch perfekt auf unser Business zugeschnitten.",
-    author: "Thomas Weber",
-    company: "Weber Handwerk GmbH",
-    rating: 5
-  },
-  {
-    text: "Von der ersten Idee bis zum Go-Live – alles lief reibungslos. Der persönliche Kontakt macht den Unterschied!",
-    author: "Sarah Meyer",
-    company: "Meyer Coaching",
-    rating: 5
-  }
-]
 
 const trustPromises = [
   "100% transparent, keine versteckten Kosten",
@@ -35,7 +14,14 @@ const trustPromises = [
 
 export default function TrustPersonalitySection() {
   return (
-    <section className="py-24 pb-32 relative overflow-hidden -mt-1">
+    <section className="pt-40 pb-32 relative overflow-hidden -mt-1">
+      {/* Wave transition from previous section */}
+      <div className="absolute top-0 left-0 right-0 z-10">
+        <svg className="w-full h-16 md:h-24 fill-gray-50" viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path d="M0,40 C480,100 960,0 1440,60 L1440,0 L0,0 Z" />
+        </svg>
+      </div>
+      
       {/* Static gradient background similar to HeroSection */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
       
@@ -127,44 +113,10 @@ export default function TrustPersonalitySection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="flex items-start gap-3 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
+                className="flex flex-col items-center text-center p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
               >
-                <Check className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+                <Check className="w-8 h-8 text-accent-500 mb-3" />
                 <span className="text-sm text-white/90 font-medium">{promise}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Testimonials */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <h3 className="text-2xl font-bold text-center text-white mb-8">
-            Was Kunden über die Zusammenarbeit sagen
-          </h3>
-          
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-300"
-              >
-                <Quote className="w-8 h-8 text-accent-400 mb-4" />
-                <p className="text-white/90 mb-4 italic leading-relaxed">
-                  &quot;{testimonial.text}&quot;
-                </p>
-                <div className="pt-4 border-t border-white/20">
-                  <p className="font-semibold text-white">{testimonial.author}</p>
-                  <p className="text-sm text-white/70">{testimonial.company}</p>
-                </div>
               </motion.div>
             ))}
           </div>
@@ -178,13 +130,6 @@ export default function TrustPersonalitySection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center mt-16"
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Überzeugen Sie sich selbst
-          </h3>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            In einem kostenlosen 15-Minuten-Gespräch lernen wir uns kennen und besprechen, 
-            wie ich Ihnen helfen kann.
-          </p>
           <Link href="/contact">
             <Button 
               size="lg"
@@ -196,6 +141,12 @@ export default function TrustPersonalitySection() {
         </motion.div>
       </div>
       
+      {/* Wave transition to footer */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <svg className="w-full h-16 md:h-24" viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path d="M0,40 C480,100 960,0 1440,60 L1440,120 L0,120 Z" fill="rgb(249, 250, 251)" />
+        </svg>
+      </div>
     </section>
   )
 }

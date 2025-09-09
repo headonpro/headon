@@ -41,7 +41,7 @@ const industries: Industry[] = [
       'Lieferservice-Plattform ohne Provisionen'
     ],
     priceRange: 'ab 2.500€',
-    timeframe: '2-4 Wochen'
+    timeframe: '1-2 Wochen'
   },
   {
     id: 'handwerk',
@@ -55,7 +55,7 @@ const industries: Industry[] = [
       'Kundenverwaltung mit Historie'
     ],
     priceRange: 'ab 3.000€',
-    timeframe: '3-5 Wochen'
+    timeframe: '1-3 Wochen'
   },
   {
     id: 'einzelhandel',
@@ -69,7 +69,7 @@ const industries: Industry[] = [
       'Digitale Kundenkarten'
     ],
     priceRange: 'ab 5.000€',
-    timeframe: '4-6 Wochen'
+    timeframe: '2-4 Wochen'
   },
   {
     id: 'beratung',
@@ -83,7 +83,7 @@ const industries: Industry[] = [
       'Klienten-Portal mit Dokumenten'
     ],
     priceRange: 'ab 4.000€',
-    timeframe: '3-5 Wochen'
+    timeframe: '2-4 Wochen'
   },
   {
     id: 'immobilien',
@@ -97,7 +97,7 @@ const industries: Industry[] = [
       'Interessenten-Management'
     ],
     priceRange: 'ab 6.000€',
-    timeframe: '4-8 Wochen'
+    timeframe: '2-4 Wochen'
   },
   {
     id: 'fitness',
@@ -111,7 +111,7 @@ const industries: Industry[] = [
       'Ernährungsplan-Portal'
     ],
     priceRange: 'ab 4.500€',
-    timeframe: '3-6 Wochen'
+    timeframe: '2-4 Wochen'
   }
 ]
 
@@ -168,23 +168,17 @@ export default function IndustryNavigator() {
                   className="p-6 cursor-pointer"
                   onClick={() => toggleCard(industry.id)}
                 >
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex justify-center mb-4">
                     <div className="p-3 rounded-xl bg-gradient-to-br from-accent to-secondary">
                       <industry.icon className="w-8 h-8 text-primary" strokeWidth={1.5} />
                     </div>
-                    <motion.div
-                      animate={{ rotate: expandedCard === industry.id ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ChevronDown className="w-6 h-6 text-white/60" />
-                    </motion.div>
                   </div>
                   
-                  <h3 className="text-xl font-bold text-white mb-2">
+                  <h3 className="text-xl font-bold text-white mb-2 text-center">
                     {industry.title}
                   </h3>
                   
-                  <div className="flex items-center gap-4 text-sm text-white/80">
+                  <div className="flex items-center justify-center gap-4 text-sm text-white/80 mb-3">
                     <span className="flex items-center gap-1">
                       <Euro className="w-4 h-4 text-accent" />
                       {industry.priceRange}
@@ -193,6 +187,15 @@ export default function IndustryNavigator() {
                       <Clock className="w-4 h-4 text-accent" />
                       {industry.timeframe}
                     </span>
+                  </div>
+                  
+                  <div className="flex justify-center">
+                    <motion.div
+                      animate={{ rotate: expandedCard === industry.id ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="w-6 h-6 text-white/60" />
+                    </motion.div>
                   </div>
                 </div>
 
@@ -207,7 +210,7 @@ export default function IndustryNavigator() {
                       className="overflow-hidden"
                     >
                       <div className="px-6 pb-6 border-t border-white/20 pt-4">
-                        <h4 className="font-semibold text-white mb-3">
+                        <h4 className="font-semibold text-white mb-3 text-center">
                           Unsere Lösungen für Sie:
                         </h4>
                         <ul className="space-y-2 mb-4">

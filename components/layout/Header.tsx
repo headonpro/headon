@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import AnimatedLogo from '@/components/ui/AnimatedLogo'
@@ -19,6 +20,7 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <header className="absolute top-0 z-50 w-full">
@@ -45,15 +47,23 @@ export default function Header() {
         </div>
         
         <div className="hidden lg:flex lg:gap-x-8">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-base font-semibold text-white/90 transition-colors hover:text-accent-500"
-            >
-              {item.name}
-            </Link>
-          ))}
+          {navigation.map((item) => {
+            const isActive = pathname === item.href || (item.href === '/' && pathname === '/')
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  "text-base font-semibold transition-colors",
+                  isActive 
+                    ? "text-accent-500" 
+                    : "text-white/90 hover:text-accent-500"
+                )}
+              >
+                {item.name}
+              </Link>
+            )
+          })}
         </div>
         
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -87,16 +97,24 @@ export default function Header() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-200">
               <div className="space-y-2 py-6">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                {navigation.map((item) => {
+                  const isActive = pathname === item.href || (item.href === '/' && pathname === '/')
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={cn(
+                        "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7",
+                        isActive
+                          ? "text-accent-500 bg-accent-50"
+                          : "text-gray-900 hover:bg-gray-50"
+                      )}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  )
+                })}
               </div>
               <div className="py-6">
                 <Button className="w-full bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600" onClick={() => setMobileMenuOpen(false)}>

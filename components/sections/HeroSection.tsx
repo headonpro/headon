@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 import { Plus, User } from 'lucide-react'
 import AnimatedRobot from '@/components/icons/AnimatedRobot'
 import TypewriterCTA from '@/components/ui/typewriter-cta'
-import SimpleShowcase from '@/components/showcase/SimpleShowcase'
 
 export default function HeroSection() {
   const [isMobile, setIsMobile] = useState(false)
@@ -260,16 +259,6 @@ export default function HeroSection() {
           className="mb-20 md:mb-28 lg:mb-32"
         >
           <TypewriterCTA />
-        </motion.div>
-        
-        {/* Simple Showcase */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className="mb-16 md:mb-20 lg:mb-24"
-        >
-          <SimpleShowcase />
         </motion.div>
       </div>
       

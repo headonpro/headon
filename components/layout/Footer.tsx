@@ -40,7 +40,7 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-muted/50">
+    <footer className="bg-gray-50">
       <div className="container mx-auto px-4 py-12">
         <div className="xl:grid xl:grid-cols-5 xl:gap-8">
           <div className="space-y-4 xl:col-span-2">

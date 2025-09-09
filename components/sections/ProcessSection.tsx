@@ -94,23 +94,23 @@ export default function ProcessSection() {
                 {/* Card */}
                 <div className="lg:text-center ml-20 lg:ml-0">
                   {/* Desktop Icon */}
-                  <motion.div 
-                    className="hidden lg:flex mx-auto w-20 h-20 rounded-full bg-white shadow-xl items-center justify-center mb-6 relative z-10"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <div className="p-5 rounded-full bg-primary">
-                      <step.icon className="w-10 h-10 text-accent" strokeWidth={1.5} />
-                    </div>
-                  </motion.div>
+                  <div className="hidden lg:flex justify-center mb-6">
+                    <motion.div 
+                      className="inline-flex p-4 rounded-xl bg-primary-500 shadow-lg"
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
+                      <step.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                    </motion.div>
+                  </div>
 
                   {/* Content */}
-                  <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                  <div className="bg-gradient-to-br from-primary-600/90 via-primary-500/90 to-secondary-500/90 backdrop-blur-md rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
                     <div className="mb-4">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-1">
+                      <h3 className="text-2xl font-bold text-white mb-1">
                         Schritt {step.id}: {step.title}
                       </h3>
-                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold text-accent bg-gradient-to-r ${step.color}`}>
+                      <span className="inline-block px-3 py-1 rounded-full text-sm font-semibold text-white bg-white/20 backdrop-blur-sm">
                         {step.subtitle}
                       </span>
                     </div>
@@ -118,8 +118,8 @@ export default function ProcessSection() {
                     <ul className="space-y-3 text-left">
                       {step.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-primary-600 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700">{feature}</span>
+                          <CheckCircle2 className="w-5 h-5 text-white mt-0.5 flex-shrink-0" />
+                          <span className="text-white/90">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -135,24 +135,39 @@ export default function ProcessSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center mt-16"
         >
-          <p className="text-lg text-gray-600 mb-6">
-            Bereit, Ihr Projekt zu starten? Der erste Schritt ist nur einen Klick entfernt.
-          </p>
-          <a 
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold rounded-lg transition-all duration-300 shadow-xl hover:shadow-2xl"
-          >
-            Kostenloses Erstgespräch vereinbaren
-            <motion.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
+          <div className="max-w-2xl mx-auto">
+            <motion.div
+              animate={{ 
+                y: [0, -5, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: 3, // 3 cycles * 2 seconds = 6 seconds total
+                ease: "easeInOut"
+              }}
             >
-              →
-            </motion.span>
-          </a>
+              <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-6">
+                Bereit, Ihr Projekt zu starten?
+              </h3>
+            </motion.div>
+            
+            <a 
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold rounded-lg transition-all duration-300 shadow-xl hover:shadow-2xl text-lg"
+            >
+              Kostenloses Erstgespräch vereinbaren
+              <motion.span
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="inline-block ml-2"
+              >
+                →
+              </motion.span>
+            </a>
+          </div>
         </motion.div>
       </div>
       
