@@ -8,18 +8,18 @@ import StructuredData from '@/components/seo/StructuredData'
 
 const outfit = Outfit({ 
   subsets: ['latin'],
-  display: 'optional', // Schnelleres Rendering - Font wird optional geladen
+  display: 'swap',
   variable: '--font-outfit',
   preload: true,
   adjustFontFallback: true,
 })
 
 const lato = Lato({
-  weight: ['400', '700'], // Nur die wirklich genutzten Weights
+  weight: ['300', '400', '700', '900'],
   subsets: ['latin'],
-  display: 'optional', // Schnelleres Rendering
+  display: 'swap',
   variable: '--font-lato',
-  preload: false, // Lato ist nicht kritisch für LCP
+  preload: true,
   adjustFontFallback: true,
 })
 
@@ -71,10 +71,6 @@ export default function RootLayout({
   return (
     <html lang="de" className={`${outfit.variable} ${lato.variable}`}>
       <head>
-        {/* Preconnect to Google Fonts for faster font loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
         {/* Preload critical assets for better LCP */}
         <link rel="preload" href="/headon-logo.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/images/onur_P.webp" as="image" type="image/webp" />
