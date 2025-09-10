@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Outfit, Lato, JetBrains_Mono } from 'next/font/google'
+import { Outfit, Lato } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -8,26 +8,18 @@ import StructuredData from '@/components/seo/StructuredData'
 
 const outfit = Outfit({ 
   subsets: ['latin'],
-  display: 'swap',
+  display: 'swap', // Sofortiger Text mit System-Font, dann swap zu Outfit
   variable: '--font-outfit',
   preload: true,
   adjustFontFallback: true,
 })
 
 const lato = Lato({
-  weight: ['300', '400', '700', '900'],
+  weight: ['400', '700'], // Nur die wirklich genutzten Weights
   subsets: ['latin'],
-  display: 'swap',
+  display: 'optional', // Schnelleres Rendering
   variable: '--font-lato',
-  preload: true,
-  adjustFontFallback: true,
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-jetbrains-mono',
-  preload: false,
+  preload: false, // Lato ist nicht kritisch für LCP
   adjustFontFallback: true,
 })
 
@@ -77,8 +69,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de" className={`${outfit.variable} ${lato.variable} ${jetbrainsMono.variable}`}>
+    <html lang="de" className={`${outfit.variable} ${lato.variable}`}>
       <head>
+        {/* Preconnect to Google Fonts for faster font loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
         {/* Preload critical assets for better LCP */}
         <link rel="preload" href="/headon-logo.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/images/onur_P.webp" as="image" type="image/webp" />
