@@ -21,14 +21,11 @@ export default function HeroSection() {
     checkMobile()
     window.addEventListener('resize', checkMobile)
     
-    // Start animations after initial paint
-    const animationTimer = setTimeout(() => {
-      setAnimationsReady(true)
-    }, 100)
+    // No delay for animations - start immediately
+    setAnimationsReady(true)
     
     return () => {
       window.removeEventListener('resize', checkMobile)
-      clearTimeout(animationTimer)
     }
   }, [])
 
@@ -196,7 +193,7 @@ export default function HeroSection() {
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0 }}
           className="mb-16 md:mb-20 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading"
         >
           <span 
@@ -251,30 +248,27 @@ export default function HeroSection() {
           <motion.span 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-300 via-accent-500 to-secondary-600"
           >
             die Ihr Unternehmen transformieren.
           </motion.span>
         </motion.h1>
         
-        {/* New Text Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto"
+        {/* New Text Section - No animation for critical content */}
+        <div
+          className="mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto opacity-90"
         >
           <p className="text-white/90 text-base md:text-lg lg:text-xl leading-relaxed text-center">
             Während andere Agenturen noch traditionell entwickeln, nutzen wir KI-gestützte Prozesse für 4x schnellere Umsetzung. Ihre digitale Transformation in Wochen statt Monaten - zu einem Bruchteil der üblichen Kosten.
           </p>
-        </motion.div>
+        </div>
         
         {/* Dynamic Typewriter CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-20 md:mb-28 lg:mb-32"
         >
           <TypewriterCTA />
