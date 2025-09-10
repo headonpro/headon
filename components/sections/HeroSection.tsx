@@ -10,7 +10,7 @@ import Image from 'next/image'
 export default function HeroSection() {
   const [isMobile, setIsMobile] = useState(false)
   const [showEasterEgg, setShowEasterEgg] = useState(false)
-  const [animationsReady, setAnimationsReady] = useState(true) // Start animations immediately
+  const [animationsReady, setAnimationsReady] = useState(false)
 
   useEffect(() => {
     // Check if device is mobile
@@ -21,8 +21,14 @@ export default function HeroSection() {
     checkMobile()
     window.addEventListener('resize', checkMobile)
     
+    // Start animations after initial paint
+    const animationTimer = setTimeout(() => {
+      setAnimationsReady(true)
+    }, 100)
+    
     return () => {
       window.removeEventListener('resize', checkMobile)
+      clearTimeout(animationTimer)
     }
   }, [])
 
@@ -188,9 +194,9 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 pt-48 pb-24 md:pt-64 lg:pt-72 md:pb-32 text-center">
         <motion.h1 
-          initial={{ opacity: 1, y: 0 }} // Start visible immediately
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0 }} // No delay
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-16 md:mb-20 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading"
         >
           <span 
@@ -252,14 +258,17 @@ export default function HeroSection() {
           </motion.span>
         </motion.h1>
         
-        {/* New Text Section - Critical LCP Element */}
-        <div
+        {/* New Text Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto"
         >
           <p className="text-white/90 text-base md:text-lg lg:text-xl leading-relaxed text-center">
             Während andere Agenturen noch traditionell entwickeln, nutzen wir KI-gestützte Prozesse für 4x schnellere Umsetzung. Ihre digitale Transformation in Wochen statt Monaten - zu einem Bruchteil der üblichen Kosten.
           </p>
-        </div>
+        </motion.div>
         
         {/* Dynamic Typewriter CTA Button */}
         <motion.div

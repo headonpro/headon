@@ -1,4 +1,4 @@
-import HeroSectionOptimized from '@/components/sections/HeroSectionOptimized'
+import HeroSection from '@/components/sections/HeroSection'
 import KIAdvantageSection from '@/components/sections/KIAdvantageSection'
 import ProblemSolutionSection from '@/components/sections/ProblemSolutionSection'
 import IndustryNavigator from '@/components/sections/IndustryNavigator'
@@ -9,7 +9,7 @@ import TrustPersonalitySection from '@/components/sections/TrustPersonalitySecti
 export default function Home() {
   return (
     <>
-      <HeroSectionOptimized />
+      <HeroSection />
       <ProblemSolutionSection />
       <IndustryNavigator />
       <ProcessSection />
