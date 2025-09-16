@@ -95,22 +95,22 @@ export default function ProcessSection() {
                 <div className="lg:text-center ml-20 lg:ml-0">
                   {/* Desktop Icon */}
                   <div className="hidden lg:flex justify-center mb-6">
-                    <motion.div 
-                      className="inline-flex p-4 rounded-xl bg-primary-500 shadow-lg"
+                    <motion.div
+                      className="inline-flex p-4 rounded-xl bg-accent-500 shadow-lg"
                       whileHover={{ scale: 1.1 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
                     >
-                      <step.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                      <step.icon className="w-8 h-8 text-primary-600" strokeWidth={2.5} />
                     </motion.div>
                   </div>
 
-                  {/* Content */}
-                  <div className="bg-gradient-to-br from-primary-600/90 via-primary-500/90 to-secondary-500/90 backdrop-blur-md rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                  {/* Glasmorphism Content Card */}
+                  <div className="bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl hover:shadow-2xl rounded-2xl p-6 lg:p-8 transition-all duration-300 hover:bg-white/90">
                     <div className="mb-4">
-                      <h3 className="text-2xl font-bold text-white mb-1">
+                      <h3 className="text-2xl font-bold text-gray-800 mb-1">
                         Schritt {step.id}: {step.title}
                       </h3>
-                      <span className="inline-block px-3 py-1 rounded-full text-sm font-semibold text-white bg-white/20 backdrop-blur-sm">
+                      <span className="inline-block px-3 py-1 rounded-full text-sm font-semibold text-primary-600 bg-accent-100/80 backdrop-blur-sm">
                         {step.subtitle}
                       </span>
                     </div>
@@ -118,11 +118,14 @@ export default function ProcessSection() {
                     <ul className="space-y-3 text-left">
                       {step.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-white mt-0.5 flex-shrink-0" />
-                          <span className="text-white/90">{feature}</span>
+                          <CheckCircle2 className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                          <span className="text-gray-600">{feature}</span>
                         </li>
                       ))}
                     </ul>
+
+                    {/* Subtle accent line */}
+                    <div className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full lg:mx-auto mt-6 opacity-60"></div>
                   </div>
                 </div>
               </motion.div>

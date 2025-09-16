@@ -122,21 +122,24 @@ export default function TechnologyTrustSection() {
               whileHover={{ scale: 1.05, y: -5 }}
               className="group"
             >
-              <motion.div 
-                className="bg-gradient-to-br from-primary-600/90 via-primary-500/90 to-secondary-500/90 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 h-full"
-                whileHover={{ scale: 1.02 }}
+              <motion.div
+                className="bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl hover:shadow-2xl rounded-2xl p-6 transition-all duration-300 hover:bg-white/90 h-full"
+                whileHover={{ scale: 1.02, y: -5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 {/* Icon */}
                 <div className="flex justify-center mb-4">
-                  <div className="inline-flex p-3 rounded-xl bg-white/20 backdrop-blur-sm">
-                    <tech.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                  <div className="inline-flex p-3 rounded-xl bg-accent-500 shadow-lg">
+                    <tech.icon className="w-8 h-8 text-primary-600" strokeWidth={2.5} />
                   </div>
                 </div>
-                
+
                 {/* Content */}
-                <h3 className="font-bold text-white mb-1 text-center">{tech.name}</h3>
-                <p className="text-sm text-white/90 text-center">{tech.description}</p>
+                <h3 className="font-bold text-gray-800 mb-1 text-center">{tech.name}</h3>
+                <p className="text-sm text-gray-600 text-center">{tech.description}</p>
+
+                {/* Subtle accent line */}
+                <div className="w-8 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-3 opacity-60"></div>
               </motion.div>
             </motion.div>
           ))}
@@ -148,12 +151,12 @@ export default function TechnologyTrustSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-gradient-to-br from-primary-600/90 via-primary-500/90 to-secondary-500/90 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-lg"
+          className="bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl rounded-3xl p-8 md:p-12"
         >
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
+          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">
             Zusätzliche Sicherheitsfeatures
           </h3>
-          
+
           <div className="grid md:grid-cols-2 gap-6">
             {features.map((feature, index) => (
               <motion.div
@@ -165,19 +168,24 @@ export default function TechnologyTrustSection() {
                 className="flex gap-4"
               >
                 <div className="flex-shrink-0">
-                  <feature.icon className="w-8 h-8 text-white" strokeWidth={2} />
+                  <div className="inline-flex p-2 rounded-lg bg-accent-500 shadow-sm">
+                    <feature.icon className="w-6 h-6 text-primary-600" strokeWidth={2.5} />
+                  </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white mb-1">
+                  <h4 className="font-semibold text-gray-800 mb-1">
                     {feature.title}
                   </h4>
-                  <p className="text-white/90 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-sm leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Subtle accent line */}
+          <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-8 opacity-60"></div>
         </motion.div>
 
         {/* Trust Statement */}

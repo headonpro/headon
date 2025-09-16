@@ -62,28 +62,31 @@ export default function ProblemSolutionSection() {
             >
               {/* Icon outside card */}
               <div className="flex justify-center mb-4">
-                <motion.div 
-                  className="inline-flex p-4 rounded-xl bg-primary-500 shadow-lg"
+                <motion.div
+                  className="inline-flex p-4 rounded-xl bg-accent-500 shadow-lg"
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  <problem.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                  <problem.icon className="w-8 h-8 text-primary-600" strokeWidth={2.5} />
                 </motion.div>
               </div>
               
-              {/* Card content */}
-              <motion.div 
-                className="bg-gradient-to-br from-primary-600/90 via-primary-500/90 to-secondary-500/90 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
+              {/* Glasmorphism Card */}
+              <motion.div
+                className="bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl hover:shadow-2xl rounded-2xl p-6 transition-all duration-300 hover:bg-white/90"
+                whileHover={{ scale: 1.02, y: -5 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 {/* Content */}
-                <h3 className="text-xl font-bold text-white mb-3 leading-tight text-center">
+                <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight text-center">
                   {problem.title}
                 </h3>
-                <p className="text-white/90 leading-relaxed text-center">
+                <p className="text-gray-600 leading-relaxed text-center">
                   {problem.description}
                 </p>
+
+                {/* Subtle accent line */}
+                <div className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4 opacity-60"></div>
               </motion.div>
             </motion.div>
           ))}
