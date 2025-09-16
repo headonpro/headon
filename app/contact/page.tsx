@@ -412,7 +412,7 @@ export default function ContactPage() {
               {[
                 { icon: CheckCircle2, text: '150+ Projekte', color: 'text-green-500' },
                 { icon: Zap, text: '4x schneller', color: 'text-yellow-500' },
-                { icon: TrendingUp, text: '75% günstiger', color: 'text-blue-500' },
+                { icon: TrendingUp, text: '25-50% günstiger', color: 'text-blue-500' },
                 { icon: Shield, text: 'DSGVO-konform', color: 'text-purple-500' }
               ].map((item, index) => (
                 <motion.div
