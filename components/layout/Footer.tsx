@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from 'lucide-react'
 
 const navigation = {
@@ -44,8 +45,14 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="xl:grid xl:grid-cols-5 xl:gap-8">
           <div className="space-y-4 xl:col-span-2">
-            <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              HEADON.pro
+            <Link href="/" className="inline-block">
+              <Image
+                src="/headon-logo.svg"
+                alt="HEADON.pro"
+                width={150}
+                height={40}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               Ihre moderne Kreativagentur für innovative Web- und Mobile-Anwendungen. 

@@ -125,7 +125,7 @@ export default function ProcessSection() {
                     </ul>
 
                     {/* Subtle accent line */}
-                    <div className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full lg:mx-auto mt-6 opacity-60"></div>
+                    <div className="w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full lg:mx-auto mt-6 opacity-60"></div>
                   </div>
                 </div>
               </motion.div>

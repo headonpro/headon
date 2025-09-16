@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import AnimatedLogo from '@/components/ui/AnimatedLogo'
+import Logo from '@/components/ui/Logo'
 import { cn } from '@/lib/utils'
 
 const navigation = [
@@ -27,8 +27,8 @@ export default function Header() {
       <nav className="container mx-auto flex items-center justify-between px-4 py-4" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 flex items-center">
-            <AnimatedLogo 
-              width={120} 
+            <Logo
+              width={120}
               height={32}
               className="h-8"
             />
@@ -79,8 +79,8 @@ export default function Header() {
         <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center" onClick={() => setMobileMenuOpen(false)}>
-              <AnimatedLogo 
-                width={100} 
+              <Logo
+                width={100}
                 height={28}
                 className="h-7"
               />

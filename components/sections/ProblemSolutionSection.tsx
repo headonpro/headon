@@ -78,15 +78,15 @@ export default function ProblemSolutionSection() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 {/* Content */}
-                <h3 className="text-xl font-bold text-gray-800 mb-3 leading-tight text-center">
+                <h3 className="text-xl font-bold text-primary-900 mb-3 leading-tight text-center">
                   {problem.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-center">
+                <p className="text-primary-900 leading-relaxed text-center">
                   {problem.description}
                 </p>
 
                 {/* Subtle accent line */}
-                <div className="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4 opacity-60"></div>
+                <div className="w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4 opacity-60"></div>
               </motion.div>
             </motion.div>
           ))}

@@ -139,7 +139,7 @@ export default function TechnologyTrustSection() {
                 <p className="text-sm text-gray-600 text-center">{tech.description}</p>
 
                 {/* Subtle accent line */}
-                <div className="w-8 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-3 opacity-60"></div>
+                <div className="w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-3 opacity-60"></div>
               </motion.div>
             </motion.div>
           ))}
@@ -185,7 +185,7 @@ export default function TechnologyTrustSection() {
           </div>
 
           {/* Subtle accent line */}
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-8 opacity-60"></div>
+          <div className="w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-8 opacity-60"></div>
         </motion.div>
 
         {/* Trust Statement */}
