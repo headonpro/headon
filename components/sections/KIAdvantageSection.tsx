@@ -43,7 +43,7 @@ const advantages = [
     icon: Trophy,
     title: '2x Bessere Performance',
     subtitle: 'Messbar überlegene Ergebnisse',
-    mainMetric: '95+ Score',
+    mainMetric: '90+ Score',
     comparison: 'Lighthouse Performance',
     color: 'text-accent-500',
     bgColor: 'bg-accent-500/10',

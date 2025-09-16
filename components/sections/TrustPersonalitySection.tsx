@@ -39,14 +39,9 @@ export default function TrustPersonalitySection() {
               {/* Profile Photo */}
               <div className="relative px-8 md:px-12">
                 <div className="w-full h-[340px] md:h-[380px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-400 to-secondary-400">
-                  <Image
-                    src="/images/onur_P.webp"
-                    alt="Onur - Ihr direkter Ansprechpartner bei HEADON"
-                    width={380}
-                    height={380}
-                    className="w-full h-full object-cover object-top scale-105"
-                    priority
-                  />
+                  <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
+                    <div className="text-6xl text-gray-600">👤</div>
+                  </div>
                 </div>
                 {/* Decorative elements */}
                 <div className="absolute -top-4 right-4 w-24 h-24 bg-accent-500/20 rounded-full blur-2xl" />
