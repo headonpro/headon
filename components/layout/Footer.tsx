@@ -47,7 +47,7 @@ export default function Footer() {
           <div className="space-y-4 xl:col-span-2">
             <Link href="/" className="inline-block">
               <Image
-                src="/headon-logo.svg"
+                src="/headon-logo_footer.svg"
                 alt="HEADON.pro"
                 width={150}
                 height={40}
