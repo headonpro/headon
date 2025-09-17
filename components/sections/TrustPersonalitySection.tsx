@@ -36,20 +36,8 @@ export default function TrustPersonalitySection() {
           className="max-w-4xl mx-auto mb-16"
         >
           <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Profile Photo */}
-              <div className="relative px-8 md:px-12">
-                <div className="w-full h-[340px] md:h-[380px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-400 to-secondary-400">
-                  <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
-                    <div className="text-6xl text-gray-600">👤</div>
-                  </div>
-                </div>
-                {/* Decorative elements */}
-                <div className="absolute -top-4 right-4 w-24 h-24 bg-accent-500/20 rounded-full blur-2xl" />
-                <div className="absolute -bottom-4 left-4 w-32 h-32 bg-primary-500/20 rounded-full blur-2xl" />
-              </div>
-
               {/* Text Content */}
-              <div>
+              <div className="order-2 md:order-1">
                 <h3 className="text-3xl font-bold text-white mb-4 flex items-center gap-2 flex-wrap">
                   <span>Hallo, ich bin</span>
                   <Image 
@@ -95,6 +83,22 @@ export default function TrustPersonalitySection() {
                     <span>LinkedIn Profil</span>
                   </a>
                 </div>
+              </div>
+
+              {/* Profile Photo */}
+              <div className="relative order-1 md:order-2">
+                <Image
+                  src="/images/onur-portrai-hd.webp"
+                  alt="Onur - Ihr persönlicher Ansprechpartner bei HEADON"
+                  width={512}
+                  height={760}
+                  className="rounded-2xl shadow-2xl object-cover mx-auto"
+                  style={{ width: '256px', height: '380px' }}
+                  quality={95}
+                />
+                {/* Decorative elements */}
+                <div className="absolute -top-4 right-4 w-24 h-24 bg-accent-500/20 rounded-full blur-2xl" />
+                <div className="absolute -bottom-4 left-4 w-32 h-32 bg-primary-500/20 rounded-full blur-2xl" />
               </div>
             </div>
         </motion.div>
