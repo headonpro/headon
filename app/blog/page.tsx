@@ -1,5 +1,9 @@
+'use client'
+
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 const posts = [
   {
@@ -47,14 +51,63 @@ const posts = [
 const categories = ['Alle', 'Development', 'Design', 'Backend', 'Business']
 
 export default function BlogPage() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
+
   return (
-    <div className="py-16">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Gradient Background - same as HeroSection */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+
+      {/* Animated Gradient Layers */}
+      <div className="absolute inset-0">
+        <motion.div
+          className="absolute inset-0 opacity-60"
+          animate={{
+            background: isMobile ? [
+              'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
+              'radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.5) 0%, transparent 40%)',
+              'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
+            ] : [
+              'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 40% 40%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+            ],
+          }}
+          transition={{
+            duration: isMobile ? 8 : 10,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            willChange: 'background'
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-4">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
             Blog
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 max-w-2xl mx-auto">
             Insights, Tutorials und News aus der Welt der digitalen Innovation.
           </p>
         </div>
@@ -66,8 +119,8 @@ export default function BlogPage() {
               key={category}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 category === 'Alle'
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted hover:bg-muted/80'
+                  ? 'bg-white/20 backdrop-blur-sm text-white border border-white/30'
+                  : 'bg-white/10 backdrop-blur-sm text-white/80 hover:bg-white/15 border border-white/20'
               }`}
             >
               {category}
@@ -80,12 +133,12 @@ export default function BlogPage() {
           {posts.map((post) => (
             <article
               key={post.id}
-              className="group overflow-hidden rounded-lg border bg-card hover:shadow-lg transition-all duration-300"
+              className="group overflow-hidden rounded-lg bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300"
             >
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20" />
+              <div className="aspect-video bg-gradient-to-br from-white/10 to-white/5" />
               <div className="p-6">
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                  <span className="text-primary font-medium">{post.category}</span>
+                <div className="flex items-center gap-4 text-sm text-white/70 mb-3">
+                  <span className="text-white font-medium">{post.category}</span>
                   <div className="flex items-center gap-1">
                     <Calendar className="h-3 w-3" />
                     <time>{new Date(post.date).toLocaleDateString('de-DE')}</time>
@@ -95,19 +148,19 @@ export default function BlogPage() {
                     <span>{post.readTime}</span>
                   </div>
                 </div>
-                <h2 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                <h2 className="text-xl font-semibold mb-2 text-white group-hover:text-white/90 transition-colors">
                   {post.title}
                 </h2>
-                <p className="text-muted-foreground mb-4 line-clamp-3">
+                <p className="text-white/80 mb-4 line-clamp-3">
                   {post.excerpt}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-sm text-white/70">
                     Von {post.author}
                   </span>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:gap-2 transition-all"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-white hover:gap-2 transition-all"
                   >
                     Weiterlesen
                     <ArrowRight className="h-4 w-4" />
@@ -120,27 +173,28 @@ export default function BlogPage() {
 
         {/* Newsletter Section */}
         <div className="mt-16">
-          <div className="rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 p-8 text-center">
-            <h2 className="text-2xl font-bold mb-4">Bleiben Sie auf dem Laufenden</h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Abonnieren Sie unseren Newsletter und erhalten Sie die neuesten Artikel, 
+          <div className="rounded-lg bg-white/10 backdrop-blur-md border border-white/20 p-8 text-center">
+            <h2 className="text-2xl font-bold mb-4 text-white">Bleiben Sie auf dem Laufenden</h2>
+            <p className="text-white/80 mb-6 max-w-2xl mx-auto">
+              Abonnieren Sie unseren Newsletter und erhalten Sie die neuesten Artikel,
               Tutorials und Insights direkt in Ihr Postfach.
             </p>
             <form className="flex gap-3 max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="ihre@email.de"
-                className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="flex-1 rounded-md border border-white/30 bg-white/10 backdrop-blur-sm px-3 py-2 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/30"
               />
               <button
                 type="submit"
-                className="rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                className="rounded-md bg-white/20 backdrop-blur-sm px-6 py-2 text-sm font-medium text-white hover:bg-white/25 transition-colors border border-white/30"
               >
                 Abonnieren
               </button>
             </form>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

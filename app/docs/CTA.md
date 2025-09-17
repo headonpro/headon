@@ -211,7 +211,7 @@ Statt generischer "Projekt starten" Buttons wird ein dynamischer, zielgruppen-sp
   - Responsive Design
   - Basis-SEO
   - Kontaktformular
-  - 1 Jahr Support
+  - 6 Monate Support
 
 - **Professional:** ab 5.000€
   - Erweiterte Funktionen

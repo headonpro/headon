@@ -11,16 +11,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { 
-  Clock, 
-  MessageSquare, 
-  TrendingUp, 
-  Shield, 
-  Phone, 
-  Calendar, 
-  Mail, 
-  CheckCircle2, 
-  Star, 
+import {
+  Clock,
+  MessageSquare,
+  TrendingUp,
+  Shield,
+  Phone,
+  Calendar,
+  Mail,
+  CheckCircle2,
   Zap,
   Award,
   Timer,
@@ -293,7 +292,7 @@ export default function ContactPage() {
               className="flex items-center justify-center gap-2 text-white/80 text-sm"
             >
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span>Gestern: 2 neue Projekte gestartet</span>
+              <span>Verfügbarkeit</span>
             </motion.div>
           </div>
         </motion.section>
@@ -341,15 +340,15 @@ export default function ContactPage() {
                     
                     <div className="mt-4 space-y-2">
                       <div className="flex items-center gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <CheckCircle2 className="w-4 h-4 text-accent-500" />
                         <span>15-Minuten Slots verfügbar</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <CheckCircle2 className="w-4 h-4 text-accent-500" />
                         <span>Zoom/Google Meet Link automatisch</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <CheckCircle2 className="w-4 h-4 text-accent-500" />
                         <span>Erinnerung per Email</span>
                       </div>
                     </div>
@@ -410,10 +409,10 @@ export default function ContactPage() {
               className="flex flex-wrap justify-center gap-4 mb-12"
             >
               {[
-                { icon: CheckCircle2, text: '150+ Projekte', color: 'text-green-500' },
-                { icon: Zap, text: '4x schneller', color: 'text-yellow-500' },
-                { icon: TrendingUp, text: '25-50% günstiger', color: 'text-blue-500' },
-                { icon: Shield, text: 'DSGVO-konform', color: 'text-purple-500' }
+                { icon: CheckCircle2, text: '150+ Projekte', color: 'text-accent-500' },
+                { icon: Zap, text: '4x schneller', color: 'text-accent-500' },
+                { icon: TrendingUp, text: '25-50% günstiger', color: 'text-accent-500' },
+                { icon: Shield, text: 'DSGVO-konform', color: 'text-accent-500' }
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -431,45 +430,6 @@ export default function ContactPage() {
               ))}
             </motion.div>
 
-            {/* Mini-Testimonials with Animation */}
-            <motion.div 
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid md:grid-cols-2 gap-6 mb-12"
-            >
-              {[
-                {
-                  text: "15 Min Gespräch, am nächsten Tag perfektes Angebot!",
-                  author: "Restaurant Müller"
-                },
-                {
-                  text: "Hätte nie gedacht, dass es so schnell und günstig geht.",
-                  author: "Handwerk Weber"
-                }
-              ].map((testimonial, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Card className="p-6 bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all">
-                    <CardContent className="p-0">
-                      <div className="flex mb-2">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
-                      <p className="text-white/90 mb-2">
-                        &quot;{testimonial.text}&quot;
-                      </p>
-                      <p className="text-sm text-white/60">- {testimonial.author}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
 
             {/* FAQ Sektion with Animation */}
             <motion.div 
@@ -500,13 +460,13 @@ export default function ContactPage() {
                   },
                   {
                     question: "Was passiert nach dem Launch?",
-                    answer: "1 Jahr kostenloser Support, dann optional Wartungsvertrag. Sie erhalten alle Zugänge und können jederzeit selbst Änderungen vornehmen."
+                    answer: "6 Monate kostenloser Support, dann optional Wartungsvertrag. Sie erhalten alle Zugänge und können jederzeit selbst Änderungen vornehmen."
                   }
                 ].map((faq, index) => (
                   <AccordionItem key={`item-${index + 1}`} value={`item-${index + 1}`} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4">
                     <AccordionTrigger className="hover:no-underline text-left text-white">
                       <div className="flex items-center gap-2">
-                        <AlertCircle className="w-5 h-5 text-primary-400 flex-shrink-0" />
+                        <AlertCircle className="w-5 h-5 text-accent-500 flex-shrink-0" />
                         <span>{faq.question}</span>
                       </div>
                     </AccordionTrigger>

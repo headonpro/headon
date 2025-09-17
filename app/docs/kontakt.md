@@ -123,7 +123,7 @@ Max 10MB - PDF, DOC, PNG, JPG
 💬 "Nein. Festpreis vor Projektbeginn, keine Überraschungen."
 
 ❓ "Was passiert nach dem Launch?"
-💬 "1 Jahr kostenloser Support, dann optional Wartungsvertrag."
+💬 "6 Monate kostenloser Support, dann optional Wartungsvertrag."
 ```
 
 ### 6. Notfall-CTA (Sticky Bottom)

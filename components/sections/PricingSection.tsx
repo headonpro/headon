@@ -25,7 +25,7 @@ const pricingPlans: PricingPlan[] = [
       'Responsive Design für alle Geräte',
       'Basis-SEO für Google-Sichtbarkeit',
       'Kontaktformular mit E-Mail-Weiterleitung',
-      '1 Jahr kostenloser Support',
+      '6 Monate kostenloser Support',
       'SSL-Zertifikat inklusive',
       'Bis zu 5 Unterseiten',
       'Cookie-Banner (DSGVO)',
