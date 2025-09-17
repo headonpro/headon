@@ -101,19 +101,41 @@ export default function BlogPage() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 py-16">
+      <div className="relative z-10 pt-40 pb-24">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
-            Blog
-          </h1>
-          <p className="text-lg text-white/90 max-w-2xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-24"
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl mb-12 font-heading"
+          >
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-300 via-accent-500 to-secondary-600">
+              Blog
+            </span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-lg text-white/90 max-w-3xl mx-auto"
+          >
             Insights, Tutorials und News aus der Welt der digitalen Innovation.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Categories */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="flex flex-wrap justify-center gap-3 mb-16"
+        >
           {categories.map((category) => (
             <button
               key={category}
@@ -126,7 +148,7 @@ export default function BlogPage() {
               {category}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Blog Posts Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">

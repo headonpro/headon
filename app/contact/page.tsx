@@ -240,19 +240,31 @@ export default function ContactPage() {
       {/* Content */}
       <div className="relative z-10">
         {/* Hero Bereich */}
-        <motion.section 
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="pt-20 pb-12 px-4"
+          className="pt-40 pb-24 px-4"
         >
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 font-heading">
-              Lassen Sie uns Ihr Projekt besprechen
-            </h1>
-            <p className="text-xl text-white/90 mb-8">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl mb-12 font-heading"
+            >
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-300 via-accent-500 to-secondary-600">
+                Lassen Sie uns Ihr Projekt besprechen
+              </span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-lg text-white/90 max-w-3xl mx-auto mb-8"
+            >
               Kostenlose Erstberatung in 15 Minuten - unverbindlich und transparent
-            </p>
+            </motion.p>
             
             {/* Trust Indicators with Animation */}
             <motion.div 

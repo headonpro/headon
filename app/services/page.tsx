@@ -62,12 +62,12 @@ export default function ServicesPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
         
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 pt-32 pb-32 text-center">
+        <div className="relative z-10 container mx-auto px-4 pt-40 pb-40 text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading"
+            className="mb-12 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading"
           >
             Unsere
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-300 via-accent-500 to-secondary-600">
@@ -79,7 +79,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mb-12 text-white/90 text-base md:text-lg lg:text-xl max-w-3xl mx-auto"
+            className="mb-16 text-white/90 text-base md:text-lg lg:text-xl max-w-3xl mx-auto"
           >
             Von der Konzeption bis zur Umsetzung – wir bieten End-to-End Lösungen für Ihre digitalen Projekte.
           </motion.p>
@@ -89,7 +89,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="grid gap-8 md:grid-cols-2 lg:grid-cols-2 max-w-5xl mx-auto mb-12"
+            className="grid gap-10 md:grid-cols-2 lg:grid-cols-2 max-w-5xl mx-auto mb-16"
           >
             {services.map((service, index) => (
               <motion.div
@@ -128,7 +128,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.9 }}
-            className="mb-24"
+            className="mb-32"
           >
             <Link href="/contact">
               <Button 

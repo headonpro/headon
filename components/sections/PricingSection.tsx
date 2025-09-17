@@ -76,7 +76,7 @@ export default function PricingSection() {
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null)
 
   return (
-    <section className="py-24 pb-32 bg-gray-50 relative -mt-1">
+    <section className="pt-32 pb-32 bg-gray-50 relative -mt-1">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div

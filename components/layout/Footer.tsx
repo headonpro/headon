@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Mail, MapPin, Phone, Github, Linkedin, Twitter } from 'lucide-react'
+import { Mail, MapPin, Phone, Linkedin } from 'lucide-react'
+
+// Custom X (Twitter) Icon Component
+const XIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+)
 
 const navigation = {
   services: [
@@ -22,19 +29,14 @@ const navigation = {
   ],
   social: [
     {
-      name: 'GitHub',
-      href: '#',
-      icon: Github,
-    },
-    {
       name: 'LinkedIn',
       href: '#',
       icon: Linkedin,
     },
     {
-      name: 'Twitter',
+      name: 'X.com',
       href: '#',
-      icon: Twitter,
+      icon: XIcon,
     },
   ],
 }
@@ -43,8 +45,9 @@ export default function Footer() {
   return (
     <footer className="bg-gray-50">
       <div className="container mx-auto px-4 py-12">
-        <div className="xl:grid xl:grid-cols-5 xl:gap-8">
-          <div className="space-y-4 xl:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-8">
+          {/* Logo & Description */}
+          <div className="space-y-4">
             <Link href="/" className="inline-block">
               <Image
                 src="/headon-logo_footer.svg"
@@ -55,18 +58,23 @@ export default function Footer() {
               />
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
-              Ihre moderne Kreativagentur für innovative Web- und Mobile-Anwendungen. 
+              Ihre moderne Kreativagentur für innovative Web- und Mobile-Anwendungen.
               Wir transformieren Ideen in digitale Realität.
             </p>
+          </div>
+
+          {/* Contact Information */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-foreground">Kontakt</h3>
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
-                <span>Berlin, Deutschland</span>
+                <span>Lauda-Königshofen, Deutschland</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:hello@headon.pro" className="hover:text-foreground transition-colors">
-                  hello@headon.pro
+                <a href="mailto:hallo@headon.pro" className="hover:text-foreground transition-colors">
+                  hallo@headon.pro
                 </a>
               </div>
               <div className="flex items-center gap-2">
@@ -89,46 +97,47 @@ export default function Footer() {
               ))}
             </div>
           </div>
-          
-          <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-3 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 className="text-sm font-semibold text-foreground">Services</h3>
-                <ul role="list" className="mt-4 space-y-2">
-                  {navigation.services.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold text-foreground">Unternehmen</h3>
-                <ul role="list" className="mt-4 space-y-2">
-                  {navigation.company.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-foreground">Rechtliches</h3>
-              <ul role="list" className="mt-4 space-y-2">
-                {navigation.legal.map((item) => (
-                  <li key={item.name}>
-                    <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+
+          {/* Services */}
+          <div>
+            <h3 className="text-sm font-semibold text-foreground">Services</h3>
+            <ul role="list" className="mt-4 space-y-2">
+              {navigation.services.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="text-sm font-semibold text-foreground">Unternehmen</h3>
+            <ul role="list" className="mt-4 space-y-2">
+              {navigation.company.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="text-sm font-semibold text-foreground">Rechtliches</h3>
+            <ul role="list" className="mt-4 space-y-2">
+              {navigation.legal.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         
