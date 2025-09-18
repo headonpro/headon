@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "System Sound Notification",
+  "description": "Plays a system sound when you need confirmation or when a task is completed",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "When you need confirmation from the user or when you have completed a task, play a system sound to alert them. Use appropriate system notification sounds to get their attention."
+  }
+}

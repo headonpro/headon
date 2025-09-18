@@ -11,7 +11,7 @@ const advantages = [
     icon: Zap,
     title: '4x Schneller',
     subtitle: 'Von der Idee zum Launch in Rekordzeit',
-    mainMetric: '3-4 Wochen',
+    mainMetric: '2-4 Wochen',
     comparison: 'statt 12-16 Wochen',
     color: 'text-accent-500',
     bgColor: 'bg-accent-500/10',

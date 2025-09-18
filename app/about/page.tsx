@@ -34,7 +34,7 @@ const stats = [
   { label: 'Jahre Erfahrung', value: '10+' },
   { label: 'Zufriedenheit', value: '100%' },
   { label: 'K.I. Modelle', value: '12+' },
-  { label: 'AI-Assistenten', value: '1+', icon: AnimatedRobot },
+  { label: 'Team', value: '1+', icon: AnimatedRobot },
 ]
 
 export default function AboutPage() {
