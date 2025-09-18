@@ -421,9 +421,9 @@ export default function ContactPage() {
               className="flex flex-wrap justify-center gap-4 mb-12"
             >
               {[
-                { icon: CheckCircle2, text: '150+ Projekte', color: 'text-accent-500' },
+                { icon: CheckCircle2, text: '100% Zufriedenheit', color: 'text-accent-500' },
                 { icon: Zap, text: '4x schneller', color: 'text-accent-500' },
-                { icon: TrendingUp, text: '25-50% günstiger', color: 'text-accent-500' },
+                { icon: TrendingUp, text: '30-50% günstiger', color: 'text-accent-500' },
                 { icon: Shield, text: 'DSGVO-konform', color: 'text-accent-500' }
               ].map((item, index) => (
                 <motion.div
