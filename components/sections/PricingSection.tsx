@@ -31,7 +31,7 @@ const pricingPlans: PricingPlan[] = [
       'Cookie-Banner (DSGVO)',
       'Google Analytics Integration'
     ],
-    color: 'from-blue-500 to-indigo-500'
+    color: 'from-primary-500 to-primary-600'
   },
   {
     name: 'Professional',
@@ -50,7 +50,7 @@ const pricingPlans: PricingPlan[] = [
     ],
     highlighted: true,
     popular: true,
-    color: 'from-purple-500 to-pink-500'
+    color: 'from-primary-500 to-secondary-500'
   },
   {
     name: 'Enterprise Custom',
@@ -68,7 +68,7 @@ const pricingPlans: PricingPlan[] = [
       'Priority Support 24/7',
       'Langfristige Betreuung'
     ],
-    color: 'from-orange-500 to-red-500'
+    color: 'from-secondary-500 to-secondary-600'
   }
 ]
 
@@ -86,7 +86,7 @@ export default function PricingSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-heading">
+          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-6 font-heading pb-2">
             Transparente Preisgestaltung
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
