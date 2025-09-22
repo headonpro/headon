@@ -245,7 +245,7 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:bg-white/15 focus:border-white/40 h-12"
-                    placeholder="+49 123 456789"
+                    placeholder="+49 176 630 402 41"
                   />
                 </motion.div>
               </div>
