@@ -506,7 +506,7 @@ export default function ContactPage() {
               className="w-full" 
               variant="outline" 
               size="lg"
-              onClick={() => window.location.href = 'tel:+49123456789'}
+              onClick={() => window.location.href = 'tel:+4917663040241'}
             >
               <Phone className="w-4 h-4 mr-1" />
               Anrufen
@@ -527,7 +527,7 @@ export default function ContactPage() {
               className="w-full" 
               variant="outline" 
               size="lg"
-              onClick={() => window.location.href = 'mailto:info@headon.pro'}
+              onClick={() => window.location.href = 'mailto:hallo@headon.pro'}
             >
               <Mail className="w-4 h-4 mr-1" />
               Email
