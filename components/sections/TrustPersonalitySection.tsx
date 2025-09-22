@@ -66,12 +66,12 @@ export default function TrustPersonalitySection() {
                     <Mail className="w-5 h-5" />
                     <span>kontakt@headon.pro</span>
                   </a>
-                  <a 
-                    href="tel:+491234567890" 
+                  <a
+                    href="tel:+4917663040241"
                     className="flex items-center gap-3 text-white/80 hover:text-accent-500 transition-colors"
                   >
                     <Phone className="w-5 h-5" />
-                    <span>+49 123 456 7890</span>
+                    <span>+49 176 630 402 41</span>
                   </a>
                   <a 
                     href="https://linkedin.com" 

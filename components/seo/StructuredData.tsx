@@ -33,7 +33,7 @@ export default function StructuredData({ type = 'organization', data }: Structur
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+49-XXX-XXXXXXX',
+      telephone: '+49-176-6304241',
       contactType: 'customer service',
       areaServed: 'DE',
       availableLanguage: ['German', 'English']
@@ -63,7 +63,7 @@ export default function StructuredData({ type = 'organization', data }: Structur
     name: 'HEADON.pro',
     image: `${baseUrl}/headon-logo.svg`,
     url: baseUrl,
-    telephone: '+49-XXX-XXXXXXX',
+    telephone: '+49-176-6304241',
     priceRange: '€€€',
     address: {
       '@type': 'PostalAddress',
