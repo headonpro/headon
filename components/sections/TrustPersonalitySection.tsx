@@ -59,12 +59,12 @@ export default function TrustPersonalitySection() {
                 
                 {/* Contact Options */}
                 <div className="space-y-3">
-                  <a 
-                    href="mailto:kontakt@headon.pro" 
+                  <a
+                    href="mailto:hallo@headon.pro"
                     className="flex items-center gap-3 text-white/80 hover:text-accent-500 transition-colors"
                   >
                     <Mail className="w-5 h-5" />
-                    <span>kontakt@headon.pro</span>
+                    <span>hallo@headon.pro</span>
                   </a>
                   <a
                     href="tel:+4917663040241"
