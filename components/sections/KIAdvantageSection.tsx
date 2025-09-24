@@ -83,7 +83,7 @@ export default function KIAdvantageSection() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">Warum</span>
             <Image 
               src="/headon-logo.svg" 
-              alt="HEADON.pro Logo - Digitalagentur Freiburg" 
+              alt="HEADON.pro Logo - Digitalagentur Lauda-Königshofen" 
               width={200} 
               height={45}
               className="inline-block"

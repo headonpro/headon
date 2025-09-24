@@ -26,9 +26,9 @@ export default function StructuredData({ type = 'organization', data }: Structur
     description: 'Moderne Kreativagentur spezialisiert auf Full-Stack Web Development, Mobile Apps, UI/UX Design und Cloud-Backend Lösungen.',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Freiburg',
+      addressLocality: 'Lauda-Königshofen',
       addressRegion: 'Baden-Württemberg',
-      postalCode: '79098',
+      postalCode: '97922',
       addressCountry: 'DE'
     },
     contactPoint: {
@@ -68,15 +68,15 @@ export default function StructuredData({ type = 'organization', data }: Structur
     address: {
       '@type': 'PostalAddress',
       streetAddress: '',
-      addressLocality: 'Freiburg',
+      addressLocality: 'Lauda-Königshofen',
       addressRegion: 'BW',
-      postalCode: '79098',
+      postalCode: '97922',
       addressCountry: 'DE'
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 47.9990,
-      longitude: 7.8421
+      latitude: 49.5667,
+      longitude: 9.7000
     },
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
@@ -91,7 +91,57 @@ export default function StructuredData({ type = 'organization', data }: Structur
       worstRating: '1',
       ratingCount: '50',
       reviewCount: '50'
-    }
+    },
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Bad Mergentheim',
+        containedInPlace: {
+          '@type': 'State',
+          name: 'Baden-Württemberg'
+        }
+      },
+      {
+        '@type': 'City',
+        name: 'Lauda-Königshofen',
+        containedInPlace: {
+          '@type': 'State',
+          name: 'Baden-Württemberg'
+        }
+      },
+      {
+        '@type': 'City',
+        name: 'Tauberbischofsheim',
+        containedInPlace: {
+          '@type': 'State',
+          name: 'Baden-Württemberg'
+        }
+      },
+      {
+        '@type': 'City',
+        name: 'Wertheim',
+        containedInPlace: {
+          '@type': 'State',
+          name: 'Baden-Württemberg'
+        }
+      },
+      {
+        '@type': 'City',
+        name: 'Marktheidenfeld',
+        containedInPlace: {
+          '@type': 'State',
+          name: 'Bayern'
+        }
+      },
+      {
+        '@type': 'City',
+        name: 'Würzburg',
+        containedInPlace: {
+          '@type': 'State',
+          name: 'Bayern'
+        }
+      }
+    ]
   }
 
   // Service Schema für Dienstleistungen
@@ -103,10 +153,36 @@ export default function StructuredData({ type = 'organization', data }: Structur
       '@type': 'Organization',
       name: 'HEADON.pro'
     },
-    areaServed: {
-      '@type': 'Country',
-      name: 'Germany'
-    },
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Bad Mergentheim'
+      },
+      {
+        '@type': 'City',
+        name: 'Lauda-Königshofen'
+      },
+      {
+        '@type': 'City',
+        name: 'Tauberbischofsheim'
+      },
+      {
+        '@type': 'City',
+        name: 'Wertheim'
+      },
+      {
+        '@type': 'City',
+        name: 'Marktheidenfeld'
+      },
+      {
+        '@type': 'City',
+        name: 'Würzburg'
+      },
+      {
+        '@type': 'Country',
+        name: 'Germany'
+      }
+    ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Digital Services',

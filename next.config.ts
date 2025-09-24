@@ -4,12 +4,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   // Enable standalone output for optimized Docker deployments
   output: 'standalone',
-  // Temporarily ignore TypeScript errors for deployment
+  // Enable proper error checking for production builds
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   images: {
     domains: [],

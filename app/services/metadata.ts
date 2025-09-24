@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Unsere Services | HEADON.pro - Web Development, Apps & Design',
-  description: 'Professionelle Web-Entwicklung, Mobile Apps, UI/UX Design und Cloud-Lösungen. Maßgeschneiderte digitale Services für Ihr Unternehmen in Freiburg und deutschlandweit.',
-  keywords: 'Web Development Freiburg, App Entwicklung, UI/UX Design, React Entwicklung, Next.js Agentur, TypeScript Experten, Cloud Solutions, API Integration',
+  description: 'Professionelle Web-Entwicklung, Mobile Apps, UI/UX Design und Cloud-Lösungen. Digitalagentur für Bad Mergentheim, Lauda-Königshofen, Tauberbischofsheim, Wertheim, Marktheidenfeld und Würzburg.',
+  keywords: 'Web Development Bad Mergentheim, Digitalagentur Lauda-Königshofen, App Entwicklung Tauberbischofsheim, UI/UX Design Wertheim, Next.js Agentur Marktheidenfeld, TypeScript Experten Würzburg, Cloud Solutions',
   openGraph: {
     title: 'Digital Services | HEADON.pro',
     description: 'Von der Idee zur fertigen Lösung - Wir bieten Full-Service Digitalentwicklung',
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://headon.pro/images/services-og.jpg',
+        url: 'https://headon.pro/headon-logo.svg',
         width: 1200,
         height: 630,
-        alt: 'HEADON.pro Services',
+        alt: 'HEADON.pro Services - Digitalagentur Lauda-Königshofen',
       },
     ],
   },

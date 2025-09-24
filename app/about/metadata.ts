@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://headon.pro/images/team-og.jpg',
+        url: 'https://headon.pro/images/onur_P.webp',
         width: 1200,
         height: 630,
         alt: 'HEADON.pro Team',
