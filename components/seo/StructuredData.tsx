@@ -84,14 +84,6 @@ export default function StructuredData({ type = 'organization', data }: Structur
       opens: '09:00',
       closes: '18:00'
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5',
-      bestRating: '5',
-      worstRating: '1',
-      ratingCount: '50',
-      reviewCount: '50'
-    },
     areaServed: [
       {
         '@type': 'City',
