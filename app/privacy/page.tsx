@@ -169,12 +169,12 @@ export default function DataProtectionPage() {
                 <div className="space-y-4 text-gray-700">
                   <p>
                     Diese Datenschutzerklärung klärt Sie über die Art, den Umfang und Zweck der Verarbeitung von
-                    personenbezogenen Daten (nachfolgend kurz „Daten") im Rahmen der Erbringung unserer Leistungen
+                    personenbezogenen Daten (nachfolgend kurz &ldquo;Daten&rdquo;) im Rahmen der Erbringung unserer Leistungen
                     sowie innerhalb unseres Onlineangebotes und der mit ihm verbundenen Webseiten, Funktionen und
-                    Inhalte auf (nachfolgend gemeinsam bezeichnet als „Onlineangebot").
+                    Inhalte auf (nachfolgend gemeinsam bezeichnet als &ldquo;Onlineangebot&rdquo;).
                   </p>
                   <p>
-                    Im Hinblick auf die verwendeten Begrifflichkeiten, wie z.B. „Verarbeitung" oder „Verantwortlicher"
+                    Im Hinblick auf die verwendeten Begrifflichkeiten, wie z.B. &ldquo;Verarbeitung&rdquo; oder &ldquo;Verantwortlicher&rdquo;
                     verweisen wir auf die Definitionen im Art. 4 der Datenschutzgrundverordnung (DSGVO).
                   </p>
                 </div>
