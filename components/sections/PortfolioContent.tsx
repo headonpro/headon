@@ -236,6 +236,9 @@ export default function PortfolioContent() {
           ))}
         </div>
       </div>
+
+      {/* Transition to Footer */}
+      <div className="h-16 bg-gradient-to-b from-transparent to-gray-50"></div>
     </div>
   )
 }
