@@ -43,7 +43,7 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-50">
+    <footer className="bg-transparent">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-8">
           {/* Logo & Description */}
@@ -57,7 +57,7 @@ export default function Footer() {
                 className="h-10 w-auto"
               />
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
+            <p className="text-sm text-white/80 max-w-xs">
               Ihre moderne Kreativagentur für innovative Web- und Mobile-Anwendungen.
               Wir transformieren Ideen in digitale Realität.
             </p>
@@ -65,8 +65,8 @@ export default function Footer() {
 
           {/* Contact Information */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-foreground">Kontakt</h3>
-            <div className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="text-sm font-semibold text-white">Kontakt</h3>
+            <div className="space-y-2 text-sm text-white/70">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
                 <span>Lauda-Königshofen, Deutschland</span>

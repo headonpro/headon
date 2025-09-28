@@ -190,13 +190,13 @@ const projects = [
 
 export default function PortfolioContent() {
   return (
-    <div className="py-16">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-4">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
             Portfolio
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 max-w-2xl mx-auto">
             Entdecken Sie unsere erfolgreichen Projekte und lassen Sie sich inspirieren.
           </p>
         </div>
@@ -205,7 +205,7 @@ export default function PortfolioContent() {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group relative overflow-hidden rounded-lg border bg-card hover:shadow-lg transition-all duration-300"
+              className="group relative overflow-hidden rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/15 hover:shadow-xl transition-all duration-300"
             >
               {project.customComponent ? (
                 <div className="p-6">
@@ -215,20 +215,20 @@ export default function PortfolioContent() {
                 <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20" />
               )}
               <div className="p-6">
-                <p className="text-sm text-muted-foreground mb-2">{project.category}</p>
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
+                <p className="text-sm text-white/70 mb-2">{project.category}</p>
+                <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+                <p className="text-white/80 mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 text-xs rounded-full bg-primary/10 text-primary"
+                      className="px-2 py-1 text-xs rounded-full bg-accent/20 text-accent-200"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10">
                   Case Study ansehen
                 </Button>
               </div>
