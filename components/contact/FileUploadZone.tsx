@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Upload, X, FileText, Image, File } from 'lucide-react'
+import { Upload, X, FileText, Image as ImageIcon, File } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 
@@ -39,7 +39,7 @@ export default function FileUploadZone({ onFilesChange }: FileUploadZoneProps) {
   })
 
   const getFileIcon = (file: File) => {
-    if (file.type.startsWith('image/')) return <Image className="w-4 h-4" />
+    if (file.type.startsWith('image/')) return <ImageIcon className="w-4 h-4" />
     if (file.type.includes('pdf')) return <FileText className="w-4 h-4 text-red-500" />
     return <File className="w-4 h-4" />
   }
