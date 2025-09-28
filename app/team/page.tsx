@@ -1,4 +1,27 @@
+import type { Metadata } from 'next'
 import { Github, Linkedin, Twitter } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Team - Das HEADON Digitalagentur Team kennenlernen',
+  description: 'Lernen Sie das HEADON Team kennen: Erfahrene Entwickler, Designer und Digitalexperten aus Lauda-Königshofen. Persönliche Betreuung und direkte Ansprechpartner für Ihr digitales Projekt.',
+  keywords: 'HEADON Team, Digitalagentur Team, Web Developer Team, UI/UX Designer, Kreativagentur Mitarbeiter, Lauda-Königshofen, persönliche Betreuung',
+  openGraph: {
+    title: 'Das HEADON Team - Ihre Digitalexperten',
+    description: 'Lernen Sie unser erfahrenes Team kennen: Von Web Development bis UI/UX Design - Ihre persönlichen Ansprechpartner.',
+    url: 'https://headon.pro/team',
+    siteName: 'HEADON.pro',
+    locale: 'de_DE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'HEADON Team - Digitalexperten',
+    description: 'Erfahrene Entwickler und Designer für Ihr digitales Projekt',
+  },
+  alternates: {
+    canonical: 'https://headon.pro/team',
+  },
+}
 
 const team = [
   {

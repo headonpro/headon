@@ -44,7 +44,7 @@ function BeforeAfterSlider() {
         document.removeEventListener('touchend', handleMouseUp)
       }
     }
-  }, [isDragging])
+  }, [isDragging, handleMouseMove, handleTouchMove])
 
   return (
     <div>

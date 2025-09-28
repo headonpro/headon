@@ -224,7 +224,7 @@ export default function IndustryNavigator() {
                         
                         <Link 
                           href={`/contact?industry=${industry.id}`}
-                          onClick={(e) => {
+                          onClick={() => {
                             // Store industry context for contact form
                             if (typeof window !== 'undefined') {
                               sessionStorage.setItem('industryContext', JSON.stringify({

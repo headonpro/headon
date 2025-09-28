@@ -51,7 +51,7 @@ export default function BeforeAfterSlider({
       document.addEventListener('mouseup', handleMouseUp)
       document.addEventListener('touchmove', handleTouchMove)
       document.addEventListener('touchend', handleMouseUp)
-      
+
       return () => {
         document.removeEventListener('mousemove', handleMouseMove)
         document.removeEventListener('mouseup', handleMouseUp)
@@ -59,7 +59,7 @@ export default function BeforeAfterSlider({
         document.removeEventListener('touchend', handleMouseUp)
       }
     }
-  }, [isDragging])
+  }, [isDragging, handleMouseMove, handleTouchMove])
 
   return (
     <div 
