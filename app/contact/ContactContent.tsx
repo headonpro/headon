@@ -28,7 +28,6 @@ import {
 import { toast } from 'sonner'
 import CalendlyWidget from '@/components/contact/CalendlyWidget'
 import MultiStepForm from './MultiStepForm'
-import { createClient } from '@/lib/supabase'
 
 // Lead Scoring Configuration
 const leadScoringWeights = {
@@ -72,9 +71,6 @@ export default function ContactContent() {
   const [showCalendly, setShowCalendly] = useState(false)
   const [leadScore, setLeadScore] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
-
-  // Initialize Supabase client
-  const supabase = createClient()
 
   useEffect(() => {
     // Check if device is mobile
@@ -144,15 +140,22 @@ export default function ContactContent() {
         } : null
       }
 
-      // Submit to Supabase
-      const { data, error } = await supabase
-        .from('leads')
-        .insert([submissionData])
-        .select()
+      // Submit to API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData)
+      })
 
-      if (error) throw error
+      const result = await response.json()
 
-      console.log('Lead successfully saved to Supabase:', data)
+      if (!response.ok) {
+        throw new Error(result.error || 'Fehler beim Senden der Anfrage')
+      }
+
+      console.log('Lead successfully saved:', result.data)
 
       // Show success message
       toast.success('Vielen Dank für Ihre Anfrage!', {
