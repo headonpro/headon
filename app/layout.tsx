@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     shortcut: '/icons/ON_favicon_32x32.png',
     apple: '/icons/ON_favicon_48x48.png',
   },
+  alternates: {
+    canonical: 'https://headon.pro',
+  },
   openGraph: {
     title: 'HEADON.pro - Webentwicklung Lauda-Königshofen | Full-Stack Entwicklung',
     description: 'Ihre Webentwicklung-Agentur aus Lauda-Königshofen für moderne Web-Lösungen, Mobile Apps und UI/UX Design',
