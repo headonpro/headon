@@ -29,7 +29,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const supabase = createClient(supabaseUrl, supabaseServiceKey)
+    const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    })
 
     // Lead-Daten für die Datenbank vorbereiten
     const leadData = {
@@ -61,10 +66,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Email-Benachrichtigung senden
+    // Email-Benachrichtigung mit Resend API senden
     try {
       await sendNotificationEmail(leadData)
-      console.log('Email successfully sent')
+      console.log('Email successfully sent via Resend API')
     } catch (emailError) {
       console.error('Email error:', emailError)
       // Nicht blockieren - Lead ist bereits gespeichert
@@ -88,7 +93,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Email-Benachrichtigung senden
+// Email-Benachrichtigung mit Resend API senden
 async function sendNotificationEmail(leadData: {
   name: string
   email: string
@@ -117,7 +122,7 @@ async function sendNotificationEmail(leadData: {
                        leadData.lead_score > 15 ? '⚡ MEDIUM' : '📝'
 
   await resend.emails.send({
-    from: 'kontakt@headon.pro',
+    from: 'hallo@headon.pro',
     to: process.env.NOTIFICATION_EMAIL || 'hallo@headon.pro',
     subject: `${priorityLevel} Neue Anfrage von ${leadData.name} (Score: ${leadData.lead_score})`,
     html: emailHtml,
