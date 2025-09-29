@@ -518,10 +518,12 @@ export default function ContactContent() {
               className="w-full"
               variant="outline"
               size="lg"
-              onClick={() => window.location.href = 'mailto:hallo@headon.pro'}
+              asChild
             >
-              <Mail className="w-4 h-4 mr-1" />
-              Email
+              <a href="mailto:hallo@headon.pro">
+                <Mail className="w-4 h-4 mr-1" />
+                Email
+              </a>
             </Button>
           </motion.div>
         </div>
