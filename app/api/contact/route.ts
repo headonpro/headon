@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend'
+import { createContactEmailTemplate } from '@/lib/email-templates'
 
 export async function POST(request: NextRequest) {
   try {
@@ -59,6 +61,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Email-Benachrichtigung senden
+    try {
+      await sendNotificationEmail(leadData)
+      console.log('Email successfully sent')
+    } catch (emailError) {
+      console.error('Email error:', emailError)
+      // Nicht blockieren - Lead ist bereits gespeichert
+    }
+
     return NextResponse.json(
       {
         success: true,
@@ -75,4 +86,41 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
+}
+
+// Email-Benachrichtigung senden
+async function sendNotificationEmail(leadData: {
+  name: string
+  email: string
+  company?: string | null
+  phone?: string | null
+  project_type: string
+  budget: string
+  timeline: string
+  message: string
+  lead_score: number
+  files?: { count: number; names: string[] } | null
+}) {
+  const resendApiKey = process.env.RESEND_API_KEY
+
+  if (!resendApiKey) {
+    throw new Error('RESEND_API_KEY not configured')
+  }
+
+  const resend = new Resend(resendApiKey)
+
+  // Email-Template generieren
+  const emailHtml = createContactEmailTemplate(leadData)
+
+  // Priority-Level für Subject
+  const priorityLevel = leadData.lead_score > 30 ? '🔥 HIGH PRIORITY' :
+                       leadData.lead_score > 15 ? '⚡ MEDIUM' : '📝'
+
+  await resend.emails.send({
+    from: 'kontakt@headon.pro',
+    to: process.env.NOTIFICATION_EMAIL || 'hallo@headon.pro',
+    subject: `${priorityLevel} Neue Anfrage von ${leadData.name} (Score: ${leadData.lead_score})`,
+    html: emailHtml,
+    replyTo: leadData.email,
+  })
 }
