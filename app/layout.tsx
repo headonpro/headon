@@ -24,9 +24,9 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
-  title: 'HEADON - Marketing Kreativagentur',
-  description: 'HEADON ist eine moderne Kreativagentur, spezialisiert auf Full-Stack Web Development, Mobile Apps, UI/UX Design und Cloud-Backend Lösungen.',
-  keywords: 'Web Development, Mobile Apps, UI/UX Design, React, Next.js, TypeScript, Kreativagentur',
+  title: 'HEADON.pro - Webentwicklung Lauda-Königshofen | Full-Stack Entwicklung Baden-Württemberg',
+  description: 'HEADON.pro - Ihre Webentwicklung-Agentur aus Lauda-Königshofen. Spezialisiert auf Full-Stack Webentwicklung, Mobile Apps und UI/UX Design in Baden-Württemberg und dem Main-Tauber-Kreis.',
+  keywords: 'Webentwicklung Lauda-Königshofen, Web Development Baden-Württemberg, Mobile Apps Main-Tauber-Kreis, React Next.js TypeScript, Kreativagentur Würzburg, UI/UX Design Tauberbischofsheim',
   authors: [{ name: 'HEADON.pro' }],
   icons: {
     icon: [
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     apple: '/icons/ON_favicon_48x48.png',
   },
   openGraph: {
-    title: 'HEADON - Marketing Kreativagentur',
-    description: 'Moderne Kreativagentur für Web Development, Mobile Apps und UI/UX Design',
+    title: 'HEADON.pro - Webentwicklung Lauda-Königshofen | Full-Stack Entwicklung',
+    description: 'Ihre Webentwicklung-Agentur aus Lauda-Königshofen für moderne Web-Lösungen, Mobile Apps und UI/UX Design',
     url: 'https://headon.pro',
     siteName: 'HEADON.pro',
     locale: 'de_DE',
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HEADON.pro',
-    description: 'Moderne Kreativagentur für digitale Lösungen',
+    title: 'HEADON.pro - Webentwicklung Lauda-Königshofen',
+    description: 'Ihre Webentwicklung-Agentur aus Lauda-Königshofen für moderne digitale Lösungen',
   },
   robots: {
     index: true,
