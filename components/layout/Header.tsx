@@ -73,8 +73,8 @@ export default function Header() {
       
       {/* Mobile menu */}
       <div className={cn('lg:hidden', mobileMenuOpen ? 'block' : 'hidden')}>
-        <div className="fixed inset-0 z-50 bg-black/20" onClick={() => setMobileMenuOpen(false)} />
-        <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+        <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gradient-to-b from-primary-600 to-primary-700 px-6 py-6 sm:max-w-sm border-l border-primary-500/20">
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center" onClick={() => setMobileMenuOpen(false)}>
               <Logo
@@ -85,7 +85,7 @@ export default function Header() {
             </Link>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-white/90 hover:text-white hover:bg-white/10 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -93,7 +93,7 @@ export default function Header() {
             </button>
           </div>
           <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-200">
+            <div className="-my-6">
               <div className="space-y-2 py-6">
                 {navigation.map((item) => {
                   const isActive = pathname === item.href || (item.href === '/' && pathname === '/')
@@ -102,10 +102,10 @@ export default function Header() {
                       key={item.name}
                       href={item.href}
                       className={cn(
-                        "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7",
+                        "-mx-3 block rounded-lg px-3 py-3 text-base font-semibold leading-7 transition-all duration-200",
                         isActive
-                          ? "text-accent-500 bg-accent-50"
-                          : "text-gray-900 hover:bg-gray-50"
+                          ? "text-accent-500 bg-gradient-to-r from-accent-500/20 to-secondary-500/20 border border-accent-500/30"
+                          : "text-white/90 hover:text-white hover:bg-white/10 hover:shadow-lg"
                       )}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -114,8 +114,8 @@ export default function Header() {
                   )
                 })}
               </div>
-              <div className="py-6">
-                <Button className="w-full bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600" onClick={() => setMobileMenuOpen(false)}>
+              <div className="py-6 border-t border-white/10">
+                <Button className="w-full bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 font-semibold shadow-lg hover:shadow-xl transition-all duration-200" onClick={() => setMobileMenuOpen(false)}>
                   Projekt starten
                 </Button>
               </div>
