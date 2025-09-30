@@ -113,6 +113,7 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             BUILDKIT_CONTEXT_KEEP_GIT_DIR=true
+            CACHEBUST=${{ github.sha }}
             NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
             NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
             NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
