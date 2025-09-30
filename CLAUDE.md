@@ -10,7 +10,7 @@ HEADON.pro Marketing Agency Template - A modern Next.js 15 application with Type
 
 ### Essential Commands
 ```bash
-# Install dependencies (use pnpm - required by package.json)
+# Install dependencies (use pnpm - required by package.json) 
 pnpm install
 
 # Development server (http://localhost:3000)
