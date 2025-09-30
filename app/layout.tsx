@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Outfit, Lato } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -71,6 +72,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const umamiUrl = process.env.NEXT_PUBLIC_UMAMI_URL
+  const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+
   return (
     <html lang="de" className={`${outfit.variable} ${lato.variable}`}>
       <head>
@@ -86,12 +90,21 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <Toaster 
+        <Toaster
           position="top-right"
           richColors
           closeButton
           duration={5000}
         />
+
+        {/* Umami Analytics - Only load in production */}
+        {umamiUrl && umamiWebsiteId && process.env.NODE_ENV === 'production' && (
+          <Script
+            src={`${umamiUrl}/script.js`}
+            data-website-id={umamiWebsiteId}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   )
