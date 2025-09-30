@@ -69,6 +69,8 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_UMAMI_URL: ${{ secrets.NEXT_PUBLIC_UMAMI_URL }}
+          NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${{ secrets.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
 
   deploy:
     needs: build-and-test
@@ -117,6 +119,8 @@ jobs:
             NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
             NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
             NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            NEXT_PUBLIC_UMAMI_URL=${{ secrets.NEXT_PUBLIC_UMAMI_URL }}
+            NEXT_PUBLIC_UMAMI_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.0
@@ -129,8 +133,9 @@ jobs:
             # Navigate to project directory
             cd /opt/headon
 
-            # Pull latest changes
-            git pull origin main
+            # Fetch latest changes and force sync with origin
+            git fetch origin
+            git reset --hard origin/main
 
             # Create .env from secrets
             cat > .env << EOF
@@ -140,6 +145,10 @@ jobs:
             NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
             RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
             NOTIFICATION_EMAIL=${{ secrets.NOTIFICATION_EMAIL }}
+            UMAMI_APP_SECRET=${{ secrets.UMAMI_APP_SECRET }}
+            UMAMI_DB_PASSWORD=${{ secrets.UMAMI_DB_PASSWORD }}
+            NEXT_PUBLIC_UMAMI_URL=${{ secrets.NEXT_PUBLIC_UMAMI_URL }}
+            NEXT_PUBLIC_UMAMI_WEBSITE_ID=${{ secrets.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
             EOF
 
             # Stop existing container
