@@ -12,6 +12,14 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
+import {
   Clock,
   MessageSquare,
   TrendingUp,
@@ -484,50 +492,110 @@ export default function ContactContent() {
         </motion.section>
       </div>
 
-      {/* Floating Action Bar (Sticky for all devices) */}
-      <motion.div
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30, delay: 1 }}
-        className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 shadow-2xl p-4 z-50"
-      >
-        <div className="flex gap-2 max-w-md mx-auto">
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex-1">
-            <Button
-              className="w-full"
-              variant="outline"
-              size="lg"
-              onClick={() => window.location.href = 'tel:+4917663040241'}
-            >
-              <Phone className="w-4 h-4 mr-1" />
-              Anrufen
-            </Button>
+      {/* Contact Drawer - Modern Bottom Sheet */}
+      <Drawer>
+        <DrawerTrigger asChild>
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30, delay: 1 }}
+            className="fixed bottom-0 left-0 right-0 z-50"
+          >
+            <div className="bg-gradient-to-t from-primary-900/50 via-primary-900/30 to-transparent backdrop-blur-md border-t border-white/10 p-4 cursor-pointer hover:from-primary-900/60 transition-colors">
+              <div className="max-w-md mx-auto flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <div>
+                    <p className="text-white font-semibold text-sm">Jetzt Kontakt aufnehmen</p>
+                    <p className="text-white/60 text-xs">Tap um Optionen zu sehen</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                    <Phone className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                    <Calendar className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                    <Mail className="w-4 h-4 text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex-1">
-            <Button
-              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800"
-              size="lg"
-              onClick={() => setShowCalendly(true)}
-            >
-              <Calendar className="w-4 h-4 mr-1" />
-              Termin
-            </Button>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex-1">
-            <Button
-              className="w-full"
-              variant="outline"
-              size="lg"
-              asChild
-            >
-              <a href="mailto:hallo@headon.pro">
-                <Mail className="w-4 h-4 mr-1" />
-                Email
-              </a>
-            </Button>
-          </motion.div>
-        </div>
-      </motion.div>
+        </DrawerTrigger>
+
+        <DrawerContent className="bg-white/5 backdrop-blur-xl border-t border-white/20">
+          <DrawerHeader className="text-center">
+            <DrawerTitle className="text-white text-2xl font-bold">Kontakt aufnehmen</DrawerTitle>
+            <DrawerDescription className="text-white/70">
+              Wählen Sie Ihre bevorzugte Kontaktmethode
+            </DrawerDescription>
+          </DrawerHeader>
+
+          <div className="p-6 pb-8 space-y-4">
+            {/* Termin buchen - Primary */}
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button
+                size="lg"
+                onClick={() => {
+                  setShowCalendly(true)
+                  // Drawer schließt automatisch
+                }}
+                className="w-full h-14 bg-gradient-to-r from-primary-500 to-accent-600 hover:from-primary-600 hover:to-accent-700 text-white font-semibold text-base"
+              >
+                <Calendar className="w-5 h-5 mr-2" />
+                Termin buchen (15 Min kostenlos)
+              </Button>
+            </motion.div>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-white/20" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-primary-600/20 backdrop-blur-sm px-2 text-white/60">Oder direkt</span>
+              </div>
+            </div>
+
+            {/* Phone & Email */}
+            <div className="grid grid-cols-2 gap-4">
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => window.location.href = 'tel:+4917663040241'}
+                  className="w-full h-14 bg-white/5 border-white/20 hover:bg-white/10 text-white"
+                >
+                  <Phone className="w-5 h-5 mr-2" />
+                  Anrufen
+                </Button>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  asChild
+                  className="w-full h-14 bg-white/5 border-white/20 hover:bg-white/10 text-white"
+                >
+                  <a href="mailto:hallo@headon.pro">
+                    <Mail className="w-5 h-5 mr-2" />
+                    Email
+                  </a>
+                </Button>
+              </motion.div>
+            </div>
+
+            {/* Trust Indicator */}
+            <div className="flex items-center justify-center gap-2 text-white/60 text-sm pt-2">
+              <CheckCircle2 className="w-4 h-4 text-accent-400" />
+              <span>Antwort innerhalb von 2 Stunden</span>
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
     </div>
   )
 }
