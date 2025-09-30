@@ -127,11 +127,11 @@ jobs:
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
             # Navigate to project directory
-            cd /opt/headon-github
-            
+            cd /opt/headon
+
             # Pull latest changes
             git pull origin main
-            
+
             # Create .env from secrets
             cat > .env << EOF
             NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
@@ -141,25 +141,22 @@ jobs:
             RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
             NOTIFICATION_EMAIL=${{ secrets.NOTIFICATION_EMAIL }}
             EOF
-            
+
             # Stop existing container
             docker compose down || true
-            
+
             # Pull latest image from registry
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            
-            # Update docker-compose to use the new image
-            export DOCKER_IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            
+
             # Start new container with the pulled image
             docker compose up -d
-            
+
             # Clean up old images
             docker image prune -f
-            
+
             # Check if container is running
             docker compose ps
-            
+
             # Show logs (last 50 lines)
             docker compose logs --tail=50
 
@@ -172,11 +169,11 @@ jobs:
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
             # Wait for container to be healthy
-            sleep 10
-            
+            sleep 15
+
             # Check if the application is responding
-            curl -f http://localhost:3001 || exit 1
-            
+            curl -f http://localhost:3001/api/health || exit 1
+
             echo "Deployment successful! Application is running."
 
       - name: Notify on success
