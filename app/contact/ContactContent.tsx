@@ -157,11 +157,19 @@ export default function ContactContent() {
 
       console.log('Lead successfully saved:', result.data)
 
-      // Show success message
-      toast.success('Vielen Dank für Ihre Anfrage!', {
-        description: 'Wir melden uns innerhalb von 2 Stunden bei Ihnen.',
-        duration: 5000,
-      })
+      // Show success message with conditional calendly info
+      if (leadScore > 30) {
+        toast.success('Vielen Dank für Ihre Anfrage!', {
+          description: 'Wir melden uns innerhalb von 2 Stunden bei Ihnen. Sie können auch direkt einen Termin buchen!',
+          duration: 6000,
+        })
+        setShowCalendly(true)
+      } else {
+        toast.success('Vielen Dank für Ihre Anfrage!', {
+          description: 'Wir melden uns innerhalb von 2 Stunden bei Ihnen.',
+          duration: 5000,
+        })
+      }
 
       // Reset form
       setFormData({
@@ -175,14 +183,6 @@ export default function ContactContent() {
         message: '',
         files: []
       })
-
-      // Show Calendly widget for high-value leads
-      if (leadScore > 30) {
-        setShowCalendly(true)
-        toast.info('Sie können auch direkt einen Termin buchen!', {
-          duration: 6000,
-        })
-      }
 
     } catch (error) {
       console.error('Submission error:', error)
