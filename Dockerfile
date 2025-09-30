@@ -27,6 +27,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Set build-time environment variables
+# Cache buster to force rebuild
+ARG CACHEBUST=1
 ARG NEXT_PUBLIC_SUPABASE_URL
 ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
 ARG NEXT_PUBLIC_SITE_URL
