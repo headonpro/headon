@@ -432,7 +432,7 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 - **Email Delivery:** Server Actions funktionieren
 
 ### ❌ NICHT ALS SUCCESS METRICS (Overengineering):
-- Lighthouse 95+ (MVP braucht das nicht)
+- Lighthouse 90+ (MVP braucht das nicht)
 - Complex Animations
 - Advanced Analytics
 - Perfect Accessibility Scores (basic reicht für MVP)

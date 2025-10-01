@@ -132,7 +132,7 @@ Ihre Ersparnis:      €11.000 - €17.000 ✨
 
 **Performance Metrics:**
 - **Page Load Speed:** < 2 Sekunden (vs. 4-6s Standard)
-- **Lighthouse Score:** 95+ (vs. 70-80 Standard)
+- **Lighthouse Score:** 90+ (vs. 70-80 Standard)
 - **Mobile Optimization:** 100% (vs. 60-70% Standard)
 - **SEO Score:** 98/100 (vs. 65/100 Standard)
 
