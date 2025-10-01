@@ -44,4 +44,7 @@ next-env.d.ts
 *~
 
 # OS
-Thumbs.dblighthouse-report.*
+Thumbs.db
+
+# Lighthouse reports
+lighthouse-report.*
