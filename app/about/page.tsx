@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import AboutContent from '@/components/sections/AboutContent'
 import { PersonSchema } from '@/components/seo/SchemaGenerator'
-import Breadcrumbs from '@/components/seo/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Über uns - HEADON Digitalagentur aus Lauda-Königshofen',
@@ -37,18 +36,6 @@ export default function AboutPage() {
           url: '/about',
         }}
       />
-
-      {/* Breadcrumbs with proper spacing from header */}
-      <div className="relative bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500">
-        <div className="container mx-auto px-4 pt-24">
-          <Breadcrumbs
-            items={[
-              { name: 'Home', url: '/' },
-              { name: 'Über uns', url: '/about' },
-            ]}
-          />
-        </div>
-      </div>
 
       <AboutContent />
     </>

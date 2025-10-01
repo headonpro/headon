@@ -73,7 +73,7 @@ function MDXLink(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
 function MDXCode(props: React.HTMLAttributes<HTMLElement>) {
   return (
     <code
-      className="px-1.5 py-0.5 rounded bg-gray-100 text-sm font-mono text-gray-900 before:content-[''] after:content-['']"
+      className="px-1.5 py-0.5 rounded bg-gray-900 text-sm font-mono text-gray-100 before:content-[''] after:content-['']"
       {...props}
     />
   )
@@ -116,7 +116,7 @@ function MDXPre(props: React.HTMLAttributes<HTMLPreElement>) {
  */
 export default function MDXContent({ children }: MDXContentProps) {
   return (
-    <div className="prose prose-lg max-w-none [&_p]:text-gray-700 [&_p]:text-lg [&_p]:leading-relaxed [&_p]:mb-8 [&_h2]:text-gray-900 [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-16 [&_h2]:mb-8 [&_h3]:text-gray-900 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-12 [&_h3]:mb-6 [&_h4]:text-gray-900 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:mt-8 [&_h4]:mb-4 [&_ul]:my-8 [&_ul_li]:text-gray-700 [&_ul_li]:mb-3 [&_ol]:my-8 [&_ol_li]:text-gray-700 [&_ol_li]:mb-3 [&_strong]:text-gray-900 [&_strong]:font-semibold [&_a]:text-primary [&_a]:no-underline hover:[&_a]:underline">
+    <div className="prose prose-lg max-w-none prose-slate [&_*]:text-gray-900 [&_p]:text-gray-900 [&_p]:text-lg [&_p]:leading-relaxed [&_p]:mb-10 [&_h1]:text-gray-900 [&_h2]:text-gray-900 [&_h2]:text-3xl [&_h2]:font-bold [&_h2]:mt-24 [&_h2]:mb-10 [&_h3]:text-gray-900 [&_h3]:text-2xl [&_h3]:font-bold [&_h3]:mt-16 [&_h3]:mb-8 [&_h4]:text-gray-900 [&_h4]:text-xl [&_h4]:font-bold [&_h4]:mt-12 [&_h4]:mb-6 [&_h5]:text-gray-900 [&_h6]:text-gray-900 [&_ul]:my-10 [&_ul_li]:text-gray-900 [&_ul_li]:mb-4 [&_ol]:my-10 [&_ol_li]:text-gray-900 [&_ol_li]:mb-4 [&_strong]:text-gray-900 [&_strong]:font-semibold [&_em]:text-gray-900 [&_blockquote]:text-gray-900 [&_blockquote]:border-l-primary [&_table]:text-gray-900 [&_th]:text-gray-900 [&_td]:text-gray-900 [&_a]:text-primary [&_a]:no-underline hover:[&_a]:underline">
       {children}
     </div>
   )

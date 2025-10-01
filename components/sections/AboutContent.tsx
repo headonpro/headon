@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import AnimatedRobot from '@/components/icons/AnimatedRobot'
 import Image from 'next/image'
+import Breadcrumbs from '@/components/seo/Breadcrumbs'
 
 const values = [
   {
@@ -88,7 +89,17 @@ export default function AboutContent() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 pt-40 pb-24">
+      <div className="relative z-10 pt-24 pb-24">
+        {/* Breadcrumbs */}
+        <div className="container mx-auto px-4 mb-8">
+          <Breadcrumbs
+            variant="dark"
+            items={[
+              { name: 'Home', url: '/' },
+              { name: 'Über uns', url: '/about' },
+            ]}
+          />
+        </div>
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <motion.div
