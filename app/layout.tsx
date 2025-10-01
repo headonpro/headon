@@ -25,8 +25,8 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
-  title: "HEADON.pro - Webentwicklung Lauda-Königshofen | Full-Stack Entwicklung Baden-Württemberg",
-  description: "HEADON.pro - Ihre Webentwicklung-Agentur aus Lauda-Königshofen. Spezialisiert auf Full-Stack Webentwicklung, Mobile Apps und UI/UX Design in Baden-Württemberg und dem Main-Tauber-Kreis.",
+  title: "Webentwicklung & Mobile Apps 4x schneller | KI-gestützte Digitalagentur",
+  description: "KI-gestützte Webentwicklung aus Lauda-Königshofen: 4x schneller, 2x bessere Performance. Von der Idee zum Launch in 2-4 Wochen statt Monaten. Festpreise ab 2.500€. Kostenlose Erstberatung.",
   keywords: "Webentwicklung Lauda-Königshofen, Web Development Baden-Württemberg, Mobile Apps Main-Tauber-Kreis, React Next.js TypeScript, Kreativagentur Würzburg, UI/UX Design Tauberbischofsheim",
   authors: [{ name: "HEADON.pro" }],
   icons: {
