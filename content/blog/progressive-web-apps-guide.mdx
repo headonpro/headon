@@ -1,0 +1,515 @@
+---
+title: "Progressive Web Apps (PWA): Der komplette Guide 2025"
+description: "PWA Entwicklung meistern: Service Workers, Offline-Support, Push Notifications, Installation und moderne PWA-Features für app-ähnliche Web-Erlebnisse."
+publishedAt: "2025-07-28T08:30:00Z"
+author:
+  name: "Onur Cirakoglu"
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
+  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
+tags: ["PWA", "Service Worker", "Web App", "Offline", "Push Notifications"]
+category: "mobile"
+image:
+  url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop"
+  alt: "Progressive Web App Konzept auf verschiedenen Geräten"
+readingTime: 10
+---
+
+Progressive Web Apps kombinieren **das Beste aus Web und nativen Apps**. In diesem Guide zeigen wir, wie Sie PWAs mit Next.js entwickeln, die offline funktionieren, installierbar sind und Push Notifications senden.
+
+## Was ist eine PWA?
+
+Eine PWA ist eine Web-App mit drei Kernmerkmalen:
+
+1. **Installierbar** - Auf Home Screen wie native App
+2. **Offline-fähig** - Funktioniert ohne Internet
+3. **Engagement** - Push Notifications möglich
+
+### PWA vs Native App
+
+| Feature | PWA | Native App |
+|---------|-----|------------|
+| **Installation** | Browser → Home Screen | App Store |
+| **Updates** | Automatisch | User muss updaten |
+| **Größe** | 1-5 MB | 50-200 MB |
+| **Offline** | ✅ Möglich | ✅ Standard |
+| **Hardware** | ⚠️ Limitiert | ✅ Voller Zugriff |
+| **Distribution** | ✅ URL teilen | ❌ Store-Approval |
+
+## PWA Requirements
+
+### 1. HTTPS
+
+```bash
+# Local Development
+npx next dev
+
+# Production (automatisch HTTPS auf Vercel)
+vercel deploy
+```
+
+### 2. Web App Manifest
+
+```json
+// public/manifest.json
+{
+  "name": "HEADON.pro Marketing Agency",
+  "short_name": "HEADON",
+  "description": "Moderne Webentwicklung & Mobile Apps",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+```
+
+```tsx
+// app/layout.tsx
+export const metadata = {
+  manifest: '/manifest.json',
+}
+```
+
+### 3. Service Worker
+
+```bash
+pnpm add next-pwa
+```
+
+```javascript
+// next.config.js
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+})
+
+module.exports = withPWA({
+  // Your Next.js config
+})
+```
+
+## Service Worker Strategies
+
+### Cache-First (Static Assets)
+
+```javascript
+// public/sw.js
+import { CacheFirst } from 'workbox-strategies'
+import { registerRoute } from 'workbox-routing'
+
+registerRoute(
+  ({ request }) => request.destination === 'image',
+  new CacheFirst({
+    cacheName: 'images',
+    plugins: [
+      {
+        cacheWillUpdate: async ({ response }) => {
+          return response.status === 200 ? response : null
+        },
+      },
+    ],
+  })
+)
+```
+
+### Network-First (API Calls)
+
+```javascript
+import { NetworkFirst } from 'workbox-strategies'
+
+registerRoute(
+  ({ url }) => url.pathname.startsWith('/api/'),
+  new NetworkFirst({
+    cacheName: 'api',
+    networkTimeoutSeconds: 3,
+  })
+)
+```
+
+### Stale-While-Revalidate
+
+```javascript
+import { StaleWhileRevalidate } from 'workbox-strategies'
+
+registerRoute(
+  ({ request }) => request.destination === 'script' || request.destination === 'style',
+  new StaleWhileRevalidate({
+    cacheName: 'static-resources',
+  })
+)
+```
+
+## Offline Support
+
+### Offline Fallback Page
+
+```tsx
+// app/offline/page.tsx
+export default function OfflinePage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <WifiOff className="w-16 h-16 mx-auto text-gray-400" />
+        <h1 className="mt-4 text-2xl font-bold">Keine Internetverbindung</h1>
+        <p className="mt-2 text-gray-600">
+          Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.
+        </p>
+        <Button
+          className="mt-4"
+          onClick={() => window.location.reload()}
+        >
+          Erneut versuchen
+        </Button>
+      </div>
+    </div>
+  )
+}
+```
+
+### Background Sync
+
+```javascript
+// Service Worker
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-messages') {
+    event.waitUntil(syncMessages())
+  }
+})
+
+async function syncMessages() {
+  const db = await openDB('messages')
+  const messages = await db.getAll('pending')
+
+  for (const message of messages) {
+    try {
+      await fetch('/api/messages', {
+        method: 'POST',
+        body: JSON.stringify(message),
+      })
+      await db.delete('pending', message.id)
+    } catch (error) {
+      // Will retry on next sync
+    }
+  }
+}
+```
+
+```javascript
+// Client
+async function sendMessage(message) {
+  try {
+    await fetch('/api/messages', {
+      method: 'POST',
+      body: JSON.stringify(message),
+    })
+  } catch (error) {
+    // Save to IndexedDB
+    await db.add('pending', message)
+    // Register sync
+    await navigator.serviceWorker.ready
+    await registration.sync.register('sync-messages')
+  }
+}
+```
+
+## Push Notifications
+
+### Server Setup
+
+```typescript
+// app/api/subscribe/route.ts
+import webpush from 'web-push'
+
+webpush.setVapidDetails(
+  'mailto:hallo@headon.pro',
+  process.env.VAPID_PUBLIC_KEY!,
+  process.env.VAPID_PRIVATE_KEY!
+)
+
+export async function POST(req: Request) {
+  const subscription = await req.json()
+
+  // Save subscription to database
+  await db.subscription.create({ data: subscription })
+
+  return Response.json({ success: true })
+}
+```
+
+### Client Setup
+
+```tsx
+'use client'
+
+export function PushNotificationSubscribe() {
+  const subscribe = async () => {
+    const registration = await navigator.serviceWorker.ready
+
+    const subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: process.env.NEXT_PUBLIC_VAPID_KEY,
+    })
+
+    await fetch('/api/subscribe', {
+      method: 'POST',
+      body: JSON.stringify(subscription),
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  return (
+    <Button onClick={subscribe}>
+      Benachrichtigungen aktivieren
+    </Button>
+  )
+}
+```
+
+### Send Push Notification
+
+```typescript
+// Server-side
+import webpush from 'web-push'
+
+async function sendNotification(userId: string, payload: any) {
+  const subscriptions = await db.subscription.findMany({
+    where: { userId },
+  })
+
+  await Promise.all(
+    subscriptions.map((sub) =>
+      webpush.sendNotification(
+        sub,
+        JSON.stringify({
+          title: 'Neue Nachricht',
+          body: payload.message,
+          icon: '/icon-192.png',
+          data: { url: '/messages' },
+        })
+      )
+    )
+  )
+}
+```
+
+### Handle Push in Service Worker
+
+```javascript
+// Service Worker
+self.addEventListener('push', (event) => {
+  const data = event.data.json()
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, {
+      body: data.body,
+      icon: data.icon,
+      data: data.data,
+    })
+  )
+})
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close()
+
+  event.waitUntil(
+    clients.openWindow(event.notification.data.url)
+  )
+})
+```
+
+## Installation Prompt
+
+```tsx
+'use client'
+
+export function InstallPrompt() {
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
+  const [showInstall, setShowInstall] = useState(false)
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault()
+      setDeferredPrompt(e)
+      setShowInstall(true)
+    }
+
+    window.addEventListener('beforeinstallprompt', handler)
+
+    return () => window.removeEventListener('beforeinstallprompt', handler)
+  }, [])
+
+  const handleInstall = async () => {
+    if (!deferredPrompt) return
+
+    deferredPrompt.prompt()
+
+    const { outcome } = await deferredPrompt.userChoice
+
+    if (outcome === 'accepted') {
+      console.log('App installed')
+    }
+
+    setDeferredPrompt(null)
+    setShowInstall(false)
+  }
+
+  if (!showInstall) return null
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 p-4 bg-primary-600 text-white">
+      <div className="container mx-auto flex items-center justify-between">
+        <div>
+          <p className="font-semibold">App installieren</p>
+          <p className="text-sm">Für schnelleren Zugriff auf dem Home Screen</p>
+        </div>
+        <Button
+          variant="outline"
+          className="bg-white text-primary-600"
+          onClick={handleInstall}
+        >
+          Installieren
+        </Button>
+      </div>
+    </div>
+  )
+}
+```
+
+## PWA Best Practices
+
+### 1. App-Like Experience
+
+```css
+/* globals.css - Disable pull-to-refresh */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* Safe area for notched devices */
+.header {
+  padding-top: env(safe-area-inset-top);
+}
+```
+
+### 2. Loading Performance
+
+```javascript
+// Preload critical resources
+const addResourcesToCache = async (resources) => {
+  const cache = await caches.open('v1')
+  await cache.addAll(resources)
+}
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    addResourcesToCache([
+      '/',
+      '/offline',
+      '/styles/main.css',
+      '/scripts/main.js',
+    ])
+  )
+})
+```
+
+### 3. Update Handling
+
+```tsx
+'use client'
+
+export function UpdatePrompt() {
+  const [showUpdate, setShowUpdate] = useState(false)
+
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').then((registration) => {
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing
+
+          newWorker?.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              setShowUpdate(true)
+            }
+          })
+        })
+      })
+    }
+  }, [])
+
+  const handleUpdate = () => {
+    window.location.reload()
+  }
+
+  if (!showUpdate) return null
+
+  return (
+    <div className="fixed top-4 right-4 bg-white shadow-lg rounded-lg p-4">
+      <p className="font-semibold">Update verfügbar</p>
+      <Button onClick={handleUpdate} className="mt-2">
+        Jetzt aktualisieren
+      </Button>
+    </div>
+  )
+}
+```
+
+## Testing PWA
+
+```bash
+# Lighthouse PWA Audit
+npx lighthouse https://your-app.com --view
+
+# Chrome DevTools
+# Application Tab → Service Workers, Manifest
+
+# Mobile Testing
+# Chrome → Remote Devices
+```
+
+**PWA Checklist:**
+- [ ] HTTPS aktiviert
+- [ ] Manifest.json vorhanden
+- [ ] Service Worker registriert
+- [ ] Offline-Fallback
+- [ ] Icons (192px, 512px)
+- [ ] Theme Color gesetzt
+- [ ] Meta Tags (viewport, theme-color)
+- [ ] Lighthouse Score 90+
+
+## Zusammenfassung
+
+PWAs bieten:
+
+✅ **App-Like Experience** ohne App Store
+✅ **Offline-Support** für bessere UX
+✅ **Push Notifications** für Engagement
+✅ **Schnelle Updates** ohne User-Action
+
+Perfekt für E-Commerce, News, Social Apps.
+
+## PWA Entwicklung?
+
+Als [Mobile-Experten](/services/mobile-development) entwickeln wir:
+
+- 📱 **Progressive Web Apps**
+- 🔔 **Push Notification Systems**
+- 📴 **Offline-First Architekturen**
+- ⚡ **Performance-Optimierung**
+
+[PWA-Projekt starten](/contact)
+
+*Aktualisiert: Dezember 2023*

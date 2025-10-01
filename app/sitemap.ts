@@ -1,65 +1,130 @@
 import { MetadataRoute } from 'next'
+import {
+  getAllBlogPosts,
+  getAllPortfolioProjects,
+  getAllServicePages,
+  getAllCityPages,
+} from '@/lib/content/content-api'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Timeout for sitemap generation (30 seconds max)
+export const maxDuration = 30
+
+// Cache for 1 hour (3600 seconds)
+export const revalidate = 3600
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://headon.pro'
-  
-  // Aktuelle Zeit für lastModified
   const currentDate = new Date()
-  
-  // Hauptseiten mit höchster Priorität
-  const mainPages = [
+
+  // Load all content in parallel for performance
+  const [blogPosts, portfolioProjects, servicePages, cityPages] =
+    await Promise.all([
+      getAllBlogPosts(),
+      getAllPortfolioProjects(),
+      getAllServicePages(),
+      getAllCityPages(),
+    ])
+
+  // Static pages with priorities
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: currentDate,
-      changeFrequency: 'weekly' as const,
-      priority: 1,
+      changeFrequency: 'weekly',
+      priority: 1.0,
     },
     {
       url: `${baseUrl}/services`,
       lastModified: currentDate,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${baseUrl}/portfolio`,
       lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/about`,
       lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
+      changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/portfolio`,
+      url: `${baseUrl}/contact`,
       lastModified: currentDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/regionen`,
       lastModified: currentDate,
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/imprint`,
       lastModified: currentDate,
-      changeFrequency: 'yearly' as const,
+      changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
       url: `${baseUrl}/privacy`,
       lastModified: currentDate,
-      changeFrequency: 'yearly' as const,
+      changeFrequency: 'yearly',
       priority: 0.3,
     },
   ]
 
-  // Hier könnten später dynamische Blog-Posts oder Portfolio-Items hinzugefügt werden
-  // const blogPosts = await getBlogPosts() // Beispiel für dynamische Inhalte
-  
-  return [...mainPages]
+  // Blog posts (priority 0.8, weekly updates)
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(
+      post.frontmatter.updatedAt || post.frontmatter.publishedAt
+    ),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  // Portfolio projects (priority 0.7, monthly updates)
+  const portfolioEntries: MetadataRoute.Sitemap = portfolioProjects.map(
+    (project) => ({
+      url: `${baseUrl}/portfolio/${project.slug}`,
+      lastModified: new Date(project.frontmatter.date),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    })
+  )
+
+  // Service pages (priority 0.9, monthly updates)
+  const serviceEntries: MetadataRoute.Sitemap = servicePages.map((service) => ({
+    url: `${baseUrl}/services/${service.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.9,
+  }))
+
+  // City pages (priority 0.7, monthly updates)
+  const cityEntries: MetadataRoute.Sitemap = cityPages.map((city) => ({
+    url: `${baseUrl}/regionen/${city.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
+  // Combine all entries
+  return [
+    ...staticPages,
+    ...blogEntries,
+    ...portfolioEntries,
+    ...serviceEntries,
+    ...cityEntries,
+  ]
 }

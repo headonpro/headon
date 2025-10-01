@@ -1,0 +1,456 @@
+---
+title: "Web Accessibility: WCAG 2.2 Standards praktisch umsetzen"
+description: "Kompletter WCAG-Guide: Barrierefreie Websites entwickeln, ARIA richtig nutzen, Keyboard-Navigation und Screen-Reader Unterstützung implementieren."
+publishedAt: "2025-09-15T08:00:00Z"
+author:
+  name: "Onur Cirakoglu"
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
+  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
+tags: ["Accessibility", "WCAG", "ARIA", "Screen Reader", "Inclusive Design"]
+category: "design"
+image:
+  url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=630&fit=crop"
+  alt: "Barrierefreies Web Design und Accessibility Icons"
+readingTime: 10
+---
+
+**15% der Weltbevölkerung** leben mit einer Behinderung. Barrierefreie Websites sind nicht nur ethisch richtig - sie sind oft gesetzlich vorgeschrieben und erreichen **30% mehr Nutzer**. Dieser Guide zeigt, wie Sie WCAG 2.2 Level AA erfüllen.
+
+## WCAG Prinzipien verstehen
+
+Die vier POUR-Prinzipien:
+
+### 1. Perceivable (Wahrnehmbar)
+Informationen müssen für alle wahrnehmbar sein.
+
+```tsx
+// ❌ Bild ohne Alt-Text
+<img src="/product.jpg" />
+
+// ✅ Mit aussagekräftigem Alt-Text
+<Image src="/product.jpg" alt="Rotes Kleid mit Blumenmuster, Größe M" />
+```
+
+### 2. Operable (Bedienbar)
+Alle Funktionen per Tastatur nutzbar.
+
+```tsx
+// ❌ Nur mit Maus bedienbar
+<div onClick={handleClick}>Click me</div>
+
+// ✅ Keyboard accessible
+<button onClick={handleClick} onKeyDown={(e) => e.key === 'Enter' && handleClick()}>
+  Click me
+</button>
+```
+
+### 3. Understandable (Verständlich)
+Content und Bedienung müssen verständlich sein.
+
+```tsx
+// ✅ Klare Fehlermeldungen
+<Input
+  error="E-Mail-Adresse ist erforderlich. Bitte geben Sie eine gültige E-Mail ein."
+  aria-describedby="email-error"
+/>
+```
+
+### 4. Robust (Robust)
+Funktioniert mit verschiedenen Technologien.
+
+```tsx
+// ✅ Semantisches HTML
+<nav aria-label="Hauptnavigation">
+  <ul role="list">
+    <li><a href="/">Home</a></li>
+  </ul>
+</nav>
+```
+
+## Semantisches HTML
+
+```tsx
+// ❌ Div-Suppe
+<div class="header">
+  <div class="nav">
+    <div class="link" onclick="navigate()">Home</div>
+  </div>
+</div>
+
+// ✅ Semantisch korrekt
+<header>
+  <nav aria-label="Hauptnavigation">
+    <a href="/">Home</a>
+  </nav>
+</header>
+```
+
+## ARIA Richtig nutzen
+
+### ARIA-Labels
+
+```tsx
+// Icon-Button ohne Text
+<button aria-label="Warenkorb öffnen">
+  <ShoppingCart />
+</button>
+
+// Search Input
+<input
+  type="search"
+  placeholder="Suchen..."
+  aria-label="Website durchsuchen"
+/>
+```
+
+### ARIA-Roles
+
+```tsx
+<div role="alert" aria-live="polite">
+  Ihre Änderungen wurden gespeichert
+</div>
+
+<div role="navigation" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+  </ol>
+</div>
+```
+
+### ARIA-States
+
+```tsx
+<button
+  aria-expanded={isOpen}
+  aria-controls="menu"
+  onClick={() => setIsOpen(!isOpen)}
+>
+  Menu
+</button>
+
+<div id="menu" aria-hidden={!isOpen}>
+  Menu content
+</div>
+```
+
+## Keyboard Navigation
+
+```tsx
+'use client'
+
+export function Modal({ isOpen, onClose, children }) {
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    // Trap focus inside modal
+    const focusableElements = modalRef.current?.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+    const firstElement = focusableElements?.[0] as HTMLElement
+    const lastElement = focusableElements?.[focusableElements.length - 1] as HTMLElement
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          lastElement?.focus()
+          e.preventDefault()
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          firstElement?.focus()
+          e.preventDefault()
+        }
+      }
+    }
+
+    // Close on Escape
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+
+    document.addEventListener('keydown', handleTab)
+    document.addEventListener('keydown', handleEscape)
+    firstElement?.focus()
+
+    return () => {
+      document.removeEventListener('keydown', handleTab)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
+
+  return (
+    <div
+      ref={modalRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      {children}
+    </div>
+  )
+}
+```
+
+## Focus Management
+
+```tsx
+export function Dropdown() {
+  const [isOpen, setIsOpen] = useState(false)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      setIsOpen(true)
+      // Focus first menu item
+      setTimeout(() => {
+        const firstItem = menuRef.current?.querySelector('[role="menuitem"]') as HTMLElement
+        firstItem?.focus()
+      }, 0)
+    }
+  }
+
+  return (
+    <div>
+      <button
+        ref={buttonRef}
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        onKeyDown={handleKeyDown}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        Menu
+      </button>
+
+      {isOpen && (
+        <div ref={menuRef} role="menu">
+          <button role="menuitem">Option 1</button>
+          <button role="menuitem">Option 2</button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+## Screen Reader Support
+
+```tsx
+// Live Regions für dynamischen Content
+export function StatusMessage() {
+  const [status, setStatus] = useState('')
+
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      className="sr-only"
+    >
+      {status}
+    </div>
+  )
+}
+
+// SR-only Utility Class
+// Visuell versteckt, für Screen Reader sichtbar
+<span className="sr-only">
+  Ergebnis wird geladen
+</span>
+<Spinner aria-hidden="true" />
+```
+
+```css
+/* globals.css */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+```
+
+## Color Contrast
+
+```tsx
+// ❌ Schlechter Kontrast (2.5:1)
+<p className="text-gray-400 bg-gray-200">Text</p>
+
+// ✅ Guter Kontrast (4.5:1 für Text, 3:1 für UI)
+<p className="text-gray-900 bg-white">Text</p>
+
+// Für Large Text (18pt+): Min 3:1
+<h1 className="text-4xl text-gray-700">Heading</h1>
+```
+
+**Tools:**
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- Chrome DevTools Contrast Ratio
+- [Coolors Contrast Checker](https://coolors.co/contrast-checker)
+
+## Forms Accessibility
+
+```tsx
+export function AccessibleForm() {
+  return (
+    <form>
+      <div className="space-y-1">
+        <label htmlFor="email" className="block text-sm font-medium">
+          E-Mail *
+        </label>
+        <input
+          id="email"
+          type="email"
+          required
+          aria-required="true"
+          aria-describedby="email-desc email-error"
+        />
+        <p id="email-desc" className="text-sm text-gray-600">
+          Wir senden keine Spam-Mails
+        </p>
+        <p id="email-error" role="alert" className="text-sm text-red-600">
+          Bitte geben Sie eine gültige E-Mail ein
+        </p>
+      </div>
+
+      <fieldset>
+        <legend>Newsletter abonnieren</legend>
+        <div>
+          <input
+            type="radio"
+            id="weekly"
+            name="frequency"
+            value="weekly"
+          />
+          <label htmlFor="weekly">Wöchentlich</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            id="monthly"
+            name="frequency"
+            value="monthly"
+          />
+          <label htmlFor="monthly">Monatlich</label>
+        </div>
+      </fieldset>
+    </form>
+  )
+}
+```
+
+## Skip Links
+
+```tsx
+// app/layout.tsx
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 z-50 bg-white px-4 py-2"
+        >
+          Zum Hauptinhalt springen
+        </a>
+
+        <Header />
+
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
+
+        <Footer />
+      </body>
+    </html>
+  )
+}
+```
+
+## Testing Tools
+
+**Automated Testing:**
+```bash
+# axe-core für Jest
+pnpm add -D @axe-core/react jest-axe
+
+# Lighthouse CI
+pnpm add -D @lhci/cli
+```
+
+```tsx
+// __tests__/accessibility.test.tsx
+import { render } from '@testing-library/react'
+import { axe, toHaveNoViolations } from 'jest-axe'
+import { Button } from '@/components/ui/button'
+
+expect.extend(toHaveNoViolations)
+
+it('should have no accessibility violations', async () => {
+  const { container } = render(<Button>Click me</Button>)
+  const results = await axe(container)
+  expect(results).toHaveNoViolations()
+})
+```
+
+**Manual Testing:**
+- NVDA (Windows Screen Reader)
+- JAWS (Windows Screen Reader)
+- VoiceOver (Mac/iOS)
+- TalkBack (Android)
+- Keyboard-only Navigation
+
+## WCAG 2.2 Checklist
+
+**Level A (Minimum):**
+- [ ] Alt-Text für alle Images
+- [ ] Keyboard-Navigation möglich
+- [ ] Keine Timeouts ohne Warnung
+- [ ] Kein blinkender Content
+
+**Level AA (Empfohlen):**
+- [ ] Kontrast 4.5:1 (Text) / 3:1 (UI)
+- [ ] Resizable Text bis 200%
+- [ ] Heading-Struktur logisch
+- [ ] Focus-Indikatoren sichtbar
+- [ ] Error Identification & Suggestions
+
+**Level AAA (Enhanced):**
+- [ ] Kontrast 7:1
+- [ ] Sign Language für Audio
+- [ ] Keine zeitbasierten Medien
+
+## Zusammenfassung
+
+Barrierefreie Websites erreichen:
+
+✅ **30% mehr Nutzer**
+✅ **Besseres SEO-Ranking**
+✅ **Gesetzliche Compliance**
+✅ **Bessere UX für alle**
+
+Beginnen Sie mit semantischem HTML, ARIA und Keyboard-Navigation.
+
+## Accessibility Audit?
+
+Als [UX-Spezialisten](/services/ui-ux-design) bieten wir:
+
+- ♿ **WCAG 2.2 Audits**
+- 🔧 **Accessibility Fixes**
+- 📚 **Team-Schulungen**
+- ✅ **Fortlaufende Compliance**
+
+[Audit anfragen](/contact)
+
+*Aktualisiert: März 2024*

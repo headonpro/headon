@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import BlogContent from '@/components/sections/BlogContent'
+import { getAllBlogPosts, getBlogCategories } from '@/lib/content/content-api'
+import type { BlogCategory } from '@/lib/types/content'
 
 export const metadata: Metadata = {
   title: 'Blog - Insights zu Web Development, Design & Innovation | HEADON',
@@ -23,6 +25,61 @@ export const metadata: Metadata = {
   },
 }
 
-export default function BlogPage() {
-  return <BlogContent />
+interface BlogPageProps {
+  searchParams: Promise<{
+    page?: string
+    category?: string
+    search?: string
+  }>
+}
+
+const POSTS_PER_PAGE = 12
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const params = await searchParams
+  const currentPage = parseInt(params.page || '1', 10)
+  const selectedCategory = params.category as BlogCategory | undefined
+  const searchQuery = params.search || ''
+
+  // Load all posts
+  const allPosts = await getAllBlogPosts({
+    sortBy: 'date',
+    sortDirection: 'desc',
+  })
+
+  // Get all unique categories
+  const categories = await getBlogCategories()
+
+  // Filter by category if selected
+  let filteredPosts = selectedCategory
+    ? allPosts.filter((post) => post.frontmatter.category === selectedCategory)
+    : allPosts
+
+  // Filter by search query (client-side filtering for simplicity)
+  if (searchQuery) {
+    const query = searchQuery.toLowerCase()
+    filteredPosts = filteredPosts.filter(
+      (post) =>
+        post.frontmatter.title.toLowerCase().includes(query) ||
+        post.frontmatter.description.toLowerCase().includes(query)
+    )
+  }
+
+  // Calculate pagination
+  const totalPosts = filteredPosts.length
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE
+  const endIndex = startIndex + POSTS_PER_PAGE
+  const paginatedPosts = filteredPosts.slice(startIndex, endIndex)
+
+  return (
+    <BlogContent
+      posts={paginatedPosts}
+      categories={categories}
+      selectedCategory={selectedCategory}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      searchQuery={searchQuery}
+    />
+  )
 }

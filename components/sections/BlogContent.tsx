@@ -1,55 +1,34 @@
 'use client'
 
-import { Calendar, Clock, ArrowRight } from 'lucide-react'
+import { Calendar, Clock, ArrowRight, Search, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import type { BlogContentResult } from '@/lib/content/mdx-loader'
+import type { BlogCategory } from '@/lib/types/content'
 
-const posts = [
-  {
-    id: 1,
-    title: 'Die Zukunft von Web Development: Was erwartet uns 2024?',
-    excerpt: 'Ein Blick auf die neuesten Trends und Technologien, die die Webentwicklung revolutionieren werden.',
-    author: 'Onur Cirakoglu',
-    date: '2024-01-15',
-    readTime: '5 min',
-    category: 'Development',
-    slug: 'zukunft-web-development-2024',
-  },
-  {
-    id: 2,
-    title: 'UI/UX Design Trends 2024: Minimalismus trifft Innovation',
-    excerpt: 'Entdecken Sie die wichtigsten Design-Trends, die User Experiences auf ein neues Level heben.',
-    author: 'Onur Cirakoglu',
-    date: '2024-01-10',
-    readTime: '7 min',
-    category: 'Design',
-    slug: 'uiux-design-trends-2024',
-  },
-  {
-    id: 3,
-    title: 'Mobile-First Development: Best Practices für moderne Apps',
-    excerpt: 'Wie Sie Apps entwickeln, die auf allen Geräten eine perfekte User Experience bieten.',
-    author: 'Onur Cirakoglu',
-    date: '2024-01-05',
-    readTime: '6 min',
-    category: 'Mobile',
-    slug: 'mobile-first-development-best-practices',
-  },
-  {
-    id: 4,
-    title: 'Performance Optimization: Websites, die blitzschnell laden',
-    excerpt: 'Praktische Tipps und Tricks, um die Ladezeiten Ihrer Website drastisch zu reduzieren.',
-    author: 'Onur Cirakoglu',
-    date: '2024-01-01',
-    readTime: '8 min',
-    category: 'Performance',
-    slug: 'performance-optimization-websites',
-  },
-]
+interface BlogContentProps {
+  posts: BlogContentResult[]
+  categories: BlogCategory[]
+  selectedCategory?: BlogCategory
+  currentPage: number
+  totalPages: number
+  searchQuery: string
+}
 
-export default function BlogContent() {
+export default function BlogContent({
+  posts,
+  categories,
+  selectedCategory,
+  currentPage,
+  totalPages,
+  searchQuery: initialSearchQuery,
+}: BlogContentProps) {
   const [isMobile, setIsMobile] = useState(false)
+  const [searchInput, setSearchInput] = useState(initialSearchQuery)
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     const checkMobile = () => {
@@ -63,6 +42,41 @@ export default function BlogContent() {
       window.removeEventListener('resize', checkMobile)
     }
   }, [])
+
+  // Debounced search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchInput !== initialSearchQuery) {
+        const params = new URLSearchParams(searchParams.toString())
+        if (searchInput) {
+          params.set('search', searchInput)
+        } else {
+          params.delete('search')
+        }
+        params.delete('page') // Reset to page 1 on search
+        router.push(`/blog?${params.toString()}`)
+      }
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [searchInput, initialSearchQuery, router, searchParams])
+
+  const handleCategoryFilter = (category: BlogCategory | null) => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (category) {
+      params.set('category', category)
+    } else {
+      params.delete('category')
+    }
+    params.delete('page') // Reset to page 1 on filter
+    router.push(`/blog?${params.toString()}`)
+  }
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('page', page.toString())
+    router.push(`/blog?${params.toString()}`)
+  }
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -106,7 +120,7 @@ export default function BlogContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-24"
+            className="text-center mb-16"
           >
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -126,90 +140,215 @@ export default function BlogContent() {
             </motion.p>
           </motion.div>
 
-          {/* Blog Posts Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="grid gap-8 md:grid-cols-2 lg:grid-cols-2"
-          >
-            {posts.map((post, index) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300"
-              >
-                <div className="p-8">
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-white/20 text-white">
-                      {post.category}
-                    </span>
-                    <div className="flex items-center gap-2 text-sm text-white/70">
-                      <Calendar className="w-4 h-4" />
-                      <time dateTime={post.date}>
-                        {new Date(post.date).toLocaleDateString('de-DE', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
-                      </time>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-white/70">
-                      <Clock className="w-4 h-4" />
-                      <span>{post.readTime}</span>
-                    </div>
-                  </div>
-
-                  <h2 className="text-xl font-bold text-white mb-3 group-hover:text-accent-300 transition-colors">
-                    {post.title}
-                  </h2>
-
-                  <p className="text-white/80 mb-6 leading-relaxed">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-white/70">
-                      von {post.author}
-                    </span>
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-medium text-accent-400 hover:text-accent-300 transition-colors"
-                    >
-                      Weiterlesen
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
-
-          {/* Coming Soon */}
+          {/* Filters and Search */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-center mt-16"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-12"
           >
-            <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-8">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Mehr Content folgt bald!
-              </h3>
-              <p className="text-white/80 mb-6">
-                Wir arbeiten an weiteren spannenden Artikeln rund um Web Development, Design und Innovation.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent-500 to-secondary-500 text-primary font-semibold hover:from-accent-600 hover:to-secondary-600 transition-all"
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
+                <input
+                  type="text"
+                  placeholder="Artikel durchsuchen..."
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center gap-3">
+              <button
+                onClick={() => handleCategoryFilter(null)}
+                className={`px-6 py-2 rounded-full font-medium transition-all ${
+                  !selectedCategory
+                    ? 'bg-accent-500 text-primary-900'
+                    : 'bg-white/10 text-white hover:bg-white/20'
+                }`}
               >
-                Newsletter abonnieren
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                Alle
+              </button>
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryFilter(category)}
+                  className={`px-6 py-2 rounded-full font-medium transition-all capitalize ${
+                    selectedCategory === category
+                      ? 'bg-accent-500 text-primary-900'
+                      : 'bg-white/10 text-white hover:bg-white/20'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
           </motion.div>
+
+          {/* Blog Posts Grid */}
+          {posts.length > 0 ? (
+            <>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+              >
+                {posts.map((post, index) => (
+                  <motion.article
+                    key={post.slug}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 + index * 0.05 }}
+                    className="group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300"
+                  >
+                    <div className="p-8">
+                      <div className="flex items-center gap-4 mb-4 flex-wrap">
+                        <span className="px-3 py-1 text-xs font-medium rounded-full bg-white/20 text-white capitalize">
+                          {post.frontmatter.category}
+                        </span>
+                        <div className="flex items-center gap-2 text-sm text-white/70">
+                          <Calendar className="w-4 h-4" />
+                          <time dateTime={post.frontmatter.publishedAt}>
+                            {new Date(post.frontmatter.publishedAt).toLocaleDateString('de-DE', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })}
+                          </time>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-white/70">
+                          <Clock className="w-4 h-4" />
+                          <span>{post.frontmatter.readingTime} Min.</span>
+                        </div>
+                      </div>
+
+                      <h2 className="text-xl font-bold text-white mb-3 group-hover:text-accent-300 transition-colors line-clamp-2">
+                        {post.frontmatter.title}
+                      </h2>
+
+                      <p className="text-white/80 mb-6 leading-relaxed line-clamp-3">
+                        {post.frontmatter.description}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-white/70">
+                          von {post.frontmatter.author.name}
+                        </span>
+                        <Link
+                          href={`/blog/${post.slug}`}
+                          className="inline-flex items-center gap-2 text-sm font-medium text-accent-400 hover:text-accent-300 transition-colors"
+                        >
+                          Weiterlesen
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </div>
+                    </div>
+                  </motion.article>
+                ))}
+              </motion.div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="mt-16 flex items-center justify-center gap-2"
+                >
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    aria-label="Vorherige Seite"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+
+                  <div className="flex items-center gap-2">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                      // Show first page, last page, current page, and pages around current
+                      const showPage =
+                        page === 1 ||
+                        page === totalPages ||
+                        Math.abs(page - currentPage) <= 1
+
+                      if (!showPage && page === 2 && currentPage > 3) {
+                        return (
+                          <span key={page} className="text-white/50 px-2">
+                            ...
+                          </span>
+                        )
+                      }
+
+                      if (!showPage && page === totalPages - 1 && currentPage < totalPages - 2) {
+                        return (
+                          <span key={page} className="text-white/50 px-2">
+                            ...
+                          </span>
+                        )
+                      }
+
+                      if (!showPage) return null
+
+                      return (
+                        <button
+                          key={page}
+                          onClick={() => handlePageChange(page)}
+                          className={`min-w-[44px] px-4 py-2 rounded-lg font-medium transition-all ${
+                            currentPage === page
+                              ? 'bg-accent-500 text-primary-900'
+                              : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20'
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      )
+                    })}
+                  </div>
+
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    aria-label="Nächste Seite"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </motion.div>
+              )}
+            </>
+          ) : (
+            /* No Results */
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-center py-24"
+            >
+              <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-12">
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Keine Artikel gefunden
+                </h3>
+                <p className="text-white/80 mb-6">
+                  Versuchen Sie es mit anderen Suchbegriffen oder Filtern.
+                </p>
+                <button
+                  onClick={() => {
+                    setSearchInput('')
+                    handleCategoryFilter(null)
+                  }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent-500 to-secondary-500 text-primary font-semibold hover:from-accent-600 hover:to-secondary-600 transition-all"
+                >
+                  Alle Artikel anzeigen
+                </button>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
     </div>

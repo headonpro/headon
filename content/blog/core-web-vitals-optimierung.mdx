@@ -1,0 +1,641 @@
+---
+title: "Core Web Vitals optimieren: LCP, FID, CLS unter Kontrolle"
+description: "Praktischer Guide zur Optimierung von Core Web Vitals: Largest Contentful Paint, First Input Delay und Cumulative Layout Shift für besseres Ranking."
+publishedAt: "2025-07-03T09:00:00Z"
+author:
+  name: "Onur Cirakoglu"
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
+  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
+tags: ["Core Web Vitals", "Performance", "SEO", "LCP", "FID", "CLS"]
+category: "performance"
+image:
+  url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop"
+  alt: "Web Performance Metriken Dashboard mit Core Web Vitals"
+readingTime: 10
+featured: true
+---
+
+Core Web Vitals sind seit 2021 offizieller **Google Ranking-Faktor**. Websites mit schlechten Werten verlieren Rankings, Traffic und Conversions. In diesem Guide zeigen wir, wie Sie **LCP, FID und CLS systematisch optimieren**.
+
+## Was sind Core Web Vitals?
+
+Google definiert drei zentrale Metriken für User Experience:
+
+### 1. Largest Contentful Paint (LCP)
+
+**Was:** Zeit bis größtes Element im Viewport sichtbar ist
+
+**Ziel:** < 2.5 Sekunden
+
+**Häufige LCP-Elemente:**
+- Hero Images
+- Header-Bilder
+- Text-Blocks
+- Video-Thumbnails
+
+### 2. First Input Delay (FID)
+
+**Was:** Zeit zwischen erstem User-Input und Browser-Response
+
+**Ziel:** < 100 Millisekunden
+
+**Typische Inputs:**
+- Button-Clicks
+- Link-Clicks
+- Input-Felder
+
+**NEU:** Ab 2024 wird FID durch **INP (Interaction to Next Paint)** ersetzt!
+
+### 3. Cumulative Layout Shift (CLS)
+
+**Was:** Summe aller unerwarteten Layout-Verschiebungen
+
+**Ziel:** < 0.1
+
+**Häufige Ursachen:**
+- Bilder ohne Dimensions
+- Fonts ohne fallback
+- Dynamisch injizierte Ads
+- Late-loading Content
+
+## LCP optimieren: 8 bewährte Techniken
+
+### 1. Images mit next/image optimieren
+
+```tsx
+// ❌ Schlecht: Unoptimiertes Bild
+<img src="/hero.jpg" alt="Hero" />
+
+// ✅ Optimal: next/image mit Priority
+import Image from 'next/image'
+
+<Image
+  src="/hero.jpg"
+  alt="Hero"
+  width={1920}
+  height={1080}
+  priority  // ⭐ Kritisch für LCP!
+  sizes="100vw"
+  quality={85}
+/>
+```
+
+**Impact:** LCP von 3.2s → 0.8s (-75%)
+
+### 2. Preload kritische Ressourcen
+
+```tsx
+// app/layout.tsx
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <head>
+        {/* Preload Hero Image */}
+        <link
+          rel="preload"
+          as="image"
+          href="/hero.jpg"
+          imageSrcSet="/hero-640.jpg 640w, /hero-1200.jpg 1200w"
+        />
+
+        {/* Preload kritische Fonts */}
+        <link
+          rel="preload"
+          href="/fonts/inter.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+### 3. Server-Side Rendering nutzen
+
+```tsx
+// ✅ Server Component lädt Daten bevor HTML generiert wird
+export default async function ProductPage({ params }) {
+  // Daten bereits im initial HTML enthalten
+  const product = await db.product.findUnique({
+    where: { id: params.id }
+  })
+
+  return (
+    <div>
+      <h1>{product.title}</h1>
+      <Image src={product.image} width={800} height={600} priority />
+    </div>
+  )
+}
+```
+
+Mehr zu [SSR vs CSR](/blog/ssr-vs-csr-complete-guide).
+
+### 4. CDN für statische Assets
+
+```javascript
+// next.config.js
+module.exports = {
+  images: {
+    domains: ['cdn.headon.pro'],
+    loader: 'custom',
+    loaderFile: './imageLoader.js',
+  },
+}
+```
+
+```javascript
+// imageLoader.js
+export default function cloudinaryLoader({ src, width, quality }) {
+  return `https://cdn.headon.pro/image/upload/w_${width},q_${quality || 75}/${src}`
+}
+```
+
+### 5. Critical CSS inlinen
+
+```tsx
+// app/layout.tsx
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <head>
+        {/* Inline Critical CSS */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            .hero { min-height: 100vh; background: linear-gradient(...); }
+            .nav { position: sticky; top: 0; }
+          `
+        }} />
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+### 6. Lazy Load Below-the-Fold Content
+
+```tsx
+export default function Page() {
+  return (
+    <div>
+      {/* Above the fold - sofort laden */}
+      <Hero />
+
+      {/* Below the fold - lazy */}
+      <Suspense fallback={<Skeleton />}>
+        <BelowFoldContent />
+      </Suspense>
+    </div>
+  )
+}
+```
+
+### 7. Fonts optimieren
+
+```tsx
+// app/layout.tsx
+import { Inter } from 'next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap', // ⭐ Verhindert FOIT
+  preload: true,
+  variable: '--font-inter',
+})
+
+export default function RootLayout({ children }) {
+  return (
+    <html className={inter.variable}>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+### 8. Render-Blocking Resources minimieren
+
+```tsx
+import Script from 'next/script'
+
+export default function Page() {
+  return (
+    <>
+      {/* ❌ Blocking: Synchrones Script */}
+      {/* <script src="analytics.js"></script> */}
+
+      {/* ✅ Non-blocking */}
+      <Script
+        src="https://analytics.example.com/script.js"
+        strategy="afterInteractive"
+      />
+    </>
+  )
+}
+```
+
+## FID/INP optimieren: Interaktivität verbessern
+
+### 1. JavaScript-Execution optimieren
+
+```tsx
+// ❌ Schlecht: Blocking JavaScript
+function handleClick() {
+  const result = heavyComputation() // Blockiert 500ms!
+  setData(result)
+}
+
+// ✅ Gut: Mit Web Worker
+const worker = new Worker('/worker.js')
+
+function handleClick() {
+  worker.postMessage({ action: 'compute' })
+  worker.onmessage = (e) => {
+    setData(e.data) // Main Thread bleibt frei
+  }
+}
+```
+
+### 2. Code-Splitting aggressive nutzen
+
+```tsx
+import dynamic from 'next/dynamic'
+
+// ✅ Heavy Components lazy laden
+const HeavyChart = dynamic(() => import('./HeavyChart'), {
+  ssr: false,
+  loading: () => <Skeleton />
+})
+
+const ComplexForm = dynamic(() => import('./ComplexForm'))
+
+export default function Dashboard() {
+  const [showChart, setShowChart] = useState(false)
+
+  return (
+    <div>
+      <button onClick={() => setShowChart(true)}>
+        Show Chart
+      </button>
+
+      {showChart && <HeavyChart />}
+    </div>
+  )
+}
+```
+
+### 3. Event-Listener optimieren
+
+```tsx
+'use client'
+
+import { useMemo, useCallback } from 'react'
+import debounce from 'lodash/debounce'
+
+export default function SearchInput() {
+  // ✅ Debounced Handler
+  const handleSearch = useCallback(
+    debounce((query: string) => {
+      performSearch(query)
+    }, 300),
+    []
+  )
+
+  // ✅ Memoized Results
+  const results = useMemo(() => {
+    return expensiveFilter(data, query)
+  }, [data, query])
+
+  return (
+    <input
+      type="text"
+      onChange={(e) => handleSearch(e.target.value)}
+    />
+  )
+}
+```
+
+### 4. Long Tasks aufbrechen
+
+```tsx
+// ❌ Schlecht: Lange Aufgabe blockiert Thread
+function processLargeDataset(data) {
+  for (let i = 0; i < data.length; i++) {
+    processItem(data[i]) // 10.000+ Items!
+  }
+}
+
+// ✅ Gut: Mit requestIdleCallback
+function processLargeDataset(data) {
+  let index = 0
+
+  function processBatch() {
+    const deadline = Date.now() + 50 // Max 50ms pro Batch
+
+    while (index < data.length && Date.now() < deadline) {
+      processItem(data[index])
+      index++
+    }
+
+    if (index < data.length) {
+      requestIdleCallback(processBatch)
+    }
+  }
+
+  requestIdleCallback(processBatch)
+}
+```
+
+### 5. Third-Party Scripts verzögern
+
+```tsx
+export default function Page() {
+  return (
+    <>
+      {/* ✅ Analytics erst nach Interaktion */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js"
+        strategy="lazyOnload"
+      />
+
+      {/* ✅ Chat Widget erst nach Idle */}
+      <Script
+        src="https://widget.intercom.io/widget.js"
+        strategy="worker" // Läuft in Partytown Worker
+      />
+    </>
+  )
+}
+```
+
+## CLS eliminieren: Stabile Layouts
+
+### 1. Image & Video Dimensions setzen
+
+```tsx
+// ❌ CLS verursacht!
+<img src="/product.jpg" alt="Product" />
+
+// ✅ Aspect Ratio reserviert
+<Image
+  src="/product.jpg"
+  alt="Product"
+  width={800}
+  height={600} // Verhindert Shift!
+  sizes="(max-width: 768px) 100vw, 50vw"
+/>
+```
+
+### 2. Font Loading optimieren
+
+```css
+/* ✅ Font-Display Swap verhindert FOIT/FOUT */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts/custom.woff2') format('woff2');
+  font-display: swap; /* ⭐ Kritisch für CLS */
+  font-weight: 400;
+}
+
+/* ✅ Fallback Font Size Match */
+body {
+  font-family: 'CustomFont', Arial, sans-serif;
+  /* Adjust fallback size to match */
+  font-size-adjust: 0.5;
+}
+```
+
+### 3. Skeleton Screens verwenden
+
+```tsx
+export default function Page() {
+  return (
+    <div>
+      <Suspense fallback={
+        <div className="h-96 bg-gray-200 animate-pulse" />
+      }>
+        <HeroImage />
+      </Suspense>
+
+      <Suspense fallback={
+        <div className="space-y-4">
+          <div className="h-8 bg-gray-200 rounded" />
+          <div className="h-4 bg-gray-200 rounded w-3/4" />
+        </div>
+      }>
+        <Content />
+      </Suspense>
+    </div>
+  )
+}
+```
+
+### 4. Ad-Slots reservieren
+
+```tsx
+export default function Article() {
+  return (
+    <article>
+      <h1>Article Title</h1>
+
+      {/* ✅ Reserved space verhindert Shift */}
+      <div className="min-h-[250px] bg-gray-100">
+        <AdBanner slot="article-top" />
+      </div>
+
+      <div>Article content...</div>
+
+      <div className="min-h-[250px] bg-gray-100">
+        <AdBanner slot="article-bottom" />
+      </div>
+    </article>
+  )
+}
+```
+
+### 5. CSS Containment nutzen
+
+```css
+/* ✅ Layout Isolation */
+.card {
+  contain: layout style paint;
+}
+
+.sidebar {
+  contain: size layout;
+}
+
+/* ✅ Content Visibility für Off-screen */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+```
+
+## Core Web Vitals Monitoring
+
+### 1. Real User Monitoring (RUM)
+
+```tsx
+// app/layout.tsx
+'use client'
+
+import { useReportWebVitals } from 'next/web-vitals'
+
+export function WebVitals() {
+  useReportWebVitals((metric) => {
+    // An Analytics senden
+    window.gtag('event', metric.name, {
+      value: Math.round(metric.value),
+      event_label: metric.id,
+      non_interaction: true,
+    })
+
+    // Oder an eigenes Backend
+    fetch('/api/analytics', {
+      method: 'POST',
+      body: JSON.stringify(metric),
+    })
+  })
+
+  return null
+}
+```
+
+### 2. Chrome User Experience Report (CrUX)
+
+```bash
+# CrUX API Query
+curl "https://chromeuxreport.googleapis.com/v1/records:queryRecord?key=YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://headon.pro",
+    "formFactor": "PHONE",
+    "metrics": ["largest_contentful_paint", "cumulative_layout_shift"]
+  }'
+```
+
+### 3. Lighthouse CI
+
+```yaml
+# .github/workflows/lighthouse.yml
+name: Lighthouse CI
+on: [pull_request]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+```
+
+```javascript
+// lighthouserc.js
+module.exports = {
+  ci: {
+    collect: {
+      startServerCommand: 'npm run start',
+      url: ['http://localhost:3000/', 'http://localhost:3000/blog'],
+    },
+    assert: {
+      assertions: {
+        'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
+        'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
+        'first-input-delay': ['error', { maxNumericValue: 100 }],
+      },
+    },
+  },
+}
+```
+
+## Best Practices Checklist
+
+### LCP Checklist
+- [ ] Hero Image mit `priority` Flag
+- [ ] Critical resources preloaded
+- [ ] Server-Side Rendering aktiviert
+- [ ] CDN für Images konfiguriert
+- [ ] Critical CSS inlined
+- [ ] Font-Display: swap gesetzt
+- [ ] Lazy Loading für below-fold
+
+### FID/INP Checklist
+- [ ] Keine Long Tasks (>50ms)
+- [ ] Heavy JavaScript lazy geladen
+- [ ] Event Listeners debounced
+- [ ] Web Workers für CPU-intensive Tasks
+- [ ] Third-party Scripts verzögert
+
+### CLS Checklist
+- [ ] Alle Images haben width/height
+- [ ] Font-Display Swap aktiviert
+- [ ] Skeleton Screens implementiert
+- [ ] Ad Slots reserviert
+- [ ] CSS Containment genutzt
+- [ ] Content Visibility für Off-screen
+
+## Tools für Core Web Vitals
+
+**Testing:**
+- [PageSpeed Insights](https://pagespeed.web.dev/) - Google's Tool
+- [WebPageTest](https://webpagetest.org/) - Detaillierte Analysen
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/) - Local Testing
+
+**Monitoring:**
+- [Vercel Analytics](https://vercel.com/analytics) - Real User Monitoring
+- [Google Search Console](https://search.google.com/search-console) - CrUX Data
+- [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) - CI/CD Integration
+
+## Real-World Verbesserungen
+
+Bei unseren [Projekten](/portfolio) konnten wir folgende Verbesserungen erzielen:
+
+**E-Commerce Site:**
+- LCP: 3.8s → 1.1s (-71%)
+- FID: 180ms → 45ms (-75%)
+- CLS: 0.28 → 0.05 (-82%)
+- **Resultat:** +18% Conversion Rate
+
+**Blog:**
+- LCP: 2.9s → 0.7s (-76%)
+- FID: 95ms → 32ms (-66%)
+- CLS: 0.15 → 0.03 (-80%)
+- **Resultat:** Google Ranking Seite 3 → Seite 1
+
+## Zusammenfassung
+
+Core Web Vitals optimieren ist **systematisch**:
+
+✅ **LCP** < 2.5s durch Image-Optimization und SSR
+✅ **FID/INP** < 100ms durch Code-Splitting und Web Workers
+✅ **CLS** < 0.1 durch Dimensions und Skeleton Screens
+
+**Monitoring** ist kritisch - messen Sie kontinuierlich!
+
+## Brauchen Sie Performance-Support?
+
+Als [Performance-Experten](/services/web-development) bieten wir:
+
+- 🔍 **Detailliertes Performance-Audit**
+- 🎯 **Core Web Vitals Optimierung**
+- 📊 **Monitoring-Setup** (RUM + Synthetic)
+- 🚀 **Implementation** aller Optimierungen
+
+[Performance-Audit anfragen](/contact)
+
+## Weitere Guides
+
+- [Next.js Performance Optimization](/blog/next-js-performance-optimization)
+- [Image Optimization](/blog/next-js-image-optimization)
+- [Caching Strategien](/blog/caching-strategien-web-apps)
+
+*Aktualisiert: Juli 2024*

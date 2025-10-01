@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/steering/structure.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-10-01T17:41:54.772Z",
+      "trigger": "initial",
+      "approvalId": "approval_1759340514770_x29e7cuy2",
+      "approvalTitle": "Structure Document (structure.md) - Codebase Organization"
+    }
+  ]
+}

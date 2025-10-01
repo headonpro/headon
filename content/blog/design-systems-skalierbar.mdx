@@ -1,0 +1,473 @@
+---
+title: "Design Systems: Skalierbare UI-Komponenten mit React und Tailwind"
+description: "Kompletter Guide zum Aufbau eines Design Systems: Komponenten-Bibliothek, Tailwind CSS, shadcn/ui und Best Practices für Enterprise-Apps."
+publishedAt: "2025-07-18T09:00:00Z"
+author:
+  name: "Onur Cirakoglu"
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
+  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
+tags: ["Design Systems", "UI/UX", "React", "Tailwind CSS", "Component Library"]
+category: "design"
+image:
+  url: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=630&fit=crop"
+  alt: "Design System Komponenten Bibliothek Visualisierung"
+readingTime: 11
+---
+
+Ein gut strukturiertes Design System spart **60% Entwicklungszeit** bei neuen Features und sorgt für konsistente UX. In diesem Guide zeigen wir, wie Sie ein skalierbares Design System mit React, Tailwind CSS und shadcn/ui aufbauen.
+
+## Was ist ein Design System?
+
+Ein Design System ist mehr als eine Component Library:
+
+**Design System = Component Library + Design Tokens + Guidelines + Documentation**
+
+### Komponenten eines Design Systems
+
+1. **Design Tokens** - Farben, Spacing, Typography
+2. **Core Components** - Button, Input, Card
+3. **Pattern Library** - Forms, Navigation, Layouts
+4. **Documentation** - Usage Guidelines, Code Examples
+5. **Tooling** - Storybook, Testing, CI/CD
+
+## Foundation: Design Tokens
+
+### Tailwind CSS Config
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          500: '#3b82f6',
+          600: '#2563eb',
+          900: '#1e3a8a',
+        },
+        gray: {
+          50: '#f9fafb',
+          900: '#111827',
+        },
+      },
+      spacing: {
+        18: '4.5rem',
+        112: '28rem',
+        128: '32rem',
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Playfair Display', 'serif'],
+      },
+    },
+  },
+}
+```
+
+### CSS Custom Properties
+
+```css
+/* globals.css */
+@layer base {
+  :root {
+    --spacing-unit: 0.25rem;
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 1rem;
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  }
+
+  .dark {
+    --bg-primary: #111827;
+    --text-primary: #f9fafb;
+  }
+}
+```
+
+## Core Components mit shadcn/ui
+
+### Installation
+
+```bash
+pnpm dlx shadcn@latest init
+pnpm dlx shadcn@latest add button input card
+```
+
+### Button Component
+
+```tsx
+// components/ui/button.tsx
+import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from 'class-variance-authority'
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary-600 text-white hover:bg-primary-700',
+        outline: 'border border-gray-300 hover:bg-gray-100',
+        ghost: 'hover:bg-gray-100',
+        link: 'underline-offset-4 hover:underline',
+      },
+      size: {
+        sm: 'h-9 px-3 text-sm',
+        md: 'h-10 px-4',
+        lg: 'h-11 px-8 text-lg',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'md',
+    },
+  }
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {}
+
+export function Button({ className, variant, size, ...props }: ButtonProps) {
+  return (
+    <button
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
+  )
+}
+```
+
+### Input Component
+
+```tsx
+// components/ui/input.tsx
+import { cn } from '@/lib/utils'
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: string
+}
+
+export function Input({ className, error, ...props }: InputProps) {
+  return (
+    <div className="space-y-1">
+      <input
+        className={cn(
+          'flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2',
+          'text-sm placeholder:text-gray-400',
+          'focus:outline-none focus:ring-2 focus:ring-primary-500',
+          'disabled:cursor-not-allowed disabled:opacity-50',
+          error && 'border-red-500 focus:ring-red-500',
+          className
+        )}
+        {...props}
+      />
+      {error && <p className="text-sm text-red-600">{error}</p>}
+    </div>
+  )
+}
+```
+
+## Composition Patterns
+
+### Compound Components
+
+```tsx
+// components/ui/card.tsx
+import { cn } from '@/lib/utils'
+
+export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn('rounded-lg border border-gray-200 bg-white shadow-sm', className)}
+      {...props}
+    />
+  )
+}
+
+export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} />
+}
+
+export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  return <h3 className={cn('font-semibold leading-none tracking-tight', className)} {...props} />
+}
+
+export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('p-6 pt-0', className)} {...props} />
+}
+
+// Usage
+<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p>Card content goes here</p>
+  </CardContent>
+</Card>
+```
+
+### Polymorphic Components
+
+```tsx
+// components/ui/text.tsx
+import { createElement } from 'react'
+import { cn } from '@/lib/utils'
+
+type TextVariant = 'h1' | 'h2' | 'h3' | 'body' | 'caption'
+
+interface TextProps {
+  as?: React.ElementType
+  variant?: TextVariant
+  className?: string
+  children: React.ReactNode
+}
+
+const variantStyles: Record<TextVariant, string> = {
+  h1: 'text-4xl font-bold',
+  h2: 'text-3xl font-semibold',
+  h3: 'text-2xl font-semibold',
+  body: 'text-base',
+  caption: 'text-sm text-gray-600',
+}
+
+export function Text({ as = 'p', variant = 'body', className, children }: TextProps) {
+  return createElement(
+    as,
+    { className: cn(variantStyles[variant], className) },
+    children
+  )
+}
+
+// Usage
+<Text variant="h1" as="h1">Heading</Text>
+<Text variant="body">Body text</Text>
+<Text variant="caption" as="span">Caption</Text>
+```
+
+## Form Patterns
+
+```tsx
+// components/forms/ContactForm.tsx
+'use client'
+
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+
+const schema = z.object({
+  name: z.string().min(2, 'Name muss mindestens 2 Zeichen haben'),
+  email: z.string().email('Ungültige E-Mail-Adresse'),
+  message: z.string().min(10, 'Nachricht zu kurz'),
+})
+
+type FormData = z.infer<typeof schema>
+
+export function ContactForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  })
+
+  const onSubmit = async (data: FormData) => {
+    await fetch('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <div>
+        <Input
+          {...register('name')}
+          placeholder="Ihr Name"
+          error={errors.name?.message}
+        />
+      </div>
+
+      <div>
+        <Input
+          {...register('email')}
+          type="email"
+          placeholder="E-Mail"
+          error={errors.email?.message}
+        />
+      </div>
+
+      <div>
+        <Input
+          {...register('message')}
+          placeholder="Nachricht"
+          error={errors.message?.message}
+        />
+      </div>
+
+      <Button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Wird gesendet...' : 'Absenden'}
+      </Button>
+    </form>
+  )
+}
+```
+
+## Documentation mit Storybook
+
+```bash
+pnpm add -D @storybook/nextjs
+pnpm dlx storybook@latest init
+```
+
+```tsx
+// stories/Button.stories.tsx
+import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '@/components/ui/button'
+
+const meta: Meta<typeof Button> = {
+  title: 'UI/Button',
+  component: Button,
+  tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default', 'outline', 'ghost', 'link'],
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+    },
+  },
+}
+
+export default meta
+type Story = StoryObj<typeof Button>
+
+export const Primary: Story = {
+  args: {
+    children: 'Button',
+    variant: 'default',
+  },
+}
+
+export const Outline: Story = {
+  args: {
+    children: 'Button',
+    variant: 'outline',
+  },
+}
+
+export const Small: Story = {
+  args: {
+    children: 'Small Button',
+    size: 'sm',
+  },
+}
+```
+
+## Testing Components
+
+```tsx
+// __tests__/Button.test.tsx
+import { render, screen, fireEvent } from '@testing-library/react'
+import { Button } from '@/components/ui/button'
+
+describe('Button', () => {
+  it('renders correctly', () => {
+    render(<Button>Click me</Button>)
+    expect(screen.getByText('Click me')).toBeInTheDocument()
+  })
+
+  it('handles click events', () => {
+    const handleClick = jest.fn()
+    render(<Button onClick={handleClick}>Click me</Button>)
+
+    fireEvent.click(screen.getByText('Click me'))
+    expect(handleClick).toHaveBeenCalledTimes(1)
+  })
+
+  it('applies correct variant styles', () => {
+    render(<Button variant="outline">Outline</Button>)
+    const button = screen.getByText('Outline')
+    expect(button).toHaveClass('border')
+  })
+
+  it('respects disabled state', () => {
+    render(<Button disabled>Disabled</Button>)
+    const button = screen.getByText('Disabled')
+    expect(button).toBeDisabled()
+    expect(button).toHaveClass('opacity-50')
+  })
+})
+```
+
+## Best Practices
+
+### 1. Atomic Design Methodology
+
+```
+Atoms (Button, Input, Icon)
+  ↓
+Molecules (SearchBar, FormField)
+  ↓
+Organisms (Header, ProductCard)
+  ↓
+Templates (PageLayout, DashboardLayout)
+  ↓
+Pages (HomePage, ProductPage)
+```
+
+### 2. Naming Conventions
+
+- **Components:** PascalCase (Button, Card, Modal)
+- **Props:** camelCase (variant, size, isDisabled)
+- **CSS Classes:** kebab-case or Tailwind utilities
+- **Files:** PascalCase (Button.tsx, Button.test.tsx)
+
+### 3. Component API Design
+
+```tsx
+// ✅ Gut: Klare, vorhersehbare API
+<Button variant="primary" size="lg" loading disabled>
+  Submit
+</Button>
+
+// ❌ Schlecht: Inkonsistente Props
+<Button type="primary" btnSize="large" isLoading={true} isDisabled={true}>
+  Submit
+</Button>
+```
+
+## Zusammenfassung
+
+Ein skalierbares Design System benötigt:
+
+✅ **Design Tokens** für Konsistenz
+✅ **Wiederverwendbare Components** mit klarer API
+✅ **Composition Patterns** für Flexibilität
+✅ **Documentation** (Storybook)
+✅ **Testing** für Reliability
+
+**Resultat:** 60% schnellere Feature-Entwicklung.
+
+## Design System Unterstützung?
+
+Als [UI/UX Spezialisten](/services/ui-ux-design) erstellen wir:
+
+- 🎨 **Komplette Design Systems**
+- 📚 **Component Libraries** mit shadcn/ui
+- 📖 **Storybook Documentation**
+- 🧪 **Testing Infrastructure**
+
+[Beratung anfragen](/contact)
+
+*Aktualisiert: April 2024*

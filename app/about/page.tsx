@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import AboutContent from '@/components/sections/AboutContent'
+import { PersonSchema } from '@/components/seo/SchemaGenerator'
+import Breadcrumbs from '@/components/seo/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Über uns - HEADON Digitalagentur aus Lauda-Königshofen',
@@ -24,5 +26,29 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
-  return <AboutContent />
+  return (
+    <>
+      {/* Schema.org Person markup for founder */}
+      <PersonSchema
+        person={{
+          name: 'Onur Cirakoglu',
+          jobTitle: 'Founder & CEO',
+          description: 'Founder and CEO of HEADON.pro, a modern digital agency specializing in AI-powered web and mobile development.',
+          url: '/about',
+        }}
+      />
+
+      {/* Breadcrumbs */}
+      <div className="container mx-auto px-4 pt-8">
+        <Breadcrumbs
+          items={[
+            { name: 'Home', url: '/' },
+            { name: 'Über uns', url: '/about' },
+          ]}
+        />
+      </div>
+
+      <AboutContent />
+    </>
+  )
 }

@@ -1,105 +1,111 @@
-'use client'
+/**
+ * Breadcrumbs Navigation Component
+ *
+ * Server component for accessible breadcrumb navigation with Schema.org markup.
+ * Provides visual navigation aid and SEO signals for page hierarchy.
+ *
+ * Features:
+ * - Semantic HTML (nav, ol, li)
+ * - Schema.org BreadcrumbList structured data
+ * - Accessible (ARIA labels)
+ * - Responsive (truncation on mobile)
+ * - Hover states for links
+ *
+ * @example
+ * ```tsx
+ * <Breadcrumbs items={[
+ *   { name: 'Home', url: '/' },
+ *   { name: 'Blog', url: '/blog' },
+ *   { name: 'Article Title', url: '/blog/article-slug' }
+ * ]} />
+ * ```
+ */
 
 import Link from 'next/link'
-import { ChevronRight, Home } from 'lucide-react'
-import { usePathname } from 'next/navigation'
-import StructuredData from './StructuredData'
+import { ChevronRight } from 'lucide-react'
+import { BreadcrumbSchema } from '@/components/seo/SchemaGenerator'
 
-interface BreadcrumbItem {
+// ============================================================================
+// Types
+// ============================================================================
+
+export interface BreadcrumbItem {
   name: string
   url: string
 }
 
-export default function Breadcrumbs() {
-  const pathname = usePathname()
-  
-  // Generiere Breadcrumbs basierend auf dem Pfad
-  const generateBreadcrumbs = (): BreadcrumbItem[] => {
-    const paths = pathname.split('/').filter(Boolean)
-    const breadcrumbs: BreadcrumbItem[] = [
-      { name: 'Home', url: '/' }
-    ]
-    
-    // Mapping für bessere Namen
-    const nameMapping: { [key: string]: string } = {
-      'services': 'Services',
-      'portfolio': 'Portfolio',
-      'about': 'Über uns',
-      'contact': 'Kontakt',
-      'team': 'Team',
-      'blog': 'Blog',
-    }
-    
-    let currentPath = ''
-    paths.forEach(path => {
-      currentPath += `/${path}`
-      breadcrumbs.push({
-        name: nameMapping[path] || path.charAt(0).toUpperCase() + path.slice(1),
-        url: currentPath
-      })
-    })
-    
-    return breadcrumbs
+export interface BreadcrumbsProps {
+  items: BreadcrumbItem[]
+  variant?: 'light' | 'dark' // light = dark text (default), dark = white text on gradient
+}
+
+// ============================================================================
+// Breadcrumbs Component
+// ============================================================================
+
+export default function Breadcrumbs({ items, variant = 'light' }: BreadcrumbsProps) {
+  // Don't render if no items or only one item (homepage)
+  if (!items || items.length === 0) {
+    return null
   }
-  
-  const breadcrumbs = generateBreadcrumbs()
-  
-  // Zeige keine Breadcrumbs auf der Startseite
-  if (pathname === '/') return null
-  
+
+  // Color classes based on variant
+  const colors = {
+    light: {
+      base: 'text-gray-600',
+      current: 'text-gray-900',
+      chevron: 'text-gray-400',
+      hover: 'hover:text-primary',
+    },
+    dark: {
+      base: 'text-white/80',
+      current: 'text-white',
+      chevron: 'text-white/50',
+      hover: 'hover:text-white',
+    },
+  }
+
+  const colorClasses = colors[variant]
+
   return (
     <>
-      {/* Structured Data für Breadcrumbs */}
-      <StructuredData 
-        type="breadcrumb" 
-        data={{ breadcrumbs }}
-      />
-      
-      {/* Visual Breadcrumbs */}
-      <nav 
-        aria-label="Breadcrumb Navigation"
-        className="container mx-auto px-4 py-4"
-      >
-        <ol 
-          className="flex items-center space-x-2 text-sm"
-          itemScope
-          itemType="https://schema.org/BreadcrumbList"
-        >
-          {breadcrumbs.map((breadcrumb, index) => (
-            <li
-              key={breadcrumb.url}
-              className="flex items-center"
-              itemProp="itemListElement"
-              itemScope
-              itemType="https://schema.org/ListItem"
-            >
-              {index > 0 && (
-                <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
-              )}
-              
-              {index === breadcrumbs.length - 1 ? (
-                // Letztes Element (aktuelle Seite)
-                <span 
-                  className="text-gray-700 dark:text-gray-300 font-medium"
-                  itemProp="name"
-                >
-                  {breadcrumb.name}
-                </span>
-              ) : (
-                // Verlinkbare Elemente
-                <Link
-                  href={breadcrumb.url}
-                  className="text-primary hover:text-primary-600 transition-colors flex items-center gap-1"
-                  itemProp="item"
-                >
-                  {index === 0 && <Home className="w-4 h-4" />}
-                  <span itemProp="name">{breadcrumb.name}</span>
-                </Link>
-              )}
-              
-              <meta itemProp="position" content={String(index + 1)} />
-            </li>
-          ))}
+      {/* Schema.org BreadcrumbList structured data */}
+      <BreadcrumbSchema items={items} />
+
+      {/* Visual breadcrumb navigation */}
+      <nav aria-label="Breadcrumb" className="mb-4">
+        <ol className={`flex flex-wrap items-center gap-2 text-sm ${colorClasses.base}`}>
+          {items.map((item, index) => {
+            const isLast = index === items.length - 1
+
+            return (
+              <li key={index} className="flex items-center gap-2">
+                {/* Breadcrumb link or text */}
+                {isLast ? (
+                  // Last item (current page) - not clickable
+                  <span className={`truncate font-semibold ${colorClasses.current} max-w-[200px] sm:max-w-none`}>
+                    {item.name}
+                  </span>
+                ) : (
+                  // Previous items - clickable links
+                  <Link
+                    href={item.url}
+                    className={`truncate transition-colors ${colorClasses.hover} max-w-[150px] sm:max-w-none`}
+                  >
+                    {item.name}
+                  </Link>
+                )}
+
+                {/* Separator (chevron) - not after last item */}
+                {!isLast && (
+                  <ChevronRight
+                    className={`h-4 w-4 flex-shrink-0 ${colorClasses.chevron}`}
+                    aria-hidden="true"
+                  />
+                )}
+              </li>
+            )
+          })}
         </ol>
       </nav>
     </>

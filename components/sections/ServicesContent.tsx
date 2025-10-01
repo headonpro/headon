@@ -9,6 +9,7 @@ import Link from 'next/link'
 const services = [
   {
     title: 'Web Development',
+    slug: 'web-development',
     description: 'Moderne, performante Webanwendungen mit Next.js, React und TypeScript.',
     icon: Code2,
     features: [
@@ -20,6 +21,7 @@ const services = [
   },
   {
     title: 'Mobile Development',
+    slug: 'mobile-development',
     description: 'Native und Cross-Platform Apps für iOS und Android mit React Native.',
     icon: Smartphone,
     features: [
@@ -31,6 +33,7 @@ const services = [
   },
   {
     title: 'UI/UX Design',
+    slug: 'ui-ux-design',
     description: 'User-zentriertes Design mit Fokus auf Usability und Ästhetik.',
     icon: Palette,
     features: [
@@ -42,6 +45,7 @@ const services = [
   },
   {
     title: 'Backend Solutions',
+    slug: 'backend-solutions',
     description: 'Skalierbare Cloud-Infrastruktur und API-Entwicklung mit Supabase.',
     icon: Database,
     features: [
@@ -92,34 +96,42 @@ export default function ServicesContent() {
             className="grid gap-10 md:grid-cols-2 lg:grid-cols-2 max-w-5xl mx-auto mb-16"
           >
             {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300 overflow-hidden"
-              >
-                <div className="p-6">
-                  {/* Icon */}
-                  <div className="flex justify-center mb-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-accent to-secondary">
-                      <service.icon className="w-8 h-8 text-primary" strokeWidth={1.5} />
+              <Link key={service.title} href={`/services/${service.slug}`}>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                  className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 hover:border-white/30 transition-all duration-300 overflow-hidden group cursor-pointer h-full"
+                >
+                  <div className="p-6">
+                    {/* Icon */}
+                    <div className="flex justify-center mb-4">
+                      <div className="p-3 rounded-xl bg-gradient-to-br from-accent to-secondary group-hover:scale-110 transition-transform duration-300">
+                        <service.icon className="w-8 h-8 text-primary" strokeWidth={1.5} />
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="text-xl font-bold text-white mb-3 text-center group-hover:text-accent transition-colors duration-300">{service.title}</h3>
+                    <p className="text-white/90 mb-4 text-center text-sm">{service.description}</p>
+                    <ul className="space-y-2 mb-4">
+                      {service.features.map((feature) => (
+                        <li key={feature} className="flex items-center text-sm text-white/80">
+                          <span className="mr-2 text-accent">•</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* "Mehr erfahren" Button */}
+                    <div className="text-center mt-4 pt-4 border-t border-white/10">
+                      <span className="text-sm text-accent group-hover:text-secondary transition-colors duration-300 font-semibold">
+                        Mehr erfahren →
+                      </span>
                     </div>
                   </div>
-
-                  {/* Content */}
-                  <h3 className="text-xl font-bold text-white mb-3 text-center">{service.title}</h3>
-                  <p className="text-white/90 mb-4 text-center text-sm">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center text-sm text-white/80">
-                        <span className="mr-2 text-accent">•</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </motion.div>
 

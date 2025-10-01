@@ -249,3 +249,24 @@ code, pre {
 .electric-on-pulse {
   animation: lightning-pulse 2s ease-in-out infinite;
 }
+
+/* Leaflet Map Custom Styles */
+.leaflet-popup-content-wrapper {
+  background: white;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border-radius: 0.5rem;
+}
+
+.leaflet-popup-tip {
+  background: white;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  min-width: 200px;
+}
+
+/* Custom marker icon color using CSS filter */
+.leaflet-marker-icon {
+  filter: hue-rotate(210deg) saturate(1.5);
+}

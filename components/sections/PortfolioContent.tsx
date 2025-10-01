@@ -4,6 +4,9 @@ import { Button } from '@/components/ui/button'
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
+import type { PortfolioContentResult } from '@/lib/content/mdx-loader'
+import type { PortfolioCategory } from '@/lib/types/content'
 
 // Before/After Slider Component
 function BeforeAfterSlider() {
@@ -153,42 +156,31 @@ function AppShowcase() {
   )
 }
 
-const projects = [
-  {
-    id: 1,
-    title: 'SV Viktoria Wertheim',
-    category: 'Web Development',
-    description: 'Komplette Neugestaltung der Vereinswebsite mit modernem Design und Dark Mode',
-    customComponent: BeforeAfterSlider,
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Dark Mode'],
-  },
-  {
-    id: 2,
-    title: 'KLARTEXT - Sprachassistent',
-    category: 'Mobile Development',
-    description: 'KI-gestützter Sprachassistent als mobile App für iOS und Android',
-    customComponent: AppShowcase,
-    tags: ['React Native', 'KI/ML', 'TypeScript', 'Firebase'],
-  },
-  {
-    id: 3,
-    title: 'SaaS Dashboard',
-    category: 'UI/UX Design',
-    description: 'Intuitives Dashboard für Business Analytics',
-    image: '/images/portfolio/project3.jpg',
-    tags: ['Figma', 'Design System', 'React'],
-  },
-  {
-    id: 4,
-    title: 'Healthcare Platform',
-    category: 'Full Stack',
-    description: 'Telemedizin-Plattform mit Video-Konsultationen',
-    image: '/images/portfolio/project4.jpg',
-    tags: ['Next.js', 'WebRTC', 'PostgreSQL'],
-  },
-]
+// Category mapping for display
+const categoryLabels: Record<PortfolioCategory, string> = {
+  web: 'Web',
+  mobile: 'Mobile',
+  'ui-ux': 'UI/UX',
+  'full-stack': 'Full-Stack',
+}
 
-export default function PortfolioContent() {
+// Special showcase components for specific projects
+const specialShowcases: Record<string, React.ComponentType> = {
+  'sv-viktoria-wertheim': BeforeAfterSlider,
+  'klartext-app': AppShowcase,
+}
+
+interface PortfolioContentProps {
+  projects: PortfolioContentResult[]
+}
+
+export default function PortfolioContent({ projects }: PortfolioContentProps) {
+  const [selectedCategory, setSelectedCategory] = useState<PortfolioCategory | 'all'>('all')
+
+  // Filter projects by category
+  const filteredProjects = selectedCategory === 'all'
+    ? projects
+    : projects.filter(project => project.frontmatter.category === selectedCategory)
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 py-16">
       <div className="container mx-auto px-4">
@@ -201,44 +193,112 @@ export default function PortfolioContent() {
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className="group relative overflow-hidden rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/15 hover:shadow-xl transition-all duration-300"
+        {/* Category Filter */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <button
+            onClick={() => setSelectedCategory('all')}
+            className={`px-4 py-2 rounded-full font-medium transition-all ${
+              selectedCategory === 'all'
+                ? 'bg-white text-primary-600 shadow-lg'
+                : 'bg-white/10 text-white hover:bg-white/20'
+            }`}
+          >
+            Alle
+          </button>
+          {(Object.keys(categoryLabels) as PortfolioCategory[]).map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 rounded-full font-medium transition-all ${
+                selectedCategory === category
+                  ? 'bg-white text-primary-600 shadow-lg'
+                  : 'bg-white/10 text-white hover:bg-white/20'
+              }`}
             >
-              {project.customComponent ? (
-                <div className="p-6">
-                  <project.customComponent />
-                </div>
-              ) : (
-                <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20" />
-              )}
-              <div className="p-6">
-                <p className="text-sm text-white/70 mb-2">{project.category}</p>
-                <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                <p className="text-white/80 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-xs rounded-full bg-accent/20 text-accent-200"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10">
-                  Case Study ansehen
-                </Button>
-              </div>
-            </div>
+              {categoryLabels[category]}
+            </button>
           ))}
         </div>
+
+        {/* Projects Grid */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+          {filteredProjects.map((project) => {
+            const CustomShowcase = specialShowcases[project.slug]
+
+            return (
+              <div
+                key={project.slug}
+                className="group relative overflow-hidden rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm hover:bg-white/15 hover:shadow-xl transition-all duration-300"
+              >
+                {/* Custom Showcase or Image */}
+                {CustomShowcase ? (
+                  <div className="p-6">
+                    <CustomShowcase />
+                  </div>
+                ) : project.frontmatter.image ? (
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={project.frontmatter.image.url}
+                      alt={project.frontmatter.image.alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20" />
+                )}
+
+                {/* Project Info */}
+                <div className="p-6">
+                  <p className="text-sm text-white/70 mb-2">
+                    {categoryLabels[project.frontmatter.category]}
+                  </p>
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    {project.frontmatter.title}
+                  </h3>
+                  <p className="text-white/80 mb-4">
+                    {project.frontmatter.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.frontmatter.tags.slice(0, 4).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 text-xs rounded-full bg-accent/20 text-accent-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* View Case Study Button */}
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="border-white/30 text-white bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-white/40"
+                  >
+                    <Link href={`/portfolio/${project.slug}`}>
+                      Case Study ansehen
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Empty State */}
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-16">
+            <p className="text-white/70 text-lg">
+              Keine Projekte in dieser Kategorie gefunden.
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Transition to Footer */}
-      <div className="h-16 bg-gradient-to-b from-transparent to-gray-50"></div>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import PortfolioContent from '@/components/sections/PortfolioContent'
+import { getAllPortfolioProjects } from '@/lib/content/content-api'
 
 export const metadata: Metadata = {
   title: 'Portfolio - Erfolgreiche Projekte & Case Studies | HEADON',
@@ -23,6 +24,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function PortfolioPage() {
-  return <PortfolioContent />
+/**
+ * Portfolio Page
+ * Server component that loads all portfolio projects
+ */
+export default async function PortfolioPage() {
+  // Load all portfolio projects from content API
+  const projects = await getAllPortfolioProjects()
+
+  return <PortfolioContent projects={projects} />
 }
