@@ -65,11 +65,11 @@ export default function Header() {
         </div>
         
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="/contact">
-            <Button className="bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 font-semibold">
+          <Button asChild className="bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 font-semibold">
+            <Link href="/contact">
               Projekt starten
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </nav>
       
@@ -117,11 +117,11 @@ export default function Header() {
                 })}
               </div>
               <div className="py-6 border-t border-white/10">
-                <Link href="/contact">
-                  <Button className="w-full bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 font-semibold shadow-lg hover:shadow-xl transition-all duration-200" onClick={() => setMobileMenuOpen(false)}>
+                <Button asChild className="w-full bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
+                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                     Projekt starten
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

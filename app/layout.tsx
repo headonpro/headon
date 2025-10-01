@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Outfit, Lato } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
@@ -71,16 +72,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const umamiScript = `<script defer src="https://analytics.headon.pro/script.js" data-website-id="4d2d852f-7617-4bd2-9e80-7dbacf1c5d24"></script>`
-  
   return (
     <html lang="de" className={`${outfit.variable} ${lato.variable}`}>
       <head>
         <link rel="preload" href="/headon-logo.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/images/onur_P.webp" as="image" type="image/webp" />
-        <div dangerouslySetInnerHTML={{ __html: umamiScript }} />
       </head>
       <body className="min-h-screen antialiased flex flex-col font-body">
+        <Script
+          defer
+          src="https://analytics.headon.pro/script.js"
+          data-website-id="4d2d852f-7617-4bd2-9e80-7dbacf1c5d24"
+          strategy="afterInteractive"
+        />
         <StructuredData type="organization" />
         <StructuredData type="localBusiness" />
         <Header />
