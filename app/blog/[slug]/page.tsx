@@ -56,9 +56,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* Schema.org Article markup */}
       <ArticleSchema post={post} />
 
-      {/* Hero Header with Gradient Background */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500">
-        <div className="container mx-auto px-4 py-16 md:py-24 max-w-4xl relative z-10">
+      {/* Hero Header with Gradient Background - Extended */}
+      <div className="relative">
+        {/* Background Gradient - Extended below content */}
+        <div className="absolute inset-0 h-[600px] md:h-[650px] bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+
+        <div className="container mx-auto px-4 pt-16 pb-12 md:pt-20 md:pb-16 max-w-4xl relative z-10">
           {/* Breadcrumbs */}
           <div className="mb-6">
             <Breadcrumbs
@@ -161,7 +164,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.frontmatter.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-block px-3 py-1 text-xs bg-white/10 backdrop-blur-sm text-white rounded-full"
+                  className="inline-block px-3 py-1 text-xs bg-black/40 backdrop-blur-sm text-white rounded-full border border-white/20"
                 >
                   #{tag}
                 </span>
@@ -173,11 +176,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
 
       {/* Main Content Area */}
-      <article className="bg-background">
+      <article className="bg-background -mt-16 md:-mt-20 relative">
         <div className="container mx-auto px-4 py-12 max-w-4xl">
           {/* Featured Image */}
           {post.frontmatter.image && (
-            <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden mb-12 shadow-2xl -mt-24">
+            <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden mb-12 shadow-2xl -mt-16">
               <Image
                 src={post.frontmatter.image.url}
                 alt={post.frontmatter.image.alt}
