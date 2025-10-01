@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import { Toaster } from "sonner"
 import StructuredData from "@/components/seo/StructuredData"
+import WebVitalsReporter from "@/components/web-vitals-reporter"
 
 const outfit = Outfit({ 
   subsets: ["latin"],
@@ -71,8 +72,12 @@ export default function RootLayout({
     <html lang="de" className={`${outfit.variable} ${lato.variable}`}>
       <head>
         <link rel="preload" href="/headon-logo.svg" as="image" type="image/svg+xml" />
+        {/* Preconnect to analytics domain for faster loading */}
+        <link rel="preconnect" href="https://analytics.headon.pro" />
+        <link rel="dns-prefetch" href="https://analytics.headon.pro" />
       </head>
       <body className="min-h-screen antialiased flex flex-col font-body">
+        <WebVitalsReporter />
         <Script
           defer
           src="https://analytics.headon.pro/script.js"
