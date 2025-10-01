@@ -42,17 +42,12 @@ export const metadata: Metadata = {
     canonical: "https://headon.pro",
   },
   openGraph: {
-    title: "HEADON.pro - Webentwicklung Lauda-Königshofen | Full-Stack Entwicklung",
-    description: "Ihre Webentwicklung-Agentur aus Lauda-Königshofen für moderne Web-Lösungen, Mobile Apps und UI/UX Design",
+    title: "Webentwicklung & Mobile Apps 4x schneller | KI-gestützte Digitalagentur",
+    description: "KI-gestützte Webentwicklung aus Lauda-Königshofen: 4x schneller, 2x bessere Performance. Von der Idee zum Launch in 2-4 Wochen statt Monaten. Festpreise ab 2.500€. Kostenlose Erstberatung.",
     url: "https://headon.pro",
     siteName: "HEADON.pro",
     locale: "de_DE",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "HEADON.pro - Webentwicklung Lauda-Königshofen",
-    description: "Ihre Webentwicklung-Agentur aus Lauda-Königshofen für moderne digitale Lösungen",
   },
   robots: {
     index: true,
@@ -76,7 +71,6 @@ export default function RootLayout({
     <html lang="de" className={`${outfit.variable} ${lato.variable}`}>
       <head>
         <link rel="preload" href="/headon-logo.svg" as="image" type="image/svg+xml" />
-        <link rel="preload" href="/images/onur_P.webp" as="image" type="image/webp" />
       </head>
       <body className="min-h-screen antialiased flex flex-col font-body">
         <Script
