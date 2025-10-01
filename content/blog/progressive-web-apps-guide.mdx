@@ -43,8 +43,9 @@ Eine PWA ist eine Web-App mit drei Kernmerkmalen:
 # Local Development
 npx next dev
 
-# Production (automatisch HTTPS auf Vercel)
-vercel deploy
+# Production (Docker Build & Deploy)
+docker build -t my-pwa .
+docker run -p 3000:3000 my-pwa
 ```
 
 ### 2. Web App Manifest

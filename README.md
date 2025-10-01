@@ -118,10 +118,10 @@ pnpm dlx shadcn-ui@latest add [component-name]
 ## 🚀 Deployment
 
 Das Projekt ist optimiert für Deployment auf:
-- Vercel (empfohlen)
+- Hetzner VPS mit Docker (empfohlen)
+- Selbst-gehostete Lösungen mit Docker
 - Netlify
 - AWS Amplify
-- Selbst-gehostete Lösungen
 
 ### Production Build
 ```bash

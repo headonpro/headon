@@ -101,7 +101,7 @@ Wir entschieden uns für einen modernen, zukunftssicheren Tech-Stack, der Perfor
 **Backend & Infrastructure:**
 - **Supabase**: PostgreSQL-Datenbank, Authentication, Storage, Row Level Security
 - **Next.js API Routes**: Server-seitige Logik für Formular-Handling und Daten-Validierung
-- **Vercel**: Edge-Deployment mit globaler CDN-Distribution
+- **Hetzner VPS**: Docker-Deployment mit globaler CDN-Distribution via CloudFlare
 - **GitHub Actions**: Automatisierte CI/CD-Pipeline mit Testing und Linting
 
 **SEO & Performance:**
@@ -303,14 +303,14 @@ Die neue Website hatte direkten, messbaren Business-Impact:
 
 **Skalierbarkeit:**
 - Supabase skaliert automatisch (aktuell: 400 Mitglieder, Kapazität: 100.000+)
-- Vercel Edge Network: Weltweit schnell, auch bei Traffic-Spikes
+- CloudFlare CDN: Weltweit schnell, auch bei Traffic-Spikes
 - Next.js ISR (Incremental Static Regeneration): Seiten werden on-demand aktualisiert
 
 **Kosten:**
-- Hosting: 0€/Monat (Vercel Free Tier)
+- Hosting: ~5€/Monat (Hetzner VPS)
 - Supabase: 0€/Monat (Free Tier, bis 500 MB Datenbank)
 - Domain: 12€/Jahr
-- **Gesamt: 1€/Monat** (im Vergleich zu vorher 15€/Monat für Shared Hosting)
+- **Gesamt: ~5€/Monat** (im Vergleich zu vorher 15€/Monat für Shared Hosting)
 
 ## Technologien & Tools
 
@@ -336,13 +336,13 @@ Die neue Website hatte direkten, messbaren Business-Impact:
 - ESLint (Code Quality, Custom Rules)
 - Prettier (Code Formatting, Single Style Guide)
 - GitHub Actions (CI/CD, Automated Testing, Deployment)
-- Vercel (Hosting, Edge Network, Analytics)
+- Hetzner VPS (Hosting mit Docker)
 
 **SEO & Analytics:**
 - Next.js Metadata API (Dynamic Meta Tags, Open Graph)
 - Schema.org JSON-LD (Rich Snippets, Knowledge Graph)
 - Google Search Console (Performance Monitoring)
-- Vercel Analytics (Web Vitals, Real User Monitoring)
+- Umami Analytics (Web Vitals, Real User Monitoring, selbstgehostet)
 
 ## Lessons Learned & Best Practices
 

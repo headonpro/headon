@@ -489,7 +489,7 @@ async function getBlogPosts() {
 export const runtime = 'edge'
 
 export async function GET(request: Request) {
-  // Läuft auf Vercel Edge Network
+  // Läuft auf Edge Runtime (CloudFlare Workers, etc.)
   // Näher am User = schnellere Response
   return new Response('Hello from the Edge!')
 }
@@ -511,16 +511,18 @@ export async function GET(request: Request) {
 
 ```tsx
 // app/layout.tsx
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import Script from 'next/script'
 
 export default function RootLayout({ children }) {
   return (
     <html>
       <body>
         {children}
-        <Analytics />
-        <SpeedInsights />
+        <Script
+          src="https://analytics.yourdomain.com/script.js"
+          data-website-id="your-umami-website-id"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )
@@ -660,7 +662,7 @@ import debounce from 'lodash/debounce' // 2 KB
 - **Lighthouse** - Chrome DevTools
 - **WebPageTest** - [webpagetest.org](https://webpagetest.org)
 - **PageSpeed Insights** - [pagespeed.web.dev](https://pagespeed.web.dev)
-- **Vercel Analytics** - Real User Monitoring
+- **Umami Analytics** - Real User Monitoring (selbstgehostet)
 - **Bundle Analyzer** - Webpack Bundle Visualisierung
 
 ## Zusammenfassung

@@ -210,8 +210,8 @@ app/layout.tsx (Root Layout)
 ## Deployment & Distribution
 
 ### Target Platform(s)
-- **Primary**: VPS with Docker containers
-- **Alternative**: Vercel, Netlify, AWS Amplify
+- **Primary**: Hetzner VPS with Docker containers
+- **Alternative**: Selbst-gehostete VPS, Netlify, AWS Amplify
 - **Environment**: Linux (Ubuntu 24.04.3 LTS)
 
 ### Distribution Method

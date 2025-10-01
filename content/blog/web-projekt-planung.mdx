@@ -193,19 +193,19 @@ ROI (Jahr 2): +115%
 - Database: PostgreSQL (Supabase)
 - ORM: Prisma
 - Auth: NextAuth.js / Supabase Auth
-- File Storage: Vercel Blob / Supabase Storage
+- File Storage: Supabase Storage
 
 ### Infrastructure
-- Hosting: Vercel
+- Hosting: Hetzner VPS mit Docker
 - Database: Supabase
-- CDN: Vercel Edge Network
-- Monitoring: Vercel Analytics + Sentry
+- CDN: CloudFlare
+- Monitoring: Umami Analytics (selbstgehostet) + Sentry
 
 ### Third-Party
 - Payments: Stripe
 - Email: Resend / SendGrid
 - Search: Algolia
-- Analytics: Vercel Analytics / Plausible
+- Analytics: Umami (selbstgehostet)
 ```
 
 **Entscheidungskriterien:**
@@ -229,7 +229,7 @@ ROI (Jahr 2): +115%
 │   Client    │ (Next.js)
 └──────┬──────┘
        │
-       ├──→ Vercel Edge (CDN)
+       ├──→ CloudFlare CDN
        │
        ├──→ Next.js API Routes
        │    ├── tRPC

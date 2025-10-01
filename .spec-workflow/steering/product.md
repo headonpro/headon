@@ -132,7 +132,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 
 ### Sharing Capabilities
 - **Static Exports**: Möglich für Hosting auf beliebigen CDNs
-- **Environment Previews**: Automatische Preview-Deployments via Vercel/Netlify
+- **Environment Previews**: Automatische Preview-Deployments via GitHub Actions
 - **Documentation**: Auto-generierte API-Docs für Backend-Routes
 
 ## Future Vision
