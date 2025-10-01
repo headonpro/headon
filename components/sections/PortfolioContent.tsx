@@ -176,13 +176,61 @@ interface PortfolioContentProps {
 
 export default function PortfolioContent({ projects }: PortfolioContentProps) {
   const [selectedCategory, setSelectedCategory] = useState<PortfolioCategory | 'all'>('all')
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => {
+      window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
 
   // Filter projects by category
   const filteredProjects = selectedCategory === 'all'
     ? projects
     : projects.filter(project => project.frontmatter.category === selectedCategory)
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 py-16">
+    <div className="min-h-screen relative overflow-hidden py-16">
+      {/* Static gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+
+      {/* Animated Gradient Layers */}
+      <div className="absolute inset-0">
+        <motion.div
+          className="absolute inset-0 opacity-60"
+          animate={{
+            background: isMobile ? [
+              'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
+              'radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.5) 0%, transparent 40%)',
+              'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
+            ] : [
+              'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 40% 40%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+            ],
+          }}
+          transition={{
+            duration: isMobile ? 8 : 10,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{
+            transform: 'translateZ(0)',
+            willChange: 'background'
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">
@@ -298,7 +346,7 @@ export default function PortfolioContent({ projects }: PortfolioContentProps) {
           </div>
         )}
       </div>
-
+      </div>
     </div>
   )
 }
