@@ -12,6 +12,9 @@ export const metadata: Metadata = {
       'HEADON.pro bietet professionelle Webentwicklung in der Region Main-Tauber-Kreis. Persönlicher Service vor Ort.',
     type: 'website',
   },
+  alternates: {
+    canonical: 'https://headon.pro/regionen',
+  },
 }
 
 export default async function RegionenPage() {
