@@ -15,8 +15,16 @@ const redirects: Record<string, string> = {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  const hostname = request.headers.get('host') || ''
 
-  // Check if the pathname exists in our redirects map
+  // 1. WWW to non-WWW redirect (SEO best practice)
+  if (hostname.startsWith('www.')) {
+    const newUrl = new URL(request.url)
+    newUrl.hostname = hostname.replace('www.', '')
+    return NextResponse.redirect(newUrl, 301)
+  }
+
+  // 2. Check if the pathname exists in our redirects map
   if (redirects[pathname]) {
     const newUrl = new URL(redirects[pathname], request.url)
     return NextResponse.redirect(newUrl, 301)
