@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import { Toaster } from "sonner"
 import StructuredData from "@/components/seo/StructuredData"
+import { WebsiteSchema } from "@/components/seo/WebsiteSchema"
 import WebVitalsReporter from "@/components/web-vitals-reporter"
 
 const outfit = Outfit({ 
@@ -84,6 +85,7 @@ export default function RootLayout({
           data-website-id="4d2d852f-7617-4bd2-9e80-7dbacf1c5d24"
           strategy="afterInteractive"
         />
+        <WebsiteSchema />
         <StructuredData type="organization" />
         <StructuredData type="localBusiness" />
         <Header />

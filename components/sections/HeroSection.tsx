@@ -211,14 +211,14 @@ export default function HeroSection() {
       <div className="relative z-10 container mx-auto px-4 pt-48 pb-24 md:pt-64 lg:pt-72 md:pb-32 text-center">
         <h1 className="mb-16 md:mb-20 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading">
 
-          <span 
+          <span
             className="relative inline-block cursor-pointer select-none easter-egg-trigger"
             onClick={() => setShowEasterEgg(true)}
           >
-            Wir
-            <motion.span 
+            Full-Service Digitalagentur
+            <motion.span
               className="inline-block ml-0.5 text-accent-500"
-              animate={{ 
+              animate={{
                 rotate: [0, 10, -10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 scale: [1, 1.1, 1, 1.1, 1, 1, 0.9, 1, 1, 1, 0.9, 1, 1],
                 y: [0, -2, 0, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -232,7 +232,7 @@ export default function HeroSection() {
             >
               *
             </motion.span>
-            
+
             {/* Easter Egg Popup - Positioned directly above the word */}
             <AnimatePresence>
               {showEasterEgg && (
@@ -251,17 +251,17 @@ export default function HeroSection() {
                       <User className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-accent-500 stroke-[2]" />
                     </div>
                     {/* Small arrow pointing down */}
-                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45" 
+                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
                          style={{ borderBottom: '1px solid rgba(255,255,255,0.15)', borderRight: '1px solid rgba(255,255,255,0.15)' }} />
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
           </span>
-          {' '}entwickeln digitale Erlebnisse,
           <br />
+          für{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-300 via-accent-500 to-secondary-600">
-            die Ihr Unternehmen transformieren.
+            Webentwicklung, Apps & kreatives Design
           </span>
         </h1>
 
@@ -270,7 +270,7 @@ export default function HeroSection() {
           className="mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto opacity-90"
         >
           <p className="text-white/90 text-base md:text-lg lg:text-xl leading-relaxed text-center">
-            Während andere Agenturen noch traditionell entwickeln, nutzen wir KI-gestützte Prozesse für 4x schnellere Umsetzung. Ihre digitale Transformation in Wochen statt Monaten - zu einem Bruchteil der üblichen Kosten.
+            Als Kreativ- und Marketingagentur vereinen wir Webentwicklung, App-Development, UI/UX Design und Corporate Branding unter einem Dach. Während andere Agenturen noch traditionell entwickeln, nutzen wir KI-gestützte Prozesse für 4x schnellere Umsetzung. Ihre digitale Transformation in Wochen statt Monaten - zu einem Bruchteil der üblichen Kosten.
           </p>
         </div>
 
