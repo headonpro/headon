@@ -5,7 +5,7 @@ import { getAllPortfolioProjects } from '@/lib/content/content-api'
 export const metadata: Metadata = {
   title: 'Portfolio - Erfolgreiche Projekte & Case Studies | HEADON',
   description:
-    'Entdecken Sie unser Portfolio: SV Viktoria Wertheim Website-Relaunch, KLARTEXT KI-Sprachassistent App, SaaS Dashboards und Healthcare Plattformen. Erfolgreiche digitale Projekte von HEADON.',
+    'Unser Portfolio: SV Viktoria Website-Relaunch, KLARTEXT KI-App, SaaS Dashboards & Healthcare Plattformen. Erfolgreiche digitale Projekte von HEADON.',
   keywords:
     'Portfolio Digitalagentur, Website Relaunch, Mobile App Entwicklung, KI Sprachassistent, SaaS Dashboard, Healthcare Platform, Web Development Projekte, Lauda-Königshofen',
   openGraph: {
@@ -16,12 +16,21 @@ export const metadata: Metadata = {
     siteName: 'HEADON.pro',
     locale: 'de_DE',
     type: 'website',
+    images: [
+      {
+        url: '/og-images/services.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'HEADON.pro - Portfolio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Portfolio - HEADON Digitalprojekte',
     description:
       'Erfolgreiche Web- und Mobile-Projekte: SV Viktoria, KLARTEXT App, SaaS Dashboards',
+    images: ['/og-images/services.jpg'],
   },
   alternates: {
     canonical: 'https://headon.pro/portfolio',

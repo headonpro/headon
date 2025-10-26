@@ -59,6 +59,7 @@ export async function generateMetadata({ params }: GlossaryTermPageProps): Promi
     title,
     description,
     slug: `glossar/${termId}`,
+    image: '/og-images/services.jpg',
   })
 }
 

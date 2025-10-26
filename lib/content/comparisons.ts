@@ -129,6 +129,7 @@ export const comparisonArticles: ComparisonArticle[] = [
       'frontend framework auswahl',
       'vue.js vs react performance',
     ],
+    ogImage: '/og-images/web-dev.jpg',
   },
 
   // ============================================================================
@@ -279,6 +280,7 @@ export const comparisonArticles: ComparisonArticle[] = [
       'ios android entwicklung',
       'cross platform app entwicklung',
     ],
+    ogImage: '/og-images/mobile-dev.jpg',
   },
 
   // ============================================================================
@@ -424,6 +426,7 @@ export const comparisonArticles: ComparisonArticle[] = [
       'web anwendung entwicklung',
       'progressive web app',
     ],
+    ogImage: '/og-images/web-dev.jpg',
   },
 
   // ============================================================================
@@ -544,6 +547,7 @@ export const comparisonArticles: ComparisonArticle[] = [
       'next.js oder create react app',
       'react framework vergleich',
     ],
+    ogImage: '/og-images/web-dev.jpg',
   },
 
   // ============================================================================
@@ -696,5 +700,6 @@ export const comparisonArticles: ComparisonArticle[] = [
       'website programmieren kosten',
       'wordpress alternativen 2025',
     ],
+    ogImage: '/og-images/web-dev.jpg',
   },
 ]

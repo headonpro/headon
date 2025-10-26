@@ -27,6 +27,7 @@ const lato = Lato({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://headon.pro'),
   title: 'Webentwicklung & Mobile Apps 4x schneller | KI-gestützte Digitalagentur',
   description:
     'KI-gestützte Webentwicklung aus Lauda-Königshofen: 4x schneller, 2x bessere Performance. Von der Idee zum Launch in 2-4 Wochen statt Monaten. Festpreise ab 2.500€. Kostenlose Erstberatung.',

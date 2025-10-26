@@ -5,7 +5,7 @@ import { PersonSchema } from '@/components/seo/SchemaGenerator'
 export const metadata: Metadata = {
   title: 'Über uns - HEADON Digitalagentur aus Lauda-Königshofen',
   description:
-    'Lernen Sie HEADON kennen: Moderne Kreativagentur für innovative digitale Lösungen. 10+ Jahre Erfahrung, KI-gestützte Entwicklung, 100% Kundenzufriedenheit. Mission, Werte und unser agiler Entwicklungsprozess.',
+    'Lernen Sie HEADON kennen: Moderne Kreativagentur für innovative digitale Lösungen. 10+ Jahre Erfahrung, KI-gestützte Entwicklung, 100% Kundenzufriedenheit.',
   keywords:
     'Über HEADON, Digitalagentur Lauda-Königshofen, Kreativagentur Team, Mission Vision Werte, agile Entwicklung, KI-gestützte Lösungen, Kundenzufriedenheit, Innovation Qualität',
   openGraph: {
@@ -16,11 +16,20 @@ export const metadata: Metadata = {
     siteName: 'HEADON.pro',
     locale: 'de_DE',
     type: 'website',
+    images: [
+      {
+        url: '/og-images/about.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'HEADON.pro - Über uns',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Über HEADON - Digitalagentur',
     description: '10+ Jahre Erfahrung, KI-gestützte Entwicklung, 100% Kundenzufriedenheit',
+    images: ['/og-images/about.jpg'],
   },
   alternates: {
     canonical: 'https://headon.pro/about',

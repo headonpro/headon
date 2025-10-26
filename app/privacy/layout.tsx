@@ -1,26 +1,37 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Datenschutzerklärung | HEADON.pro',
+  title: 'Datenschutz - Datenschutzerklärung | HEADON.pro',
   description:
-    'Datenschutzerklärung der HEADON Kreativagentur: Transparente Informationen über die Verarbeitung personenbezogener Daten, DSGVO-konforme Datenverarbeitung, Cookie-freie Webanalyse und Ihre Rechte.',
-  keywords:
-    'Datenschutz, DSGVO, Datenschutzerklärung, HEADON, Cookie-frei, Umami Analytics, Persönliche Daten',
-  alternates: {
-    canonical: 'https://headon.pro/privacy',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+    'Datenschutzerklärung von HEADON: Transparente Informationen über Datenerhebung, -verarbeitung und -nutzung gemäß DSGVO. Ihre Privatsphäre ist uns wichtig.',
   openGraph: {
     title: 'Datenschutzerklärung | HEADON.pro',
-    description:
-      'Datenschutz und Transparenz: Informationen über unsere DSGVO-konforme Datenverarbeitung',
+    description: 'Informationen zur Datenverarbeitung gemäß DSGVO',
     url: 'https://headon.pro/privacy',
     siteName: 'HEADON.pro',
     locale: 'de_DE',
     type: 'website',
+    images: [
+      {
+        url: '/og-images/services.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'HEADON.pro - Datenschutz',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Datenschutzerklärung | HEADON.pro',
+    description: 'Informationen zur Datenverarbeitung gemäß DSGVO',
+    images: ['/og-images/services.jpg'],
+  },
+  alternates: {
+    canonical: 'https://headon.pro/privacy',
+  },
+  robots: {
+    index: false,
+    follow: true,
   },
 }
 

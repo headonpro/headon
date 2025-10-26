@@ -4,9 +4,9 @@ import { getAllBlogPosts, getBlogCategories } from '@/lib/content/content-api'
 import type { BlogCategory } from '@/lib/types/content'
 
 export const metadata: Metadata = {
-  title: 'Blog - Insights zu Web Development, Design & Innovation | HEADON',
+  title: 'Blog - Web Development, Design & Innovation | HEADON',
   description:
-    'HEADON Blog: Aktuelle Insights, Trends und Best Practices zu Web Development, UI/UX Design, Mobile Apps und digitaler Innovation. Tipps von Experten für Digitalexperten.',
+    'HEADON Blog: Insights, Trends und Best Practices zu Web Development, UI/UX Design, Mobile Apps und digitaler Innovation. Expertenwissen für Digitalexperten.',
   keywords:
     'Web Development Blog, UI/UX Design Trends, Mobile App Development, Performance Optimization, Digital Innovation, HEADON Insights, Digitalagentur Blog',
   openGraph: {
@@ -17,11 +17,20 @@ export const metadata: Metadata = {
     siteName: 'HEADON.pro',
     locale: 'de_DE',
     type: 'website',
+    images: [
+      {
+        url: '/og-images/blog.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'HEADON.pro - Blog',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'HEADON Blog - Digital Insights',
     description: 'Trends und Best Practices zu Web Development, Design und Innovation',
+    images: ['/og-images/blog.jpg'],
   },
   alternates: {
     canonical: 'https://headon.pro/blog',

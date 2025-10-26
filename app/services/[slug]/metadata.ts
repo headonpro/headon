@@ -31,8 +31,14 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
   // Build absolute URL for canonical and OpenGraph
   const pageUrl = `${baseUrl}/services/${slug}`
 
-  // Build OpenGraph image URL (use default logo)
-  const ogImageUrl = `${baseUrl}/headon-logo.svg`
+  // Map slug to OG image
+  const ogImageMap: Record<string, string> = {
+    'web-development': '/og-images/web-dev.jpg',
+    'mobile-development': '/og-images/mobile-dev.jpg',
+    'ui-ux-design': '/og-images/design.jpg',
+    'backend-solutions': '/og-images/backend.jpg',
+  }
+  const ogImageUrl = ogImageMap[slug] || '/og-images/services.jpg'
 
   return {
     title: `${frontmatter.title} | HEADON.pro`,

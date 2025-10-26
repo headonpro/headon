@@ -14,7 +14,7 @@ import type { BlogPost, PortfolioProject, ServicePage, CityPage } from '@/lib/ty
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://headon.pro'
 const SITE_NAME = 'HEADON.pro'
-const DEFAULT_OG_IMAGE = `${BASE_URL}/headon-logo.svg`
+const DEFAULT_OG_IMAGE = `${BASE_URL}/og-images/services.jpg`
 const TWITTER_HANDLE = process.env.NEXT_PUBLIC_TWITTER_HANDLE // Optional
 
 // ============================================================================
@@ -260,6 +260,7 @@ export function generateCityMetadata(city: CityPage): Metadata {
     title,
     description: truncateDescription(description, 160),
     url: `/regionen/${slug}`,
+    image: '/og-images/services.jpg',
     type: 'website',
   })
 }

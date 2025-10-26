@@ -17,7 +17,7 @@ import { VergleicheHero } from '@/components/sections/VergleicheHero'
 // ============================================================================
 
 export const metadata: Metadata = {
-  title: 'Vergleiche: React vs Vue, Native vs Cross-Platform & mehr | HEADON.pro',
+  title: 'Technologie-Vergleiche für bessere Entscheidungen | HEADON',
   description:
     'Ausführliche Technologie-Vergleiche für fundierte Entscheidungen: React vs Vue, Native vs Cross-Platform, Website vs Web-App, WordPress vs Custom Development.',
   keywords: [

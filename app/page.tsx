@@ -43,12 +43,19 @@ export const metadata: Metadata = {
       'Kreativagentur für Web, Apps & Design. KI-beschleunigt, 4x schneller. Webentwicklung, App-Development, UI/UX Design. Main-Tauber-Kreis, Baden-Württemberg.',
     images: [
       {
-        url: 'https://headon.pro/headon-logo.svg',
+        url: '/og-images/home.jpg',
         width: 1200,
         height: 630,
         alt: 'HEADON.pro Digitalagentur',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Digitalagentur Lauda | Web & App Entwicklung',
+    description:
+      'Kreativagentur für Web, Apps & Design. KI-beschleunigt, 4x schneller. Webentwicklung, App-Development, UI/UX Design.',
+    images: ['/og-images/home.jpg'],
   },
 }
 
