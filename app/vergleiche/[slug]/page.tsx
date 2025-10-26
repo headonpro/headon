@@ -52,16 +52,22 @@ export async function generateMetadata({
   }
 
   const itemNames = article.items.map((item) => item.name).join(' vs ')
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://headon.pro'
+  const pageUrl = `${baseUrl}/vergleiche/${slug}`
 
   return {
     title: article.title,
     description: article.description,
     keywords: article.keywords.join(', '),
     authors: [{ name: article.author.name }],
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
       title: article.title,
       description: article.description,
       type: 'article',
+      url: pageUrl,
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt,
       authors: [article.author.name],
