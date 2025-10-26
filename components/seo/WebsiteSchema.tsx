@@ -16,14 +16,6 @@ export function WebsiteSchema() {
             '@type': 'Organization',
             '@id': 'https://headon.pro/#organization',
           },
-          potentialAction: {
-            '@type': 'SearchAction',
-            target: {
-              '@type': 'EntryPoint',
-              urlTemplate: 'https://headon.pro/search?q={search_term_string}',
-            },
-            'query-input': 'required name=search_term_string',
-          },
         }),
       }}
     />

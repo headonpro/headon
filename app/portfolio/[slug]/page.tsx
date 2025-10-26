@@ -17,7 +17,7 @@ import {
   Database,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { CreativeWorkSchema, ReviewSchema } from '@/components/seo/SchemaGenerator'
+import { CreativeWorkSchema, ReviewSchema, BreadcrumbSchema } from '@/components/seo/SchemaGenerator'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
 
 // Export metadata generator
@@ -129,6 +129,15 @@ export default async function PortfolioProjectPage({ params }: PortfolioProjectP
           }}
         />
       )}
+
+      {/* Breadcrumb Schema for SEO */}
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Portfolio', url: '/portfolio' },
+          { name: project.frontmatter.title, url: `/portfolio/${slug}` },
+        ]}
+      />
 
       {/* Main content with static gradient background */}
       <div className="from-primary-600 via-primary-500 to-secondary-500 min-h-screen bg-gradient-to-br">

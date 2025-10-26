@@ -1,13 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Mail, MapPin, Phone, Linkedin } from 'lucide-react'
-
-// Custom X (Twitter) Icon Component
-const XIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-)
+import { Mail, MapPin, Phone } from 'lucide-react'
 
 const navigation = {
   services: [
@@ -30,19 +23,6 @@ const navigation = {
   legal: [
     { name: 'Datenschutz', href: '/privacy' },
     { name: 'Impressum', href: '/imprint' },
-    { name: 'AGB', href: '/terms' },
-  ],
-  social: [
-    {
-      name: 'LinkedIn',
-      href: '#',
-      icon: Linkedin,
-    },
-    {
-      name: 'X.com',
-      href: '#',
-      icon: XIcon,
-    },
   ],
 }
 
@@ -91,18 +71,6 @@ export default function Footer() {
                   +49 176 630 402 41
                 </a>
               </div>
-            </div>
-            <div className="flex space-x-4">
-              {navigation.social.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-5 w-5" aria-hidden="true" />
-                </a>
-              ))}
             </div>
           </div>
 

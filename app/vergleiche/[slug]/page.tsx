@@ -16,7 +16,7 @@ import Link from 'next/link'
 import { ArrowRight, Check, X, Calendar, User } from 'lucide-react'
 import { comparisonArticles } from '@/lib/content/comparisons'
 import ComparisonTable from '@/components/content/ComparisonTable'
-import SchemaGenerator from '@/components/seo/SchemaGenerator'
+import SchemaGenerator, { BreadcrumbSchema } from '@/components/seo/SchemaGenerator'
 import { buildArticleSchema } from '@/lib/seo/schema-builder'
 
 // ============================================================================
@@ -128,6 +128,15 @@ export default async function ComparisonArticlePage({
     <>
       {/* Article Schema */}
       <SchemaGenerator schema={articleSchema} />
+
+      {/* Breadcrumb Schema for SEO */}
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Vergleiche', url: '/vergleiche' },
+          { name: itemNames, url: `/vergleiche/${slug}` },
+        ]}
+      />
 
       <main className="min-h-screen bg-white">
         {/* Hero Section */}

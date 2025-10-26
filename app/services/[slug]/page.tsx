@@ -10,6 +10,7 @@ import Image from 'next/image'
 import { FAQAccordion } from '@/components/seo/FAQAccordion'
 import { faqData } from '@/lib/content/faq-data'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
+import { BreadcrumbSchema } from '@/components/seo/SchemaGenerator'
 import type { FAQ } from '@/lib/types/content'
 
 // Export metadata generator
@@ -74,6 +75,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <main className="min-h-screen">
+      {/* Breadcrumb Schema for SEO */}
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Services', url: '/services' },
+          { name: service.frontmatter.title, url: `/services/${slug}` },
+        ]}
+      />
+
       {/* Hero Section with Animated Gradient Background */}
       <section className="bg-primary-600 relative flex min-h-screen items-center justify-center overflow-hidden">
         {/* Static gradient for base */}

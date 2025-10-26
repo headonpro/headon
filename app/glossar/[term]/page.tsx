@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, Tag, Link2, CheckCircle2 } from 'lucide-react'
 import { glossaryTerms, getTermById } from '@/lib/content/glossary'
 import { generatePageMetadata } from '@/lib/seo/meta-builder'
+import { BreadcrumbSchema } from '@/components/seo/SchemaGenerator'
 
 /**
  * Dynamic Glossary Term Page
@@ -86,6 +87,15 @@ export default async function GlossaryTermPage({ params }: GlossaryTermPageProps
 
   return (
     <main className="min-h-screen bg-white">
+      {/* Breadcrumb Schema for SEO */}
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Glossar', url: '/glossar' },
+          { name: term.term, url: `/glossar/${termId}` },
+        ]}
+      />
+
       {/* Header Navigation */}
       <section className="bg-primary-600/10 py-4">
         <div className="container">
