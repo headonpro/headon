@@ -5,7 +5,7 @@ export async function GET() {
     {
       status: 'ok',
       timestamp: new Date().toISOString(),
-      service: 'headon-pro'
+      service: 'headon-pro',
     },
     { status: 200 }
   )

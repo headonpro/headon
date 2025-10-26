@@ -17,8 +17,12 @@ interface LeadData {
 }
 
 export function createContactEmailTemplate(leadData: LeadData): string {
-  const priorityLevel = leadData.lead_score > 30 ? '🔥 HIGH PRIORITY' :
-                       leadData.lead_score > 15 ? '⚡ MEDIUM' : '📝 STANDARD'
+  const priorityLevel =
+    leadData.lead_score > 30
+      ? '🔥 HIGH PRIORITY'
+      : leadData.lead_score > 15
+        ? '⚡ MEDIUM'
+        : '📝 STANDARD'
 
   return `
     <!DOCTYPE html>
@@ -98,12 +102,16 @@ export function createContactEmailTemplate(leadData: LeadData): string {
           <div style="margin-top: 10px; white-space: pre-wrap;">${leadData.message}</div>
         </div>
 
-        ${leadData.files ? `
+        ${
+          leadData.files
+            ? `
         <div class="info-item">
           <div class="label">📎 Dateien (${leadData.files.count})</div>
           <div class="value">${leadData.files.names.join(', ')}</div>
         </div>
-        ` : ''}
+        `
+            : ''
+        }
 
         <div style="margin-top: 30px; text-align: center;">
           <a href="mailto:${leadData.email}?subject=Re: Ihre Anfrage bei HEADON.pro"

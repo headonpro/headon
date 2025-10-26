@@ -1,9 +1,5 @@
 import { notFound } from 'next/navigation'
-import {
-  getCityPage,
-  getServicePage,
-  getPortfolioProject,
-} from '@/lib/content/content-api'
+import { getCityPage, getServicePage, getPortfolioProject } from '@/lib/content/content-api'
 import { compileMDXContent } from '@/lib/content/mdx-compiler'
 import { generateMetadata } from './metadata'
 import CityPageContent from '@/components/sections/CityPageContent'
@@ -72,7 +68,7 @@ export default async function CityPage({ params }: CityPageProps) {
           { name: 'Home', url: '/' },
           { name: 'Service-Regionen', url: '/regionen' },
           { name: cityPage.frontmatter.name, url: `/regionen/${city}` },
-        ]
+        ],
       }}
     />
   )

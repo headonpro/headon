@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/next-to-astro-migration/requirements.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-10-11T19:43:00.356Z",
+      "trigger": "initial",
+      "approvalId": "approval_1760211780349_mcnbrr5ta",
+      "approvalTitle": "Requirements: Next.js to Astro Migration"
+    }
+  ]
+}

@@ -26,11 +26,11 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
   }, [error])
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden">
       {/* Gradient Background (matching not-found.tsx and HeroSection) */}
       <div className="absolute inset-0 -z-10">
         {/* Static gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+        <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
         {/* Animated gradient overlay */}
         <motion.div
@@ -54,24 +54,21 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         />
       </div>
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="relative z-10 container mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-2xl mx-auto"
+          className="mx-auto max-w-2xl"
         >
           {/* Error Icon */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex justify-center mb-8"
+            className="mb-8 flex justify-center"
           >
-            <AlertTriangle
-              className="w-32 h-32 text-white/90"
-              strokeWidth={1.5}
-            />
+            <AlertTriangle className="h-32 w-32 text-white/90" strokeWidth={1.5} />
           </motion.div>
 
           {/* Heading */}
@@ -79,7 +76,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-4 text-center"
+            className="mb-4 text-center text-4xl font-bold text-white md:text-6xl"
           >
             Etwas ist schiefgelaufen
           </motion.h1>
@@ -89,10 +86,10 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-xl md:text-2xl text-white/90 mb-8 text-center"
+            className="mb-8 text-center text-xl text-white/90 md:text-2xl"
           >
-            Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es
-            erneut oder kontaktieren Sie unseren Support.
+            Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren
+            Sie unseren Support.
           </motion.p>
 
           {/* Technical details (only in development) */}
@@ -106,13 +103,11 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
               <Accordion
                 type="single"
                 collapsible
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg overflow-hidden"
+                className="overflow-hidden rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm"
               >
                 <AccordionItem value="error-details" className="border-none">
                   <AccordionTrigger className="px-6 text-white hover:bg-white/5">
-                    <span className="font-semibold">
-                      Technische Details (Entwicklungsmodus)
-                    </span>
+                    <span className="font-semibold">Technische Details (Entwicklungsmodus)</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 text-white/80">
                     <div className="space-y-2">
@@ -126,8 +121,8 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
                       )}
                       {error.stack && (
                         <div className="mt-4">
-                          <strong className="block mb-2">Stack Trace:</strong>
-                          <pre className="font-mono text-xs bg-black/20 p-4 rounded overflow-x-auto whitespace-pre-wrap">
+                          <strong className="mb-2 block">Stack Trace:</strong>
+                          <pre className="overflow-x-auto rounded bg-black/20 p-4 font-mono text-xs whitespace-pre-wrap">
                             {error.stack}
                           </pre>
                         </div>
@@ -144,15 +139,15 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             {/* Try Again button */}
             <Button
               onClick={reset}
               size="lg"
-              className="bg-white text-primary-600 hover:bg-white/90 group min-w-[200px]"
+              className="text-primary-600 group min-w-[200px] bg-white hover:bg-white/90"
             >
-              <RefreshCw className="w-5 h-5 mr-2 group-hover:rotate-180 transition-transform duration-500" />
+              <RefreshCw className="mr-2 h-5 w-5 transition-transform duration-500 group-hover:rotate-180" />
               Erneut versuchen
             </Button>
 
@@ -161,10 +156,10 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
               asChild
               size="lg"
               variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 min-w-[200px]"
+              className="min-w-[200px] border-white/30 text-white hover:bg-white/10"
             >
               <Link href="/contact">
-                <Mail className="w-5 h-5 mr-2" />
+                <Mail className="mr-2 h-5 w-5" />
                 Support kontaktieren
               </Link>
             </Button>
@@ -177,11 +172,11 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
             transition={{ duration: 0.5, delay: 0.7 }}
             className="mt-8 text-center"
           >
-            <p className="text-white/70 text-sm">
+            <p className="text-sm text-white/70">
               Oder senden Sie uns direkt eine E-Mail:{' '}
               <a
                 href="mailto:hallo@headon.pro"
-                className="text-white underline hover:text-white/90 transition-colors"
+                className="text-white underline transition-colors hover:text-white/90"
               >
                 hallo@headon.pro
               </a>

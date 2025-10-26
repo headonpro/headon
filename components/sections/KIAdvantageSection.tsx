@@ -20,8 +20,8 @@ const advantages = [
       'KI-beschleunigtes Konzept & Design',
       'Automatisierte Code-Generierung',
       'Parallele Entwicklungsprozesse',
-      'One-Click Deployment'
-    ]
+      'One-Click Deployment',
+    ],
   },
   {
     icon: Zap,
@@ -36,8 +36,8 @@ const advantages = [
       'Express-Umsetzung für eilige Projekte',
       'Komplette Webseiten & Apps',
       'Höchste Priorität & Fokus',
-      '24/7 Entwicklung möglich'
-    ]
+      '24/7 Entwicklung möglich',
+    ],
   },
   {
     icon: Trophy,
@@ -52,24 +52,28 @@ const advantages = [
       'Blitzschnelle Ladezeiten (< 2s)',
       'Mobile-First Architektur',
       'SEO-optimiert von Anfang an',
-      '99.9% Uptime garantiert'
-    ]
-  }
+      '99.9% Uptime garantiert',
+    ],
+  },
 ]
 
 export default function KIAdvantageSection() {
   return (
-    <section className="pt-40 pb-52 relative overflow-hidden -mt-1">
+    <section className="relative -mt-1 overflow-hidden pt-40 pb-52">
       {/* Wave transition from previous section */}
-      <div className="absolute top-0 left-0 right-0 z-10">
-        <svg className="w-full h-16 md:h-24 fill-white" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <div className="absolute top-0 right-0 left-0 z-10">
+        <svg
+          className="h-16 w-full fill-white md:h-24"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+        >
           <path d="M0,40 C480,100 960,0 1440,60 L1440,0 L0,0 Z" />
         </svg>
       </div>
-      
+
       {/* Static gradient background similar to HeroSection */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
-      
+      <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
+
       <div className="relative z-10 container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -77,27 +81,29 @@ export default function KIAdvantageSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-12 md:mb-16 font-heading flex items-center justify-center gap-4 flex-wrap">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">Warum</span>
-            <Image 
-              src="/headon-logo.svg" 
-              alt="HEADON.pro Logo - Digitalagentur Lauda-Königshofen" 
-              width={200} 
+          <h2 className="font-heading mb-12 flex flex-wrap items-center justify-center gap-4 text-5xl font-bold text-white md:mb-16 md:text-6xl">
+            <span className="from-accent to-secondary bg-gradient-to-r bg-clip-text text-transparent">
+              Warum
+            </span>
+            <Image
+              src="/headon-logo.svg"
+              alt="HEADON.pro Logo - Digitalagentur Lauda-Königshofen"
+              width={200}
               height={45}
               className="inline-block"
             />
             <span>anders ist</span>
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-12 md:mb-20">
-            KI-gestützte Entwicklung revolutioniert, wie wir Projekte umsetzen. 
-            Schneller, günstiger und besser - das ist kein Versprechen, sondern messbare Realität.
+          <p className="mx-auto mb-12 max-w-3xl text-xl text-white/90 md:mb-20">
+            KI-gestützte Entwicklung revolutioniert, wie wir Projekte umsetzen. Schneller, günstiger
+            und besser - das ist kein Versprechen, sondern messbare Realität.
           </p>
         </motion.div>
 
         {/* Advantages Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16 mt-16 md:mt-24">
+        <div className="mt-16 mb-16 grid gap-8 md:mt-24 lg:grid-cols-3">
           {advantages.map((advantage, index) => (
             <motion.div
               key={index}
@@ -106,52 +112,52 @@ export default function KIAdvantageSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               whileHover={{ scale: 1.02 }}
-              className="relative group"
+              className="group relative"
             >
-              <div className={`${index === 1 ? 'bg-gradient-to-br from-accent-500/20 to-secondary-500/20 border-accent-500/30 shadow-2xl shadow-accent-500/20 lg:-mt-8 lg:mb-8 lg:py-10' : 'bg-white/10 border-white/20'} backdrop-blur-sm rounded-2xl p-8 border hover:bg-white/15 transition-all duration-300 h-full relative overflow-hidden`}>
+              <div
+                className={`${index === 1 ? 'from-accent-500/20 to-secondary-500/20 border-accent-500/30 shadow-accent-500/20 bg-gradient-to-br shadow-2xl lg:-mt-8 lg:mb-8 lg:py-10' : 'border-white/20 bg-white/10'} relative h-full overflow-hidden rounded-2xl border p-8 backdrop-blur-sm transition-all duration-300 hover:bg-white/15`}
+              >
                 {/* Background Gradient on Hover */}
                 <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${advantage.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+                  className={`absolute inset-0 bg-gradient-to-br ${advantage.gradient} opacity-0 transition-opacity duration-300 group-hover:opacity-5`}
                 />
-                
+
                 {/* Icon */}
-                <div className="flex justify-center mb-6">
-                  <div className={`inline-flex p-4 rounded-xl ${advantage.bgColor}`}>
-                    <advantage.icon className={`w-8 h-8 ${advantage.color}`} strokeWidth={1.5} />
+                <div className="mb-6 flex justify-center">
+                  <div className={`inline-flex rounded-xl p-4 ${advantage.bgColor}`}>
+                    <advantage.icon className={`h-8 w-8 ${advantage.color}`} strokeWidth={1.5} />
                   </div>
                 </div>
-                
+
                 {/* Title & Subtitle */}
-                <h3 className="text-2xl font-bold text-white mb-2 text-center">
+                <h3 className="mb-2 text-center text-2xl font-bold text-white">
                   {advantage.title}
                 </h3>
-                <p className="text-white/80 mb-6 text-center">
-                  {advantage.subtitle}
-                </p>
-                
+                <p className="mb-6 text-center text-white/80">{advantage.subtitle}</p>
+
                 {/* Main Metric */}
-                <div className="mb-6 p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10">
-                  <div className="text-3xl font-bold text-accent text-center">
+                <div className="mb-6 rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                  <div className="text-accent text-center text-3xl font-bold">
                     {advantage.mainMetric}
                   </div>
-                  <div className="text-sm text-white/70 mt-1 text-center">
+                  <div className="mt-1 text-center text-sm text-white/70">
                     {advantage.comparison}
                   </div>
                 </div>
-                
+
                 {/* Features List */}
                 <ul className="space-y-3">
                   {advantage.features.map((feature, idx) => (
-                    <motion.li 
-                      key={idx} 
+                    <motion.li
+                      key={idx}
                       className="flex items-start gap-3"
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: index * 0.1 + idx * 0.05 }}
                     >
-                      <CheckCircle2 className="w-5 h-5 text-accent-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-white/90 text-sm leading-relaxed">{feature}</span>
+                      <CheckCircle2 className="text-accent-500 mt-0.5 h-5 w-5 flex-shrink-0" />
+                      <span className="text-sm leading-relaxed text-white/90">{feature}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -168,24 +174,24 @@ export default function KIAdvantageSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
-          <div className="max-w-2xl mx-auto">
-            <p className="text-lg text-white/90 mb-8">
-              Während traditionelle Agenturen noch Konzepte erstellen, 
-              haben wir Ihr Projekt bereits fertiggestellt.
+          <div className="mx-auto max-w-2xl">
+            <p className="mb-8 text-lg text-white/90">
+              Während traditionelle Agenturen noch Konzepte erstellen, haben wir Ihr Projekt bereits
+              fertiggestellt.
             </p>
-            
+
             <div className="flex justify-center">
               <Link href="/contact">
-                <Button 
+                <Button
                   size="lg"
-                  className="bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 group"
+                  className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary group bg-gradient-to-r px-8 py-6 text-lg font-semibold shadow-xl transition-all duration-300 hover:shadow-2xl"
                 >
                   Kostenloses Erstgespräch
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
             </div>
-            
+
             {/* Trust Badge */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -194,18 +200,18 @@ export default function KIAdvantageSection() {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="mt-8"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-                <CheckCircle2 className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-medium text-green-800">
+                <CheckCircle2 className="h-4 w-4" />
                 100% Zufrieden oder Geld zurück
               </div>
             </motion.div>
           </div>
         </motion.div>
       </div>
-      
+
       {/* Wave transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <svg className="w-full h-16 md:h-24" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <div className="absolute right-0 bottom-0 left-0 z-10">
+        <svg className="h-16 w-full md:h-24" viewBox="0 0 1440 120" preserveAspectRatio="none">
           <path d="M0,40 C480,100 960,0 1440,60 L1440,120 L0,120 Z" fill="rgb(249, 250, 251)" />
         </svg>
       </div>

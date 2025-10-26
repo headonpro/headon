@@ -64,8 +64,7 @@ export const blogPostFrontmatterSchema = z.object({
     .min(1, 'Mindestens ein Tag ist erforderlich')
     .max(10, 'Maximal 10 Tags erlaubt'),
   category: z.enum(['development', 'design', 'performance', 'mobile'], {
-    message:
-      'Kategorie muss eine der folgenden sein: development, design, performance, mobile',
+    message: 'Kategorie muss eine der folgenden sein: development, design, performance, mobile',
   }),
   image: imageMetadataSchema,
   readingTime: z
@@ -103,10 +102,7 @@ const projectMetricSchema = z.object({
     .string()
     .min(1, 'Metrik-Wert ist erforderlich')
     .max(20, 'Metrik-Wert darf maximal 20 Zeichen haben'),
-  improvement: z
-    .string()
-    .max(20, 'Verbesserung darf maximal 20 Zeichen haben')
-    .optional(),
+  improvement: z.string().max(20, 'Verbesserung darf maximal 20 Zeichen haben').optional(),
 })
 
 const testimonialSchema = z.object({
@@ -141,8 +137,7 @@ export const portfolioProjectFrontmatterSchema = z.object({
   client: clientInfoSchema,
   date: iso8601DateSchema,
   category: z.enum(['web', 'mobile', 'ui-ux', 'full-stack'], {
-    message:
-      'Kategorie muss eine der folgenden sein: web, mobile, ui-ux, full-stack',
+    message: 'Kategorie muss eine der folgenden sein: web, mobile, ui-ux, full-stack',
   }),
   tags: z
     .array(z.string().min(1, 'Tag darf nicht leer sein'))
@@ -158,9 +153,7 @@ export const portfolioProjectFrontmatterSchema = z.object({
   githubUrl: z.string().url('GitHub-URL muss eine gültige URL sein').optional(),
 })
 
-export type PortfolioProjectFrontmatterData = z.infer<
-  typeof portfolioProjectFrontmatterSchema
->
+export type PortfolioProjectFrontmatterData = z.infer<typeof portfolioProjectFrontmatterSchema>
 
 // ============================================================================
 // ServicePage Frontmatter Schema
@@ -215,10 +208,7 @@ export const servicePageFrontmatterSchema = z.object({
     .string()
     .min(1, 'Icon-Name ist erforderlich')
     .max(50, 'Icon-Name darf maximal 50 Zeichen haben')
-    .regex(
-      /^[A-Z][a-zA-Z0-9]*$/,
-      'Icon-Name muss ein gültiger Lucide-Icon-Name sein (PascalCase)'
-    ),
+    .regex(/^[A-Z][a-zA-Z0-9]*$/, 'Icon-Name muss ein gültiger Lucide-Icon-Name sein (PascalCase)'),
   pricing: pricingSchema,
   deliverables: z
     .array(
@@ -248,9 +238,7 @@ export const servicePageFrontmatterSchema = z.object({
     .max(5, 'Maximal 5 verwandte Case-Studies erlaubt'),
 })
 
-export type ServicePageFrontmatterData = z.infer<
-  typeof servicePageFrontmatterSchema
->
+export type ServicePageFrontmatterData = z.infer<typeof servicePageFrontmatterSchema>
 
 // ============================================================================
 // CityPage Frontmatter Schema

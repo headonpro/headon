@@ -16,7 +16,7 @@ export default function Logo({ className, width = 120, height = 32 }: LogoProps)
       alt="HEADON.pro Logo"
       width={width}
       height={height}
-      className={cn("h-full w-auto", className)}
+      className={cn('h-full w-auto', className)}
       priority
     />
   )

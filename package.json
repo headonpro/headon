@@ -11,7 +11,7 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
@@ -59,6 +59,7 @@
     "@types/node": "^24.3.1",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
+    "@types/sharp": "^0.32.0",
     "canvas": "^3.2.0",
     "eslint": "^9.35.0",
     "eslint-config-next": "^15.5.2",
@@ -67,8 +68,10 @@
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "shadcn": "^3.2.1",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.1.13",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.2"
   }
 }

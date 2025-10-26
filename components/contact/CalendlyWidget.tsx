@@ -30,7 +30,7 @@ export default function CalendlyWidget() {
           url: process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/cirakoglu-onur/30min',
           parentElement: document.getElementById('calendly-embed'),
           prefill: {},
-          utm: {}
+          utm: {},
         })
       }
     }
@@ -47,21 +47,24 @@ export default function CalendlyWidget() {
       transition={{ duration: 0.4 }}
       className="relative"
     >
-      <div 
-        id="calendly-embed" 
-        style={{ 
-          minWidth: '320px', 
+      <div
+        id="calendly-embed"
+        style={{
+          minWidth: '320px',
           height: '630px',
           borderRadius: '8px',
-          overflow: 'hidden'
+          overflow: 'hidden',
         }}
         className="shadow-lg"
       />
-      
+
       {/* Fallback for loading state */}
-      <div className="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-lg pointer-events-none opacity-0 transition-opacity duration-300" id="calendly-loading">
+      <div
+        className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-lg bg-gray-50 opacity-0 transition-opacity duration-300"
+        id="calendly-loading"
+      >
         <div className="text-center">
-          <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="border-primary-600 mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-4 border-t-transparent" />
           <p className="text-gray-600">Lade Kalender...</p>
         </div>
       </div>

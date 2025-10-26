@@ -76,14 +76,14 @@ export function TableOfContents({ items }: TableOfContentsProps) {
 
   return (
     <nav
-      className="hidden lg:block sticky top-24 right-0 w-64 h-fit max-h-[calc(100vh-6rem)] overflow-y-auto"
+      className="sticky top-24 right-0 hidden h-fit max-h-[calc(100vh-6rem)] w-64 overflow-y-auto lg:block"
       aria-label="Table of contents"
     >
       <div className="space-y-2">
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">
+        <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
           On This Page
         </h3>
-        <ul className="space-y-2 text-sm border-l-2 border-gray-200 dark:border-gray-700">
+        <ul className="space-y-2 border-l-2 border-gray-200 text-sm dark:border-gray-700">
           {items.map((item) => (
             <li
               key={item.id}
@@ -95,11 +95,11 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                 href={`#${item.id}`}
                 onClick={(e) => handleClick(e, item.id)}
                 className={cn(
-                  'block py-1 px-3 -ml-px border-l-2 transition-colors',
+                  '-ml-px block border-l-2 px-3 py-1 transition-colors',
                   'hover:text-primary hover:border-primary',
                   activeId === item.id
                     ? 'text-primary border-primary font-medium'
-                    : 'text-gray-600 dark:text-gray-400 border-transparent'
+                    : 'border-transparent text-gray-600 dark:text-gray-400'
                 )}
               >
                 {item.title}

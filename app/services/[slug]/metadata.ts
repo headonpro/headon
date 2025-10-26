@@ -12,9 +12,7 @@ interface GenerateMetadataProps {
 /**
  * Generate dynamic metadata for service pages
  */
-export async function generateMetadata({
-  params,
-}: GenerateMetadataProps): Promise<Metadata> {
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
   const { slug } = await params
 
   // Load service page
@@ -24,8 +22,7 @@ export async function generateMetadata({
   if (!service) {
     return {
       title: 'Service nicht gefunden | HEADON.pro',
-      description:
-        'Die gesuchte Service-Seite konnte nicht gefunden werden.',
+      description: 'Die gesuchte Service-Seite konnte nicht gefunden werden.',
     }
   }
 

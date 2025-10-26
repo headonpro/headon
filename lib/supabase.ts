@@ -10,10 +10,7 @@ export function createClient() {
     // Return a dummy client for build time
     // This prevents build errors when env vars are not available
     console.warn('Supabase environment variables not found. Using placeholder values for build.')
-    return createBrowserClient(
-      'https://placeholder.supabase.co',
-      'placeholder-key'
-    )
+    return createBrowserClient('https://placeholder.supabase.co', 'placeholder-key')
   }
 
   return createBrowserClient(supabaseUrl, supabaseAnonKey)

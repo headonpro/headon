@@ -13,9 +13,7 @@ interface GenerateMetadataProps {
  * Generate dynamic metadata for city landing pages
  * Optimized for local SEO with city name and keywords
  */
-export async function generateMetadata({
-  params,
-}: GenerateMetadataProps): Promise<Metadata> {
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
   const { city } = await params
 
   // Load city page

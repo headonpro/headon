@@ -6,38 +6,41 @@ import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 
 const preparationChecklist = [
-  "Ihre aktuellen Herausforderungen",
-  "Gewünschte Funktionen und Ziele",
-  "Ungefährer Zeitrahmen",
-  "Budget-Vorstellungen (optional)"
+  'Ihre aktuellen Herausforderungen',
+  'Gewünschte Funktionen und Ziele',
+  'Ungefährer Zeitrahmen',
+  'Budget-Vorstellungen (optional)',
 ]
 
 export default function FinalCTASection() {
   const [isCalendarLoaded, setIsCalendarLoaded] = useState(false)
 
   return (
-    <section className="py-24 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 relative overflow-hidden -mt-1">
+    <section className="from-primary-600 via-primary-500 to-secondary-500 relative -mt-1 overflow-hidden bg-gradient-to-br py-24">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 20% 50%, white 1px, transparent 1px),
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 20% 50%, white 1px, transparent 1px),
                            radial-gradient(circle at 80% 50%, white 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }} />
+            backgroundSize: '50px 50px',
+          }}
+        />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="relative z-10 container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
+          className="mx-auto max-w-4xl"
         >
           {/* Header */}
-          <div className="text-center mb-12">
-            <motion.h2 
-              className="text-4xl md:text-5xl font-bold text-white mb-4 font-heading"
+          <div className="mb-12 text-center">
+            <motion.h2
+              className="font-heading mb-4 text-4xl font-bold text-white md:text-5xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -45,14 +48,14 @@ export default function FinalCTASection() {
             >
               Bereit? Lass uns 15 Minuten sprechen.
             </motion.h2>
-            <motion.p 
-              className="text-xl text-white/90 max-w-2xl mx-auto"
+            <motion.p
+              className="mx-auto max-w-2xl text-xl text-white/90"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Wählen Sie einen passenden Termin und lassen Sie uns über Ihr Projekt sprechen. 
+              Wählen Sie einen passenden Termin und lassen Sie uns über Ihr Projekt sprechen.
               Kostenlos, unverbindlich und ohne Verpflichtungen.
             </motion.p>
           </div>
@@ -63,36 +66,34 @@ export default function FinalCTASection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12"
+            className="mb-12 rounded-3xl bg-white p-8 shadow-2xl md:p-12"
           >
             {/* Calendar Header */}
-            <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-200">
+            <div className="mb-8 flex items-center justify-between border-b border-gray-200 pb-6">
               <div className="flex items-center gap-3">
-                <Calendar className="w-6 h-6 text-primary-600" />
-                <h3 className="text-2xl font-bold text-gray-900">
-                  Verfügbare Termine
-                </h3>
+                <Calendar className="text-primary-600 h-6 w-6" />
+                <h3 className="text-2xl font-bold text-gray-900">Verfügbare Termine</h3>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
-                <Clock className="w-4 h-4" />
+                <Clock className="h-4 w-4" />
                 <span>15 Minuten</span>
               </div>
             </div>
 
             {/* Calendar Embed Placeholder */}
-            <div className="relative min-h-[500px] bg-gray-50 rounded-xl flex items-center justify-center">
+            <div className="relative flex min-h-[500px] items-center justify-center rounded-xl bg-gray-50">
               {!isCalendarLoaded ? (
                 <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full mb-4">
-                    <Calendar className="w-8 h-8 text-primary-600" />
+                  <div className="bg-primary-100 mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full">
+                    <Calendar className="text-primary-600 h-8 w-8" />
                   </div>
-                  <p className="text-gray-600 mb-4">Kalender-Widget wird hier eingebettet</p>
+                  <p className="mb-4 text-gray-600">Kalender-Widget wird hier eingebettet</p>
                   <p className="text-sm text-gray-500">
                     (Calendly, Acuity Scheduling oder ähnliches)
                   </p>
-                  <Button 
+                  <Button
                     onClick={() => setIsCalendarLoaded(true)}
-                    className="mt-6 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold"
+                    className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary mt-6 bg-gradient-to-r font-semibold"
                   >
                     Kalender simulieren
                   </Button>
@@ -101,14 +102,14 @@ export default function FinalCTASection() {
                 <div className="w-full">
                   {/* Simulated Calendar */}
                   <div className="grid grid-cols-7 gap-2 p-4">
-                    <div className="text-center text-sm font-semibold text-gray-600 py-2">Mo</div>
-                    <div className="text-center text-sm font-semibold text-gray-600 py-2">Di</div>
-                    <div className="text-center text-sm font-semibold text-gray-600 py-2">Mi</div>
-                    <div className="text-center text-sm font-semibold text-gray-600 py-2">Do</div>
-                    <div className="text-center text-sm font-semibold text-gray-600 py-2">Fr</div>
-                    <div className="text-center text-sm font-semibold text-gray-600 py-2">Sa</div>
-                    <div className="text-center text-sm font-semibold text-gray-600 py-2">So</div>
-                    
+                    <div className="py-2 text-center text-sm font-semibold text-gray-600">Mo</div>
+                    <div className="py-2 text-center text-sm font-semibold text-gray-600">Di</div>
+                    <div className="py-2 text-center text-sm font-semibold text-gray-600">Mi</div>
+                    <div className="py-2 text-center text-sm font-semibold text-gray-600">Do</div>
+                    <div className="py-2 text-center text-sm font-semibold text-gray-600">Fr</div>
+                    <div className="py-2 text-center text-sm font-semibold text-gray-600">Sa</div>
+                    <div className="py-2 text-center text-sm font-semibold text-gray-600">So</div>
+
                     {/* Sample calendar days */}
                     {[...Array(35)].map((_, i) => {
                       const day = (i % 31) + 1
@@ -116,13 +117,11 @@ export default function FinalCTASection() {
                       return (
                         <button
                           key={i}
-                          className={`
-                            aspect-square rounded-lg flex items-center justify-center text-sm
-                            ${isAvailable 
-                              ? 'bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer' 
-                              : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            }
-                          `}
+                          className={`flex aspect-square items-center justify-center rounded-lg text-sm ${
+                            isAvailable
+                              ? 'cursor-pointer bg-green-100 text-green-800 hover:bg-green-200'
+                              : 'cursor-not-allowed bg-gray-100 text-gray-400'
+                          } `}
                           disabled={!isAvailable}
                         >
                           {day}
@@ -130,9 +129,9 @@ export default function FinalCTASection() {
                       )
                     })}
                   </div>
-                  
-                  <div className="border-t border-gray-200 mt-4 pt-4 px-4">
-                    <p className="text-sm text-gray-600 text-center">
+
+                  <div className="mt-4 border-t border-gray-200 px-4 pt-4">
+                    <p className="text-center text-sm text-gray-600">
                       Klicken Sie auf einen grünen Tag, um verfügbare Zeiten zu sehen
                     </p>
                   </div>
@@ -141,9 +140,9 @@ export default function FinalCTASection() {
             </div>
 
             {/* Preparation Checklist */}
-            <div className="mt-8 p-6 bg-blue-50 rounded-xl">
-              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-blue-600" />
+            <div className="mt-8 rounded-xl bg-blue-50 p-6">
+              <h4 className="mb-3 flex items-center gap-2 font-semibold text-gray-900">
+                <CheckCircle className="h-5 w-5 text-blue-600" />
                 Was Sie zum Gespräch mitbringen sollten:
               </h4>
               <ul className="space-y-2">
@@ -156,8 +155,8 @@ export default function FinalCTASection() {
                     transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
                     className="flex items-start gap-2"
                   >
-                    <span className="text-blue-600 mt-0.5">•</span>
-                    <span className="text-gray-700 text-sm">{item}</span>
+                    <span className="mt-0.5 text-blue-600">•</span>
+                    <span className="text-sm text-gray-700">{item}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -172,23 +171,21 @@ export default function FinalCTASection() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-center"
           >
-            <p className="text-white/80 mb-4">
-              Bevorzugen Sie einen anderen Weg?
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+            <p className="mb-4 text-white/80">Bevorzugen Sie einen anderen Weg?</p>
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <a
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold rounded-lg transition-all"
+                className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary inline-flex items-center gap-2 rounded-lg bg-gradient-to-r px-6 py-3 font-semibold transition-all"
               >
                 Kontaktformular nutzen
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="h-4 w-4" />
               </a>
-              <a 
+              <a
                 href="mailto:kontakt@headon.agency"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold rounded-lg transition-all"
+                className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary inline-flex items-center gap-2 rounded-lg bg-gradient-to-r px-6 py-3 font-semibold transition-all"
               >
                 Direkt E-Mail schreiben
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </motion.div>

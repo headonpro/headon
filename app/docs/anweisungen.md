@@ -27,6 +27,7 @@ HEADON ist eine moderne Kreativagentur, die sich auf folgende Bereiche spezialis
 ## 🛠 Technischer Stack (OBLIGATORISCH)
 
 ### Frontend Core
+
 ```typescript
 - Next.js 15+ mit App Router
 - React 18+ mit TypeScript (strict mode)
@@ -37,6 +38,7 @@ HEADON ist eine moderne Kreativagentur, die sich auf folgende Bereiche spezialis
 ```
 
 ### Backend & Services
+
 ```typescript
 - Supabase als Backend-as-a-Service
 - Supabase Auth für Authentifizierung (falls benötigt)
@@ -45,6 +47,7 @@ HEADON ist eine moderne Kreativagentur, die sich auf folgende Bereiche spezialis
 ```
 
 ### Forms & Validation
+
 ```typescript
 - React Hook Form für Formulare
 - Zod für Schema-Validierung
@@ -52,6 +55,7 @@ HEADON ist eine moderne Kreativagentur, die sich auf folgende Bereiche spezialis
 ```
 
 ### Development & Quality
+
 ```typescript
 - ESLint + Prettier Konfiguration
 - TypeScript strict mode
@@ -112,12 +116,14 @@ headon-template/
 ## 🎨 Design-Anforderungen
 
 ### Visueller Stil
+
 - **Modern & Minimalistisch** - Clean, professionelles Design
 - **Creative Touch** - Subtile Animationen und Micro-Interactions
 - **Premium Feel** - Hochwertige Typografie und Farbschema
 - **Mobile-First** - Responsive auf allen Geräten perfekt
 
 ### Farbschema (Vorschlag)
+
 ```css
 Primary: #1034A6 (Königsblau)
 Secondary: #FF8C00 (Orange)
@@ -132,6 +138,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ```
 
 ### Typografie
+
 - **Headlines:** Outfit
 - **Body:** Lato
 - **Code:** JetBrains Mono (falls Code-Beispiele)
@@ -141,13 +148,16 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ## 📄 Seitenstruktur & Content
 
 ### 1. Homepage (`/`)
+
 **Hero Section:**
+
 - Compelling Headline: "Wir entwickeln digitale Erlebnisse, die Ihr Business transformieren"
 - Subheadline über HEADON's Expertise
 - Call-to-Action Buttons: "Projekt starten" & "Portfolio ansehen"
 - Hero Animation/Video Background
 
 **Sections:**
+
 - **Services Overview** - 4 Hauptservices mit Icons
 - **Featured Projects** - 3-4 Top Case Studies
 - **Why Choose HEADON** - USPs mit Statistiken
@@ -156,19 +166,23 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 - **CTA Section** - "Bereit für Ihr nächstes Projekt?"
 
 ### 2. Services (`/services`)
+
 **Service-Kategorien:**
+
 - **Web Development** (Next.js, React, Full-Stack)
 - **Mobile Development** (React Native, Cross-Platform)
 - **UI/UX Design** (Figma, Design Systems)
 - **Backend Solutions** (Supabase, APIs, Databases)
 
 **Jeder Service:**
+
 - Detaillierte Beschreibung
 - Tech-Stack Liste
 - Pricing-Modelle
 - Case Study Referenzen
 
 ### 3. Portfolio (`/portfolio`)
+
 - **Filter-System** (Web, Mobile, Design, Backend)
 - **Case Study Grid** mit Hover-Effekten
 - **Detailseiten** für jeden Case Study (`/portfolio/[slug]`)
@@ -179,24 +193,28 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
   - Client Testimonial
 
 ### 4. About (`/about`)
+
 - **HEADON Story** - Mission, Vision, Values
 - **Team Section** - Founder & Key Members
 - **Company Stats** - Projekte, Kunden, Jahre Erfahrung
 - **Process Overview** - Wie wir arbeiten
 
 ### 5. Team (`/team`)
+
 - **Team Member Cards** mit Hover-Effekten
 - **Skills & Expertise** pro Person
 - **Social Links** (LinkedIn, GitHub)
 - **"Join our Team" CTA**
 
 ### 6. Blog (`/blog`)
+
 - **Artikel-Grid** mit Kategorien
 - **Detail-Seiten** (`/blog/[slug]`)
 - **Kategorien:** Development, Design, Business, Tech-Trends
 - **MDX Support** für rich content
 
 ### 7. Contact (`/contact`)
+
 - **Contact Form** mit Zod-Validierung
 - **Office Information** (falls vorhanden)
 - **Social Media Links**
@@ -207,6 +225,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ## 🧩 Komponenten-Spezifikationen
 
 ### Layout Components
+
 ```typescript
 // components/layout/Header.tsx
 - Responsive Navigation
@@ -224,6 +243,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ```
 
 ### Section Components
+
 ```typescript
 // components/sections/HeroSection.tsx
 - Framer Motion Animationen
@@ -254,6 +274,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ```
 
 ### Form Components
+
 ```typescript
 // components/forms/ContactForm.tsx
 - React Hook Form Integration
@@ -265,6 +286,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ```
 
 ### UI Components (shadcn/ui erweitert)
+
 ```typescript
 - Button Varianten
 - Card Components
@@ -280,6 +302,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ## 🎬 Animations & Interactions
 
 ### Framer Motion Implementierungen
+
 ```typescript
 // Scroll-triggered Animations
 - Fade In on Scroll
@@ -297,6 +320,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ```
 
 ### Micro-Interactions
+
 - Smooth Scrolling
 - Button Click Feedback
 - Form Field Focus States
@@ -307,6 +331,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ## 🔧 Technische Features
 
 ### Performance Optimierungen
+
 ```typescript
 - Image Optimization (next/image)
 - Font Optimization (next/font)
@@ -316,6 +341,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ```
 
 ### SEO & Accessibility
+
 ```typescript
 - Semantic HTML Structure
 - Meta Tags optimiert
@@ -327,6 +353,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ```
 
 ### Supabase Integration
+
 ```typescript
 // lib/supabase.ts
 - Client Configuration
@@ -344,6 +371,7 @@ Disabled Text: #CBD5E1 / #64748B (Light/Dark Mode)
 ## 📱 Responsive Design
 
 ### Breakpoints (Tailwind)
+
 ```css
 sm: 640px   // Mobile landscape
 md: 768px   // Tablet
@@ -353,6 +381,7 @@ xl: 1280px  // Large Desktop
 ```
 
 ### Mobile-First Approach
+
 - Touch-friendly Navigation
 - Optimized Image Sizes
 - Readable Typography
@@ -363,6 +392,7 @@ xl: 1280px  // Large Desktop
 ## 🚀 Deployment & Setup
 
 ### Environment Variables
+
 ```bash
 # .env.local.example
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
@@ -372,6 +402,7 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 ```
 
 ### Scripts
+
 ```json
 // package.json scripts
 "dev": "next dev",
@@ -386,6 +417,7 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 ## 📋 Entwicklungs-Checkliste
 
 ### Phase 1: Setup & Core Structure
+
 - [ ] Projekt initialisieren mit Next.js 15
 - [ ] TypeScript & ESLint Konfiguration
 - [ ] Tailwind CSS + shadcn/ui Setup
@@ -394,6 +426,7 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 - [ ] Routing Structure erstellen
 
 ### Phase 2: Content Pages
+
 - [ ] Homepage mit Hero Section
 - [ ] Services Page komplett
 - [ ] About Page mit Team Section
@@ -402,6 +435,7 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 - [ ] Blog Setup mit MDX
 
 ### Phase 3: Advanced Features
+
 - [ ] Framer Motion Animationen
 - [ ] Dark/Light Mode Toggle
 - [ ] Contact Form Backend
@@ -409,6 +443,7 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 - [ ] Performance Testing
 
 ### Phase 4: Polish & Testing
+
 - [ ] Mobile Responsive Testing
 - [ ] Accessibility Audit
 - [ ] Performance Optimization
@@ -420,6 +455,7 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 ## 🎯 KLARE Erfolgs-Kriterien (MVP Focus)
 
 ### ✅ PHASE 1 SUCCESS METRICS:
+
 - **Lighthouse Score:** 90+ (realistisch für MVP)
 - **Mobile Responsive:** Funktioniert auf allen Devices
 - **TypeScript:** Zero errors
@@ -427,11 +463,13 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 - **Loading Time:** < 3s (nicht < 1.5s - übertrieben für MVP)
 
 ### ✅ PHASE 2 SUCCESS METRICS:
+
 - **Contact Form:** Funktioniert ohne Errors
 - **Form Validation:** Client + Server-side
 - **Email Delivery:** Server Actions funktionieren
 
 ### ❌ NICHT ALS SUCCESS METRICS (Overengineering):
+
 - Lighthouse 90+ (MVP braucht das nicht)
 - Complex Animations
 - Advanced Analytics
@@ -442,7 +480,9 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 ## ⚠️ CLAUDE CODE INSTRUCTIONS
 
 ### ENTWICKLUNGS-STOPP-SIGNALE:
+
 **STOPPE ENTWICKLUNG wenn du denkst an:**
+
 - Complex State Management (Context, Zustand)
 - Custom Design System development
 - Animation Libraries außer CSS
@@ -453,11 +493,13 @@ NEXT_PUBLIC_SITE_URL=https://headon.pro
 - API Route Handlers (außer Contact Form)
 
 ### ENTWICKLUNGS-PRIORITÄTEN:
+
 1. **ERST:** Statische Seiten zum Laufen bringen
-2. **DANN:** Contact Form minimal implementieren  
+2. **DANN:** Contact Form minimal implementieren
 3. **ZULETZT:** Nur auf explizite Anfrage erweitern
 
 ### FRAGE BEI UNKLARHEIT:
+
 Wenn Features nicht eindeutig als "Phase 1 MVP" definiert sind, **FRAGE NACH** anstatt zu implementieren.
 
 ---
@@ -469,12 +511,14 @@ Wenn Features nicht eindeutig als "Phase 1 MVP" definiert sind, **FRAGE NACH** a
 ## 🔗 Referenzen & Inspiration
 
 **Design Inspiration:**
+
 - Vercel.com (Clean, Modern)
 - Linear.app (Animations)
 - Stripe.com (Professional)
 - Framer.com (Creative)
 
 **Technical Reference:**
+
 - startup-nextjs Template (Basis-Struktur)
 - shadcn/ui Documentation
 - Tailwind CSS Best Practices

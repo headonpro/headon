@@ -168,3 +168,93 @@ export interface CityPage {
   frontmatter: CityPageFrontmatter
   content: string // Local content (MDX)
 }
+
+// ============================================================================
+// Glossary Types
+// ============================================================================
+
+export type GlossaryCategory = 'technology' | 'design' | 'development' | 'marketing'
+
+export interface GlossaryTerm {
+  id: string // Slug for URL (e.g., "api", "responsive-design")
+  term: string // Display name (e.g., "API", "Responsive Design")
+  category: GlossaryCategory
+  shortDefinition: string // 1 sentence for preview cards
+  fullExplanation: string // 2-3 paragraphs for detail page
+  benefits: string[] // Bullet points of advantages
+  relatedTerms: Array<{ term: string; id: string }> // Links to other glossary entries
+  resources?: Array<{ title: string; url: string }> // External links (optional)
+  keywords: string[] // For SEO and search functionality
+}
+
+// ============================================================================
+// Comparison Article Types
+// ============================================================================
+
+export interface ComparisonItem {
+  name: string // e.g., "React", "Vue.js"
+  logo?: string // Logo image URL
+  features: Record<string, string | boolean | number> // Feature values
+  pros: string[] // Advantages
+  cons: string[] // Disadvantages
+  useCase: string // Best use case description
+  recommendation: string // When to choose this option
+}
+
+export interface FeatureCategory {
+  category: string // e.g., "Performance", "Ecosystem"
+  features: string[] // e.g., ["Bundle Size", "Rendering Speed"]
+}
+
+export interface ComparisonArticle {
+  slug: string // URL slug (e.g., "react-vs-vue")
+  title: string // SEO-optimized title
+  description: string // Meta description
+  publishedAt: string // ISO 8601 date
+  updatedAt?: string // For dateModified in Article schema
+  author: {
+    name: string
+    image?: string
+  }
+
+  // Items being compared (2-5 items)
+  items: ComparisonItem[]
+
+  // Feature categories for table headers
+  featureCategories: FeatureCategory[]
+
+  // Article content
+  introduction: string
+  conclusion: string
+
+  // Related service CTA
+  relatedService?: {
+    name: string
+    url: string
+    cta: string
+  }
+
+  // SEO
+  keywords: string[]
+  ogImage?: string
+}
+
+// ============================================================================
+// Stats Section Types (AI SEO)
+// ============================================================================
+
+export interface Stat {
+  value: string | number
+  label: string
+  unit?: string
+  suffix?: string // e.g., "+", "x", "%"
+  schemaProperty?: string // For Organization schema integration
+}
+
+export interface StatsSectionProps {
+  stats: Stat[]
+  title?: string
+  description?: string
+  includeSchema?: boolean // Add to Organization schema
+  className?: string
+}

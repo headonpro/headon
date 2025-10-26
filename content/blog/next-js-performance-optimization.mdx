@@ -1,16 +1,16 @@
 ---
-title: "Next.js Performance-Optimierung: 15 Best Practices für 2025"
-description: "Steigern Sie Ihren Lighthouse-Score auf 90+: Code-Splitting, Image Optimization, Caching und moderne Performance-Patterns für Next.js Anwendungen."
-publishedAt: "2025-07-12T10:00:00Z"
+title: 'Next.js Performance-Optimierung: 15 Best Practices für 2025'
+description: 'Steigern Sie Ihren Lighthouse-Score auf 90+: Code-Splitting, Image Optimization, Caching und moderne Performance-Patterns für Next.js Anwendungen.'
+publishedAt: '2025-07-12T10:00:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["Next.js", "Performance", "Optimization", "Web Vitals", "SEO"]
-category: "performance"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['Next.js', 'Performance', 'Optimization', 'Web Vitals', 'SEO']
+category: 'performance'
 image:
-  url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop"
-  alt: "Performance Metriken und Optimierung Dashboard"
+  url: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop'
+  alt: 'Performance Metriken und Optimierung Dashboard'
 readingTime: 12
 featured: true
 ---
@@ -75,8 +75,8 @@ export default function Dashboard() {
 
 ```tsx
 // ✅ Für Named Exports
-const SpecificComponent = dynamic(
-  () => import('@/components/library').then(mod => mod.SpecificComponent)
+const SpecificComponent = dynamic(() =>
+  import('@/components/library').then((mod) => mod.SpecificComponent)
 )
 ```
 
@@ -123,6 +123,7 @@ module.exports = {
 ```
 
 **Ergebnis:**
+
 - AVIF: **30% kleiner** als WebP
 - WebP: **25-35% kleiner** als JPEG
 - Automatisches Format-Switching basierend auf Browser-Support
@@ -162,6 +163,7 @@ export default function RootLayout({ children }) {
 ```
 
 **Vorteile:**
+
 - ⚡ Fonts werden **automatisch optimiert**
 - 🚀 **Self-hosted** (kein externes Google-Request)
 - 🎯 **Zero Layout Shift** durch font-display: swap
@@ -246,6 +248,7 @@ ANALYZE=true pnpm build
 ```
 
 **Achten Sie auf:**
+
 - Duplicate Dependencies (z.B. moment.js mehrfach)
 - Große Packages die lazy geladen werden könnten
 - Ungenutzte Exports (Tree-Shaking funktioniert nicht)
@@ -269,7 +272,7 @@ async function BlogPost({ slug }: { slug: string }) {
 }
 
 // components/CommentSection.tsx
-'use client'
+;('use client')
 
 export function CommentSection({ postId }: { postId: string }) {
   const [comments, setComments] = useState([])
@@ -293,8 +296,8 @@ async function Dashboard() {
 // ✅ Gut: Parallel
 async function Dashboard() {
   const [user, posts, analytics] = await Promise.all([
-    fetchUser(),    // \
-    fetchPosts(),   //  } Parallel - 500ms total
+    fetchUser(), // \
+    fetchPosts(), //  } Parallel - 500ms total
     fetchAnalytics(), // /
   ])
 }
@@ -348,6 +351,7 @@ export default function Page() {
 ```
 
 **Ergebnis:**
+
 - ⚡ **FCP verbessert sich um 40-60%**
 - 🎯 **User sieht Content sofort**
 - 🚀 **Keine leeren Seiten** mehr
@@ -427,28 +431,20 @@ export default function Page() {
   return (
     <>
       {/* ✅ Analytics mit afterInteractive */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=GA_ID"
-        strategy="afterInteractive"
-      />
+      <Script src="https://www.googletagmanager.com/gtag/js?id=GA_ID" strategy="afterInteractive" />
 
       {/* ✅ Chat Widget mit lazyOnload */}
-      <Script
-        src="https://widget.example.com/chat.js"
-        strategy="lazyOnload"
-      />
+      <Script src="https://widget.example.com/chat.js" strategy="lazyOnload" />
 
       {/* ✅ Critical Scripts mit beforeInteractive */}
-      <Script
-        src="/critical-polyfill.js"
-        strategy="beforeInteractive"
-      />
+      <Script src="/critical-polyfill.js" strategy="beforeInteractive" />
     </>
   )
 }
 ```
 
 **Strategy-Guide:**
+
 - `beforeInteractive`: Nur für kritische Polyfills
 - `afterInteractive`: Standard für Analytics
 - `lazyOnload`: Chat-Widgets, Social Media
@@ -496,11 +492,13 @@ export async function GET(request: Request) {
 ```
 
 **Vorteile:**
+
 - ⚡ **30-50% schnellere Response** global
 - 🌍 Ausführung am **nächsten Edge-Location**
 - 📦 **Kleinere Bundles** (Edge-optimiert)
 
 **Limitations:**
+
 - Kein Node.js APIs (fs, child_process)
 - Limitierte NPM-Packages
 - Max 1MB Code-Size
@@ -609,18 +607,21 @@ Vor jedem Production-Deployment:
 Bei unserem [E-Commerce-Projekt](/portfolio):
 
 **Vor Optimierung:**
+
 - LCP: 3.2s
 - FCP: 1.8s
 - Bundle: 456 KB
 - Lighthouse: 67
 
 **Nach Optimierung:**
+
 - LCP: 0.9s ✅ (-72%)
 - FCP: 0.4s ✅ (-78%)
 - Bundle: 198 KB ✅ (-57%)
 - Lighthouse: 98 ✅ (+46%)
 
 **Business Impact:**
+
 - +23% Conversion Rate
 - -35% Bounce Rate
 - +15% Average Session Duration
@@ -696,4 +697,4 @@ Als [Performance-Spezialisten](/services/web-development) analysieren wir Ihre N
 - [Web.dev Performance Guide](https://web.dev/performance/)
 - [Core Web Vitals](https://web.dev/vitals/)
 
-*Aktualisiert: September 2024*
+_Aktualisiert: September 2024_

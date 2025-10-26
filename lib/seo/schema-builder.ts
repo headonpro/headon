@@ -15,10 +15,7 @@
  */
 
 import type { FAQ } from '@/lib/types/content'
-import type {
-  BlogContentResult,
-  PortfolioContentResult,
-} from '@/lib/content/mdx-loader'
+import type { BlogContentResult, PortfolioContentResult } from '@/lib/content/mdx-loader'
 import type {
   ArticleSchema,
   FAQSchema,
@@ -111,9 +108,7 @@ export function buildArticleSchema(post: BlogContentResult): ArticleSchema {
     author: {
       '@type': 'Person',
       name: frontmatter.author.name,
-      url: frontmatter.author.avatar
-        ? toAbsoluteUrl(frontmatter.author.avatar)
-        : undefined,
+      url: frontmatter.author.avatar ? toAbsoluteUrl(frontmatter.author.avatar) : undefined,
     },
     publisher: getOrganization(),
   }
@@ -146,9 +141,7 @@ export function buildFAQPageSchema(faqs: FAQ[]): FAQSchema {
  * Build CreativeWork Schema for portfolio projects
  * @see https://schema.org/CreativeWork
  */
-export function buildCreativeWorkSchema(
-  project: PortfolioContentResult
-): CreativeWorkSchema {
+export function buildCreativeWorkSchema(project: PortfolioContentResult): CreativeWorkSchema {
   const { frontmatter } = project
 
   return {
@@ -245,9 +238,7 @@ export interface AggregateRatingInput {
   reviewCount?: number // Total number of reviews (optional, can be different from ratings)
 }
 
-export function buildAggregateRatingSchema(
-  rating: AggregateRatingInput
-): AggregateRatingSchema {
+export function buildAggregateRatingSchema(rating: AggregateRatingInput): AggregateRatingSchema {
   // Validate rating is in 1-5 range
   const ratingValue = Math.max(1, Math.min(5, rating.ratingValue))
 

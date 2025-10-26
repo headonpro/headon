@@ -12,9 +12,7 @@ interface GenerateMetadataProps {
 /**
  * Generate dynamic metadata for portfolio project pages
  */
-export async function generateMetadata({
-  params,
-}: GenerateMetadataProps): Promise<Metadata> {
+export async function generateMetadata({ params }: GenerateMetadataProps): Promise<Metadata> {
   const { slug } = await params
 
   // Load portfolio project

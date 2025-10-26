@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/seo-optimization/tasks.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-10-26T13:38:03.552Z",
+      "trigger": "initial",
+      "approvalId": "approval_1761485883549_8oyq0cc58",
+      "approvalTitle": "SEO Optimization Tasks Document"
+    }
+  ]
+}

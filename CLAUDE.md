@@ -9,8 +9,9 @@ HEADON.pro Marketing Agency Template - A modern Next.js 15 application with Type
 ## Development Commands
 
 ### Essential Commands
+
 ```bash
-# Install dependencies (use pnpm - required by package.json) 
+# Install dependencies (use pnpm - required by package.json)
 pnpm install
 
 # Development server (http://localhost:3000)
@@ -27,13 +28,14 @@ pnpm lint          # Run ESLint
 pnpm lint:fix      # Auto-fix linting issues
 pnpm format        # Format with Prettier
 pnpm format:check  # Check formatting
-pnpm type-check    # TypeScript type checking
+pnpm typecheck     # TypeScript type checking
 
 # Full pre-commit verification
-pnpm lint:fix && pnpm format && pnpm type-check && pnpm build
+pnpm lint:fix && pnpm format && pnpm typecheck && pnpm build
 ```
 
 ### Component Management
+
 ```bash
 # Add new shadcn/ui component
 pnpm dlx shadcn@latest add [component-name]
@@ -45,6 +47,7 @@ pnpm dlx shadcn@latest add button
 ## Architecture & Code Structure
 
 ### Tech Stack
+
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript (strict mode enabled)
 - **Styling**: Tailwind CSS v4 + shadcn/ui components
@@ -56,12 +59,14 @@ pnpm dlx shadcn@latest add button
 ### Application Architecture
 
 #### Routing Strategy
+
 - App Router with file-based routing in `app/` directory
 - Each route is a folder containing `page.tsx`
 - Layout components wrap pages for consistent structure
 - Metadata API used for SEO optimization
 
 #### Data Flow
+
 1. **Client Components**: Interactive UI with React Hook Form
 2. **Server Components**: Data fetching from Supabase
 3. **API Routes**: Server-side operations with service role key
@@ -69,6 +74,7 @@ pnpm dlx shadcn@latest add button
 5. **State Management**: Local state with React hooks
 
 #### Component Hierarchy
+
 ```
 app/layout.tsx (Root Layout)
   └── components/layout/Header.tsx
@@ -81,6 +87,7 @@ app/layout.tsx (Root Layout)
 ### Key Patterns
 
 #### Styling Pattern with cn() Utility
+
 ```typescript
 import { cn } from '@/lib/utils'
 
@@ -93,20 +100,22 @@ className={cn(
 ```
 
 #### Form Pattern with Zod Validation
+
 ```typescript
 // 1. Define schema in lib/validations.ts
 const schema = z.object({
   email: z.string().email(),
-  message: z.string().min(10)
+  message: z.string().min(10),
 })
 
 // 2. Use in component with React Hook Form
 const form = useForm<z.infer<typeof schema>>({
-  resolver: zodResolver(schema)
+  resolver: zodResolver(schema),
 })
 ```
 
 #### Supabase Client Pattern
+
 ```typescript
 // Client-side: lib/supabase.ts
 import { createClient } from '@supabase/supabase-js'
@@ -116,7 +125,9 @@ const supabase = createClient(url, serviceRoleKey)
 ```
 
 ### Environment Configuration
+
 Required `.env.local` variables:
+
 ```
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -125,6 +136,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 ### Build Configuration
+
 - **Standalone Output**: Enabled for Docker deployments
 - **React Strict Mode**: Enabled for development
 - **TypeScript Build Errors**: Currently ignored (temporary)
@@ -134,12 +146,14 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ## Code Standards
 
 ### TypeScript Requirements
+
 - Strict mode enabled in `tsconfig.json`
 - No implicit `any` types
 - Explicit return types for functions
 - Interface naming: `ComponentNameProps`
 
 ### Import Organization
+
 1. React/Next.js imports
 2. Third-party libraries
 3. Local components (`@/components`)
@@ -147,6 +161,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 5. Types (`@/lib/types`)
 
 ### Prettier Configuration
+
 ```json
 {
   "semi": false,
@@ -160,6 +175,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ## Docker Deployment
 
 ### Local Docker Testing
+
 ```bash
 # Build and run with Docker Compose
 docker-compose up -d
@@ -172,14 +188,17 @@ docker-compose down
 ```
 
 ### Production Deployment
+
 - CI/CD pipeline configured with GitHub Actions
 - Automatic deployment to VPS on main branch push
 - Health checks configured at `/api/health`
 - Resource limits: 1 CPU, 1GB memory
 
 ## Testing Approach
+
 Currently no test framework configured. For testing:
+
 - Manual testing in development environment
 - Build verification with `pnpm build`
-- Type checking with `pnpm type-check`
+- Type checking with `pnpm typecheck`
 - Linting with `pnpm lint`

@@ -8,7 +8,11 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import type { CityContentResult, ServiceContentResult, PortfolioContentResult } from '@/lib/content/mdx-loader'
+import type {
+  CityContentResult,
+  ServiceContentResult,
+  PortfolioContentResult,
+} from '@/lib/content/mdx-loader'
 import MDXContent from '@/components/content/MDXContent'
 import { MapPin, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -20,8 +24,8 @@ import Breadcrumbs from '@/components/seo/Breadcrumbs'
 // Lazy load map component
 const SingleCityMap = dynamic(() => import('@/components/sections/SingleCityMap'), {
   loading: () => (
-    <div className="h-64 md:h-96 bg-white/10 backdrop-blur-sm rounded-lg animate-pulse flex items-center justify-center border border-white/20">
-      <MapPin className="w-8 h-8 text-white/50" />
+    <div className="flex h-64 animate-pulse items-center justify-center rounded-lg border border-white/20 bg-white/10 backdrop-blur-sm md:h-96">
+      <MapPin className="h-8 w-8 text-white/50" />
     </div>
   ),
 })
@@ -59,9 +63,9 @@ export default function CityPageContent({
   }, [])
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       {/* Animated Gradient Background - same as HeroSection */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+      <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
       {/* Animated Gradient Layers */}
       <div className="absolute inset-0">
@@ -107,21 +111,19 @@ export default function CityPageContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-5xl mx-auto mb-16"
+            className="mx-auto mb-16 max-w-5xl"
           >
-            <div className="text-center mb-12">
+            <div className="mb-12 text-center">
               {/* H1 with local keyword targeting */}
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white">
+              <h1 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-6xl">
                 Webentwicklung in {cityPage.frontmatter.name}
               </h1>
 
               {/* Subtitle with state */}
-              <p className="text-xl md:text-2xl text-white/90 mb-4">
-                {cityPage.frontmatter.state}
-              </p>
+              <p className="mb-4 text-xl text-white/90 md:text-2xl">{cityPage.frontmatter.state}</p>
 
               {/* Description */}
-              <p className="text-lg text-white/80 max-w-3xl mx-auto">
+              <p className="mx-auto max-w-3xl text-lg text-white/80">
                 {cityPage.frontmatter.description}
               </p>
             </div>
@@ -140,26 +142,26 @@ export default function CityPageContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-4xl mx-auto mb-16"
+            className="mx-auto mb-16 max-w-4xl"
           >
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-6 md:grid-cols-2">
               {/* Population Card */}
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20 text-center hover:bg-white/20 transition-colors">
-                <div className="flex justify-center mb-4">
-                  <Users className="w-12 h-12 text-white" />
+              <div className="rounded-lg border border-white/20 bg-white/10 p-8 text-center backdrop-blur-md transition-colors hover:bg-white/20">
+                <div className="mb-4 flex justify-center">
+                  <Users className="h-12 w-12 text-white" />
                 </div>
-                <div className="text-4xl font-bold text-white mb-2">
+                <div className="mb-2 text-4xl font-bold text-white">
                   {cityPage.frontmatter.population.toLocaleString('de-DE')}
                 </div>
                 <div className="text-white/80">Einwohner</div>
               </div>
 
               {/* Location Card */}
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20 text-center hover:bg-white/20 transition-colors">
-                <div className="flex justify-center mb-4">
-                  <MapPin className="w-12 h-12 text-white" />
+              <div className="rounded-lg border border-white/20 bg-white/10 p-8 text-center backdrop-blur-md transition-colors hover:bg-white/20">
+                <div className="mb-4 flex justify-center">
+                  <MapPin className="h-12 w-12 text-white" />
                 </div>
-                <div className="text-2xl font-bold text-white mb-2">
+                <div className="mb-2 text-2xl font-bold text-white">
                   {cityPage.frontmatter.state}
                 </div>
                 <div className="text-white/80">Bundesland</div>
@@ -172,9 +174,9 @@ export default function CityPageContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="max-w-4xl mx-auto mb-16"
+            className="mx-auto mb-16 max-w-4xl"
           >
-            <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 md:p-12 shadow-xl border border-white/20 text-white [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-6 [&_h1]:mt-0 [&_h1]:text-white [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:text-white [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mb-3 [&_h3]:mt-8 [&_h3]:text-white [&_p]:text-white/90 [&_p]:mb-5 [&_p]:leading-relaxed [&_p]:text-base [&_strong]:text-white [&_strong]:font-semibold [&_ul]:space-y-3 [&_ul]:mb-6 [&_ul]:mt-4 [&_ol]:space-y-3 [&_ol]:mb-6 [&_ol]:mt-4 [&_li]:text-white/90 [&_li]:leading-relaxed [&_a]:text-white [&_a]:underline [&_a]:hover:text-white/80">
+            <div className="rounded-lg border border-white/20 bg-white/10 p-8 text-white shadow-xl backdrop-blur-md md:p-12 [&_a]:text-white [&_a]:underline [&_a]:hover:text-white/80 [&_h1]:mt-0 [&_h1]:mb-6 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:text-white [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-white [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-white [&_li]:leading-relaxed [&_li]:text-white/90 [&_ol]:mt-4 [&_ol]:mb-6 [&_ol]:space-y-3 [&_p]:mb-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-white/90 [&_strong]:font-semibold [&_strong]:text-white [&_ul]:mt-4 [&_ul]:mb-6 [&_ul]:space-y-3">
               <MDXContent>{CompiledContent}</MDXContent>
             </div>
           </motion.div>
@@ -185,30 +187,26 @@ export default function CityPageContent({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="max-w-6xl mx-auto mb-16"
+              className="mx-auto mb-16 max-w-6xl"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-white">
+              <h2 className="mb-4 text-center text-3xl font-bold text-white md:text-4xl">
                 Unsere Services in {cityPage.frontmatter.name}
               </h2>
-              <p className="text-center text-white/80 mb-12 max-w-2xl mx-auto">
+              <p className="mx-auto mb-12 max-w-2xl text-center text-white/80">
                 Professionelle Dienstleistungen direkt vor Ort
               </p>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {services.map((service) => (
-                  <Link
-                    key={service!.slug}
-                    href={`/services/${service!.slug}`}
-                    className="group"
-                  >
-                    <div className="bg-white/95 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover:border-white/40 transition-all hover:shadow-xl h-full hover:bg-white">
-                      <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
+                  <Link key={service!.slug} href={`/services/${service!.slug}`} className="group">
+                    <div className="h-full rounded-lg border border-white/20 bg-white/95 p-6 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white hover:shadow-xl">
+                      <h3 className="group-hover:text-primary mb-3 text-xl font-semibold transition-colors">
                         {service!.frontmatter.title}
                       </h3>
-                      <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                      <p className="mb-4 line-clamp-3 text-sm text-gray-600">
                         {service!.frontmatter.description}
                       </p>
-                      <div className="text-primary font-semibold text-sm">
+                      <div className="text-primary text-sm font-semibold">
                         ab {service!.frontmatter.pricing.from.toLocaleString('de-DE')}{' '}
                         {service!.frontmatter.pricing.currency}
                       </div>
@@ -225,23 +223,19 @@ export default function CityPageContent({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="max-w-6xl mx-auto mb-16"
+              className="mx-auto mb-16 max-w-6xl"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-white">
+              <h2 className="mb-4 text-center text-3xl font-bold text-white md:text-4xl">
                 Erfolgsgeschichten aus der Region
               </h2>
-              <p className="text-center text-white/80 mb-12 max-w-2xl mx-auto">
+              <p className="mx-auto mb-12 max-w-2xl text-center text-white/80">
                 Projekte, die wir in {cityPage.frontmatter.name} und Umgebung realisiert haben
               </p>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {caseStudies.map((project) => (
-                  <Link
-                    key={project!.slug}
-                    href={`/portfolio/${project!.slug}`}
-                    className="group"
-                  >
-                    <div className="bg-white/95 backdrop-blur-sm rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all hover:shadow-xl">
+                  <Link key={project!.slug} href={`/portfolio/${project!.slug}`} className="group">
+                    <div className="overflow-hidden rounded-lg border border-white/20 bg-white/95 backdrop-blur-sm transition-all hover:border-white/40 hover:shadow-xl">
                       {/* Project Image */}
                       {project!.frontmatter.image && (
                         <div className="relative h-48 overflow-hidden">
@@ -250,34 +244,32 @@ export default function CityPageContent({
                             alt={project!.frontmatter.image.alt}
                             width={600}
                             height={400}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         </div>
                       )}
 
                       {/* Project Info */}
                       <div className="p-6">
-                        <div className="text-sm text-gray-600 mb-2">
+                        <div className="mb-2 text-sm text-gray-600">
                           {project!.frontmatter.client.name}
                         </div>
-                        <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                        <h3 className="group-hover:text-primary mb-2 text-xl font-semibold transition-colors">
                           {project!.frontmatter.title}
                         </h3>
-                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                        <p className="mb-4 line-clamp-2 text-sm text-gray-600">
                           {project!.frontmatter.description}
                         </p>
 
                         {/* Metrics */}
                         {project!.frontmatter.metrics.length > 0 && (
-                          <div className="grid grid-cols-2 gap-3 pt-4 border-t border-gray-200">
+                          <div className="grid grid-cols-2 gap-3 border-t border-gray-200 pt-4">
                             {project!.frontmatter.metrics.slice(0, 2).map((metric, idx) => (
                               <div key={idx} className="text-center">
-                                <div className="text-2xl font-bold text-primary">
+                                <div className="text-primary text-2xl font-bold">
                                   {metric.value}
                                 </div>
-                                <div className="text-xs text-gray-600">
-                                  {metric.label}
-                                </div>
+                                <div className="text-xs text-gray-600">{metric.label}</div>
                               </div>
                             ))}
                           </div>
@@ -295,28 +287,25 @@ export default function CityPageContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="max-w-4xl mx-auto"
+            className="mx-auto max-w-4xl"
           >
-            <div className="text-center bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-12 shadow-2xl">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+            <div className="rounded-2xl border border-white/20 bg-white/10 p-12 text-center shadow-2xl backdrop-blur-md">
+              <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
                 Ihr Partner für Webentwicklung in {cityPage.frontmatter.name}
               </h2>
-              <p className="text-xl text-white/90 mb-8">
+              <p className="mb-8 text-xl text-white/90">
                 Lassen Sie uns gemeinsam Ihr digitales Projekt verwirklichen
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <Link href="/contact">
-                  <Button
-                    size="lg"
-                    className="bg-white text-primary hover:bg-gray-100"
-                  >
+                  <Button size="lg" className="text-primary bg-white hover:bg-gray-100">
                     Kostenloses Erstgespräch
                   </Button>
                 </Link>
                 <Link href="/portfolio">
                   <Button
                     size="lg"
-                    className="bg-white/20 backdrop-blur-sm border-2 border-white text-white hover:bg-white/30 hover:border-white/80 transition-all"
+                    className="border-2 border-white bg-white/20 text-white backdrop-blur-sm transition-all hover:border-white/80 hover:bg-white/30"
                   >
                     Portfolio ansehen
                   </Button>

@@ -138,9 +138,7 @@ export async function loadMDX(
     const sanitizedSlug = sanitizeSlug(slug)
 
     if (sanitizedSlug !== slug) {
-      console.warn(
-        `Slug "${slug}" was sanitized to "${sanitizedSlug}" for security`
-      )
+      console.warn(`Slug "${slug}" was sanitized to "${sanitizedSlug}" for security`)
     }
 
     // Build file path
@@ -151,9 +149,7 @@ export async function loadMDX(
     const resolvedPath = path.resolve(filePath)
     const resolvedContentDir = path.resolve(contentDir)
     if (!resolvedPath.startsWith(resolvedContentDir)) {
-      console.error(
-        `Security: Attempted to access file outside content directory: ${filePath}`
-      )
+      console.error(`Security: Attempted to access file outside content directory: ${filePath}`)
       return null
     }
 
@@ -194,16 +190,12 @@ export async function loadMDX(
  * @param contentType - The type of content to list
  * @returns Array of slugs (filenames without .mdx extension)
  */
-export async function listContentSlugs(
-  contentType: ContentType
-): Promise<string[]> {
+export async function listContentSlugs(contentType: ContentType): Promise<string[]> {
   try {
     const contentDir = getContentDirectory(contentType)
     const files = await fs.readdir(contentDir)
 
-    return files
-      .filter((file) => file.endsWith('.mdx'))
-      .map((file) => file.replace(/\.mdx$/, ''))
+    return files.filter((file) => file.endsWith('.mdx')).map((file) => file.replace(/\.mdx$/, ''))
   } catch (error) {
     // Return empty array if directory doesn't exist
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
@@ -220,10 +212,7 @@ export async function listContentSlugs(
  * @param contentType - The type of content
  * @returns true if file exists, false otherwise
  */
-export async function contentExists(
-  slug: string,
-  contentType: ContentType
-): Promise<boolean> {
+export async function contentExists(slug: string, contentType: ContentType): Promise<boolean> {
   const sanitizedSlug = sanitizeSlug(slug)
   const contentDir = getContentDirectory(contentType)
   const filePath = path.join(contentDir, `${sanitizedSlug}.mdx`)

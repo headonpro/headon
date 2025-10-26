@@ -11,9 +11,10 @@ import { cn } from '@/lib/utils'
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'FAQ', href: '/faq' },
   { name: 'Regionen', href: '/regionen' },
   { name: 'About', href: '/about' },
-  { name: 'Blog', href: '/blog' },
   { name: 'Kontakt', href: '/contact' },
 ]
 
@@ -23,17 +24,16 @@ export default function Header() {
 
   return (
     <header className="absolute top-0 z-50 w-full">
-      <nav className="container mx-auto flex items-center justify-between px-4 py-4" aria-label="Global">
+      <nav
+        className="container mx-auto flex items-center justify-between px-4 py-4"
+        aria-label="Global"
+      >
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5 flex items-center">
-            <Logo
-              width={120}
-              height={32}
-              className="h-8"
-            />
+          <Link href="/" className="-m-1.5 flex items-center p-1.5">
+            <Logo width={120} height={32} className="h-8" />
           </Link>
         </div>
-        
+
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -44,7 +44,7 @@ export default function Header() {
             <Menu className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        
+
         <div className="hidden lg:flex lg:gap-x-8">
           {navigation.map((item) => {
             const isActive = pathname === item.href || (item.href === '/' && pathname === '/')
@@ -53,10 +53,8 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "text-base font-semibold transition-colors",
-                  isActive 
-                    ? "text-accent-500" 
-                    : "text-white/90 hover:text-accent-500"
+                  'text-base font-semibold transition-colors',
+                  isActive ? 'text-accent-500' : 'hover:text-accent-500 text-white/90'
                 )}
               >
                 {item.name}
@@ -64,31 +62,35 @@ export default function Header() {
             )
           })}
         </div>
-        
+
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Button asChild className="bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 font-semibold">
-            <Link href="/contact">
-              Projekt starten
-            </Link>
+          <Button
+            asChild
+            className="from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 bg-gradient-to-r font-semibold"
+          >
+            <Link href="/contact">Projekt starten</Link>
           </Button>
         </div>
       </nav>
-      
+
       {/* Mobile menu */}
       <div className={cn('lg:hidden', mobileMenuOpen ? 'block' : 'hidden')}>
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
-        <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gradient-to-b from-primary-600 to-primary-700 px-6 py-6 sm:max-w-sm border-l border-primary-500/20">
+        <div
+          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+        <div className="from-primary-600 to-primary-700 border-primary-500/20 fixed inset-y-0 right-0 z-50 w-full overflow-y-auto border-l bg-gradient-to-b px-6 py-6 sm:max-w-sm">
           <div className="flex items-center justify-between">
-            <Link href="/" className="-m-1.5 p-1.5 flex items-center" onClick={() => setMobileMenuOpen(false)}>
-              <Logo
-                width={100}
-                height={28}
-                className="h-7"
-              />
+            <Link
+              href="/"
+              className="-m-1.5 flex items-center p-1.5"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Logo width={100} height={28} className="h-7" />
             </Link>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+              className="-m-2.5 rounded-md p-2.5 text-white/90 transition-colors hover:bg-white/10 hover:text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -105,10 +107,10 @@ export default function Header() {
                       key={item.name}
                       href={item.href}
                       className={cn(
-                        "-mx-3 block rounded-lg px-3 py-3 text-base font-semibold leading-7 transition-all duration-200",
+                        '-mx-3 block rounded-lg px-3 py-3 text-base leading-7 font-semibold transition-all duration-200',
                         isActive
-                          ? "text-accent-500 bg-gradient-to-r from-accent-500/20 to-secondary-500/20 border border-accent-500/30"
-                          : "text-white/90 hover:text-white hover:bg-white/10 hover:shadow-lg"
+                          ? 'text-accent-500 from-accent-500/20 to-secondary-500/20 border-accent-500/30 border bg-gradient-to-r'
+                          : 'text-white/90 hover:bg-white/10 hover:text-white hover:shadow-lg'
                       )}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -117,8 +119,11 @@ export default function Header() {
                   )
                 })}
               </div>
-              <div className="py-6 border-t border-white/10">
-                <Button asChild className="w-full bg-gradient-to-r from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 font-semibold shadow-lg hover:shadow-xl transition-all duration-200">
+              <div className="border-t border-white/10 py-6">
+                <Button
+                  asChild
+                  className="from-accent-500 to-secondary-600 hover:from-accent-600 hover:to-secondary-700 text-primary-600 w-full bg-gradient-to-r font-semibold shadow-lg transition-all duration-200 hover:shadow-xl"
+                >
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                     Projekt starten
                   </Link>

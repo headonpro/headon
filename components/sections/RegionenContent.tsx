@@ -32,9 +32,9 @@ export default function RegionenContent({ cities }: RegionenContentProps) {
   }, [])
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       {/* Animated Gradient Background - same as HeroSection */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+      <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
       {/* Animated Gradient Layers */}
       <div className="absolute inset-0">
@@ -75,15 +75,15 @@ export default function RegionenContent({ cities }: RegionenContentProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="mb-16 text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white">
+            <h1 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-6xl">
               Unsere Service-Regionen
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+            <p className="mx-auto max-w-3xl text-xl text-white/90 md:text-2xl">
               HEADON.pro kommt persönlich zu Ihnen in der gesamten Region Main-Tauber-Kreis.
-              Professionelle Webentwicklung, Mobile Apps und digitale Lösungen –
-              regional, persönlich, vor Ort bei Ihnen.
+              Professionelle Webentwicklung, Mobile Apps und digitale Lösungen – regional,
+              persönlich, vor Ort bei Ihnen.
             </p>
           </motion.div>
 

@@ -1,4 +1,5 @@
 # 🎯 SEO-OPTIMIERUNGSPLAN HEADON.PRO
+
 **Stand:** Oktober 2025 | **Version:** 1.1 (Update nach Code-Analyse)
 **Letzte Aktualisierung:** 2025-10-09
 
@@ -13,6 +14,7 @@
 ### Kritische Erkenntnisse
 
 #### ✅ Stärken
+
 - ✅ Solide technische Basis (HTTPS, moderne Stack, Next.js 15)
 - ✅ Grundlegende SEO-Elemente vorhanden (robots.txt, sitemap, meta-tags)
 - ✅ Gute Performance-Optimierung
@@ -21,6 +23,7 @@
 - ✅ **SchemaGenerator System vorhanden** (FAQSchema, PersonSchema, etc.)
 
 #### 🔴 Kritische Schwachstellen (SOFORT FIXEN!)
+
 - **🚨 KRITISCH:** Keine H1-Tags im Live-HTML (Google findet kein Page Topic!)
 - **🔴 KRITISCH:** Homepage hat keine spezifischen Metadaten
 - **🔴 KRITISCH:** WebSite Schema fehlt komplett (verhindert Sitelinks)
@@ -28,6 +31,7 @@
 - **⚠️ WICHTIG:** Nur 2 JSON-LD Scripts statt 4+ (OG Images fehlen komplett)
 
 #### ⚠️ Mittelfristige Optimierungen
+
 - Fehlende Keyword-Optimierung für "Kreativagentur", "Webagentur", "Marketingagentur"
 - FAQ-Seite existiert nicht (verpasste Featured Snippets)
 - OG Images fehlen komplett (schlechte Social Media CTR)
@@ -40,17 +44,20 @@
 ### Aktuelle Keyword-Performance
 
 #### Gut optimiert ✅
+
 - ✅ "Webentwicklung Lauda-Königshofen" (14x Erwähnung)
 - ✅ "Digitalagentur" (prominent in Meta-Tags)
 - ✅ "Web Development Baden-Württemberg"
 - ✅ "Mobile Apps Main-Tauber-Kreis"
 
 #### Schwach optimiert ⚠️
+
 - ⚠️ "Kreativagentur" (nur 1x in Keywords, kaum im Content)
 - ⚠️ "UI/UX Design" (nur in Keywords, nicht prominent)
 - ⚠️ "Design" / "Webdesign" (nur 9 Erwähnungen gesamt)
 
 #### Komplett fehlend ❌
+
 - ❌ "Marketingagentur" (0x)
 - ❌ "Webagentur" (0x)
 - ❌ "Full-Service Digitalagentur" (0x)
@@ -62,6 +69,7 @@
 ### Empfohlene Keyword-Strategie
 
 #### Primäre Keywords (Fokus)
+
 1. **Webentwicklung Lauda-Königshofen** ← GUT
 2. **Digitalagentur Main-Tauber-Kreis** ← VERSTÄRKEN
 3. **Kreativagentur Würzburg** ← NEU PUSHEN
@@ -69,6 +77,7 @@
 5. **App Entwicklung Tauberbischofsheim** ← HINZUFÜGEN
 
 #### Sekundäre Keywords (Long-Tail)
+
 - "Website erstellen lassen Lauda-Königshofen"
 - "Mobile App entwickeln Baden-Württemberg"
 - "Webdesign Agentur Main-Tauber-Kreis"
@@ -76,6 +85,7 @@
 - "Full-Service Digitalagentur Heilbronn"
 
 #### Service-spezifische Keywords
+
 - "React Entwickler Deutschland"
 - "Next.js Agentur"
 - "Flutter App Entwicklung"
@@ -94,6 +104,7 @@ WebFetch zeigt 0 H1-Tags im Live-HTML! Google kann kein Page Topic identifiziere
 **Status:** 🔴 KRITISCH - Verhindert Rankings!
 
 **Analyse:**
+
 - `HeroSection.tsx:212` hat ein H1-Tag, aber es ist **leer** oder wird nicht gerendert
 - Ohne H1 weiß Google nicht, worum es auf der Seite geht
 - **Quick Win:** Kann in 5 Minuten gefixt werden
@@ -104,27 +115,31 @@ H1 in HeroSection mit Keywords füllen:
 **Datei:** `components/sections/HeroSection.tsx`
 
 **Code finden (ca. Zeile 212):**
+
 ```tsx
-<h1 className="mb-16 md:mb-20 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading">
+<h1 className="font-heading mb-16 text-4xl font-bold tracking-tight text-white sm:text-5xl md:mb-20 md:text-6xl lg:text-7xl">
   {/* HIER IST ES LEER! */}
 </h1>
 ```
 
 **Code ersetzen mit:**
+
 ```tsx
-<h1 className="mb-16 md:mb-20 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading">
+<h1 className="font-heading mb-16 text-4xl font-bold tracking-tight text-white sm:text-5xl md:mb-20 md:text-6xl lg:text-7xl">
   Full-Service Digitalagentur für Web & App Entwicklung
 </h1>
 ```
 
 **ODER mit mehr Keywords:**
+
 ```tsx
-<h1 className="mb-16 md:mb-20 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl font-heading">
+<h1 className="font-heading mb-16 text-4xl font-bold tracking-tight text-white sm:text-5xl md:mb-20 md:text-6xl lg:text-7xl">
   Kreativ- und Digitalagentur für moderne Weblösungen
 </h1>
 ```
 
 **Erfolgskriterium:**
+
 - ✅ Exakt 1 H1-Tag auf Homepage
 - ✅ H1 enthält Haupt-Keywords ("Digitalagentur", "Web", "App")
 - ✅ H1 ist im Live-HTML sichtbar
@@ -141,6 +156,7 @@ H1 in HeroSection mit Keywords füllen:
 Nur 2 JSON-LD Scripts (Organization, LocalBusiness), sollte aber 4+ sein.
 
 **Aktueller Status:**
+
 - ✅ StructuredData Component **funktioniert** (wird korrekt gerendert)
 - ✅ 2 JSON-LD Scripts im Live-HTML vorhanden
 - ✅ SchemaGenerator System existiert
@@ -148,17 +164,20 @@ Nur 2 JSON-LD Scripts (Organization, LocalBusiness), sollte aber 4+ sein.
 - ❌ Breadcrumb Schema fehlt auf Unterseiten
 
 **Aktion:**
+
 1. ~~Prüfen: `curl -s https://headon.pro | grep -c "application/ld+json"`~~ ✅ Erledigt (zeigt 2)
 2. ~~Problem identifizieren~~ ✅ Kein Problem - funktioniert!
 3. **NEU:** WebSite Schema hinzufügen (siehe 1.3)
 4. **NEU:** BreadcrumbList auf Service-Seiten hinzufügen
 
 **Dateien:**
+
 - ~~`app/layout.tsx`~~ ✅ Funktioniert
 - ~~`components/seo/StructuredData.tsx`~~ ✅ Funktioniert
 - `components/seo/SchemaGenerator.tsx` ✅ Vorhanden
 
 **Erfolgskriterium:**
+
 - ✅ Mindestens 4 JSON-LD Scripts im HTML (aktuell 2, Ziel 4+)
 - ✅ Validierung unter https://search.google.com/test/rich-results
 
@@ -177,48 +196,51 @@ Erstelle spezifische Metadata für die Homepage mit erweiterten Keywords.
 **Datei:** `app/page.tsx`
 
 **Code hinzufügen:**
+
 ```typescript
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Full-Service Digitalagentur | Web & App Entwicklung | Lauda-Königshofen",
-  description: "Kreativ- und Marketingagentur für moderne Weblösungen: Webentwicklung, App-Development, UI/UX Design und Corporate Branding. KI-beschleunigt, 4x schneller, ab 2.500€. Main-Tauber-Kreis, Baden-Württemberg.",
+  title: 'Full-Service Digitalagentur | Web & App Entwicklung | Lauda-Königshofen',
+  description:
+    'Kreativ- und Marketingagentur für moderne Weblösungen: Webentwicklung, App-Development, UI/UX Design und Corporate Branding. KI-beschleunigt, 4x schneller, ab 2.500€. Main-Tauber-Kreis, Baden-Württemberg.',
   keywords: [
     // Primäre Keywords
-    "Digitalagentur Lauda-Königshofen",
-    "Kreativagentur Main-Tauber-Kreis",
-    "Webagentur Baden-Württemberg",
-    "Marketingagentur Würzburg",
+    'Digitalagentur Lauda-Königshofen',
+    'Kreativagentur Main-Tauber-Kreis',
+    'Webagentur Baden-Württemberg',
+    'Marketingagentur Würzburg',
 
     // Service Keywords
-    "Webentwicklung Lauda-Königshofen",
-    "App Entwicklung Baden-Württemberg",
-    "Webdesign Agentur Tauberbischofsheim",
-    "UI UX Design Würzburg",
-    "Corporate Design Bad Mergentheim",
+    'Webentwicklung Lauda-Königshofen',
+    'App Entwicklung Baden-Württemberg',
+    'Webdesign Agentur Tauberbischofsheim',
+    'UI UX Design Würzburg',
+    'Corporate Design Bad Mergentheim',
 
     // Tech Keywords
-    "React Entwickler Deutschland",
-    "Next.js Agentur",
-    "Flutter App Entwicklung",
-    "Full-Stack Development",
+    'React Entwickler Deutschland',
+    'Next.js Agentur',
+    'Flutter App Entwicklung',
+    'Full-Stack Development',
 
     // Long-Tail
-    "Website erstellen lassen",
-    "Mobile App entwickeln lassen",
-    "Responsive Webdesign",
-    "Full-Service Digitalagentur"
-  ].join(", "),
+    'Website erstellen lassen',
+    'Mobile App entwickeln lassen',
+    'Responsive Webdesign',
+    'Full-Service Digitalagentur',
+  ].join(', '),
   openGraph: {
-    title: "HEADON.pro - Full-Service Digitalagentur für Web & App",
-    description: "Kreativ- und Marketingagentur mit KI-Power: Websites, Apps, Design & Branding in Rekordzeit. Main-Tauber-Kreis, Baden-Württemberg.",
+    title: 'HEADON.pro - Full-Service Digitalagentur für Web & App',
+    description:
+      'Kreativ- und Marketingagentur mit KI-Power: Websites, Apps, Design & Branding in Rekordzeit. Main-Tauber-Kreis, Baden-Württemberg.',
     images: [
       {
         url: 'https://headon.pro/og-images/home.jpg',
         width: 1200,
         height: 630,
-        alt: 'HEADON.pro Digitalagentur'
-      }
+        alt: 'HEADON.pro Digitalagentur',
+      },
     ],
   },
 }
@@ -229,6 +251,7 @@ export default function Home() {
 ```
 
 **Erfolgskriterium:**
+
 - ✅ Title enthält "Digitalagentur", "Kreativagentur", "Web", "App"
 - ✅ Description unter 160 Zeichen
 - ✅ Keywords decken alle Service-Bereiche ab
@@ -271,6 +294,7 @@ export function WebsiteSchema() {
 ```
 
 **In `app/layout.tsx` einbinden:**
+
 ```typescript
 import { WebsiteSchema } from '@/components/seo/WebsiteSchema'
 
@@ -281,6 +305,7 @@ import { WebsiteSchema } from '@/components/seo/WebsiteSchema'
 ```
 
 **Erfolgskriterium:**
+
 - ✅ WebSite Schema validiert erfolgreich
 - ✅ Nach 2-4 Wochen: Sitelinks in Google Search Console
 
@@ -295,15 +320,17 @@ Homepage-Content fokussiert zu stark auf "Entwicklung", zu wenig auf "Design" un
 Content-Anpassungen in folgenden Sections:
 
 #### Hero Section (`components/sections/HeroSection.tsx`)
+
 ```typescript
 // VORHER:
-"entwickeln digitale Erlebnisse"
+'entwickeln digitale Erlebnisse'
 
 // NACHHER:
-"gestalten und entwickeln digitale Erlebnisse"
+'gestalten und entwickeln digitale Erlebnisse'
 ```
 
 #### Neue Headline hinzufügen:
+
 ```typescript
 <h2 className="text-2xl md:text-3xl mb-4">
   Full-Service Digitalagentur für Web, App & Design
@@ -315,12 +342,14 @@ Content-Anpassungen in folgenden Sections:
 ```
 
 **Ziel-Keyword-Dichte:**
+
 - "Agentur" / "Digitalagentur": 10-15x
 - "Kreativagentur" / "Marketingagentur": 5-8x
 - "Design" / "Webdesign": 8-12x
 - "Entwicklung" / "Development": 12-18x (aktuell gut)
 
 **Erfolgskriterium:**
+
 - ✅ Ausgewogene Keyword-Verteilung zwischen "Dev", "Design", "Marketing"
 - ✅ Natürlicher Textfluss bleibt erhalten
 
@@ -412,6 +441,7 @@ export default function FAQPage() {
 ```
 
 **Erfolgskriterium:**
+
 - ✅ FAQPage Schema validiert
 - ✅ Featured Snippets erscheinen nach 2-4 Wochen
 
@@ -428,6 +458,7 @@ Erstelle OG Images für jede Hauptseite (1200x630px).
 **Verzeichnis:** `/public/og-images/` (NEU)
 
 **Benötigte Images:**
+
 ```
 og-images/
 ├── home.jpg          (1200x630) - Hauptseite
@@ -442,6 +473,7 @@ og-images/
 ```
 
 **Design-Richtlinien:**
+
 - **Logo:** HEADON Logo links oben
 - **Headline:** Service-Name groß und prominent
 - **Subline:** Kurzbeschreibung (1 Zeile)
@@ -450,11 +482,13 @@ og-images/
 - **Text:** Lesbar bei kleiner Darstellung (Safe Zone beachten)
 
 **Tool-Empfehlung:**
+
 - Vercel OG Image Generation: https://vercel.com/docs/functions/og-image-generation
 - Canva Template: 1200x630px
 - Figma Template: Aus Design-System
 
 **Erfolgskriterium:**
+
 - ✅ Alle OG Images optimiert (< 100KB)
 - ✅ Social Media Previews testen mit https://www.opengraph.xyz/
 
@@ -469,14 +503,15 @@ About-Seite zu generisch, fehlt Expertise-Signale.
 Erweitere About-Seite um:
 
 1. **Team-Section mit Skills**
+
    ```typescript
    const teamMembers = [
      {
-       name: "Onur Cirakoglu",
-       role: "Founder & Full-Stack Developer",
-       skills: ["React", "Next.js", "Node.js", "TypeScript", "UI/UX Design"],
-       image: "/team/onur.jpg"
-     }
+       name: 'Onur Cirakoglu',
+       role: 'Founder & Full-Stack Developer',
+       skills: ['React', 'Next.js', 'Node.js', 'TypeScript', 'UI/UX Design'],
+       image: '/team/onur.jpg',
+     },
      // Weitere Team-Mitglieder
    ]
    ```
@@ -492,6 +527,7 @@ Erweitere About-Seite um:
    - SEO-Text: "agile Entwicklung", "Scrum", "Sprint"
 
 **Erfolgskriterium:**
+
 - ✅ About-Seite enthält min. 800 Wörter
 - ✅ Team-Schema implementiert
 - ✅ Keywords: "Experten", "Spezialist", "Erfahrung"
@@ -506,30 +542,39 @@ Service-Seiten gut, aber Keyword-Potenzial nicht ausgeschöpft.
 **Aktion für jede Service-Seite:**
 
 #### Web Development (`app/services/web-development/page.tsx`)
+
 **Hinzufügen:**
+
 - H2: "Professionelle Webentwicklung vom Experten-Team"
 - Text mit Keywords: "Webagentur", "Website erstellen lassen", "Responsive Webdesign"
 - FAQ-Section speziell für Web Development
 
 #### Mobile Development (`app/services/mobile-development/page.tsx`)
+
 **Hinzufügen:**
+
 - H2: "Native & Cross-Platform App Entwicklung"
 - Keywords: "App Entwickler", "Flutter Agentur", "React Native Entwicklung"
 - Vergleichstabelle: Native vs. Cross-Platform
 
 #### UI/UX Design (`app/services/ui-ux-design/page.tsx`)
+
 **Hinzufügen:**
+
 - H2: "Kreatives Design für unvergessliche User Experience"
 - Keywords: "Webdesigner", "UX Designer", "Interface Design Agentur"
 - Design-Prozess visualisiert
 
 #### Backend Solutions (`app/services/backend-solutions/page.tsx`)
+
 **Hinzufügen:**
+
 - H2: "Skalierbare Backend-Architekturen für moderne Apps"
 - Keywords: "API Entwicklung", "Cloud Backend", "Datenbank Design"
 - Tech-Stack Vergleich
 
 **Erfolgskriterium:**
+
 - ✅ Jede Service-Seite enthält min. 1200 Wörter
 - ✅ Keyword-Dichte: 1,5-2,5%
 - ✅ Min. 3 H2-Headlines mit Keywords
@@ -543,6 +588,7 @@ Service-Seiten gut, aber Keyword-Potenzial nicht ausgeschöpft.
 **Aktion:**
 
 #### Google Business Profile
+
 1. Profil erstellen/optimieren für "Lauda-Königshofen"
 2. Kategorie: "Website-Designer", "Softwareunternehmen"
 3. Fotos hochladen (min. 10 Bilder):
@@ -556,80 +602,83 @@ Service-Seiten gut, aber Keyword-Potenzial nicht ausgeschöpft.
    - Service-Updates
 
 #### LocalBusiness Schema erweitern
+
 **Datei:** `components/seo/StructuredData.tsx`
 
 ```typescript
 // LocalBusiness Schema - ERWEITERT
 const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": `${baseUrl}/#business`,
-  name: "HEADON.pro",
-  alternateName: "HEADON Digitalagentur",
-  description: "Full-Service Digitalagentur für Webentwicklung, App Development, UI/UX Design und digitales Marketing",
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${baseUrl}/#business`,
+  name: 'HEADON.pro',
+  alternateName: 'HEADON Digitalagentur',
+  description:
+    'Full-Service Digitalagentur für Webentwicklung, App Development, UI/UX Design und digitales Marketing',
   image: [
     `${baseUrl}/headon-logo.svg`,
     `${baseUrl}/og-images/office.jpg`,
-    `${baseUrl}/og-images/team.jpg`
+    `${baseUrl}/og-images/team.jpg`,
   ],
-  priceRange: "€€€",
-  telephone: "+49-176-6304241",
-  email: "info@headon.pro",
+  priceRange: '€€€',
+  telephone: '+49-176-6304241',
+  email: 'info@headon.pro',
   url: baseUrl,
   address: {
-    "@type": "PostalAddress",
-    streetAddress: "", // Wenn vorhanden
-    addressLocality: "Lauda-Königshofen",
-    addressRegion: "Baden-Württemberg",
-    postalCode: "97922",
-    addressCountry: "DE"
+    '@type': 'PostalAddress',
+    streetAddress: '', // Wenn vorhanden
+    addressLocality: 'Lauda-Königshofen',
+    addressRegion: 'Baden-Württemberg',
+    postalCode: '97922',
+    addressCountry: 'DE',
   },
   geo: {
-    "@type": "GeoCoordinates",
+    '@type': 'GeoCoordinates',
     latitude: 49.5667,
-    longitude: 9.7000
+    longitude: 9.7,
   },
   areaServed: [
     {
-      "@type": "City",
-      name: "Lauda-Königshofen"
+      '@type': 'City',
+      name: 'Lauda-Königshofen',
     },
     {
-      "@type": "City",
-      name: "Bad Mergentheim"
+      '@type': 'City',
+      name: 'Bad Mergentheim',
     },
     {
-      "@type": "City",
-      name: "Tauberbischofsheim"
+      '@type': 'City',
+      name: 'Tauberbischofsheim',
     },
     {
-      "@type": "City",
-      name: "Wertheim"
+      '@type': 'City',
+      name: 'Wertheim',
     },
     {
-      "@type": "City",
-      name: "Würzburg"
+      '@type': 'City',
+      name: 'Würzburg',
     },
     {
-      "@type": "State",
-      name: "Baden-Württemberg"
-    }
+      '@type': 'State',
+      name: 'Baden-Württemberg',
+    },
   ],
   openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "09:00",
-    closes: "18:00"
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '18:00',
   },
   sameAs: [
-    "https://www.linkedin.com/company/headon-pro",
-    "https://github.com/headonpro",
-    "https://twitter.com/headonpro"
-  ]
+    'https://www.linkedin.com/company/headon-pro',
+    'https://github.com/headonpro',
+    'https://twitter.com/headonpro',
+  ],
 }
 ```
 
 **Erfolgskriterium:**
+
 - ✅ Google Business Profile vollständig
 - ✅ Erscheint im Local Pack für "Digitalagentur Lauda-Königshofen"
 - ✅ Google Maps Rankings
@@ -645,9 +694,11 @@ Fehlende Tiefe für Long-Tail Keywords.
 Erstelle Content-Hub mit 3 Säulen:
 
 #### 3.2.1 Glossar (`/glossar`)
+
 **Datei:** `app/glossar/page.tsx` (NEU)
 
 **Begriffe (A-Z):**
+
 - API (Application Programming Interface)
 - Responsive Design
 - PWA (Progressive Web App)
@@ -660,6 +711,7 @@ Erstelle Content-Hub mit 3 Säulen:
 - ... (min. 30 Begriffe)
 
 **Format pro Begriff:**
+
 ```markdown
 ## Begriff
 
@@ -668,6 +720,7 @@ Erstelle Content-Hub mit 3 Säulen:
 **Ausführliche Erklärung** (2-3 Absätze)
 
 **Vorteile:**
+
 - Punkt 1
 - Punkt 2
 
@@ -677,6 +730,7 @@ Erstelle Content-Hub mit 3 Säulen:
 ```
 
 **SEO-Vorteil:**
+
 - Long-Tail Keywords: "Was ist React?", "Was bedeutet Responsive Design?"
 - Featured Snippets für Definitionen
 - Interne Verlinkung zu Service-Seiten
@@ -684,6 +738,7 @@ Erstelle Content-Hub mit 3 Säulen:
 ---
 
 #### 3.2.2 Vergleiche (`/vergleiche`)
+
 **Datei:** `app/vergleiche/page.tsx` (NEU)
 
 **Vergleichs-Artikel:**
@@ -709,12 +764,14 @@ Erstelle Content-Hub mit 3 Säulen:
 5. **Supabase vs. Firebase vs. AWS: Backend-as-a-Service**
 
 **Format:**
+
 - Übersichtstabelle
 - Detaillierte Vor-/Nachteile
 - Use Case Beispiele
 - CTA zu passender Service-Seite
 
 **SEO-Vorteil:**
+
 - Long-Tail: "React vs Vue 2025", "Native oder Cross-Platform"
 - High Search Intent → höhere Conversion
 - Backlink-Potenzial
@@ -722,12 +779,14 @@ Erstelle Content-Hub mit 3 Säulen:
 ---
 
 #### 3.2.3 Case Studies erweitern (`/portfolio`)
+
 **Problem:**
 Portfolio vorhanden, aber zu wenig Details.
 
 **Aktion für jede Case Study:**
 
 **Struktur:**
+
 1. **Hero Section**
    - Client Logo
    - Projekt-Name
@@ -759,6 +818,7 @@ Portfolio vorhanden, aber zu wenig Details.
    - Learnings
 
 **Erfolgskriterium:**
+
 - ✅ Min. 5 ausführliche Case Studies
 - ✅ Jede 1000+ Wörter
 - ✅ Testimonial mit Person Schema
@@ -773,6 +833,7 @@ Portfolio vorhanden, aber zu wenig Details.
 **Content-Themen (Quartalsplan):**
 
 #### Q1 2025
+
 1. **"7 Gründe warum Ihre Website langsam ist (und wie Sie das ändern)"**
    - Performance-Tipps
    - Core Web Vitals
@@ -794,12 +855,14 @@ Portfolio vorhanden, aber zu wenig Details.
    - Timeline
 
 #### Q2 2025
+
 5. **"React oder Vue? Der ultimative Framework-Guide für Ihr nächstes Projekt"**
 6. **"Barrierefreies Webdesign: WCAG 2.2 Standards praktisch umsetzen"**
 7. **"Progressive Web Apps (PWA): Die Zukunft des Web?"**
 8. **"API-First Development: Warum moderne Apps auf APIs setzen"**
 
 **Erfolgskriterium:**
+
 - ✅ Konsistente Veröffentlichung (2x/Monat)
 - ✅ Min. 1500 Wörter pro Artikel
 - ✅ Article Schema für jeden Post
@@ -809,13 +872,16 @@ Portfolio vorhanden, aber zu wenig Details.
 ## 🤖 KI-SUCHMASCHINEN OPTIMIERUNG
 
 ### Warum KI-SEO wichtig ist
+
 Nutzer verwenden zunehmend:
+
 - ChatGPT mit Web Search
 - Perplexity AI
 - Google Bard/Gemini
 - Bing Chat
 
 Diese Tools bevorzugen:
+
 - ✅ Strukturierte Daten (JSON-LD)
 - ✅ Klare Frage-Antwort-Formate
 - ✅ Tabellen und Listen
@@ -827,6 +893,7 @@ Diese Tools bevorzugen:
 #### 4.1 FAQ-Format für jede Seite
 
 **Struktur:**
+
 ```html
 <section itemscope itemtype="https://schema.org/FAQPage">
   <h2>Häufige Fragen zu [Service]</h2>
@@ -834,15 +901,14 @@ Diese Tools bevorzugen:
   <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     <h3 itemprop="name">Frage hier?</h3>
     <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-      <div itemprop="text">
-        Antwort hier mit konkreten Fakten und Zahlen.
-      </div>
+      <div itemprop="text">Antwort hier mit konkreten Fakten und Zahlen.</div>
     </div>
   </div>
 </section>
 ```
 
 **Auf jeder Service-Seite 5-7 FAQs:**
+
 - "Was kostet [Service]?"
 - "Wie lange dauert [Service]?"
 - "Welche Technologien nutzen Sie für [Service]?"
@@ -854,6 +920,7 @@ Diese Tools bevorzugen:
 #### 4.2 Strukturierte Listen verwenden
 
 **VORHER (schlecht für KI):**
+
 ```text
 Wir bieten verschiedene Services an, darunter Webentwicklung,
 Mobile Apps, Design und Backend-Lösungen mit unterschiedlichen
@@ -861,18 +928,20 @@ Technologien und Preisen.
 ```
 
 **NACHHER (gut für KI):**
+
 ```markdown
 ## Unsere Services im Überblick
 
-| Service | Technologie | Preis | Dauer |
-|---------|-------------|-------|-------|
-| Webentwicklung | React, Next.js | ab 2.500€ | 2-4 Wochen |
-| Mobile Apps | Flutter, React Native | ab 8.000€ | 4-8 Wochen |
-| UI/UX Design | Figma, Adobe XD | ab 1.500€ | 1-2 Wochen |
-| Backend | Node.js, Supabase | ab 3.000€ | 2-3 Wochen |
+| Service        | Technologie           | Preis     | Dauer      |
+| -------------- | --------------------- | --------- | ---------- |
+| Webentwicklung | React, Next.js        | ab 2.500€ | 2-4 Wochen |
+| Mobile Apps    | Flutter, React Native | ab 8.000€ | 4-8 Wochen |
+| UI/UX Design   | Figma, Adobe XD       | ab 1.500€ | 1-2 Wochen |
+| Backend        | Node.js, Supabase     | ab 3.000€ | 2-3 Wochen |
 ```
 
 **Vorteil:**
+
 - KI kann Tabellen direkt extrahieren
 - Perfekt für Voice Search Antworten
 - Featured Snippet Potenzial
@@ -882,6 +951,7 @@ Technologien und Preisen.
 #### 4.3 Zahlen und Fakten prominent
 
 **Erstelle "Über uns in Zahlen" Section:**
+
 ```html
 <section class="stats">
   <h2>HEADON in Zahlen</h2>
@@ -909,6 +979,7 @@ Technologien und Preisen.
 ```
 
 **Mit Schema.org:**
+
 ```json
 {
   "@type": "Organization",
@@ -928,16 +999,19 @@ Technologien und Preisen.
 ### Einzurichtende Tools
 
 #### 1. Google Search Console
+
 - Property verifizieren: `https://headon.pro`
 - Sitemap einreichen: `https://headon.pro/sitemap.xml`
 
 **Wöchentlich prüfen:**
+
 - Impressions (Sichtbarkeit)
 - CTR (Click-Through-Rate)
 - Average Position
 - Coverage-Fehler
 
 **Ziele:**
+
 - Impressions: +100% in 3 Monaten
 - CTR: >3% (aktuell unbekannt)
 - Average Position: <10 für Haupt-Keywords
@@ -945,6 +1019,7 @@ Technologien und Preisen.
 ---
 
 #### 2. Google Analytics / Umami
+
 - Bereits eingerichtet ✅
 - Events tracken:
   - Button Klicks "Projekt starten"
@@ -953,6 +1028,7 @@ Technologien und Preisen.
   - Download von Resources
 
 **KPIs:**
+
 - Organic Traffic (Hauptmetrik)
 - Bounce Rate (Ziel: <40%)
 - Time on Site (Ziel: >2 Minuten)
@@ -963,12 +1039,14 @@ Technologien und Preisen.
 #### 3. Keyword Tracking Tools
 
 **Empfohlene Tools:**
+
 - **Ahrefs** (Premium, €99/Monat)
 - **SEMrush** (Premium, €119/Monat)
 - **Ubersuggest** (Budget, €29/Monat)
 - **Google Search Console** (Kostenlos, aber limitiert)
 
 **Zu trackende Keywords (Top 10):**
+
 1. Digitalagentur Lauda-Königshofen
 2. Webentwicklung Main-Tauber-Kreis
 3. Kreativagentur Würzburg
@@ -985,16 +1063,19 @@ Technologien und Preisen.
 ### Erfolgskontrolle: Meilensteine
 
 #### Nach 4 Wochen (Ende Priorität 1)
+
 - ✅ Strukturierte Daten: 4+ JSON-LD im HTML
 - ✅ Rich Snippets erscheinen in Google
 - ✅ Keyword-Rankings: Einstieg Top 30 für 3+ Keywords
 
 #### Nach 8 Wochen (Ende Priorität 2)
+
 - ✅ FAQ-Featured Snippets für 2+ Fragen
 - ✅ Keyword-Rankings: Top 20 für 5+ Keywords
 - ✅ Organischer Traffic: +30-50%
 
 #### Nach 12 Wochen (Ende Priorität 3)
+
 - ✅ Keyword-Rankings: Top 10 für 3+ Haupt-Keywords
 - ✅ Local Pack Appearance für "Digitalagentur Lauda-Königshofen"
 - ✅ Organischer Traffic: +100-150%
@@ -1007,6 +1088,7 @@ Technologien und Preisen.
 Diese Änderungen haben hohen Impact bei minimalem Aufwand:
 
 ### 1. Alt-Tags für alle Bilder prüfen ✅
+
 ```bash
 # Prüfen:
 grep -r "alt=\"\"" app/ components/
@@ -1023,6 +1105,7 @@ grep -r "alt=\"\"" app/ components/
 ---
 
 ### 2. H1-Tags prüfen (nur 1x pro Seite)
+
 ```bash
 # Prüfen:
 curl -s https://headon.pro | grep -o "<h1" | wc -l
@@ -1030,6 +1113,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 ```
 
 **Falls mehrere H1:**
+
 - Erste H1 behalten
 - Weitere zu H2 ändern
 
@@ -1038,7 +1122,9 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 ---
 
 ### 3. Internal Links zu Service-Seiten erhöhen
+
 **Auf Homepage:**
+
 - Minimum 5 Internal Links zu Services
 - Anchor-Text mit Keywords: "Webentwicklung", "App Development", "UI/UX Design"
 
@@ -1047,6 +1133,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 ---
 
 ### 4. Meta-Description Länge prüfen
+
 ```bash
 # Zu lange Descriptions werden abgeschnitten
 # Ideal: 150-160 Zeichen
@@ -1063,6 +1150,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 ### Backlink-Aufbau
 
 **Strategie:**
+
 1. **Lokale Verzeichnisse:**
    - meinestadt.de
    - gelbeseiten.de
@@ -1091,6 +1179,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 ### Video-Content
 
 **YouTube-Kanal erstellen:**
+
 - Channel Name: "HEADON.pro - Web & App Development"
 - Videos:
   - "So funktioniert unser Entwicklungs-Prozess"
@@ -1099,6 +1188,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
   - "Portfolio-Walkthrough: Projekt XYZ"
 
 **Impact:**
+
 - YouTube = 2. größte Suchmaschine
 - Video Snippets in Google
 - Längere Time on Site
@@ -1108,11 +1198,13 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 ### Testimonials & Trust-Signale
 
 **Sammle aktiv:**
+
 - Google Reviews
 - Trustpilot/ProvenExpert Bewertungen
 - Projekt-Testimonials
 
 **Integriere auf Website:**
+
 - Trust-Badges (ISO, sichere Zahlung, etc.)
 - Client-Logos
 - Ratings mit AggregateRating Schema
@@ -1122,11 +1214,13 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 ## 📋 CHECKLISTE: NÄCHSTE SCHRITTE
 
 ### 🚨 PRIORITÄT 0 - SOFORT (HEUTE!)
+
 - [ ] **H1-Tag fixen** in `HeroSection.tsx` (5 Minuten) 🔥
 - [ ] H1-Tags validieren (nur 1x pro Seite)
 - [ ] Alt-Tags für alle Bilder prüfen
 
 ### 🔴 PRIORITÄT 1 - Diese Woche (Woche 1)
+
 - [x] ~~Strukturierte Daten Rendering fixen~~ ✅ Funktioniert bereits!
 - [ ] **Homepage Metadata hinzufügen** (`app/page.tsx`)
 - [ ] **WebSite Schema erstellen** (`components/seo/WebsiteSchema.tsx`)
@@ -1134,6 +1228,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 - [ ] Content-Anpassungen (Keyword-Dichte erhöhen)
 
 ### 🟡 PRIORITÄT 2 - Nächste Woche (Woche 2)
+
 - [ ] FAQ-Seite erstellen (`app/faq/page.tsx`)
 - [ ] OG Images generieren (min. 5 wichtigste: home, services, about, contact, blog)
 - [ ] OG Images in Metadaten einbinden
@@ -1141,6 +1236,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 - [ ] Keyword-Tracking starten (Ahrefs/SEMrush)
 
 ### 🟢 PRIORITÄT 3 - Woche 3-4
+
 - [ ] About-Seite erweitern (Team, Tech-Stack, Prozess)
 - [ ] Service-Seiten Keyword-optimieren (alle 4)
 - [ ] Blog-Post #1 schreiben
@@ -1148,6 +1244,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 - [ ] Internal Links zu Service-Seiten erhöhen
 
 ### 📈 MONAT 2-3
+
 - [ ] Content-Hub aufbauen (Glossar + Vergleiche)
 - [ ] Case Studies ausarbeiten (5 Stück, je 1000+ Wörter)
 - [ ] Blog-Content-Kalender abarbeiten (2x/Monat)
@@ -1155,6 +1252,7 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 - [ ] Review System mit AggregateRating Schema
 
 ### 📊 TRACKING & MONITORING (Laufend)
+
 - [ ] Weekly: Google Search Console Impressions prüfen
 - [ ] Weekly: Keyword Rankings tracken
 - [ ] Monthly: Traffic-Analyse (Ziel: +30% pro Monat)
@@ -1169,11 +1267,13 @@ curl -s https://headon.pro | grep -o "<h1" | wc -l
 **Aktueller Status:** Wahrscheinlich gut (Next.js optimiert)
 
 **Prüfen mit:**
+
 ```bash
 npx lighthouse https://headon.pro --view
 ```
 
 **Falls nötig optimieren:**
+
 1. **LCP (Largest Contentful Paint):**
    - Hero-Bilder optimieren (WebP/AVIF)
    - Preload critical resources
@@ -1196,9 +1296,11 @@ npx lighthouse https://headon.pro --view
 ### Mobile-Optimierung
 
 **Prüfen:**
+
 - Google Mobile-Friendly Test: https://search.google.com/test/mobile-friendly
 
 **Optimierungen:**
+
 - Touch-Targets min. 48x48px
 - Viewport richtig konfiguriert ✅
 - Text lesbar ohne Zoom
@@ -1209,11 +1311,13 @@ npx lighthouse https://headon.pro --view
 ## 📞 SUPPORT & FRAGEN
 
 **Bei Fragen zu diesem Plan:**
+
 - Dokumentation: Siehe Google Search Central Docs
 - Tools: Google Search Console, PageSpeed Insights
 - Community: r/SEO, r/webdev, SEO-Stammtisch
 
 **Review dieses Plans:**
+
 - Alle 4 Wochen: Progress prüfen
 - Alle 12 Wochen: Strategie anpassen basierend auf Daten
 
@@ -1222,6 +1326,7 @@ npx lighthouse https://headon.pro --view
 ## 🔄 ÄNDERUNGSPROTOKOLL
 
 ### Version 1.1 (2025-10-09) - Code-Analyse Update
+
 **Durchgeführte Änderungen:**
 
 1. **Status-Update:** Aktueller Stand von 6/10 auf 6.5/10 erhöht
@@ -1244,6 +1349,7 @@ npx lighthouse https://headon.pro --view
    - PRIORITÄT 2: FAQ + OG Images (Nächste Woche)
 
 **Nächste Schritte:**
+
 1. H1-Tag fixen (5 Min)
 2. Homepage Metadata (10 Min)
 3. WebSite Schema (15 Min)
@@ -1255,27 +1361,30 @@ npx lighthouse https://headon.pro --view
 
 **VIEL ERFOLG! 🚀**
 
-*Erstellt: Oktober 2025*
-*Version: 1.1 (Update nach Code-Analyse)*
-*Nächstes Review: November 2025*
+_Erstellt: Oktober 2025_
+_Version: 1.1 (Update nach Code-Analyse)_
+_Nächstes Review: November 2025_
 
 ---
 
 ## 📞 QUICK REFERENCE
 
 **Kritische Dateien:**
+
 - `components/sections/HeroSection.tsx` (H1-Fix)
 - `app/page.tsx` (Homepage Metadata)
 - `components/seo/WebsiteSchema.tsx` (NEU erstellen)
 - `app/layout.tsx` (WebSite Schema einbinden)
 
 **Validierungs-Tools:**
+
 - Google Rich Results Test: https://search.google.com/test/rich-results
 - Schema Validator: https://validator.schema.org/
 - Meta Tags Preview: https://metatags.io/
 - Google PageSpeed Insights: https://pagespeed.web.dev/
 
 **Live-Checks:**
+
 ```bash
 # Strukturierte Daten prüfen
 curl -s https://headon.pro | grep -c "application/ld+json"

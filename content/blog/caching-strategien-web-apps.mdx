@@ -1,16 +1,16 @@
 ---
-title: "Caching-Strategien für moderne Web-Apps: Redis, CDN und Browser-Cache"
-description: "Praktischer Guide zu Caching: Browser Cache, CDN, Redis, Service Workers und Next.js Caching für dramatisch schnellere Web-Anwendungen."
-publishedAt: "2025-09-22T10:00:00Z"
+title: 'Caching-Strategien für moderne Web-Apps: Redis, CDN und Browser-Cache'
+description: 'Praktischer Guide zu Caching: Browser Cache, CDN, Redis, Service Workers und Next.js Caching für dramatisch schnellere Web-Anwendungen.'
+publishedAt: '2025-09-22T10:00:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["Caching", "Performance", "Redis", "CDN", "Service Worker"]
-category: "performance"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['Caching', 'Performance', 'Redis', 'CDN', 'Service Worker']
+category: 'performance'
 image:
-  url: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop"
-  alt: "Caching Architektur Diagramm mit verschiedenen Cache-Layern"
+  url: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop'
+  alt: 'Caching Architektur Diagramm mit verschiedenen Cache-Layern'
 readingTime: 10
 ---
 
@@ -88,17 +88,17 @@ const data = await fetch('https://api.example.com/data')
 
 // Cache 1 Stunde
 const posts = await fetch('https://api.example.com/posts', {
-  next: { revalidate: 3600 }
+  next: { revalidate: 3600 },
 })
 
 // Nie cachen
 const user = await fetch('https://api.example.com/user', {
-  cache: 'no-store'
+  cache: 'no-store',
 })
 
 // Force cache (auch wenn expired)
 const static = await fetch('https://api.example.com/config', {
-  cache: 'force-cache'
+  cache: 'force-cache',
 })
 ```
 
@@ -138,7 +138,7 @@ export async function updatePost(id: string) {
 ```tsx
 // Fetch mit Tag
 const posts = await fetch('https://api.example.com/posts', {
-  next: { tags: ['posts'] }
+  next: { tags: ['posts'] },
 })
 ```
 
@@ -187,7 +187,7 @@ async function purgeCache(urls: string[]) {
   await fetch('https://api.cloudflare.com/client/v4/zones/{zone_id}/purge_cache', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${process.env.CLOUDFLARE_TOKEN}`,
+      Authorization: `Bearer ${process.env.CLOUDFLARE_TOKEN}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ files: urls }),
@@ -317,11 +317,7 @@ const CACHE_NAME = 'v1'
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll([
-        '/',
-        '/offline.html',
-        '/images/logo.png',
-      ])
+      return cache.addAll(['/', '/offline.html', '/images/logo.png'])
     })
   )
 })
@@ -369,10 +365,7 @@ registerRoute(
 )
 
 // API: Network First
-registerRoute(
-  ({ url }) => url.pathname.startsWith('/api/'),
-  new NetworkFirst({ cacheName: 'api' })
-)
+registerRoute(({ url }) => url.pathname.startsWith('/api/'), new NetworkFirst({ cacheName: 'api' }))
 
 // CSS/JS: Stale While Revalidate
 registerRoute(
@@ -405,17 +398,9 @@ await revalidateTag(CACHE_TAGS.USER('123'))
 ```typescript
 // Warm cache on deploy
 async function warmCache() {
-  const criticalPaths = [
-    '/api/products',
-    '/api/categories',
-    '/api/featured',
-  ]
+  const criticalPaths = ['/api/products', '/api/categories', '/api/featured']
 
-  await Promise.all(
-    criticalPaths.map(path =>
-      fetch(`https://example.com${path}`)
-    )
-  )
+  await Promise.all(criticalPaths.map((path) => fetch(`https://example.com${path}`)))
 }
 ```
 
@@ -459,7 +444,7 @@ export async function GET(req: Request) {
     duration: Date.now() - start,
   })
 
-  return NextResponse.json(cached || await fetchData())
+  return NextResponse.json(cached || (await fetchData()))
 }
 ```
 
@@ -468,11 +453,13 @@ export async function GET(req: Request) {
 Bei unserem [E-Commerce-Projekt](/portfolio):
 
 **Vor Caching:**
+
 - API Response Time: 420ms
 - Page Load: 2.8s
 - Server Requests/min: 12,000
 
 **Nach Multi-Layer Caching:**
+
 - API Response Time: 45ms (-89%)
 - Page Load: 0.9s (-68%)
 - Server Requests/min: 2,400 (-80%)
@@ -503,4 +490,4 @@ Als [Performance-Spezialisten](/services/web-development) implementieren wir:
 
 [Kostenlose Beratung](/contact)
 
-*Aktualisiert: Mai 2024*
+_Aktualisiert: Mai 2024_

@@ -5,6 +5,7 @@
 Die Enterprise-SEO-Optimierung transformiert HEADON.pro von einer Basis-SEO-Website zu einer vollständigen Enterprise-Level SEO-Maschine für Agenturen. Aktuell verfügt die Website nur über grundlegende On-Page-SEO (Meta-Tags, Sitemap, Schema.org Basics), was für eine professionelle Agentur-Website absolut unzureichend ist.
 
 **Kernproblem:**
+
 - Nur 3 von 10 notwendigen Schema-Markups implementiert
 - Keine Content-Tiefe: Blog-System ist Mock, Portfolio ohne Detailseiten
 - Lokales SEO fehlt komplett trotz 6 definierter Städte
@@ -18,20 +19,24 @@ Die Enterprise-SEO-Optimierung transformiert HEADON.pro von einer Basis-SEO-Webs
 Diese Feature-Implementierung ist **kritisch** für die Hauptziele aus product.md:
 
 ### Performance & SEO Leadership (product.md Zeile 42-47)
+
 - **Aktuell:** Basis-SEO vorhanden, aber keine Content-Strategie
 - **Ziel:** "SEO Ranking: Top 10 für relevante Agentur-Keywords innerhalb von 6 Monaten" (Zeile 82)
 - **Impact:** Enterprise-SEO macht dieses Ziel erst erreichbar
 
 ### Business Objectives - Time-to-Market & Cost Efficiency (product.md Zeile 69-73)
+
 - Kunden erwarten von Agentur-Templates **produktionsreife SEO-Infrastruktur**
 - Ohne Enterprise-SEO ist Template nur 40% produktionsreif
 - SEO-Implementierung würde Kunden 40-60 Stunden kosten
 
 ### Future Vision - SEO Dashboard (product.md Zeile 149)
+
 - "SEO Dashboard: Real-time Ranking Monitoring" ist geplant
 - Enterprise-SEO legt die **technische Basis** dafür
 
 ### Technical Requirements (tech.md Zeile 244-246)
+
 - "Lighthouse Score: 95+ in all categories" inkl. **SEO-Kategorie**
 - "Standards Compliance: Open Graph, Twitter Cards, **Schema.org**" (Zeile 266)
 
@@ -134,6 +139,7 @@ Diese Feature-Implementierung ist **kritisch** für die Hauptziele aus product.m
 ## Non-Functional Requirements
 
 ### Code Architecture and Modularity
+
 - **Single Responsibility Principle**: Content-System (MDX), SEO-System (Schema), Template-System (Pages) sind getrennte Module
 - **Modular Design**: Schema-Generator als wiederverwendbare Utility, Content-Loader als separater Service
 - **Dependency Management**: Content-System unabhängig von SEO-System, beide unabhängig von UI-Components
@@ -143,6 +149,7 @@ Diese Feature-Implementierung ist **kritisch** für die Hauptziele aus product.m
   - `generateSitemap()` für Sitemap-Generierung
 
 ### Performance (aus tech.md Zeile 240-246)
+
 - **Page Load Time (LCP)**: < 1.5 Sekunden für alle neuen Seiten
 - **Time to Interactive (TTI)**: < 3 Sekunden
 - **Lighthouse Score**: 95+ in allen Kategorien (inkl. SEO)
@@ -150,24 +157,28 @@ Diese Feature-Implementierung ist **kritisch** für die Hauptziele aus product.m
 - **Build Time**: < 120 Sekunden (trotz dynamischer Sitemap-Generierung)
 
 ### Security (aus tech.md Zeile 270-288)
+
 - **Input Validation**: Alle MDX-Inhalte werden sanitized vor Rendering
 - **XSS Prevention**: Kein `dangerouslySetInnerHTML` außer für JSON-LD Schema
 - **Schema Injection**: JSON-LD wird escaped vor Output
 - **File Access**: MDX-Content nur aus definierten Verzeichnissen
 
 ### Reliability
+
 - **Error Boundaries**: Alle neuen Sections haben Error Boundaries
 - **Graceful Degradation**: Wenn Schema-Generierung fehlschlägt, wird Page trotzdem geladen
 - **Fallback Content**: 404-Page zeigt hilfreiche Navigation auch bei Fehler
 - **Build Resilience**: Build schlägt nicht fehl wenn einzelner MDX-Artikel fehlerhaft
 
 ### Usability (aus product.md Zeile 98-103)
+
 - **Mobile-First**: Alle neuen Pages sind mobile-optimiert
 - **Accessibility**: WCAG 2.1 Level AA für alle neuen Components
 - **Reading Experience**: Blog-Artikel haben optimale Line-Length (60-75 Zeichen), Schriftgröße 18-20px, Zeilenhöhe 1.6-1.8
 - **Navigation**: Breadcrumbs auf allen Unterseiten für klare Hierarchie
 
 ### SEO-Specific Requirements
+
 - **Structured Data Validation**: Alle Schema-Markups müssen Google Rich Results Test bestehen
 - **Sitemap Protocol**: XML-Sitemaps müssen Sitemap Protocol 0.9 Standard entsprechen
 - **RSS Standard**: RSS-Feed muss RSS 2.0 Standard entsprechen
@@ -175,6 +186,7 @@ Diese Feature-Implementierung ist **kritisch** für die Hauptziele aus product.m
 - **Meta-Tag Completeness**: Alle Seiten haben Title (50-60 Zeichen), Description (150-160 Zeichen), OG-Tags
 
 ### Content Requirements
+
 - **Blog-Artikel**: Min. 15 initiale Artikel mit 800-2000 Wörtern
 - **Case Studies**: Min. 6 Portfolio-Projekte mit vollständigen Details
 - **Service-Pages**: 4 Seiten mit jeweils 2000+ Wörtern
@@ -182,12 +194,14 @@ Diese Feature-Implementierung ist **kritisch** für die Hauptziele aus product.m
 - **FAQ-Content**: Min. 25 FAQs verteilt über alle Service-Pages
 
 ### Testing Requirements (WICHTIG: User sagt "Wir brauchen keine Tests")
+
 - **Keine automatisierten Tests erforderlich**
 - **Manuelle Validierung**: Google Rich Results Test für Schema-Markups
 - **Build Verification**: Production Build muss erfolgreich sein
 - **Manual Testing**: Development Environment Testing ausreichend
 
 ### Deployment Requirements
+
 - **Backwards Compatibility**: Bestehende URLs (/, /services, /portfolio, /about, /contact, /blog) bleiben unverändert
 - **Incremental Rollout**: Neue Features können schrittweise deployed werden
 - **Zero Downtime**: Deployment darf bestehende Seiten nicht beeinträchtigen

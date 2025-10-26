@@ -31,7 +31,7 @@ import {
   Zap,
   Award,
   Timer,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import CalendlyWidget from '@/components/contact/CalendlyWidget'
@@ -44,22 +44,22 @@ const leadScoringWeights = {
     '5000-10000': 10,
     '10000-20000': 15,
     '20000+': 20,
-    'consulting': 3
+    consulting: 3,
   },
   timeline: {
-    'immediately': 20,
+    immediately: 20,
     'next-month': 15,
     '2-3-months': 10,
-    'planning': 5
+    planning: 5,
   },
   projectType: {
     'website-simple': 5,
     'website-complex': 10,
     'mobile-app': 15,
-    'ecommerce': 15,
-    'custom': 20,
-    'unsure': 3
-  }
+    ecommerce: 15,
+    custom: 20,
+    unsure: 3,
+  },
 }
 
 export default function ContactContent() {
@@ -72,7 +72,7 @@ export default function ContactContent() {
     budget: '',
     timeline: '',
     message: '',
-    files: [] as File[]
+    files: [] as File[],
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -105,16 +105,31 @@ export default function ContactContent() {
   useEffect(() => {
     let score = 0
 
-    if (formData.budget && leadScoringWeights.budget[formData.budget as keyof typeof leadScoringWeights.budget]) {
+    if (
+      formData.budget &&
+      leadScoringWeights.budget[formData.budget as keyof typeof leadScoringWeights.budget]
+    ) {
       score += leadScoringWeights.budget[formData.budget as keyof typeof leadScoringWeights.budget]
     }
 
-    if (formData.timeline && leadScoringWeights.timeline[formData.timeline as keyof typeof leadScoringWeights.timeline]) {
-      score += leadScoringWeights.timeline[formData.timeline as keyof typeof leadScoringWeights.timeline]
+    if (
+      formData.timeline &&
+      leadScoringWeights.timeline[formData.timeline as keyof typeof leadScoringWeights.timeline]
+    ) {
+      score +=
+        leadScoringWeights.timeline[formData.timeline as keyof typeof leadScoringWeights.timeline]
     }
 
-    if (formData.projectType && leadScoringWeights.projectType[formData.projectType as keyof typeof leadScoringWeights.projectType]) {
-      score += leadScoringWeights.projectType[formData.projectType as keyof typeof leadScoringWeights.projectType]
+    if (
+      formData.projectType &&
+      leadScoringWeights.projectType[
+        formData.projectType as keyof typeof leadScoringWeights.projectType
+      ]
+    ) {
+      score +=
+        leadScoringWeights.projectType[
+          formData.projectType as keyof typeof leadScoringWeights.projectType
+        ]
     }
 
     if (formData.company) score += 10
@@ -123,7 +138,6 @@ export default function ContactContent() {
 
     setLeadScore(score)
   }, [formData])
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -142,10 +156,13 @@ export default function ContactContent() {
         message: formData.message,
         lead_score: leadScore,
         source: 'contact-form',
-        files: formData.files.length > 0 ? {
-          count: formData.files.length,
-          names: formData.files.map(f => f.name)
-        } : null
+        files:
+          formData.files.length > 0
+            ? {
+                count: formData.files.length,
+                names: formData.files.map((f) => f.name),
+              }
+            : null,
       }
 
       // Submit to API route
@@ -154,7 +171,7 @@ export default function ContactContent() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(submissionData)
+        body: JSON.stringify(submissionData),
       })
 
       const result = await response.json()
@@ -168,7 +185,8 @@ export default function ContactContent() {
       // Show success message with conditional calendly info
       if (leadScore > 30) {
         toast.success('Vielen Dank für Ihre Anfrage!', {
-          description: 'Wir melden uns innerhalb von 2 Stunden bei Ihnen. Sie können auch direkt einen Termin buchen!',
+          description:
+            'Wir melden uns innerhalb von 2 Stunden bei Ihnen. Sie können auch direkt einen Termin buchen!',
           duration: 6000,
         })
         setShowCalendly(true)
@@ -189,13 +207,14 @@ export default function ContactContent() {
         budget: '',
         timeline: '',
         message: '',
-        files: []
+        files: [],
       })
-
     } catch (error) {
       console.error('Submission error:', error)
       toast.error('Ein Fehler ist aufgetreten', {
-        description: (error as Error)?.message || 'Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.',
+        description:
+          (error as Error)?.message ||
+          'Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.',
       })
     } finally {
       setIsSubmitting(false)
@@ -203,35 +222,37 @@ export default function ContactContent() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       {/* Animated Gradient Background - Premium wie HeroSection */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+      <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
       {/* Animated Gradient Layers */}
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0 opacity-60"
           animate={{
-            background: isMobile ? [
-              'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
-              'radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.5) 0%, transparent 40%)',
-              'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
-            ] : [
-              'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 40% 40%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
-            ],
+            background: isMobile
+              ? [
+                  'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
+                  'radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.5) 0%, transparent 40%)',
+                  'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
+                ]
+              : [
+                  'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+                  'radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
+                  'radial-gradient(circle at 40% 40%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+                  'radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
+                  'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+                ],
           }}
           transition={{
             duration: isMobile ? 8 : 10,
             repeat: Infinity,
-            ease: "linear"
+            ease: 'linear',
           }}
           style={{
             transform: 'translateZ(0)',
-            willChange: 'background'
+            willChange: 'background',
           }}
         />
       </div>
@@ -243,16 +264,16 @@ export default function ContactContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="pt-40 pb-24 px-4"
+          className="px-4 pt-40 pb-24"
         >
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="mx-auto max-w-4xl text-center">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl mb-12 font-heading"
+              className="font-heading mb-12 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary-300 via-accent-500 to-secondary-600">
+              <span className="from-secondary-300 via-accent-500 to-secondary-600 bg-gradient-to-r bg-clip-text text-transparent">
                 Lassen Sie uns Ihr Projekt besprechen
               </span>
             </motion.h1>
@@ -260,7 +281,7 @@ export default function ContactContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-lg text-white/90 max-w-3xl mx-auto mb-8"
+              className="mx-auto mb-8 max-w-3xl text-lg text-white/90"
             >
               Kostenlose Erstberatung in 15 Minuten - unverbindlich und transparent
             </motion.p>
@@ -270,28 +291,34 @@ export default function ContactContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+              className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2"
+                className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 backdrop-blur-sm"
               >
-                <Clock className="w-5 h-5 text-accent-500" />
-                <span className="text-sm font-medium text-white">Antwort innerhalb von 2 Stunden</span>
+                <Clock className="text-accent-500 h-5 w-5" />
+                <span className="text-sm font-medium text-white">
+                  Antwort innerhalb von 2 Stunden
+                </span>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2"
+                className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 backdrop-blur-sm"
               >
-                <MessageSquare className="w-5 h-5 text-accent-500" />
-                <span className="text-sm font-medium text-white">Persönliches Gespräch, keine Verkaufs-Calls</span>
+                <MessageSquare className="text-accent-500 h-5 w-5" />
+                <span className="text-sm font-medium text-white">
+                  Persönliches Gespräch, keine Verkaufs-Calls
+                </span>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2"
+                className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 backdrop-blur-sm"
               >
-                <TrendingUp className="w-5 h-5 text-accent-500" />
-                <span className="text-sm font-medium text-white">Kostenlose Projekt-Einschätzung</span>
+                <TrendingUp className="text-accent-500 h-5 w-5" />
+                <span className="text-sm font-medium text-white">
+                  Kostenlose Projekt-Einschätzung
+                </span>
               </motion.div>
             </motion.div>
 
@@ -300,34 +327,34 @@ export default function ContactContent() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="flex items-center justify-center gap-2 text-white/80 text-sm"
+              className="flex items-center justify-center gap-2 text-sm text-white/80"
             >
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              <div className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
               <span>Verfügbarkeit</span>
             </motion.div>
           </div>
         </motion.section>
 
         {/* Kontakt-Optionen */}
-        <section className="pb-12 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-8">
+        <section className="px-4 pb-12">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid gap-8 lg:grid-cols-2">
               {/* Option A: Sofort-Termin */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Card className="p-6 bg-white/10 backdrop-blur-md shadow-xl hover:bg-white/15 transition-all border border-white/20">
+                <Card className="border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md transition-all hover:bg-white/15">
                   <CardContent className="p-0">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="mb-4 flex items-center justify-between">
                       <h2 className="text-2xl font-bold text-white">Direkt Termin buchen</h2>
-                      <Badge className="bg-white/20 backdrop-blur-sm text-white border border-white/20">
-                        <Timer className="w-3 h-3 mr-1" />
+                      <Badge className="border border-white/20 bg-white/20 text-white backdrop-blur-sm">
+                        <Timer className="mr-1 h-3 w-3" />
                         15 Min
                       </Badge>
                     </div>
-                    <p className="text-white/80 mb-6">
+                    <p className="mb-6 text-white/80">
                       Wählen Sie einen passenden Termin für Ihre kostenlose Erstberatung
                     </p>
 
@@ -338,12 +365,12 @@ export default function ContactContent() {
                       <motion.div
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-8 text-center cursor-pointer hover:bg-white/15 transition-all"
+                        className="cursor-pointer rounded-lg border border-white/20 bg-white/10 p-8 text-center backdrop-blur-sm transition-all hover:bg-white/15"
                         onClick={() => setShowCalendly(true)}
                       >
-                        <Calendar className="w-12 h-12 text-white mx-auto mb-4" />
-                        <Button className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800">
-                          <Calendar className="w-4 h-4 mr-2" />
+                        <Calendar className="mx-auto mb-4 h-12 w-12 text-white" />
+                        <Button className="from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 w-full bg-gradient-to-r">
+                          <Calendar className="mr-2 h-4 w-4" />
                           Termin-Kalender öffnen
                         </Button>
                       </motion.div>
@@ -351,15 +378,15 @@ export default function ContactContent() {
 
                     <div className="mt-4 space-y-2">
                       <div className="flex items-center gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-accent-500" />
+                        <CheckCircle2 className="text-accent-500 h-4 w-4" />
                         <span>15-Minuten Slots verfügbar</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-accent-500" />
+                        <CheckCircle2 className="text-accent-500 h-4 w-4" />
                         <span>Zoom/Google Meet Link automatisch</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-accent-500" />
+                        <CheckCircle2 className="text-accent-500 h-4 w-4" />
                         <span>Erinnerung per Email</span>
                       </div>
                     </div>
@@ -373,18 +400,18 @@ export default function ContactContent() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <Card className="p-6 bg-white/10 backdrop-blur-md shadow-xl hover:bg-white/15 transition-all border border-white/20">
+                <Card className="border border-white/20 bg-white/10 p-6 shadow-xl backdrop-blur-md transition-all hover:bg-white/15">
                   <CardContent className="p-0">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="mb-4 flex items-center justify-between">
                       <h2 className="text-2xl font-bold text-white">Oder schreiben Sie uns</h2>
                       {leadScore > 0 && (
-                        <Badge className="bg-white/20 backdrop-blur-sm text-white border border-white/20">
-                          <Award className="w-3 h-3 mr-1" />
+                        <Badge className="border border-white/20 bg-white/20 text-white backdrop-blur-sm">
+                          <Award className="mr-1 h-3 w-3" />
                           Lead Score: {leadScore}
                         </Badge>
                       )}
                     </div>
-                    <p className="text-white/80 mb-6">
+                    <p className="mb-6 text-white/80">
                       Beschreiben Sie Ihr Projekt und wir melden uns schnellstmöglich
                     </p>
 
@@ -408,22 +435,22 @@ export default function ContactContent() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="py-12 px-4 bg-gradient-to-b from-transparent to-white/10"
+          className="bg-gradient-to-b from-transparent to-white/10 px-4 py-12"
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="mx-auto max-w-6xl">
             {/* Quick-Facts Leiste */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="flex flex-wrap justify-center gap-4 mb-12"
+              className="mb-12 flex flex-wrap justify-center gap-4"
             >
               {[
                 { icon: CheckCircle2, text: '100% Zufriedenheit', color: 'text-accent-500' },
                 { icon: Zap, text: '4x schneller', color: 'text-accent-500' },
                 { icon: TrendingUp, text: '30-50% günstiger', color: 'text-accent-500' },
-                { icon: Shield, text: 'DSGVO-konform', color: 'text-accent-500' }
+                { icon: Shield, text: 'DSGVO-konform', color: 'text-accent-500' },
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -433,14 +460,16 @@ export default function ContactContent() {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -2 }}
                 >
-                  <Badge variant="secondary" className="px-4 py-2 bg-white/20 backdrop-blur-sm text-white">
-                    <item.icon className={`w-4 h-4 mr-1 ${item.color}`} />
+                  <Badge
+                    variant="secondary"
+                    className="bg-white/20 px-4 py-2 text-white backdrop-blur-sm"
+                  >
+                    <item.icon className={`mr-1 h-4 w-4 ${item.color}`} />
                     {item.text}
                   </Badge>
                 </motion.div>
               ))}
             </motion.div>
-
 
             {/* FAQ Sektion with Animation */}
             <motion.div
@@ -448,42 +477,49 @@ export default function ContactContent() {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="max-w-3xl mx-auto"
+              className="mx-auto max-w-3xl"
             >
-              <h2 className="text-3xl font-bold text-center mb-8 text-white">Häufige Fragen</h2>
+              <h2 className="mb-8 text-center text-3xl font-bold text-white">Häufige Fragen</h2>
               <Accordion type="single" collapsible className="w-full space-y-4">
                 {[
                   {
-                    question: "Wie läuft die Zusammenarbeit ab?",
-                    answer: "15-Min Gespräch → 48h Angebot → Projekt-Start in 1-2 Wochen. Wir arbeiten agil und transparent, Sie sind immer auf dem Laufenden."
+                    question: 'Wie läuft die Zusammenarbeit ab?',
+                    answer:
+                      '15-Min Gespräch → 48h Angebot → Projekt-Start in 1-2 Wochen. Wir arbeiten agil und transparent, Sie sind immer auf dem Laufenden.',
                   },
                   {
-                    question: "Was kostet eine Website?",
-                    answer: "Je nach Umfang 2.500€ - 10.000€. Exakte Kosten erhalten Sie nach unserem Erstgespräch. Wir erstellen immer ein Festpreisangebot, damit Sie Planungssicherheit haben."
+                    question: 'Was kostet eine Website?',
+                    answer:
+                      'Je nach Umfang 2.500€ - 10.000€. Exakte Kosten erhalten Sie nach unserem Erstgespräch. Wir erstellen immer ein Festpreisangebot, damit Sie Planungssicherheit haben.',
                   },
                   {
-                    question: "Wie lange dauert die Entwicklung?",
-                    answer: "Website: 2-4 Wochen, App: 4-8 Wochen - 4x schneller als üblich. Durch unsere effiziente KI-unterstützte Entwicklung sparen Sie Zeit und Geld."
+                    question: 'Wie lange dauert die Entwicklung?',
+                    answer:
+                      'Website: 2-4 Wochen, App: 4-8 Wochen - 4x schneller als üblich. Durch unsere effiziente KI-unterstützte Entwicklung sparen Sie Zeit und Geld.',
                   },
                   {
-                    question: "Gibt es versteckte Kosten?",
-                    answer: "Nein. Festpreis vor Projektbeginn, keine Überraschungen. Alle Kosten werden transparent im Angebot aufgeführt."
+                    question: 'Gibt es versteckte Kosten?',
+                    answer:
+                      'Nein. Festpreis vor Projektbeginn, keine Überraschungen. Alle Kosten werden transparent im Angebot aufgeführt.',
                   },
                   {
-                    question: "Was passiert nach dem Launch?",
-                    answer: "6 Monate kostenloser Support, dann optional Wartungsvertrag. Sie erhalten alle Zugänge und können jederzeit selbst Änderungen vornehmen."
-                  }
+                    question: 'Was passiert nach dem Launch?',
+                    answer:
+                      '6 Monate kostenloser Support, dann optional Wartungsvertrag. Sie erhalten alle Zugänge und können jederzeit selbst Änderungen vornehmen.',
+                  },
                 ].map((faq, index) => (
-                  <AccordionItem key={`item-${index + 1}`} value={`item-${index + 1}`} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4">
-                    <AccordionTrigger className="hover:no-underline text-left text-white">
+                  <AccordionItem
+                    key={`item-${index + 1}`}
+                    value={`item-${index + 1}`}
+                    className="rounded-lg border border-white/20 bg-white/10 px-4 backdrop-blur-md"
+                  >
+                    <AccordionTrigger className="text-left text-white hover:no-underline">
                       <div className="flex items-center gap-2">
-                        <AlertCircle className="w-5 h-5 text-accent-500 flex-shrink-0" />
+                        <AlertCircle className="text-accent-500 h-5 w-5 flex-shrink-0" />
                         <span>{faq.question}</span>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="text-white/80">
-                      {faq.answer}
-                    </AccordionContent>
+                    <AccordionContent className="text-white/80">{faq.answer}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
@@ -498,27 +534,27 @@ export default function ContactContent() {
           <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30, delay: 1 }}
-            className="fixed bottom-0 left-0 right-0 z-50"
+            transition={{ type: 'spring', stiffness: 300, damping: 30, delay: 1 }}
+            className="fixed right-0 bottom-0 left-0 z-50"
           >
-            <div className="bg-gradient-to-t from-primary-900/50 via-primary-900/30 to-transparent backdrop-blur-md border-t border-white/10 p-4 cursor-pointer hover:from-primary-900/60 transition-colors">
-              <div className="max-w-md mx-auto flex items-center justify-between">
+            <div className="from-primary-900/50 via-primary-900/30 hover:from-primary-900/60 cursor-pointer border-t border-white/10 bg-gradient-to-t to-transparent p-4 backdrop-blur-md transition-colors">
+              <div className="mx-auto flex max-w-md items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <div className="h-2 w-2 animate-pulse rounded-full bg-green-400" />
                   <div>
-                    <p className="text-white font-semibold text-sm">Jetzt Kontakt aufnehmen</p>
-                    <p className="text-white/60 text-xs">Tap um Optionen zu sehen</p>
+                    <p className="text-sm font-semibold text-white">Jetzt Kontakt aufnehmen</p>
+                    <p className="text-xs text-white/60">Tap um Optionen zu sehen</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                    <Phone className="w-4 h-4 text-white" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+                    <Phone className="h-4 w-4 text-white" />
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                    <Calendar className="w-4 h-4 text-white" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+                    <Calendar className="h-4 w-4 text-white" />
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                    <Mail className="w-4 h-4 text-white" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+                    <Mail className="h-4 w-4 text-white" />
                   </div>
                 </div>
               </div>
@@ -526,15 +562,15 @@ export default function ContactContent() {
           </motion.div>
         </DrawerTrigger>
 
-        <DrawerContent className="bg-white/5 backdrop-blur-xl border-t border-white/20">
+        <DrawerContent className="border-t border-white/20 bg-white/5 backdrop-blur-xl">
           <DrawerHeader className="text-center">
-            <DrawerTitle className="text-white text-2xl font-bold">Kontakt aufnehmen</DrawerTitle>
+            <DrawerTitle className="text-2xl font-bold text-white">Kontakt aufnehmen</DrawerTitle>
             <DrawerDescription className="text-white/70">
               Wählen Sie Ihre bevorzugte Kontaktmethode
             </DrawerDescription>
           </DrawerHeader>
 
-          <div className="p-6 pb-8 space-y-4">
+          <div className="space-y-4 p-6 pb-8">
             {/* Termin buchen - Primary */}
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button
@@ -543,9 +579,9 @@ export default function ContactContent() {
                   setShowCalendly(true)
                   // Drawer schließt automatisch
                 }}
-                className="w-full h-14 bg-gradient-to-r from-primary-500 to-accent-600 hover:from-primary-600 hover:to-accent-700 text-white font-semibold text-base"
+                className="from-primary-500 to-accent-600 hover:from-primary-600 hover:to-accent-700 h-14 w-full bg-gradient-to-r text-base font-semibold text-white"
               >
-                <Calendar className="w-5 h-5 mr-2" />
+                <Calendar className="mr-2 h-5 w-5" />
                 Termin buchen (15 Min kostenlos)
               </Button>
             </motion.div>
@@ -555,7 +591,9 @@ export default function ContactContent() {
                 <span className="w-full border-t border-white/20" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-primary-600/20 backdrop-blur-sm px-2 text-white/60">Oder direkt</span>
+                <span className="bg-primary-600/20 px-2 text-white/60 backdrop-blur-sm">
+                  Oder direkt
+                </span>
               </div>
             </div>
 
@@ -565,10 +603,10 @@ export default function ContactContent() {
                 <Button
                   size="lg"
                   variant="outline"
-                  onClick={() => window.location.href = 'tel:+4917663040241'}
-                  className="w-full h-14 bg-white/5 border-white/20 hover:bg-white/10 text-white"
+                  onClick={() => (window.location.href = 'tel:+4917663040241')}
+                  className="h-14 w-full border-white/20 bg-white/5 text-white hover:bg-white/10"
                 >
-                  <Phone className="w-5 h-5 mr-2" />
+                  <Phone className="mr-2 h-5 w-5" />
                   Anrufen
                 </Button>
               </motion.div>
@@ -578,10 +616,10 @@ export default function ContactContent() {
                   size="lg"
                   variant="outline"
                   asChild
-                  className="w-full h-14 bg-white/5 border-white/20 hover:bg-white/10 text-white"
+                  className="h-14 w-full border-white/20 bg-white/5 text-white hover:bg-white/10"
                 >
                   <a href="mailto:hallo@headon.pro">
-                    <Mail className="w-5 h-5 mr-2" />
+                    <Mail className="mr-2 h-5 w-5" />
                     Email
                   </a>
                 </Button>
@@ -589,8 +627,8 @@ export default function ContactContent() {
             </div>
 
             {/* Trust Indicator */}
-            <div className="flex items-center justify-center gap-2 text-white/60 text-sm pt-2">
-              <CheckCircle2 className="w-4 h-4 text-accent-400" />
+            <div className="flex items-center justify-center gap-2 pt-2 text-sm text-white/60">
+              <CheckCircle2 className="text-accent-400 h-4 w-4" />
               <span>Antwort innerhalb von 2 Stunden</span>
             </div>
           </div>

@@ -5,6 +5,8 @@ import {
   getAllServicePages,
   getAllCityPages,
 } from '@/lib/content/content-api'
+import { glossaryTerms } from '@/lib/content/glossary'
+import { comparisonArticles } from '@/lib/content/comparisons'
 
 // Timeout for sitemap generation (30 seconds max)
 export const maxDuration = 30
@@ -17,13 +19,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const currentDate = new Date()
 
   // Load all content in parallel for performance
-  const [blogPosts, portfolioProjects, servicePages, cityPages] =
-    await Promise.all([
-      getAllBlogPosts(),
-      getAllPortfolioProjects(),
-      getAllServicePages(),
-      getAllCityPages(),
-    ])
+  const [blogPosts, portfolioProjects, servicePages, cityPages] = await Promise.all([
+    getAllBlogPosts(),
+    getAllPortfolioProjects(),
+    getAllServicePages(),
+    getAllCityPages(),
+  ])
 
   // Static pages with priorities
   const staticPages: MetadataRoute.Sitemap = [
@@ -81,27 +82,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    {
+      url: `${baseUrl}/faq`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/glossar`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/vergleiche`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ]
 
   // Blog posts (priority 0.8, weekly updates)
   const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(
-      post.frontmatter.updatedAt || post.frontmatter.publishedAt
-    ),
+    lastModified: new Date(post.frontmatter.updatedAt || post.frontmatter.publishedAt),
     changeFrequency: 'weekly',
     priority: 0.8,
   }))
 
   // Portfolio projects (priority 0.7, monthly updates)
-  const portfolioEntries: MetadataRoute.Sitemap = portfolioProjects.map(
-    (project) => ({
-      url: `${baseUrl}/portfolio/${project.slug}`,
-      lastModified: new Date(project.frontmatter.date),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    })
-  )
+  const portfolioEntries: MetadataRoute.Sitemap = portfolioProjects.map((project) => ({
+    url: `${baseUrl}/portfolio/${project.slug}`,
+    lastModified: new Date(project.frontmatter.date),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
 
   // Service pages (priority 0.9, monthly updates)
   const serviceEntries: MetadataRoute.Sitemap = servicePages.map((service) => ({
@@ -119,6 +134,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
+  // Glossary terms (priority 0.6, monthly updates)
+  const glossaryEntries: MetadataRoute.Sitemap = glossaryTerms.map((term) => ({
+    url: `${baseUrl}/glossar/${term.id}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  // Comparison articles (priority 0.7, monthly updates)
+  const comparisonEntries: MetadataRoute.Sitemap = comparisonArticles.map((comparison) => ({
+    url: `${baseUrl}/vergleiche/${comparison.slug}`,
+    lastModified: new Date(comparison.publishedAt),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
   // Combine all entries
   return [
     ...staticPages,
@@ -126,5 +157,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...portfolioEntries,
     ...serviceEntries,
     ...cityEntries,
+    ...glossaryEntries,
+    ...comparisonEntries,
   ]
 }

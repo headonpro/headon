@@ -2,8 +2,10 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Über uns | HEADON.pro - Ihre Digitalagentur in Lauda-Königshofen',
-  description: 'Lernen Sie HEADON.pro kennen - Ein junges, dynamisches Team von Digital-Experten in Lauda-Königshofen. Wir verbinden Kreativität mit modernster Technologie.',
-  keywords: 'Digitalagentur Lauda-Königshofen, Webagentur Baden-Württemberg, Team, Über uns, Digital Experten, Kreativagentur, Full-Service Agentur',
+  description:
+    'Lernen Sie HEADON.pro kennen - Ein junges, dynamisches Team von Digital-Experten in Lauda-Königshofen. Wir verbinden Kreativität mit modernster Technologie.',
+  keywords:
+    'Digitalagentur Lauda-Königshofen, Webagentur Baden-Württemberg, Team, Über uns, Digital Experten, Kreativagentur, Full-Service Agentur',
   openGraph: {
     title: 'Über HEADON.pro | Digitalagentur Lauda-Königshofen',
     description: 'Passion für digitale Exzellenz - Lernen Sie unser Team kennen',

@@ -1,16 +1,16 @@
 ---
-title: "Progressive Web Apps (PWA): Der komplette Guide 2025"
-description: "PWA Entwicklung meistern: Service Workers, Offline-Support, Push Notifications, Installation und moderne PWA-Features für app-ähnliche Web-Erlebnisse."
-publishedAt: "2025-07-28T08:30:00Z"
+title: 'Progressive Web Apps (PWA): Der komplette Guide 2025'
+description: 'PWA Entwicklung meistern: Service Workers, Offline-Support, Push Notifications, Installation und moderne PWA-Features für app-ähnliche Web-Erlebnisse.'
+publishedAt: '2025-07-28T08:30:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["PWA", "Service Worker", "Web App", "Offline", "Push Notifications"]
-category: "mobile"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['PWA', 'Service Worker', 'Web App', 'Offline', 'Push Notifications']
+category: 'mobile'
 image:
-  url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop"
-  alt: "Progressive Web App Konzept auf verschiedenen Geräten"
+  url: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop'
+  alt: 'Progressive Web App Konzept auf verschiedenen Geräten'
 readingTime: 10
 ---
 
@@ -26,14 +26,14 @@ Eine PWA ist eine Web-App mit drei Kernmerkmalen:
 
 ### PWA vs Native App
 
-| Feature | PWA | Native App |
-|---------|-----|------------|
-| **Installation** | Browser → Home Screen | App Store |
-| **Updates** | Automatisch | User muss updaten |
-| **Größe** | 1-5 MB | 50-200 MB |
-| **Offline** | ✅ Möglich | ✅ Standard |
-| **Hardware** | ⚠️ Limitiert | ✅ Voller Zugriff |
-| **Distribution** | ✅ URL teilen | ❌ Store-Approval |
+| Feature          | PWA                   | Native App        |
+| ---------------- | --------------------- | ----------------- |
+| **Installation** | Browser → Home Screen | App Store         |
+| **Updates**      | Automatisch           | User muss updaten |
+| **Größe**        | 1-5 MB                | 50-200 MB         |
+| **Offline**      | ✅ Möglich            | ✅ Standard       |
+| **Hardware**     | ⚠️ Limitiert          | ✅ Voller Zugriff |
+| **Distribution** | ✅ URL teilen         | ❌ Store-Approval |
 
 ## PWA Requirements
 
@@ -162,17 +162,14 @@ registerRoute(
 // app/offline/page.tsx
 export default function OfflinePage() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="flex min-h-screen items-center justify-center">
       <div className="text-center">
-        <WifiOff className="w-16 h-16 mx-auto text-gray-400" />
+        <WifiOff className="mx-auto h-16 w-16 text-gray-400" />
         <h1 className="mt-4 text-2xl font-bold">Keine Internetverbindung</h1>
         <p className="mt-2 text-gray-600">
           Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.
         </p>
-        <Button
-          className="mt-4"
-          onClick={() => window.location.reload()}
-        >
+        <Button className="mt-4" onClick={() => window.location.reload()}>
           Erneut versuchen
         </Button>
       </div>
@@ -272,11 +269,7 @@ export function PushNotificationSubscribe() {
     })
   }
 
-  return (
-    <Button onClick={subscribe}>
-      Benachrichtigungen aktivieren
-    </Button>
-  )
+  return <Button onClick={subscribe}>Benachrichtigungen aktivieren</Button>
 }
 ```
 
@@ -326,9 +319,7 @@ self.addEventListener('push', (event) => {
 self.addEventListener('notificationclick', (event) => {
   event.notification.close()
 
-  event.waitUntil(
-    clients.openWindow(event.notification.data.url)
-  )
+  event.waitUntil(clients.openWindow(event.notification.data.url))
 })
 ```
 
@@ -371,17 +362,13 @@ export function InstallPrompt() {
   if (!showInstall) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 p-4 bg-primary-600 text-white">
+    <div className="bg-primary-600 fixed right-0 bottom-0 left-0 p-4 text-white">
       <div className="container mx-auto flex items-center justify-between">
         <div>
           <p className="font-semibold">App installieren</p>
           <p className="text-sm">Für schnelleren Zugriff auf dem Home Screen</p>
         </div>
-        <Button
-          variant="outline"
-          className="bg-white text-primary-600"
-          onClick={handleInstall}
-        >
+        <Button variant="outline" className="text-primary-600 bg-white" onClick={handleInstall}>
           Installieren
         </Button>
       </div>
@@ -416,14 +403,7 @@ const addResourcesToCache = async (resources) => {
 }
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    addResourcesToCache([
-      '/',
-      '/offline',
-      '/styles/main.css',
-      '/scripts/main.js',
-    ])
-  )
+  event.waitUntil(addResourcesToCache(['/', '/offline', '/styles/main.css', '/scripts/main.js']))
 })
 ```
 
@@ -458,7 +438,7 @@ export function UpdatePrompt() {
   if (!showUpdate) return null
 
   return (
-    <div className="fixed top-4 right-4 bg-white shadow-lg rounded-lg p-4">
+    <div className="fixed top-4 right-4 rounded-lg bg-white p-4 shadow-lg">
       <p className="font-semibold">Update verfügbar</p>
       <Button onClick={handleUpdate} className="mt-2">
         Jetzt aktualisieren
@@ -482,6 +462,7 @@ npx lighthouse https://your-app.com --view
 ```
 
 **PWA Checklist:**
+
 - [ ] HTTPS aktiviert
 - [ ] Manifest.json vorhanden
 - [ ] Service Worker registriert
@@ -513,4 +494,4 @@ Als [Mobile-Experten](/services/mobile-development) entwickeln wir:
 
 [PWA-Projekt starten](/contact)
 
-*Aktualisiert: Dezember 2023*
+_Aktualisiert: Dezember 2023_

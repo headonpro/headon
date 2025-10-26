@@ -7,9 +7,10 @@ import { Check, Clock, Code2, Smartphone, Palette, Database, LucideIcon } from '
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
-import FAQSection from '@/components/sections/FAQSection'
-import { FAQSchema } from '@/components/seo/SchemaGenerator'
+import { FAQAccordion } from '@/components/seo/FAQAccordion'
+import { faqData } from '@/lib/content/faq-data'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
+import type { FAQ } from '@/lib/types/content'
 
 // Export metadata generator
 export { generateMetadata }
@@ -51,9 +52,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const { content: CompiledContent } = await compileMDXContent(service.content)
 
   // Get related case studies
-  const relatedProjects = await getRelatedPortfolioProjects(
-    service.frontmatter.relatedCaseStudies
-  )
+  const relatedProjects = await getRelatedPortfolioProjects(service.frontmatter.relatedCaseStudies)
 
   // Get the Lucide icon component based on frontmatter
   const iconMap: Record<string, LucideIcon> = {
@@ -64,20 +63,24 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
   const IconComponent = iconMap[service.frontmatter.icon] || Code2
 
+  // Map service slug to FAQ data
+  const serviceFaqMap: Record<string, FAQ[]> = {
+    'web-development': faqData.webDevelopment,
+    'mobile-development': faqData.mobileDevelopment,
+    'ui-ux-design': faqData.uiUxDesign,
+    'backend-solutions': faqData.backendSolutions,
+  }
+  const serviceFaqs = serviceFaqMap[slug] || []
+
   return (
     <main className="min-h-screen">
-      {/* Schema.org FAQ markup */}
-      {service.frontmatter.faqs.length > 0 && (
-        <FAQSchema faqs={service.frontmatter.faqs} />
-      )}
-
       {/* Hero Section with Animated Gradient Background */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-primary-600">
+      <section className="bg-primary-600 relative flex min-h-screen items-center justify-center overflow-hidden">
         {/* Static gradient for base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+        <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
         {/* Breadcrumbs - in normal flow at top */}
-        <div className="absolute top-24 left-0 right-0 z-20">
+        <div className="absolute top-24 right-0 left-0 z-20">
           <div className="container mx-auto px-4">
             <Breadcrumbs
               variant="dark"
@@ -94,27 +97,27 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <div className="relative z-10 container mx-auto px-4 pt-32 pb-24 text-center">
           {/* Large Icon */}
           <div className="mb-8 flex justify-center">
-            <div className="p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-              <IconComponent className="w-20 h-20 md:w-24 md:h-24 text-white" />
+            <div className="rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-sm">
+              <IconComponent className="h-20 w-20 text-white md:h-24 md:w-24" />
             </div>
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white">
+          <h1 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-6xl">
             {service.frontmatter.title}
           </h1>
 
           {/* Description */}
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
+          <p className="mx-auto mb-8 max-w-3xl text-xl text-white/90 md:text-2xl">
             {service.frontmatter.description}
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold shadow-xl hover:shadow-2xl transition-all duration-300"
+                className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary bg-gradient-to-r font-semibold shadow-xl transition-all duration-300 hover:shadow-2xl"
               >
                 Projekt anfragen
               </Button>
@@ -122,7 +125,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <Link href="#pricing">
               <Button
                 size="lg"
-                className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20"
+                className="border border-white/20 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
               >
                 Preise ansehen
               </Button>
@@ -131,34 +134,43 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
 
         {/* Wave at bottom */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg className="w-full h-16 md:h-24 fill-white" viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <div className="absolute right-0 bottom-0 left-0">
+          <svg
+            className="h-16 w-full fill-white md:h-24"
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+          >
             <path d="M0,40 C480,100 960,0 1440,60 L1440,120 L0,120 Z" />
           </svg>
         </div>
       </section>
 
       {/* Pricing Card */}
-      <section id="pricing" className="bg-white container mx-auto px-4 py-16 md:py-20">
-        <div className="max-w-2xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200">
-            <div className="p-8 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 text-white">
-              <h2 className="text-3xl font-bold mb-2">Investition</h2>
+      <section id="pricing" className="container mx-auto bg-white px-4 py-16 md:py-20">
+        <div className="mx-auto max-w-2xl">
+          <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl">
+            <div className="from-primary-600 via-primary-500 to-secondary-500 bg-gradient-to-br p-8 text-white">
+              <h2 className="mb-2 text-3xl font-bold">Investition</h2>
               <p className="text-white/90">Transparente Preisgestaltung</p>
-              <div className="text-5xl font-bold mt-6">
+              <div className="mt-6 text-5xl font-bold">
                 ab {service.frontmatter.pricing.from.toLocaleString('de-DE')}{' '}
                 {service.frontmatter.pricing.currency}
-                <span className="text-xl font-normal text-white/80 ml-2">
-                  / {service.frontmatter.pricing.unit === 'project' ? 'Projekt' : service.frontmatter.pricing.unit === 'hour' ? 'Stunde' : 'Monat'}
+                <span className="ml-2 text-xl font-normal text-white/80">
+                  /{' '}
+                  {service.frontmatter.pricing.unit === 'project'
+                    ? 'Projekt'
+                    : service.frontmatter.pricing.unit === 'hour'
+                      ? 'Stunde'
+                      : 'Monat'}
                 </span>
               </div>
             </div>
             <div className="p-8">
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-muted-foreground mb-4 text-sm">
                 Exakte Kosten nach kostenlosem 15-Minuten Beratungsgespräch
               </p>
               <Link href="/contact">
-                <Button className="w-full bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Button className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary w-full bg-gradient-to-r font-semibold shadow-xl transition-all duration-300 hover:shadow-2xl">
                   Kostenloses Beratungsgespräch
                 </Button>
               </Link>
@@ -168,24 +180,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </section>
 
       {/* Deliverables Section */}
-      <section className="bg-gray-50 container mx-auto px-4 py-16 md:py-20">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Was Sie erhalten
-          </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+      <section className="container mx-auto bg-gray-50 px-4 py-16 md:py-20">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-4 text-center text-3xl font-bold md:text-4xl">Was Sie erhalten</h2>
+          <p className="text-muted-foreground mx-auto mb-12 max-w-2xl text-center">
             Alle Leistungen im Überblick – transparent und vollständig
           </p>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid gap-4 md:grid-cols-2">
             {service.frontmatter.deliverables.map((deliverable, index) => (
               <div
                 key={index}
-                className="flex items-start gap-3 p-4 rounded-lg bg-white border border-gray-200 hover:border-primary hover:shadow-md transition-all duration-300"
+                className="hover:border-primary flex items-start gap-3 rounded-lg border border-gray-200 bg-white p-4 transition-all duration-300 hover:shadow-md"
               >
-                <Check className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                <span className="text-gray-900 font-medium">
-                  {deliverable}
-                </span>
+                <Check className="mt-0.5 h-6 w-6 flex-shrink-0 text-green-500" />
+                <span className="font-medium text-gray-900">{deliverable}</span>
               </div>
             ))}
           </div>
@@ -193,36 +201,30 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </section>
 
       {/* Process Timeline */}
-      <section className="bg-white container mx-auto px-4 py-16 md:py-20">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-            Unser Prozess
-          </h2>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+      <section className="container mx-auto bg-white px-4 py-16 md:py-20">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="mb-4 text-center text-3xl font-bold md:text-4xl">Unser Prozess</h2>
+          <p className="text-muted-foreground mx-auto mb-12 max-w-2xl text-center">
             Von der Konzeption bis zum Launch – strukturiert und transparent
           </p>
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 to-secondary-500 hidden md:block" />
+            <div className="from-primary-600 to-secondary-500 absolute top-0 bottom-0 left-8 hidden w-0.5 bg-gradient-to-b md:block" />
 
             <div className="space-y-8">
               {service.frontmatter.processSteps.map((step, index) => (
-                <div key={index} className="relative flex gap-6 items-start">
+                <div key={index} className="relative flex items-start gap-6">
                   {/* Step number circle */}
-                  <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 text-white flex items-center justify-center font-bold text-xl z-10 shadow-lg">
+                  <div className="from-primary-600 via-primary-500 to-secondary-500 z-10 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br text-xl font-bold text-white shadow-lg">
                     {index + 1}
                   </div>
 
                   {/* Step content */}
-                  <div className="flex-1 bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-600 mb-3">
-                      {step.description}
-                    </p>
-                    <div className="flex items-center gap-2 text-sm text-primary font-semibold">
-                      <Clock className="w-4 h-4" />
+                  <div className="flex-1 rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                    <h3 className="mb-2 text-xl font-semibold text-gray-900">{step.title}</h3>
+                    <p className="mb-3 text-gray-600">{step.description}</p>
+                    <div className="text-primary flex items-center gap-2 text-sm font-semibold">
+                      <Clock className="h-4 w-4" />
                       <span>{step.duration}</span>
                     </div>
                   </div>
@@ -234,40 +236,40 @@ export default async function ServicePage({ params }: ServicePageProps) {
       </section>
 
       {/* Main Content (MDX) */}
-      <section className="bg-gray-50 container mx-auto px-4 py-16 md:py-20">
-        <div className="max-w-4xl mx-auto">
+      <section className="container mx-auto bg-gray-50 px-4 py-16 md:py-20">
+        <div className="mx-auto max-w-4xl">
           <MDXContent>{CompiledContent}</MDXContent>
         </div>
       </section>
 
       {/* FAQ Section */}
-      {service.frontmatter.faqs.length > 0 && (
-        <section className="bg-white container mx-auto px-4 py-16 md:py-20">
-          <div className="max-w-4xl mx-auto">
-            <FAQSection faqs={service.frontmatter.faqs} />
+      {serviceFaqs.length > 0 && (
+        <section className="container mx-auto bg-white px-4 py-16 md:py-20">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="mb-4 text-center text-3xl font-bold md:text-4xl">
+              Häufig gestellte Fragen
+            </h2>
+            <p className="text-muted-foreground mx-auto mb-12 max-w-2xl text-center">
+              Antworten auf die wichtigsten Fragen zu {service.frontmatter.title.toLowerCase()}
+            </p>
+            <FAQAccordion faqs={serviceFaqs} includeSchema={true} />
           </div>
         </section>
       )}
 
       {/* Related Case Studies */}
       {relatedProjects.length > 0 && (
-        <section className="bg-gray-50 container mx-auto px-4 py-16 md:py-20">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
-              Erfolgsgeschichten
-            </h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <section className="container mx-auto bg-gray-50 px-4 py-16 md:py-20">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="mb-4 text-center text-3xl font-bold md:text-4xl">Erfolgsgeschichten</h2>
+            <p className="text-muted-foreground mx-auto mb-12 max-w-2xl text-center">
               Sehen Sie, wie wir ähnliche Projekte erfolgreich umgesetzt haben
             </p>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {relatedProjects.map((project) => (
-                <Link
-                  key={project.slug}
-                  href={`/portfolio/${project.slug}`}
-                  className="group"
-                >
-                  <div className="bg-white rounded-lg overflow-hidden border border-gray-200 hover:border-primary transition-all hover:shadow-lg">
+                <Link key={project.slug} href={`/portfolio/${project.slug}`} className="group">
+                  <div className="hover:border-primary overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg">
                     {/* Project Image */}
                     {project.frontmatter.image && (
                       <div className="relative h-48 overflow-hidden">
@@ -276,34 +278,30 @@ export default async function ServicePage({ params }: ServicePageProps) {
                           alt={project.frontmatter.image.alt}
                           width={600}
                           height={400}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                       </div>
                     )}
 
                     {/* Project Info */}
                     <div className="p-6">
-                      <div className="text-sm text-muted-foreground mb-2">
+                      <div className="text-muted-foreground mb-2 text-sm">
                         {project.frontmatter.client.name}
                       </div>
-                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                      <h3 className="group-hover:text-primary mb-2 text-xl font-semibold transition-colors">
                         {project.frontmatter.title}
                       </h3>
-                      <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                      <p className="mb-4 line-clamp-2 text-sm text-gray-600">
                         {project.frontmatter.description}
                       </p>
 
                       {/* Metrics */}
                       {project.frontmatter.metrics.length > 0 && (
-                        <div className="grid grid-cols-2 gap-3 pt-4 border-t border-gray-200">
+                        <div className="grid grid-cols-2 gap-3 border-t border-gray-200 pt-4">
                           {project.frontmatter.metrics.slice(0, 2).map((metric, idx) => (
                             <div key={idx} className="text-center">
-                              <div className="text-2xl font-bold text-primary">
-                                {metric.value}
-                              </div>
-                              <div className="text-xs text-muted-foreground">
-                                {metric.label}
-                              </div>
+                              <div className="text-primary text-2xl font-bold">{metric.value}</div>
+                              <div className="text-muted-foreground text-xs">{metric.label}</div>
                             </div>
                           ))}
                         </div>
@@ -314,9 +312,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
               ))}
             </div>
 
-            <div className="text-center mt-12">
+            <div className="mt-12 text-center">
               <Link href="/portfolio">
-                <Button className="bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold shadow-xl hover:shadow-2xl transition-all duration-300" size="lg">
+                <Button
+                  className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary bg-gradient-to-r font-semibold shadow-xl transition-all duration-300 hover:shadow-2xl"
+                  size="lg"
+                >
                   Alle Projekte ansehen
                 </Button>
               </Link>
@@ -326,19 +327,17 @@ export default async function ServicePage({ params }: ServicePageProps) {
       )}
 
       {/* Final CTA Section */}
-      <section className="bg-white container mx-auto px-4 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 text-white rounded-2xl p-12 shadow-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Bereit, Ihr Projekt zu starten?
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
+      <section className="container mx-auto bg-white px-4 py-16 md:py-24">
+        <div className="from-primary-600 via-primary-500 to-secondary-500 mx-auto max-w-4xl rounded-2xl bg-gradient-to-br p-12 text-center text-white shadow-2xl">
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">Bereit, Ihr Projekt zu starten?</h2>
+          <p className="mb-8 text-xl text-white/90">
             Lassen Sie uns gemeinsam Ihre Vision verwirklichen
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-white text-primary hover:bg-gray-100 font-semibold shadow-xl hover:shadow-2xl transition-all duration-300"
+                className="text-primary bg-white font-semibold shadow-xl transition-all duration-300 hover:bg-gray-100 hover:shadow-2xl"
               >
                 Kostenloses Erstgespräch
               </Button>
@@ -346,7 +345,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <Link href="/portfolio">
               <Button
                 size="lg"
-                className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20"
+                className="border border-white/20 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
               >
                 Portfolio ansehen
               </Button>

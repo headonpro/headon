@@ -57,23 +57,17 @@ export default function FAQSection({
   return (
     <section id={id} className="w-full">
       {/* Section Heading */}
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12">
-        {heading}
-      </h2>
+      <h2 className="mb-8 text-center text-3xl font-bold md:mb-12 md:text-4xl">{heading}</h2>
 
       {/* FAQ Accordion */}
       <Accordion type="single" collapsible className="w-full">
         {faqs.map((faq, index) => (
-          <AccordionItem
-            key={index}
-            value={`item-${index}`}
-            className="border-b border-gray-200"
-          >
-            <AccordionTrigger className="text-left font-semibold text-lg text-gray-900 hover:bg-gray-50 px-4 py-6 rounded-lg transition-colors [&[data-state=open]]:bg-gray-50">
+          <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200">
+            <AccordionTrigger className="rounded-lg px-4 py-6 text-left text-lg font-semibold text-gray-900 transition-colors hover:bg-gray-50 [&[data-state=open]]:bg-gray-50">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="px-4 pt-2 pb-6">
-              <div className="prose max-w-none text-gray-700 text-base leading-relaxed">
+              <div className="prose max-w-none text-base leading-relaxed text-gray-700">
                 {faq.answer}
               </div>
             </AccordionContent>

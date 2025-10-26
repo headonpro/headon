@@ -10,15 +10,15 @@ interface PhoneMockup3DProps {
   className?: string
 }
 
-export default function PhoneMockup3D({ 
-  appScreenshot, 
+export default function PhoneMockup3D({
+  appScreenshot,
   appName,
-  className = '' 
+  className = '',
 }: PhoneMockup3DProps) {
   const [isMobile, setIsMobile] = useState(false)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
-  
+
   const rotateX = useTransform(mouseY, [-300, 300], [15, -15])
   const rotateY = useTransform(mouseX, [-300, 300], [-15, 15])
 
@@ -28,11 +28,11 @@ export default function PhoneMockup3D({
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isMobile) return
-    
+
     const rect = e.currentTarget.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
-    
+
     mouseX.set(e.clientX - centerX)
     mouseY.set(e.clientY - centerY)
   }
@@ -43,7 +43,7 @@ export default function PhoneMockup3D({
   }
 
   return (
-    <div 
+    <div
       className={`relative ${className}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -57,36 +57,44 @@ export default function PhoneMockup3D({
           transformStyle: 'preserve-3d',
         }}
         initial={{ rotateY: 0 }}
-        animate={isMobile ? {
-          rotateY: [0, 10, 0, -10, 0],
-        } : undefined}
-        transition={isMobile ? {
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        } : {
-          type: "spring",
-          stiffness: 100,
-          damping: 20
-        }}
+        animate={
+          isMobile
+            ? {
+                rotateY: [0, 10, 0, -10, 0],
+              }
+            : undefined
+        }
+        transition={
+          isMobile
+            ? {
+                duration: 8,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }
+            : {
+                type: 'spring',
+                stiffness: 100,
+                damping: 20,
+              }
+        }
       >
         {/* Phone Frame */}
-        <div className="relative w-[280px] h-[580px] mx-auto">
+        <div className="relative mx-auto h-[580px] w-[280px]">
           {/* Phone Shadow */}
-          <div 
-            className="absolute inset-0 bg-black/20 rounded-[40px] blur-2xl"
+          <div
+            className="absolute inset-0 rounded-[40px] bg-black/20 blur-2xl"
             style={{ transform: 'translateZ(-50px)' }}
           />
-          
+
           {/* Phone Body */}
-          <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-[40px] p-2 shadow-2xl">
+          <div className="relative h-full w-full rounded-[40px] bg-gradient-to-br from-gray-900 to-gray-800 p-2 shadow-2xl">
             {/* Screen Bezel */}
-            <div className="relative w-full h-full bg-black rounded-[32px] p-3 overflow-hidden">
+            <div className="relative h-full w-full overflow-hidden rounded-[32px] bg-black p-3">
               {/* Notch */}
-              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-32 h-6 bg-black rounded-full z-20" />
-              
+              <div className="absolute top-3 left-1/2 z-20 h-6 w-32 -translate-x-1/2 rounded-full bg-black" />
+
               {/* Screen Content */}
-              <div className="relative w-full h-full bg-white rounded-[24px] overflow-hidden">
+              <div className="relative h-full w-full overflow-hidden rounded-[24px] bg-white">
                 <Image
                   src={appScreenshot}
                   alt={appName}
@@ -94,20 +102,20 @@ export default function PhoneMockup3D({
                   className="object-cover object-top"
                   priority
                 />
-                
+
                 {/* Screen Reflection */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-white/10 pointer-events-none" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-white/10" />
               </div>
-              
+
               {/* Home Indicator */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full" />
+              <div className="absolute bottom-2 left-1/2 h-1 w-32 -translate-x-1/2 rounded-full bg-white/30" />
             </div>
-            
+
             {/* Side Buttons */}
-            <div className="absolute -right-1 top-24 w-1 h-12 bg-gray-700 rounded-l" />
-            <div className="absolute -right-1 top-40 w-1 h-8 bg-gray-700 rounded-l" />
-            <div className="absolute -right-1 top-52 w-1 h-8 bg-gray-700 rounded-l" />
-            <div className="absolute -left-1 top-32 w-1 h-16 bg-gray-700 rounded-r" />
+            <div className="absolute top-24 -right-1 h-12 w-1 rounded-l bg-gray-700" />
+            <div className="absolute top-40 -right-1 h-8 w-1 rounded-l bg-gray-700" />
+            <div className="absolute top-52 -right-1 h-8 w-1 rounded-l bg-gray-700" />
+            <div className="absolute top-32 -left-1 h-16 w-1 rounded-r bg-gray-700" />
           </div>
         </div>
       </motion.div>

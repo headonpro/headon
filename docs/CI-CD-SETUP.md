@@ -1,16 +1,20 @@
 # CI/CD Pipeline Setup Guide
 
 ## Übersicht
+
 Diese Anleitung erklärt, wie Sie die automatische CI/CD-Pipeline für HEADON.pro einrichten.
 
 ## Funktionsweise
+
 Bei jedem Push zu `main` Branch:
+
 1. Code wird getestet (Lint, Type-Check)
 2. Docker Image wird gebaut und in GitHub Container Registry gepusht
 3. VPS zieht das neue Image und startet den Container neu
 4. Health-Check prüft, ob die Anwendung läuft
 
 ## Voraussetzungen
+
 - VPS mit Docker und Docker Compose installiert
 - GitHub Account mit Repository-Zugriff
 - SSH-Zugang zum VPS
@@ -56,12 +60,14 @@ Gehen Sie zu: https://github.com/headonpro/headon/settings/secrets/actions
 Fügen Sie folgende Secrets hinzu:
 
 ### VPS-Zugang
+
 - `VPS_HOST`: IP-Adresse Ihres VPS (z.B. 192.168.1.1)
 - `VPS_USER`: SSH-Username (z.B. root oder ubuntu)
 - `VPS_SSH_KEY`: Der private SSH-Key von Schritt 2
 - `VPS_PORT`: SSH-Port (Standard: 22)
 
 ### Supabase Konfiguration
+
 - `NEXT_PUBLIC_SUPABASE_URL`: Ihre Supabase URL
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Ihr Supabase Anon Key
 - `SUPABASE_SERVICE_ROLE_KEY`: Ihr Supabase Service Role Key
@@ -105,6 +111,7 @@ sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 ## Fehlerbehebung
 
 ### Container läuft nicht
+
 ```bash
 cd ~/projects/headon
 docker-compose logs --tail=100
@@ -112,10 +119,12 @@ docker-compose ps
 ```
 
 ### Permission Denied beim SSH
+
 - Prüfen Sie, ob der SSH-Key korrekt in GitHub Secrets ist
 - Prüfen Sie die Permissions: `chmod 600 ~/.ssh/authorized_keys`
 
 ### Port bereits belegt
+
 ```bash
 # Prüfen welcher Prozess Port 3001 nutzt
 sudo lsof -i :3001
@@ -127,6 +136,7 @@ docker rm $(docker ps -aq)
 ```
 
 ### Build fehlgeschlagen
+
 - Prüfen Sie die GitHub Actions Logs
 - Stellen Sie sicher, dass alle Secrets konfiguriert sind
 - Prüfen Sie die pnpm-lock.yaml Datei
@@ -134,12 +144,14 @@ docker rm $(docker ps -aq)
 ## Monitoring
 
 ### Container Status prüfen
+
 ```bash
 docker-compose ps
 docker stats
 ```
 
 ### Logs anzeigen
+
 ```bash
 # Live logs
 docker-compose logs -f
@@ -149,6 +161,7 @@ docker-compose logs --tail=100
 ```
 
 ### Speicherplatz prüfen
+
 ```bash
 docker system df
 docker image prune -a  # Alte Images löschen
@@ -168,6 +181,7 @@ docker run -d -p 3001:3000 --env-file .env.production [IMAGE_ID]
 ## Weitere Optimierungen
 
 ### Automatisches Backup
+
 Erstellen Sie einen Cronjob für regelmäßige Backups:
 
 ```bash
@@ -177,6 +191,7 @@ crontab -e
 ```
 
 ### Monitoring mit Uptime Kuma
+
 ```bash
 docker run -d --restart=always -p 3002:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
 ```
@@ -184,6 +199,7 @@ docker run -d --restart=always -p 3002:3001 -v uptime-kuma:/app/data --name upti
 ## Support
 
 Bei Problemen:
+
 1. Prüfen Sie die GitHub Actions Logs
 2. Prüfen Sie die Docker Logs auf dem VPS
 3. Erstellen Sie ein Issue im Repository

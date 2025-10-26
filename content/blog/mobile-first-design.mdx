@@ -1,16 +1,16 @@
 ---
-title: "Mobile-First Design: Best Practices für 2025"
-description: "Moderne Mobile-First Strategie: Responsive Design, Touch Interfaces, Performance-Optimierung und Progressive Enhancement für mobile Web-Apps."
-publishedAt: "2025-09-05T09:00:00Z"
+title: 'Mobile-First Design: Best Practices für 2025'
+description: 'Moderne Mobile-First Strategie: Responsive Design, Touch Interfaces, Performance-Optimierung und Progressive Enhancement für mobile Web-Apps.'
+publishedAt: '2025-09-05T09:00:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["Mobile-First", "Responsive Design", "UX", "Performance", "Touch Interface"]
-category: "design"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['Mobile-First', 'Responsive Design', 'UX', 'Performance', 'Touch Interface']
+category: 'design'
 image:
-  url: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=630&fit=crop"
-  alt: "Mobile-First Design Konzept mit verschiedenen Geräten"
+  url: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=630&fit=crop'
+  alt: 'Mobile-First Design Konzept mit verschiedenen Geräten'
 readingTime: 9
 ---
 
@@ -93,21 +93,17 @@ export function ResponsiveLayout() {
       {/* Mobile: Stack */}
       {/* Tablet: 2 columns */}
       {/* Desktop: 3 columns */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card />
         <Card />
         <Card />
       </div>
 
       {/* Responsive Typography */}
-      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
-        Responsive Heading
-      </h1>
+      <h1 className="text-2xl font-bold md:text-3xl lg:text-4xl">Responsive Heading</h1>
 
       {/* Responsive Spacing */}
-      <div className="py-8 md:py-12 lg:py-16">
-        Content
-      </div>
+      <div className="py-8 md:py-12 lg:py-16">Content</div>
     </div>
   )
 }
@@ -151,9 +147,7 @@ export function Dashboard() {
 
   return (
     <div>
-      <button onClick={() => setShowChart(true)}>
-        Show Chart
-      </button>
+      <button onClick={() => setShowChart(true)}>Show Chart</button>
       {showChart && <HeavyChart />}
     </div>
   )
@@ -261,13 +255,9 @@ export function PullToRefresh({ children, onRefresh }) {
   }
 
   return (
-    <div
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
       {pulling && (
-        <div className="text-center py-4">
+        <div className="py-4 text-center">
           <RefreshIcon className={pullDistance > 80 ? 'animate-spin' : ''} />
         </div>
       )}
@@ -288,20 +278,20 @@ export function MobileNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t md:hidden">
+    <nav className="fixed right-0 bottom-0 left-0 border-t bg-white md:hidden">
       <div className="flex justify-around">
         <Link href="/" className={pathname === '/' ? 'text-primary' : ''}>
-          <Home className="w-6 h-6" />
+          <Home className="h-6 w-6" />
           <span className="text-xs">Home</span>
         </Link>
 
         <Link href="/search">
-          <Search className="w-6 h-6" />
+          <Search className="h-6 w-6" />
           <span className="text-xs">Search</span>
         </Link>
 
         <Link href="/profile">
-          <User className="w-6 h-6" />
+          <User className="h-6 w-6" />
           <span className="text-xs">Profile</span>
         </Link>
       </div>
@@ -318,16 +308,12 @@ export function MobileMenu() {
 
   return (
     <>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden"
-        aria-label="Toggle menu"
-      >
+      <button onClick={() => setIsOpen(!isOpen)} className="md:hidden" aria-label="Toggle menu">
         {isOpen ? <X /> : <Menu />}
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-white z-50 md:hidden">
+        <div className="fixed inset-0 z-50 bg-white md:hidden">
           <nav className="p-4">
             <Link href="/" onClick={() => setIsOpen(false)}>
               Home
@@ -403,4 +389,4 @@ Als [Mobile-Spezialisten](/services/mobile-development) optimieren wir:
 
 [Beratung anfragen](/contact)
 
-*Aktualisiert: Februar 2024*
+_Aktualisiert: Februar 2024_

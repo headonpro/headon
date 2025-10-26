@@ -27,10 +27,11 @@ const caseStudies: CaseStudy[] = [
     solution: 'Online-Reservierungssystem mit Tischplanung',
     results: [
       { metric: 'Buchungen', value: '+40%', icon: TrendingUp },
-      { metric: 'Telefonanrufe', value: '-60%', icon: Clock }
+      { metric: 'Telefonanrufe', value: '-60%', icon: Clock },
     ],
-    testimonial: 'Endlich haben wir Zeit für unsere Gäste statt für das Telefon. Die Online-Reservierungen laufen wie von selbst!',
-    image: '/images/restaurant-case.jpg'
+    testimonial:
+      'Endlich haben wir Zeit für unsere Gäste statt für das Telefon. Die Online-Reservierungen laufen wie von selbst!',
+    image: '/images/restaurant-case.jpg',
   },
   {
     id: 'handwerker-schmidt',
@@ -40,10 +41,11 @@ const caseStudies: CaseStudy[] = [
     solution: 'Digitales Terminbuchungssystem',
     results: [
       { metric: 'Effizienz', value: '+25%', icon: TrendingUp },
-      { metric: 'Zeitersparnis', value: '10h/Woche', icon: Clock }
+      { metric: 'Zeitersparnis', value: '10h/Woche', icon: Clock },
     ],
-    testimonial: 'Die automatische Terminvergabe hat unseren Arbeitsalltag revolutioniert. Kein Chaos mehr!',
-    image: '/images/handwerk-case.jpg'
+    testimonial:
+      'Die automatische Terminvergabe hat unseren Arbeitsalltag revolutioniert. Kein Chaos mehr!',
+    image: '/images/handwerk-case.jpg',
   },
   {
     id: 'boutique-weber',
@@ -53,10 +55,11 @@ const caseStudies: CaseStudy[] = [
     solution: 'E-Commerce Shop mit Warenwirtschaft',
     results: [
       { metric: 'Umsatz', value: '+150%', icon: TrendingUp },
-      { metric: 'Neue Kunden', value: '+200', icon: Users }
+      { metric: 'Neue Kunden', value: '+200', icon: Users },
     ],
-    testimonial: 'Der Online-Shop hat uns durch die schwierige Zeit gerettet und neue Märkte erschlossen.',
-    image: '/images/boutique-case.jpg'
+    testimonial:
+      'Der Online-Shop hat uns durch die schwierige Zeit gerettet und neue Märkte erschlossen.',
+    image: '/images/boutique-case.jpg',
   },
   {
     id: 'coach-meyer',
@@ -66,16 +69,17 @@ const caseStudies: CaseStudy[] = [
     solution: 'Online-Kursplattform mit Mitgliederbereich',
     results: [
       { metric: 'Teilnehmer', value: '+300', icon: Users },
-      { metric: 'Reichweite', value: 'Bundesweit', icon: TrendingUp }
+      { metric: 'Reichweite', value: 'Bundesweit', icon: TrendingUp },
     ],
-    testimonial: 'Jetzt kann ich Menschen in ganz Deutschland helfen. Die Plattform läuft vollautomatisch!',
-    image: '/images/coach-case.jpg'
-  }
+    testimonial:
+      'Jetzt kann ich Menschen in ganz Deutschland helfen. Die Plattform läuft vollautomatisch!',
+    image: '/images/coach-case.jpg',
+  },
 ]
 
 export default function SuccessStoriesSection() {
   return (
-    <section className="py-24 pb-32 bg-gray-50 relative -mt-1">
+    <section className="relative -mt-1 bg-gray-50 py-24 pb-32">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -83,18 +87,18 @@ export default function SuccessStoriesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-heading">
+          <h2 className="font-heading mb-4 text-4xl font-bold text-gray-900 md:text-5xl">
             Erfolgsgeschichten unserer Kunden
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="mx-auto max-w-3xl text-xl text-gray-600">
             Echte Ergebnisse von echten Unternehmen – so haben wir anderen geholfen zu wachsen
           </p>
         </motion.div>
 
         {/* Case Studies Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-8 md:grid-cols-2">
           {caseStudies.map((study, index) => (
             <motion.div
               key={study.id}
@@ -102,47 +106,45 @@ export default function SuccessStoriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+              className="overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-2xl"
             >
               {/* Card Content */}
               <div className="p-8">
                 {/* Header */}
-                <div className="flex items-start justify-between mb-6">
+                <div className="mb-6 flex items-start justify-between">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                      {study.client}
-                    </h3>
-                    <span className="inline-block px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
+                    <h3 className="mb-1 text-2xl font-bold text-gray-900">{study.client}</h3>
+                    <span className="bg-primary-100 text-primary-700 inline-block rounded-full px-3 py-1 text-sm font-medium">
                       {study.industry}
                     </span>
                   </div>
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
                 </div>
 
                 {/* Problem & Solution */}
-                <div className="space-y-4 mb-6">
+                <div className="mb-6 space-y-4">
                   <div>
-                    <h4 className="font-semibold text-gray-700 mb-1">Problem:</h4>
+                    <h4 className="mb-1 font-semibold text-gray-700">Problem:</h4>
                     <p className="text-gray-600">{study.problem}</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-700 mb-1">Lösung:</h4>
+                    <h4 className="mb-1 font-semibold text-gray-700">Lösung:</h4>
                     <p className="text-gray-600">{study.solution}</p>
                   </div>
                 </div>
 
                 {/* Results */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="mb-6 grid grid-cols-2 gap-4">
                   {study.results.map((result, idx) => (
-                    <div 
+                    <div
                       key={idx}
-                      className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 text-center"
+                      className="rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 p-4 text-center"
                     >
-                      <result.icon className="w-8 h-8 mx-auto mb-2 text-primary-600" />
+                      <result.icon className="text-primary-600 mx-auto mb-2 h-8 w-8" />
                       <div className="text-2xl font-bold text-gray-900">{result.value}</div>
                       <div className="text-sm text-gray-600">{result.metric}</div>
                     </div>
@@ -150,7 +152,7 @@ export default function SuccessStoriesSection() {
                 </div>
 
                 {/* Testimonial */}
-                <blockquote className="border-l-4 border-primary-500 pl-4 italic text-gray-700">
+                <blockquote className="border-primary-500 border-l-4 pl-4 text-gray-700 italic">
                   &quot;{study.testimonial}&quot;
                 </blockquote>
               </div>
@@ -166,25 +168,24 @@ export default function SuccessStoriesSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 text-center"
         >
-          <div className="inline-flex flex-col sm:flex-row gap-8 items-center justify-center">
+          <div className="inline-flex flex-col items-center justify-center gap-8 sm:flex-row">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600">50+</div>
-              <div className="text-gray-600">Zufriedene Kunden</div>
+              <div className="text-primary-600 text-4xl font-bold">90+</div>
+              <div className="text-gray-600">Lighthouse Score</div>
             </div>
-            <div className="hidden sm:block w-px h-12 bg-gray-300" />
+            <div className="hidden h-12 w-px bg-gray-300 sm:block" />
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600">98%</div>
+              <div className="text-primary-600 text-4xl font-bold">100%</div>
               <div className="text-gray-600">Kundenzufriedenheit</div>
             </div>
-            <div className="hidden sm:block w-px h-12 bg-gray-300" />
+            <div className="hidden h-12 w-px bg-gray-300 sm:block" />
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary-600">100%</div>
-              <div className="text-gray-600">Weiterempfehlung</div>
+              <div className="text-primary-600 text-4xl font-bold">4x</div>
+              <div className="text-gray-600">Schneller durch KI</div>
             </div>
           </div>
         </motion.div>
       </div>
-      
     </section>
   )
 }

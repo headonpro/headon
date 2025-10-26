@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/seo-optimization/requirements.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-10-26T13:28:17.735Z",
+      "trigger": "initial",
+      "approvalId": "approval_1761485297727_x6wjmc4nr",
+      "approvalTitle": "SEO Optimization Requirements Document"
+    }
+  ]
+}

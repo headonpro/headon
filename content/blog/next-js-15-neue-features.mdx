@@ -1,16 +1,16 @@
 ---
-title: "Next.js 15: Die wichtigsten neuen Features für moderne Web-Apps"
-description: "Entdecken Sie die revolutionären Features von Next.js 15: Partial Prerendering, Server Actions und verbesserte Performance für Enterprise-Anwendungen."
-publishedAt: "2025-06-05T09:00:00Z"
+title: 'Next.js 15: Die wichtigsten neuen Features für moderne Web-Apps'
+description: 'Entdecken Sie die revolutionären Features von Next.js 15: Partial Prerendering, Server Actions und verbesserte Performance für Enterprise-Anwendungen.'
+publishedAt: '2025-06-05T09:00:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["Next.js", "React", "Web Development", "Performance", "TypeScript"]
-category: "development"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['Next.js', 'React', 'Web Development', 'Performance', 'TypeScript']
+category: 'development'
 image:
-  url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop"
-  alt: "Next.js 15 Development auf einem modernen Setup mit Code-Editor"
+  url: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop'
+  alt: 'Next.js 15 Development auf einem modernen Setup mit Code-Editor'
 readingTime: 8
 featured: true
 ---
@@ -46,6 +46,7 @@ export default async function Dashboard() {
 ```
 
 **Vorteile von PPR:**
+
 - **Sofortiges Initial Paint**: Statische Teile werden instant gerendert
 - **Progressive Enhancement**: Dynamische Daten streamen nach
 - **Optimale Performance**: Lighthouse-Scores von 90+ out of the box
@@ -163,6 +164,7 @@ export default function Hero() {
 ```
 
 **Neue Features:**
+
 - Native AVIF-Support (30% kleinere Dateien als WebP)
 - Intelligentes Lazy Loading mit Intersection Observer v3
 - Automatisches `srcset` für Retina-Displays
@@ -186,7 +188,7 @@ function UserProfile({ userPromise }) {
 }
 
 export default function Page() {
-  const userPromise = fetch('/api/user').then(r => r.json())
+  const userPromise = fetch('/api/user').then((r) => r.json())
 
   return (
     <Suspense fallback={<Skeleton />}>
@@ -224,6 +226,7 @@ module.exports = nextConfig
 ### Schritt 3: Breaking Changes beachten
 
 **Wichtige Änderungen:**
+
 - Mindestens React 19 RC erforderlich
 - Node.js 18.17+ benötigt
 - Neue Cache-Semantik (opt-in statt opt-out)
@@ -243,11 +246,13 @@ export const experimental_ppr = true // Nur für diese Route
 ### 1. Nutzen Sie Partial Prerendering strategisch
 
 PPR ist ideal für:
+
 - **Dashboards** mit statischem Layout + dynamischen Daten
 - **E-Commerce** mit statischem Header/Footer + personalisiertem Content
 - **Blogs** mit statischen Artikeln + dynamischen Kommentaren
 
 **Nicht geeignet für:**
+
 - Komplett statische Seiten (nutzen Sie SSG)
 - Komplett dynamische Seiten (nutzen Sie SSR)
 
@@ -294,11 +299,13 @@ Lesen Sie unseren Guide zu [Core Web Vitals](/blog/core-web-vitals-optimierung) 
 Bei HEADON.pro haben wir mehrere Kundenprojekte auf Next.js 15 migriert. Die Ergebnisse sprechen für sich:
 
 **E-Commerce Dashboard:**
+
 - **LCP**: 2.4s → 0.8s (-67%)
 - **FCP**: 1.8s → 0.4s (-78%)
 - **Bundle Size**: 245 KB → 156 KB (-36%)
 
 **Content-Portal:**
+
 - **Build Time**: 12 min → 3 min (-75%)
 - **Server Response**: 420ms → 180ms (-57%)
 - **Lighthouse Score**: 78 → 98 (+26%)
@@ -308,12 +315,14 @@ Sehen Sie sich unsere [Portfolio-Projekte](/portfolio) an für weitere Case Stud
 ## Wann sollten Sie upgraden?
 
 **Upgraden Sie jetzt, wenn:**
+
 - Sie Performance-Probleme haben
 - Sie komplexe Dashboards bauen
 - Sie TypeScript nutzen
 - Sie auf React 19 Features setzen wollen
 
 **Warten Sie noch, wenn:**
+
 - Sie kritische Third-Party-Dependencies haben, die React 19 noch nicht unterstützen
 - Ihr Team noch nicht mit Suspense vertraut ist
 - Sie eine sehr große Legacy-Codebase haben (migrieren Sie schrittweise)
@@ -348,4 +357,4 @@ Als spezialisierte [Webentwicklung-Agentur](/services/web-development) haben wir
 - [Next.js Performance Best Practices](https://nextjs.org/docs/app/building-your-application/optimizing)
 - [Web.dev Performance Guide](https://web.dev/performance/)
 
-*Aktualisiert: November 2024*
+_Aktualisiert: November 2024_

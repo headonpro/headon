@@ -2,17 +2,17 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Utensils, 
-  Hammer, 
-  ShoppingBag, 
-  Briefcase, 
-  Home, 
+import {
+  Utensils,
+  Hammer,
+  ShoppingBag,
+  Briefcase,
+  Home,
   Heart,
   ChevronDown,
   Clock,
   Euro,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -38,10 +38,10 @@ const industries: Industry[] = [
     solutions: [
       'Online-Reservierungssystem mit Tischplanung',
       'Digitale Speisekarte mit QR-Code',
-      'Lieferservice-Plattform ohne Provisionen'
+      'Lieferservice-Plattform ohne Provisionen',
     ],
     priceRange: 'ab 2.500€',
-    timeframe: '1-2 Wochen'
+    timeframe: '1-2 Wochen',
   },
   {
     id: 'handwerk',
@@ -52,10 +52,10 @@ const industries: Industry[] = [
     solutions: [
       'Automatische Terminbuchung',
       'Digitale Angebotserstellung',
-      'Kundenverwaltung mit Historie'
+      'Kundenverwaltung mit Historie',
     ],
     priceRange: 'ab 3.000€',
-    timeframe: '1-3 Wochen'
+    timeframe: '1-3 Wochen',
   },
   {
     id: 'einzelhandel',
@@ -66,10 +66,10 @@ const industries: Industry[] = [
     solutions: [
       'Online-Shop mit Warenwirtschaft',
       'Click & Collect System',
-      'Digitale Kundenkarten'
+      'Digitale Kundenkarten',
     ],
     priceRange: 'ab 5.000€',
-    timeframe: '2-4 Wochen'
+    timeframe: '2-4 Wochen',
   },
   {
     id: 'beratung',
@@ -80,10 +80,10 @@ const industries: Industry[] = [
     solutions: [
       'Online-Kursplattform',
       'Automatisierte Terminbuchung',
-      'Klienten-Portal mit Dokumenten'
+      'Klienten-Portal mit Dokumenten',
     ],
     priceRange: 'ab 4.000€',
-    timeframe: '2-4 Wochen'
+    timeframe: '2-4 Wochen',
   },
   {
     id: 'immobilien',
@@ -94,10 +94,10 @@ const industries: Industry[] = [
     solutions: [
       'Virtuelle 360° Rundgänge',
       'Automatische Exposé-Erstellung',
-      'Interessenten-Management'
+      'Interessenten-Management',
     ],
     priceRange: 'ab 6.000€',
-    timeframe: '2-4 Wochen'
+    timeframe: '2-4 Wochen',
   },
   {
     id: 'fitness',
@@ -105,14 +105,10 @@ const industries: Industry[] = [
     icon: Heart,
     color: 'text-red-600',
     bgGradient: 'from-red-500 to-pink-500',
-    solutions: [
-      'Mitglieder-App mit Check-in',
-      'Online-Kursbuchung',
-      'Ernährungsplan-Portal'
-    ],
+    solutions: ['Mitglieder-App mit Check-in', 'Online-Kursbuchung', 'Ernährungsplan-Portal'],
     priceRange: 'ab 4.500€',
-    timeframe: '2-4 Wochen'
-  }
+    timeframe: '2-4 Wochen',
+  },
 ]
 
 export default function IndustryNavigator() {
@@ -123,17 +119,21 @@ export default function IndustryNavigator() {
   }
 
   return (
-    <section className="pt-40 pb-52 relative overflow-hidden -mt-1">
+    <section className="relative -mt-1 overflow-hidden pt-40 pb-52">
       {/* Wave transition from previous section */}
-      <div className="absolute top-0 left-0 right-0 z-10">
-        <svg className="w-full h-16 md:h-24 fill-gray-50" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <div className="absolute top-0 right-0 left-0 z-10">
+        <svg
+          className="h-16 w-full fill-gray-50 md:h-24"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+        >
           <path d="M0,40 C480,100 960,0 1440,60 L1440,0 L0,0 Z" />
         </svg>
       </div>
-      
+
       {/* Static gradient background similar to HeroSection */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
-      
+      <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
+
       <div className="relative z-10 container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -141,19 +141,22 @@ export default function IndustryNavigator() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 font-heading overflow-visible pb-1">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">Lösungen</span>
+          <h2 className="font-heading mb-4 overflow-visible pb-1 text-4xl font-bold md:text-5xl">
+            <span className="from-accent to-secondary bg-gradient-to-r bg-clip-text text-transparent">
+              Lösungen
+            </span>
             <span className="text-white"> für jede Branche</span>
           </h2>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
-            Wir verstehen die spezifischen Herausforderungen Ihrer Branche und liefern maßgeschneiderte digitale Lösungen
+          <p className="mx-auto max-w-3xl text-xl text-white/90">
+            Wir verstehen die spezifischen Herausforderungen Ihrer Branche und liefern
+            maßgeschneiderte digitale Lösungen
           </p>
         </motion.div>
 
         {/* Industry Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {industries.map((industry, index) => (
             <motion.div
               key={industry.id}
@@ -162,39 +165,36 @@ export default function IndustryNavigator() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300 overflow-hidden">
+              <div className="overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white/15">
                 {/* Card Header */}
-                <div 
-                  className="p-6 cursor-pointer"
-                  onClick={() => toggleCard(industry.id)}
-                >
-                  <div className="flex justify-center mb-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-accent to-secondary">
-                      <industry.icon className="w-8 h-8 text-primary" strokeWidth={1.5} />
+                <div className="cursor-pointer p-6" onClick={() => toggleCard(industry.id)}>
+                  <div className="mb-4 flex justify-center">
+                    <div className="from-accent to-secondary rounded-xl bg-gradient-to-br p-3">
+                      <industry.icon className="text-primary h-8 w-8" strokeWidth={1.5} />
                     </div>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-white mb-2 text-center">
+
+                  <h3 className="mb-2 text-center text-xl font-bold text-white">
                     {industry.title}
                   </h3>
-                  
-                  <div className="flex items-center justify-center gap-4 text-sm text-white/80 mb-3">
+
+                  <div className="mb-3 flex items-center justify-center gap-4 text-sm text-white/80">
                     <span className="flex items-center gap-1">
-                      <Euro className="w-4 h-4 text-accent" />
+                      <Euro className="text-accent h-4 w-4" />
                       {industry.priceRange}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4 text-accent" />
+                      <Clock className="text-accent h-4 w-4" />
                       {industry.timeframe}
                     </span>
                   </div>
-                  
+
                   <div className="flex justify-center">
                     <motion.div
                       animate={{ rotate: expandedCard === industry.id ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <ChevronDown className="w-6 h-6 text-white/60" />
+                      <ChevronDown className="h-6 w-6 text-white/60" />
                     </motion.div>
                   </div>
                 </div>
@@ -209,35 +209,36 @@ export default function IndustryNavigator() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 border-t border-white/20 pt-4">
-                        <h4 className="font-semibold text-white mb-3 text-center">
+                      <div className="border-t border-white/20 px-6 pt-4 pb-6">
+                        <h4 className="mb-3 text-center font-semibold text-white">
                           Unsere Lösungen für Sie:
                         </h4>
-                        <ul className="space-y-2 mb-4">
+                        <ul className="mb-4 space-y-2">
                           {industry.solutions.map((solution, idx) => (
                             <li key={idx} className="flex items-start gap-2">
-                              <CheckCircle className="w-5 h-5 text-accent-500 mt-0.5 flex-shrink-0" />
-                              <span className="text-white/90 text-sm">{solution}</span>
+                              <CheckCircle className="text-accent-500 mt-0.5 h-5 w-5 flex-shrink-0" />
+                              <span className="text-sm text-white/90">{solution}</span>
                             </li>
                           ))}
                         </ul>
-                        
-                        <Link 
+
+                        <Link
                           href={`/contact?industry=${industry.id}`}
                           onClick={() => {
                             // Store industry context for contact form
                             if (typeof window !== 'undefined') {
-                              sessionStorage.setItem('industryContext', JSON.stringify({
-                                id: industry.id,
-                                title: industry.title,
-                                timestamp: new Date().toISOString()
-                              }))
+                              sessionStorage.setItem(
+                                'industryContext',
+                                JSON.stringify({
+                                  id: industry.id,
+                                  title: industry.title,
+                                  timestamp: new Date().toISOString(),
+                                })
+                              )
                             }
                           }}
                         >
-                          <Button 
-                            className="w-full bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold transition-all"
-                          >
+                          <Button className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary w-full bg-gradient-to-r font-semibold transition-all">
                             Sofort loslegen
                           </Button>
                         </Link>
@@ -250,10 +251,10 @@ export default function IndustryNavigator() {
           ))}
         </div>
       </div>
-      
+
       {/* Wave transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <svg className="w-full h-16 md:h-24" viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <div className="absolute right-0 bottom-0 left-0 z-10">
+        <svg className="h-16 w-full md:h-24" viewBox="0 0 1440 120" preserveAspectRatio="none">
           <path d="M0,40 C480,100 960,0 1440,60 L1440,120 L0,120 Z" fill="rgb(255, 255, 255)" />
         </svg>
       </div>

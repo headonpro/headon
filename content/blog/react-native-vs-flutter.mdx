@@ -1,16 +1,16 @@
 ---
-title: "React Native vs Flutter: Was ist besser für Ihre App 2025?"
-description: "Detaillierter Vergleich React Native vs Flutter: Performance, Developer Experience, Ecosystem, Use Cases und Entscheidungshilfe für mobile Apps."
-publishedAt: "2025-08-25T10:00:00Z"
+title: 'React Native vs Flutter: Was ist besser für Ihre App 2025?'
+description: 'Detaillierter Vergleich React Native vs Flutter: Performance, Developer Experience, Ecosystem, Use Cases und Entscheidungshilfe für mobile Apps.'
+publishedAt: '2025-08-25T10:00:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["React Native", "Flutter", "Mobile Development", "Cross-Platform", "iOS", "Android"]
-category: "mobile"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['React Native', 'Flutter', 'Mobile Development', 'Cross-Platform', 'iOS', 'Android']
+category: 'mobile'
 image:
-  url: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop"
-  alt: "React Native vs Flutter Vergleich Illustration"
+  url: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop'
+  alt: 'React Native vs Flutter Vergleich Illustration'
 readingTime: 11
 ---
 
@@ -19,6 +19,7 @@ React Native oder Flutter? Diese Frage stellen sich viele Teams beim Start eines
 ## Technologie-Übersicht
 
 ### React Native
+
 - **Sprache:** JavaScript/TypeScript
 - **UI:** Native Components
 - **Bridge:** JavaScript Bridge
@@ -26,6 +27,7 @@ React Native oder Flutter? Diese Frage stellen sich viele Teams beim Start eines
 - **Apps:** Facebook, Instagram, Discord
 
 ### Flutter
+
 - **Sprache:** Dart
 - **UI:** Custom Render Engine (Skia)
 - **Performance:** Compiled zu Natice Code
@@ -44,11 +46,9 @@ function ProductList({ products }) {
   return (
     <FlatList
       data={products}
-      renderItem={({ item }) => (
-        <Text>{item.name}</Text>
-      )}
+      renderItem={({ item }) => <Text>{item.name}</Text>}
       // Performance Optimierung nötig
-      keyExtractor={item => item.id}
+      keyExtractor={(item) => item.id}
       getItemLayout={(data, index) => ({
         length: 80,
         offset: 80 * index,
@@ -60,6 +60,7 @@ function ProductList({ products }) {
 ```
 
 **Performance:**
+
 - ⚡ 60 FPS möglich
 - ⚠️ JavaScript Bridge Overhead
 - ✅ Hermes Engine verbessert Performance
@@ -88,12 +89,14 @@ class ProductList extends StatelessWidget {
 ```
 
 **Performance:**
+
 - ⚡ 120 FPS möglich
 - ✅ Kein Bridge Overhead
 - ✅ Smooth Animations out-of-the-box
 - ✅ Consistent Performance
 
 **Benchmark (Real Device):**
+
 - Scroll Performance: Flutter 15% schneller
 - Startup Time: React Native 20% schneller
 - Memory Usage: Ähnlich (~150 MB)
@@ -103,6 +106,7 @@ class ProductList extends StatelessWidget {
 ### React Native DX
 
 **Vorteile:**
+
 ```javascript
 // ✅ Bekannte Syntax (React)
 function App() {
@@ -111,7 +115,7 @@ function App() {
   return (
     <View>
       <Text>Count: {count}</Text>
-      <Button onPress={() => setCount(c => c + 1)} />
+      <Button onPress={() => setCount((c) => c + 1)} />
     </View>
   )
 }
@@ -126,6 +130,7 @@ function App() {
 ### Flutter DX
 
 **Vorteile:**
+
 ```dart
 // Dart Syntax (Java-ähnlich)
 class App extends StatefulWidget {
@@ -160,6 +165,7 @@ class _AppState extends State<App> {
 ## Ecosystem & Packages
 
 ### React Native
+
 - **npm Packages:** 2 Millionen+
 - **React Native Packages:** ~10.000
 - **Navigation:** React Navigation, React Native Navigation
@@ -167,6 +173,7 @@ class _AppState extends State<App> {
 - **UI:** React Native Paper, Native Base
 
 ### Flutter
+
 - **pub.dev Packages:** 50.000+
 - **Navigation:** Built-in Navigator 2.0
 - **State:** Riverpod, Provider, Bloc
@@ -248,6 +255,7 @@ class BiometricAuth {
 ### Wann React Native?
 
 ✅ **Ideal wenn:**
+
 - Team kennt React/JavaScript
 - Web-App existiert (Code-Sharing)
 - Schnelle Iterationen wichtig
@@ -255,6 +263,7 @@ class BiometricAuth {
 - Native Look wichtig
 
 **Beispiel-Apps:**
+
 - Social Media Apps
 - E-Commerce Apps
 - Content-Apps
@@ -263,6 +272,7 @@ class BiometricAuth {
 ### Wann Flutter?
 
 ✅ **Ideal wenn:**
+
 - Performance kritisch
 - Custom UI/Animations
 - Web + Mobile aus einem Code
@@ -270,6 +280,7 @@ class BiometricAuth {
 - Game-ähnliche Apps
 
 **Beispiel-Apps:**
+
 - Fintech Apps
 - Gaming Apps
 - IoT Dashboards
@@ -332,12 +343,14 @@ flutter build apk --release
 ## Team & Hiring
 
 ### React Native
+
 - **Developers verfügbar:** Sehr viele
 - **Hiring:** Einfach (React kennen viele)
 - **Kosten:** Mittel
 - **Learning Curve:** Niedrig (für React Devs)
 
 ### Flutter
+
 - **Developers verfügbar:** Weniger
 - **Hiring:** Schwieriger
 - **Kosten:** Höher (Spezialisierung)
@@ -348,20 +361,24 @@ flutter build apk --release
 **Entwicklungskosten (Durchschnitt):**
 
 React Native App:
+
 - Entwicklung: 40.000 - 80.000 €
 - Maintenance: 1.000 - 2.000 €/Monat
 
 Flutter App:
+
 - Entwicklung: 45.000 - 90.000 €
 - Maintenance: 1.200 - 2.500 €/Monat
 
 **Native Apps (iOS + Android):**
+
 - Entwicklung: 80.000 - 150.000 €
 - Maintenance: 2.000 - 4.000 €/Monat
 
 ## Unsere Empfehlung
 
 ### Wählen Sie React Native wenn:
+
 1. Ihr Team React/JS kennt
 2. Sie eine Web-App haben
 3. Sie schnell starten wollen
@@ -369,6 +386,7 @@ Flutter App:
 5. Community-Support kritisch ist
 
 ### Wählen Sie Flutter wenn:
+
 1. Performance kritisch ist
 2. Custom UI/Animations nötig
 3. Web + Mobile geplant
@@ -378,6 +396,7 @@ Flutter App:
 ## Zusammenfassung
 
 **React Native:**
+
 - ✅ Große Community
 - ✅ JavaScript/TypeScript
 - ✅ Code-Sharing mit Web
@@ -385,6 +404,7 @@ Flutter App:
 - ❌ More native code needed
 
 **Flutter:**
+
 - ✅ Beste Performance
 - ✅ Custom UI einfach
 - ✅ Single Codebase
@@ -404,4 +424,4 @@ Als [Mobile-Spezialisten](/services/mobile-development) helfen wir:
 
 [Kostenloses Erstgespräch](/contact)
 
-*Aktualisiert: Januar 2024*
+_Aktualisiert: Januar 2024_

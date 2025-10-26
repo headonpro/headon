@@ -1,4 +1,5 @@
 # SEO-Analyse für headon.pro
+
 **Datum:** 06. Oktober 2025
 **URL:** https://headon.pro
 
@@ -15,9 +16,11 @@ Die Website headon.pro zeigt **keine kritischen Fehler**, weist aber **13 Seiten
 ## 1. robots.txt ✅ OPTIMAL
 
 ### Status
+
 ✅ **Keine Probleme gefunden**
 
 ### Konfiguration
+
 ```
 User-Agent: *
 Allow: /
@@ -35,7 +38,8 @@ Sitemap: https://headon.pro/image-sitemap.xml
 ```
 
 ### Bewertung
-- Korrekte Sperrung von internen Bereichen (/api/, /admin/, /_next/)
+
+- Korrekte Sperrung von internen Bereichen (/api/, /admin/, /\_next/)
 - Googlebot erhält vollen Zugriff
 - Sitemap korrekt referenziert
 - **1 Seite durch robots.txt blockiert** (laut GSC) - wahrscheinlich gewollt
@@ -45,9 +49,11 @@ Sitemap: https://headon.pro/image-sitemap.xml
 ## 2. Sitemap.xml ✅ GUT
 
 ### Status
+
 ✅ **35 URLs in Sitemap**
 
 ### Struktur
+
 - ✅ Alle Haupt-URLs vorhanden
 - ✅ Korrekte Prioritäten gesetzt
 - ✅ Changefreq definiert
@@ -55,6 +61,7 @@ Sitemap: https://headon.pro/image-sitemap.xml
 - ✅ Keine 404-Fehler in Sitemap-URLs
 
 ### URL-Verteilung
+
 - 9 Hauptseiten (/, /services, /blog, etc.)
 - 14 Blog-Artikel
 - 4 Service-Unterseiten
@@ -63,6 +70,7 @@ Sitemap: https://headon.pro/image-sitemap.xml
 - 2 Rechtliche Seiten (Impressum, Datenschutz)
 
 ### Fehlende URLs
+
 ❌ **Keine image-sitemap.xml vorhanden** (in robots.txt referenziert)
 
 ---
@@ -70,16 +78,20 @@ Sitemap: https://headon.pro/image-sitemap.xml
 ## 3. 404-Fehler & Tote Links ✅ KEINE
 
 ### Status
+
 ✅ **Alle 35 Sitemap-URLs antworten mit Status 200**
 
 ### Geprüfte URLs
+
 - Alle Hauptseiten erreichbar
 - Alle Blog-Posts erreichbar
 - Alle Service-Seiten erreichbar
 - Alle Regions-Seiten erreichbar
 
 ### Bewertung
+
 Laut Google Search Console **2 Seiten als "Nicht gefunden (404)"** gemeldet, aber diese sind **nicht in der aktuellen Sitemap** enthalten. Dies deutet auf:
+
 - Alte URLs aus früheren Versionen
 - Gelöschte Seiten, die noch im Google-Index sind
 - Externe Links auf nicht mehr existierende Seiten
@@ -91,9 +103,11 @@ Laut Google Search Console **2 Seiten als "Nicht gefunden (404)"** gemeldet, abe
 ## 4. Canonical Tags ⚠️ UNVOLLSTÄNDIG
 
 ### Status
+
 ⚠️ **Nur auf 6 von 13 Seiten implementiert**
 
 ### Implementierte Canonical Tags
+
 ✅ Homepage: `https://headon.pro`
 ✅ /services: `https://headon.pro/services`
 ✅ /portfolio: `https://headon.pro/portfolio`
@@ -102,6 +116,7 @@ Laut Google Search Console **2 Seiten als "Nicht gefunden (404)"** gemeldet, abe
 ✅ /about: `https://headon.pro/about`
 
 ### Fehlende Canonical Tags
+
 ❌ **/imprint** - Keine Metadata, da Client Component
 ❌ **/privacy** - Keine Metadata, da Client Component
 ❌ **/regionen** - Canonical fehlt
@@ -111,6 +126,7 @@ Laut Google Search Console **2 Seiten als "Nicht gefunden (404)"** gemeldet, abe
 ❌ **/portfolio/[slug]** - Canonical fehlt für Portfolio-Projekte
 
 ### Problem
+
 - **Impressum & Datenschutz sind 'use client' Components** → Keine Metadata-Export möglich
 - **Dynamische Routen fehlen Canonical-Implementation**
 
@@ -119,12 +135,15 @@ Laut Google Search Console **2 Seiten als "Nicht gefunden (404)"** gemeldet, abe
 ## 5. Duplicate Content ⚠️ RISIKO VORHANDEN
 
 ### Status
+
 ⚠️ **Potenzielle Duplicate Content Probleme**
 
 ### Identifizierte Probleme
 
 #### A) Client-Side Pages ohne Metadata
+
 **Betroffen:** `/imprint`, `/privacy`
+
 - Beide Seiten nutzen `'use client'`
 - Keine `export const metadata` möglich
 - Kein Canonical Tag
@@ -132,7 +151,9 @@ Laut Google Search Console **2 Seiten als "Nicht gefunden (404)"** gemeldet, abe
 - **Lösung:** Umstellung auf Server Components mit Client-Komponenten für Animationen
 
 #### B) Regions-Seiten
+
 **6 Stadt-Landingpages mit ähnlicher Struktur:**
+
 - /regionen/bad-mergentheim
 - /regionen/lauda-koenigshofen
 - /regionen/marktheidenfeld
@@ -141,18 +162,23 @@ Laut Google Search Console **2 Seiten als "Nicht gefunden (404)"** gemeldet, abe
 - /regionen/wuerzburg
 
 **Potenzial für Duplicate Content:**
+
 - Ähnliche Seitenstruktur (Hero, Services, Case Studies)
 - Möglicherweise ähnlicher Content über Städte hinweg
 - **Canonical Tags fehlen komplett**
 
 #### C) Blog-Posts
+
 **14 Blog-Artikel ohne Canonical Tags**
+
 - Korrekte Metadata vorhanden
 - Canonical Tags fehlen in `metadata.ts`
 - **Risiko:** Duplicate Content bei Pagination/Kategorien
 
 #### D) Service-Unterseiten
+
 **4 Service-Pages ohne Canonical Tags**
+
 - /services/web-development
 - /services/mobile-development
 - /services/ui-ux-design
@@ -169,19 +195,24 @@ Laut Google Search Console **2 Seiten als "Nicht gefunden (404)"** gemeldet, abe
 ### Mögliche Ursachen
 
 #### A) Thin Content (Zu wenig Inhalt)
+
 **Betroffene Seiten (Vermutung):**
+
 - Regions-Seiten (wenn Inhalt zu dünn)
 - Service-Unterseiten (wenn nur Aufzählungen)
 - Portfolio-Projekt (wenn nur Bilder, wenig Text)
 
 **Empfehlung:**
+
 - Mindestens 800-1200 Wörter unique Content pro Seite
 - Detaillierte Beschreibungen, nicht nur Listen
 - Lokale Inhalte für jede Stadt (nicht copy-paste)
 
 #### B) Duplicate/Similar Content
+
 **Regions-Seiten Risiko:**
 Wenn alle 6 Städte-Seiten ähnliche Texte haben:
+
 ```
 "Webentwicklung in [Stadt]"
 "Ihre Digitalagentur in [Stadt]"
@@ -189,13 +220,16 @@ Wenn alle 6 Städte-Seiten ähnliche Texte haben:
 ```
 
 **Lösung:**
+
 - Unique Content für jede Stadt
 - Lokale Case Studies
 - Stadtspezifische Statistiken
 - Lokale Kundenstimmen
 
 #### C) Fehlende oder schwache Meta-Tags
+
 **Problem bei Client Components:**
+
 - Impressum & Datenschutz haben keine Meta-Tags
 - Google bewertet Seiten ohne Descriptions niedriger
 
@@ -204,14 +238,21 @@ Wenn alle 6 Städte-Seiten ähnliche Texte haben:
 ## 7. Meta-Tags Analyse
 
 ### Homepage ✅ EXCELLENT
+
 ```html
 <title>Webentwicklung & Mobile Apps 4x schneller | KI-gestützte Digitalagentur</title>
-<meta name="description" content="KI-gestützte Webentwicklung aus Lauda-Königshofen: 4x schneller, 2x bessere Performance...">
-<meta name="keywords" content="Webentwicklung Lauda-Königshofen, Web Development Baden-Württemberg...">
-<link rel="canonical" href="https://headon.pro">
-<meta property="og:title" content="...">
-<meta property="og:description" content="...">
-<meta name="twitter:card" content="summary">
+<meta
+  name="description"
+  content="KI-gestützte Webentwicklung aus Lauda-Königshofen: 4x schneller, 2x bessere Performance..."
+/>
+<meta
+  name="keywords"
+  content="Webentwicklung Lauda-Königshofen, Web Development Baden-Württemberg..."
+/>
+<link rel="canonical" href="https://headon.pro" />
+<meta property="og:title" content="..." />
+<meta property="og:description" content="..." />
+<meta name="twitter:card" content="summary" />
 ```
 
 ✅ Alle wichtigen Tags vorhanden
@@ -221,9 +262,10 @@ Wenn alle 6 Städte-Seiten ähnliche Texte haben:
 ✅ Canonical korrekt
 
 ### Imprint & Privacy ❌ FEHLEND
+
 ```tsx
 // app/imprint/page.tsx
-'use client'  // ← PROBLEM
+'use client' // ← PROBLEM
 
 export default function ImprintPage() {
   // Kein metadata Export möglich
@@ -231,6 +273,7 @@ export default function ImprintPage() {
 ```
 
 **Fehlende Tags:**
+
 - ❌ Title Tag (nutzt Parent Layout)
 - ❌ Description
 - ❌ Canonical
@@ -242,12 +285,14 @@ export default function ImprintPage() {
 ## 8. Strukturierte Daten ✅ GUT
 
 ### Implementiert
+
 ✅ Organization Schema
 ✅ LocalBusiness Schema
 ✅ Article Schema (für Blog-Posts)
 ✅ Breadcrumbs (visuell implementiert)
 
 ### Empfehlungen
+
 - ❌ **BreadcrumbList Schema fehlt** (nur visuell, kein JSON-LD)
 - ❌ **FAQ Schema** könnte für Service-Seiten nützlich sein
 - ❌ **Review/Rating Schema** für Portfolio-Projekte
@@ -257,6 +302,7 @@ export default function ImprintPage() {
 ## 9. Technische SEO ✅ SEHR GUT
 
 ### Performance
+
 ✅ Next.js 15 mit App Router
 ✅ Optimierte Bilder (next/image)
 ✅ Font Optimization
@@ -264,11 +310,13 @@ export default function ImprintPage() {
 ✅ Umami Analytics (DSGVO-konform, kein Cookie-Banner nötig)
 
 ### Mobile-Friendly
+
 ✅ Responsive Design
 ✅ Meta Viewport korrekt
 ✅ Touch-optimiert
 
 ### Core Web Vitals
+
 ✅ Modern Stack (React 19, Next.js 15)
 ✅ Lazy Loading für Bilder
 ✅ Prefetching für Navigation
@@ -282,6 +330,7 @@ export default function ImprintPage() {
 **Betroffen:** `/imprint`, `/privacy`
 
 **Aktueller Code:**
+
 ```tsx
 'use client'
 
@@ -296,6 +345,7 @@ export default function ImprintPage() {
 ```
 
 **Lösung A - Server Component mit Client Islands:**
+
 ```tsx
 // app/imprint/page.tsx (Server Component)
 import type { Metadata } from 'next'
@@ -335,6 +385,7 @@ export default function ImprintContent() {
 ```
 
 **Lösung B - Layout mit Metadata:**
+
 ```tsx
 // app/imprint/layout.tsx
 import type { Metadata } from 'next'
@@ -357,6 +408,7 @@ export default function ImprintLayout({ children }) {
 **Betroffen:** Blog-Posts, Service-Seiten, Regions-Seiten
 
 **Blog-Post Lösung:**
+
 ```tsx
 // app/blog/[slug]/metadata.ts
 export async function generateMetadata({ params }): Promise<Metadata> {
@@ -367,7 +419,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
     title: post.frontmatter.title,
     description: post.frontmatter.description,
     alternates: {
-      canonical: `https://headon.pro/blog/${slug}`,  // ← HINZUFÜGEN
+      canonical: `https://headon.pro/blog/${slug}`, // ← HINZUFÜGEN
     },
     // ... rest
   }
@@ -375,6 +427,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 ```
 
 **Regions-Seite Lösung:**
+
 ```tsx
 // app/regionen/[city]/metadata.ts
 export async function generateMetadata({ params }): Promise<Metadata> {
@@ -385,7 +438,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
     title: `${cityPage.frontmatter.name} | HEADON.pro`,
     description: cityPage.frontmatter.description,
     alternates: {
-      canonical: `https://headon.pro/regionen/${city}`,  // ← HINZUFÜGEN
+      canonical: `https://headon.pro/regionen/${city}`, // ← HINZUFÜGEN
     },
   }
 }
@@ -399,6 +452,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 Wenn alle 6 Städte-Seiten ähnlichen Content haben, erkennt Google dies als Duplicate Content.
 
 **Beispiel schlechter Content:**
+
 ```
 Bad Mergentheim: "Ihre Digitalagentur in Bad Mergentheim"
 Wertheim: "Ihre Digitalagentur in Wertheim"
@@ -407,6 +461,7 @@ Wertheim: "Ihre Digitalagentur in Wertheim"
 **Empfehlung - Unique Content pro Stadt:**
 
 **1. Lokale Statistiken:**
+
 ```markdown
 # Webentwicklung in Bad Mergentheim
 
@@ -417,13 +472,16 @@ von digitalen Lösungen.
 ```
 
 **2. Stadtspezifische Case Studies:**
+
 ```markdown
 ## Erfolgsgeschichte: Kurhotel Digitalisierung
+
 Für das Kurhotel [Name] entwickelten wir ein Online-Buchungssystem
 mit Wellness-Paket-Konfiguration...
 ```
 
 **3. Lokale Keywords:**
+
 ```markdown
 - "Webentwicklung Bad Mergentheim"
 - "Online-Marketing Kurstadt"
@@ -435,6 +493,7 @@ mit Wellness-Paket-Konfiguration...
 ### Problem 4: Fehlende image-sitemap.xml
 
 **In robots.txt referenziert:**
+
 ```
 Sitemap: https://headon.pro/image-sitemap.xml
 ```
@@ -442,10 +501,12 @@ Sitemap: https://headon.pro/image-sitemap.xml
 **Aber:** Diese Sitemap existiert nicht → 404
 
 **Lösung:**
+
 1. Entweder aus robots.txt entfernen
 2. Oder Image-Sitemap generieren
 
 **Image-Sitemap Beispiel:**
+
 ```tsx
 // app/image-sitemap.xml/route.ts
 export async function GET() {
@@ -461,7 +522,9 @@ export async function GET() {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
             xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-      ${images.map(img => `
+      ${images
+        .map(
+          (img) => `
         <url>
           <loc>https://headon.pro</loc>
           <image:image>
@@ -469,7 +532,9 @@ export async function GET() {
             <image:caption>${img.caption}</image:caption>
           </image:image>
         </url>
-      `).join('')}
+      `
+        )
+        .join('')}
     </urlset>`
 
   return new Response(sitemap, {
@@ -551,6 +616,7 @@ app/regionen/page.tsx
 ```
 
 **Beispiel-Code für alle:**
+
 ```tsx
 alternates: {
   canonical: `https://headon.pro/${pfad}`,
@@ -560,6 +626,7 @@ alternates: {
 ### Phase 2: Server Components (2-3 Stunden)
 
 **1. Impressum**
+
 ```bash
 # Neue Dateien:
 app/imprint/layout.tsx        # Metadata hier
@@ -570,6 +637,7 @@ app/imprint/page.tsx          # Nur noch Wrapper
 ```
 
 **2. Datenschutz**
+
 ```bash
 # Neue Dateien:
 app/privacy/layout.tsx
@@ -582,6 +650,7 @@ app/privacy/page.tsx
 ### Phase 3: Content-Optimierung (8-16 Stunden)
 
 **Für jede der 6 Regions-Seiten:**
+
 1. Recherche lokaler Statistiken (30 min)
 2. Schreiben unique Content (2 Stunden)
 3. Lokale Keywords einbauen (15 min)
@@ -597,12 +666,14 @@ app/privacy/page.tsx
 ### Google Search Console Metriken
 
 **Vor Optimierung (aktuell):**
+
 - ✅ 0 Seiten mit 404
 - ⚠️ 13 Seiten "Gecrawlt – nicht indexiert"
 - ⚠️ 2 Seiten "Nicht gefunden"
 - ⚠️ 1 Seite "Durch robots.txt blockiert"
 
 **Ziel (nach 4 Wochen):**
+
 - ✅ 0 Seiten mit 404
 - ✅ 0 Seiten "Gecrawlt – nicht indexiert"
 - ✅ 0 Seiten "Nicht gefunden"
@@ -611,14 +682,17 @@ app/privacy/page.tsx
 ### KPIs
 
 **Indexierung:**
+
 - Aktuell indexiert: ~20 Seiten (Schätzung)
 - Ziel: 35 Seiten (alle Sitemap-URLs)
 
 **Organic Traffic:**
+
 - Baseline etablieren in GSC
 - Ziel: +30% in 3 Monaten
 
 **Rankings:**
+
 - Fokus Keywords tracken
 - Lokale Rankings für Städte
 
@@ -627,6 +701,7 @@ app/privacy/page.tsx
 ## 14. Zusammenfassung
 
 ### ✅ Was funktioniert gut
+
 - Technische SEO-Grundlagen
 - robots.txt Konfiguration
 - Sitemap-Struktur
@@ -635,6 +710,7 @@ app/privacy/page.tsx
 - Metadata auf Hauptseiten
 
 ### ⚠️ Was verbessert werden muss
+
 - **Canonical Tags fehlen auf 27 Seiten**
 - **Client Components verhindern Metadata** (Impressum, Datenschutz)
 - **Content-Qualität für 13 nicht-indexierte Seiten**
@@ -642,22 +718,23 @@ app/privacy/page.tsx
 - **Fehlende Structured Data** (Breadcrumbs, FAQ)
 
 ### 🎯 Wichtigste Maßnahme
+
 **Content-Qualität der Regions-Seiten verbessern** → Löst vermutlich das Hauptproblem der 13 nicht-indexierten Seiten.
 
 ---
 
 ## 15. Geschätzter Aufwand
 
-| Phase | Aufgabe | Aufwand | Priorität |
-|-------|---------|---------|-----------|
-| 1 | Canonical Tags | 2h | 🔴 Kritisch |
-| 2 | Server Components | 3h | 🔴 Kritisch |
-| 3 | 404 URLs prüfen + Redirects | 1h | 🔴 Kritisch |
-| 4 | Regions-Content (6 Städte) | 18h | 🟡 Wichtig |
-| 5 | BreadcrumbList Schema | 2h | 🟡 Wichtig |
-| 6 | Image Sitemap | 1h | 🟡 Wichtig |
-| 7 | FAQ Schema | 4h | 🟢 Medium |
-| 8 | Content-Audit restliche Seiten | 8h | 🟢 Medium |
+| Phase | Aufgabe                        | Aufwand | Priorität   |
+| ----- | ------------------------------ | ------- | ----------- |
+| 1     | Canonical Tags                 | 2h      | 🔴 Kritisch |
+| 2     | Server Components              | 3h      | 🔴 Kritisch |
+| 3     | 404 URLs prüfen + Redirects    | 1h      | 🔴 Kritisch |
+| 4     | Regions-Content (6 Städte)     | 18h     | 🟡 Wichtig  |
+| 5     | BreadcrumbList Schema          | 2h      | 🟡 Wichtig  |
+| 6     | Image Sitemap                  | 1h      | 🟡 Wichtig  |
+| 7     | FAQ Schema                     | 4h      | 🟢 Medium   |
+| 8     | Content-Audit restliche Seiten | 8h      | 🟢 Medium   |
 
 **Gesamt:** ~39 Stunden
 **Sprint 1 (Kritisch):** ~6 Stunden → Sofort starten

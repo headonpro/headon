@@ -13,6 +13,7 @@
 **Status:** ERLEDIGT
 
 **Was wurde gemacht:**
+
 - ✅ Blog-Posts: Canonical Tags bereits vorhanden (`/app/blog/[slug]/metadata.ts`)
 - ✅ Service-Seiten: Canonical Tags bereits vorhanden (`/app/services/[slug]/metadata.ts`)
 - ✅ Portfolio-Projekte: Canonical Tags bereits vorhanden (`/app/portfolio/[slug]/metadata.ts`)
@@ -20,14 +21,17 @@
 - ✅ **NEU:** Regions-Übersichtsseite: Canonical Tag hinzugefügt (`/app/regionen/page.tsx`)
 
 **Geänderte Dateien:**
+
 - `app/regionen/page.tsx` → Canonical Tag ergänzt
 
 **Ergebnis:**
+
 - **Alle 35 Sitemap-URLs haben jetzt Canonical Tags**
 - Verhindert Duplicate Content
 - Verbessert SEO-Signale für Google
 
 **Beispiel-Code:**
+
 ```tsx
 export const metadata: Metadata = {
   // ... andere Metadata
@@ -44,11 +48,13 @@ export const metadata: Metadata = {
 **Status:** ERLEDIGT
 
 **Problem:**
+
 - `/imprint` und `/privacy` nutzen `'use client'`
 - Client Components können kein `export const metadata` haben
 - Fehlende Meta-Tags, kein Canonical, schlechtes SEO
 
 **Lösung:**
+
 - **Layout Pattern** verwendet statt kompletter Umstellung
 - Neue Dateien erstellt:
   - `app/imprint/layout.tsx` → Enthält Metadata
@@ -56,10 +62,12 @@ export const metadata: Metadata = {
 - Bestehende `page.tsx` bleiben Client Components (für Animationen)
 
 **Geänderte/Neue Dateien:**
+
 - `app/imprint/layout.tsx` (NEU) - 29 Zeilen
 - `app/privacy/layout.tsx` (NEU) - 29 Zeilen
 
 **Ergebnis:**
+
 - ✅ **Impressum hat jetzt:**
   - Title: "Impressum | HEADON.pro"
   - Meta Description (171 Zeichen)
@@ -77,6 +85,7 @@ export const metadata: Metadata = {
   - Robots Tags (index, follow)
 
 **Code-Beispiel:**
+
 ```tsx
 // app/imprint/layout.tsx
 import type { Metadata } from 'next'
@@ -95,6 +104,7 @@ export default function ImprintLayout({ children }) {
 ```
 
 **Vorteile:**
+
 - Client-Side Animationen bleiben funktional
 - SEO-Metadata vollständig vorhanden
 - Kein Code-Breaking
@@ -109,12 +119,14 @@ export default function ImprintLayout({ children }) {
 **Was wurde gemacht:**
 
 **A) Middleware erstellt (`middleware.ts`):**
+
 - 301-Redirect-System für alte URLs
 - Pattern-basierte Redirects möglich
 - Production-ready Code
 - Einfach erweiterbar
 
 **B) Anleitung erstellt (`GSC-404-ANLEITUNG.md`):**
+
 - Schritt-für-Schritt Anleitung
 - Google Search Console Integration
 - Beispiel-Workflows
@@ -122,10 +134,12 @@ export default function ImprintLayout({ children }) {
 - Häufige 404-Ursachen
 
 **Neue Dateien:**
+
 - `middleware.ts` (43 Zeilen) - Redirect-Handler
 - `GSC-404-ANLEITUNG.md` (266 Zeilen) - Komplette Anleitung
 
 **Middleware-Code:**
+
 ```typescript
 const redirects: Record<string, string> = {
   // Hier URLs aus Google Search Console eintragen:
@@ -145,6 +159,7 @@ export function middleware(request: NextRequest) {
 ```
 
 **Nächste Schritte (manuell erforderlich):**
+
 1. Google Search Console öffnen: https://search.google.com/search-console
 2. Property `headon.pro` auswählen
 3. **Indexierung** → **Seiten** → **"Nicht gefunden (404)"** (2 Seiten)
@@ -155,6 +170,7 @@ export function middleware(request: NextRequest) {
 8. In GSC Indexierung für neue URLs beantragen
 
 **Beispiel-Verwendung:**
+
 ```typescript
 // Wenn du in GSC z.B. diese 404-URLs findest:
 const redirects: Record<string, string> = {
@@ -169,6 +185,7 @@ const redirects: Record<string, string> = {
 ## 📊 Zusammenfassung der Änderungen
 
 ### Dateien geändert/erstellt:
+
 1. ✅ `app/regionen/page.tsx` - Canonical Tag hinzugefügt
 2. ✅ `app/imprint/layout.tsx` - NEU, Metadata für Impressum
 3. ✅ `app/privacy/layout.tsx` - NEU, Metadata für Datenschutz
@@ -176,11 +193,13 @@ const redirects: Record<string, string> = {
 5. ✅ `GSC-404-ANLEITUNG.md` - NEU, Anleitung für 404-Fixes
 
 ### Code-Zeilen:
+
 - Hinzugefügt: ~370 Zeilen
 - Geändert: 10 Zeilen
 - Gelöscht: 0 Zeilen
 
 ### Build-Status:
+
 ```bash
 ✓ Compiled successfully
 ✓ Generating static pages (44/44)
@@ -196,19 +215,23 @@ const redirects: Record<string, string> = {
 ### Vorher → Nachher
 
 **Canonical Tags:**
+
 - ❌ 6 Hauptseiten: ✅ Canonical vorhanden
 - ❌ 27 Unterseiten: ❌ Canonical fehlte
 - ❌ Impressum/Datenschutz: ❌ Keine Metadata
 
 **Nachher:**
+
 - ✅ **35/35 Seiten haben Canonical Tags**
 - ✅ **100% Coverage**
 
 **Meta-Tags Impressum/Datenschutz:**
+
 - ❌ Vorher: Keine Title, Description, Canonical, OG
 - ✅ Nachher: Vollständige SEO-Metadata
 
 **404-Handling:**
+
 - ❌ Vorher: Keine Redirects für alte URLs
 - ✅ Nachher: Redirect-System bereit, Anleitung vorhanden
 
@@ -227,6 +250,7 @@ const redirects: Record<string, string> = {
    - 2 URLs notieren
 
 2. **URLs in middleware.ts eintragen:**
+
    ```typescript
    const redirects: Record<string, string> = {
      '/gefundene-404-url-1': '/neue-ziel-url-1',
@@ -235,6 +259,7 @@ const redirects: Record<string, string> = {
    ```
 
 3. **Deployen:**
+
    ```bash
    git add middleware.ts
    git commit -m "fix: Add redirects for GSC 404 URLs"
@@ -251,16 +276,19 @@ const redirects: Record<string, string> = {
 ## 📈 Erwartete SEO-Verbesserungen
 
 ### Kurzfristig (1-2 Wochen):
+
 - ✅ Alle 35 Seiten haben korrekte Canonical Tags
 - ✅ Impressum & Datenschutz werden indexierbar
 - ✅ 404-Fehler werden auf 0 reduziert (nach manueller GSC-Arbeit)
 
 ### Mittelfristig (2-4 Wochen):
+
 - ✅ "Gecrawlt - nicht indexiert" (13 Seiten) sollte sinken
 - ✅ Duplicate Content Warnungen verschwinden
 - ✅ Bessere Rankings für alle Seiten
 
 ### Langfristig (1-3 Monate):
+
 - ✅ Mehr Seiten im Google Index (Ziel: 35/35)
 - ✅ Höhere Sichtbarkeit in SERPs
 - ✅ Bessere CTR durch vollständige Meta-Tags
@@ -270,6 +298,7 @@ const redirects: Record<string, string> = {
 ## 🔍 Testing
 
 ### Lokaler Test durchgeführt:
+
 ```bash
 pnpm build
 # ✓ Compiled successfully in 9.7s
@@ -277,6 +306,7 @@ pnpm build
 ```
 
 ### Production Test (nach Deployment):
+
 ```bash
 # Canonical Tags testen:
 curl -s https://headon.pro/imprint | grep canonical
@@ -290,6 +320,7 @@ curl -s https://headon.pro/regionen | grep canonical
 ```
 
 ### Nach GSC-Arbeit testen:
+
 ```bash
 # Redirects testen (nachdem URLs in middleware.ts eingetragen):
 curl -I https://headon.pro/alte-url
@@ -302,6 +333,7 @@ curl -I https://headon.pro/alte-url
 ## 📝 Nächste Schritte
 
 ### Sofort (5 Minuten):
+
 1. ✅ **Deployment vorbereiten:**
    ```bash
    git status
@@ -311,6 +343,7 @@ curl -I https://headon.pro/alte-url
    ```
 
 ### Nach Deployment (15 Minuten):
+
 2. ⏳ **Google Search Console:**
    - 404-URLs finden
    - In `middleware.ts` eintragen
@@ -318,6 +351,7 @@ curl -I https://headon.pro/alte-url
    - Redirects testen
 
 ### Diese Woche (siehe Hauptreport):
+
 3. ⏳ **Content-Optimierung Regions-Seiten** (18 Stunden)
 4. ⏳ **BreadcrumbList Schema** (2 Stunden)
 5. ⏳ **Image Sitemap** (1 Stunde)
@@ -327,6 +361,7 @@ curl -I https://headon.pro/alte-url
 ## 📊 Metriken zur Überwachung
 
 ### Google Search Console:
+
 - **Jetzt:** 13 Seiten "Gecrawlt - nicht indexiert"
 - **Ziel (4 Wochen):** 0 Seiten
 
@@ -337,9 +372,11 @@ curl -I https://headon.pro/alte-url
 - **Ziel (8 Wochen):** 35 Seiten
 
 ### Core Web Vitals:
+
 - Keine Änderungen (Performance bleibt gleich)
 
 ### Indexierungsrate:
+
 - Vorher: ~57% (20/35)
 - Ziel: 100% (35/35)
 
@@ -364,6 +401,7 @@ curl -I https://headon.pro/alte-url
 ## 🚀 Bereit für Deployment
 
 **Alle Änderungen sind:**
+
 - ✅ Getestet (Build erfolgreich)
 - ✅ Dokumentiert (Reports + Anleitung)
 - ✅ Production-ready
@@ -371,6 +409,7 @@ curl -I https://headon.pro/alte-url
 - ✅ SEO-optimiert
 
 **Git Commands:**
+
 ```bash
 git status
 # 5 neue/geänderte Dateien
@@ -392,6 +431,7 @@ git push
 ```
 
 **Nach Deployment:**
+
 - Warte 5-10 Minuten
 - Teste Canonical Tags (siehe Testing-Sektion oben)
 - Öffne Google Search Console

@@ -79,35 +79,37 @@ export default function BlogContent({
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       {/* Animated Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500" />
+      <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
       {/* Animated Gradient Layers */}
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0 opacity-60"
           animate={{
-            background: isMobile ? [
-              'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
-              'radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.5) 0%, transparent 40%)',
-              'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
-            ] : [
-              'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 40% 40%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
-              'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
-            ],
+            background: isMobile
+              ? [
+                  'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
+                  'radial-gradient(circle at 70% 30%, rgba(255, 215, 0, 0.5) 0%, transparent 40%)',
+                  'radial-gradient(circle at 30% 70%, rgba(255, 140, 0, 0.5) 0%, transparent 40%)',
+                ]
+              : [
+                  'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+                  'radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
+                  'radial-gradient(circle at 40% 40%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+                  'radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)',
+                  'radial-gradient(circle at 20% 80%, rgba(255, 140, 0, 0.4) 0%, transparent 50%)',
+                ],
           }}
           transition={{
             duration: isMobile ? 8 : 10,
             repeat: Infinity,
-            ease: "linear"
+            ease: 'linear',
           }}
           style={{
             transform: 'translateZ(0)',
-            willChange: 'background'
+            willChange: 'background',
           }}
         />
       </div>
@@ -120,13 +122,13 @@ export default function BlogContent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="mb-16 text-center"
           >
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl mb-12 font-heading"
+              className="font-heading mb-12 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
             >
               Blog
             </motion.h1>
@@ -134,7 +136,7 @@ export default function BlogContent({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-lg text-white/90 max-w-3xl mx-auto"
+              className="mx-auto max-w-3xl text-lg text-white/90"
             >
               Insights, Trends und Best Practices aus der Welt der digitalen Innovation
             </motion.p>
@@ -148,15 +150,15 @@ export default function BlogContent({
             className="mb-12"
           >
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-8">
+            <div className="mx-auto mb-8 max-w-2xl">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
+                <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-white/50" />
                 <input
                   type="text"
                   placeholder="Artikel durchsuchen..."
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-all"
+                  className="focus:ring-accent-500 w-full rounded-2xl border border-white/20 bg-white/10 py-4 pr-4 pl-12 text-white placeholder-white/50 backdrop-blur-md transition-all focus:border-transparent focus:ring-2 focus:outline-none"
                 />
               </div>
             </div>
@@ -165,7 +167,7 @@ export default function BlogContent({
             <div className="flex flex-wrap justify-center gap-3">
               <button
                 onClick={() => handleCategoryFilter(null)}
-                className={`px-6 py-2 rounded-full font-medium transition-all ${
+                className={`rounded-full px-6 py-2 font-medium transition-all ${
                   !selectedCategory
                     ? 'bg-accent-500 text-primary-900'
                     : 'bg-white/10 text-white hover:bg-white/20'
@@ -177,7 +179,7 @@ export default function BlogContent({
                 <button
                   key={category}
                   onClick={() => handleCategoryFilter(category)}
-                  className={`px-6 py-2 rounded-full font-medium transition-all capitalize ${
+                  className={`rounded-full px-6 py-2 font-medium capitalize transition-all ${
                     selectedCategory === category
                       ? 'bg-accent-500 text-primary-900'
                       : 'bg-white/10 text-white hover:bg-white/20'
@@ -204,34 +206,34 @@ export default function BlogContent({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 + index * 0.05 }}
-                    className="group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all duration-300"
+                    className="group relative overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md transition-all duration-300 hover:bg-white/15"
                   >
                     <div className="p-8">
-                      <div className="flex items-center gap-4 mb-4 flex-wrap">
-                        <span className="px-3 py-1 text-xs font-medium rounded-full bg-white/20 text-white capitalize">
+                      <div className="mb-4 flex flex-wrap items-center gap-4">
+                        <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white capitalize">
                           {post.frontmatter.category}
                         </span>
                         <div className="flex items-center gap-2 text-sm text-white/70">
-                          <Calendar className="w-4 h-4" />
+                          <Calendar className="h-4 w-4" />
                           <time dateTime={post.frontmatter.publishedAt}>
                             {new Date(post.frontmatter.publishedAt).toLocaleDateString('de-DE', {
                               year: 'numeric',
                               month: 'long',
-                              day: 'numeric'
+                              day: 'numeric',
                             })}
                           </time>
                         </div>
                         <div className="flex items-center gap-2 text-sm text-white/70">
-                          <Clock className="w-4 h-4" />
+                          <Clock className="h-4 w-4" />
                           <span>{post.frontmatter.readingTime} Min.</span>
                         </div>
                       </div>
 
-                      <h2 className="text-xl font-bold text-white mb-3 group-hover:text-accent-300 transition-colors line-clamp-2">
+                      <h2 className="group-hover:text-accent-300 mb-3 line-clamp-2 text-xl font-bold text-white transition-colors">
                         {post.frontmatter.title}
                       </h2>
 
-                      <p className="text-white/80 mb-6 leading-relaxed line-clamp-3">
+                      <p className="mb-6 line-clamp-3 leading-relaxed text-white/80">
                         {post.frontmatter.description}
                       </p>
 
@@ -241,10 +243,10 @@ export default function BlogContent({
                         </span>
                         <Link
                           href={`/blog/${post.slug}`}
-                          className="inline-flex items-center gap-2 text-sm font-medium text-accent-400 hover:text-accent-300 transition-colors"
+                          className="text-accent-400 hover:text-accent-300 inline-flex items-center gap-2 text-sm font-medium transition-colors"
                         >
                           Weiterlesen
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </Link>
                       </div>
                     </div>
@@ -263,23 +265,21 @@ export default function BlogContent({
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="rounded-lg border border-white/20 bg-white/10 p-3 text-white backdrop-blur-md transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
                     aria-label="Vorherige Seite"
                   >
-                    <ChevronLeft className="w-5 h-5" />
+                    <ChevronLeft className="h-5 w-5" />
                   </button>
 
                   <div className="flex items-center gap-2">
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
                       // Show first page, last page, current page, and pages around current
                       const showPage =
-                        page === 1 ||
-                        page === totalPages ||
-                        Math.abs(page - currentPage) <= 1
+                        page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1
 
                       if (!showPage && page === 2 && currentPage > 3) {
                         return (
-                          <span key={page} className="text-white/50 px-2">
+                          <span key={page} className="px-2 text-white/50">
                             ...
                           </span>
                         )
@@ -287,7 +287,7 @@ export default function BlogContent({
 
                       if (!showPage && page === totalPages - 1 && currentPage < totalPages - 2) {
                         return (
-                          <span key={page} className="text-white/50 px-2">
+                          <span key={page} className="px-2 text-white/50">
                             ...
                           </span>
                         )
@@ -299,10 +299,10 @@ export default function BlogContent({
                         <button
                           key={page}
                           onClick={() => handlePageChange(page)}
-                          className={`min-w-[44px] px-4 py-2 rounded-lg font-medium transition-all ${
+                          className={`min-w-[44px] rounded-lg px-4 py-2 font-medium transition-all ${
                             currentPage === page
                               ? 'bg-accent-500 text-primary-900'
-                              : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20'
+                              : 'border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white/20'
                           }`}
                         >
                           {page}
@@ -314,10 +314,10 @@ export default function BlogContent({
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="rounded-lg border border-white/20 bg-white/10 p-3 text-white backdrop-blur-md transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
                     aria-label="Nächste Seite"
                   >
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="h-5 w-5" />
                   </button>
                 </motion.div>
               )}
@@ -328,13 +328,11 @@ export default function BlogContent({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-center py-24"
+              className="py-24 text-center"
             >
-              <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-12">
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Keine Artikel gefunden
-                </h3>
-                <p className="text-white/80 mb-6">
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-12 backdrop-blur-md">
+                <h3 className="mb-4 text-2xl font-bold text-white">Keine Artikel gefunden</h3>
+                <p className="mb-6 text-white/80">
                   Versuchen Sie es mit anderen Suchbegriffen oder Filtern.
                 </p>
                 <button
@@ -342,7 +340,7 @@ export default function BlogContent({
                     setSearchInput('')
                     handleCategoryFilter(null)
                   }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent-500 to-secondary-500 text-primary font-semibold hover:from-accent-600 hover:to-secondary-600 transition-all"
+                  className="from-accent-500 to-secondary-500 text-primary hover:from-accent-600 hover:to-secondary-600 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r px-6 py-3 font-semibold transition-all"
                 >
                   Alle Artikel anzeigen
                 </button>

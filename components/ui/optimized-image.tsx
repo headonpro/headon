@@ -21,7 +21,7 @@ export default function OptimizedImage({
 }: OptimizedImageProps) {
   // Check if WebP version exists
   const webpSrc = src.replace(/\.(png|jpg|jpeg)$/, '.webp')
-  
+
   return (
     <picture>
       <source srcSet={webpSrc} type="image/webp" />

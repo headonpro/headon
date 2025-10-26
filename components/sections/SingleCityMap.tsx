@@ -17,10 +17,7 @@ interface SingleCityMapProps {
   coordinates: Coordinates
 }
 
-export default function SingleCityMap({
-  cityName,
-  coordinates,
-}: SingleCityMapProps) {
+export default function SingleCityMap({ cityName, coordinates }: SingleCityMapProps) {
   const mapRef = useRef<HTMLDivElement>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const leafletMapRef = useRef<any>(null)
@@ -43,17 +40,18 @@ export default function SingleCityMap({
       )
 
       // Add OpenStreetMap tiles
-      L.default.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 19,
-      }).addTo(map)
+      L.default
+        .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 19,
+        })
+        .addTo(map)
 
       // Custom marker icon (using default Leaflet icon)
       const defaultIcon = L.default.icon({
         iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-        iconRetinaUrl:
-          'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
@@ -90,14 +88,14 @@ export default function SingleCityMap({
       {/* Map Container */}
       <div
         ref={mapRef}
-        className="h-64 md:h-96 w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 shadow-lg"
+        className="h-64 w-full overflow-hidden rounded-lg border border-gray-200 shadow-lg md:h-96 dark:border-gray-800"
         style={{ zIndex: 0 }}
       />
 
       {/* Loading State - shown until map loads */}
       {!leafletMapRef.current && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg">
-          <MapPin className="w-8 h-8 text-gray-400 animate-pulse" />
+        <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800">
+          <MapPin className="h-8 w-8 animate-pulse text-gray-400" />
         </div>
       )}
     </div>

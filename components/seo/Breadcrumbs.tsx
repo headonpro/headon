@@ -83,7 +83,9 @@ export default function Breadcrumbs({ items, variant = 'light' }: BreadcrumbsPro
                 {/* Breadcrumb link or text */}
                 {isLast ? (
                   // Last item (current page) - not clickable
-                  <span className={`truncate font-semibold ${colorClasses.current} max-w-[200px] sm:max-w-none`}>
+                  <span
+                    className={`truncate font-semibold ${colorClasses.current} max-w-[200px] sm:max-w-none`}
+                  >
                     {item.name}
                   </span>
                 ) : (

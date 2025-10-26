@@ -2,8 +2,10 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Portfolio & Referenzen | HEADON.pro - Erfolgreiche Projekte',
-  description: 'Entdecken Sie unsere erfolgreichen Web- und App-Projekte. Von E-Commerce bis Enterprise - Referenzen, die für sich sprechen.',
-  keywords: 'Portfolio Webdesign, Referenzen Webentwicklung, Case Studies, Erfolgreiche Projekte, Website Beispiele, App Portfolio, React Projekte, Next.js Referenzen',
+  description:
+    'Entdecken Sie unsere erfolgreichen Web- und App-Projekte. Von E-Commerce bis Enterprise - Referenzen, die für sich sprechen.',
+  keywords:
+    'Portfolio Webdesign, Referenzen Webentwicklung, Case Studies, Erfolgreiche Projekte, Website Beispiele, App Portfolio, React Projekte, Next.js Referenzen',
   openGraph: {
     title: 'Portfolio | HEADON.pro - Unsere Erfolgsgeschichten',
     description: 'Überzeugen Sie sich von unserer Expertise durch reale Projektbeispiele',

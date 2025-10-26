@@ -16,14 +16,17 @@
 Für jede gefundene 404-URL entscheide:
 
 **Option A: URL existiert unter neuem Namen**
+
 - Beispiel: `/blog/old-slug` → `/blog/new-slug`
 - **Aktion:** 301-Redirect einrichten (siehe unten)
 
 **Option B: URL wurde gelöscht und Inhalt existiert nicht mehr**
+
 - Beispiel: `/old-service` (Service wurde eingestellt)
 - **Aktion:** 410-Gone Status oder auf Homepage umleiten
 
 **Option C: URL sollte nie existiert haben**
+
 - Beispiel: `/api/test` (interner Entwicklungs-Endpoint)
 - **Aktion:** In Google Search Console als "Gelöscht" markieren
 
@@ -49,6 +52,7 @@ const redirects: Record<string, string> = {
 Nachdem du die Redirects eingetragen hast:
 
 1. **Lokal testen:**
+
    ```bash
    pnpm dev
    # Besuche http://localhost:3000/alte-url
@@ -73,6 +77,7 @@ Nachdem du die Redirects eingetragen hast:
 ### Schritt 6: Überwachung
 
 Nach 1-2 Wochen:
+
 - Prüfe GSC → **Seiten** → **"Nicht gefunden (404)"**
 - Die Anzahl sollte auf 0 gesunken sein
 - Falls nicht, prüfe die Redirects erneut
@@ -80,31 +85,41 @@ Nach 1-2 Wochen:
 ## Häufige 404-Ursachen
 
 ### 1. Alte Blog-URLs
+
 **Problem:** Blog-Post wurde umbenannt
+
 ```typescript
 '/blog/old-slug': '/blog/new-slug',
 ```
 
 ### 2. Service-URLs geändert
+
 **Problem:** Service-Struktur wurde umgebaut
+
 ```typescript
 '/services/old-name': '/services/new-name',
 ```
 
 ### 3. Regionen-URLs
+
 **Problem:** Stadt-URLs wurden geändert
+
 ```typescript
 '/stadt/bad-mergentheim': '/regionen/bad-mergentheim',
 ```
 
 ### 4. Portfolio-Projekte
+
 **Problem:** Projekt-URLs umbenannt
+
 ```typescript
 '/portfolio/old-project': '/portfolio/new-project',
 ```
 
 ### 5. Rechtliche Seiten
+
 **Problem:** Impressum/Datenschutz URL geändert
+
 ```typescript
 '/impressum': '/imprint',
 '/datenschutz': '/privacy',
@@ -156,14 +171,17 @@ export function middleware(request: NextRequest) {
 ## Beispiel-Workflow
 
 **Szenario:** Du findest in GSC diese 404-URLs:
+
 - `/blog/responsive-webdesign` (alt)
 - `/dienste` (alt)
 
 **Schritt 1:** Prüfe wo der Inhalt jetzt ist:
+
 - `/blog/responsive-webdesign` → existiert als `/blog/responsive-design-tailwind`
 - `/dienste` → wurde zu `/services`
 
 **Schritt 2:** Trage in `middleware.ts` ein:
+
 ```typescript
 const redirects: Record<string, string> = {
   '/blog/responsive-webdesign': '/blog/responsive-design-tailwind',
@@ -172,6 +190,7 @@ const redirects: Record<string, string> = {
 ```
 
 **Schritt 3:** Commit & Deploy:
+
 ```bash
 git add middleware.ts
 git commit -m "fix: Add 301 redirects for old URLs from GSC"
@@ -179,6 +198,7 @@ git push
 ```
 
 **Schritt 4:** Nach Deployment testen:
+
 ```bash
 curl -I https://headon.pro/blog/responsive-webdesign
 # HTTP/2 301

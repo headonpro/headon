@@ -1,16 +1,16 @@
 ---
-title: "Next.js Image Optimization: WebP, AVIF und moderne Formate meistern"
-description: "Kompletter Guide zur Next.js Image-Komponente: Automatische Optimierung, moderne Formate (WebP/AVIF), Lazy Loading und Best Practices für perfekte Performance."
-publishedAt: "2025-08-18T09:00:00Z"
+title: 'Next.js Image Optimization: WebP, AVIF und moderne Formate meistern'
+description: 'Kompletter Guide zur Next.js Image-Komponente: Automatische Optimierung, moderne Formate (WebP/AVIF), Lazy Loading und Best Practices für perfekte Performance.'
+publishedAt: '2025-08-18T09:00:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["Next.js", "Image Optimization", "WebP", "AVIF", "Performance"]
-category: "performance"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['Next.js', 'Image Optimization', 'WebP', 'AVIF', 'Performance']
+category: 'performance'
 image:
-  url: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=1200&h=630&fit=crop"
-  alt: "Bildoptimierung und moderne Bildformate Illustration"
+  url: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=1200&h=630&fit=crop'
+  alt: 'Bildoptimierung und moderne Bildformate Illustration'
 readingTime: 9
 ---
 
@@ -37,6 +37,7 @@ export default function Hero() {
 ```
 
 **Was passiert automatisch:**
+
 - ✅ Conversion zu WebP/AVIF
 - ✅ Responsive Image Sizes
 - ✅ Lazy Loading (außer mit `priority`)
@@ -47,11 +48,11 @@ export default function Hero() {
 
 ### Format-Vergleich
 
-| Format | Kompression | Browser Support | Use Case |
-|--------|-------------|-----------------|----------|
-| **JPEG** | Baseline | 100% | Fallback |
-| **WebP** | 25-35% besser | 97% | Standard |
-| **AVIF** | 50% besser | 89% | Premium |
+| Format   | Kompression   | Browser Support | Use Case |
+| -------- | ------------- | --------------- | -------- |
+| **JPEG** | Baseline      | 100%            | Fallback |
+| **WebP** | 25-35% besser | 97%             | Standard |
+| **AVIF** | 50% besser    | 89%             | Premium  |
 
 ### Format-Konfiguration
 
@@ -66,6 +67,7 @@ module.exports = {
 ```
 
 **Next.js sendet automatisch:**
+
 1. AVIF für Chrome 85+, Firefox 93+
 2. WebP für ältere Browser
 3. JPEG als universal fallback
@@ -75,6 +77,7 @@ module.exports = {
 **Original JPEG:** 2.4 MB (4000×3000 px)
 
 Nach Next.js Optimization:
+
 - **AVIF:** 145 KB (-94%)
 - **WebP:** 215 KB (-91%)
 - **JPEG (optimiert):** 380 KB (-84%)
@@ -98,12 +101,13 @@ Nach Next.js Optimization:
 ```
 
 **Generiertes srcset:**
+
 ```html
 <img
   srcset="
-    /_next/image?url=%2Fproduct.jpg&w=640 640w,
-    /_next/image?url=%2Fproduct.jpg&w=750 750w,
-    /_next/image?url=%2Fproduct.jpg&w=828 828w,
+    /_next/image?url=%2Fproduct.jpg&w=640   640w,
+    /_next/image?url=%2Fproduct.jpg&w=750   750w,
+    /_next/image?url=%2Fproduct.jpg&w=828   828w,
     /_next/image?url=%2Fproduct.jpg&w=1080 1080w,
     /_next/image?url=%2Fproduct.jpg&w=1200 1200w
   "
@@ -151,11 +155,7 @@ export default function HomePage() {
         // loading="lazy" ist default
       />
 
-      <Image
-        src="/feature2.jpg"
-        width={800}
-        height={600}
-      />
+      <Image src="/feature2.jpg" width={800} height={600} />
     </div>
   )
 }
@@ -244,18 +244,13 @@ sharp('hero.jpg')
 ### Responsive Container
 
 ```tsx
-<div className="relative w-full h-96">
-  <Image
-    src="/background.jpg"
-    alt="Background"
-    fill
-    style={{ objectFit: 'cover' }}
-    sizes="100vw"
-  />
+<div className="relative h-96 w-full">
+  <Image src="/background.jpg" alt="Background" fill style={{ objectFit: 'cover' }} sizes="100vw" />
 </div>
 ```
 
 **Use Cases für fill:**
+
 - Background Images
 - Unknown Dimensions
 - CSS-gesteuerte Sizes
@@ -291,6 +286,7 @@ sharp('hero.jpg')
 ```
 
 **Empfehlungen:**
+
 - **Hero Images:** quality={90}
 - **Content Images:** quality={85} (Default)
 - **Thumbnails:** quality={75}
@@ -300,12 +296,7 @@ sharp('hero.jpg')
 
 ```tsx
 // Für SVG, GIF (Animationen), bereits optimierte Images
-<Image
-  src="/logo.svg"
-  width={200}
-  height={60}
-  unoptimized
-/>
+<Image src="/logo.svg" width={200} height={60} unoptimized />
 ```
 
 ## Custom Loader für externe CDNs
@@ -364,13 +355,7 @@ export default function imgixLoader({ src, width, quality }) {
 ### 2. Srcset für Retina Displays
 
 ```tsx
-<Image
-  src="/logo.png"
-  width={200}
-  height={60}
-  srcSet="/logo.png 1x, /logo@2x.png 2x"
-  alt="Logo"
-/>
+<Image src="/logo.png" width={200} height={60} srcSet="/logo.png 1x, /logo@2x.png 2x" alt="Logo" />
 ```
 
 ### 3. Remote Images erlauben
@@ -522,11 +507,13 @@ export default function ArtDirectionHero() {
 Bei unserem [E-Commerce-Projekt](/portfolio):
 
 **Vor Image Optimization:**
+
 - Total Image Size: 8.4 MB
 - LCP: 3.2s
 - Requests: 47 images
 
 **Nach next/image:**
+
 - Total Image Size: 1.2 MB (-86%)
 - LCP: 0.9s (-72%)
 - Requests: 12 images (-74% durch lazy loading)
@@ -536,16 +523,19 @@ Bei unserem [E-Commerce-Projekt](/portfolio):
 ## Tools & Testing
 
 **Performance Testing:**
+
 - [PageSpeed Insights](https://pagespeed.web.dev/)
 - [WebPageTest](https://webpagetest.org/)
 - Chrome DevTools Network Tab
 
 **Image Optimization:**
+
 - [Squoosh](https://squoosh.app/) - Browser-based
 - [TinyPNG](https://tinypng.com/) - Bulk optimization
 - [ImageOptim](https://imageoptim.com/) - Mac app
 
 **Format Conversion:**
+
 - [Convertio](https://convertio.co/) - JPEG → WebP/AVIF
 - Sharp (Node.js) - Automated conversion
 
@@ -579,4 +569,4 @@ Als [Performance-Experten](/services/web-development) optimieren wir:
 - [Next.js Performance Guide](/blog/next-js-performance-optimization)
 - [Caching Strategies](/blog/caching-strategien-web-apps)
 
-*Aktualisiert: Juni 2024*
+_Aktualisiert: Juni 2024_

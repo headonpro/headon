@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server'
-import {
-  getAllBlogPosts,
-  getAllPortfolioProjects,
-} from '@/lib/content/content-api'
+import { getAllBlogPosts, getAllPortfolioProjects } from '@/lib/content/content-api'
 
 /**
  * XML escape helper function

@@ -69,28 +69,20 @@ const cache: {
 /**
  * Gets all blog posts with optional filtering, sorting, and pagination
  */
-export async function getAllBlogPosts(
-  options: BlogPostOptions = {}
-): Promise<BlogContentResult[]> {
+export async function getAllBlogPosts(options: BlogPostOptions = {}): Promise<BlogContentResult[]> {
   try {
     // Load all posts (with caching)
     if (!cache.blogPosts) {
       const slugs = await listContentSlugs('blog')
-      const posts = await Promise.all(
-        slugs.map((slug) => loadMDX(slug, 'blog'))
-      )
-      cache.blogPosts = posts.filter(
-        (post): post is BlogContentResult => post !== null
-      )
+      const posts = await Promise.all(slugs.map((slug) => loadMDX(slug, 'blog')))
+      cache.blogPosts = posts.filter((post): post is BlogContentResult => post !== null)
     }
 
     let results = [...cache.blogPosts]
 
     // Filter by category
     if (options.category) {
-      results = results.filter(
-        (post) => post.frontmatter.category === options.category
-      )
+      results = results.filter((post) => post.frontmatter.category === options.category)
     }
 
     // Filter by tags (must include all specified tags)
@@ -102,9 +94,7 @@ export async function getAllBlogPosts(
 
     // Filter by featured status
     if (options.featured !== undefined) {
-      results = results.filter(
-        (post) => post.frontmatter.featured === options.featured
-      )
+      results = results.filter((post) => post.frontmatter.featured === options.featured)
     }
 
     // Sort
@@ -121,9 +111,7 @@ export async function getAllBlogPosts(
       results.sort((a, b) => {
         const featuredA = a.frontmatter.featured ? 1 : 0
         const featuredB = b.frontmatter.featured ? 1 : 0
-        return sortDirection === 'desc'
-          ? featuredB - featuredA
-          : featuredA - featuredB
+        return sortDirection === 'desc' ? featuredB - featuredA : featuredA - featuredB
       })
     }
 
@@ -144,9 +132,7 @@ export async function getAllBlogPosts(
 /**
  * Gets a single blog post by slug
  */
-export async function getBlogPost(
-  slug: string
-): Promise<BlogContentResult | null> {
+export async function getBlogPost(slug: string): Promise<BlogContentResult | null> {
   try {
     const result = await loadMDX(slug, 'blog')
     return result as BlogContentResult | null
@@ -214,11 +200,7 @@ export async function getRelatedBlogPosts(
       })
 
       const additionalPosts = recentPosts
-        .filter(
-          (post) =>
-            post.slug !== slug &&
-            !relatedPosts.find((rp) => rp.slug === post.slug)
-        )
+        .filter((post) => post.slug !== slug && !relatedPosts.find((rp) => rp.slug === post.slug))
         .slice(0, maxResults - relatedPosts.length)
 
       relatedPosts.push(...additionalPosts)
@@ -245,9 +227,7 @@ export async function getAllPortfolioProjects(
     // Load all projects (with caching)
     if (!cache.portfolioProjects) {
       const slugs = await listContentSlugs('portfolio')
-      const projects = await Promise.all(
-        slugs.map((slug) => loadMDX(slug, 'portfolio'))
-      )
+      const projects = await Promise.all(slugs.map((slug) => loadMDX(slug, 'portfolio')))
       cache.portfolioProjects = projects.filter(
         (project): project is PortfolioContentResult => project !== null
       )
@@ -257,9 +237,7 @@ export async function getAllPortfolioProjects(
 
     // Filter by category
     if (options.category) {
-      results = results.filter(
-        (project) => project.frontmatter.category === options.category
-      )
+      results = results.filter((project) => project.frontmatter.category === options.category)
     }
 
     // Filter by tags
@@ -294,9 +272,7 @@ export async function getAllPortfolioProjects(
 /**
  * Gets a single portfolio project by slug
  */
-export async function getPortfolioProject(
-  slug: string
-): Promise<PortfolioContentResult | null> {
+export async function getPortfolioProject(slug: string): Promise<PortfolioContentResult | null> {
   try {
     const result = await loadMDX(slug, 'portfolio')
     return result as PortfolioContentResult | null
@@ -313,12 +289,8 @@ export async function getRelatedPortfolioProjects(
   slugs: string[]
 ): Promise<PortfolioContentResult[]> {
   try {
-    const projects = await Promise.all(
-      slugs.map((slug) => getPortfolioProject(slug))
-    )
-    return projects.filter(
-      (project): project is PortfolioContentResult => project !== null
-    )
+    const projects = await Promise.all(slugs.map((slug) => getPortfolioProject(slug)))
+    return projects.filter((project): project is PortfolioContentResult => project !== null)
   } catch (error) {
     console.error('Error loading related portfolio projects:', error)
     return []
@@ -337,12 +309,8 @@ export async function getAllServicePages(): Promise<ServiceContentResult[]> {
     // Load all service pages (with caching)
     if (!cache.servicePages) {
       const slugs = await listContentSlugs('services')
-      const pages = await Promise.all(
-        slugs.map((slug) => loadMDX(slug, 'services'))
-      )
-      cache.servicePages = pages.filter(
-        (page): page is ServiceContentResult => page !== null
-      )
+      const pages = await Promise.all(slugs.map((slug) => loadMDX(slug, 'services')))
+      cache.servicePages = pages.filter((page): page is ServiceContentResult => page !== null)
     }
 
     return [...cache.servicePages]
@@ -355,9 +323,7 @@ export async function getAllServicePages(): Promise<ServiceContentResult[]> {
 /**
  * Gets a single service page by slug
  */
-export async function getServicePage(
-  slug: string
-): Promise<ServiceContentResult | null> {
+export async function getServicePage(slug: string): Promise<ServiceContentResult | null> {
   try {
     const result = await loadMDX(slug, 'services')
     return result as ServiceContentResult | null
@@ -379,18 +345,12 @@ export async function getAllCityPages(): Promise<CityContentResult[]> {
     // Load all city pages (with caching)
     if (!cache.cityPages) {
       const slugs = await listContentSlugs('cities')
-      const pages = await Promise.all(
-        slugs.map((slug) => loadMDX(slug, 'cities'))
-      )
-      cache.cityPages = pages.filter(
-        (page): page is CityContentResult => page !== null
-      )
+      const pages = await Promise.all(slugs.map((slug) => loadMDX(slug, 'cities')))
+      cache.cityPages = pages.filter((page): page is CityContentResult => page !== null)
     }
 
     // Sort by name alphabetically
-    return [...cache.cityPages].sort((a, b) =>
-      a.frontmatter.name.localeCompare(b.frontmatter.name)
-    )
+    return [...cache.cityPages].sort((a, b) => a.frontmatter.name.localeCompare(b.frontmatter.name))
   } catch (error) {
     console.error('Error loading city pages:', error)
     return []
@@ -400,9 +360,7 @@ export async function getAllCityPages(): Promise<CityContentResult[]> {
 /**
  * Gets a single city page by slug
  */
-export async function getCityPage(
-  slug: string
-): Promise<CityContentResult | null> {
+export async function getCityPage(slug: string): Promise<CityContentResult | null> {
   try {
     const result = await loadMDX(slug, 'cities')
     return result as CityContentResult | null
@@ -465,8 +423,6 @@ export async function getBlogTags(): Promise<string[]> {
  */
 export async function getPortfolioCategories(): Promise<PortfolioCategory[]> {
   const projects = await getAllPortfolioProjects()
-  const categories = new Set(
-    projects.map((project) => project.frontmatter.category)
-  )
+  const categories = new Set(projects.map((project) => project.frontmatter.category))
   return Array.from(categories)
 }

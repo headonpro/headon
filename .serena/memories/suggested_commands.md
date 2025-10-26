@@ -1,6 +1,7 @@
 # Suggested Commands for HEADON.pro Project
 
 ## Development Commands
+
 ```bash
 # Start development server (http://localhost:3000)
 pnpm dev
@@ -16,6 +17,7 @@ pnpm install
 ```
 
 ## Code Quality Commands
+
 ```bash
 # Run ESLint
 pnpm lint
@@ -34,6 +36,7 @@ pnpm type-check
 ```
 
 ## Component Management
+
 ```bash
 # Add new shadcn/ui component
 pnpm dlx shadcn@latest add [component-name]
@@ -43,6 +46,7 @@ pnpm dlx shadcn@latest add button
 ```
 
 ## Git Commands
+
 ```bash
 # Check status
 git status
@@ -64,6 +68,7 @@ git push origin main
 ```
 
 ## System Navigation (Linux)
+
 ```bash
 # List files
 ls -la
@@ -82,6 +87,7 @@ find . -name "*.tsx"
 ```
 
 ## Docker Commands (if using Supabase locally)
+
 ```bash
 # Start Supabase
 docker-compose up -d
@@ -94,6 +100,7 @@ docker-compose logs -f
 ```
 
 ## Testing Commands
+
 ```bash
 # Run Playwright tests (when configured)
 pnpm test
@@ -103,12 +110,14 @@ pnpm test:ui
 ```
 
 ## Build Verification
+
 ```bash
 # Full verification before commit
 pnpm lint:fix && pnpm format && pnpm type-check && pnpm build
 ```
 
 ## Environment Setup
+
 ```bash
 # Copy environment template
 cp .env.local.example .env.local

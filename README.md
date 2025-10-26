@@ -36,22 +36,26 @@ template/
 ## 🛠 Installation
 
 1. **Repository klonen:**
+
 ```bash
 git clone [repository-url]
 cd template
 ```
 
 2. **Dependencies installieren:**
+
 ```bash
 pnpm install
 ```
 
 3. **Umgebungsvariablen konfigurieren:**
+
 ```bash
 cp .env.local.example .env.local
 ```
 
 Fügen Sie Ihre Supabase-Credentials in `.env.local` ein:
+
 ```
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
@@ -59,6 +63,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ```
 
 4. **Entwicklungsserver starten:**
+
 ```bash
 pnpm dev
 ```
@@ -79,12 +84,14 @@ Die Anwendung läuft unter [http://localhost:3000](http://localhost:3000).
 ## 🎨 Design System
 
 ### Farben
+
 - **Primary:** Königsblau (#1034A6)
 - **Secondary:** Orange (#FF8C00)
 - **Accent:** Gold (#FFD700)
 - **Success:** Emerald (#10B981)
 
 ### Responsive Breakpoints
+
 - `sm`: 640px (Mobile landscape)
 - `md`: 768px (Tablet)
 - `lg`: 1024px (Desktop)
@@ -104,13 +111,16 @@ Die Anwendung läuft unter [http://localhost:3000](http://localhost:3000).
 ## 🔧 Entwicklung
 
 ### Code Style
+
 - TypeScript Strict Mode aktiviert
 - ESLint + Prettier für konsistente Formatierung
 - Tailwind CSS für Styling
 - Mobile-First Responsive Design
 
 ### Komponenten-Entwicklung
+
 Neue UI-Komponenten können mit shadcn/ui CLI hinzugefügt werden:
+
 ```bash
 pnpm dlx shadcn-ui@latest add [component-name]
 ```
@@ -118,12 +128,14 @@ pnpm dlx shadcn-ui@latest add [component-name]
 ## 🚀 Deployment
 
 Das Projekt ist optimiert für Deployment auf:
+
 - Hetzner VPS mit Docker (empfohlen)
 - Selbst-gehostete Lösungen mit Docker
 - Netlify
 - AWS Amplify
 
 ### Production Build
+
 ```bash
 pnpm build
 pnpm start

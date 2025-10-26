@@ -9,14 +9,16 @@ const problems = [
   {
     icon: Search,
     title: 'Kunden suchen dich online - finden aber nur die Konkurrenz',
-    description: 'Ohne professionelle Online-Präsenz verlierst du täglich potenzielle Kunden an deine Mitbewerber.',
+    description:
+      'Ohne professionelle Online-Präsenz verlierst du täglich potenzielle Kunden an deine Mitbewerber.',
     color: 'text-accent',
     bgColor: 'bg-gradient-to-br from-accent to-secondary',
   },
   {
     icon: Clock,
     title: 'Du verlierst wertvolle Zeit mit manuellen Prozessen',
-    description: 'Termine, Buchungen, Anfragen - alles läuft noch per Telefon oder E-Mail statt automatisiert.',
+    description:
+      'Termine, Buchungen, Anfragen - alles läuft noch per Telefon oder E-Mail statt automatisiert.',
     color: 'text-accent',
     bgColor: 'bg-gradient-to-br from-accent to-secondary',
   },
@@ -31,7 +33,7 @@ const problems = [
 
 export default function ProblemSolutionSection() {
   return (
-    <section className="py-24 pb-32 bg-gradient-to-b from-white to-gray-50 relative -mt-1">
+    <section className="relative -mt-1 bg-gradient-to-b from-white to-gray-50 py-24 pb-32">
       <div className="container mx-auto px-4">
         {/* Headline */}
         <motion.div
@@ -39,18 +41,18 @@ export default function ProblemSolutionSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-4 font-heading">
+          <h2 className="from-primary to-secondary font-heading mb-4 bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent md:text-6xl">
             Kennst du das?
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-xl text-gray-600">
             Diese Herausforderungen kosten dich jeden Tag Geld und Nerven
           </p>
         </motion.div>
 
         {/* Problems Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="mb-16 grid gap-8 md:grid-cols-3">
           {problems.map((problem, index) => (
             <motion.div
               key={index}
@@ -61,32 +63,32 @@ export default function ProblemSolutionSection() {
               className="relative"
             >
               {/* Icon outside card */}
-              <div className="flex justify-center mb-4">
+              <div className="mb-4 flex justify-center">
                 <motion.div
-                  className="inline-flex p-4 rounded-xl bg-accent-500 shadow-lg"
+                  className="bg-accent-500 inline-flex rounded-xl p-4 shadow-lg"
                   whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                 >
-                  <problem.icon className="w-8 h-8 text-primary-600" strokeWidth={2.5} />
+                  <problem.icon className="text-primary-600 h-8 w-8" strokeWidth={2.5} />
                 </motion.div>
               </div>
-              
+
               {/* Glasmorphism Card */}
               <motion.div
-                className="bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl hover:shadow-2xl rounded-2xl p-6 transition-all duration-300 hover:bg-white/90"
+                className="rounded-2xl border border-white/20 bg-white/80 p-6 shadow-xl backdrop-blur-lg transition-all duration-300 hover:bg-white/90 hover:shadow-2xl"
                 whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               >
                 {/* Content */}
-                <h3 className="text-xl font-bold text-primary-900 mb-3 leading-tight text-center">
+                <h3 className="text-primary-900 mb-3 text-center text-xl leading-tight font-bold">
                   {problem.title}
                 </h3>
-                <p className="text-primary-900 leading-relaxed text-center">
+                <p className="text-primary-900 text-center leading-relaxed">
                   {problem.description}
                 </p>
 
                 {/* Subtle accent line */}
-                <div className="w-full h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4 opacity-60"></div>
+                <div className="from-primary to-secondary mx-auto mt-4 h-1 w-full rounded-full bg-gradient-to-r opacity-60"></div>
               </motion.div>
             </motion.div>
           ))}
@@ -100,32 +102,32 @@ export default function ProblemSolutionSection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
-          <div className="max-w-2xl mx-auto">
+          <div className="mx-auto max-w-2xl">
             <motion.div
-              animate={{ 
+              animate={{
                 y: [0, -5, 0],
               }}
               transition={{
                 duration: 2,
                 repeat: 3, // 3 cycles * 2 seconds = 6 seconds total
-                ease: "easeInOut"
+                ease: 'easeInOut',
               }}
             >
-              <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-6">
+              <h3 className="from-primary to-secondary mb-6 bg-gradient-to-r bg-clip-text text-3xl font-bold text-transparent">
                 Wir lösen das für dich!
               </h3>
             </motion.div>
-            
+
             <Link href="/contact">
-              <Button 
+              <Button
                 size="lg"
-                className="bg-gradient-to-r from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary font-semibold px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary bg-gradient-to-r px-8 py-6 text-lg font-semibold shadow-xl transition-all duration-300 hover:shadow-2xl"
               >
                 Jetzt Lösung entdecken
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
-                  className="inline-block ml-2"
+                  className="ml-2 inline-block"
                 >
                   →
                 </motion.span>
@@ -134,7 +136,6 @@ export default function ProblemSolutionSection() {
           </div>
         </motion.div>
       </div>
-      
     </section>
   )
 }

@@ -4,11 +4,14 @@ import { PersonSchema } from '@/components/seo/SchemaGenerator'
 
 export const metadata: Metadata = {
   title: 'Über uns - HEADON Digitalagentur aus Lauda-Königshofen',
-  description: 'Lernen Sie HEADON kennen: Moderne Kreativagentur für innovative digitale Lösungen. 10+ Jahre Erfahrung, KI-gestützte Entwicklung, 100% Kundenzufriedenheit. Mission, Werte und unser agiler Entwicklungsprozess.',
-  keywords: 'Über HEADON, Digitalagentur Lauda-Königshofen, Kreativagentur Team, Mission Vision Werte, agile Entwicklung, KI-gestützte Lösungen, Kundenzufriedenheit, Innovation Qualität',
+  description:
+    'Lernen Sie HEADON kennen: Moderne Kreativagentur für innovative digitale Lösungen. 10+ Jahre Erfahrung, KI-gestützte Entwicklung, 100% Kundenzufriedenheit. Mission, Werte und unser agiler Entwicklungsprozess.',
+  keywords:
+    'Über HEADON, Digitalagentur Lauda-Königshofen, Kreativagentur Team, Mission Vision Werte, agile Entwicklung, KI-gestützte Lösungen, Kundenzufriedenheit, Innovation Qualität',
   openGraph: {
     title: 'Über HEADON - Ihre Digitalagentur aus Lauda-Königshofen',
-    description: 'Moderne Kreativagentur mit 10+ Jahren Erfahrung. Innovative digitale Lösungen durch KI-gestützte Entwicklung und agile Methoden.',
+    description:
+      'Moderne Kreativagentur mit 10+ Jahren Erfahrung. Innovative digitale Lösungen durch KI-gestützte Entwicklung und agile Methoden.',
     url: 'https://headon.pro/about',
     siteName: 'HEADON.pro',
     locale: 'de_DE',
@@ -32,7 +35,8 @@ export default function AboutPage() {
         person={{
           name: 'Onur Cirakoglu',
           jobTitle: 'Founder & CEO',
-          description: 'Founder and CEO of HEADON.pro, a modern digital agency specializing in AI-powered web and mobile development.',
+          description:
+            'Founder and CEO of HEADON.pro, a modern digital agency specializing in AI-powered web and mobile development.',
           url: '/about',
         }}
       />

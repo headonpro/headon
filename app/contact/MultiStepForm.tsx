@@ -22,7 +22,7 @@ import {
   Clock,
   Calendar,
   Target,
-  Rocket
+  Rocket,
 } from 'lucide-react'
 import FileUploadZone from '@/components/contact/FileUploadZone'
 
@@ -46,15 +46,22 @@ interface MultiStepFormProps {
 }
 
 const projectTypePlaceholders: Record<string, string> = {
-  'website-simple': 'z.B. Ich brauche eine moderne Website für mein Restaurant mit Menü, Öffnungszeiten und Kontaktinformationen...',
-  'website-complex': 'z.B. Website mit Buchungssystem und Kundenverwaltung für mein Dienstleistungsunternehmen...',
+  'website-simple':
+    'z.B. Ich brauche eine moderne Website für mein Restaurant mit Menü, Öffnungszeiten und Kontaktinformationen...',
+  'website-complex':
+    'z.B. Website mit Buchungssystem und Kundenverwaltung für mein Dienstleistungsunternehmen...',
   'mobile-app': 'z.B. App für iOS/Android mit Login und Push-Notifications für meine Kunden...',
-  'ecommerce': 'z.B. Online-Shop mit Payment-Integration und Lagerverwaltung für 500+ Produkte...',
-  'custom': 'z.B. Individuelle Lösung für spezifische Geschäftsanforderungen...',
-  'unsure': 'Beschreiben Sie Ihre Idee und wir helfen Ihnen, die beste Lösung zu finden...'
+  ecommerce: 'z.B. Online-Shop mit Payment-Integration und Lagerverwaltung für 500+ Produkte...',
+  custom: 'z.B. Individuelle Lösung für spezifische Geschäftsanforderungen...',
+  unsure: 'Beschreiben Sie Ihre Idee und wir helfen Ihnen, die beste Lösung zu finden...',
 }
 
-export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmitting }: MultiStepFormProps) {
+export default function MultiStepForm({
+  formData,
+  setFormData,
+  onSubmit,
+  isSubmitting,
+}: MultiStepFormProps) {
   const [currentStep, setCurrentStep] = useState(1)
   const totalSteps = 4
 
@@ -79,7 +86,7 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
   }
 
   const isStepValid = (step: number) => {
-    switch(step) {
+    switch (step) {
       case 1:
         return formData.name && formData.email
       case 2:
@@ -97,29 +104,29 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
     <>
       {/* Progress Bar */}
       <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
+        <div className="mb-4 flex items-center justify-between">
           {[1, 2, 3, 4].map((step) => (
-            <div key={step} className="flex items-center flex-1">
+            <div key={step} className="flex flex-1 items-center">
               <motion.div
                 initial={{ scale: 0 }}
-                animate={{ 
+                animate={{
                   scale: currentStep >= step ? 1 : 0.8,
-                  backgroundColor: currentStep >= step ? '#fff' : 'rgba(255,255,255,0.2)'
+                  backgroundColor: currentStep >= step ? '#fff' : 'rgba(255,255,255,0.2)',
                 }}
-                className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition-all cursor-pointer ${
+                className={`flex h-12 w-12 cursor-pointer items-center justify-center rounded-full font-bold transition-all ${
                   currentStep >= step ? 'text-primary-600 shadow-lg' : 'text-white/60'
                 }`}
                 onClick={() => step <= currentStep && setCurrentStep(step)}
               >
                 {currentStep > step ? (
-                  <CheckCircle2 className="w-7 h-7 text-primary-600" />
+                  <CheckCircle2 className="text-primary-600 h-7 w-7" />
                 ) : (
                   <span className="text-lg">{step}</span>
                 )}
               </motion.div>
               {step < 4 && (
-                <motion.div 
-                  className="flex-1 h-1 mx-3 rounded-full overflow-hidden bg-white/20"
+                <motion.div
+                  className="mx-3 h-1 flex-1 overflow-hidden rounded-full bg-white/20"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 0.5, delay: step * 0.1 }}
@@ -140,7 +147,7 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
             key={currentStep}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-white/90 font-medium"
+            className="font-medium text-white/90"
           >
             {currentStep === 1 && 'Kontaktdaten'}
             {currentStep === 2 && 'Projekt-Details'}
@@ -162,35 +169,37 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <div className="text-center mb-8">
+              <div className="mb-8 text-center">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                  className="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                  transition={{ type: 'spring', stiffness: 200 }}
+                  className="from-primary-400 to-primary-600 mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br"
                 >
-                  <Mail className="w-10 h-10 text-white" />
+                  <Mail className="h-10 w-10 text-white" />
                 </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-2">Wie können wir Sie erreichen?</h3>
+                <h3 className="mb-2 text-2xl font-bold text-white">
+                  Wie können wir Sie erreichen?
+                </h3>
                 <p className="text-white/70">Ihre Kontaktdaten für die Projektbesprechung</p>
               </div>
-              
-              <div className="grid sm:grid-cols-2 gap-5">
+
+              <div className="grid gap-5 sm:grid-cols-2">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
                 >
-                  <Label htmlFor="name" className="text-white/90 mb-2 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-yellow-400" />
+                  <Label htmlFor="name" className="mb-2 flex items-center gap-2 text-white/90">
+                    <Sparkles className="h-4 w-4 text-yellow-400" />
                     Name *
                   </Label>
                   <Input
                     id="name"
                     required
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:bg-white/15 focus:border-white/40 h-12"
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="h-12 border-white/20 bg-white/10 text-white placeholder-white/40 focus:border-white/40 focus:bg-white/15"
                     placeholder="Max Mustermann"
                   />
                 </motion.div>
@@ -199,8 +208,8 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <Label htmlFor="email" className="text-white/90 mb-2 flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-blue-400" />
+                  <Label htmlFor="email" className="mb-2 flex items-center gap-2 text-white/90">
+                    <Mail className="h-4 w-4 text-blue-400" />
                     Email *
                   </Label>
                   <Input
@@ -208,8 +217,8 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
                     type="email"
                     required
                     value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:bg-white/15 focus:border-white/40 h-12"
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="h-12 border-white/20 bg-white/10 text-white placeholder-white/40 focus:border-white/40 focus:bg-white/15"
                     placeholder="max@beispiel.de"
                   />
                 </motion.div>
@@ -218,15 +227,15 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <Label htmlFor="company" className="text-white/90 mb-2 flex items-center gap-2">
-                    <Briefcase className="w-4 h-4 text-green-400" />
+                  <Label htmlFor="company" className="mb-2 flex items-center gap-2 text-white/90">
+                    <Briefcase className="h-4 w-4 text-green-400" />
                     Unternehmen
                   </Label>
                   <Input
                     id="company"
                     value={formData.company}
-                    onChange={(e) => setFormData({...formData, company: e.target.value})}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:bg-white/15 focus:border-white/40 h-12"
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="h-12 border-white/20 bg-white/10 text-white placeholder-white/40 focus:border-white/40 focus:bg-white/15"
                     placeholder="Firma GmbH"
                   />
                 </motion.div>
@@ -235,16 +244,16 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <Label htmlFor="phone" className="text-white/90 mb-2 flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-purple-400" />
+                  <Label htmlFor="phone" className="mb-2 flex items-center gap-2 text-white/90">
+                    <Phone className="h-4 w-4 text-purple-400" />
                     Telefon (optional)
                   </Label>
                   <Input
                     id="phone"
                     type="tel"
                     value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:bg-white/15 focus:border-white/40 h-12"
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="h-12 border-white/20 bg-white/10 text-white placeholder-white/40 focus:border-white/40 focus:bg-white/15"
                     placeholder="+49 176 630 402 41"
                   />
                 </motion.div>
@@ -262,26 +271,58 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <div className="text-center mb-8">
+              <div className="mb-8 text-center">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                  className="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                  transition={{ type: 'spring', stiffness: 200 }}
+                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-purple-600"
                 >
-                  <Rocket className="w-10 h-10 text-white" />
+                  <Rocket className="h-10 w-10 text-white" />
                 </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-2">Was möchten Sie entwickeln lassen?</h3>
+                <h3 className="mb-2 text-2xl font-bold text-white">
+                  Was möchten Sie entwickeln lassen?
+                </h3>
                 <p className="text-white/70">Wählen Sie den passenden Projekt-Typ</p>
               </div>
 
               <div className="grid gap-4">
                 {[
-                  { value: 'website-simple', icon: FileText, label: 'Website (einfach)', color: 'from-blue-500 to-blue-600', desc: 'Präsenz-Website mit statischen Inhalten' },
-                  { value: 'website-complex', icon: Zap, label: 'Website (komplex)', color: 'from-purple-500 to-purple-600', desc: 'Dynamische Website mit Backend-Funktionen' },
-                  { value: 'mobile-app', icon: Phone, label: 'Mobile App', color: 'from-green-500 to-green-600', desc: 'Native oder Cross-Platform App' },
-                  { value: 'ecommerce', icon: TrendingUp, label: 'E-Commerce', color: 'from-orange-500 to-orange-600', desc: 'Online-Shop mit Zahlungssystem' },
-                  { value: 'custom', icon: Target, label: 'Custom Lösung', color: 'from-pink-500 to-pink-600', desc: 'Maßgeschneiderte Software-Lösung' },
+                  {
+                    value: 'website-simple',
+                    icon: FileText,
+                    label: 'Website (einfach)',
+                    color: 'from-blue-500 to-blue-600',
+                    desc: 'Präsenz-Website mit statischen Inhalten',
+                  },
+                  {
+                    value: 'website-complex',
+                    icon: Zap,
+                    label: 'Website (komplex)',
+                    color: 'from-purple-500 to-purple-600',
+                    desc: 'Dynamische Website mit Backend-Funktionen',
+                  },
+                  {
+                    value: 'mobile-app',
+                    icon: Phone,
+                    label: 'Mobile App',
+                    color: 'from-green-500 to-green-600',
+                    desc: 'Native oder Cross-Platform App',
+                  },
+                  {
+                    value: 'ecommerce',
+                    icon: TrendingUp,
+                    label: 'E-Commerce',
+                    color: 'from-orange-500 to-orange-600',
+                    desc: 'Online-Shop mit Zahlungssystem',
+                  },
+                  {
+                    value: 'custom',
+                    icon: Target,
+                    label: 'Custom Lösung',
+                    color: 'from-pink-500 to-pink-600',
+                    desc: 'Maßgeschneiderte Software-Lösung',
+                  },
                 ].map((type, index) => (
                   <motion.div
                     key={type.value}
@@ -289,22 +330,24 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => handleProjectTypeChange(type.value)}
-                    className={`relative p-4 rounded-xl cursor-pointer transition-all ${
-                      formData.projectType === type.value 
-                        ? 'bg-white/20 border-2 border-white shadow-lg' 
-                        : 'bg-white/10 border-2 border-white/20 hover:bg-white/15'
+                    className={`relative cursor-pointer rounded-xl p-4 transition-all ${
+                      formData.projectType === type.value
+                        ? 'border-2 border-white bg-white/20 shadow-lg'
+                        : 'border-2 border-white/20 bg-white/10 hover:bg-white/15'
                     }`}
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${type.color} flex items-center justify-center`}>
-                        <type.icon className="w-6 h-6 text-white" />
+                      <div
+                        className={`h-12 w-12 rounded-lg bg-gradient-to-br ${type.color} flex items-center justify-center`}
+                      >
+                        <type.icon className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-white font-semibold">{type.label}</h4>
-                        <p className="text-white/60 text-sm">{type.desc}</p>
+                        <h4 className="font-semibold text-white">{type.label}</h4>
+                        <p className="text-sm text-white/60">{type.desc}</p>
                       </div>
                       {formData.projectType === type.value && (
-                        <CheckCircle2 className="w-6 h-6 text-white" />
+                        <CheckCircle2 className="h-6 w-6 text-white" />
                       )}
                     </div>
                   </motion.div>
@@ -323,23 +366,23 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <div className="text-center mb-8">
+              <div className="mb-8 text-center">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                  className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                  transition={{ type: 'spring', stiffness: 200 }}
+                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-green-600"
                 >
-                  <DollarSign className="w-10 h-10 text-white" />
+                  <DollarSign className="h-10 w-10 text-white" />
                 </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-2">Budget & Zeitrahmen</h3>
+                <h3 className="mb-2 text-2xl font-bold text-white">Budget & Zeitrahmen</h3>
                 <p className="text-white/70">Damit wir das perfekte Angebot erstellen können</p>
               </div>
 
               <div className="space-y-6">
                 <div>
-                  <Label className="text-white/90 mb-3 flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-green-400" />
+                  <Label className="mb-3 flex items-center gap-2 text-white/90">
+                    <DollarSign className="h-4 w-4 text-green-400" />
                     Budget-Rahmen *
                   </Label>
                   <div className="grid grid-cols-2 gap-3">
@@ -353,45 +396,60 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
                         key={budget.value}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => setFormData({...formData, budget: budget.value})}
-                        className={`p-4 rounded-lg cursor-pointer transition-all ${
+                        onClick={() => setFormData({ ...formData, budget: budget.value })}
+                        className={`cursor-pointer rounded-lg p-4 transition-all ${
                           formData.budget === budget.value
-                            ? 'bg-white/20 border-2 border-white'
-                            : 'bg-white/10 border-2 border-white/20 hover:bg-white/15'
+                            ? 'border-2 border-white bg-white/20'
+                            : 'border-2 border-white/20 bg-white/10 hover:bg-white/15'
                         }`}
                       >
                         <div className="font-semibold text-white">{budget.label}</div>
-                        <div className="text-xs text-white/60 mt-1">{budget.desc}</div>
+                        <div className="mt-1 text-xs text-white/60">{budget.desc}</div>
                       </motion.div>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <Label className="text-white/90 mb-3 flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-blue-400" />
+                  <Label className="mb-3 flex items-center gap-2 text-white/90">
+                    <Clock className="h-4 w-4 text-blue-400" />
                     Wann soll es losgehen? *
                   </Label>
                   <div className="grid grid-cols-2 gap-3">
                     {[
                       { value: 'immediately', label: 'Sofort', icon: Zap, color: 'text-red-400' },
-                      { value: 'next-month', label: 'Nächster Monat', icon: Calendar, color: 'text-orange-400' },
-                      { value: '2-3-months', label: 'In 2-3 Monaten', icon: Clock, color: 'text-blue-400' },
-                      { value: 'planning', label: 'Noch in Planung', icon: Target, color: 'text-purple-400' },
+                      {
+                        value: 'next-month',
+                        label: 'Nächster Monat',
+                        icon: Calendar,
+                        color: 'text-orange-400',
+                      },
+                      {
+                        value: '2-3-months',
+                        label: 'In 2-3 Monaten',
+                        icon: Clock,
+                        color: 'text-blue-400',
+                      },
+                      {
+                        value: 'planning',
+                        label: 'Noch in Planung',
+                        icon: Target,
+                        color: 'text-purple-400',
+                      },
                     ].map((timeline) => (
                       <motion.div
                         key={timeline.value}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => setFormData({...formData, timeline: timeline.value})}
-                        className={`p-4 rounded-lg cursor-pointer transition-all ${
+                        onClick={() => setFormData({ ...formData, timeline: timeline.value })}
+                        className={`cursor-pointer rounded-lg p-4 transition-all ${
                           formData.timeline === timeline.value
-                            ? 'bg-white/20 border-2 border-white'
-                            : 'bg-white/10 border-2 border-white/20 hover:bg-white/15'
+                            ? 'border-2 border-white bg-white/20'
+                            : 'border-2 border-white/20 bg-white/10 hover:bg-white/15'
                         }`}
                       >
                         <div className="flex items-center gap-2">
-                          <timeline.icon className={`w-4 h-4 ${timeline.color}`} />
+                          <timeline.icon className={`h-4 w-4 ${timeline.color}`} />
                           <span className="font-semibold text-white">{timeline.label}</span>
                         </div>
                       </motion.div>
@@ -412,32 +470,35 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
               transition={{ duration: 0.3 }}
               className="space-y-6"
             >
-              <div className="text-center mb-8">
+              <div className="mb-8 text-center">
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                  className="w-20 h-20 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                  transition={{ type: 'spring', stiffness: 200 }}
+                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600"
                 >
-                  <MessageSquare className="w-10 h-10 text-white" />
+                  <MessageSquare className="h-10 w-10 text-white" />
                 </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-2">Erzählen Sie uns mehr</h3>
+                <h3 className="mb-2 text-2xl font-bold text-white">Erzählen Sie uns mehr</h3>
                 <p className="text-white/70">Je mehr Details, desto besser können wir helfen</p>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="message" className="text-white/90 mb-2 flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4 text-indigo-400" />
+                  <Label htmlFor="message" className="mb-2 flex items-center gap-2 text-white/90">
+                    <MessageSquare className="h-4 w-4 text-indigo-400" />
                     Projektbeschreibung *
                   </Label>
                   <Textarea
                     id="message"
                     required
                     value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:bg-white/15 focus:border-white/40 min-h-[150px]"
-                    placeholder={projectTypePlaceholders[formData.projectType] || 'Beschreiben Sie Ihr Projekt...'}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="min-h-[150px] border-white/20 bg-white/10 text-white placeholder-white/40 focus:border-white/40 focus:bg-white/15"
+                    placeholder={
+                      projectTypePlaceholders[formData.projectType] ||
+                      'Beschreiben Sie Ihr Projekt...'
+                    }
                   />
                 </div>
 
@@ -448,16 +509,18 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20"
+                  className="rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm"
                 >
-                  <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-green-400" />
+                  <h4 className="mb-3 flex items-center gap-2 font-semibold text-white">
+                    <CheckCircle2 className="h-5 w-5 text-green-400" />
                     Zusammenfassung
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between text-white/80">
                       <span>Kontakt:</span>
-                      <span>{formData.name} ({formData.email})</span>
+                      <span>
+                        {formData.name} ({formData.email})
+                      </span>
                     </div>
                     <div className="flex justify-between text-white/80">
                       <span>Projekt:</span>
@@ -485,22 +548,22 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
               type="button"
               variant="outline"
               onClick={handlePrev}
-              className="flex-1 bg-white/10 border-white/20 text-white hover:bg-white/20"
+              className="flex-1 border-white/20 bg-white/10 text-white hover:bg-white/20"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <ArrowLeft className="mr-2 h-4 w-4" />
               Zurück
             </Button>
           )}
-          
+
           {currentStep < totalSteps ? (
             <Button
               type="button"
               onClick={handleNext}
               disabled={!isStepValid(currentStep)}
-              className={`flex-1 ${currentStep === 1 ? 'w-full' : ''} bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800`}
+              className={`flex-1 ${currentStep === 1 ? 'w-full' : ''} from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 bg-gradient-to-r`}
             >
               Weiter
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           ) : (
             <Button
@@ -510,12 +573,12 @@ export default function MultiStepForm({ formData, setFormData, onSubmit, isSubmi
             >
               {isSubmitting ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
+                  <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                   Wird gesendet...
                 </>
               ) : (
                 <>
-                  <CheckCircle2 className="w-4 h-4 mr-2" />
+                  <CheckCircle2 className="mr-2 h-4 w-4" />
                   Nachricht senden
                 </>
               )}

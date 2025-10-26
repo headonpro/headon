@@ -5,6 +5,7 @@
 Die Enterprise-SEO-Optimierung erweitert HEADON.pro um ein vollständiges Content-Management-System (MDX-based), dynamische Schema-Generierung, erweiterte Sitemap-Funktionalität und lokale SEO-Pages. Das Design folgt der bestehenden Next.js 15 App Router Architektur und integriert sich nahtlos in die vorhandene Component-Struktur.
 
 **Kern-Module:**
+
 1. **Content-System** (`lib/content/`) - MDX-Loading, Parsing, Metadata-Extraction
 2. **SEO-System** (`lib/seo/`) - Schema-Generierung, Sitemap-Generierung, Meta-Tag-Builder
 3. **Dynamic Routes** (`app/blog/[slug]`, `app/portfolio/[slug]`, etc.) - Server Components für Content-Rendering
@@ -15,22 +16,26 @@ Die Enterprise-SEO-Optimierung erweitert HEADON.pro um ein vollständiges Conten
 ### Technical Standards (tech.md)
 
 **Next.js 15 App Router (tech.md Zeile 21-23)**
+
 - Design nutzt Server Components als Default für alle Content-Pages
 - Client Components nur für interaktive Features (Table of Contents Navigation, Reading Progress Bar)
 - Metadata API für type-safe SEO (tech.md Zeile 85)
 
 **TypeScript Strict Mode (tech.md Zeile 8-13)**
+
 - Alle neuen Module haben vollständige Type-Safety
 - Zod-Schemas für Content-Frontmatter Validation
 - Type-generated Interfaces für Schema.org Markups
 
 **Performance Requirements (tech.md Zeile 240-246)**
+
 - Static Generation für Blog/Portfolio (Pre-rendering at Build Time)
 - Incremental Static Regeneration (ISR) für Content-Updates
 - Image Optimization mit next/image (WebP/AVIF auto-generation)
 - Bundle Size < 200KB durch Code Splitting
 
 **Supabase Integration (tech.md Zeile 46-49, 89-93)**
+
 - Bestehende Supabase-Integration wird NICHT für Content verwendet
 - Content bleibt file-based (MDX) für bessere Developer Experience
 - Supabase nur für User-Generated Content (Testimonials, optional)
@@ -38,6 +43,7 @@ Die Enterprise-SEO-Optimierung erweitert HEADON.pro um ein vollständiges Conten
 ### Project Structure (structure.md)
 
 **Directory Organization (structure.md Zeile 3-108)**
+
 ```
 app/
 ├── blog/[slug]/          # Neue dynamische Route
@@ -92,12 +98,14 @@ content/                  # NEUE: Content-Dateien
 ```
 
 **Naming Conventions (structure.md Zeile 110-167)**
+
 - Route Folders: `kebab-case` (z.B. `blog/[slug]`)
 - Components: `PascalCase.tsx` (z.B. `MDXContent.tsx`)
 - Utilities: `camelCase.ts` (z.B. `mdx-loader.ts`)
 - Content Files: `kebab-case.mdx` (z.B. `next-js-performance.mdx`)
 
 **Import Patterns (structure.md Zeile 169-229)**
+
 ```typescript
 // 1. React/Next.js
 import type { Metadata } from 'next'
@@ -124,22 +132,26 @@ import type { BlogPost, Frontmatter } from '@/lib/types'
 ### Existing Components to Leverage
 
 **1. Layout System**
+
 - **Header.tsx** (components/layout/Header.tsx:5-102) - Wiederverwendet für alle neuen Pages
 - **Footer.tsx** (components/layout/Footer.tsx:5-78) - Unverändert für alle neuen Pages
 - **Integration**: Neue Routes nutzen bestehende Root-Layout (app/layout.tsx:66-103)
 
 **2. UI Components (shadcn/ui)**
+
 - **Button** (components/ui/button.tsx) - CTAs auf Content-Pages
 - **Accordion** (components/ui/accordion.tsx) - FAQ-Sections auf Service-Pages
 - **Dialog** (components/ui/dialog.tsx) - Lightbox für Portfolio-Bilder
 - **Alle Komponenten** bleiben unverändert, werden nur importiert
 
 **3. Styling System**
+
 - **cn() Utility** (lib/utils.ts:4-6) - Für conditional Tailwind classes
 - **Tailwind Config** (tailwind.config.ts) - Bestehende Design-Tokens
 - **Global CSS** (app/globals.css) - Bestehende CSS-Variablen
 
 **4. SEO Foundation**
+
 - **StructuredData.tsx** (components/seo/StructuredData.tsx:1-258) - ERWEITERN für neue Schema-Typen
   - Aktuell: Organization, LocalBusiness, Service
   - Neu: Article, FAQPage, CreativeWork, Person, Review, Breadcrumb
@@ -147,6 +159,7 @@ import type { BlogPost, Frontmatter } from '@/lib/types'
 - **robots.ts** (app/robots.ts:1-28) - Unverändert (bereits optimal)
 
 **5. Metadata Pattern**
+
 - **Existing Pattern**: Separate `metadata.ts` Files (z.B. app/services/metadata.ts:1-24)
 - **Reuse**: Gleiche Struktur für alle neuen Routes
 - **Extend**: Dynamische Metadata-Generierung aus MDX-Frontmatter
@@ -154,21 +167,25 @@ import type { BlogPost, Frontmatter } from '@/lib/types'
 ### Integration Points
 
 **1. Next.js App Router**
+
 - **generateStaticParams()**: Für alle dynamischen Routes ([slug])
 - **Dynamic Metadata**: generateMetadata() aus MDX-Frontmatter
 - **Server Components**: Content-Loading direkt in Page-Component
 
 **2. File System (MDX Content)**
+
 - **Content Storage**: `content/` directory als Single Source of Truth
 - **Build-Time Processing**: MDX wird zu Build-Zeit kompiliert
 - **No Database**: Content ist file-based für bessere Git-Integration
 
 **3. Image Pipeline**
+
 - **next/image** (tech.md Zeile 14): Auto-Optimization für alle Content-Bilder
 - **Public Assets**: Content-Bilder in `public/images/blog/`, `public/images/portfolio/`
 - **Responsive Images**: Automatisches srcset via next/image
 
 **4. Analytics (Existing)**
+
 - **Plausible Analytics** (app/layout.tsx:81-86) - Bereits vorhanden, trackt automatisch neue Pages
 - **Web Vitals** (components/web-vitals-reporter.tsx) - Tracks LCP/CLS für neue Content-Pages
 
@@ -177,17 +194,20 @@ import type { BlogPost, Frontmatter } from '@/lib/types'
 ### Modular Design Principles
 
 **Single File Responsibility**
+
 - `mdx-loader.ts`: NUR MDX-Dateien laden
 - `schema-builder.ts`: NUR Schema.org JSON-LD generieren
 - `sitemap-generator.ts`: NUR Sitemap XML generieren
 - `MDXContent.tsx`: NUR MDX rendern (kein Schema, keine Metadata)
 
 **Component Isolation**
+
 - Jede Content-Section ist eigene Component (RelatedArticles, TableOfContents, etc.)
 - Schema-Components sind wiederverwendbar und unabhängig vom Content-Typ
 - Error Boundaries um kritische Components
 
 **Service Layer Separation**
+
 ```
 Presentation Layer (components/)
     ↓
@@ -197,6 +217,7 @@ Data Layer (file system MDX, Supabase optional)
 ```
 
 **Utility Modularity**
+
 - Schema-Builder hat einzelne Functions pro Schema-Typ
 - Content-API abstrahiert File-System-Details
 - Meta-Builder generiert Meta-Tags unabhängig von Content-Typ
@@ -231,6 +252,7 @@ graph TD
 ### Data Flow
 
 **1. Content Authoring Flow**
+
 ```
 Developer writes article.mdx
     ↓
@@ -248,6 +270,7 @@ Deploy to Production
 ```
 
 **2. Runtime Content Request Flow**
+
 ```
 User requests /blog/my-article
     ↓
@@ -304,6 +327,7 @@ Return to User (Cached via CDN)
 - **Purpose:** Client component for sticky ToC with scroll-spy highlighting
 - **File:** `components/content/TableOfContents.tsx`
 - **Interfaces:**
+
   ```typescript
   interface TOCItem {
     id: string
@@ -315,6 +339,7 @@ Return to User (Cached via CDN)
     items: TOCItem[]
   }
   ```
+
 - **Dependencies:** React hooks (useState, useEffect), Framer Motion
 - **Reuses:** Existing scroll-spy pattern, Framer Motion animations
 
@@ -351,6 +376,7 @@ Return to User (Cached via CDN)
 - **Purpose:** Interactive map showing all 6 cities (Bad Mergentheim, Lauda, etc.)
 - **File:** `components/sections/CityMap.tsx`
 - **Interfaces:**
+
   ```typescript
   interface City {
     slug: string
@@ -364,6 +390,7 @@ Return to User (Cached via CDN)
     highlightedCity?: string
   }
   ```
+
 - **Dependencies:** Leaflet or Mapbox (lightweight map library)
 - **Reuses:** Existing card styling, Framer Motion for hover effects
 
@@ -540,6 +567,7 @@ interface FAQSchema {
 ### Error Scenarios
 
 **1. MDX File Not Found**
+
 - **Handling:** Check if file exists before loading, return 404 via Next.js `notFound()`
 - **User Impact:** Custom 404 page with search and navigation
 - **Implementation:**
@@ -550,6 +578,7 @@ interface FAQSchema {
   ```
 
 **2. Invalid MDX Frontmatter**
+
 - **Handling:** Validate with Zod schema, throw error at build time (fail fast)
 - **User Impact:** Build fails, developer sees clear validation error
 - **Implementation:**
@@ -560,6 +589,7 @@ interface FAQSchema {
   ```
 
 **3. MDX Compilation Error**
+
 - **Handling:** Catch compilation error, show helpful error message
 - **User Impact:** Build fails with line number and error description
 - **Implementation:**
@@ -572,6 +602,7 @@ interface FAQSchema {
   ```
 
 **4. Schema Generation Failure**
+
 - **Handling:** Log warning, render page without schema (graceful degradation)
 - **User Impact:** Page loads normally, schema just missing (no user-facing error)
 - **Implementation:**
@@ -586,11 +617,13 @@ interface FAQSchema {
   ```
 
 **5. Image Not Found in Content**
+
 - **Handling:** next/image shows placeholder, log warning
 - **User Impact:** Placeholder image shown, no broken layout
 - **Implementation:** Built-in next/image error handling
 
 **6. Sitemap Generation Timeout**
+
 - **Handling:** Implement pagination for large content sets, cache results
 - **User Impact:** Sitemap loads within timeout, possibly paginated
 - **Implementation:**
@@ -607,16 +640,19 @@ interface FAQSchema {
 ### Build-Time Validation
 
 **Frontmatter Schema Validation**
+
 - Alle MDX-Files werden bei Build-Time via Zod validiert
 - Build schlägt fehl bei invaliden Frontmatter
 - Developer sieht sofort klare Fehlermeldungen
 
 **Schema.org Validation (Manuell)**
+
 - Google Rich Results Test: https://search.google.com/test/rich-results
 - Schema.org Validator: https://validator.schema.org/
 - Manuelle Checks nach jedem neuen Schema-Typ
 
 **Lighthouse Checks (Manuell)**
+
 - `pnpm build && pnpm start` für Production-Build
 - Lighthouse Audit für min. 5 repräsentative Pages
 - Target: 95+ Score in allen Kategorien
@@ -624,11 +660,13 @@ interface FAQSchema {
 ### Development Verification
 
 **Hot Reload Testing**
+
 - MDX-Änderungen müssen sofort in dev server sichtbar sein
 - Schema-Änderungen müssen nach reload korrekt sein
 - Keine build errors bei Änderungen an Content
 
 **Visual Regression (Manuell)**
+
 - Neue Components in Storybook-ähnlichem Setup testen
 - Oder: Manuelle Browser-Tests Chrome/Firefox/Safari
 - Mobile-Ansicht via Chrome DevTools testen
@@ -636,6 +674,7 @@ interface FAQSchema {
 ### Production Verification
 
 **Post-Deployment Checks (Manuell)**
+
 1. `/sitemap.xml` aufrufen → alle URLs enthalten?
 2. `/rss.xml` aufrufen → valides XML?
 3. Google Search Console → Coverage Report checken
@@ -643,6 +682,7 @@ interface FAQSchema {
 5. Random Blog-Artikel aufrufen → LCP < 1.5s?
 
 **SEO Monitoring (Extern)**
+
 - Google Search Console für Rankings
 - Google Analytics/Plausible für Traffic
 - Manual Keyword-Checks 1x weekly
@@ -650,12 +690,14 @@ interface FAQSchema {
 ### No Automated Tests
 
 **Begründung (von User):**
+
 - Project ist Template/Portfolio, keine Mission-Critical App
 - Manuelle Tests sind bei Content-Changes ausreichend
 - Build-Time Validation via Zod ist ausreichend für Type-Safety
 - Focus auf schnelle Iteration statt Test-Coverage
 
 **Alternativen:**
+
 - TypeScript Strict Mode ersetzt viele Unit Tests
 - Zod-Schemas ersetzen Input-Validation-Tests
 - Build Success = Integration Test

@@ -1,16 +1,16 @@
 ---
-title: "Web Accessibility: WCAG 2.2 Standards praktisch umsetzen"
-description: "Kompletter WCAG-Guide: Barrierefreie Websites entwickeln, ARIA richtig nutzen, Keyboard-Navigation und Screen-Reader Unterstützung implementieren."
-publishedAt: "2025-09-15T08:00:00Z"
+title: 'Web Accessibility: WCAG 2.2 Standards praktisch umsetzen'
+description: 'Kompletter WCAG-Guide: Barrierefreie Websites entwickeln, ARIA richtig nutzen, Keyboard-Navigation und Screen-Reader Unterstützung implementieren.'
+publishedAt: '2025-09-15T08:00:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["Accessibility", "WCAG", "ARIA", "Screen Reader", "Inclusive Design"]
-category: "design"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['Accessibility', 'WCAG', 'ARIA', 'Screen Reader', 'Inclusive Design']
+category: 'design'
 image:
-  url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=630&fit=crop"
-  alt: "Barrierefreies Web Design und Accessibility Icons"
+  url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=630&fit=crop'
+  alt: 'Barrierefreies Web Design und Accessibility Icons'
 readingTime: 10
 ---
 
@@ -21,6 +21,7 @@ readingTime: 10
 Die vier POUR-Prinzipien:
 
 ### 1. Perceivable (Wahrnehmbar)
+
 Informationen müssen für alle wahrnehmbar sein.
 
 ```tsx
@@ -32,6 +33,7 @@ Informationen müssen für alle wahrnehmbar sein.
 ```
 
 ### 2. Operable (Bedienbar)
+
 Alle Funktionen per Tastatur nutzbar.
 
 ```tsx
@@ -45,6 +47,7 @@ Alle Funktionen per Tastatur nutzbar.
 ```
 
 ### 3. Understandable (Verständlich)
+
 Content und Bedienung müssen verständlich sein.
 
 ```tsx
@@ -56,13 +59,16 @@ Content und Bedienung müssen verständlich sein.
 ```
 
 ### 4. Robust (Robust)
+
 Funktioniert mit verschiedenen Technologien.
 
 ```tsx
 // ✅ Semantisches HTML
 <nav aria-label="Hauptnavigation">
   <ul role="list">
-    <li><a href="/">Home</a></li>
+    <li>
+      <a href="/">Home</a>
+    </li>
   </ul>
 </nav>
 ```
@@ -185,12 +191,7 @@ export function Modal({ isOpen, onClose, children }) {
   if (!isOpen) return null
 
   return (
-    <div
-      ref={modalRef}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-    >
+    <div ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title">
       {children}
     </div>
   )
@@ -295,6 +296,7 @@ export function StatusMessage() {
 ```
 
 **Tools:**
+
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - Chrome DevTools Contrast Ratio
 - [Coolors Contrast Checker](https://coolors.co/contrast-checker)
@@ -327,21 +329,11 @@ export function AccessibleForm() {
       <fieldset>
         <legend>Newsletter abonnieren</legend>
         <div>
-          <input
-            type="radio"
-            id="weekly"
-            name="frequency"
-            value="weekly"
-          />
+          <input type="radio" id="weekly" name="frequency" value="weekly" />
           <label htmlFor="weekly">Wöchentlich</label>
         </div>
         <div>
-          <input
-            type="radio"
-            id="monthly"
-            name="frequency"
-            value="monthly"
-          />
+          <input type="radio" id="monthly" name="frequency" value="monthly" />
           <label htmlFor="monthly">Monatlich</label>
         </div>
       </fieldset>
@@ -360,7 +352,7 @@ export default function RootLayout({ children }) {
       <body>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 z-50 bg-white px-4 py-2"
+          className="sr-only z-50 bg-white px-4 py-2 focus:not-sr-only focus:absolute focus:top-0 focus:left-0"
         >
           Zum Hauptinhalt springen
         </a>
@@ -381,6 +373,7 @@ export default function RootLayout({ children }) {
 ## Testing Tools
 
 **Automated Testing:**
+
 ```bash
 # axe-core für Jest
 pnpm add -D @axe-core/react jest-axe
@@ -405,6 +398,7 @@ it('should have no accessibility violations', async () => {
 ```
 
 **Manual Testing:**
+
 - NVDA (Windows Screen Reader)
 - JAWS (Windows Screen Reader)
 - VoiceOver (Mac/iOS)
@@ -414,12 +408,14 @@ it('should have no accessibility violations', async () => {
 ## WCAG 2.2 Checklist
 
 **Level A (Minimum):**
+
 - [ ] Alt-Text für alle Images
 - [ ] Keyboard-Navigation möglich
 - [ ] Keine Timeouts ohne Warnung
 - [ ] Kein blinkender Content
 
 **Level AA (Empfohlen):**
+
 - [ ] Kontrast 4.5:1 (Text) / 3:1 (UI)
 - [ ] Resizable Text bis 200%
 - [ ] Heading-Struktur logisch
@@ -427,6 +423,7 @@ it('should have no accessibility violations', async () => {
 - [ ] Error Identification & Suggestions
 
 **Level AAA (Enhanced):**
+
 - [ ] Kontrast 7:1
 - [ ] Sign Language für Audio
 - [ ] Keine zeitbasierten Medien
@@ -453,4 +450,4 @@ Als [UX-Spezialisten](/services/ui-ux-design) bieten wir:
 
 [Audit anfragen](/contact)
 
-*Aktualisiert: März 2024*
+_Aktualisiert: März 2024_

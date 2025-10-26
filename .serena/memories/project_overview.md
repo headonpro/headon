@@ -1,9 +1,11 @@
 # HEADON.pro Marketing Agency Project Overview
 
 ## Project Purpose
+
 HEADON.pro is a modern, high-performance marketing and creative agency website template built with enterprise-grade technologies. It serves as a comprehensive digital presence for a progressive marketing agency.
 
 ## Tech Stack
+
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript (strict mode enabled)
 - **Styling**: Tailwind CSS v4 + shadcn/ui components
@@ -14,6 +16,7 @@ HEADON.pro is a modern, high-performance marketing and creative agency website t
 - **Package Manager**: pnpm (v10.15.0 - enforced)
 
 ## Project Structure
+
 ```
 /app/              - Next.js App Router pages
   /services/       - Services showcase
@@ -38,6 +41,7 @@ HEADON.pro is a modern, high-performance marketing and creative agency website t
 ```
 
 ## Key Features
+
 - Mobile-first responsive design
 - SEO optimized with Next.js metadata API
 - Server-side rendering (SSR) and static site generation (SSG)
@@ -48,6 +52,7 @@ HEADON.pro is a modern, high-performance marketing and creative agency website t
 - TypeScript for type safety
 
 ## Design System
+
 - **Primary Color**: Königsblau (#1034A6)
 - **Secondary Color**: Orange (#FF8C00)
 - **Accent Color**: Gold (#FFD700)
@@ -55,6 +60,7 @@ HEADON.pro is a modern, high-performance marketing and creative agency website t
 - Responsive breakpoints: sm(640px), md(768px), lg(1024px), xl(1280px), 2xl(1536px)
 
 ## Environment Variables Required
+
 - NEXT_PUBLIC_SUPABASE_URL
 - NEXT_PUBLIC_SUPABASE_ANON_KEY
 - SUPABASE_SERVICE_ROLE_KEY

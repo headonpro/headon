@@ -112,6 +112,7 @@ headon/
 ### Files
 
 #### Pages & Routes (app/)
+
 - **Route Folders**: `kebab-case` (e.g., `contact/`, `about/`)
 - **Page Components**: `page.tsx` (Next.js convention)
 - **Layout Components**: `layout.tsx` (Next.js convention)
@@ -120,47 +121,56 @@ headon/
 - **Special Files**: `not-found.tsx`, `error.tsx`, `loading.tsx`
 
 #### Components (components/)
+
 - **Component Files**: `PascalCase.tsx` (e.g., `HeroSection.tsx`, `Button.tsx`)
 - **Multi-word Components**: `PascalCase` with no separators (e.g., `MultiStepForm.tsx`)
 - **Client Components**: Explicit `'use client'` directive at top
 - **Server Components**: No directive (default in Next.js 15)
 
 #### Utilities & Libraries (lib/)
+
 - **Utility Files**: `camelCase.ts` (e.g., `utils.ts`, `validations.ts`)
 - **Client Files**: `camelCase.ts` (e.g., `supabase.ts`)
 
 #### Types (types/)
+
 - **Type Definition Files**: `camelCase.ts` (e.g., `supabase.ts`)
 
 #### Configuration Files
+
 - **Config Files**: `kebab-case.config.ts` (e.g., `next.config.ts`)
 - **RC Files**: `.{tool}rc` or `.{tool}rc.json`
 
 ### Code
 
 #### TypeScript Types & Interfaces
+
 - **Interfaces**: `PascalCase` (e.g., `ButtonProps`, `FormData`)
 - **Types**: `PascalCase` (e.g., `Variant`, `Size`)
 - **Type Props Suffix**: Component props end with `Props` (e.g., `HeroSectionProps`)
 - **Enums**: `PascalCase` for name, `SCREAMING_SNAKE_CASE` for values
 
 #### Functions & Methods
+
 - **Functions**: `camelCase` (e.g., `getUserData`, `validateForm`)
 - **React Components**: `PascalCase` (e.g., `Button`, `HeroSection`)
 - **Event Handlers**: `handle{Event}` prefix (e.g., `handleSubmit`, `handleClick`)
 - **Boolean Functions**: `is/has/should` prefix (e.g., `isValid`, `hasError`)
 
 #### Constants
+
 - **Global Constants**: `SCREAMING_SNAKE_CASE` (e.g., `MAX_FILE_SIZE`, `API_ENDPOINT`)
 - **Component Constants**: `camelCase` for local, `SCREAMING_SNAKE_CASE` for exports
 - **Config Objects**: `camelCase` (e.g., `buttonVariants`, `formConfig`)
 
 #### Variables
+
 - **Variables**: `camelCase` (e.g., `userName`, `isLoading`, `formData`)
 - **React State**: `camelCase` (e.g., `isOpen`, `selectedOption`)
 - **Props Destructuring**: `camelCase` matching interface definition
 
 #### CSS Classes (Tailwind)
+
 - **Class Utilities**: Tailwind utility classes (e.g., `flex`, `justify-center`)
 - **Custom Classes**: `kebab-case` in globals.css (e.g., `custom-scrollbar`)
 - **CSS Variables**: `--kebab-case` (e.g., `--font-outfit`, `--primary-600`)
@@ -170,6 +180,7 @@ headon/
 ### Import Order (Enforced by ESLint + Prettier)
 
 1. **React/Next.js Core**
+
    ```typescript
    import React from 'react'
    import { useState, useEffect } from 'react'
@@ -179,6 +190,7 @@ headon/
    ```
 
 2. **External Dependencies**
+
    ```typescript
    import { motion } from 'framer-motion'
    import { useForm } from 'react-hook-form'
@@ -187,6 +199,7 @@ headon/
    ```
 
 3. **Internal Components (Absolute Imports via @/)**
+
    ```typescript
    import { Button } from '@/components/ui/button'
    import Header from '@/components/layout/Header'
@@ -194,12 +207,14 @@ headon/
    ```
 
 4. **Utilities & Libraries**
+
    ```typescript
    import { cn } from '@/lib/utils'
    import { createClient } from '@/lib/supabase'
    ```
 
 5. **Types**
+
    ```typescript
    import type { Database } from '@/types/supabase'
    ```
@@ -213,16 +228,19 @@ headon/
 ### Module Organization
 
 #### Absolute Imports
+
 - **Path Alias**: `@/` maps to project root
 - **Usage**: All internal imports use `@/` prefix
 - **Example**: `import { Button } from '@/components/ui/button'`
 - **Configuration**: Defined in `tsconfig.json` paths
 
 #### Relative Imports
+
 - **Avoided**: Minimize relative imports except for co-located files
 - **Exception**: `./metadata.ts` in same directory as `page.tsx`
 
 #### Barrel Exports
+
 - **Not Used**: Direct imports preferred over index files
 - **Rationale**: Better tree-shaking, clearer dependencies
 - **Exception**: `@/components/ui` from shadcn (auto-generated)
@@ -297,7 +315,7 @@ import { z } from 'zod'
 // 1. Validation Schema
 const requestSchema = z.object({
   email: z.string().email(),
-  message: z.string().min(10)
+  message: z.string().min(10),
 })
 
 // 2. Route Handler
@@ -309,9 +327,7 @@ export async function POST(request: NextRequest) {
 
     // 2b. Business Logic
     const supabase = createClient()
-    const { data, error } = await supabase
-      .from('contacts')
-      .insert(validated)
+    const { data, error } = await supabase.from('contacts').insert(validated)
 
     // 2c. Error Handling
     if (error) throw error
@@ -320,10 +336,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, data })
   } catch (error) {
     // 2e. Error Response
-    return NextResponse.json(
-      { success: false, error: 'Invalid request' },
-      { status: 400 }
-    )
+    return NextResponse.json({ success: false, error: 'Invalid request' }, { status: 400 })
   }
 }
 ```
@@ -381,24 +394,28 @@ export function isString(value: unknown): value is string {
 ## Code Organization Principles
 
 ### 1. Component Composition
+
 - **Single Responsibility**: Each component has one clear purpose
 - **Composition over Inheritance**: Build complex UIs from simple components
 - **Props-based Configuration**: Behavior controlled via props, not internal state
 - **Server Components by Default**: Only use `'use client'` when necessary
 
 ### 2. Type Safety
+
 - **TypeScript Strict Mode**: All code must pass strict type checking
 - **Explicit Return Types**: Functions declare return types
 - **Props Interfaces**: All components have typed props
 - **Runtime Validation**: Zod schemas for external data
 
 ### 3. Performance Optimization
+
 - **Code Splitting**: Lazy load non-critical components
 - **Server Components**: Reduce JavaScript bundle size
 - **Static Generation**: Pre-render pages at build time when possible
 - **Image Optimization**: Use Next.js Image component
 
 ### 4. Maintainability
+
 - **Consistent Patterns**: Follow established conventions
 - **Self-Documenting Code**: Clear names over comments
 - **Minimal Complexity**: Avoid clever code, prefer explicit
@@ -407,22 +424,26 @@ export function isString(value: unknown): value is string {
 ## Module Boundaries
 
 ### Core Application vs Features
+
 - **Core** (`app/layout.tsx`, `components/layout`): Global layout and navigation
 - **Features** (`app/[route]`, `components/sections`): Page-specific functionality
 - **Shared UI** (`components/ui`): Reusable UI primitives
 - **Utilities** (`lib/`): Cross-cutting concerns
 
 ### Public API vs Internal
+
 - **Public**: Exported components, types, and utilities
 - **Internal**: Helper functions, private components (not exported)
 - **Convention**: Only export what's intended for reuse
 
 ### Client vs Server
+
 - **Server Components** (default): Data fetching, static rendering
 - **Client Components** (`'use client'`): Interactivity, hooks, browser APIs
 - **Boundary Rule**: Server components can import client components, not vice versa
 
 ### Feature Isolation
+
 - **Route-specific**: Components in `app/[route]` are scoped to that route
 - **Shared sections**: `components/sections` for reusable page sections
 - **No cross-dependencies**: Routes don't import from other routes
@@ -430,24 +451,28 @@ export function isString(value: unknown): value is string {
 ## Code Size Guidelines
 
 ### File Size
+
 - **Component Files**: ≤ 300 lines (ideal: 100-200)
 - **Page Files**: ≤ 200 lines (should mostly compose sections)
 - **Utility Files**: ≤ 400 lines (consider splitting if larger)
 - **Type Definition Files**: No hard limit (generated files exempt)
 
 ### Function Size
+
 - **Component Functions**: ≤ 100 lines (ideal: 20-50)
 - **Utility Functions**: ≤ 50 lines (ideal: 5-20)
 - **Event Handlers**: ≤ 20 lines (extract complex logic)
 - **JSX Returns**: ≤ 100 lines (extract to sub-components if larger)
 
 ### Complexity Limits
+
 - **Cyclomatic Complexity**: ≤ 10 per function
 - **Nesting Depth**: ≤ 4 levels
 - **Props Count**: ≤ 8 props per component (use composition or config objects)
 - **Conditional Rendering**: ≤ 3 nested ternaries (prefer early returns or variables)
 
 ### When to Split
+
 - **Extract Component**: When JSX block is reused or exceeds 50 lines
 - **Extract Hook**: When stateful logic is reused across components
 - **Extract Utility**: When function is pure and reusable
@@ -456,6 +481,7 @@ export function isString(value: unknown): value is string {
 ## SEO Structure
 
 ### Metadata Organization
+
 ```typescript
 // app/[route]/metadata.ts (separate file)
 export const metadata = {
@@ -469,6 +495,7 @@ export { metadata } from './metadata'
 ```
 
 ### SEO Component Pattern
+
 - **Breadcrumbs**: `components/seo/Breadcrumbs.tsx`
 - **Structured Data**: `components/seo/StructuredData.tsx`
 - **Page Headers**: `components/seo/PageHeader.tsx`
@@ -479,7 +506,8 @@ export { metadata } from './metadata'
 ### Code Documentation
 
 #### Component Documentation
-```typescript
+
+````typescript
 /**
  * Primary button component with multiple variants
  *
@@ -489,9 +517,10 @@ export { metadata } from './metadata'
  * ```
  */
 export function Button({ ... }) { ... }
-```
+````
 
 #### Function Documentation
+
 ```typescript
 /**
  * Merges Tailwind CSS classes intelligently
@@ -503,17 +532,20 @@ export function cn(...inputs: ClassValue[]): string { ... }
 ```
 
 ### README Standards
+
 - **Project Root**: `README.md` with setup instructions
 - **Major Modules**: No module-level READMEs (use CLAUDE.md instead)
 - **Documentation**: `docs/` folder for guides and architecture docs
 
 ### Inline Comments
+
 - **Avoid Obvious Comments**: Code should be self-explanatory
 - **Explain Why, Not What**: Comments explain reasoning, not mechanics
 - **Complex Logic**: Add comments for non-trivial algorithms
 - **TODOs**: Format as `// TODO: description` with GitHub issue reference
 
 ### TypeScript as Documentation
+
 - **Types First**: Types serve as primary documentation
 - **JSDoc for Public APIs**: Add JSDoc to exported functions/components
 - **No Redundant Comments**: If types are clear, comments are optional
@@ -537,6 +569,7 @@ export function cn(...inputs: ClassValue[]): string { ... }
 ```
 
 ### Standalone Output
+
 - **Purpose**: Optimized for Docker containers
 - **Size**: Minimal (~50-100MB vs 500MB+ with full node_modules)
 - **Usage**: Production deployment only

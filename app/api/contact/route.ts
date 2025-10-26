@@ -23,17 +23,14 @@ export async function POST(request: NextRequest) {
 
     if (!supabaseUrl || !supabaseServiceKey) {
       console.error('Supabase configuration missing')
-      return NextResponse.json(
-        { error: 'Server-Konfigurationsfehler' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Server-Konfigurationsfehler' }, { status: 500 })
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey, {
       auth: {
         autoRefreshToken: false,
-        persistSession: false
-      }
+        persistSession: false,
+      },
     })
 
     // Lead-Daten für die Datenbank vorbereiten
@@ -49,21 +46,15 @@ export async function POST(request: NextRequest) {
       lead_score: body.lead_score || 0,
       source: 'contact-form',
       files: body.files || null,
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
     }
 
     // In Supabase speichern
-    const { data, error } = await supabase
-      .from('leads')
-      .insert([leadData])
-      .select()
+    const { data, error } = await supabase.from('leads').insert([leadData]).select()
 
     if (error) {
       console.error('Supabase error:', error)
-      return NextResponse.json(
-        { error: 'Fehler beim Speichern der Anfrage' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Fehler beim Speichern der Anfrage' }, { status: 500 })
     }
 
     // Email-Benachrichtigung mit Resend API senden
@@ -79,17 +70,13 @@ export async function POST(request: NextRequest) {
       {
         success: true,
         message: 'Anfrage erfolgreich gesendet',
-        data
+        data,
       },
       { status: 200 }
     )
-
   } catch (error) {
     console.error('API error:', error)
-    return NextResponse.json(
-      { error: 'Ein unerwarteter Fehler ist aufgetreten' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Ein unerwarteter Fehler ist aufgetreten' }, { status: 500 })
   }
 }
 
@@ -118,8 +105,8 @@ async function sendNotificationEmail(leadData: {
   const emailHtml = createContactEmailTemplate(leadData)
 
   // Priority-Level für Subject
-  const priorityLevel = leadData.lead_score > 30 ? '🔥 HIGH PRIORITY' :
-                       leadData.lead_score > 15 ? '⚡ MEDIUM' : '📝'
+  const priorityLevel =
+    leadData.lead_score > 30 ? '🔥 HIGH PRIORITY' : leadData.lead_score > 15 ? '⚡ MEDIUM' : '📝'
 
   await resend.emails.send({
     from: 'hallo@headon.pro',

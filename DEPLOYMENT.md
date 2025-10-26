@@ -5,11 +5,13 @@ This guide explains how to deploy the HEADON.pro Template to a VPS server using 
 ## 📋 Prerequisites
 
 ### Local Development
+
 - Node.js 22+ and pnpm 10.15.0
 - Docker and Docker Compose installed locally (for testing)
 - Git repository configured
 
 ### VPS Server Requirements
+
 - Ubuntu 20.04+ or similar Linux distribution
 - Docker and Docker Compose installed
 - Nginx installed (for reverse proxy)
@@ -28,6 +30,7 @@ cp .env.production.example .env.production
 ```
 
 Required variables:
+
 - `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Supabase anonymous key
 - `SUPABASE_SERVICE_ROLE_KEY` - Supabase service role key
@@ -36,6 +39,7 @@ Required variables:
 ### 2. Build Configuration
 
 The project is already configured for Docker deployment with:
+
 - `Dockerfile` - Multi-stage build for optimized production image
 - `docker-compose.yml` - Container orchestration configuration
 - `.dockerignore` - Excludes unnecessary files from Docker build
@@ -59,6 +63,7 @@ docker-compose logs -f
 ```
 
 Stop the container:
+
 ```bash
 docker-compose down
 ```
@@ -68,11 +73,13 @@ docker-compose down
 ### Step 1: Initial VPS Setup
 
 SSH into your VPS:
+
 ```bash
 ssh user@your-vps-ip
 ```
 
 Install required software (if not already installed):
+
 ```bash
 # Update system
 sudo apt update && sudo apt upgrade -y
@@ -107,6 +114,7 @@ cd template
 ### Step 3: Configure Environment
 
 Create `.env.production` file on the VPS:
+
 ```bash
 nano .env.production
 ```
@@ -116,6 +124,7 @@ Add your production environment variables (same as local `.env.production`).
 ### Step 4: Create Docker Network
 
 Create a shared network for container communication:
+
 ```bash
 docker network create web-network
 ```
@@ -139,11 +148,13 @@ docker-compose logs -f
 ### Step 6: Configure Nginx
 
 Copy the Nginx configuration:
+
 ```bash
 sudo cp deploy/nginx/headon-template.conf /etc/nginx/sites-available/
 ```
 
 Edit the configuration with your domain:
+
 ```bash
 sudo nano /etc/nginx/sites-available/headon-template.conf
 ```
@@ -151,6 +162,7 @@ sudo nano /etc/nginx/sites-available/headon-template.conf
 Replace `your-domain.com` with your actual domain.
 
 Enable the site:
+
 ```bash
 sudo ln -s /etc/nginx/sites-available/headon-template.conf /etc/nginx/sites-enabled/
 sudo nginx -t
@@ -210,6 +222,7 @@ Add these secrets to your GitHub repository (Settings → Secrets → Actions):
 #### Generate SSH Key for GitHub Actions
 
 On your VPS:
+
 ```bash
 # Generate SSH key pair
 ssh-keygen -t ed25519 -C "github-actions" -f ~/.ssh/github_actions
@@ -284,6 +297,7 @@ Since we're using Supabase, backups are handled by Supabase. Configure backups i
 ### Memory Issues
 
 Monitor memory usage:
+
 ```bash
 docker stats
 free -h
@@ -309,6 +323,7 @@ df -h
 ### Health Check Endpoint
 
 The application includes a health check endpoint:
+
 ```bash
 curl https://your-domain.com/api/health
 ```
@@ -316,11 +331,13 @@ curl https://your-domain.com/api/health
 ### Log Rotation
 
 Configure log rotation for Docker:
+
 ```bash
 sudo nano /etc/docker/daemon.json
 ```
 
 Add:
+
 ```json
 {
   "log-driver": "json-file",
@@ -332,6 +349,7 @@ Add:
 ```
 
 Restart Docker:
+
 ```bash
 sudo systemctl restart docker
 ```
@@ -339,11 +357,13 @@ sudo systemctl restart docker
 ## 🔐 Security Best Practices
 
 1. **Keep software updated**:
+
    ```bash
    sudo apt update && sudo apt upgrade -y
    ```
 
 2. **Configure firewall**:
+
    ```bash
    sudo ufw allow 22/tcp
    sudo ufw allow 80/tcp
@@ -372,6 +392,7 @@ sudo systemctl restart docker
 ## 🆘 Support
 
 For issues or questions:
+
 1. Check the logs first
 2. Review this documentation
 3. Check GitHub Issues

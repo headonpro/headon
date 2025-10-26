@@ -1,16 +1,16 @@
 ---
-title: "React 19: Concurrent Features verstehen und richtig einsetzen"
-description: "Ein praktischer Guide zu React 19 Concurrent Features: use() Hook, Server Components, Transitions und automatisches Batching für performante Apps."
-publishedAt: "2025-06-15T10:00:00Z"
+title: 'React 19: Concurrent Features verstehen und richtig einsetzen'
+description: 'Ein praktischer Guide zu React 19 Concurrent Features: use() Hook, Server Components, Transitions und automatisches Batching für performante Apps.'
+publishedAt: '2025-06-15T10:00:00Z'
 author:
-  name: "Onur Cirakoglu"
-  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
-  bio: "Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien"
-tags: ["React", "JavaScript", "Performance", "Web Development", "Frontend"]
-category: "development"
+  name: 'Onur Cirakoglu'
+  avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
+  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['React', 'JavaScript', 'Performance', 'Web Development', 'Frontend']
+category: 'development'
 image:
-  url: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=630&fit=crop"
-  alt: "React 19 Concurrent Rendering Konzept Visualisierung"
+  url: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=630&fit=crop'
+  alt: 'React 19 Concurrent Rendering Konzept Visualisierung'
 readingTime: 9
 featured: true
 ---
@@ -24,15 +24,14 @@ Concurrent Rendering ermöglicht es React, **mehrere UI-Updates gleichzeitig vor
 ### Der Unterschied: Blocking vs. Concurrent
 
 **Traditionelles React (Blocking):**
+
 ```tsx
 // User tippt in Input → UI friert ein während große Liste updatet
 function SearchableList() {
   const [query, setQuery] = useState('')
   const [items, setItems] = useState(LARGE_DATASET)
 
-  const filtered = items.filter(item =>
-    item.name.toLowerCase().includes(query.toLowerCase())
-  )
+  const filtered = items.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <>
@@ -47,6 +46,7 @@ function SearchableList() {
 ```
 
 **React 19 (Concurrent):**
+
 ```tsx
 import { useTransition, useDeferredValue } from 'react'
 
@@ -55,7 +55,7 @@ function SearchableList() {
   const [isPending, startTransition] = useTransition()
   const deferredQuery = useDeferredValue(query)
 
-  const filtered = items.filter(item =>
+  const filtered = items.filter((item) =>
     item.name.toLowerCase().includes(deferredQuery.toLowerCase())
   )
 
@@ -95,7 +95,7 @@ function OldUserProfile({ userId }) {
 
   useEffect(() => {
     fetch(`/api/users/${userId}`)
-      .then(r => r.json())
+      .then((r) => r.json())
       .then(setUser)
       .finally(() => setLoading(false))
   }, [userId])
@@ -111,7 +111,7 @@ function NewUserProfile({ userPromise }) {
 }
 
 export default function Page({ userId }) {
-  const userPromise = fetch(`/api/users/${userId}`).then(r => r.json())
+  const userPromise = fetch(`/api/users/${userId}`).then((r) => r.json())
 
   return (
     <Suspense fallback={<Spinner />}>
@@ -155,7 +155,7 @@ React 19 bringt **Server Components** als stable Feature:
 export default async function BlogPost({ params }) {
   // Läuft nur auf dem Server!
   const post = await db.post.findUnique({
-    where: { slug: params.slug }
+    where: { slug: params.slug },
   })
 
   return (
@@ -179,7 +179,7 @@ export function CommentSection({ postId }) {
   return (
     <div>
       <h2>Kommentare</h2>
-      {comments.map(comment => (
+      {comments.map((comment) => (
         <Comment key={comment.id} data={comment} />
       ))}
     </div>
@@ -189,13 +189,13 @@ export function CommentSection({ postId }) {
 
 ### Server vs. Client Components
 
-| Feature | Server Component | Client Component |
-|---------|-----------------|------------------|
-| **Daten fetchen** | ✅ Direkt mit async/await | ❌ Nur mit useEffect |
-| **Bundle Size** | ✅ 0 KB im Client | ❌ Im Bundle enthalten |
-| **DB-Zugriff** | ✅ Direkt möglich | ❌ Nur via API |
-| **Interaktivität** | ❌ Keine Hooks/Events | ✅ Volle Interaktivität |
-| **Secrets** | ✅ Sicher auf Server | ❌ Im Bundle sichtbar |
+| Feature            | Server Component          | Client Component        |
+| ------------------ | ------------------------- | ----------------------- |
+| **Daten fetchen**  | ✅ Direkt mit async/await | ❌ Nur mit useEffect    |
+| **Bundle Size**    | ✅ 0 KB im Client         | ❌ Im Bundle enthalten  |
+| **DB-Zugriff**     | ✅ Direkt möglich         | ❌ Nur via API          |
+| **Interaktivität** | ❌ Keine Hooks/Events     | ✅ Volle Interaktivität |
+| **Secrets**        | ✅ Sicher auf Server      | ❌ Im Bundle sichtbar   |
 
 Mehr zur optimalen Nutzung in unserem [Next.js 15 Guide](/blog/next-js-15-neue-features).
 
@@ -239,6 +239,7 @@ function TabContainer() {
 ```
 
 **Use Cases für Transitions:**
+
 - Tab-Navigation bei heavy content
 - Filterung großer Datensätze
 - Navigation zwischen routes
@@ -251,22 +252,22 @@ React 19 macht **automatisches Batching** zur Standardfunktion:
 ```tsx
 // React 18: Nur in Events gebatched
 function handleClick() {
-  setCount(c => c + 1)
-  setFlag(f => !f)
+  setCount((c) => c + 1)
+  setFlag((f) => !f)
   // Re-render nur 1x
 }
 
 // React 18: In Promises NICHT gebatched
 fetch('/api').then(() => {
-  setCount(c => c + 1)  // Re-render
-  setFlag(f => !f)       // Re-render
+  setCount((c) => c + 1) // Re-render
+  setFlag((f) => !f) // Re-render
   // 2x Re-render!
 })
 
 // React 19: ÜBERALL gebatched!
 fetch('/api').then(() => {
-  setCount(c => c + 1)
-  setFlag(f => !f)
+  setCount((c) => c + 1)
+  setFlag((f) => !f)
   setData(newData)
   // Nur 1x Re-render!
 })
@@ -302,11 +303,7 @@ function LikeButton({ postId, initialLikes }) {
     }
   }
 
-  return (
-    <button onClick={handleLike}>
-      ❤️ {optimisticLikes}
-    </button>
-  )
+  return <button onClick={handleLike}>❤️ {optimisticLikes}</button>
 }
 ```
 
@@ -353,9 +350,7 @@ export default function Newsletter() {
       <input name="email" type="email" required />
       <SubmitButton />
       {state?.message && (
-        <p className={state.success ? 'text-green-600' : 'text-red-600'}>
-          {state.message}
-        </p>
+        <p className={state.success ? 'text-green-600' : 'text-red-600'}>{state.message}</p>
       )}
     </form>
   )
@@ -374,17 +369,21 @@ async function ProductList() {
   const products = await db.product.findMany()
   return (
     <div>
-      {products.map(p => <ProductCard key={p.id} product={p} />)}
+      {products.map((p) => (
+        <ProductCard key={p.id} product={p} />
+      ))}
     </div>
   )
 }
 
 // ❌ Schlecht: Client Component unnötig
-'use client'
+;('use client')
 function ProductList() {
   const [products, setProducts] = useState([])
   useEffect(() => {
-    fetch('/api/products').then(r => r.json()).then(setProducts)
+    fetch('/api/products')
+      .then((r) => r.json())
+      .then(setProducts)
   }, [])
   // ...
 }
@@ -399,7 +398,9 @@ function SearchResults({ query }) {
 
   return (
     <div className={query !== deferredQuery ? 'opacity-50' : ''}>
-      {results.map(r => <ResultItem key={r.id} data={r} />)}
+      {results.map((r) => (
+        <ResultItem key={r.id} data={r} />
+      ))}
     </div>
   )
 }
@@ -410,11 +411,7 @@ function SearchResults({ query }) {
 ```tsx
 async function Dashboard() {
   // Parallel starten - nicht sequenziell!
-  const [user, posts, analytics] = await Promise.all([
-    fetchUser(),
-    fetchPosts(),
-    fetchAnalytics(),
-  ])
+  const [user, posts, analytics] = await Promise.all([fetchUser(), fetchPosts(), fetchAnalytics()])
 
   return (
     <div>
@@ -444,6 +441,7 @@ pnpm update react react-dom
 ### Häufige Breaking Changes
 
 **1. Automatisches Batching**
+
 ```tsx
 // React 18: Manuelles Batching nötig
 import { unstable_batchedUpdates } from 'react-dom'
@@ -453,6 +451,7 @@ import { unstable_batchedUpdates } from 'react-dom'
 ```
 
 **2. Legacy Context API entfernt**
+
 ```tsx
 // ❌ Nicht mehr unterstützt
 static contextTypes = { ... }
@@ -462,6 +461,7 @@ const value = useContext(MyContext)
 ```
 
 **3. String Refs deprecated**
+
 ```tsx
 // ❌ Veraltet
 <div ref="myDiv" />
@@ -531,9 +531,7 @@ export class ErrorBoundary extends Component {
       return (
         <div className="error-container">
           <h2>Etwas ist schiefgelaufen</h2>
-          <button onClick={() => this.setState({ hasError: false })}>
-            Erneut versuchen
-          </button>
+          <button onClick={() => this.setState({ hasError: false })}>Erneut versuchen</button>
         </div>
       )
     }
@@ -551,10 +549,7 @@ Hier ein komplettes Beispiel aus unseren [Projekten](/portfolio):
 // app/dashboard/page.tsx - Server Component
 export default async function Dashboard() {
   // Daten parallel laden
-  const [user, stats] = await Promise.all([
-    fetchUserProfile(),
-    fetchDashboardStats(),
-  ])
+  const [user, stats] = await Promise.all([fetchUserProfile(), fetchDashboardStats()])
 
   return (
     <div>
@@ -612,6 +607,7 @@ export function InteractiveChart({ userId }) {
 ```
 
 **Ergebnis:**
+
 - ⚡ 0.4s First Contentful Paint
 - 🚀 Sofortiges User-Feedback
 - 📦 35% kleinerer Bundle
@@ -646,4 +642,4 @@ Als spezialisierte [React-Agentur](/services/web-development) helfen wir bei:
 - [React Compiler Playground](https://playground.react.dev/)
 - [Server Components RFC](https://github.com/reactjs/rfcs/blob/main/text/0188-server-components.md)
 
-*Aktualisiert: Oktober 2024*
+_Aktualisiert: Oktober 2024_

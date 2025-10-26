@@ -16,10 +16,7 @@
 
 import Script from 'next/script'
 import type { FAQ } from '@/lib/types/content'
-import type {
-  BlogContentResult,
-  PortfolioContentResult,
-} from '@/lib/content/mdx-loader'
+import type { BlogContentResult, PortfolioContentResult } from '@/lib/content/mdx-loader'
 import {
   buildArticleSchema,
   buildFAQPageSchema,

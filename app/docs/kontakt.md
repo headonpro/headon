@@ -3,9 +3,11 @@
 ## 🎯 Strategisches Ziel
 
 ### Conversion-Optimierung
+
 Die Kontaktseite ist der **finale Funnel-Punkt** - hier entscheidet sich, ob aus Interesse echte Leads werden. Nach der beeindruckenden Website müssen wir das gleiche Niveau halten und alle Conversion-Hürden eliminieren.
 
 ### Zielgruppen-Berücksichtigung
+
 - **Lokale KMUs:** Brauchen Vertrauen und klare Preisvorstellungen
 - **Verschiedene Branchen:** Spezifische Ansprache je nach Herkunft
 - **Unterschiedliche Projekt-Größen:** Von kleiner Website bis Complex App
@@ -16,10 +18,12 @@ Die Kontaktseite ist der **finale Funnel-Punkt** - hier entscheidet sich, ob aus
 ## 📋 Seiten-Aufbau (Top to Bottom)
 
 ### 1. Hero-Bereich
+
 **Headline:** "Lassen Sie uns Ihr Projekt besprechen"
 **Sub-Headline:** "Kostenlose Erstberatung in 15 Minuten - unverbindlich und transparent"
 
 **Trust-Indicator:**
+
 - ⏱️ "Antwort innerhalb von 2 Stunden"
 - 💬 "Persönliches Gespräch, keine Verkaufs-Calls"
 - 📊 "Kostenlose Projekt-Einschätzung"
@@ -27,14 +31,18 @@ Die Kontaktseite ist der **finale Funnel-Punkt** - hier entscheidet sich, ob aus
 ### 2. Kontakt-Optionen (Nebeneinander)
 
 #### Option A: Sofort-Termin (Links)
+
 **"Direkt Termin buchen"**
+
 - **Calendly/Acuity Widget** embedded
 - **Verfügbare Zeiten** in Echtzeit
 - **15-Min Slots** für Erstberatung
 - **Zoom/Google Meet** Auto-Link
 
 #### Option B: Nachricht senden (Rechts)
+
 **"Oder schreiben Sie uns"**
+
 - **Smart Kontaktformular** (siehe unten)
 - **Upload-Möglichkeit** für Briefings
 - **Auto-Response** mit nächsten Schritten
@@ -42,6 +50,7 @@ Die Kontaktseite ist der **finale Funnel-Punkt** - hier entscheidet sich, ob aus
 ### 3. Smart Kontaktformular
 
 #### Basis-Felder
+
 ```
 Name* [Eingabefeld]
 Email* [Eingabefeld]
@@ -50,6 +59,7 @@ Telefon (optional) [Eingabefeld]
 ```
 
 #### Projekt-Spezifikation
+
 ```
 Projekt-Typ* [Dropdown]
 ├── Website (einfach)
@@ -74,16 +84,18 @@ Wann soll es losgehen?* [Dropdown]
 ```
 
 #### Intelligente Nachricht-Feld
+
 ```
 Erzählen Sie uns von Ihrem Projekt* [Textarea]
 [Platzhalter-Text basierend auf Projekt-Typ]
 
 Beispiel für "Website":
-"Beschreiben Sie kurz: Welche Art von Website brauchen Sie? 
+"Beschreiben Sie kurz: Welche Art von Website brauchen Sie?
 Haben Sie schon eine Website? Was soll anders/besser werden?"
 ```
 
 #### Optional: File Upload
+
 ```
 [Drag & Drop Bereich]
 "Briefing, Wireframes oder Inspiration hochladen (optional)"
@@ -93,11 +105,13 @@ Max 10MB - PDF, DOC, PNG, JPG
 ### 4. Vertrauens-Verstärkung
 
 #### Quick-Facts Leiste
+
 ```
-[✅ 150+ Projekte] [⚡ 4x schneller] [💰 75% günstiger] [🔒 DSGVO-konform]
+[⚡ 4x schneller] [💰 Transparente Festpreise] [🔒 DSGVO-konform] [📊 90+ Lighthouse Score]
 ```
 
 #### Mini-Testimonials
+
 ```
 "15 Min Gespräch, am nächsten Tag perfektes Angebot!"
 ⭐⭐⭐⭐⭐ - Restaurant Müller
@@ -109,6 +123,7 @@ Max 10MB - PDF, DOC, PNG, JPG
 ### 5. FAQ Sektion (Bedenken ausräumen)
 
 #### Häufige Fragen
+
 ```
 ❓ "Wie läuft die Zusammenarbeit ab?"
 💬 "15-Min Gespräch → 48h Angebot → Projekt-Start in 1-2 Wochen"
@@ -129,9 +144,11 @@ Max 10MB - PDF, DOC, PNG, JPG
 ### 6. Notfall-CTA (Sticky Bottom)
 
 #### Floating Action Bar
+
 ```
 [📞 Anrufen: +49...] [📅 Termin buchen] [✉️ Email senden]
 ```
+
 **Erscheint beim Scrollen**, **klebt unten am Bildschirm**
 
 ---
@@ -139,34 +156,41 @@ Max 10MB - PDF, DOC, PNG, JPG
 ## 🛠 Technische Features
 
 ### Smart Form Logic
+
 **Dynamic Placeholders:**
+
 ```javascript
 const placeholders = {
   'website-einfach': 'z.B. Ich brauche eine moderne Website für mein Restaurant...',
   'website-komplex': 'z.B. Website mit Buchungssystem und Kundenverwaltung...',
   'mobile-app': 'z.B. App für iOS/Android mit Login und Push-Notifications...',
-  'ecommerce': 'z.B. Online-Shop mit Payment und Inventory Management...'
-};
+  ecommerce: 'z.B. Online-Shop mit Payment und Inventory Management...',
+}
 ```
 
 ### Auto-Responses
+
 **Immediate Confirmation:**
+
 - Email-Bestätigung mit nächsten Schritten
 - PDF mit Ablauf-Information
 - Calendly-Link falls nicht direkt gebucht
 
 ### Lead Scoring
+
 **Automatic Qualification:**
+
 ```javascript
 const leadScore = {
   budget: budgetValue,
   timeline: timelineUrgency,
   projectType: projectComplexity,
-  company: hasCompany ? 10 : 0
-};
+  company: hasCompany ? 10 : 0,
+}
 ```
 
 ### Integration
+
 - **Supabase:** Lead-Storage mit real-time notifications
 - **Email:** Auto-Responses + admin notifications
 - **CRM:** Optional Zapier integration
@@ -177,12 +201,14 @@ const leadScore = {
 ## 🎨 Design-Spezifikationen
 
 ### Layout
+
 - **Container:** Max-width 1000px, zentriert
 - **Grid:** 2-Spalten (Termin + Formular), 1-Spalte mobile
 - **Spacing:** Großzügige Abstände wie auf der Hauptseite
 - **Background:** Sanfter Gradient, passt zur Hero
 
 ### Formular-Design
+
 ```css
 Input Fields:
 - Border-radius: 8px
@@ -203,6 +229,7 @@ Submit Button:
 ```
 
 ### Mobile Optimization
+
 - **Stacked Layout:** Alle Elemente untereinander
 - **Touch-Friendly:** Mindestens 44px Touch-Targets
 - **Keyboard-Aware:** Viewport adjustment bei Keyboard
@@ -213,18 +240,21 @@ Submit Button:
 ## 🚀 Conversion-Optimierung
 
 ### Progressive Disclosure
+
 1. **Basis-Kontakt** erst sichtbar
 2. **Projekt-Details** erscheinen nach Name/Email
 3. **Optional Fields** am Ende
 4. **File Upload** nur bei komplexeren Projekten
 
 ### Psychological Triggers
+
 - **Scarcity:** "Nur 3 Beratungsplätze diese Woche verfügbar"
 - **Social Proof:** "Gestern: 2 neue Projekte gestartet"
-- **Authority:** "150+ erfolgreiche Projekte"
+- **Authority:** "90+ Lighthouse Score bei allen Projekten"
 - **Risk Reversal:** "Kostenlose Erstberatung, unverbindlich"
 
 ### A/B Testing Opportunities
+
 - **Headline:** "Besprechen" vs. "Starten" vs. "Planen"
 - **CTA-Text:** "Jetzt Termin buchen" vs. "Kostenlos beraten lassen"
 - **Form Length:** Kurz vs. Ausführlich
@@ -235,32 +265,36 @@ Submit Button:
 ## 📱 Responsive Breakpoints
 
 ### Desktop (1200px+)
+
 - **2-Spalten Layout:** Termin-Widget + Formular
 - **Sidebar:** FAQ oder Trust-Elemente
 - **Full Features:** Alle interaktiven Elemente
 
 ### Tablet (768px - 1199px)
+
 - **Stacked Layout:** Termin über Formular
 - **Simplified Navigation:** Weniger Optionen
 - **Touch-Optimized:** Größere Touch-Targets
 
 ### Mobile (< 768px)
+
 - **Single Column:** Alles untereinander
 - **Prioritized:** Wichtigste Elemente zuerst
 - **Thumb-Friendly:** Navigation für eine Hand
-
 
 ---
 
 ## 📊 Success Metrics
 
 ### Conversion Tracking
+
 - **Form Completion Rate:** Prozent der Starter vs. Absender
 - **Field Drop-off:** Wo brechen User ab?
 - **Contact Method Preference:** Formular vs. Termin vs. Telefon
 - **Lead Quality:** Conversion von Contact zu Project
 
 ### Engagement Metrics
+
 - **Time on Page:** Wie lange verweilen User?
 - **Scroll Depth:** Lesen sie FAQ etc.?
 - **Return Visits:** Kommen User mehrfach zurück?
@@ -268,4 +302,4 @@ Submit Button:
 
 ---
 
-*Diese Kontaktseite wird das perfekte Finale für deine bereits fantastische Website - sie hält das Premium-Niveau und konvertiert maximal!*
+_Diese Kontaktseite wird das perfekte Finale für deine bereits fantastische Website - sie hält das Premium-Niveau und konvertiert maximal!_

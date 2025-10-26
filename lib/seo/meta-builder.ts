@@ -6,12 +6,7 @@
  */
 
 import { Metadata } from 'next'
-import type {
-  BlogPost,
-  PortfolioProject,
-  ServicePage,
-  CityPage,
-} from '@/lib/types/content'
+import type { BlogPost, PortfolioProject, ServicePage, CityPage } from '@/lib/types/content'
 
 // ============================================================================
 // Configuration
@@ -55,10 +50,7 @@ export function truncateTitle(title: string, maxLength = 60): string {
  * @param maxLength - Maximum length (default: 160 chars per Google guidelines)
  * @returns Truncated description with ellipsis if needed
  */
-export function truncateDescription(
-  description: string,
-  maxLength = 160
-): string {
+export function truncateDescription(description: string, maxLength = 160): string {
   if (description.length <= maxLength) {
     return description
   }

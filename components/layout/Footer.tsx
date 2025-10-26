@@ -5,7 +5,7 @@ import { Mail, MapPin, Phone, Linkedin } from 'lucide-react'
 // Custom X (Twitter) Icon Component
 const XIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 )
 
@@ -19,8 +19,13 @@ const navigation = {
   company: [
     { name: 'About', href: '/about' },
     { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Blog', href: '/blog' },
     { name: 'Regionen', href: '/regionen' },
+  ],
+  resources: [
+    { name: 'Blog', href: '/blog' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Glossar', href: '/glossar' },
+    { name: 'Vergleiche', href: '/vergleiche' },
   ],
   legal: [
     { name: 'Datenschutz', href: '/privacy' },
@@ -45,9 +50,9 @@ export default function Footer() {
   return (
     <footer className="bg-gray-50">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {/* Logo & Description */}
-          <div className="space-y-4">
+          <div className="space-y-4 md:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-block">
               <Image
                 src="/headon-logo_footer.svg"
@@ -57,23 +62,26 @@ export default function Footer() {
                 className="h-10 w-auto"
               />
             </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
-              Ihre moderne Kreativagentur für innovative Web- und Mobile-Anwendungen.
-              Wir transformieren Ideen in digitale Realität.
+            <p className="text-muted-foreground max-w-xs text-sm">
+              Ihre moderne Kreativagentur für innovative Web- und Mobile-Anwendungen. Wir
+              transformieren Ideen in digitale Realität.
             </p>
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-foreground">Kontakt</h3>
-            <div className="space-y-2 text-sm text-muted-foreground">
+          <div className="space-y-4 md:col-span-2 lg:col-span-1">
+            <h3 className="text-foreground text-sm font-semibold">Kontakt</h3>
+            <div className="text-muted-foreground space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
                 <span>Lauda-Königshofen, Deutschland</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:hallo@headon.pro" className="hover:text-foreground transition-colors">
+                <a
+                  href="mailto:hallo@headon.pro"
+                  className="hover:text-foreground transition-colors"
+                >
                   hallo@headon.pro
                 </a>
               </div>
@@ -100,11 +108,14 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground">Services</h3>
+            <h3 className="text-foreground text-sm font-semibold">Services</h3>
             <ul role="list" className="mt-4 space-y-2">
               {navigation.services.map((item) => (
                 <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={item.href}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -114,11 +125,31 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground">Unternehmen</h3>
+            <h3 className="text-foreground text-sm font-semibold">Unternehmen</h3>
             <ul role="list" className="mt-4 space-y-2">
               {navigation.company.map((item) => (
                 <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={item.href}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h3 className="text-foreground text-sm font-semibold">Ressourcen</h3>
+            <ul role="list" className="mt-4 space-y-2">
+              {navigation.resources.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -128,11 +159,14 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground">Rechtliches</h3>
+            <h3 className="text-foreground text-sm font-semibold">Rechtliches</h3>
             <ul role="list" className="mt-4 space-y-2">
               {navigation.legal.map((item) => (
                 <li key={item.name}>
-                  <Link href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <Link
+                    href={item.href}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -140,9 +174,9 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        
+
         <div className="mt-12 border-t pt-8">
-          <p className="text-center text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-center text-xs">
             © {new Date().getFullYear()} HEADON.pro. Alle Rechte vorbehalten.
           </p>
         </div>

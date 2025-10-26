@@ -5,10 +5,12 @@
 **Ziel:** Funktionsfähiges MVP mit 2 Sektoren in 12-14 Wochen
 
 **Launch-Sektoren:**
+
 1. SanctuaryHub (Lebenshöfe)
 2. ClubHub (Fußballvereine)
 
 **Beta-Kunden:**
+
 - Vita Est Cara (Lebenshof)
 - SV Viktoria Wertheim (Fußballverein)
 - +3-5 weitere Testvereine/Höfe
@@ -20,6 +22,7 @@
 ### **Woche 1: Projekt-Setup**
 
 **Tag 1-2: Repository & Tooling**
+
 - GitHub Repository erstellen (Private)
 - Monorepo-Struktur anlegen mit Turborepo/Nx
 - Ordnerstruktur definieren:
@@ -34,6 +37,7 @@
 - Git Hooks (Husky) für Commits
 
 **Tag 3-4: Supabase Setup**
+
 - Supabase Cloud Projekt erstellen (Frankfurt Region)
 - Organisations-Struktur definieren
 - API Keys in Environment Variables
@@ -42,6 +46,7 @@
 - Testing-Projekt für Entwicklung
 
 **Tag 5: Hetzner Server vorbereiten**
+
 - CPX32 checken (aktueller Stand)
 - Docker Compose Struktur für LocalHub planen
 - Nginx Config-Strategie definieren
@@ -49,6 +54,7 @@
 - Subdomain-Routing testen mit Dummy-Site
 
 **Tag 6-7: Design System**
+
 - shadcn/ui installieren (Remix + Astro)
 - Tailwind Config definieren (Basis-Farben)
 - Component-Library Basis erstellen
@@ -63,53 +69,48 @@
 **Tag 1-3: Core Schema Design**
 
 **Core Tables (alle Sektoren):**
+
 - `organizations` (Haupt-Tabelle)
   - id, name, slug, sector (enum), plan, stripe_customer_id
   - theme_settings (jsonb), created_at, updated_at
   - subdomain, custom_domain, domain_verified
-  
 - `users` (Admin-Accounts)
   - id, email, organization_id, role (enum: owner, admin, editor)
   - created_at, last_login
-  
 - `pages` (Custom Pages)
   - id, organization_id, title, slug, content, published
-  
 - `media` (Uploads)
   - id, organization_id, filename, url, mime_type, size
-  
 - `domains` (Domain-Management)
   - id, organization_id, domain, verified, ssl_active
 
 **Tag 4-5: Sanctuary-Specific Schema**
+
 - `animals` (Tiere)
   - id, organization_id, name, species, story, rescue_date
   - status, images[], featured
-  
 - `sponsorships` (Patenschaften)
   - id, animal_id, sponsor_name, sponsor_email
   - monthly_amount, active, started_at
-  
 - `donations` (Spenden)
   - id, organization_id, amount, donor_name, donor_email
   - stripe_payment_id, created_at
 
 **Tag 6-7: Sports-Specific Schema**
+
 - `teams` (Mannschaften)
   - id, organization_id, name, league, age_group
   - coach, training_times
-  
 - `matches` (Spiele)
   - id, team_id, opponent, date, home_away
   - result_home, result_away, stadium, notes
-  
 - `match_messages` (Live-Chat)
   - id, match_id, author, message, created_at
-  
 - `league_tables` (Tabellen)
   - id, team_id, season, position, points, goals_for, goals_against
 
 **Tag 7: Row Level Security (RLS)**
+
 - RLS Policies für alle Tables definieren
 - Multi-Tenancy sicherstellen
 - Test-Policies schreiben
@@ -122,6 +123,7 @@
 ### **Woche 3: Authentication & Onboarding Foundation**
 
 **Tag 1-3: Auth-System (Remix)**
+
 - Supabase Auth Integration
 - Login-Page mit Email/Password
 - Session-Management (Cookies)
@@ -130,6 +132,7 @@
 - Password-Reset Flow
 
 **Tag 4-5: Sign-up Flow (Teil 1)**
+
 - Landing auf Marketing-Site (Astro)
 - Sign-up Formular
   - Email, Password
@@ -139,6 +142,7 @@
 - Email-Verifizierung (Supabase Auth)
 
 **Tag 6-7: Stripe Integration (Basics)**
+
 - Stripe Account setup (Test-Mode)
 - Pricing-Pläne in Stripe anlegen
 - Checkout-Session erstellen
@@ -150,6 +154,7 @@
 ### **Woche 4: Dashboard Core**
 
 **Tag 1-2: Dashboard Layout**
+
 - Main-Layout Component (Remix)
 - Sidebar-Navigation (dynamisch nach Sektor)
 - Top-Bar mit User-Menu
@@ -158,6 +163,7 @@
 - Loading-States
 
 **Tag 3-4: Dashboard Home**
+
 - Übersichts-Page
 - Statistiken (Basis):
   - Anzahl Tiere/Teams
@@ -167,6 +173,7 @@
 - Welcome-Message für neue User
 
 **Tag 5-7: Settings-Bereich**
+
 - Organisation Settings
   - Name, Description ändern
   - Logo-Upload (Supabase Storage)
@@ -183,6 +190,7 @@
 ### **Woche 5: Website Generator (Basics)**
 
 **Tag 1-3: Astro Template Structure**
+
 - Basis-Template erstellen
 - Layout-Komponenten:
   - Header (mit Logo, Navigation)
@@ -194,6 +202,7 @@
   - Gallery-Section
 
 **Tag 4-5: Theme-System**
+
 - Farben aus DB laden
 - Logo aus Supabase Storage laden
 - Typography dynamisch
@@ -201,6 +210,7 @@
 - Build-Prozess testen
 
 **Tag 6-7: Generator-Service (Node Script)**
+
 - Script das Astro-Site baut
 - Nimmt Organisation-ID
 - Fetched Daten aus Supabase
@@ -216,6 +226,7 @@
 ### **Woche 6: Multi-Step Onboarding**
 
 **Tag 1-2: Onboarding-Framework**
+
 - Step-Progress-Bar Component
 - State-Management für Steps
 - Navigation (Next, Back, Skip)
@@ -225,6 +236,7 @@
 **Tag 3-4: Universal Steps (beide Sektoren)**
 
 **Step 1: Basis-Infos**
+
 - Name (auto-filled aus Sign-up)
 - Tagline/Slogan
 - Beschreibung (Textarea)
@@ -232,6 +244,7 @@
 - Email, Phone
 
 **Step 2: Branding**
+
 - Logo-Upload (optional, skip möglich)
 - Farb-Picker (Primary Color)
 - Farb-Picker (Secondary Color)
@@ -243,17 +256,20 @@
 **Tag 5-7: Sanctuary-Specific Onboarding**
 
 **Step 3: Erste Tiere (optional)**
+
 - Mini-Form: Name, Art, Foto
 - 1-3 Tiere hinzufügbar
 - "Später hinzufügen" Option
 - Preview wie es auf Website aussieht
 
 **Step 4: Spenden-Setup**
+
 - PayPal Email (optional)
 - Stripe Connect (optional, später)
 - Spenden-Ziel setzen (optional)
 
 **Step 5: Domain**
+
 - Subdomain-Anzeige (auto: [slug].localhub.de)
 - Custom-Domain Option
 - "Später einrichten" Default
@@ -265,6 +281,7 @@
 **Tag 1-3: Sport-Onboarding Steps**
 
 **Step 3: Mannschaften**
+
 - Mannschaft hinzufügen (Name, Liga)
 - Altersklasse
 - Trainer-Name (optional)
@@ -273,15 +290,18 @@
 - Skip möglich
 
 **Step 4: Spielstätte**
+
 - Stadion-Name
 - Adresse
 - Google Maps Link (optional)
 - Kapazität (optional)
 
 **Step 5: Domain**
+
 - Identisch wie Sanctuary
 
 **Tag 4-5: Onboarding-Completion**
+
 - Completion-Screen (beide Sektoren)
 - "Eure Website wird gebaut..."
 - Loading-Spinner
@@ -293,6 +313,7 @@
 - Welcome-Email versenden
 
 **Tag 6-7: Testing & Refinement**
+
 - Beide Onboarding-Flows testen
 - Edge-Cases (leere Felder, etc.)
 - Validation verbessern
@@ -308,6 +329,7 @@
 **Tag 1-3: Tier-Verwaltung**
 
 **Dashboard-Bereich:**
+
 - Liste aller Tiere (Table)
 - Filter (Art, Status)
 - Suche
@@ -321,6 +343,7 @@
 - Tier löschen (mit Confirmation)
 
 **Bilder-Upload:**
+
 - Multi-Image Upload zu Supabase Storage
 - Drag & Drop
 - Preview
@@ -328,6 +351,7 @@
 - Bilder löschen
 
 **Tag 4-5: Patenschaften**
+
 - Patenschaften-Übersicht
 - Patenschaft hinzufügen (zu Tier)
   - Paten-Name, Email
@@ -337,6 +361,7 @@
 - Paten-Email senden (später)
 
 **Tag 6-7: Spenden-Tracking**
+
 - Spenden-Liste (Table)
 - Spende manuell hinzufügen
   - Betrag, Spender, Datum
@@ -352,6 +377,7 @@
 **Tag 1-3: Mannschafts-Verwaltung**
 
 **Dashboard:**
+
 - Mannschaften-Liste
 - Mannschaft hinzufügen/bearbeiten
   - Name, Liga, Altersklasse
@@ -361,10 +387,12 @@
 - Mannschaft löschen
 
 **Spieler (basic, optional MVP):**
+
 - Spieler-Liste pro Team
 - Spieler hinzufügen (Name, Nummer, Position)
 
 **Tag 4-5: Spielplan**
+
 - Spiele-Liste pro Team
 - Spiel hinzufügen
   - Gegner
@@ -377,6 +405,7 @@
 - Spiel bearbeiten/löschen
 
 **Tag 6-7: Tabellen (basic)**
+
 - Tabelle manuell eingeben (für MVP)
   - Position, Team, Spiele, Punkte
   - Tore, Differenz
@@ -387,6 +416,7 @@
 ### **Woche 10: Website-Content Management**
 
 **Tag 1-2: Seiten-Verwaltung (beide Sektoren)**
+
 - "Über uns" bearbeiten
   - Rich-Text Editor (TipTap oder ähnlich)
   - Bilder einfügen
@@ -397,6 +427,7 @@
   - Öffnungszeiten
 
 **Tag 3-4: News/Blog**
+
 - News-Liste
 - News-Artikel erstellen
   - Titel, Content (Rich-Text)
@@ -407,6 +438,7 @@
 - Auf Website automatisch anzeigen
 
 **Tag 5-7: Bildergalerie**
+
 - Galerie-Verwaltung
 - Bilder hochladen (bulk)
 - Alben/Kategorien (optional)
@@ -423,6 +455,7 @@
 **Tag 1-3: Sanctuary-Template**
 
 **Pages:**
+
 - Homepage (Hero + Tiere-Preview + CTA)
 - Über uns (aus DB)
 - Unsere Tiere (Grid mit allen Tieren)
@@ -435,6 +468,7 @@
 - Impressum, Datenschutz
 
 **Components:**
+
 - Hero mit Background-Image
 - Tier-Card (mit Bild, Name, Story-Teaser)
 - Spenden-Widget (prominent)
@@ -444,6 +478,7 @@
 **Tag 4-6: Sports-Template**
 
 **Pages:**
+
 - Homepage (Hero + nächstes Spiel + News)
 - Über uns / Verein
 - Mannschaften-Übersicht
@@ -455,6 +490,7 @@
 - Impressum, Datenschutz
 
 **Components:**
+
 - Hero mit Team-Foto
 - Match-Card (nächste Spiele)
 - Tabellen-Component
@@ -462,6 +498,7 @@
 - Sponsor-Logos (Footer)
 
 **Tag 7: Mobile Optimization**
+
 - Beide Templates auf Mobile testen
 - Responsive Breakpoints optimieren
 - Touch-Friendly Navigation
@@ -475,6 +512,7 @@
 **Tag 1-2: Hetzner Deployment-Setup**
 
 **Docker Compose:**
+
 - Service für Remix-Admin
 - Service für Nginx (Reverse Proxy)
 - Service für Generator (Node)
@@ -482,6 +520,7 @@
 - Redis (optional, für Caching)
 
 **Nginx Config:**
+
 - Reverse Proxy für app.localhub.de → Remix
 - Subdomain-Routing für Kunden-Sites
 - SSL mit Let's Encrypt (Wildcard)
@@ -489,6 +528,7 @@
 - Caching Headers für Static Assets
 
 **Tag 3-4: CI/CD Pipeline**
+
 - GitHub Actions Workflow
 - Trigger bei Push to main
 - Build Admin (Remix)
@@ -501,6 +541,7 @@
 **Tag 5-6: Domain-Verwaltung**
 
 **Im Dashboard:**
+
 - Domain-Settings Page
 - Subdomain anzeigen (auto)
 - Custom Domain hinzufügen
@@ -509,12 +550,14 @@
   - Verification-Status
 
 **DNS-Verification:**
+
 - Cronjob/Service checkt DNS alle 30 Min
 - Bei Erfolg: Nginx Config automatisch erweitern
 - SSL-Zertifikat für Domain holen
 - User-Email: "Domain aktiv"
 
 **Tag 7: Monitoring & Logging**
+
 - Uptime-Monitoring (UptimeRobot oder selbst)
 - Error-Tracking (Sentry)
 - Application Logs (Winston/Pino)
@@ -528,6 +571,7 @@
 ### **Woche 13: Polish & Testing**
 
 **Tag 1-2: Feature-Completeness Check**
+
 - Checkliste durchgehen:
   - Alle Onboarding-Steps funktionieren
   - Beide Sektoren vollständig
@@ -538,6 +582,7 @@
 - Fehlende Micro-Features ergänzen
 
 **Tag 3-4: Qualitätssicherung**
+
 - End-to-End Tests schreiben (Playwright)
   - Sign-up Flow
   - Onboarding komplett
@@ -547,6 +592,7 @@
 - Performance-Optimierung
 
 **Tag 5: Beta-User-Vorbereitung**
+
 - Vita Est Cara kontaktieren
 - Viktoria Wertheim kontaktieren
 - 3-5 weitere Vereine/Höfe ansprechen
@@ -554,6 +600,7 @@
 - Onboarding-Call-Termine vereinbaren
 
 **Tag 6-7: Dokumentation**
+
 - User-Guide schreiben (Basic)
   - Wie logge ich mich ein
   - Wie füge ich Inhalte hinzu
@@ -569,12 +616,14 @@
 ### **Woche 14: Soft-Launch & Feedback**
 
 **Tag 1: Beta-Onboarding Calls**
+
 - Vita Est Cara durchs System führen
 - Viktoria Wertheim durchs System führen
 - Screen-Sharing, live Feedback sammeln
 - Erste Inhalte gemeinsam eingeben
 
 **Tag 2-3: Migration Bestandskunden**
+
 - Viktoria Wertheim Inhalte migrieren
   - Texte übertragen
   - Bilder hochladen
@@ -585,18 +634,21 @@
   - Geschichten schreiben
 
 **Tag 4-5: Weitere Beta-User onboarden**
+
 - 3-5 weitere Organisationen
 - Weniger hands-on (sollen selbst testen)
 - Feedback-Formular bereitstellen
 - Bugs tracken (GitHub Issues)
 
 **Tag 6: Monitoring & Support**
+
 - Tägliches Check-In mit Beta-Usern
 - Bug-Reports sammeln
 - Feature-Requests notieren
 - Prioritäten setzen
 
 **Tag 7: Retro & Planning**
+
 - Team-Meeting: Was lief gut/schlecht
 - Beta-Feedback analysieren
 - Roadmap für Post-Launch erstellen
@@ -607,29 +659,35 @@
 ## **MEILENSTEINE & DELIVERABLES**
 
 ### **Milestone 1 (Ende Woche 2):**
+
 ✅ Setup komplett
 ✅ Datenbank-Schema fertig
 ✅ Lokale Dev-Umgebung läuft
 
 ### **Milestone 2 (Ende Woche 5):**
+
 ✅ Auth funktioniert
 ✅ Dashboard-Layout steht
 ✅ Website-Generator (basic) läuft
 
 ### **Milestone 3 (Ende Woche 7):**
+
 ✅ Onboarding beide Sektoren fertig
 ✅ User kann sich registrieren + zahlen + Website bekommen
 
 ### **Milestone 4 (Ende Woche 10):**
+
 ✅ Alle Kern-Features beide Sektoren
 ✅ Content-Management funktioniert
 
 ### **Milestone 5 (Ende Woche 12):**
+
 ✅ Deployment auf Hetzner
 ✅ CI/CD läuft
 ✅ Domain-Management funktioniert
 
 ### **Milestone 6 (Ende Woche 14):**
+
 ✅ Beta mit 5-10 Kunden
 ✅ Feedback gesammelt
 ✅ System stabil
@@ -641,21 +699,25 @@
 ### **Team-Setup (2 Personen angenommen):**
 
 **Developer 1 (Full-Stack):**
+
 - Fokus: Remix Admin
 - Auth, Dashboard, Sektor-Features
 - 30-40h/Woche
 
 **Developer 2 (Full-Stack):**
+
 - Fokus: Astro Templates
 - Website-Generator, Deployment
 - 30-40h/Woche
 
 **Alternativ (1 Person):**
+
 - Alles nacheinander
 - 20-25h/Woche
 - Dauer: 18-20 Wochen statt 14
 
 ### **Externe Ressourcen:**
+
 - Designer (optional): Logo, Branding - 2-3 Tage
 - Texter (optional): Marketing-Copy - 1-2 Tage
 
@@ -664,22 +726,27 @@
 ## **RISIKEN & MITIGATION**
 
 ### **Risiko 1: Scope Creep**
+
 **Problem:** Zu viele Features während MVP
 **Lösung:** Strikte Feature-Liste, "Nice-to-Have" für Post-Launch
 
 ### **Risiko 2: Technische Blocker**
+
 **Problem:** Unbekannte Tech-Probleme (z.B. Realtime)
 **Lösung:** Time-Buffer einplanen, Community/Docs nutzen
 
 ### **Risiko 3: Beta-User finden**
+
 **Problem:** Keine Organisationen bereit zu testen
 **Lösung:** Eigene Kontakte (Viktoria, Vita Est Cara) + lokales Netzwerk
 
 ### **Risiko 4: Performance-Issues**
+
 **Problem:** Generator zu langsam, Sites zu groß
 **Lösung:** Früh testen, optimieren, Caching
 
 ### **Risiko 5: Zeitplan zu ambitioniert**
+
 **Problem:** 14 Wochen zu wenig
 **Lösung:** MVP-Features reduzieren, Launch auf Woche 16-18 schieben
 
@@ -688,18 +755,21 @@
 ## **POST-MVP ROADMAP (grob)**
 
 ### **Monat 4-5: Iteration nach Beta**
+
 - Bug-Fixes aus Beta
 - Performance-Optimierung
 - Missing Features ergänzen
 - Public Launch vorbereiten
 
 ### **Monat 6: Public Launch**
+
 - Marketing-Kampagne
 - 50 Kunden Ziel
 - Paid Ads (Google, Facebook)
 - Content-Marketing
 
 ### **Monat 7-12: Wachstum & neue Features**
+
 - E-Commerce Integration (Shops)
 - Weitere Sektoren (Restaurant, Handwerk)
 - Enterprise-Features
@@ -711,17 +781,20 @@
 ## **SOFORT-SCHRITTE (diese Woche)**
 
 ### **Heute:**
+
 1. Diesen Plan im Team besprechen
 2. Commitment: Ja/Nein zur Timeline
 3. Kalender blocken (30-40h/Woche)
 
 ### **Diese Woche:**
+
 1. GitHub Repo erstellen
 2. Supabase Projekt aufsetzen
 3. Hetzner Server prüfen
 4. Design System starten (Farben, Fonts)
 
 ### **Nächste Woche:**
+
 1. Database Schema finalisieren
 2. Remix Admin Basics (Auth)
 3. Astro Template Struktur
@@ -731,6 +804,7 @@
 **LOS GEHT'S! 🚀**
 
 **Fragen zum Plan?**
+
 - Ist die Timeline realistisch für euch?
 - Soll ich einen Bereich detaillierter ausarbeiten?
 - Habt ihr bereits Ressourcen die den Plan beschleunigen?
