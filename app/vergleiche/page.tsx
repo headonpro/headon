@@ -9,8 +9,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { comparisonArticles } from '@/lib/content/comparisons'
-import { cn } from '@/lib/utils'
 import { VergleicheHero } from '@/components/sections/VergleicheHero'
+import { ComparisonCard } from '@/components/sections/ComparisonCard'
 
 // ============================================================================
 // Metadata
@@ -55,11 +55,33 @@ export default function VergleichePage() {
       <VergleicheHero />
 
       {/* Comparison Articles Grid */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-            {comparisonArticles.map((article) => (
-              <ComparisonCard key={article.slug} article={article} />
+      <section className="relative overflow-hidden py-20 md:py-32">
+        {/* Subtle Background Pattern */}
+        <div className="pointer-events-none absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(0,0,0)_1px,transparent_0)] [background-size:24px_24px]" />
+        </div>
+
+        <div className="container relative mx-auto max-w-6xl px-4">
+          {/* Section Header */}
+          <div className="mb-12 text-center md:mb-16">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-primary-200 bg-primary-50 px-4 py-2">
+              <span className="text-primary-700 text-sm font-semibold">
+                {comparisonArticles.length} ausführliche Vergleiche
+              </span>
+            </div>
+            <h2 className="font-heading mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
+              Unsere Vergleiche
+            </h2>
+            <p className="mx-auto max-w-2xl text-lg text-gray-600">
+              Fundierte Analysen basierend auf realen Projekterfahrungen. Finden Sie die richtige
+              Technologie für Ihr Projekt.
+            </p>
+          </div>
+
+          {/* Grid */}
+          <div className="grid gap-8 md:grid-cols-2">
+            {comparisonArticles.map((article, index) => (
+              <ComparisonCard key={article.slug} article={article} index={index} />
             ))}
           </div>
         </div>
@@ -67,17 +89,44 @@ export default function VergleichePage() {
 
       {/* CTA Section */}
       <section className="from-primary-600 via-primary-500 to-secondary-500 relative overflow-hidden bg-gradient-to-br py-24">
-        <div className="container mx-auto max-w-4xl px-4 text-center">
+        {/* Decorative Elements */}
+        <div className="pointer-events-none absolute inset-0 opacity-10">
+          <div className="absolute left-10 top-10 h-64 w-64 rounded-full bg-white blur-3xl" />
+          <div className="absolute right-10 bottom-10 h-80 w-80 rounded-full bg-white blur-3xl" />
+        </div>
+
+        {/* Animated dots pattern */}
+        <div className="pointer-events-none absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:40px_40px]" />
+        </div>
+
+        <div className="container relative mx-auto max-w-4xl px-4 text-center">
           <h2 className="font-heading mb-6 text-3xl font-bold text-white md:text-4xl">
             Noch Fragen zur richtigen Technologie?
           </h2>
           <p className="mb-8 text-lg text-white/90 md:text-xl">
             Wir beraten Sie gerne bei der Auswahl der optimalen Technologien für Ihr Projekt.
-            Kostenlose 15-Minuten-Beratung.
           </p>
+
+          {/* Trust Badges */}
+          <div className="mb-8 flex flex-wrap items-center justify-center gap-4 text-sm text-white/90 md:gap-6">
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-accent" />
+              <span>15min Beratung</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-accent" />
+              <span>Unverbindlich</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-accent" />
+              <span>Kostenlos</span>
+            </div>
+          </div>
+
           <Link
             href="/contact"
-            className="bg-accent hover:bg-accent/90 text-primary inline-flex items-center gap-2 rounded-lg px-8 py-4 text-lg font-semibold shadow-xl transition-all duration-300 hover:shadow-2xl"
+            className="bg-accent hover:bg-accent/90 text-primary inline-flex items-center gap-2 rounded-lg px-8 py-4 text-lg font-semibold shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
             Kostenlose Beratung anfragen
             <ArrowRight className="h-5 w-5" />
@@ -85,73 +134,5 @@ export default function VergleichePage() {
         </div>
       </section>
     </main>
-  )
-}
-
-// ============================================================================
-// Comparison Card Component
-// ============================================================================
-
-interface ComparisonCardProps {
-  article: (typeof comparisonArticles)[0]
-}
-
-function ComparisonCard({ article }: ComparisonCardProps) {
-  // Extract item names for the "vs" display
-  const itemNames = article.items.map((item) => item.name).join(' vs ')
-
-  return (
-    <Link
-      href={`/vergleiche/${article.slug}`}
-      className={cn(
-        'group block rounded-xl border-2 border-gray-200 bg-white p-6 shadow-md',
-        'hover:border-primary-500 transition-all duration-300 hover:shadow-xl'
-      )}
-    >
-      {/* Header */}
-      <div className="mb-4">
-        <div className="mb-2 flex items-center gap-2 text-sm text-gray-500">
-          <span className="bg-primary-100 text-primary-700 rounded-md px-2 py-1 font-medium">
-            {article.items.length} Optionen
-          </span>
-          <span>•</span>
-          <time dateTime={article.publishedAt}>
-            {new Date(article.publishedAt).toLocaleDateString('de-DE', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
-        </div>
-        <h2 className="group-hover:text-primary-600 mb-2 text-2xl font-bold text-gray-900 transition-colors">
-          {itemNames}
-        </h2>
-        <p className="line-clamp-2 text-gray-600">{article.description}</p>
-      </div>
-
-      {/* Items Preview */}
-      <div className="mb-4 flex flex-wrap gap-2">
-        {article.items.map((item, index) => (
-          <span
-            key={index}
-            className="rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700"
-          >
-            {item.name}
-          </span>
-        ))}
-      </div>
-
-      {/* Footer */}
-      <div className="flex items-center justify-between text-sm">
-        <span className="text-gray-500">
-          {article.featureCategories.reduce((acc, cat) => acc + cat.features.length, 0)} Features
-          verglichen
-        </span>
-        <span className="text-primary-600 flex items-center gap-1 font-medium transition-all group-hover:gap-2">
-          Vergleich lesen
-          <ArrowRight className="h-4 w-4" />
-        </span>
-      </div>
-    </Link>
   )
 }
