@@ -10,6 +10,7 @@ import { WebsiteSchema } from '@/components/seo/WebsiteSchema'
 import WebVitalsReporter from '@/components/web-vitals-reporter'
 
 const outfit = Outfit({
+  weight: ['400', '600', '700'], // Optimiert: nur benötigte Weights
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-outfit',
@@ -18,7 +19,7 @@ const outfit = Outfit({
 })
 
 const lato = Lato({
-  weight: ['300', '400', '700', '900'],
+  weight: ['400', '700'], // Optimiert: nur Regular & Bold
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-lato',

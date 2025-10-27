@@ -2,9 +2,13 @@
 
 import { onCLS, onFCP, onINP, onLCP, onTTFB, Metric } from 'web-vitals'
 
-const vitalsUrl = 'https://analytics.headon.pro/api/vitals'
+// Feature Gate: nur senden wenn URL konfiguriert ist
+const vitalsUrl = process.env.NEXT_PUBLIC_VITALS_URL
 
 function sendToAnalytics(metric: Metric) {
+  // Früher Return wenn kein Analytics-Endpoint konfiguriert
+  if (!vitalsUrl) return
+
   const body = {
     name: metric.name,
     value: metric.value,
