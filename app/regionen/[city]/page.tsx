@@ -18,6 +18,10 @@ export async function generateStaticParams() {
     { city: 'wertheim' },
     { city: 'marktheidenfeld' },
     { city: 'wuerzburg' },
+    { city: 'heilbronn' },
+    { city: 'mosbach' },
+    { city: 'crailsheim' },
+    { city: 'aschaffenburg' },
   ]
 }
 

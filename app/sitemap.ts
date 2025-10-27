@@ -4,6 +4,8 @@ import {
   getAllPortfolioProjects,
   getAllServicePages,
   getAllCityPages,
+  getAllBranchePages,
+  getAllTechnologyPages,
 } from '@/lib/content/content-api'
 import { glossaryTerms } from '@/lib/content/glossary'
 import { comparisonArticles } from '@/lib/content/comparisons'
@@ -19,11 +21,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const currentDate = new Date()
 
   // Load all content in parallel for performance
-  const [blogPosts, portfolioProjects, servicePages, cityPages] = await Promise.all([
+  const [blogPosts, portfolioProjects, servicePages, cityPages, branchePages, technologyPages] = await Promise.all([
     getAllBlogPosts(),
     getAllPortfolioProjects(),
     getAllServicePages(),
     getAllCityPages(),
+    getAllBranchePages(),
+    getAllTechnologyPages(),
   ])
 
   // Static pages with priorities
@@ -66,6 +70,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/regionen`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/branchen`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/technologie`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.7,
@@ -134,6 +150,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
+  // Branchen pages (priority 0.8, weekly updates)
+  const brancheEntries: MetadataRoute.Sitemap = branchePages.map((branche) => ({
+    url: `${baseUrl}/branchen/${branche.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
   // Glossary terms (priority 0.6, monthly updates)
   const glossaryEntries: MetadataRoute.Sitemap = glossaryTerms.map((term) => ({
     url: `${baseUrl}/glossar/${term.id}`,
@@ -150,6 +174,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
+  // Technology pages (priority 0.7, monthly updates)
+  const technologyEntries: MetadataRoute.Sitemap = technologyPages.map((tech) => ({
+    url: `${baseUrl}/technologie/${tech.slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
   // Combine all entries
   return [
     ...staticPages,
@@ -157,7 +189,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...portfolioEntries,
     ...serviceEntries,
     ...cityEntries,
+    ...brancheEntries,
     ...glossaryEntries,
     ...comparisonEntries,
+    ...technologyEntries,
   ]
 }

@@ -46,7 +46,7 @@ export default function TrustPersonalitySection() {
                 <span>Hallo, ich bin</span>
                 <Image
                   src="/images/ONUR.svg"
-                  alt="ONUR"
+                  alt="Onur Cirakoglu - Geschäftsführer HEADON.pro"
                   width={70}
                   height={20}
                   className="inline-block h-[0.9em] w-auto"
@@ -93,12 +93,12 @@ export default function TrustPersonalitySection() {
             <div className="relative order-1 md:order-2">
               <Image
                 src="/images/onur-portrai-hd.webp"
-                alt="Onur - Ihr persönlicher Ansprechpartner bei HEADON"
+                alt="Onur Cirakoglu - Ihr persönlicher Ansprechpartner bei HEADON"
                 width={512}
                 height={760}
                 className="mx-auto rounded-2xl object-cover shadow-2xl"
                 style={{ width: '256px', height: '380px' }}
-                quality={95}
+                quality={90}
               />
               {/* Decorative elements */}
               <div className="bg-accent-500/20 absolute -top-4 right-4 h-24 w-24 rounded-full blur-2xl" />
@@ -128,7 +128,7 @@ export default function TrustPersonalitySection() {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="flex flex-col items-center rounded-xl border border-white/20 bg-white/10 p-4 text-center backdrop-blur-sm"
               >
-                <Check className="text-accent-500 mb-3 h-8 w-8" />
+                <Check className="text-accent-500 mb-3 h-8 w-8" aria-hidden="true" />
                 <span className="text-sm font-medium text-white/90">{promise}</span>
               </motion.div>
             ))}

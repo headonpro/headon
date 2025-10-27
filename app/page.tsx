@@ -8,9 +8,9 @@ import TechnologyTrustSection from '@/components/sections/TechnologyTrustSection
 import TrustPersonalitySection from '@/components/sections/TrustPersonalitySection'
 
 export const metadata: Metadata = {
-  title: 'Digitalagentur Lauda | Web & App Entwicklung',
+  title: 'Website erstellen lassen | Festpreise ab 2.500€',
   description:
-    'Kreativagentur für Web, Apps & Design. KI-beschleunigt, 4x schneller. Webentwicklung, App-Development, UI/UX Design. Main-Tauber-Kreis, Baden-Württemberg.',
+    'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller. Professionelle Digitalagentur.',
   keywords: [
     // Primäre Keywords
     'Digitalagentur Lauda-Königshofen',
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     'Full-Service Digitalagentur',
   ].join(', '),
   openGraph: {
-    title: 'Digitalagentur Lauda | Web & App Entwicklung',
+    title: 'Website erstellen lassen | Festpreise ab 2.500€',
     description:
-      'Kreativagentur für Web, Apps & Design. KI-beschleunigt, 4x schneller. Webentwicklung, App-Development, UI/UX Design. Main-Tauber-Kreis, Baden-Württemberg.',
+      'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller. Professionelle Digitalagentur.',
     images: [
       {
         url: '/og-images/home.jpg',
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Digitalagentur Lauda | Web & App Entwicklung',
+    title: 'Website erstellen lassen | Festpreise ab 2.500€',
     description:
-      'Kreativagentur für Web, Apps & Design. KI-beschleunigt, 4x schneller. Webentwicklung, App-Development, UI/UX Design.',
+      'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller.',
     images: ['/og-images/home.jpg'],
   },
 }

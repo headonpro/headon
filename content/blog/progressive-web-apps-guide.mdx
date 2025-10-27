@@ -1,74 +1,121 @@
 ---
-title: 'Progressive Web Apps (PWA): Der komplette Guide 2025'
-description: 'PWA Entwicklung meistern: Service Workers, Offline-Support, Push Notifications, Installation und moderne PWA-Features für app-ähnliche Web-Erlebnisse.'
-publishedAt: '2025-07-28T08:30:00Z'
+title: 'Progressive Web Apps (PWA): Der komplette Guide für 2025'
+description: 'PWA-Entwicklung verstehen: Was sind Progressive Web Apps, Vorteile, technische Implementierung mit Service Workers, Offline-Funktionalität und App-ähnliche Features.'
+publishedAt: '2025-02-13T10:00:00Z'
 author:
   name: 'Onur Cirakoglu'
   avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
-  bio: 'Full-Stack Developer und Gründer von HEADON.pro mit Fokus auf moderne Web-Technologien'
-tags: ['PWA', 'Service Worker', 'Web App', 'Offline', 'Push Notifications']
-category: 'mobile'
+  bio: 'Full-Stack Developer bei HEADON.pro mit Fokus auf moderne Web-Technologien'
+tags: ['PWA', 'Progressive Web Apps', 'Service Worker', 'Mobile', 'Web Development']
+category: 'development'
 image:
-  url: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop'
-  alt: 'Progressive Web App Konzept auf verschiedenen Geräten'
+  url: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=630&fit=crop'
+  alt: 'Progressive Web App auf Smartphone Display mit App-Icons'
 readingTime: 10
+keywords: ['progressive web app', 'pwa', 'service worker', 'offline funktionalität', 'app manifest', 'installierbare website']
+relatedPosts: ['mobile-first-design-strategie', 'website-performance-optimieren']
 ---
 
-Progressive Web Apps kombinieren **das Beste aus Web und nativen Apps**. In diesem Guide zeigen wir, wie Sie PWAs mit Next.js entwickeln, die offline funktionieren, installierbar sind und Push Notifications senden.
+Progressive Web Apps (PWAs) vereinen das Beste aus zwei Welten: Die Reichweite und Offenheit von Websites mit dem App-Gefühl und der Funktionalität nativer Apps. In diesem umfassenden Guide zeigen wir Ihnen, was PWAs sind, welche Vorteile sie bieten und wie Sie selbst eine PWA entwickeln können.
 
-## Was ist eine PWA?
+## Was sind Progressive Web Apps?
 
-Eine PWA ist eine Web-App mit drei Kernmerkmalen:
+Progressive Web Apps sind Websites, die sich wie native Apps verhalten. Sie können auf dem Homescreen installiert werden, funktionieren offline, senden Push-Benachrichtigungen und bieten eine flüssige, app-ähnliche User Experience – alles ohne App Store.
 
-1. **Installierbar** - Auf Home Screen wie native App
-2. **Offline-fähig** - Funktioniert ohne Internet
-3. **Engagement** - Push Notifications möglich
+**Die drei Grundpfeiler einer PWA:**
 
-### PWA vs Native App
+1. **Zuverlässig**: Lädt auch bei schlechter oder ohne Internetverbindung
+2. **Schnell**: Reagiert sofort auf Nutzerinteraktionen
+3. **Ansprechend**: Fühlt sich an wie eine native App
 
-| Feature          | PWA                   | Native App        |
-| ---------------- | --------------------- | ----------------- |
-| **Installation** | Browser → Home Screen | App Store         |
-| **Updates**      | Automatisch           | User muss updaten |
-| **Größe**        | 1-5 MB                | 50-200 MB         |
-| **Offline**      | ✅ Möglich            | ✅ Standard       |
-| **Hardware**     | ⚠️ Limitiert          | ✅ Voller Zugriff |
-| **Distribution** | ✅ URL teilen         | ❌ Store-Approval |
+**Bekannte PWAs:**
+- **Twitter Lite**: 65% mehr Seiten pro Session
+- **Pinterest**: 60% mehr Core Engagement
+- **Starbucks**: 2x tägliche aktive Nutzer
+- **Uber**: 50KB statt 25MB App
 
-## PWA Requirements
+Bei [HEADON.pro](/services/web-development) entwickeln wir PWAs, die Ihre mobile Nutzererfahrung revolutionieren und Conversion Rates nachweislich steigern.
 
-### 1. HTTPS
+## Warum PWAs die Zukunft sind
+
+### Vorteile für Unternehmen
+
+**1. Keine App Store Abhängigkeit**
+- Keine 30% App Store Provision
+- Keine langwierigen Review-Prozesse
+- Sofortige Updates ohne Freigabe
+- Ein Codebase für alle Plattformen
+
+**2. Höhere Conversion Rates**
+- 36% höhere Conversion (durchschnittlich)
+- Kein Download-Zwang → geringere Einstiegshürde
+- Schnellere Ladezeiten = mehr Käufe
+- Push-Notifications für Re-Engagement
+
+**3. Geringere Entwicklungskosten**
+- Eine Codebasis für Web, iOS, Android
+- Nutzung von Web-Technologien (JavaScript, HTML, CSS)
+- Einfachere Wartung und Updates
+- Schnellere Time-to-Market
+
+### Vorteile für Nutzer
+
+**1. Weniger Speicherplatz**
+- PWAs: 1-5 MB Durchschnitt
+- Native Apps: 50-200 MB Durchschnitt
+- Perfekt für Geräte mit wenig Speicher
+
+**2. Funktioniert offline**
+- Basis-Funktionen auch ohne Internet
+- Automatische Synchronisation bei Verbindung
+- Keine frustrierenden "Keine Verbindung"-Screens
+
+**3. Immer aktuell**
+- Automatische Updates im Hintergrund
+- Keine manuellen App-Updates nötig
+- Nutzer haben immer die neueste Version
+
+## Technische Anforderungen einer PWA
+
+### 1. HTTPS ist Pflicht
+
+PWAs erfordern eine sichere HTTPS-Verbindung:
 
 ```bash
-# Local Development
-npx next dev
-
-# Production (Docker Build & Deploy)
-docker build -t my-pwa .
-docker run -p 3000:3000 my-pwa
+# SSL-Zertifikat von Let's Encrypt (kostenlos)
+sudo certbot --nginx -d ihre-domain.de -d www.ihre-domain.de
 ```
+
+Warum HTTPS? Service Workers können sensible Daten abfangen. HTTPS schützt vor Man-in-the-Middle-Angriffen.
 
 ### 2. Web App Manifest
 
+Das Manifest definiert, wie Ihre PWA aussieht, wenn sie installiert wird:
+
 ```json
-// public/manifest.json
 {
-  "name": "HEADON.pro Marketing Agency",
+  "name": "HEADON Marketing Agentur",
   "short_name": "HEADON",
-  "description": "Moderne Webentwicklung & Mobile Apps",
+  "description": "Webdesign & Marketing Agentur",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#3b82f6",
+  "theme_color": "#0066cc",
+  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -76,17 +123,256 @@ docker run -p 3000:3000 my-pwa
 }
 ```
 
-```tsx
-// app/layout.tsx
-export const metadata = {
-  manifest: '/manifest.json',
-}
-```
+**Wichtige Manifest-Properties:**
+- `display: standalone` → App-Modus ohne Browser-UI
+- `theme_color` → Farbe der Statusleiste
+- `icons` → Minimum: 192x192px und 512x512px
 
 ### 3. Service Worker
 
+Der Service Worker ist das Herzstück jeder PWA. Er läuft im Hintergrund und ermöglicht Offline-Funktionalität:
+
+```javascript
+// sw.js - Basis Service Worker
+const CACHE_NAME = 'headon-v1'
+const urlsToCache = [
+  '/',
+  '/styles/main.css',
+  '/scripts/main.js',
+  '/images/logo.svg'
+]
+
+// Installation: Cache befüllen
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(urlsToCache))
+  )
+})
+
+// Fetch: Cache-First-Strategie
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        // Cache Hit: Gib gecachte Version zurück
+        if (response) {
+          return response
+        }
+        // Cache Miss: Hole von Netzwerk
+        return fetch(event.request)
+      })
+  )
+})
+
+// Aktivierung: Alte Caches löschen
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName)
+          }
+        })
+      )
+    })
+  )
+})
+```
+
+**Service Worker registrieren:**
+
+```javascript
+// main.js
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('SW registered:', registration)
+      })
+      .catch(error => {
+        console.log('SW registration failed:', error)
+      })
+  })
+}
+```
+
+## Caching-Strategien für PWAs
+
+Unterschiedliche Inhalte brauchen unterschiedliche Caching-Strategien:
+
+### 1. Cache First (für statische Assets)
+
+```javascript
+// Perfekt für: CSS, JS, Bilder, Fonts
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(cached => cached || fetch(event.request))
+  )
+})
+```
+
+### 2. Network First (für dynamische Inhalte)
+
+```javascript
+// Perfekt für: API-Calls, aktuelle Daten
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    fetch(event.request)
+      .catch(() => caches.match(event.request))
+  )
+})
+```
+
+### 3. Stale-While-Revalidate (beste UX)
+
+```javascript
+// Zeige Cache, aktualisiere im Hintergrund
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.match(event.request).then(cached => {
+        const fetched = fetch(event.request).then(response => {
+          cache.put(event.request, response.clone())
+          return response
+        })
+        return cached || fetched
+      })
+    })
+  )
+})
+```
+
+## Offline-Funktionalität implementieren
+
+Zeigen Sie eine ansprechende Offline-Seite statt Browser-Fehler:
+
+```javascript
+// sw.js
+const OFFLINE_URL = '/offline.html'
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.add(OFFLINE_URL))
+  )
+})
+
+self.addEventListener('fetch', event => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => caches.match(OFFLINE_URL))
+    )
+  }
+})
+```
+
+**Offline-Seite Beispiel:**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Offline - HEADON</title>
+  <style>
+    body {
+      font-family: system-ui;
+      text-align: center;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>📱 Sie sind offline</h1>
+  <p>Diese Seite benötigt eine Internetverbindung.</p>
+  <p>Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.</p>
+  <button onclick="location.reload()">Erneut versuchen</button>
+</body>
+</html>
+```
+
+## Push-Benachrichtigungen
+
+Push-Notifications sind ein mächtiges Re-Engagement-Tool:
+
+```javascript
+// Push-Berechtigung anfragen
+async function subscribeToPushNotifications() {
+  const registration = await navigator.serviceWorker.ready
+
+  const subscription = await registration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: 'YOUR_PUBLIC_VAPID_KEY'
+  })
+
+  // Subscription an Backend senden
+  await fetch('/api/push-subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(subscription)
+  })
+}
+
+// In Service Worker: Push empfangen
+self.addEventListener('push', event => {
+  const data = event.data.json()
+
+  const options = {
+    body: data.body,
+    icon: '/icons/icon-192x192.png',
+    badge: '/icons/badge-72x72.png',
+    vibrate: [200, 100, 200],
+    actions: [
+      { action: 'open', title: 'Öffnen' },
+      { action: 'close', title: 'Schließen' }
+    ]
+  }
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, options)
+  )
+})
+```
+
+## Installation Prompt steuern
+
+Kontrollieren Sie, wann der Install-Prompt erscheint:
+
+```javascript
+let deferredPrompt
+
+window.addEventListener('beforeinstallprompt', e => {
+  // Verhindere automatischen Prompt
+  e.preventDefault()
+  deferredPrompt = e
+
+  // Zeige eigenen "Installieren"-Button
+  document.getElementById('install-button').style.display = 'block'
+})
+
+document.getElementById('install-button').addEventListener('click', async () => {
+  if (!deferredPrompt) return
+
+  // Zeige Install Prompt
+  deferredPrompt.prompt()
+
+  // Warte auf Nutzer-Entscheidung
+  const { outcome } = await deferredPrompt.userChoice
+  console.log(`User ${outcome} the install prompt`)
+
+  deferredPrompt = null
+})
+```
+
+## PWAs mit Next.js entwickeln
+
+Next.js macht PWA-Entwicklung einfach mit `next-pwa`:
+
 ```bash
-pnpm add next-pwa
+npm install next-pwa
 ```
 
 ```javascript
@@ -95,403 +381,167 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
+  disable: process.env.NODE_ENV === 'development'
 })
 
 module.exports = withPWA({
-  // Your Next.js config
+  // Ihre Next.js Config
 })
 ```
 
-## Service Worker Strategies
+Das war's! `next-pwa` generiert automatisch Service Worker und Manifest.
 
-### Cache-First (Static Assets)
+Bei [HEADON.pro](/services/web-development) entwickeln wir alle modernen Websites mit Next.js – PWA-Ready from day one.
+
+## PWA Testing und Debugging
+
+### Lighthouse PWA Audit
+
+Chrome DevTools bietet einen umfassenden PWA-Check:
+
+1. Chrome DevTools öffnen (F12)
+2. Lighthouse-Tab
+3. "Progressive Web App" anklicken
+4. "Generate report"
+
+**PWA-Checklist:**
+- ✅ HTTPS aktiv
+- ✅ Service Worker registriert
+- ✅ Manifest vorhanden und valide
+- ✅ Icons in richtigen Größen
+- ✅ Offline-Funktionalität
+- ✅ Viewport Meta-Tag
+- ✅ Splash Screen konfiguriert
+
+### Service Worker Debugging
 
 ```javascript
-// public/sw.js
-import { CacheFirst } from 'workbox-strategies'
-import { registerRoute } from 'workbox-routing'
-
-registerRoute(
-  ({ request }) => request.destination === 'image',
-  new CacheFirst({
-    cacheName: 'images',
-    plugins: [
-      {
-        cacheWillUpdate: async ({ response }) => {
-          return response.status === 200 ? response : null
-        },
-      },
-    ],
+// Service Worker Status prüfen
+navigator.serviceWorker.getRegistrations().then(registrations => {
+  registrations.forEach(registration => {
+    console.log('Service Worker:', registration)
   })
-)
-```
-
-### Network-First (API Calls)
-
-```javascript
-import { NetworkFirst } from 'workbox-strategies'
-
-registerRoute(
-  ({ url }) => url.pathname.startsWith('/api/'),
-  new NetworkFirst({
-    cacheName: 'api',
-    networkTimeoutSeconds: 3,
-  })
-)
-```
-
-### Stale-While-Revalidate
-
-```javascript
-import { StaleWhileRevalidate } from 'workbox-strategies'
-
-registerRoute(
-  ({ request }) => request.destination === 'script' || request.destination === 'style',
-  new StaleWhileRevalidate({
-    cacheName: 'static-resources',
-  })
-)
-```
-
-## Offline Support
-
-### Offline Fallback Page
-
-```tsx
-// app/offline/page.tsx
-export default function OfflinePage() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <WifiOff className="mx-auto h-16 w-16 text-gray-400" />
-        <h1 className="mt-4 text-2xl font-bold">Keine Internetverbindung</h1>
-        <p className="mt-2 text-gray-600">
-          Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.
-        </p>
-        <Button className="mt-4" onClick={() => window.location.reload()}>
-          Erneut versuchen
-        </Button>
-      </div>
-    </div>
-  )
-}
-```
-
-### Background Sync
-
-```javascript
-// Service Worker
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'sync-messages') {
-    event.waitUntil(syncMessages())
-  }
 })
 
-async function syncMessages() {
-  const db = await openDB('messages')
-  const messages = await db.getAll('pending')
+// Service Worker deregistrieren (für Tests)
+navigator.serviceWorker.getRegistrations().then(registrations => {
+  registrations.forEach(registration => registration.unregister())
+})
 
-  for (const message of messages) {
-    try {
-      await fetch('/api/messages', {
-        method: 'POST',
-        body: JSON.stringify(message),
+// Cache-Inhalt prüfen
+caches.keys().then(names => {
+  names.forEach(name => {
+    caches.open(name).then(cache => {
+      cache.keys().then(keys => {
+        console.log(`Cache ${name}:`, keys)
       })
-      await db.delete('pending', message.id)
-    } catch (error) {
-      // Will retry on next sync
-    }
-  }
-}
-```
-
-```javascript
-// Client
-async function sendMessage(message) {
-  try {
-    await fetch('/api/messages', {
-      method: 'POST',
-      body: JSON.stringify(message),
     })
-  } catch (error) {
-    // Save to IndexedDB
-    await db.add('pending', message)
-    // Register sync
-    await navigator.serviceWorker.ready
-    await registration.sync.register('sync-messages')
-  }
-}
-```
-
-## Push Notifications
-
-### Server Setup
-
-```typescript
-// app/api/subscribe/route.ts
-import webpush from 'web-push'
-
-webpush.setVapidDetails(
-  'mailto:hallo@headon.pro',
-  process.env.VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-)
-
-export async function POST(req: Request) {
-  const subscription = await req.json()
-
-  // Save subscription to database
-  await db.subscription.create({ data: subscription })
-
-  return Response.json({ success: true })
-}
-```
-
-### Client Setup
-
-```tsx
-'use client'
-
-export function PushNotificationSubscribe() {
-  const subscribe = async () => {
-    const registration = await navigator.serviceWorker.ready
-
-    const subscription = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: process.env.NEXT_PUBLIC_VAPID_KEY,
-    })
-
-    await fetch('/api/subscribe', {
-      method: 'POST',
-      body: JSON.stringify(subscription),
-      headers: { 'Content-Type': 'application/json' },
-    })
-  }
-
-  return <Button onClick={subscribe}>Benachrichtigungen aktivieren</Button>
-}
-```
-
-### Send Push Notification
-
-```typescript
-// Server-side
-import webpush from 'web-push'
-
-async function sendNotification(userId: string, payload: any) {
-  const subscriptions = await db.subscription.findMany({
-    where: { userId },
   })
-
-  await Promise.all(
-    subscriptions.map((sub) =>
-      webpush.sendNotification(
-        sub,
-        JSON.stringify({
-          title: 'Neue Nachricht',
-          body: payload.message,
-          icon: '/icon-192.png',
-          data: { url: '/messages' },
-        })
-      )
-    )
-  )
-}
+})
 ```
 
-### Handle Push in Service Worker
+## Performance-Optimierung für PWAs
+
+PWAs müssen schnell sein. Sehr schnell.
+
+### App Shell Architektur
+
+Laden Sie zuerst die Basis-UI (Shell), dann die Inhalte:
 
 ```javascript
-// Service Worker
-self.addEventListener('push', (event) => {
-  const data = event.data.json()
+// Cache App Shell bei Installation
+const APP_SHELL = [
+  '/',
+  '/styles/core.css',
+  '/scripts/app.js',
+  '/icons/icon-192x192.png'
+]
 
+self.addEventListener('install', event => {
   event.waitUntil(
-    self.registration.showNotification(data.title, {
-      body: data.body,
-      icon: data.icon,
-      data: data.data,
-    })
+    caches.open('app-shell-v1')
+      .then(cache => cache.addAll(APP_SHELL))
   )
 })
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close()
-
-  event.waitUntil(clients.openWindow(event.notification.data.url))
-})
 ```
 
-## Installation Prompt
-
-```tsx
-'use client'
-
-export function InstallPrompt() {
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
-  const [showInstall, setShowInstall] = useState(false)
-
-  useEffect(() => {
-    const handler = (e: Event) => {
-      e.preventDefault()
-      setDeferredPrompt(e)
-      setShowInstall(true)
-    }
-
-    window.addEventListener('beforeinstallprompt', handler)
-
-    return () => window.removeEventListener('beforeinstallprompt', handler)
-  }, [])
-
-  const handleInstall = async () => {
-    if (!deferredPrompt) return
-
-    deferredPrompt.prompt()
-
-    const { outcome } = await deferredPrompt.userChoice
-
-    if (outcome === 'accepted') {
-      console.log('App installed')
-    }
-
-    setDeferredPrompt(null)
-    setShowInstall(false)
-  }
-
-  if (!showInstall) return null
-
-  return (
-    <div className="bg-primary-600 fixed right-0 bottom-0 left-0 p-4 text-white">
-      <div className="container mx-auto flex items-center justify-between">
-        <div>
-          <p className="font-semibold">App installieren</p>
-          <p className="text-sm">Für schnelleren Zugriff auf dem Home Screen</p>
-        </div>
-        <Button variant="outline" className="text-primary-600 bg-white" onClick={handleInstall}>
-          Installieren
-        </Button>
-      </div>
-    </div>
-  )
-}
-```
-
-## PWA Best Practices
-
-### 1. App-Like Experience
-
-```css
-/* globals.css - Disable pull-to-refresh */
-body {
-  overscroll-behavior-y: contain;
-}
-
-/* Safe area for notched devices */
-.header {
-  padding-top: env(safe-area-inset-top);
-}
-```
-
-### 2. Loading Performance
+### Lazy Loading für Code
 
 ```javascript
-// Preload critical resources
-const addResourcesToCache = async (resources) => {
-  const cache = await caches.open('v1')
-  await cache.addAll(resources)
-}
+// Route-based Code Splitting in Next.js
+import dynamic from 'next/dynamic'
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(addResourcesToCache(['/', '/offline', '/styles/main.css', '/scripts/main.js']))
+const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
+  loading: () => <p>Lädt...</p>,
+  ssr: false
 })
 ```
 
-### 3. Update Handling
+### Preload kritischer Ressourcen
 
-```tsx
-'use client'
-
-export function UpdatePrompt() {
-  const [showUpdate, setShowUpdate] = useState(false)
-
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').then((registration) => {
-        registration.addEventListener('updatefound', () => {
-          const newWorker = registration.installing
-
-          newWorker?.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              setShowUpdate(true)
-            }
-          })
-        })
-      })
-    }
-  }, [])
-
-  const handleUpdate = () => {
-    window.location.reload()
-  }
-
-  if (!showUpdate) return null
-
-  return (
-    <div className="fixed top-4 right-4 rounded-lg bg-white p-4 shadow-lg">
-      <p className="font-semibold">Update verfügbar</p>
-      <Button onClick={handleUpdate} className="mt-2">
-        Jetzt aktualisieren
-      </Button>
-    </div>
-  )
-}
+```html
+<link rel="preload" href="/fonts/main.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/styles/critical.css" as="style">
 ```
 
-## Testing PWA
+## Fallstricke und Best Practices
 
-```bash
-# Lighthouse PWA Audit
-npx lighthouse https://your-app.com --view
+### ❌ Häufige Fehler
 
-# Chrome DevTools
-# Application Tab → Service Workers, Manifest
+1. **Alles cachen**: Cachen Sie nur statische Assets, nicht personalisierte Inhalte
+2. **Cache nie leeren**: Implementieren Sie Cache-Versioning
+3. **Zu aggressive Offline-UX**: Machen Sie klar, wenn Daten nicht aktuell sind
+4. **Service Worker nicht updaten**: Nutzen Sie `skipWaiting` und `clients.claim()`
 
-# Mobile Testing
-# Chrome → Remote Devices
-```
+### ✅ Best Practices
 
-**PWA Checklist:**
+1. **Progressive Enhancement**: App funktioniert auch ohne Service Worker
+2. **Transparenz**: Zeigen Sie Offline-Status deutlich an
+3. **Background Sync**: Synchronisieren Sie Daten automatisch bei Verbindung
+4. **Update-Prompts**: Informieren Sie Nutzer über verfügbare Updates
 
-- [ ] HTTPS aktiviert
-- [ ] Manifest.json vorhanden
-- [ ] Service Worker registriert
-- [ ] Offline-Fallback
-- [ ] Icons (192px, 512px)
-- [ ] Theme Color gesetzt
-- [ ] Meta Tags (viewport, theme-color)
-- [ ] Lighthouse Score 90+
+## PWA vs. Native App: Wann was?
 
-## Zusammenfassung
+### PWA ist ideal für:
+- ✅ Content-lastige Websites (Blogs, Shops, Portale)
+- ✅ Begrenzte Budgets (günstiger als 2 native Apps)
+- ✅ Schnelle Entwicklung (kürzere Time-to-Market)
+- ✅ SEO-Relevanz (PWAs sind indexierbar)
 
-PWAs bieten:
+### Native App ist besser für:
+- ✅ Intensive Hardware-Nutzung (AR, VR, komplexe Spiele)
+- ✅ Tiefe OS-Integration (Kontakte, Kalender, etc.)
+- ✅ Monetarisierung via App Store
+- ✅ Sehr komplexe Offline-Logik
 
-✅ **App-Like Experience** ohne App Store
-✅ **Offline-Support** für bessere UX
-✅ **Push Notifications** für Engagement
-✅ **Schnelle Updates** ohne User-Action
+**Hybrid-Ansatz**: Starten Sie mit PWA, entwickeln Sie native Apps bei Bedarf später.
 
-Perfekt für E-Commerce, News, Social Apps.
+## Erfolgsgeschichten: PWAs in der Praxis
 
-## PWA Entwicklung?
+### Starbucks PWA
+- **99,84% kleiner** als iOS App (233 KB vs. 148 MB)
+- **2x tägliche Nutzer** nach PWA-Launch
+- **Offline-Bestellung** möglich
 
-Als [Mobile-Experten](/services/mobile-development) entwickeln wir:
+### Twitter Lite
+- **65% mehr Seiten** pro Session
+- **75% mehr Tweets** gesendet
+- **20% reduzierte Bounce Rate**
 
-- 📱 **Progressive Web Apps**
-- 🔔 **Push Notification Systems**
-- 📴 **Offline-First Architekturen**
-- ⚡ **Performance-Optimierung**
+### Pinterest PWA
+- **60% mehr Engagement**
+- **44% mehr Werbeeinnahmen**
+- **50% mehr Core User Retention**
 
-[PWA-Projekt starten](/contact)
+## Fazit: PWAs als Wettbewerbsvorteil
 
-_Aktualisiert: Dezember 2023_
+Progressive Web Apps sind 2025 kein Hype mehr, sondern bewährte Technologie mit messbaren Business-Vorteilen. Mit geringeren Kosten als native Apps, besserer Performance als klassische Websites und höheren Conversion Rates sind PWAs die ideale Lösung für moderne Webanwendungen.
+
+Bei [HEADON.pro](/services/web-development) entwickeln wir PWAs mit Next.js, die perfekte Performance, Offline-Funktionalität und app-ähnliche User Experience vereinen. **Starten Sie Ihr PWA-Projekt ab 5.000 EUR – inklusive Service Worker, Push-Notifications und Installation-Support.**
+
+---
+
+**Weitere Ressourcen:**
+- [Mobile-First Design Strategie](/blog/mobile-first-design-strategie)
+- [Website Performance optimieren](/blog/website-performance-optimieren)
+- [Next.js Agentur](/technologie/next-js-agentur)

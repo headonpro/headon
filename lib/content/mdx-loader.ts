@@ -15,17 +15,21 @@ import {
   portfolioProjectFrontmatterSchema,
   servicePageFrontmatterSchema,
   cityPageFrontmatterSchema,
+  brancheFrontmatterSchema,
+  technologyFrontmatterSchema,
   type BlogPostFrontmatterData,
   type PortfolioProjectFrontmatterData,
   type ServicePageFrontmatterData,
   type CityPageFrontmatterData,
+  type BranchePageFrontmatterData,
+  type TechnologyPageFrontmatterData,
 } from './frontmatter'
 
 // ============================================================================
 // Types
 // ============================================================================
 
-export type ContentType = 'blog' | 'portfolio' | 'services' | 'cities'
+export type ContentType = 'blog' | 'portfolio' | 'services' | 'cities' | 'branchen' | 'technologie'
 
 export interface BlogContentResult {
   slug: string
@@ -51,11 +55,25 @@ export interface CityContentResult {
   content: string
 }
 
+export interface BrancheContentResult {
+  slug: string
+  frontmatter: BranchePageFrontmatterData
+  content: string
+}
+
+export interface TechnologyContentResult {
+  slug: string
+  frontmatter: TechnologyPageFrontmatterData
+  content: string
+}
+
 export type ContentResult =
   | BlogContentResult
   | PortfolioContentResult
   | ServiceContentResult
   | CityContentResult
+  | BrancheContentResult
+  | TechnologyContentResult
 
 // ============================================================================
 // Helper Functions
@@ -87,6 +105,10 @@ function getContentDirectory(contentType: ContentType): string {
       return path.join(baseDir, 'services')
     case 'cities':
       return path.join(baseDir, 'cities')
+    case 'branchen':
+      return path.join(baseDir, 'branchen')
+    case 'technologie':
+      return path.join(baseDir, 'technologie')
     default:
       throw new Error(`Invalid content type: ${contentType}`)
   }
@@ -105,6 +127,10 @@ function getValidationSchema(contentType: ContentType) {
       return servicePageFrontmatterSchema
     case 'cities':
       return cityPageFrontmatterSchema
+    case 'branchen':
+      return brancheFrontmatterSchema
+    case 'technologie':
+      return technologyFrontmatterSchema
     default:
       throw new Error(`Invalid content type: ${contentType}`)
   }

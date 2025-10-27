@@ -47,6 +47,24 @@ const authorSchema = z.object({
 // BlogPost Frontmatter Schema
 // ============================================================================
 
+const seoMetadataSchema = z.object({
+  title: z
+    .string()
+    .min(10, 'SEO-Titel muss mindestens 10 Zeichen haben')
+    .max(60, 'SEO-Titel darf maximal 60 Zeichen haben')
+    .optional(),
+  description: z
+    .string()
+    .min(50, 'SEO-Beschreibung muss mindestens 50 Zeichen haben')
+    .max(160, 'SEO-Beschreibung darf maximal 160 Zeichen haben')
+    .optional(),
+  keywords: z
+    .array(z.string().min(2, 'Keyword muss mindestens 2 Zeichen haben'))
+    .max(10, 'Maximal 10 SEO-Keywords erlaubt')
+    .optional(),
+  ogImage: z.string().url('OG-Bild muss eine gültige URL sein').optional(),
+})
+
 export const blogPostFrontmatterSchema = z.object({
   title: z
     .string()
@@ -72,6 +90,20 @@ export const blogPostFrontmatterSchema = z.object({
     .positive('Lesezeit muss positiv sein')
     .max(60, 'Lesezeit darf maximal 60 Minuten sein'),
   featured: z.boolean().optional(),
+  keywords: z
+    .array(z.string().min(2, 'Keyword muss mindestens 2 Zeichen haben'))
+    .max(15, 'Maximal 15 Keywords erlaubt')
+    .optional(),
+  relatedPosts: z
+    .array(
+      z
+        .string()
+        .min(1, 'Related-Post-Slug darf nicht leer sein')
+        .regex(/^[a-z0-9-]+$/, 'Slug muss im kebab-case Format sein')
+    )
+    .max(5, 'Maximal 5 verwandte Posts erlaubt')
+    .optional(),
+  seo: seoMetadataSchema.optional(),
 })
 
 export type BlogPostFrontmatterData = z.infer<typeof blogPostFrontmatterSchema>
@@ -303,3 +335,176 @@ export const cityPageFrontmatterSchema = z.object({
 })
 
 export type CityPageFrontmatterData = z.infer<typeof cityPageFrontmatterSchema>
+
+// ============================================================================
+// BranchePage Frontmatter Schema
+// ============================================================================
+
+const featureItemSchema = z.object({
+  title: z
+    .string()
+    .min(5, 'Feature-Titel muss mindestens 5 Zeichen haben')
+    .max(100, 'Feature-Titel darf maximal 100 Zeichen haben'),
+  description: z
+    .string()
+    .min(10, 'Feature-Beschreibung muss mindestens 10 Zeichen haben')
+    .max(300, 'Feature-Beschreibung darf maximal 300 Zeichen haben'),
+  icon: z
+    .string()
+    .min(1, 'Icon-Name ist erforderlich')
+    .max(50, 'Icon-Name darf maximal 50 Zeichen haben')
+    .regex(/^[A-Z][a-zA-Z0-9]*$/, 'Icon-Name muss ein gültiger Lucide-Icon-Name sein (PascalCase)'),
+})
+
+export const brancheFrontmatterSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Branchen-Name muss mindestens 2 Zeichen haben')
+    .max(100, 'Branchen-Name darf maximal 100 Zeichen haben'),
+  icon: z
+    .string()
+    .min(1, 'Icon-Name ist erforderlich')
+    .max(50, 'Icon-Name darf maximal 50 Zeichen haben')
+    .regex(/^[A-Z][a-zA-Z0-9]*$/, 'Icon-Name muss ein gültiger Lucide-Icon-Name sein (PascalCase)'),
+  heroTitle: z
+    .string()
+    .min(10, 'Hero-Titel muss mindestens 10 Zeichen haben')
+    .max(150, 'Hero-Titel darf maximal 150 Zeichen haben'),
+  description: z
+    .string()
+    .min(50, 'Beschreibung muss mindestens 50 Zeichen haben')
+    .max(300, 'Beschreibung darf maximal 300 Zeichen haben'),
+  pricing: z.object({
+    from: z.number().positive('Preis muss positiv sein'),
+    to: z.number().positive('Preis muss positiv sein'),
+    currency: z.enum(['EUR', 'USD']).default('EUR'),
+  }),
+  features: z
+    .array(featureItemSchema)
+    .min(4, 'Mindestens 4 Features sind erforderlich')
+    .max(8, 'Maximal 8 Features erlaubt'),
+  faqs: z
+    .array(faqSchema)
+    .min(5, 'Mindestens 5 FAQs sind erforderlich')
+    .max(15, 'Maximal 15 FAQs erlaubt'),
+})
+
+export type BranchePageFrontmatterData = z.infer<typeof brancheFrontmatterSchema>
+
+// ============================================================================
+// TechnologyPage Frontmatter Schema
+// ============================================================================
+
+const benefitItemSchema = z.object({
+  title: z
+    .string()
+    .min(5, 'Benefit-Titel muss mindestens 5 Zeichen haben')
+    .max(100, 'Benefit-Titel darf maximal 100 Zeichen haben'),
+  description: z
+    .string()
+    .min(10, 'Benefit-Beschreibung muss mindestens 10 Zeichen haben')
+    .max(300, 'Benefit-Beschreibung darf maximal 300 Zeichen haben'),
+})
+
+const useCaseSchema = z.object({
+  title: z
+    .string()
+    .min(5, 'Use-Case-Titel muss mindestens 5 Zeichen haben')
+    .max(100, 'Use-Case-Titel darf maximal 100 Zeichen haben'),
+  description: z
+    .string()
+    .min(20, 'Use-Case-Beschreibung muss mindestens 20 Zeichen haben')
+    .max(500, 'Use-Case-Beschreibung darf maximal 500 Zeichen haben'),
+  bestFor: z
+    .string()
+    .min(10, 'bestFor muss mindestens 10 Zeichen haben')
+    .max(200, 'bestFor darf maximal 200 Zeichen haben'),
+})
+
+const comparisonTableRowSchema = z.object({
+  feature: z
+    .string()
+    .min(2, 'Feature muss mindestens 2 Zeichen haben')
+    .max(100, 'Feature darf maximal 100 Zeichen haben'),
+  thisTech: z
+    .string()
+    .min(1, 'Wert für diese Technologie ist erforderlich')
+    .max(50, 'Wert darf maximal 50 Zeichen haben'),
+  alternatives: z
+    .array(
+      z
+        .string()
+        .min(1, 'Alternative-Wert ist erforderlich')
+        .max(50, 'Alternative-Wert darf maximal 50 Zeichen haben')
+    )
+    .min(1, 'Mindestens ein Alternativwert ist erforderlich')
+    .max(5, 'Maximal 5 Alternativwerte erlaubt'),
+})
+
+const comparisonSchema = z.object({
+  alternatives: z
+    .array(
+      z
+        .string()
+        .min(2, 'Alternative muss mindestens 2 Zeichen haben')
+        .max(50, 'Alternative darf maximal 50 Zeichen haben')
+    )
+    .min(1, 'Mindestens eine Alternative ist erforderlich')
+    .max(5, 'Maximal 5 Alternativen erlaubt'),
+  tableRows: z
+    .array(comparisonTableRowSchema)
+    .min(3, 'Mindestens 3 Vergleichszeilen sind erforderlich')
+    .max(10, 'Maximal 10 Vergleichszeilen erlaubt'),
+})
+
+export const technologyFrontmatterSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Technologie-Name muss mindestens 2 Zeichen haben')
+    .max(100, 'Technologie-Name darf maximal 100 Zeichen haben'),
+  officialName: z
+    .string()
+    .min(2, 'Offizieller Name muss mindestens 2 Zeichen haben')
+    .max(100, 'Offizieller Name darf maximal 100 Zeichen haben'),
+  logo: z
+    .string()
+    .min(1, 'Logo-Pfad ist erforderlich')
+    .refine(
+      (val) => val.startsWith('/') || val.startsWith('http://') || val.startsWith('https://'),
+      'Logo muss eine absolute URL (https://...) oder ein relativer Pfad (/images/...) sein'
+    ),
+  version: z
+    .string()
+    .min(1, 'Version ist erforderlich')
+    .max(20, 'Version darf maximal 20 Zeichen haben')
+    .optional(),
+  description: z
+    .string()
+    .min(50, 'Beschreibung muss mindestens 50 Zeichen haben')
+    .max(300, 'Beschreibung darf maximal 300 Zeichen haben'),
+  benefits: z
+    .array(benefitItemSchema)
+    .min(4, 'Mindestens 4 Benefits sind erforderlich')
+    .max(8, 'Maximal 8 Benefits erlaubt'),
+  useCases: z
+    .array(useCaseSchema)
+    .min(3, 'Mindestens 3 Use-Cases sind erforderlich')
+    .max(6, 'Maximal 6 Use-Cases erlaubt'),
+  comparison: comparisonSchema,
+  relatedProjects: z
+    .array(
+      z
+        .string()
+        .min(1, 'Projekt-Slug darf nicht leer sein')
+        .regex(/^[a-z0-9-]+$/, 'Slug muss im kebab-case Format sein')
+    )
+    .min(0)
+    .max(5, 'Maximal 5 verwandte Projekte erlaubt')
+    .optional(),
+  faqs: z
+    .array(faqSchema)
+    .min(5, 'Mindestens 5 FAQs sind erforderlich')
+    .max(12, 'Maximal 12 FAQs erlaubt'),
+})
+
+export type TechnologyPageFrontmatterData = z.infer<typeof technologyFrontmatterSchema>

@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Optimize build performance for large content sites
+  experimental: {
+    // Limit parallel page generation to prevent OOM errors
+    // Default is CPU count, we limit to 4 for stability
+    cpus: 4,
+    // Enable optimized package imports
+    optimizePackageImports: ['@/components', '@/lib'],
+  },
+  // Increase static page generation timeout for content-heavy pages
+  staticPageGenerationTimeout: 120,
   // Add security headers for development environment
   async headers() {
     return [

@@ -12,8 +12,11 @@ import {
   type PortfolioContentResult,
   type ServiceContentResult,
   type CityContentResult,
+  type BrancheContentResult,
+  type TechnologyContentResult,
 } from './mdx-loader'
 import type { BlogCategory, PortfolioCategory } from '@/lib/types/content'
+import { generateTOC, type TOCItem } from './toc-generator'
 
 // ============================================================================
 // Types
@@ -60,6 +63,8 @@ const cache: {
   portfolioProjects?: PortfolioContentResult[]
   servicePages?: ServiceContentResult[]
   cityPages?: CityContentResult[]
+  branchePages?: BrancheContentResult[]
+  technologyPages?: TechnologyContentResult[]
 } = {}
 
 // ============================================================================
@@ -130,12 +135,59 @@ export async function getAllBlogPosts(options: BlogPostOptions = {}): Promise<Bl
 }
 
 /**
- * Gets a single blog post by slug
+ * Extended blog post result with TOC and related posts
  */
-export async function getBlogPost(slug: string): Promise<BlogContentResult | null> {
+export interface BlogPostWithMeta extends BlogContentResult {
+  toc: TOCItem[]
+  relatedPosts: Array<Pick<BlogContentResult, 'slug' | 'frontmatter'>>
+}
+
+/**
+ * Gets a single blog post by slug with TOC and related posts
+ *
+ * @param slug - Blog post slug
+ * @param includeRelated - Whether to load related posts (default: true)
+ * @returns Blog post with TOC and related posts, or null if not found
+ */
+export async function getBlogPost(
+  slug: string,
+  includeRelated: boolean = true
+): Promise<BlogPostWithMeta | null> {
   try {
     const result = await loadMDX(slug, 'blog')
-    return result as BlogContentResult | null
+    if (!result) return null
+
+    const blogPost = result as BlogContentResult
+
+    // Generate TOC from H2 and H3 headings
+    const toc = generateTOC(blogPost.content)
+
+    // Load related posts (metadata only, without content to save memory)
+    let relatedPosts: Array<Pick<BlogContentResult, 'slug' | 'frontmatter'>> = []
+    if (includeRelated) {
+      // If frontmatter has explicit relatedPosts, load them
+      if (blogPost.frontmatter.relatedPosts && blogPost.frontmatter.relatedPosts.length > 0) {
+        const relatedResults = await Promise.all(
+          blogPost.frontmatter.relatedPosts.slice(0, 3).map((relatedSlug) => loadMDX(relatedSlug, 'blog'))
+        )
+        relatedPosts = relatedResults
+          .filter((post): post is BlogContentResult => post !== null)
+          .map(post => ({ slug: post.slug, frontmatter: post.frontmatter }))
+      } else {
+        // Otherwise, use automatic related post detection
+        const fullRelatedPosts = await getRelatedBlogPosts(slug, 3)
+        relatedPosts = fullRelatedPosts.map(post => ({
+          slug: post.slug,
+          frontmatter: post.frontmatter
+        }))
+      }
+    }
+
+    return {
+      ...blogPost,
+      toc,
+      relatedPosts,
+    }
   } catch (error) {
     console.error(`Error loading blog post "${slug}":`, error)
     return null
@@ -152,15 +204,19 @@ export async function getBlogPost(slug: string): Promise<BlogContentResult | nul
  * 4. Sort by score descending
  * 5. Take top maxResults
  * 6. If less than maxResults, fill with recent posts
+ *
+ * OPTIMIZED: Uses direct loadMDX to avoid recursive getBlogPost calls
  */
 export async function getRelatedBlogPosts(
   slug: string,
   maxResults: number = 4
 ): Promise<BlogContentResult[]> {
   try {
-    const currentPost = await getBlogPost(slug)
+    // Load current post directly (avoid recursion via getBlogPost)
+    const currentPost = await loadMDX(slug, 'blog')
     if (!currentPost) return []
 
+    const blogPost = currentPost as BlogContentResult
     const allPosts = await getAllBlogPosts()
 
     // Calculate scores for each post
@@ -171,12 +227,12 @@ export async function getRelatedBlogPosts(
 
         // Score by shared tags
         const sharedTags = post.frontmatter.tags.filter((tag) =>
-          currentPost.frontmatter.tags.includes(tag)
+          blogPost.frontmatter.tags.includes(tag)
         )
         score += sharedTags.length
 
         // Boost same category
-        if (post.frontmatter.category === currentPost.frontmatter.category) {
+        if (post.frontmatter.category === blogPost.frontmatter.category) {
           score += 0.5
         }
 
@@ -371,6 +427,80 @@ export async function getCityPage(slug: string): Promise<CityContentResult | nul
 }
 
 // ============================================================================
+// Branche API Functions
+// ============================================================================
+
+/**
+ * Gets all branche pages
+ */
+export async function getAllBranchePages(): Promise<BrancheContentResult[]> {
+  try {
+    // Load all branche pages (with caching)
+    if (!cache.branchePages) {
+      const slugs = await listContentSlugs('branchen')
+      const pages = await Promise.all(slugs.map((slug) => loadMDX(slug, 'branchen')))
+      cache.branchePages = pages.filter((page): page is BrancheContentResult => page !== null)
+    }
+
+    // Sort by name alphabetically
+    return [...cache.branchePages].sort((a, b) => a.frontmatter.name.localeCompare(b.frontmatter.name))
+  } catch (error) {
+    console.error('Error loading branche pages:', error)
+    return []
+  }
+}
+
+/**
+ * Gets a single branche page by slug
+ */
+export async function getBranchePage(slug: string): Promise<BrancheContentResult | null> {
+  try {
+    const result = await loadMDX(slug, 'branchen')
+    return result as BrancheContentResult | null
+  } catch (error) {
+    console.error(`Error loading branche page "${slug}":`, error)
+    return null
+  }
+}
+
+// ============================================================================
+// Technology API Functions
+// ============================================================================
+
+/**
+ * Gets all technology pages
+ */
+export async function getAllTechnologyPages(): Promise<TechnologyContentResult[]> {
+  try {
+    // Load all technology pages (with caching)
+    if (!cache.technologyPages) {
+      const slugs = await listContentSlugs('technologie')
+      const pages = await Promise.all(slugs.map((slug) => loadMDX(slug, 'technologie')))
+      cache.technologyPages = pages.filter((page): page is TechnologyContentResult => page !== null)
+    }
+
+    // Sort by name alphabetically
+    return [...cache.technologyPages].sort((a, b) => a.frontmatter.name.localeCompare(b.frontmatter.name))
+  } catch (error) {
+    console.error('Error loading technology pages:', error)
+    return []
+  }
+}
+
+/**
+ * Gets a single technology page by slug
+ */
+export async function getTechnologyPage(slug: string): Promise<TechnologyContentResult | null> {
+  try {
+    const result = await loadMDX(slug, 'technologie')
+    return result as TechnologyContentResult | null
+  } catch (error) {
+    console.error(`Error loading technology page "${slug}":`, error)
+    return null
+  }
+}
+
+// ============================================================================
 // Utility Functions
 // ============================================================================
 
@@ -383,13 +513,15 @@ export function clearCache(): void {
   cache.portfolioProjects = undefined
   cache.servicePages = undefined
   cache.cityPages = undefined
+  cache.branchePages = undefined
+  cache.technologyPages = undefined
 }
 
 /**
  * Gets the total count of items for a content type
  */
 export async function getContentCount(
-  type: 'blog' | 'portfolio' | 'services' | 'cities'
+  type: 'blog' | 'portfolio' | 'services' | 'cities' | 'branchen' | 'technologie'
 ): Promise<number> {
   try {
     const slugs = await listContentSlugs(type)

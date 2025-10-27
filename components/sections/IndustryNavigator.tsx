@@ -165,9 +165,15 @@ export default function IndustryNavigator() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white/15">
+              <Link
+                href={`/branchen/${industry.id}`}
+                className="block overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white/15 hover:scale-[1.02]"
+              >
                 {/* Card Header */}
-                <div className="cursor-pointer p-6" onClick={() => toggleCard(industry.id)}>
+                <div className="cursor-pointer p-6" onClick={(e) => {
+                  e.preventDefault()
+                  toggleCard(industry.id)
+                }}>
                   <div className="mb-4 flex justify-center">
                     <div className="from-accent to-secondary rounded-xl bg-gradient-to-br p-3">
                       <industry.icon className="text-primary h-8 w-8" strokeWidth={1.5} />
@@ -222,31 +228,47 @@ export default function IndustryNavigator() {
                           ))}
                         </ul>
 
-                        <Link
-                          href={`/contact?industry=${industry.id}`}
-                          onClick={() => {
-                            // Store industry context for contact form
-                            if (typeof window !== 'undefined') {
-                              sessionStorage.setItem(
-                                'industryContext',
-                                JSON.stringify({
-                                  id: industry.id,
-                                  title: industry.title,
-                                  timestamp: new Date().toISOString(),
-                                })
-                              )
-                            }
-                          }}
-                        >
-                          <Button className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary w-full bg-gradient-to-r font-semibold transition-all">
-                            Sofort loslegen
-                          </Button>
-                        </Link>
+                        <div className="flex gap-2">
+                          <Link
+                            href={`/branchen/${industry.id}`}
+                            className="flex-1"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Button className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary w-full bg-gradient-to-r font-semibold transition-all">
+                              Mehr erfahren
+                            </Button>
+                          </Link>
+                          <Link
+                            href={`/contact?industry=${industry.id}`}
+                            className="flex-1"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              // Store industry context for contact form
+                              if (typeof window !== 'undefined') {
+                                sessionStorage.setItem(
+                                  'industryContext',
+                                  JSON.stringify({
+                                    id: industry.id,
+                                    title: industry.title,
+                                    timestamp: new Date().toISOString(),
+                                  })
+                                )
+                              }
+                            }}
+                          >
+                            <Button
+                              variant="outline"
+                              className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10"
+                            >
+                              Kontakt
+                            </Button>
+                          </Link>
+                        </div>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>

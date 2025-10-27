@@ -28,9 +28,9 @@ const lato = Lato({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://headon.pro'),
-  title: 'Webentwicklung & Mobile Apps 4x schneller | KI-gestützte Digitalagentur',
+  title: 'Webdesign & Marketing Agentur | Main-Tauber-Kreis',
   description:
-    'KI-gestützte Webentwicklung aus Lauda-Königshofen: 4x schneller, 2x bessere Performance. Von der Idee zum Launch in 2-4 Wochen statt Monaten. Festpreise ab 2.500€. Kostenlose Erstberatung.',
+    'Webdesign & Marketing Agentur aus Main-Tauber-Kreis. Web & App Entwicklung, KI-gestützt und 4x schneller. Festpreise ab 2.500€. Von der Idee zum Launch in 2-4 Wochen.',
   keywords:
     'Webentwicklung Lauda-Königshofen, Web Development Baden-Württemberg, Mobile Apps Main-Tauber-Kreis, React Next.js TypeScript, Kreativagentur Würzburg, UI/UX Design Tauberbischofsheim',
   authors: [{ name: 'HEADON.pro' }],
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     canonical: 'https://headon.pro',
   },
   openGraph: {
-    title: 'Webentwicklung & Mobile Apps 4x schneller | KI-gestützte Digitalagentur',
+    title: 'Webdesign & Marketing Agentur | Main-Tauber-Kreis',
     description:
-      'KI-gestützte Webentwicklung aus Lauda-Königshofen: 4x schneller, 2x bessere Performance. Von der Idee zum Launch in 2-4 Wochen statt Monaten. Festpreise ab 2.500€. Kostenlose Erstberatung.',
+      'Webdesign & Marketing Agentur aus Main-Tauber-Kreis. Web & App Entwicklung, KI-gestützt und 4x schneller. Festpreise ab 2.500€. Von der Idee zum Launch in 2-4 Wochen.',
     url: 'https://headon.pro',
     siteName: 'HEADON.pro',
     locale: 'de_DE',
