@@ -23,6 +23,20 @@ headon/
 │   ├── sitemap.ts            # sitemap.xml generation
 │   └── globals.css           # Global styles
 │
+├── content/                  # MDX Content (6 Content Types)
+│   ├── blog/                # Blog posts with frontmatter
+│   │   └── *.mdx           # Individual blog articles
+│   ├── portfolio/           # Project case studies
+│   │   └── *.mdx           # Portfolio project pages
+│   ├── services/            # Service descriptions
+│   │   └── *.mdx           # Individual service pages
+│   ├── cities/              # Regional landing pages
+│   │   └── *.mdx           # City-specific pages (Bad Mergentheim, etc.)
+│   ├── branchen/            # Industry-specific pages
+│   │   └── *.mdx           # Industry landing pages
+│   └── technologie/         # Technology pages
+│       └── *.mdx           # Technology explanation pages
+│
 ├── components/               # Reusable React Components
 │   ├── ui/                  # shadcn/ui Primitives (Radix-based)
 │   │   ├── button.tsx       # Button component with variants
@@ -32,6 +46,10 @@ headon/
 │   │   ├── accordion.tsx    # Collapsible content
 │   │   ├── dialog.tsx       # Modal dialog
 │   │   └── ...              # Other UI primitives
+│   ├── content/             # Content-specific Components
+│   │   ├── TableOfContents.tsx
+│   │   ├── MDXContent.tsx
+│   │   └── ReadingTime.tsx
 │   ├── layout/              # Layout Components
 │   │   ├── Header.tsx       # Global navigation header
 │   │   └── Footer.tsx       # Global footer
@@ -66,9 +84,26 @@ headon/
 │       └── AnimatedRobot.tsx
 │
 ├── lib/                      # Utilities & Configuration
-│   ├── supabase.ts          # Supabase client initialization
-│   ├── utils.ts             # Utility functions (cn, etc.)
-│   └── validations.ts       # Zod validation schemas
+│   ├── content/             # Content Processing System
+│   │   ├── mdx-loader.ts   # Loads and parses MDX files
+│   │   ├── mdx-compiler.ts # Compiles MDX to React components
+│   │   ├── content-api.ts  # High-level content API (getBlogPosts, etc.)
+│   │   ├── frontmatter.ts  # Zod schemas for frontmatter validation
+│   │   ├── glossary.ts     # Technical glossary data (30+ terms)
+│   │   ├── faq-data.ts     # FAQ data by category
+│   │   └── comparisons/    # Comparison tables as TypeScript data
+│   │       ├── index.ts    # Barrel export
+│   │       ├── react-vs-vue.ts
+│   │       ├── nextjs-vs-spa.ts
+│   │       └── ...         # 12+ comparison files
+│   ├── seo/                # SEO Utilities
+│   │   ├── meta-builder.ts    # Next.js metadata generation
+│   │   ├── schema-builder.ts  # JSON-LD structured data
+│   │   └── og-image-generator.ts  # Dynamic OG images
+│   ├── email-templates.ts  # HTML email templates (lead notifications)
+│   ├── supabase.ts         # Supabase client initialization
+│   ├── utils.ts            # Utility functions (cn, etc.)
+│   └── validations.ts      # Zod validation schemas
 │
 ├── types/                    # TypeScript Type Definitions
 │   └── supabase.ts          # Database type definitions
@@ -391,6 +426,109 @@ export function isString(value: unknown): value is string {
 }
 ```
 
+### Content Component Pattern
+
+```typescript
+// Content page structure (app/blog/[slug]/page.tsx)
+import { getBlogPost } from '@/lib/content/content-api'
+import { MDXContent } from '@/components/content/MDXContent'
+import { TableOfContents } from '@/components/content/TableOfContents'
+import { notFound } from 'next/navigation'
+
+// 1. Server Component for data fetching
+export default async function BlogPost({
+  params
+}: {
+  params: { slug: string }
+}) {
+  // 2. Fetch content via Content API
+  const post = await getBlogPost(params.slug)
+
+  if (!post) {
+    notFound()
+  }
+
+  // 3. Render with MDX compilation
+  return (
+    <article>
+      <h1>{post.frontmatter.title}</h1>
+      <TableOfContents toc={post.toc} />
+      <MDXContent content={post.content} />
+    </article>
+  )
+}
+
+// 4. Generate metadata for SEO
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = await getBlogPost(params.slug)
+  return {
+    title: post.frontmatter.title,
+    description: post.frontmatter.description
+  }
+}
+
+// 5. Static generation for all posts
+export async function generateStaticParams() {
+  const posts = await getBlogPosts()
+  return posts.map(post => ({ slug: post.slug }))
+}
+```
+
+### MDX Frontmatter Pattern
+
+```yaml
+---
+title: "Blog Post Title"
+description: "SEO-optimized description (50-200 chars)"
+publishedAt: "2025-01-15"
+updatedAt: "2025-01-20"
+author: "HEADON Team"
+category: "web-development"
+tags: ["nextjs", "react", "typescript"]
+featured: false
+image: "/images/blog/post-image.jpg"
+excerpt: "Short excerpt for listings"
+---
+
+# Your MDX content starts here
+```
+
+**Frontmatter Validation**:
+- Zod schema in `lib/content/frontmatter.ts`
+- Validates at build time (fails fast)
+- Each content type has specific schema
+- Type-safe frontmatter access
+
+### Comparison Data Pattern
+
+```typescript
+// lib/content/comparisons/react-vs-vue.ts
+export const reactVsVueComparison = {
+  title: "React vs Vue: Ein umfassender Vergleich",
+  description: "Detaillierter Vergleich...",
+  criteria: [
+    {
+      name: "Lernkurve",
+      react: "Mittel - JSX und Konzepte",
+      vue: "Niedrig - Einfacher Einstieg"
+    }
+    // ... more criteria
+  ],
+  options: [
+    { name: "React", description: "..." },
+    { name: "Vue", description: "..." }
+  ]
+}
+
+// Usage in dynamic route: app/vergleiche/[slug]/page.tsx
+import { comparisons } from '@/lib/content/comparisons'
+
+export default function ComparisonPage({ params }: { params: { slug: string } }) {
+  const comparison = comparisons[params.slug]
+  return <ComparisonTable data={comparison} />
+}
+```
+
 ## Code Organization Principles
 
 ### 1. Component Composition
@@ -421,6 +559,14 @@ export function isString(value: unknown): value is string {
 - **Minimal Complexity**: Avoid clever code, prefer explicit
 - **Testable Structure**: Components designed for testing
 
+### 5. Content-First Architecture
+
+- **Build-Time Validation**: MDX frontmatter validated with Zod at build time
+- **Type-Safe Content**: TypeScript types derived from Zod schemas
+- **SEO-Optimized**: Every content page has metadata generation
+- **Git-Based Workflow**: Content versioned alongside code
+- **Static Generation**: All content pre-rendered for performance
+
 ## Module Boundaries
 
 ### Core Application vs Features
@@ -447,6 +593,15 @@ export function isString(value: unknown): value is string {
 - **Route-specific**: Components in `app/[route]` are scoped to that route
 - **Shared sections**: `components/sections` for reusable page sections
 - **No cross-dependencies**: Routes don't import from other routes
+
+### Content System Boundaries
+
+- **content/**: MDX source files (version controlled, not runtime accessed)
+- **lib/content/**: Content processing utilities (mdx-loader, content-api, frontmatter)
+- **lib/seo/**: SEO utilities (meta-builder, schema-builder, og-images)
+- **components/content/**: Content rendering components (MDXContent, TableOfContents)
+- **Separation**: Content API abstracts MDX complexity from components
+- **Data Flow**: MDX → Content API → React Components
 
 ## Code Size Guidelines
 

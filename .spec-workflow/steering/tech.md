@@ -62,13 +62,30 @@
 
 - **Sonner** 2.0.7: Toast notification system
 
+#### Content Processing & MDX
+
+- **@next/mdx** ^15.5.2: MDX support for Next.js
+- **gray-matter** 4.0.3: Frontmatter parsing for MDX files
+- **remark-gfm** 4.0.0: GitHub Flavored Markdown support
+- **rehype-slug** 6.0.0: Auto-generate heading IDs
+- **rehype-autolink-headings** 7.1.0: Add links to headings
+- **shiki** 1.29.1: Syntax highlighting for code blocks
+
 #### Email Integration
 
 - **Resend** 6.1.1: Transactional email API
+- **HTML Email Templates**: Custom-built responsive templates with inline CSS
+- **Lead Notifications**: Priority-based email formatting
 
 #### Performance Monitoring
 
 - **web-vitals** 5.1.0: Core Web Vitals tracking
+
+#### Analytics Stack
+
+- **Umami** 2.10.2: Self-hosted web analytics (Docker container)
+- **PostgreSQL** 15-alpine: Dedicated database for Umami
+- **Docker Compose**: Multi-service orchestration for analytics
 
 ### Application Architecture
 
@@ -97,6 +114,37 @@ app/layout.tsx (Root Layout)
 - **Client Components for interactivity**: Forms, animations, state
 - **Edge Runtime capable**: Fast global distribution
 - **Metadata API**: Type-safe SEO optimization
+
+**Content Processing Architecture**:
+
+```
+MDX Files (content/**/*.mdx)
+  ↓ gray-matter parsing
+Frontmatter + Content
+  ↓ Zod validation
+Validated Frontmatter
+  ↓ MDX compilation
+React Components + Metadata
+  ↓ Content API
+Filtered, Sorted, Paginated Content
+```
+
+**Content Types Pipeline**:
+
+1. **MDX Source Files**: 6 content types (blog, portfolio, services, cities, branchen, technologie)
+2. **Frontmatter Validation**: Zod schemas ensure data quality at build time
+3. **MDX Compilation**: Server-side compilation with syntax highlighting (Shiki)
+4. **Content API**: High-level API (`lib/content/content-api.ts`) for content access
+5. **TOC Generation**: Automatic table of contents from headings
+6. **Reading Time**: Calculated based on word count
+
+**Key Content Utilities**:
+
+- `lib/content/mdx-loader.ts`: Loads and parses MDX files with frontmatter
+- `lib/content/mdx-compiler.ts`: Compiles MDX to React with code highlighting
+- `lib/content/content-api.ts`: Provides getBlogPosts(), getPortfolioProjects(), etc.
+- `lib/content/frontmatter.ts`: Zod schemas for each content type
+- `lib/content/comparisons/`: Large comparison tables as TypeScript data
 
 ### Data Storage
 
@@ -146,17 +194,43 @@ app/layout.tsx (Root Layout)
 - **React Server Components**: Data fetching layer
 - **React Client Components**: Interactive UI
 
+#### Umami Analytics Stack (Self-Hosted)
+
+**Docker Services**:
+- **Umami Web Service**: Port 3002, Node.js-based analytics dashboard
+- **PostgreSQL 15-alpine**: Dedicated database for analytics data
+- **Docker Compose**: Multi-container orchestration
+- **Persistent Volumes**: Analytics data persistence
+- **Health Checks**: Automatic service monitoring
+
+**Features**:
+- **Cookie-free Tracking**: GDPR compliant without consent banners
+- **Real-time Visitor Tracking**: Live page views and sessions
+- **Privacy-focused**: No personal data collection
+- **Custom Events**: Conversion tracking capabilities
+- **Geographic Analytics**: Visitor location tracking
+- **Device Analytics**: Browser and device breakdown
+- **Dashboard Access**: analytics.headon.pro
+
+**Integration**:
+- **Script Component**: `components/UmamiScript.tsx` for tracking code injection
+- **Environment Variables**: `NEXT_PUBLIC_UMAMI_URL`, `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
+- **Resource Limits**: 256MB RAM, 0.25 CPU per service
+- **Network**: Connected to external web-network for reverse proxy
+
 #### Real-time Communication
 
 - **Supabase Realtime**: PostgreSQL changes via WebSocket
 - **React State**: Local UI state management
 - **Web Vitals API**: Performance metrics collection
+- **Umami WebSocket**: Real-time analytics updates
 
 #### Visualization Libraries
 
 - **Framer Motion**: Smooth animations and transitions
 - **Lucide Icons**: Visual indicators and UI elements
 - **Tailwind CSS**: Responsive design utilities
+- **Umami Charts**: Built-in analytics visualizations
 
 #### State Management
 
@@ -164,6 +238,7 @@ app/layout.tsx (Root Layout)
 - **React Hook Form**: Form state management
 - **URL State**: Search params for shareable states
 - **Server State**: Supabase as source of truth
+- **Analytics State**: Umami PostgreSQL database
 
 ## Development Environment
 
@@ -244,32 +319,100 @@ app/layout.tsx (Root Layout)
 
 ### Target Platform(s)
 
-- **Primary**: Hetzner VPS with Docker containers
-- **Alternative**: Selbst-gehostete VPS, Netlify, AWS Amplify
-- **Environment**: Linux (Ubuntu 24.04.3 LTS)
+- **Primary**: Production VPS at `/opt/headon` with Docker containers
+- **Alternative**: Vercel, Netlify, AWS Amplify (CDN-based deployment)
+- **Environment**: Linux (Ubuntu 24.04.3 LTS recommended)
+- **Container Registry**: GitHub Container Registry (ghcr.io)
+
+### Docker Architecture
+
+**Multi-Stage Dockerfile**:
+1. **Stage 1 (deps)**: Install dependencies only, cached layer
+2. **Stage 2 (builder)**: Build Next.js application with standalone output
+3. **Stage 3 (runner)**: Minimal production image with non-root user
+
+**Docker Compose Services** (3 services):
+
+1. **headon** (Main Application)
+   - Port: 3001:3000 (internal → external)
+   - Health Check: `/api/health` endpoint
+   - Volume: Next.js cache persistence
+   - Network: External `web-network` for reverse proxy
+   - Image: From standalone build
+
+2. **umami-db** (PostgreSQL)
+   - Port: 5432 (internal only)
+   - Image: PostgreSQL 15-alpine
+   - Volume: Persistent analytics data
+   - Resources: 256MB RAM, 0.25 CPU limit
+
+3. **umami** (Analytics Dashboard)
+   - Port: 3002:3000
+   - Depends: umami-db service
+   - Health Check: `/api/heartbeat`
+   - Resources: 256MB RAM, 0.25 CPU limit
+   - Network: Connected to web-network
+
+**Network Configuration**:
+- **web-network**: External network for Nginx/Caddy reverse proxy
+- **Internal Network**: Docker Compose default for service communication
 
 ### Distribution Method
 
-- **Docker Container**: Standalone output for containerization
-- **CI/CD Pipeline**: GitHub Actions automation
+- **Docker Container**: Standalone output for optimized containerization
+- **CI/CD Pipeline**: GitHub Actions automation (`.github/workflows/deploy.yml`)
 - **Deployment Trigger**: Push to main branch
+- **Build & Deploy Flow**:
+  1. Lint & TypeCheck
+  2. Docker build & push to GHCR
+  3. SSH to VPS, pull image
+  4. Docker Compose up with zero-downtime restart
+  5. Health check verification
 
 ### Installation Requirements
 
-- **Node.js**: v22.x or higher
-- **pnpm**: v10.15.0 (enforced)
-- **Docker**: v27.5.1+ (production)
-- **Environment Variables**:
-  - `NEXT_PUBLIC_SUPABASE_URL`
-  - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-  - `SUPABASE_SERVICE_ROLE_KEY`
-  - `NEXT_PUBLIC_SITE_URL`
+**Development Environment**:
+- **Node.js**: v22.x or higher (v22.18.0 via NVM)
+- **pnpm**: v10.15.0 (enforced via package.json)
+- **Docker**: v27.5.1+ for local testing
+- **Docker Compose**: v1.29.2+
+
+**Production Environment**:
+- **Docker**: v27.5.1+ (required)
+- **Docker Compose**: v1.29.2+ (required)
+- **Reverse Proxy**: Nginx or Caddy for HTTPS termination
+- **PostgreSQL**: Bundled in Umami service (no separate install)
+
+**Environment Variables** (Required):
+```bash
+# Supabase Backend
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+
+# Site Configuration
+NEXT_PUBLIC_SITE_URL=https://headon.pro
+
+# Email Service (Resend)
+RESEND_API_KEY=
+NOTIFICATION_EMAIL=hallo@headon.pro
+
+# Analytics (Umami)
+NEXT_PUBLIC_UMAMI_URL=https://analytics.headon.pro
+NEXT_PUBLIC_UMAMI_WEBSITE_ID=
+
+# Umami Database (docker-compose)
+DATABASE_URL=postgresql://umami:umami@umami-db:5432/umami
+DATABASE_TYPE=postgresql
+```
 
 ### Update Mechanism
 
-- **Automatic Deployment**: GitHub Actions CI/CD
-- **Health Checks**: `/api/health` endpoint monitoring
-- **Zero-Downtime**: Docker container orchestration
+- **Automatic Deployment**: GitHub Actions CI/CD on push to main
+- **Health Checks**: `/api/health` endpoint monitoring (30s intervals)
+- **Zero-Downtime**: Docker Compose recreate strategy
+- **Rollback**: Git revert + manual trigger or previous image tag
+- **Monitoring**: Post-deployment health verification in CI/CD
 
 ## Technical Requirements & Constraints
 
@@ -396,6 +539,21 @@ app/layout.tsx (Root Layout)
    - **Why**: Minimal container size, faster deployments, optimized for production
    - **Alternatives**: Full node_modules copy, custom Dockerfile
    - **Trade-offs**: Initial build time slightly higher
+
+8. **Resend for Email over SendGrid/Mailgun**
+   - **Why**: Modern API, excellent DX, reliable delivery, reasonable pricing
+   - **Alternatives**: SendGrid (more complex), Mailgun (legacy), Postmark (pricier)
+   - **Trade-offs**: Newer service, smaller market share
+
+9. **Self-Hosted Umami over Google Analytics**
+   - **Why**: Privacy-first, GDPR compliant without banners, data ownership, no vendor lock-in
+   - **Alternatives**: Google Analytics (privacy concerns), Plausible (paid), Matomo (heavier)
+   - **Trade-offs**: Additional infrastructure to manage, basic features vs. GA
+
+10. **MDX for Content over Headless CMS**
+    - **Why**: Git-based workflow, TypeScript integration, zero runtime cost, full control
+    - **Alternatives**: Contentful, Sanity, Strapi (more overhead)
+    - **Trade-offs**: No GUI for non-technical editors, build required for updates
 
 ## Known Limitations
 
