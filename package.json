@@ -11,7 +11,12 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:cdn": "./scripts/test-cdn-performance.sh https://headon.pro",
+    "test:cdn:local": "./scripts/test-cdn-performance.sh http://localhost:3000",
+    "test:lighthouse": "pnpm dlx lighthouse https://headon.pro --output=html --output-path=./lighthouse-report.html",
+    "test:lighthouse:local": "pnpm dlx lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-local.html",
+    "test:perf": "pnpm run test:cdn && pnpm run test:lighthouse"
   },
   "keywords": [],
   "author": "",
