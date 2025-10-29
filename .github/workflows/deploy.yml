@@ -206,11 +206,57 @@ jobs:
               exit 1
             fi
 
+      - name: Purge Cloudflare Cache
+        if: success()
+        run: |
+          echo "🔄 Purging Cloudflare cache..."
+
+          RESPONSE=$(curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+
+          # Check if purge was successful
+          SUCCESS=$(echo $RESPONSE | jq -r '.success')
+
+          if [ "$SUCCESS" = "true" ]; then
+            echo "✅ Cloudflare cache successfully purged!"
+            echo "⏳ Cache will warm up over the next 10-30 minutes"
+          else
+            ERROR=$(echo $RESPONSE | jq -r '.errors[0].message // "Unknown error"')
+            echo "⚠️ Warning: Cache purge failed: $ERROR"
+            echo "📝 Full response: $RESPONSE"
+            # Don't fail the deployment, just warn
+          fi
+
+      - name: Warm Up Critical Pages
+        if: success()
+        run: |
+          echo "🔥 Warming up cache for critical pages..."
+
+          CRITICAL_URLS=(
+            "${{ secrets.NEXT_PUBLIC_SITE_URL }}/"
+            "${{ secrets.NEXT_PUBLIC_SITE_URL }}/blog"
+            "${{ secrets.NEXT_PUBLIC_SITE_URL }}/portfolio"
+            "${{ secrets.NEXT_PUBLIC_SITE_URL }}/services"
+            "${{ secrets.NEXT_PUBLIC_SITE_URL }}/contact"
+          )
+
+          for url in "${CRITICAL_URLS[@]}"; do
+            echo "Fetching: $url"
+            curl -s -o /dev/null "$url" || echo "⚠️ Failed to fetch $url"
+            sleep 0.5
+          done
+
+          echo "✅ Cache warmup completed for ${#CRITICAL_URLS[@]} pages"
+
       - name: Notify on success
         if: success()
         run: |
           echo "✅ Deployment successful! The application has been deployed to the VPS."
-          echo "URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}"
+          echo "🌐 URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}"
+          echo "💨 Cloudflare cache has been purged and warmed up"
 
       - name: Notify on failure
         if: failure()
