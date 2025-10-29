@@ -376,7 +376,7 @@ export const brancheFrontmatterSchema = z.object({
     .max(300, 'Beschreibung darf maximal 300 Zeichen haben'),
   pricing: z.object({
     from: z.number().positive('Preis muss positiv sein'),
-    to: z.number().positive('Preis muss positiv sein'),
+    to: z.number().positive('Preis muss positiv sein').optional(),
     currency: z.enum(['EUR', 'USD']).default('EUR'),
   }),
   features: z
