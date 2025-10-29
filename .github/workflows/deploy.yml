@@ -177,13 +177,34 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT || 22 }}
           script: |
-            # Wait for container to be healthy
-            sleep 15
+            # Wait for container to become healthy (max 2 minutes)
+            echo "Waiting for container to become healthy..."
+            TIMEOUT=120
+            ELAPSED=0
+            INTERVAL=5
 
-            # Check if the application is responding
-            curl -f http://localhost:3001/api/health || exit 1
+            while [ $ELAPSED -lt $TIMEOUT ]; do
+              # Check container health status
+              HEALTH_STATUS=$(docker inspect --format='{{.State.Health.Status}}' headon 2>/dev/null || echo "none")
 
-            echo "Deployment successful! Application is running."
+              if [ "$HEALTH_STATUS" = "healthy" ]; then
+                echo "✅ Container is healthy!"
+                break
+              fi
+
+              echo "⏳ Container status: $HEALTH_STATUS (${ELAPSED}s / ${TIMEOUT}s)"
+              sleep $INTERVAL
+              ELAPSED=$((ELAPSED + INTERVAL))
+            done
+
+            # Final check with curl
+            if curl -f http://localhost:3001/api/health; then
+              echo "✅ Deployment successful! Application is running and responding."
+            else
+              echo "❌ Health check failed - application not responding"
+              docker compose logs --tail=100 headon
+              exit 1
+            fi
 
       - name: Notify on success
         if: success()
