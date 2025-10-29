@@ -128,9 +128,9 @@ export default function BrancheContent({
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/20 px-6 py-3 backdrop-blur-md">
                   <Icons.Euro className="h-5 w-5 text-white" />
                   <span className="text-lg font-semibold text-white">
-                    {branchePage.frontmatter.pricing.from.toLocaleString('de-DE')} -{' '}
-                    {branchePage.frontmatter.pricing.to.toLocaleString('de-DE')}{' '}
-                    {branchePage.frontmatter.pricing.currency}
+                    {branchePage.frontmatter.pricing.to
+                      ? `${branchePage.frontmatter.pricing.from.toLocaleString('de-DE')} - ${branchePage.frontmatter.pricing.to.toLocaleString('de-DE')} ${branchePage.frontmatter.pricing.currency}`
+                      : `Ab ${branchePage.frontmatter.pricing.from.toLocaleString('de-DE')} ${branchePage.frontmatter.pricing.currency}`}
                   </span>
                 </div>
               </div>
