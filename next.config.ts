@@ -111,7 +111,7 @@ const nextConfig: NextConfig = {
       },
       // Cache headers for static images (SVG, PNG, JPG, WebP, AVIF)
       {
-        source: '/:path*.(svg|png|jpg|jpeg|gif|webp|avif|ico)',
+        source: '/:path*\\.(svg|png|jpg|jpeg|gif|webp|avif|ico)',
         headers: [
           {
             key: 'Cache-Control',
@@ -119,20 +119,6 @@ const nextConfig: NextConfig = {
             // Longer CDN cache for better hit ratio
             value:
               'public, max-age=31536000, s-maxage=2592000, stale-while-revalidate=86400',
-          },
-        ],
-      },
-      // HTML pages: Enable CDN caching with short TTL
-      {
-        source: '/((?!api|_next/static|_next/image).*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            // HTML: 5 min browser cache, 2 hours CDN cache
-            // Short browser cache ensures users get updates quickly
-            // CDN cache reduces origin load significantly
-            value:
-              'public, max-age=300, s-maxage=7200, stale-while-revalidate=3600',
           },
         ],
       },

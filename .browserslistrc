@@ -1,0 +1,14 @@
+# Browserslist configuration for modern browsers
+# This reduces JavaScript bundle size by not transpiling for old browsers
+# Coverage: ~98% of users worldwide
+
+# Modern browser versions (last 2 major versions)
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+
+# Exclude dead browsers and legacy versions
+not dead
+not IE 11
+not op_mini all
