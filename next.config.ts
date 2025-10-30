@@ -36,6 +36,8 @@ const nextConfig: NextConfig = {
     cpus: 4,
     // Enable optimized package imports
     optimizePackageImports: ['@/components', '@/lib'],
+    // Optimize CSS delivery: inline critical CSS, defer non-critical
+    optimizeCss: true,
   },
   // Increase static page generation timeout for content-heavy pages
   staticPageGenerationTimeout: 120,
@@ -76,6 +78,20 @@ const nextConfig: NextConfig = {
             // Immutable: Files have content hashes in filenames, never change
             // max-age=31536000: 1 year browser cache
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Preload CSS files to reduce render blocking
+      {
+        source: '/_next/static/css/:path*.css',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Link',
+            value: '</_next/static/css/:path*.css>; rel=preload; as=style',
           },
         ],
       },
