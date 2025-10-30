@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
+  // Configure compiler for modern browsers (removes unnecessary polyfills)
+  compiler: {
+    // Remove React properties in production
+    reactRemoveProperties: true,
+    // Remove console.log in production
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn']
+    } : false,
+  },
   images: {
     domains: [],
     remotePatterns: [

@@ -22,6 +22,15 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.15.0",
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions",
+    "not dead",
+    "not IE 11",
+    "not op_mini all"
+  ],
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
     "@radix-ui/react-accordion": "^1.2.12",
