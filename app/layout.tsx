@@ -84,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           defer
           src="https://analytics.headon.pro/script.js"
           data-website-id="4d2d852f-7617-4bd2-9e80-7dbacf1c5d24"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <WebsiteSchema />
         <StructuredData type="organization" />
