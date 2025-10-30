@@ -36,6 +36,8 @@ const nextConfig: NextConfig = {
     cpus: 4,
     // Enable optimized package imports
     optimizePackageImports: ['@/components', '@/lib'],
+    // Optimize CSS delivery: inline critical CSS, defer non-critical
+    optimizeCss: true,
   },
   // Increase static page generation timeout for content-heavy pages
   staticPageGenerationTimeout: 120,
