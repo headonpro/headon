@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Technologien | HEADON - Unsere Tech-Stack',
   description:
     'Moderne Webtechnologien für zukunftssichere Projekte. Next.js, React, TypeScript, Supabase, Headless CMS und Tailwind CSS - Expertise für Ihre digitale Transformation.',
+  alternates: {
+    canonical: 'https://headon.pro/technologie',
+  },
   openGraph: {
     title: 'Technologien | HEADON - Unsere Tech-Stack',
     description:

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Branchen-Lösungen | HEADON - Webdesign für jede Branche',
   description:
     'Spezialisierte Website-Lösungen für Gastronomie, Handwerk, Einzelhandel, Beratung, Immobilien und Fitness. Maßgeschneidert für Ihre Branche.',
+  alternates: {
+    canonical: 'https://headon.pro/branchen',
+  },
   openGraph: {
     title: 'Branchen-Lösungen | HEADON - Webdesign für jede Branche',
     description:

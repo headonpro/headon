@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     'Responsive Webdesign',
     'Full-Service Digitalagentur',
   ].join(', '),
+  alternates: {
+    canonical: 'https://headon.pro',
+  },
   openGraph: {
     title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Festpreise ab 2.500€',
     description:

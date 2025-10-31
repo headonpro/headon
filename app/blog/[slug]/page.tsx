@@ -45,6 +45,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     description,
     authors: [{ name: frontmatter.author.name }],
     keywords: frontmatter.keywords || frontmatter.tags,
+    alternates: {
+      canonical: `https://headon.pro/blog/${slug}`,
+    },
     openGraph: {
       title,
       description,
