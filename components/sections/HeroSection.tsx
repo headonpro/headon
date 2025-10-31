@@ -274,8 +274,8 @@ export default function HeroSection() {
         {/* New Text Section - No animation for critical content */}
         <div className="mx-auto mb-16 max-w-4xl opacity-90 md:mb-20 lg:mb-24">
           <p className="text-center text-base leading-relaxed text-white/90 md:text-lg lg:text-xl">
-            Als Kreativ- und Marketingagentur aus Lauda-Königshofen vereinen wir Webdesign,
-            Webentwicklung, App-Development und Corporate Branding unter einem Dach. Während andere
+            Als Kreativ- und Digitalagentur aus Lauda-Königshofen vereinen wir Webdesign,
+            Webentwicklung, App-Development und Corporate Design unter einem Dach. Während andere
             Agenturen 3-6 Monate brauchen, gestalten und entwickeln wir Ihr Projekt durch
             KI-gestützte Prozesse in 2-4 Wochen. Ihre digitale Transformation zu transparenten
             Festpreisen.

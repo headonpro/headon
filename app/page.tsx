@@ -8,7 +8,7 @@ import TechnologyTrustSection from '@/components/sections/TechnologyTrustSection
 import TrustPersonalitySection from '@/components/sections/TrustPersonalitySection'
 
 export const metadata: Metadata = {
-  title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Festpreise ab 2.500€',
+  title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Ab 2.500€',
   description:
     'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller. Professionelle Digitalagentur.',
   keywords: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     canonical: 'https://headon.pro',
   },
   openGraph: {
-    title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Festpreise ab 2.500€',
+    title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Ab 2.500€',
     description:
       'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller. Professionelle Digitalagentur.',
     images: [
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Festpreise ab 2.500€',
+    title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Ab 2.500€',
     description:
       'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller.',
     images: ['/og-images/home.jpg'],
