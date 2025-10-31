@@ -73,6 +73,10 @@ export default function ServicesContent() {
               {' '}
               Services
             </span>
+            <br />
+            <span className="text-3xl font-normal text-white/90 sm:text-4xl md:text-5xl">
+              für Web, Mobile Apps & UI/UX Design
+            </span>
           </motion.h1>
 
           <motion.p

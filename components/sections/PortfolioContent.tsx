@@ -266,8 +266,11 @@ export default function PortfolioContent({ projects }: PortfolioContentProps) {
       <div className="relative z-10">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h1 className="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            <h1 className="mb-4 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
               Portfolio
+              <span className="mt-2 block text-2xl font-normal text-white/90 sm:text-3xl md:text-4xl">
+                Erfolgreiche Projekte & Case Studies
+              </span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-white/90">
               Entdecken Sie unsere erfolgreichen Projekte und lassen Sie sich inspirieren.

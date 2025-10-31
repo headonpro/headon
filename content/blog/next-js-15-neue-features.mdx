@@ -17,14 +17,39 @@ featured: true
 
 Next.js 15 markiert einen bedeutenden Meilenstein in der Evolution des React-Frameworks. Mit revolutionären Features wie Partial Prerendering, verbesserten Server Actions und drastischen Performance-Verbesserungen werden neue Maßstäbe für moderne Web-Entwicklung gesetzt.
 
+<KeyTakeaways
+  items={[
+    { text: "Partial Prerendering (PPR) kombiniert SSG und SSR für optimale Performance", highlight: true },
+    { text: "Server Actions vereinfachen Backend-Logik um bis zu 60% weniger Code" },
+    { text: "Turbopack wird Standard: 5x schnellere Dev-Server, 700% schnelleres HMR" },
+    { text: "React 19 Integration bringt moderne Concurrent Features wie use() Hook" },
+    { text: "Image Optimization 2.0 mit AVIF-Support (30% kleinere Dateien als WebP)" }
+  ]}
+/>
+
 ## Was ist neu in Next.js 15?
 
 Die neueste Version von Next.js bringt fundamentale Verbesserungen, die sowohl die Developer Experience als auch die End-User Performance signifikant verbessern. Als Agentur haben wir Next.js 15 bereits in mehreren [Enterprise-Projekten](/portfolio) eingesetzt und beeindruckende Ergebnisse erzielt.
 
-### Partial Prerendering (PPR) - Die Revolution des Rendering
+## Partial Prerendering (PPR) - Die Revolution des Rendering
 
-Das mit Abstand spannendste Feature ist **Partial Prerendering**. PPR kombiniert die Vorteile von Static Site Generation (SSG) und Server-Side Rendering (SSR) in einem einzigen Request:
+Das mit Abstand spannendste Feature ist **Partial Prerendering**. PPR kombiniert die Vorteile von Static Site Generation (SSG) und Server-Side Rendering (SSR) in einem einzigen Request.
 
+<BlogStats
+  title="PPR Performance Impact"
+  stats={[
+    { value: 0.5, label: "First Contentful Paint", unit: "s" },
+    { value: 90, label: "Lighthouse Score", suffix: "+" },
+    { value: 67, label: "LCP Verbesserung", suffix: "%" },
+    { value: 100, label: "SEO Score", suffix: "/100" }
+  ]}
+/>
+
+### Wie funktioniert PPR?
+
+PPR rendert statische Teile der Seite sofort, während dynamische Inhalte über Streaming nachgeladen werden. Das Beste aus beiden Welten:
+
+<CodeBlock title="PPR aktivieren und nutzen" language="tsx" collapsible defaultOpen>
 ```tsx
 // app/dashboard/page.tsx
 export const experimental_ppr = true
@@ -44,20 +69,55 @@ export default async function Dashboard() {
   )
 }
 ```
+</CodeBlock>
 
-**Vorteile von PPR:**
+<ComparisonBlock
+  title="PPR vs. Traditionelles SSR/SSG"
+  left={{
+    title: "Vorteile von PPR",
+    type: "positive",
+    items: [
+      "Sofortiges Initial Paint für statische Teile",
+      "Progressive Enhancement durch Streaming",
+      "Lighthouse-Scores von 90+ out of the box",
+      "Bessere UX: Keine leeren Seiten oder Spinner",
+      "Optimale Caching-Strategie kombiniert"
+    ]
+  }}
+  right={{
+    title: "Wann NICHT PPR nutzen",
+    type: "negative",
+    items: [
+      "Komplett statische Seiten (nutze SSG)",
+      "Komplett dynamische Seiten (nutze SSR)",
+      "Legacy-Code ohne Suspense-Support",
+      "Wenn Team nicht mit Suspense vertraut ist"
+    ]
+  }}
+/>
 
-- **Sofortiges Initial Paint**: Statische Teile werden instant gerendert
-- **Progressive Enhancement**: Dynamische Daten streamen nach
-- **Optimale Performance**: Lighthouse-Scores von 90+ out of the box
-- **Bessere UX**: Keine leeren Seiten oder Spinner mehr
+<InfoBox type="tip" title="PPR Best Practice">
+Nutzen Sie PPR gezielt für **Dashboards** (statisches Layout + dynamische Daten), **E-Commerce** (statischer Header/Footer + personalisierter Content) und **Blogs** (statische Artikel + dynamische Kommentare).
+</InfoBox>
 
-Unsere Messungen zeigen: Mit PPR erreichen wir **First Contentful Paint (FCP) Zeiten unter 0.5 Sekunden** - selbst bei komplexen Dashboards mit Echtzeit-Daten.
+<BlogCTA
+  service="web-development"
+  title="PPR für Ihr Projekt nutzen?"
+  description="Wir helfen Ihnen, Next.js 15 mit Partial Prerendering optimal einzusetzen. Profitieren Sie von unserer Expertise mit modernen Web-Technologien."
+/>
 
-### Server Actions - Vereinfachte Backend-Logik
+## Server Actions - Vereinfachte Backend-Logik
 
-Server Actions in Next.js 15 sind jetzt production-ready und bieten eine elegante Lösung für Formular-Handling und Daten-Mutationen:
+Server Actions in Next.js 15 sind jetzt production-ready und bieten eine elegante Lösung für Formular-Handling und Daten-Mutationen. **Keine API-Routes mehr nötig** - Server Actions reduzieren Boilerplate-Code um bis zu 60%.
 
+### Vorteile von Server Actions
+
+- **Type-Safe**: Direkter TypeScript-Support ohne Extra-Layer
+- **Weniger Code**: Bis zu 60% weniger Boilerplate
+- **Bessere DX**: Keine Trennung zwischen Frontend und Backend-Code
+- **Progressive Enhancement**: Funktioniert auch ohne JavaScript
+
+<CodeBlock title="Server Actions in der Praxis" language="tsx" collapsible>
 ```tsx
 // app/actions/create-post.ts
 'use server'
@@ -82,7 +142,9 @@ export async function createPost(formData: FormData) {
   return { success: true }
 }
 ```
+</CodeBlock>
 
+<CodeBlock title="Form-Integration" language="tsx" collapsible>
 ```tsx
 // app/blog/new/page.tsx
 import { createPost } from '@/app/actions/create-post'
@@ -97,52 +159,50 @@ export default function NewPost() {
   )
 }
 ```
+</CodeBlock>
 
-**Keine API-Routes mehr nötig** - Server Actions reduzieren Boilerplate-Code um bis zu 60% und verbessern die Type-Safety durch direkten TypeScript-Support.
+<InfoBox type="success">
+**Best Practice:** Ersetzen Sie API Routes durch Server Actions wo möglich. Der Code wird deutlich kürzer, type-safer und einfacher zu warten.
+</InfoBox>
 
 ## Performance-Verbesserungen in Next.js 15
 
-### Optimierter Compiler
+### Turbopack wird Standard
 
-Der Turbopack-basierte Compiler ist nun **Standard in Next.js 15**:
+Der Turbopack-basierte Compiler ist nun **Standard in Next.js 15** und bringt massive Performance-Gewinne:
 
-- **5x schnellere** Local Development Server-Starts
-- **700% schnellere** HMR (Hot Module Replacement)
-- **Reduzierter Speicherverbrauch** um durchschnittlich 40%
+<BlogStats
+  title="Turbopack Performance"
+  stats={[
+    { value: 5, label: "Schnellerer Dev-Server", suffix: "x" },
+    { value: 700, label: "Schnelleres HMR", suffix: "%" },
+    { value: 40, label: "Weniger RAM", suffix: "%" },
+    { value: 0.7, label: "Server Start", unit: "s" }
+  ]}
+/>
 
+<CodeBlock title="Turbopack aktivieren" language="bash" collapsible>
 ```bash
 # Vergleich: Development Server Start
 # Next.js 14: ~3.5 Sekunden
 # Next.js 15: ~0.7 Sekunden (mit Turbopack)
 pnpm dev --turbo
 ```
+</CodeBlock>
 
 ### Automatisches Code-Splitting
 
-Next.js 15 optimiert automatisch das Bundle-Splitting basierend auf tatsächlichen Nutzungsmustern:
+Next.js 15 optimiert automatisch das Bundle-Splitting basierend auf tatsächlichen Nutzungsmustern. Resultat: **Initial Bundle-Größen reduziert um 35-45%** in unseren Projekten.
 
-```tsx
-// Automatisches Lazy Loading
-import { HeavyChart } from '@/components/charts'
-
-// Next.js 15 lädt HeavyChart nur bei Bedarf
-export default function Analytics() {
-  return (
-    <div>
-      <Suspense fallback={<ChartSkeleton />}>
-        <HeavyChart data={data} />
-      </Suspense>
-    </div>
-  )
-}
-```
-
-Resultat: **Initial Bundle-Größen reduziert um 35-45%** in unseren Projekten.
+<InfoBox type="info">
+Next.js 15 nutzt intelligente Analyse-Algorithmen, um häufig gemeinsam genutzte Module in optimale Chunks zu gruppieren. Das reduziert Redundanz und verbessert Caching.
+</InfoBox>
 
 ### Image Optimization 2.0
 
-Die `<Image>`-Komponente wurde grundlegend überarbeitet:
+Die `<Image>`-Komponente wurde grundlegend überarbeitet und bringt native **AVIF-Support** (30% kleinere Dateien als WebP), intelligentes Lazy Loading und automatisches `srcset` für Retina-Displays.
 
+<CodeBlock title="Optimierte Image-Nutzung" language="tsx" collapsible>
 ```tsx
 import Image from 'next/image'
 
@@ -162,20 +222,21 @@ export default function Hero() {
   )
 }
 ```
-
-**Neue Features:**
-
-- Native AVIF-Support (30% kleinere Dateien als WebP)
-- Intelligentes Lazy Loading mit Intersection Observer v3
-- Automatisches `srcset` für Retina-Displays
-- Blur-Placeholder ohne base64 (CSS-basiert)
+</CodeBlock>
 
 Mehr dazu in unserem Guide zur [Image Optimization](/blog/next-js-image-optimization).
 
+<BlogCTA
+  service="consulting"
+  title="Performance-Audit gewünscht?"
+  description="Lassen Sie uns Ihre Web-App analysieren und optimieren. Kostenlose Erstberatung inklusive."
+/>
+
 ## React 19 Integration
 
-Next.js 15 nutzt React 19 RC und profitiert von den neuen Concurrent Features:
+Next.js 15 nutzt React 19 RC und profitiert von den neuen Concurrent Features, insbesondere dem neuen `use()` Hook für Promise-Handling.
 
+<CodeBlock title="React 19 use() Hook" language="tsx" collapsible>
 ```tsx
 'use client'
 
@@ -197,19 +258,34 @@ export default function Page() {
   )
 }
 ```
+</CodeBlock>
 
 Erfahren Sie mehr über [React 19 Features](/blog/react-19-concurrent-features) in unserem detaillierten Guide.
 
 ## Migration zu Next.js 15
 
-### Schritt 1: Dependencies aktualisieren
+Die Migration ist **schrittweise möglich** und die Performance-Gewinne sind **messbar und signifikant**.
 
+<InfoBox type="warning" title="Wichtige Breaking Changes">
+- Mindestens **React 19 RC** erforderlich
+- **Node.js 18.17+** benötigt
+- Neue Cache-Semantik (opt-in statt opt-out)
+- Server Actions sind default enabled
+</InfoBox>
+
+### Migration in 4 Schritten
+
+**Schritt 1: Dependencies aktualisieren**
+
+<CodeBlock language="bash" collapsible>
 ```bash
 pnpm add next@latest react@rc react-dom@rc
 ```
+</CodeBlock>
 
-### Schritt 2: Next.js Config anpassen
+**Schritt 2: Next.js Config anpassen**
 
+<CodeBlock language="javascript" collapsible>
 ```javascript
 // next.config.js
 /** @type {import('next').NextConfig} */
@@ -222,133 +298,103 @@ const nextConfig = {
 
 module.exports = nextConfig
 ```
+</CodeBlock>
 
-### Schritt 3: Breaking Changes beachten
-
-**Wichtige Änderungen:**
-
-- Mindestens React 19 RC erforderlich
-- Node.js 18.17+ benötigt
-- Neue Cache-Semantik (opt-in statt opt-out)
-- Server Actions sind default enabled
-
-### Schritt 4: Schrittweise Migration
+**Schritt 3: Schrittweise PPR aktivieren**
 
 Migrieren Sie **nicht alles auf einmal**. Nutzen Sie Partial Prerendering gezielt:
 
+<CodeBlock language="tsx" collapsible>
 ```tsx
 // Opt-in pro Route
 export const experimental_ppr = true // Nur für diese Route
 ```
+</CodeBlock>
 
-## Best Practices für Next.js 15
+**Schritt 4: Testing & Rollout**
 
-### 1. Nutzen Sie Partial Prerendering strategisch
+Testen Sie kritische User Flows und überwachen Sie Performance-Metriken während der Migration.
 
-PPR ist ideal für:
-
-- **Dashboards** mit statischem Layout + dynamischen Daten
-- **E-Commerce** mit statischem Header/Footer + personalisiertem Content
-- **Blogs** mit statischen Artikeln + dynamischen Kommentaren
-
-**Nicht geeignet für:**
-
-- Komplett statische Seiten (nutzen Sie SSG)
-- Komplett dynamische Seiten (nutzen Sie SSR)
-
-### 2. Server Actions für alle Mutationen
-
-Ersetzen Sie API Routes durch Server Actions wo möglich:
-
-```tsx
-// ✅ Gut: Type-safe, weniger Code
-'use server'
-export async function updateUser(data: UserData) {
-  return await db.user.update(data)
-}
-
-// ❌ Vermeiden: Mehr Boilerplate
-// app/api/user/route.ts
-export async function POST(request: Request) {
-  const data = await request.json()
-  return NextResponse.json(await db.user.update(data))
-}
-```
-
-### 3. Optimieren Sie Images konsequent
-
-```tsx
-// ✅ Optimal
-<Image
-  src="/product.jpg"
-  alt="Product"
-  width={800}
-  height={600}
-  sizes="(max-width: 768px) 100vw, 800px"
-  quality={85}
-/>
-
-// ❌ Suboptimal: Keine sizes, zu hohe quality
-<Image src="/product.jpg" alt="Product" quality={100} />
-```
-
-Lesen Sie unseren Guide zu [Core Web Vitals](/blog/core-web-vitals-optimierung) für mehr Performance-Tipps.
+<InfoBox type="success">
+Nutzen Sie eine **Feature-Flag-Strategie** für graduelle Rollouts. So können Sie neue Features schrittweise aktivieren und bei Problemen schnell zurückrollen.
+</InfoBox>
 
 ## Real-World Performance: Unsere Ergebnisse
 
 Bei HEADON.pro haben wir mehrere Kundenprojekte auf Next.js 15 migriert. Die Ergebnisse sprechen für sich:
 
-**E-Commerce Dashboard:**
+<BlogStats
+  title="E-Commerce Dashboard - Vorher/Nachher"
+  description="Migration von Next.js 14 auf 15 mit PPR"
+  stats={[
+    { value: -67, label: "LCP Verbesserung", suffix: "%" },
+    { value: -78, label: "FCP Verbesserung", suffix: "%" },
+    { value: -36, label: "Bundle Size", suffix: "%" },
+    { value: 98, label: "Lighthouse Score", suffix: "/100" }
+  ]}
+/>
 
-- **LCP**: 2.4s → 0.8s (-67%)
-- **FCP**: 1.8s → 0.4s (-78%)
-- **Bundle Size**: 245 KB → 156 KB (-36%)
-
-**Content-Portal:**
-
-- **Build Time**: 12 min → 3 min (-75%)
-- **Server Response**: 420ms → 180ms (-57%)
-- **Lighthouse Score**: 78 → 98 (+26%)
+<BlogStats
+  title="Content-Portal - Build Performance"
+  stats={[
+    { value: -75, label: "Build Time", suffix: "%" },
+    { value: -57, label: "Server Response", suffix: "%" },
+    { value: 26, label: "Lighthouse Improvement", suffix: "%" }
+  ]}
+/>
 
 Sehen Sie sich unsere [Portfolio-Projekte](/portfolio) an für weitere Case Studies.
 
 ## Wann sollten Sie upgraden?
 
-**Upgraden Sie jetzt, wenn:**
-
-- Sie Performance-Probleme haben
-- Sie komplexe Dashboards bauen
-- Sie TypeScript nutzen
-- Sie auf React 19 Features setzen wollen
-
-**Warten Sie noch, wenn:**
-
-- Sie kritische Third-Party-Dependencies haben, die React 19 noch nicht unterstützen
-- Ihr Team noch nicht mit Suspense vertraut ist
-- Sie eine sehr große Legacy-Codebase haben (migrieren Sie schrittweise)
+<ComparisonBlock
+  title="Upgrade-Entscheidung"
+  left={{
+    title: "Upgraden Sie jetzt, wenn:",
+    type: "positive",
+    items: [
+      "Sie Performance-Probleme haben",
+      "Sie komplexe Dashboards bauen",
+      "Sie TypeScript nutzen",
+      "Sie auf React 19 Features setzen wollen",
+      "Ihr Team mit Suspense vertraut ist"
+    ]
+  }}
+  right={{
+    title: "Warten Sie noch, wenn:",
+    type: "neutral",
+    items: [
+      "Kritische Dependencies React 19 noch nicht unterstützen",
+      "Team nicht mit Suspense vertraut ist",
+      "Sehr große Legacy-Codebase (erst testen)",
+      "Keine Zeit für Migration in nächsten 2-3 Monaten"
+    ]
+  }}
+/>
 
 ## Zusammenfassung
 
 Next.js 15 ist ein **Game-Changer** für moderne Web-Entwicklung:
 
-✅ **Partial Prerendering** kombiniert das Beste aus SSG und SSR
-✅ **Server Actions** vereinfachen Backend-Logik massiv
-✅ **Turbopack** beschleunigt Development um Faktor 5
-✅ **React 19 Integration** bringt moderne Concurrent Features
-✅ **Image Optimization 2.0** mit AVIF und Smart Lazy Loading
+<KeyTakeaways
+  title="Das Wichtigste in Kürze"
+  items={[
+    "Partial Prerendering kombiniert das Beste aus SSG und SSR",
+    "Server Actions vereinfachen Backend-Logik massiv (60% weniger Code)",
+    "Turbopack beschleunigt Development um Faktor 5",
+    "React 19 Integration bringt moderne Concurrent Features",
+    "Image Optimization 2.0 mit AVIF und Smart Lazy Loading",
+    "Migration ist schrittweise möglich - Performance-Gewinne messbar"
+  ]}
+/>
 
-Die Migration ist **schrittweise möglich** und die Performance-Gewinne sind **messbar und signifikant**.
-
-## Brauchen Sie Hilfe bei der Migration?
-
-Als spezialisierte [Webentwicklung-Agentur](/services/web-development) haben wir bereits dutzende Next.js 15 Projekte umgesetzt. Wir unterstützen Sie bei:
-
-- **Performance-Audits** und Optimierung
-- **Migration** von Next.js 12/13/14 zu 15
-- **Training** Ihres Teams in modernen React-Patterns
-- **Aufbau** neuer Next.js 15 Anwendungen
-
-[Kontaktieren Sie uns](/contact) für eine unverbindliche Beratung.
+<BlogCTA
+  service="web-development"
+  title="Brauchen Sie Hilfe bei der Migration?"
+  description="Als spezialisierte Webentwicklung-Agentur haben wir bereits dutzende Next.js 15 Projekte umgesetzt. Wir unterstützen Sie bei Performance-Audits, Migration, Training und Aufbau neuer Anwendungen."
+  buttonText="Jetzt Beratung anfragen"
+  href="/contact"
+/>
 
 ## Weiterführende Ressourcen
 

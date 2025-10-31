@@ -201,56 +201,58 @@ export default function BlogContent({
                 className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
               >
                 {posts.map((post, index) => (
-                  <motion.article
+                  <Link
                     key={post.slug}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 + index * 0.05 }}
-                    className="group relative overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md transition-all duration-300 hover:bg-white/15"
+                    href={`/blog/${post.slug}`}
+                    className="group block"
                   >
-                    <div className="p-8">
-                      <div className="mb-4 flex flex-wrap items-center gap-4">
-                        <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white capitalize">
-                          {post.frontmatter.category}
-                        </span>
-                        <div className="flex items-center gap-2 text-sm text-white/70">
-                          <Calendar className="h-4 w-4" />
-                          <time dateTime={post.frontmatter.publishedAt}>
-                            {new Date(post.frontmatter.publishedAt).toLocaleDateString('de-DE', {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric',
-                            })}
-                          </time>
+                    <motion.article
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.5 + index * 0.05 }}
+                      className="relative h-full overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-white/30 hover:bg-white/15 hover:shadow-2xl cursor-pointer"
+                    >
+                      <div className="p-8">
+                        <div className="mb-4 flex flex-wrap items-center gap-4">
+                          <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white capitalize">
+                            {post.frontmatter.category}
+                          </span>
+                          <div className="flex items-center gap-2 text-sm text-white/70">
+                            <Calendar className="h-4 w-4" />
+                            <time dateTime={post.frontmatter.publishedAt}>
+                              {new Date(post.frontmatter.publishedAt).toLocaleDateString('de-DE', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                              })}
+                            </time>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-white/70">
+                            <Clock className="h-4 w-4" />
+                            <span>{post.frontmatter.readingTime} Min.</span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-white/70">
-                          <Clock className="h-4 w-4" />
-                          <span>{post.frontmatter.readingTime} Min.</span>
+
+                        <h2 className="group-hover:text-accent-300 mb-3 line-clamp-2 text-xl font-bold text-white transition-colors">
+                          {post.frontmatter.title}
+                        </h2>
+
+                        <p className="mb-6 line-clamp-3 leading-relaxed text-white/80">
+                          {post.frontmatter.description}
+                        </p>
+
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-white/70">
+                            von {post.frontmatter.author.name}
+                          </span>
+                          <span className="text-accent-400 group-hover:text-accent-300 inline-flex items-center gap-2 text-sm font-medium transition-colors">
+                            Weiterlesen
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </span>
                         </div>
                       </div>
-
-                      <h2 className="group-hover:text-accent-300 mb-3 line-clamp-2 text-xl font-bold text-white transition-colors">
-                        {post.frontmatter.title}
-                      </h2>
-
-                      <p className="mb-6 line-clamp-3 leading-relaxed text-white/80">
-                        {post.frontmatter.description}
-                      </p>
-
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-white/70">
-                          von {post.frontmatter.author.name}
-                        </span>
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          className="text-accent-400 hover:text-accent-300 inline-flex items-center gap-2 text-sm font-medium transition-colors"
-                        >
-                          Weiterlesen
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.article>
+                    </motion.article>
+                  </Link>
                 ))}
               </motion.div>
 

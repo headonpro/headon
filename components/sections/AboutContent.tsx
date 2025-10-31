@@ -117,16 +117,21 @@ export default function AboutContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-heading mb-12 flex items-center justify-center gap-4 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
+              className="font-heading mb-12 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              Über{' '}
-              <Image
-                src="/headon-logo.svg"
-                alt="HEADON"
-                width={200}
-                height={50}
-                className="h-8 w-auto sm:h-10 md:h-12 lg:h-14"
-              />
+              <span className="flex items-center justify-center gap-4">
+                Über{' '}
+                <Image
+                  src="/headon-logo.svg"
+                  alt="HEADON"
+                  width={200}
+                  height={50}
+                  className="h-8 w-auto sm:h-10 md:h-12 lg:h-14"
+                />
+              </span>
+              <span className="mt-4 block text-2xl font-normal text-white/90 sm:text-3xl md:text-4xl">
+                Digitalagentur aus Lauda-Königshofen
+              </span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

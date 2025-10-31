@@ -273,6 +273,7 @@ export default function ContactContent() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="font-heading mb-12 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
             >
+              Kontakt -{' '}
               <span className="from-secondary-300 via-accent-500 to-secondary-600 bg-gradient-to-r bg-clip-text text-transparent">
                 Lassen Sie uns Ihr Projekt besprechen
               </span>

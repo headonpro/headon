@@ -8,7 +8,7 @@ import TechnologyTrustSection from '@/components/sections/TechnologyTrustSection
 import TrustPersonalitySection from '@/components/sections/TrustPersonalitySection'
 
 export const metadata: Metadata = {
-  title: 'Website erstellen lassen | Festpreise ab 2.500€',
+  title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Festpreise ab 2.500€',
   description:
     'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller. Professionelle Digitalagentur.',
   keywords: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     'Full-Service Digitalagentur',
   ].join(', '),
   openGraph: {
-    title: 'Website erstellen lassen | Festpreise ab 2.500€',
+    title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Festpreise ab 2.500€',
     description:
       'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller. Professionelle Digitalagentur.',
     images: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Website erstellen lassen | Festpreise ab 2.500€',
+    title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Festpreise ab 2.500€',
     description:
       'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller.',
     images: ['/og-images/home.jpg'],

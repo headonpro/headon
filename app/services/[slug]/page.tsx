@@ -7,7 +7,7 @@ import { Check, Clock, Code2, Smartphone, Palette, Database, LucideIcon } from '
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
-import { FAQAccordion } from '@/components/seo/FAQAccordion'
+import { ModernFAQAccordion } from '@/components/seo/ModernFAQAccordion'
 import { faqData } from '@/lib/content/faq-data'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
 import { BreadcrumbSchema } from '@/components/seo/SchemaGenerator'
@@ -262,7 +262,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <p className="text-muted-foreground mx-auto mb-12 max-w-2xl text-center">
               Antworten auf die wichtigsten Fragen zu {service.frontmatter.title.toLowerCase()}
             </p>
-            <FAQAccordion faqs={serviceFaqs} includeSchema={true} />
+            <ModernFAQAccordion faqs={serviceFaqs} includeSchema={true} />
           </div>
         </section>
       )}
