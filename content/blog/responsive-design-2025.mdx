@@ -213,6 +213,7 @@ Bilder machen oft 50-70% der Ladezeit einer Website aus. Responsive Images sind 
          (max-width: 1024px) 80vw,
          1200px"
   alt="Website Hero Image"
+  title="Responsive Hero-Bild für verschiedene Bildschirmgrößen"
   loading="lazy"
 />
 
@@ -220,7 +221,7 @@ Bilder machen oft 50-70% der Ladezeit einer Website aus. Responsive Images sind 
 <picture>
   <source media="(max-width: 640px)" srcset="hero-mobile.jpg" />
   <source media="(max-width: 1024px)" srcset="hero-tablet.jpg" />
-  <img src="hero-desktop.jpg" alt="Hero Image" />
+  <img src="hero-desktop.jpg" alt="Hero Image" title="Hero-Bild Desktop-Version" />
 </picture>
 ```
 

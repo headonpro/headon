@@ -25,11 +25,15 @@ Die vier POUR-Prinzipien:
 Informationen müssen für alle wahrnehmbar sein.
 
 ```tsx
-// ❌ Bild ohne Alt-Text
+// ❌ Bild ohne Alt-Text und title
 <img src="/product.jpg" />
 
-// ✅ Mit aussagekräftigem Alt-Text
-<Image src="/product.jpg" alt="Rotes Kleid mit Blumenmuster, Größe M" />
+// ✅ Mit aussagekräftigem Alt-Text und title
+<Image
+  src="/product.jpg"
+  alt="Rotes Kleid mit Blumenmuster, Größe M"
+  title="Produktbild: Rotes Sommerkleid"
+/>
 ```
 
 ### 2. Operable (Bedienbar)

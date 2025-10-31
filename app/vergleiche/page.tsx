@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     description:
       'Detaillierte Vergleiche von Frameworks, Technologien und Ansätzen. Fundierte Entscheidungen für Ihr Projekt treffen.',
     url: 'https://headon.pro/vergleiche',
+    type: 'website',
+    siteName: 'HEADON.pro',
+    locale: 'de_DE',
     images: [
       {
         url: '/og-images/services.jpg',

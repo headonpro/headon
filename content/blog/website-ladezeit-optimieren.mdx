@@ -155,6 +155,7 @@ Mehr Details in unserem [Core Web Vitals Guide](/blog/core-web-vitals-optimierun
   "
   sizes="(max-width: 768px) 100vw, 800px"
   alt="Beschreibung"
+  title="Responsive WebP-Bild für optimale Ladezeiten"
   loading="lazy"
   width="800"
   height="600"
@@ -165,7 +166,7 @@ Mehr Details in unserem [Core Web Vitals Guide](/blog/core-web-vitals-optimierun
 
 ```html
 <!-- Native Lazy Loading (Browser-Support 95%+) -->
-<img src="image.webp" loading="lazy" alt="..." />
+<img src="image.webp" loading="lazy" alt="..." title="Lazy-loaded Bild" />
 ```
 
 **Ergebnis:** 40-60% kleinere Seitengröße!
@@ -183,7 +184,7 @@ Mehr Details in unserem [Core Web Vitals Guide](/blog/core-web-vitals-optimierun
   <source srcset="image.webp" type="image/webp" />
 
   <!-- Fallback: JPEG für alte Browser -->
-  <img src="image.jpg" alt="Beschreibung" loading="lazy" />
+  <img src="image.jpg" alt="Beschreibung" title="Bild mit modernen Formaten und Fallback" loading="lazy" />
 </picture>
 ```
 
@@ -666,6 +667,7 @@ Bei [HEADON.pro](/services/web-development) hosten wir auf **Hetzner** (Deutschl
   sizes="(max-width: 768px) 100vw, 50vw"
   src="large.jpg"
   alt="..."
+  title="Responsive Bild für mobile und Desktop-Geräte"
 />
 ```
 

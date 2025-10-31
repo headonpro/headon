@@ -44,6 +44,10 @@ export const metadata: Metadata = {
     title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Ab 2.500€',
     description:
       'Website erstellen lassen im Main-Tauber-Kreis. Webdesign & App-Entwicklung zu Festpreisen ab 2.500€. KI-gestützt, 4x schneller. Professionelle Digitalagentur.',
+    url: 'https://headon.pro',
+    type: 'website',
+    siteName: 'HEADON.pro',
+    locale: 'de_DE',
     images: [
       {
         url: '/og-images/home.jpg',

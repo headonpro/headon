@@ -631,11 +631,17 @@ Bei unserem [E-Commerce-Projekt](/portfolio):
 ### 1. Unoptimierte Images
 
 ```tsx
-// ❌ Direktes <img> Tag
+// ❌ Direktes <img> Tag (keine Optimierung)
 <img src="/large-image.jpg" />
 
-// ✅ next/image
-<Image src="/large-image.jpg" width={800} height={600} />
+// ✅ next/image (automatische Optimierung)
+<Image
+  src="/large-image.jpg"
+  width={800}
+  height={600}
+  alt="Großes Bild"
+  title="Optimiertes Bild mit Next.js Image-Komponente"
+/>
 ```
 
 ### 2. Blocking Scripts
