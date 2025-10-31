@@ -216,9 +216,9 @@ export default function IndustryNavigator() {
                       className="overflow-hidden"
                     >
                       <div className="border-t border-white/20 px-6 pt-4 pb-6">
-                        <h4 className="mb-3 text-center font-semibold text-white">
+                        <p className="mb-3 text-center font-semibold text-white">
                           Unsere Lösungen für Sie:
-                        </h4>
+                        </p>
                         <ul className="mb-4 space-y-2">
                           {industry.solutions.map((solution, idx) => (
                             <li key={idx} className="flex items-start gap-2">
@@ -235,7 +235,7 @@ export default function IndustryNavigator() {
                             onClick={(e) => e.stopPropagation()}
                           >
                             <Button className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary w-full bg-gradient-to-r font-semibold transition-all">
-                              Mehr erfahren
+                              Mehr erfahren<span className="sr-only"> über {industry.title}</span>
                             </Button>
                           </Link>
                           <Link
@@ -260,7 +260,7 @@ export default function IndustryNavigator() {
                               variant="outline"
                               className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10"
                             >
-                              Kontakt
+                              Kontakt<span className="sr-only"> für {industry.title}</span>
                             </Button>
                           </Link>
                         </div>

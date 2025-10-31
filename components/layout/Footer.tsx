@@ -33,7 +33,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {/* Logo & Description */}
           <div className="space-y-4 md:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-block">
+            <Link href="/" className="inline-block" aria-label="HEADON.pro - Zur Startseite">
               <Image
                 src="/headon-logo_footer.svg"
                 alt="HEADON.pro"

@@ -40,7 +40,7 @@ export default function Header() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 flex items-center p-1.5">
+          <Link href="/" className="-m-1.5 flex items-center p-1.5" aria-label="HEADON.pro - Zur Startseite">
             <Logo width={120} height={32} className="h-8" />
           </Link>
         </div>
