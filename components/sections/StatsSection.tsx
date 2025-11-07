@@ -161,20 +161,22 @@ function StatCard({ stat, index }: { stat: StatsSectionProps['stats'][0]; index:
       <div className="flex h-full flex-col items-center justify-center rounded-2xl bg-white p-8 text-center shadow-lg transition-shadow duration-300 hover:shadow-2xl">
         {/* Value with count-up animation */}
         <div className="mb-3">
-          <motion.span
-            className="from-primary-600 to-secondary-500 bg-gradient-to-br bg-clip-text text-5xl font-bold text-transparent md:text-6xl"
-            style={{
-              // Force GPU acceleration for smooth animation
-              transform: 'translate3d(0, 0, 0)',
-              willChange: 'auto',
-            }}
-          >
-            {displayValue !== null ? displayValue : <motion.span>{rounded}</motion.span>}
-            {stat.suffix && <span className="text-4xl md:text-5xl">{stat.suffix}</span>}
-          </motion.span>
-          {stat.unit && (
-            <span className="ml-2 text-2xl font-medium text-gray-600 md:text-3xl">{stat.unit}</span>
-          )}
+          <div className="flex flex-col items-center">
+            <motion.span
+              className="from-primary-600 to-secondary-500 bg-gradient-to-br bg-clip-text text-5xl font-bold text-transparent md:text-6xl"
+              style={{
+                // Force GPU acceleration for smooth animation
+                transform: 'translate3d(0, 0, 0)',
+                willChange: 'auto',
+              }}
+            >
+              {displayValue !== null ? displayValue : <motion.span>{rounded}</motion.span>}
+              {stat.suffix && <span className="text-4xl md:text-5xl">{stat.suffix}</span>}
+            </motion.span>
+            {stat.unit && (
+              <span className="mt-1 text-base font-medium text-gray-600 md:text-lg">{stat.unit}</span>
+            )}
+          </div>
         </div>
 
         {/* Label */}

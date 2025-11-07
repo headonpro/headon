@@ -27,17 +27,17 @@ const iconMap = {
 
 const typeConfig = {
   positive: {
-    border: 'border-secondary-300/40',
-    bg: 'bg-secondary-50/60',
-    icon: 'text-secondary-600',
-    title: 'text-secondary-900',
+    border: 'border-green-300/40',
+    bg: 'bg-green-50/60',
+    icon: 'text-green-600',
+    title: 'text-green-900',
     defaultIcon: 'check' as const,
   },
   negative: {
-    border: 'border-primary-300/40',
-    bg: 'bg-primary-50/60',
-    icon: 'text-primary-700',
-    title: 'text-primary-900',
+    border: 'border-red-300/40',
+    bg: 'bg-red-50/60',
+    icon: 'text-red-600',
+    title: 'text-red-900',
     defaultIcon: 'x' as const,
   },
   neutral: {

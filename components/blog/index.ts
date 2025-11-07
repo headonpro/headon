@@ -9,3 +9,6 @@ export { CodeBlock } from './CodeBlock'
 export { ComparisonBlock } from './ComparisonBlock'
 export { BlogCTA } from './BlogCTA'
 export { BlogStats } from './BlogStats'
+export { BlogTable } from './BlogTable'
+// Temporarily comment out TableOfContents to isolate the issue
+// export { TableOfContents } from './TableOfContents'

@@ -14,7 +14,9 @@ import {
   BackendTechStack,
   RESTvsGraphQL,
 } from '@/components/services/ServiceComponents'
-import { KeyTakeaways, InfoBox, CodeBlock, ComparisonBlock, BlogCTA, BlogStats } from '@/components/blog'
+import { KeyTakeaways, InfoBox, CodeBlock, ComparisonBlock, BlogCTA, BlogStats, BlogTable } from '@/components/blog'
+// Temporarily import TableOfContents directly to isolate the issue
+// import { TableOfContents } from '@/components/blog/TableOfContents'
 
 interface MDXContentProps {
   children: React.ReactNode
@@ -161,4 +163,5 @@ export const mdxComponents = {
   ComparisonBlock,
   BlogCTA,
   BlogStats,
+  BlogTable
 }

@@ -5,6 +5,7 @@ import { ArticleSchema } from '@/components/seo/SchemaGenerator'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
 import MDXContent from '@/components/content/MDXContent'
 import { Button } from '@/components/ui/button'
+import { TableOfContents } from '@/components/blog/TableOfContents'
 
 interface BlogPostContentProps {
   blogPost: BlogPostWithMeta
@@ -243,22 +244,7 @@ export default function BlogPostContent({
             {toc.length > 0 && (
               <aside className="hidden lg:block">
                 <div className="sticky top-24">
-                  <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                    Inhaltsverzeichnis
-                  </h3>
-                  <nav className="space-y-2">
-                    {toc.map((item) => (
-                      <a
-                        key={item.id}
-                        href={`#${item.id}`}
-                        className={`block text-sm transition-colors hover:text-primary ${
-                          item.level === 3 ? 'pl-4 text-muted-foreground' : 'font-medium'
-                        }`}
-                      >
-                        {item.title}
-                      </a>
-                    ))}
-                  </nav>
+                  <TableOfContents items={toc} />
                 </div>
               </aside>
             )}

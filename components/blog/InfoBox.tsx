@@ -33,10 +33,10 @@ const infoBoxConfig = {
   success: {
     icon: CheckCircle,
     colors: {
-      border: 'border-secondary-300/40',
-      bg: 'bg-secondary-50/60',
-      icon: 'text-secondary-600',
-      title: 'text-secondary-900',
+      border: 'border-green-300/40',
+      bg: 'bg-green-50/60',
+      icon: 'text-green-600',
+      title: 'text-green-900',
     },
     defaultTitle: '✅ Best Practice',
   },
