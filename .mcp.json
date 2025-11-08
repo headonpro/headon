@@ -1,9 +1,5 @@
 {
   "mcpServers": {
-    "task-master": {
-      "command": "npx",
-      "args": ["task-master-ai", "mcp"]
-    },
     "chrome-devtools": {
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest", "--executablePath=/usr/bin/chromium"]

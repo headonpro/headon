@@ -1,9 +1,9 @@
 'use client'
 
 /**
- * CityPageContent Component (Enhanced Version)
+ * CityPageContent Component
  *
- * Redesigned city landing pages with improved UX, conversion optimization, and Local SEO
+ * Client wrapper for city landing pages with animated gradient background
  */
 
 import { motion } from 'framer-motion'
@@ -13,19 +13,13 @@ import type {
   ServiceContentResult,
   PortfolioContentResult,
 } from '@/lib/content/mdx-loader'
-import { MapPin, Users, TrendingUp, Clock } from 'lucide-react'
+import MDXContent from '@/components/content/MDXContent'
+import { MapPin, Users } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
-import AnimatedStats from '@/components/sections/AnimatedStats'
-import ProcessTimeline from '@/components/sections/ProcessTimeline'
-import TrustBadges from '@/components/sections/TrustBadges'
-import LeadMagnetCTA from '@/components/sections/LeadMagnetCTA'
-import CityFAQSection from '@/components/sections/CityFAQSection'
-import ServiceTabs from '@/components/sections/ServiceTabs'
-import { getCityFAQs } from '@/lib/content/city-faq-data'
 
 // Lazy load map component
 const SingleCityMap = dynamic(() => import('@/components/sections/SingleCityMap'), {
@@ -68,79 +62,12 @@ export default function CityPageContent({
     }
   }, [])
 
-  // Generate city-specific FAQs
-  const faqs = getCityFAQs(cityPage.frontmatter.name, 'Main-Tauber-Kreis')
-
-  // Stats for the city
-  const stats = [
-    {
-      value: 12,
-      label: 'Projekte in der Region',
-      suffix: '+',
-      icon: <TrendingUp className="h-6 w-6" />,
-    },
-    {
-      value: 98,
-      label: 'Kundenzufriedenheit',
-      suffix: '%',
-      icon: <Users className="h-6 w-6" />,
-    },
-    {
-      value: 1.5,
-      label: 'Durchschn. Ladezeit',
-      suffix: 's',
-      icon: <Clock className="h-6 w-6" />,
-    },
-    {
-      value: cityPage.frontmatter.population,
-      label: 'Einwohner',
-      icon: <MapPin className="h-6 w-6" />,
-    },
-  ]
-
-  // Process steps
-  const processSteps = [
-    {
-      number: 1,
-      title: 'Kostenlose Erstberatung',
-      description: `Persönliches Gespräch in ${cityPage.frontmatter.name} oder online. Wir analysieren Ihre Anforderungen und zeigen Ihnen Möglichkeiten auf.`,
-      duration: '30-45 Min',
-    },
-    {
-      number: 2,
-      title: 'Konzept & Angebot',
-      description:
-        'Sie erhalten ein detailliertes Konzept mit Festpreis-Angebot. Keine versteckten Kosten, keine Überraschungen.',
-      duration: '2-3 Tage',
-    },
-    {
-      number: 3,
-      title: 'Design & Entwicklung',
-      description:
-        'Wir entwickeln Ihre Website mit regelmäßigen Updates (alle 3-5 Tage). Sie können jederzeit Feedback geben und Anpassungen vornehmen.',
-      duration: '2-4 Wochen',
-    },
-    {
-      number: 4,
-      title: 'Testing & Launch',
-      description:
-        'Ausgiebige Tests auf allen Geräten, Performance-Optimierung und SEO-Check. Nach Ihrer Freigabe geht die Website live.',
-      duration: '3-5 Tage',
-    },
-    {
-      number: 5,
-      title: '30 Tage Support',
-      description:
-        'Nach dem Launch unterstützen wir Sie 30 Tage kostenlos bei Fragen, Anpassungen und Optimierungen.',
-      duration: 'Inklusive',
-    },
-  ]
-
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Animated Gradient Background */}
+      {/* Animated Gradient Background - same as HeroSection */}
       <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
+      {/* Animated Gradient Layers */}
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0 opacity-60"
@@ -179,7 +106,7 @@ export default function CityPageContent({
             <Breadcrumbs items={breadcrumbs.items} variant="dark" />
           </div>
 
-          {/* Hero Section */}
+          {/* Hero Section with H1 for local SEO */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -187,15 +114,21 @@ export default function CityPageContent({
             className="mx-auto mb-16 max-w-5xl"
           >
             <div className="mb-12 text-center">
+              {/* H1 with local keyword targeting */}
               <h1 className="mb-6 text-4xl font-bold tracking-tight text-white md:text-6xl">
                 Webentwicklung in {cityPage.frontmatter.name}
               </h1>
+
+              {/* Subtitle with state */}
               <p className="mb-4 text-xl text-white/90 md:text-2xl">{cityPage.frontmatter.state}</p>
+
+              {/* Description */}
               <p className="mx-auto max-w-3xl text-lg text-white/80">
                 {cityPage.frontmatter.description}
               </p>
             </div>
 
+            {/* Single City Map */}
             <div className="mb-8">
               <SingleCityMap
                 cityName={cityPage.frontmatter.name}
@@ -204,98 +137,93 @@ export default function CityPageContent({
             </div>
           </motion.div>
 
-          {/* Stats Section - NEW */}
+          {/* Stats Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mb-24 max-w-6xl"
+            className="mx-auto mb-16 max-w-4xl"
           >
-            <AnimatedStats stats={stats} variant="dark" />
-          </motion.div>
+            <div className="grid gap-6 md:grid-cols-2">
+              {/* Population Card */}
+              <div className="rounded-lg border border-white/20 bg-white/10 p-8 text-center backdrop-blur-md transition-colors hover:bg-white/20">
+                <div className="mb-4 flex justify-center">
+                  <Users className="h-12 w-12 text-white" />
+                </div>
+                <div className="mb-2 text-4xl font-bold text-white">
+                  {cityPage.frontmatter.population.toLocaleString('de-DE')}
+                </div>
+                <div className="text-white/80">Einwohner</div>
+              </div>
 
-          {/* About Teaser - Shortened MDX Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mx-auto mb-24 max-w-4xl"
-          >
-            <div className="rounded-lg border border-white/20 bg-white/10 p-8 text-white shadow-xl backdrop-blur-md md:p-12">
-              <h2 className="mb-6 text-3xl font-bold text-white">
-                Über {cityPage.frontmatter.name}
-              </h2>
-              <div className="[&_a]:text-white [&_a]:underline [&_a]:hover:text-white/80 [&_p]:mb-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-white/90 [&_strong]:font-semibold [&_strong]:text-white">
-                {/* Only show first section of MDX */}
-                {CompiledContent}
+              {/* Location Card */}
+              <div className="rounded-lg border border-white/20 bg-white/10 p-8 text-center backdrop-blur-md transition-colors hover:bg-white/20">
+                <div className="mb-4 flex justify-center">
+                  <MapPin className="h-12 w-12 text-white" />
+                </div>
+                <div className="mb-2 text-2xl font-bold text-white">
+                  {cityPage.frontmatter.state}
+                </div>
+                <div className="text-white/80">Bundesland</div>
               </div>
             </div>
           </motion.div>
 
-          {/* Services Tabs - NEW */}
+          {/* Main Content (MDX) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mx-auto mb-16 max-w-4xl"
+          >
+            <div className="rounded-lg border border-white/20 bg-white/10 p-8 text-white shadow-xl backdrop-blur-md md:p-12 [&_a]:text-white [&_a]:underline [&_a]:hover:text-white/80 [&_h1]:mt-0 [&_h1]:mb-6 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:text-white [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-white [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-white [&_li]:leading-relaxed [&_li]:text-white/90 [&_ol]:mt-4 [&_ol]:mb-6 [&_ol]:space-y-3 [&_p]:mb-5 [&_p]:text-base [&_p]:leading-relaxed [&_p]:text-white/90 [&_strong]:font-semibold [&_strong]:text-white [&_ul]:mt-4 [&_ul]:mb-6 [&_ul]:space-y-3">
+              <MDXContent>{CompiledContent}</MDXContent>
+            </div>
+          </motion.div>
+
+          {/* Services Offered in City */}
           {services.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mx-auto mb-24 max-w-6xl"
+              className="mx-auto mb-16 max-w-6xl"
             >
               <h2 className="mb-4 text-center text-3xl font-bold text-white md:text-4xl">
                 Unsere Services in {cityPage.frontmatter.name}
               </h2>
               <p className="mx-auto mb-12 max-w-2xl text-center text-white/80">
-                Professionelle Dienstleistungen mit modernen Technologien
+                Professionelle Dienstleistungen direkt vor Ort
               </p>
-              <ServiceTabs services={services} variant="dark" />
+
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {services.map((service) => (
+                  <Link key={service!.slug} href={`/services/${service!.slug}`} className="group">
+                    <div className="h-full rounded-lg border border-white/20 bg-white/95 p-6 backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white hover:shadow-xl">
+                      <h3 className="group-hover:text-primary mb-3 text-xl font-semibold transition-colors">
+                        {service!.frontmatter.title}
+                      </h3>
+                      <p className="mb-4 line-clamp-3 text-sm text-gray-600">
+                        {service!.frontmatter.description}
+                      </p>
+                      <div className="text-primary text-sm font-semibold">
+                        ab {service!.frontmatter.pricing.from.toLocaleString('de-DE')}{' '}
+                        {service!.frontmatter.pricing.currency}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </motion.div>
           )}
 
-          {/* Intermediate CTA - Lead Magnet */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mx-auto mb-24 max-w-5xl"
-          >
-            <LeadMagnetCTA cityName={cityPage.frontmatter.name} variant="dark" />
-          </motion.div>
-
-          {/* Process Timeline - NEW */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mx-auto mb-24 max-w-5xl"
-          >
-            <h2 className="mb-4 text-center text-3xl font-bold text-white md:text-4xl">
-              So läuft die Zusammenarbeit ab
-            </h2>
-            <p className="mx-auto mb-12 max-w-2xl text-center text-white/80">
-              Von der ersten Idee bis zum erfolgreichen Launch – transparent und planbar
-            </p>
-            <ProcessTimeline steps={processSteps} variant="dark" />
-          </motion.div>
-
-          {/* Trust Badges - NEW */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="mx-auto mb-24 max-w-6xl"
-          >
-            <h2 className="mb-12 text-center text-3xl font-bold text-white md:text-4xl">
-              Qualität & Sicherheit garantiert
-            </h2>
-            <TrustBadges variant="dark" showTechStack={true} />
-          </motion.div>
-
-          {/* Case Studies */}
+          {/* Local Case Studies */}
           {caseStudies.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mx-auto mb-24 max-w-6xl"
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mx-auto mb-16 max-w-6xl"
             >
               <h2 className="mb-4 text-center text-3xl font-bold text-white md:text-4xl">
                 Erfolgsgeschichten aus der Region
@@ -308,6 +236,7 @@ export default function CityPageContent({
                 {caseStudies.map((project) => (
                   <Link key={project!.slug} href={`/portfolio/${project!.slug}`} className="group">
                     <div className="overflow-hidden rounded-lg border border-white/20 bg-white/95 backdrop-blur-sm transition-all hover:border-white/40 hover:shadow-xl">
+                      {/* Project Image */}
                       {project!.frontmatter.image && (
                         <div className="relative h-48 overflow-hidden">
                           <Image
@@ -320,6 +249,7 @@ export default function CityPageContent({
                         </div>
                       )}
 
+                      {/* Project Info */}
                       <div className="p-6">
                         <div className="mb-2 text-sm text-gray-600">
                           {project!.frontmatter.client.name}
@@ -331,6 +261,7 @@ export default function CityPageContent({
                           {project!.frontmatter.description}
                         </p>
 
+                        {/* Metrics */}
                         {project!.frontmatter.metrics.length > 0 && (
                           <div className="grid grid-cols-2 gap-3 border-t border-gray-200 pt-4">
                             {project!.frontmatter.metrics.slice(0, 2).map((metric, idx) => (
@@ -351,25 +282,11 @@ export default function CityPageContent({
             </motion.div>
           )}
 
-          {/* FAQ Section - NEW */}
+          {/* Final CTA Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            className="mx-auto mb-24 max-w-5xl"
-          >
-            <CityFAQSection
-              faqs={faqs}
-              cityName={cityPage.frontmatter.name}
-              variant="dark"
-            />
-          </motion.div>
-
-          {/* Final CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="mx-auto max-w-4xl"
           >
             <div className="rounded-2xl border border-white/20 bg-white/10 p-12 text-center shadow-2xl backdrop-blur-md">

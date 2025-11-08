@@ -25,6 +25,10 @@ import type {
   AggregateRatingSchema,
   BreadcrumbSchema,
   Organization,
+  LocalBusinessSchema,
+  ServiceSchema,
+  PostalAddress,
+  GeoCoordinates,
 } from '@/lib/types/schema'
 
 // ============================================================================
@@ -276,5 +280,127 @@ export function buildBreadcrumbListSchema(items: BreadcrumbInput[]): BreadcrumbS
       name: item.name,
       item: item.url ? toAbsoluteUrl(item.url) : undefined,
     })),
+  }
+}
+
+/**
+ * Build LocalBusiness Schema for regional/city pages
+ * @see https://schema.org/LocalBusiness
+ */
+export interface LocalBusinessInput {
+  name: string
+  description?: string
+  url?: string
+  image?: string | string[]
+  telephone?: string
+  email?: string
+  address: {
+    streetAddress?: string
+    city: string
+    region?: string // State/Province
+    postalCode?: string
+    country?: string
+  }
+  coordinates: {
+    lat: number
+    lng: number
+  }
+  serviceArea?: string[] // City names
+  priceRange?: string // "€€€"
+  openingHours?: string[]
+  socialMedia?: string[]
+}
+
+export function buildLocalBusinessSchema(input: LocalBusinessInput): LocalBusinessSchema {
+  const postalAddress: PostalAddress = {
+    '@type': 'PostalAddress',
+    streetAddress: input.address.streetAddress,
+    addressLocality: input.address.city,
+    addressRegion: input.address.region,
+    postalCode: input.address.postalCode,
+    addressCountry: input.address.country || 'DE',
+  }
+
+  const geo: GeoCoordinates = {
+    '@type': 'GeoCoordinates',
+    latitude: input.coordinates.lat,
+    longitude: input.coordinates.lng,
+  }
+
+  const areaServed = input.serviceArea?.map((city) => ({
+    '@type': 'City' as const,
+    name: city,
+  }))
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: input.name,
+    description: input.description,
+    url: input.url ? toAbsoluteUrl(input.url) : undefined,
+    image: Array.isArray(input.image)
+      ? input.image.map(toAbsoluteUrl)
+      : input.image
+        ? toAbsoluteUrl(input.image)
+        : undefined,
+    telephone: input.telephone,
+    email: input.email,
+    address: postalAddress,
+    geo,
+    areaServed,
+    priceRange: input.priceRange,
+    openingHours: input.openingHours,
+    sameAs: input.socialMedia,
+  }
+}
+
+/**
+ * Build Service Schema for individual services
+ * @see https://schema.org/Service
+ */
+export interface ServiceInput {
+  name: string
+  description: string
+  serviceType: string
+  url?: string
+  image?: string | string[]
+  areaServed?: string[] // City names
+  price?: {
+    from?: number
+    to?: number
+    currency?: string
+    priceRange?: string
+  }
+}
+
+export function buildServiceSchema(input: ServiceInput): ServiceSchema {
+  const areaServed = input.areaServed?.map((city) => ({
+    '@type': 'City' as const,
+    name: city,
+  }))
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: input.name,
+    description: input.description,
+    provider: getOrganization(),
+    serviceType: input.serviceType,
+    areaServed,
+    offers: input.price
+      ? {
+          '@type': 'Offer',
+          price: input.price.from?.toString(),
+          priceCurrency: input.price.currency || 'EUR',
+          priceRange: input.price.priceRange,
+          availability: 'https://schema.org/InStock',
+        }
+      : undefined,
+    image: Array.isArray(input.image)
+      ? input.image.map(toAbsoluteUrl)
+      : input.image
+        ? toAbsoluteUrl(input.image)
+        : undefined,
+    url: input.url ? toAbsoluteUrl(input.url) : undefined,
   }
 }

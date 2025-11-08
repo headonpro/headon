@@ -160,6 +160,65 @@ export interface BreadcrumbSchema {
 }
 
 // ============================================================================
+// LocalBusinessSchema - For Local SEO
+// ============================================================================
+
+export interface PostalAddress {
+  '@type': 'PostalAddress'
+  streetAddress?: string
+  addressLocality: string // City
+  addressRegion?: string // State/Province
+  postalCode?: string
+  addressCountry?: string
+}
+
+export interface GeoCoordinates {
+  '@type': 'GeoCoordinates'
+  latitude: number
+  longitude: number
+}
+
+export interface LocalBusinessSchema {
+  '@context': 'https://schema.org'
+  '@type': 'LocalBusiness' | 'ProfessionalService'
+  name: string
+  description?: string
+  url?: string
+  image?: string | string[]
+  telephone?: string
+  email?: string
+  address: PostalAddress
+  geo: GeoCoordinates
+  areaServed?: string[] | { '@type': 'City' | 'State'; name: string }[]
+  priceRange?: string // e.g., "€€€"
+  openingHours?: string[] // e.g., ["Mo-Fr 09:00-18:00"]
+  sameAs?: string[] // Social media URLs
+}
+
+// ============================================================================
+// ServiceSchema - For Professional Services
+// ============================================================================
+
+export interface ServiceSchema {
+  '@context': 'https://schema.org'
+  '@type': 'Service'
+  name: string
+  description: string
+  provider: Organization
+  serviceType: string
+  areaServed?: string | string[] | { '@type': 'City' | 'State'; name: string }[]
+  offers?: {
+    '@type': 'Offer'
+    price?: string
+    priceCurrency?: string
+    priceRange?: string
+    availability?: string
+  }
+  image?: string | string[]
+  url?: string
+}
+
+// ============================================================================
 // Union Types for Schema Builders
 // ============================================================================
 
@@ -171,6 +230,8 @@ export type SchemaType =
   | ReviewSchema
   | AggregateRatingSchema
   | BreadcrumbSchema
+  | LocalBusinessSchema
+  | ServiceSchema
 
 // ============================================================================
 // Helper Types
