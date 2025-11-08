@@ -89,16 +89,16 @@ export default function Header() {
                   {/* Dropdown */}
                   {branchenOpen && (
                     <div className="absolute top-full left-0 z-50 w-64 pt-2">
-                      <div className="rounded-lg py-2">
+                      <div className="rounded-lg border border-white/10 bg-primary-600/95 py-2 shadow-xl backdrop-blur-md">
                         {branchenItems.map((branche) => (
                           <Link
                             key={branche.href}
                             href={branche.href}
                             className={cn(
-                              'block px-4 py-2 text-sm font-medium transition-colors',
+                              'block px-4 py-2 text-sm font-medium transition-all rounded-md mx-2',
                               pathname === branche.href
-                                ? 'text-accent-500'
-                                : 'hover:text-accent-500 text-white/90'
+                                ? 'text-accent-500 bg-white/10'
+                                : 'hover:text-accent-500 hover:bg-white/5 text-white/90'
                             )}
                           >
                             {branche.name}

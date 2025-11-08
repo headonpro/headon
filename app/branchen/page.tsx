@@ -1,20 +1,18 @@
 import { getAllBranchePages } from '@/lib/content/content-api'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import * as Icons from 'lucide-react'
+import BranchenOverviewContent from '@/components/sections/BranchenOverviewContent'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Branchen-Lösungen | HEADON - Webdesign für jede Branche',
+  title: 'Branchen-Lösungen | HEADON - Enterprise Web Development',
   description:
-    'Spezialisierte Website-Lösungen für Gastronomie, Handwerk, Einzelhandel, Beratung, Immobilien und Fitness. Maßgeschneidert für Ihre Branche.',
+    'Spezialisierte Website-Lösungen mit Enterprise-Architektur. Next.js 15, TypeScript, Performance-optimiert. Für Gastronomie, Handwerk, Einzelhandel, Beratung, Immobilien und Fitness.',
   alternates: {
     canonical: 'https://headon.pro/branchen',
   },
   openGraph: {
-    title: 'Branchen-Lösungen | HEADON - Webdesign für jede Branche',
+    title: 'Branchen-Lösungen | HEADON - Enterprise Web Development',
     description:
-      'Spezialisierte Website-Lösungen für Gastronomie, Handwerk, Einzelhandel, Beratung, Immobilien und Fitness.',
+      'Spezialisierte Website-Lösungen mit Enterprise-Architektur. Performance-optimiert, skalierbar und sicher.',
     url: 'https://headon.pro/branchen',
     type: 'website',
   },
@@ -22,100 +20,10 @@ export const metadata: Metadata = {
 
 /**
  * Branchen Overview Page
- * Displays all available industry-specific landing pages
+ * Displays all available industry-specific landing pages with enterprise-level features
  */
 export default async function BranchenPage() {
   const branchePages = await getAllBranchePages()
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
-      {/* Hero Section */}
-      <section className="from-primary-600 via-primary-500 to-secondary-500 bg-gradient-to-br py-24 text-white">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl">
-              Website-Lösungen für Ihre Branche
-            </h1>
-            <p className="mx-auto max-w-2xl text-xl text-white/90">
-              Spezialisierte Websites, die auf die Anforderungen Ihrer Branche zugeschnitten sind.
-              Von der Gastronomie bis zum Immobiliengeschäft – wir kennen Ihre Bedürfnisse.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Branchen Grid */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {branchePages.map((branche) => {
-              const IconComponent = Icons[branche.frontmatter.icon as keyof typeof Icons] as
-                | React.ComponentType<{ className?: string }>
-                | undefined
-
-              return (
-                <Link
-                  key={branche.slug}
-                  href={`/branchen/${branche.slug}`}
-                  className="group"
-                  aria-label={`Zur ${branche.frontmatter.name} Seite`}
-                >
-                  <div className="hover:border-primary-500 h-full rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all hover:shadow-xl">
-                    {/* Icon */}
-                    <div className="bg-primary-100 text-primary-600 group-hover:bg-primary-600 mb-6 flex h-16 w-16 items-center justify-center rounded-xl transition-colors group-hover:text-white">
-                      {IconComponent && <IconComponent className="h-8 w-8" />}
-                    </div>
-
-                    {/* Content */}
-                    <h2 className="group-hover:text-primary-600 mb-3 text-2xl font-bold text-gray-900 transition-colors">
-                      {branche.frontmatter.name}
-                    </h2>
-                    <p className="mb-4 text-gray-600">{branche.frontmatter.description}</p>
-
-                    {/* Pricing */}
-                    <div className="text-primary-600 mb-6 text-sm font-semibold">
-                      ab {branche.frontmatter.pricing.from.toLocaleString('de-DE')}{' '}
-                      {branche.frontmatter.pricing.currency}
-                    </div>
-
-                    {/* CTA */}
-                    <div className="text-primary-600 group-hover:text-primary-700 flex items-center transition-colors">
-                      <span className="font-semibold">Mehr erfahren</span>
-                      <Icons.ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gray-50 py-24">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl text-center">
-            <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
-              Ihre Branche nicht dabei?
-            </h2>
-            <p className="mb-8 text-xl text-gray-600">
-              Wir entwickeln maßgeschneiderte Lösungen für jede Branche. Sprechen Sie uns an!
-            </p>
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <Link href="/contact">
-                <Button size="lg" className="text-white">
-                  Jetzt Beratung anfragen
-                </Button>
-              </Link>
-              <Link href="/portfolio">
-                <Button size="lg" variant="outline">
-                  Portfolio ansehen
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
+  return <BranchenOverviewContent branchePages={branchePages} />
 }
