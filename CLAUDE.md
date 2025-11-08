@@ -87,7 +87,7 @@ const posts = await getBlogPosts({
   category: 'web-development',
   featured: true,
   page: 1,
-  perPage: 10
+  perPage: 10,
 })
 
 // Get single post with TOC
@@ -114,12 +114,15 @@ export const metadata: Metadata = {
   title: 'Services | HEADON.pro',
   description: '...',
   keywords: '...',
-  openGraph: { /* */ },
-  alternates: { canonical: '...' }
+  openGraph: {
+    /* */
+  },
+  alternates: { canonical: '...' },
 }
 ```
 
 Import in page:
+
 ```typescript
 // app/services/page.tsx
 export { metadata } from './metadata'
@@ -181,6 +184,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 #### Frontmatter Validation Pattern
 
 All content has strict Zod validation:
+
 ```typescript
 // lib/content/frontmatter.ts
 export const blogPostFrontmatterSchema = z.object({
@@ -197,6 +201,7 @@ Fails at build time if frontmatter is invalid. Each content type has its own sch
 #### Comparison Data Pattern
 
 Large comparison tables live in `lib/content/comparisons/`:
+
 ```typescript
 // lib/content/comparisons/react-vs-vue.ts
 export const reactVsVueComparison = {
@@ -211,6 +216,7 @@ Used in dynamic routes like `app/vergleiche/[slug]/page.tsx`
 #### Multi-Step Form Pattern
 
 Contact form uses state-based multi-step pattern with file uploads:
+
 ```typescript
 // app/contact/MultiStepForm.tsx
 const [step, setStep] = useState(1)
@@ -282,6 +288,7 @@ NEXT_PUBLIC_UMAMI_WEBSITE_ID=
 ### Email Template System
 
 Rich HTML email templates in `lib/email-templates.ts`:
+
 - Responsive design with inline CSS
 - Lead score badge
 - Grid layout for lead information
@@ -293,6 +300,7 @@ Rich HTML email templates in `lib/email-templates.ts`:
 ### `/api/contact` (POST)
 
 Handles contact form submissions:
+
 - Validates required fields (name, email, message)
 - Calculates lead score
 - Saves to Supabase `leads` table
@@ -304,6 +312,7 @@ Handles contact form submissions:
 ### `/api/health` (GET)
 
 Health check endpoint for Docker/monitoring:
+
 - Returns 200 OK if app is running
 - Used by docker-compose healthcheck
 - Used by CI/CD pipeline post-deployment
@@ -313,6 +322,7 @@ Health check endpoint for Docker/monitoring:
 ### Umami Analytics (Self-Hosted)
 
 Complete analytics stack in docker-compose:
+
 - **Umami Service**: Port 3002, analytics dashboard
 - **PostgreSQL Database**: Dedicated database for analytics
 - **Script Integration**: `components/UmamiScript.tsx` loads tracking
@@ -322,6 +332,7 @@ Complete analytics stack in docker-compose:
 ### Web Vitals Monitoring
 
 Optional performance monitoring:
+
 ```typescript
 // components/web-vitals-reporter.tsx
 // Tracks: CLS, FCP, INP, LCP, TTFB
@@ -335,12 +346,14 @@ Metrics can be sent to any endpoint for analysis.
 ### Glossary System
 
 `lib/content/glossary.ts` contains 30+ technical terms:
+
 - Web development concepts
 - Mobile app terminology
 - Design & UX terms
 - Marketing technology
 
 Each term includes:
+
 - Short definition
 - Full explanation (SEO-optimized)
 - Benefits list
@@ -350,6 +363,7 @@ Each term includes:
 ### FAQ Data
 
 `lib/content/faq-data.ts` contains categorized FAQs:
+
 - Grouped by topic
 - Pre-written Q&A pairs
 - Used in multiple pages
@@ -358,6 +372,7 @@ Each term includes:
 ### Dynamic Sitemap
 
 `app/sitemap.ts` auto-generates sitemap from:
+
 - All blog posts
 - Portfolio projects
 - Service pages
@@ -381,6 +396,7 @@ Each term includes:
 ```
 
 **Benefits**:
+
 - Smaller final image size
 - Cached dependency layer
 - Non-root user for security
@@ -417,17 +433,19 @@ Three services in `docker-compose.yml`:
 
 1. Create MDX file: `content/blog/my-post.mdx`
 2. Add frontmatter:
+
 ```yaml
 ---
-title: "My Post"
-date: "2025-01-15"
-category: "web-development"
-tags: ["nextjs", "react"]
+title: 'My Post'
+date: '2025-01-15'
+category: 'web-development'
+tags: ['nextjs', 'react']
 featured: false
-author: "HEADON Team"
-excerpt: "Short description"
+author: 'HEADON Team'
+excerpt: 'Short description'
 ---
 ```
+
 3. Write content in MDX
 4. Post auto-appears in `/blog` via Content API
 
@@ -447,6 +465,7 @@ excerpt: "Short description"
 ### Working with shadcn/ui Components
 
 Configuration in `components.json`:
+
 ```bash
 # Add individual components
 pnpm dlx shadcn@latest add button
@@ -601,6 +620,7 @@ This site targets German-speaking clients in specific regions:
 - **Industries**: Various (branchen pages cover different sectors)
 
 When creating content, maintain:
+
 - German language throughout
 - Regional keyword optimization
 - Local business context

@@ -55,6 +55,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - **Technologien** (`content/technologie/`): Technologie-Erklärseiten
 
 **Content-Pipeline:**
+
 - MDX-Dateien mit Frontmatter-Validierung (Zod Schemas)
 - Automatische Syntax-Highlighting für Code-Beispiele
 - Table of Contents (TOC) Auto-Generierung
@@ -65,23 +66,27 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 ### 2. Intelligentes Lead-Management & CRM
 
 **Multi-Step Contact Form (4 Schritte):**
+
 - Schritt 1: Kontaktinformationen (Name, E-Mail, Firma, Telefon)
 - Schritt 2: Projekttyp-Auswahl (Website, App, E-Commerce, Custom)
 - Schritt 3: Budget & Timeline
 - Schritt 4: Nachricht & File-Upload
 
 **Automatisches Lead-Scoring System:**
+
 - Budget-basierte Bewertung (höheres Budget = mehr Punkte)
 - Timeline-Dringlichkeit (schnellere Timeline = höhere Priorität)
 - Projekttyp-Komplexität
 - File-Attachments (zeigt Vorbereitung)
 
 **Scoring-Kategorien:**
+
 - 🔥 HIGH PRIORITY (Score > 30)
 - ⚡ MEDIUM (Score > 15)
 - 📝 STANDARD (Score ≤ 15)
 
 **Rich Email-Notifications:**
+
 - Responsive HTML-Templates mit Inline-CSS
 - Lead-Score Badge prominent
 - Grid-Layout für strukturierte Lead-Informationen
@@ -90,6 +95,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - Versand via Resend API
 
 **Supabase Integration:**
+
 - Leads-Tabelle für persistente Speicherung
 - Lead-Metadaten (source, lead_score, created_at)
 - File-Informationen (count, names)
@@ -98,6 +104,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 ### 3. Regional SEO & Local Marketing
 
 **Stadt-spezifische Landing Pages:**
+
 - Bad Mergentheim
 - Lauda-Königshofen
 - Tauberbischofsheim
@@ -106,6 +113,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - Würzburg
 
 **Jede Stadt-Seite enthält:**
+
 - Lokale Keyword-Optimierung
 - Regionale Referenzen und Kontext
 - Google Maps Integration (Leaflet/React-Leaflet)
@@ -113,11 +121,13 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - Canonical URLs für SEO
 
 **SEO-Utilities:**
+
 - **Meta Builder** (`lib/seo/meta-builder.ts`): Next.js Metadata-Generierung
 - **Schema Builder** (`lib/seo/schema-builder.ts`): JSON-LD Structured Data
 - **OG Image Generator** (`lib/seo/og-image-generator.ts`): Dynamische Social-Media-Bilder
 
 **Separate Metadata-Dateien:**
+
 - Jede Route hat `metadata.ts` für SEO-Konfiguration
 - OpenGraph, Twitter Cards, Canonical URLs
 - Keywords und Descriptions optimiert für regionale Suche
@@ -125,6 +135,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 ### 4. Educational Content & SEO Traffic
 
 **Glossar-System** (`lib/content/glossary.ts`):
+
 - 30+ technische Begriffe mit ausführlichen Erklärungen
 - Kategorisiert: Development, Design, Performance, Mobile
 - SEO-optimiert für "Was ist X?" Suchanfragen
@@ -132,6 +143,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - Keywords für Long-Tail-Search
 
 **Vergleichs-Artikel** (`lib/content/comparisons/`):
+
 - 12+ technische Vergleiche (React vs Vue, Next.js vs SPA, etc.)
 - Kriterien-basierte Bewertungen
 - Tabellen-Format für einfache Übersicht
@@ -139,12 +151,14 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - Unterstützt Kaufentscheidungen
 
 **FAQ-System** (`lib/content/faq-data.ts`):
+
 - Kategorisierte häufig gestellte Fragen
 - Zentrale Datenverwaltung
 - Wiederverwendbar auf mehreren Seiten
 - Schema.org FAQPage Markup
 
 **Dynamic Sitemap** (`app/sitemap.ts`):
+
 - Auto-generiert aus allen Content-Typen
 - Parallel Loading für Performance
 - Cached (1 Stunde Revalidation)
@@ -154,6 +168,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 ### 5. Self-Hosted Analytics & Monitoring
 
 **Umami Analytics Stack:**
+
 - Umami Web Analytics (Port 3002)
 - Dedizierte PostgreSQL-Datenbank
 - Docker-Compose Integration
@@ -161,12 +176,14 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - Dashboard: analytics.headon.pro
 
 **Web Vitals Monitoring:**
+
 - Core Web Vitals Tracking (CLS, FCP, INP, LCP, TTFB)
 - Automatische Datensammlung via web-vitals Library
 - Optional: Versand an Analytics-Endpoint
 - Performance-Budget Überwachung
 
 **Health Monitoring:**
+
 - `/api/health` Endpoint für Container-Überwachung
 - Docker Healthchecks
 - CI/CD Post-Deployment Verification
@@ -175,6 +192,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 ### 6. Performance & SEO Excellence
 
 **Next.js 15 App Router Optimierungen:**
+
 - React 19 mit Server Components
 - Static Site Generation (SSG) für Content-Seiten
 - Server-Side Rendering (SSR) für dynamische Daten
@@ -182,18 +200,21 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - 4 CPU-Cores für Build-Performance
 
 **Core Web Vitals:**
+
 - LCP: < 1.5s (Largest Contentful Paint)
 - FID: < 100ms (First Input Delay)
 - CLS: < 0.1 (Cumulative Layout Shift)
 - Lighthouse Score: 95+ in allen Kategorien
 
 **Caching-Strategie:**
+
 - Next.js Built-in Cache
 - Sitemap: 1 Stunde Revalidation
 - Static Content Pre-Rendering
 - Docker Volume für Next.js Cache
 
 **Image Optimization:**
+
 - Next.js Image Component
 - Remote Patterns für alle HTTPS-Quellen
 - Optimized-Image Wrapper (`components/ui/optimized-image.tsx`)
@@ -201,23 +222,27 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 ### 7. Developer Experience
 
 **TypeScript Strict Mode:**
+
 - Comprehensive Type Safety
 - Fail-Fast bei Type-Errors
 - Selbstdokumentierender Code
 
 **Code Quality Tools:**
+
 - ESLint + Prettier
 - Tailwind CSS Class Sorting
 - Pre-Commit Hooks
 - CI/CD Build Verification
 
 **shadcn/ui Integration:**
+
 - Moderne, accessible UI-Komponenten
 - Radix UI Primitives
 - Einfach erweiterbar via CLI
 - Tailwind CSS v4 Integration
 
 **MDX Development:**
+
 - Syntax Highlighting (Shiki)
 - Frontmatter Validation (Zod)
 - Content API für einfachen Zugriff
@@ -352,6 +377,7 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 ### Dashboard Type
 
 **Self-Hosted Umami Analytics:**
+
 - Port 3002 mit dedizierter PostgreSQL-Datenbank
 - Real-time Visitor Tracking
 - Page Views, Session Duration, Bounce Rate
@@ -361,12 +387,14 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 - Custom Events für Conversion-Tracking
 
 **Performance Monitoring:**
+
 - Web Vitals Tracking integriert
 - Optional: Externe Endpoint-Integration
 - Core Web Vitals Dashboard
 - Lighthouse CI für Build-Time Checks
 
 **Lead-Management Dashboard:**
+
 - Supabase Database für Lead-Übersicht
 - Lead-Scoring Visualisierung
 - Email-Notification Status
@@ -383,30 +411,35 @@ Die Plattform bietet eine produktionsreife Lösung mit:
 ### Key Metrics Displayed
 
 **Performance:**
+
 - Core Web Vitals (LCP, FID, CLS, TTFB)
 - Page Load Times
 - JavaScript Bundle Sizes
 - Build Durations
 
 **User Engagement:**
+
 - Page Views und Unique Visitors
 - Session Duration und Pages per Session
 - Bounce Rate pro Seite
 - Traffic Sources (Organic, Direct, Referral)
 
 **Conversion Tracking:**
+
 - Contact Form Submissions
 - Lead-Score Distribution
 - High-Priority Lead Rate
 - Email-Delivery Success Rate
 
 **Content Performance:**
+
 - Top Blog Posts (Page Views)
 - Top Glossar-Begriffe
 - Top Vergleichs-Artikel
 - Regional Landing Page Performance
 
 **Technical Health:**
+
 - API Response Times (/api/health, /api/contact)
 - Docker Container Status
 - Database Connection Health

@@ -21,14 +21,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const currentDate = new Date()
 
   // Load all content in parallel for performance
-  const [blogPosts, portfolioProjects, servicePages, cityPages, branchePages, technologyPages] = await Promise.all([
-    getAllBlogPosts(),
-    getAllPortfolioProjects(),
-    getAllServicePages(),
-    getAllCityPages(),
-    getAllBranchePages(),
-    getAllTechnologyPages(),
-  ])
+  const [blogPosts, portfolioProjects, servicePages, cityPages, branchePages, technologyPages] =
+    await Promise.all([
+      getAllBlogPosts(),
+      getAllPortfolioProjects(),
+      getAllServicePages(),
+      getAllCityPages(),
+      getAllBranchePages(),
+      getAllTechnologyPages(),
+    ])
 
   // Static pages with priorities
   const staticPages: MetadataRoute.Sitemap = [

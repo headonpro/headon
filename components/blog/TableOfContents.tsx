@@ -51,10 +51,10 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
             setActiveId(entry.target.id)
 
             // Find parent section for nested items
-            const currentItem = items.find(item => item.id === entry.target.id)
+            const currentItem = items.find((item) => item.id === entry.target.id)
             if (currentItem && currentItem.level === 3) {
               // Find the parent h2 for this h3
-              const currentIndex = items.findIndex(item => item.id === entry.target.id)
+              const currentIndex = items.findIndex((item) => item.id === entry.target.id)
               for (let i = currentIndex - 1; i >= 0; i--) {
                 if (items[i].level === 2) {
                   setActiveParentId(items[i].id)
@@ -69,7 +69,7 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
       },
       {
         rootMargin: '-20% 0% -70% 0%',
-        threshold: 0
+        threshold: 0,
       }
     )
 
@@ -104,44 +104,47 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
   }, [])
 
   // Group items by parent sections
-  const groupedItems = items.reduce((acc, item) => {
-    if (item.level === 2) {
-      acc.push({
-        parent: item,
-        children: []
-      })
-    } else if (item.level === 3 && acc.length > 0) {
-      acc[acc.length - 1].children.push(item)
-    }
-    return acc
-  }, [] as Array<{ parent: TocItem; children: TocItem[] }>)
+  const groupedItems = items.reduce(
+    (acc, item) => {
+      if (item.level === 2) {
+        acc.push({
+          parent: item,
+          children: [],
+        })
+      } else if (item.level === 3 && acc.length > 0) {
+        acc[acc.length - 1].children.push(item)
+      }
+      return acc
+    },
+    [] as Array<{ parent: TocItem; children: TocItem[] }>
+  )
 
   return (
     <div className={cn('relative', className)}>
       {/* Progress Bar */}
-      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-200 rounded-full overflow-hidden">
+      <div className="absolute top-0 bottom-0 left-0 w-0.5 overflow-hidden rounded-full bg-gray-200">
         <div
-          className="w-full bg-primary transition-all duration-300 ease-out"
+          className="bg-primary w-full transition-all duration-300 ease-out"
           style={{ height: `${scrollProgress}%` }}
         />
       </div>
 
       {/* TOC Content */}
       <nav className="pl-4">
-        <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+        <h3 className="text-muted-foreground mb-4 text-sm font-semibold tracking-wider uppercase">
           Inhaltsverzeichnis
         </h3>
 
         <ul className="space-y-2">
           {groupedItems.map(({ parent, children }) => {
             const isParentActive = activeParentId === parent.id
-            const hasActiveChild = children.some(child => activeId === child.id)
+            const hasActiveChild = children.some((child) => activeId === child.id)
 
             return (
               <li key={parent.id} className="relative">
@@ -150,12 +153,12 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
                   href={`#${parent.id}`}
                   onClick={(e) => handleClick(e, parent.id)}
                   className={cn(
-                    'group flex items-center gap-2 text-sm transition-all duration-200 hover:text-primary',
+                    'group hover:text-primary flex items-center gap-2 text-sm transition-all duration-200',
                     activeId === parent.id
-                      ? 'font-semibold text-primary'
+                      ? 'text-primary font-semibold'
                       : isParentActive || hasActiveChild
-                      ? 'font-medium text-gray-900'
-                      : 'text-gray-600'
+                        ? 'font-medium text-gray-900'
+                        : 'text-gray-600'
                   )}
                 >
                   {/* Indicator */}
@@ -163,10 +166,10 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
                     className={cn(
                       'flex h-1.5 w-1.5 shrink-0 transition-all duration-200',
                       activeId === parent.id
-                        ? 'scale-150 bg-primary rounded-full'
+                        ? 'bg-primary scale-150 rounded-full'
                         : isParentActive || hasActiveChild
-                        ? 'bg-primary/50 rounded-full'
-                        : 'bg-gray-300 rounded-full group-hover:bg-primary/50'
+                          ? 'bg-primary/50 rounded-full'
+                          : 'group-hover:bg-primary/50 rounded-full bg-gray-300'
                     )}
                   />
 
@@ -193,9 +196,9 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
                           href={`#${child.id}`}
                           onClick={(e) => handleClick(e, child.id)}
                           className={cn(
-                            'block text-xs transition-all duration-200 hover:text-primary',
+                            'hover:text-primary block text-xs transition-all duration-200',
                             activeId === child.id
-                              ? 'font-semibold text-primary translate-x-1'
+                              ? 'text-primary translate-x-1 font-semibold'
                               : 'text-gray-500'
                           )}
                         >
@@ -211,7 +214,7 @@ export function TableOfContents({ items, className }: TableOfContentsProps) {
         </ul>
 
         {/* Quick Stats */}
-        <div className="mt-6 pt-6 border-t border-gray-200">
+        <div className="mt-6 border-t border-gray-200 pt-6">
           <div className="flex items-center justify-between text-xs text-gray-500">
             <span>{groupedItems.length} Abschnitte</span>
             <span>{Math.round(scrollProgress)}% gelesen</span>

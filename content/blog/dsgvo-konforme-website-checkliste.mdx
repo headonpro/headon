@@ -13,7 +13,22 @@ image:
   alt: 'Datenschutz-Dokumente und Paragraphen-Symbol für DSGVO-konforme Webseite'
 readingTime: 12
 featured: true
-keywords: ['dsgvo konforme website', 'dsgvo konforme webseite', 'datenschutzkonforme website', 'datenschutzkonforme webseite', 'website datenschutz', 'webseite datenschutz', 'dsgvo website checkliste', 'dsgvo webseite checkliste', 'cookie banner dsgvo', 'datenschutzerklärung website', 'datenschutzerklärung webseite', 'dsgvo compliance website', 'rechtssichere webseite erstellen']
+keywords:
+  [
+    'dsgvo konforme website',
+    'dsgvo konforme webseite',
+    'datenschutzkonforme website',
+    'datenschutzkonforme webseite',
+    'website datenschutz',
+    'webseite datenschutz',
+    'dsgvo website checkliste',
+    'dsgvo webseite checkliste',
+    'cookie banner dsgvo',
+    'datenschutzerklärung website',
+    'datenschutzerklärung webseite',
+    'dsgvo compliance website',
+    'rechtssichere webseite erstellen',
+  ]
 relatedPosts: ['website-erstellen-lassen-guide', 'website-kosten-2025']
 ---
 
@@ -22,11 +37,14 @@ Die Datenschutz-Grundverordnung (DSGVO) ist seit 2018 in Kraft – doch viele We
 <KeyTakeaways
   title="Das Wichtigste zur DSGVO-Compliance"
   items={[
-    { text: "Bußgelder bis zu 20 Millionen EUR oder 4% des Jahresumsatzes möglich", highlight: true },
-    "SSL-Verschlüsselung ist absolute Pflicht für jede Webseite",
-    "Cookie-Banner müssen echtes Opt-in bieten (keine Vorab-Häkchen)",
-    "Google Fonts lokal hosten – mehrere Abmahnwellen in 2022/2023",
-    "Auftragsverarbeitungsverträge (AVV) mit allen Dienstleistern notwendig"
+    {
+      text: 'Bußgelder bis zu 20 Millionen EUR oder 4% des Jahresumsatzes möglich',
+      highlight: true,
+    },
+    'SSL-Verschlüsselung ist absolute Pflicht für jede Webseite',
+    'Cookie-Banner müssen echtes Opt-in bieten (keine Vorab-Häkchen)',
+    'Google Fonts lokal hosten – mehrere Abmahnwellen in 2022/2023',
+    'Auftragsverarbeitungsverträge (AVV) mit allen Dienstleistern notwendig',
   ]}
 />
 
@@ -35,22 +53,23 @@ Die Datenschutz-Grundverordnung (DSGVO) ist seit 2018 in Kraft – doch viele We
 <BlogStats
   title="Die Risiken bei Nicht-Einhaltung"
   stats={[
-    { value: 20, label: "Maximale Bußgelder", unit: "Mio EUR" },
-    { value: 4, label: "oder vom Jahresumsatz", suffix: "%" },
-    { value: 53, label: "Mobile-Nutzer verlassen", suffix: "%", unit: "langsame Seiten" },
-    { value: 2018, label: "DSGVO in Kraft seit" }
+    { value: 20, label: 'Maximale Bußgelder', unit: 'Mio EUR' },
+    { value: 4, label: 'oder vom Jahresumsatz', suffix: '%' },
+    { value: 53, label: 'Mobile-Nutzer verlassen', suffix: '%', unit: 'langsame Seiten' },
+    { value: 2018, label: 'DSGVO in Kraft seit' },
   ]}
 />
 
 <InfoBox type="warning" title="Rechtliche Risiken">
-  Verstöße gegen die DSGVO können existenzbedrohend sein. Neben hohen Bußgeldern drohen Abmahnungen durch Konkurrenten oder Verbraucherschutzverbände, erheblicher Reputationsschaden und im schlimmsten Fall die Schließung Ihrer Webseite.
+  Verstöße gegen die DSGVO können existenzbedrohend sein. Neben hohen Bußgeldern drohen Abmahnungen
+  durch Konkurrenten oder Verbraucherschutzverbände, erheblicher Reputationsschaden und im
+  schlimmsten Fall die Schließung Ihrer Webseite.
 </InfoBox>
 
 <InfoBox type="success" title="Vorteile einer DSGVO-konformen Webseite">
-  - **Rechtssicherheit**: Schutz vor Bußgeldern und Abmahnungen
-  - **Kundenvertrauen**: Transparenter Umgang mit Daten steigert Conversions
-  - **Wettbewerbsvorteil**: Professioneller als nicht-konforme Konkurrenz
-  - **SEO-Bonus**: Google bevorzugt sichere Webseiten
+  - **Rechtssicherheit**: Schutz vor Bußgeldern und Abmahnungen - **Kundenvertrauen**: Transparenter
+  Umgang mit Daten steigert Conversions - **Wettbewerbsvorteil**: Professioneller als nicht-konforme
+  Konkurrenz - **SEO-Bonus**: Google bevorzugt sichere Webseiten
 </InfoBox>
 
 Bei [HEADON.pro](/services/web-development) entwickeln wir alle Webseiten standardmäßig DSGVO-konform – ohne Aufpreis.
@@ -66,6 +85,7 @@ SSL-Verschlüsselung ist die Grundvoraussetzung für jede datenschutzkonforme We
 </InfoBox>
 
 **Was Sie tun müssen:**
+
 - SSL-Zertifikat installieren
 - Alle HTTP-URLs zu HTTPS umleiten
 - Mixed Content Warnings beheben
@@ -77,9 +97,12 @@ SSL-Verschlüsselung ist die Grundvoraussetzung für jede datenschutzkonforme We
 curl -I https://ihre-domain.de
 
 # Antwort sollte enthalten:
+
 # HTTP/2 200
+
 # strict-transport-security: max-age=31536000
-```
+
+````
 </CodeBlock>
 
 <ComparisonBlock
@@ -219,38 +242,39 @@ Die Datenschutzerklärung ist das Herzstück der DSGVO-Compliance.
     // GA Code hier
   }
 </script>
-```
+````
+
 </CodeBlock>
 
 <BlogTable
   title="Beliebte Cookie-Banner-Lösungen"
   variant="pricing"
   columns={[
-    { header: "Anbieter", accessor: "anbieter" },
-    { header: "Kosten", accessor: "kosten", align: "right" },
-    { header: "Features", accessor: "features" }
+    { header: 'Anbieter', accessor: 'anbieter' },
+    { header: 'Kosten', accessor: 'kosten', align: 'right' },
+    { header: 'Features', accessor: 'features' },
   ]}
   data={[
     {
-      anbieter: "Cookiebot",
-      kosten: "0-250 EUR/Monat",
-      features: "Auto-Scanning, DSGVO-konform"
+      anbieter: 'Cookiebot',
+      kosten: '0-250 EUR/Monat',
+      features: 'Auto-Scanning, DSGVO-konform',
     },
     {
-      anbieter: "Borlabs Cookie",
-      kosten: "49 EUR/Jahr",
-      features: "WordPress-Plugin, beliebt in Deutschland"
+      anbieter: 'Borlabs Cookie',
+      kosten: '49 EUR/Jahr',
+      features: 'WordPress-Plugin, beliebt in Deutschland',
     },
     {
-      anbieter: "Usercentrics",
-      kosten: "ab 10 EUR/Monat",
-      features: "Enterprise-Features, Multi-Domain"
+      anbieter: 'Usercentrics',
+      kosten: 'ab 10 EUR/Monat',
+      features: 'Enterprise-Features, Multi-Domain',
     },
     {
-      anbieter: "Cookie Information",
-      kosten: "ab 25 EUR/Monat",
-      features: "EU-zertifiziert, automatische Updates"
-    }
+      anbieter: 'Cookie Information',
+      kosten: 'ab 25 EUR/Monat',
+      features: 'EU-zertifiziert, automatische Updates',
+    },
   ]}
 />
 
@@ -261,6 +285,7 @@ Die Datenschutzerklärung ist das Herzstück der DSGVO-Compliance.
 </InfoBox>
 
 **Anforderungen:**
+
 - Checkbox: "Ich habe die Datenschutzerklärung gelesen" (aktiv anklicken)
 - Link zur Datenschutzerklärung direkt beim Formular
 - SSL-verschlüsselte Übertragung
@@ -276,11 +301,12 @@ Die Datenschutzerklärung ist das Herzstück der DSGVO-Compliance.
   <textarea name="message" required placeholder="Ihre Nachricht *"></textarea>
 
   <!-- DSGVO-Checkbox -->
-  <label>
-    <input type="checkbox" name="privacy" required />
-    Ich habe die <a href="/datenschutz">Datenschutzerklärung</a>
-    gelesen und akzeptiere die Verarbeitung meiner Daten. *
-  </label>
+
+<label>
+  <input type="checkbox" name="privacy" required />
+  Ich habe die <a href="/datenschutz">Datenschutzerklärung</a>
+  gelesen und akzeptiere die Verarbeitung meiner Daten. *
+</label>
 
   <button type="submit">Absenden</button>
 </form>
@@ -290,10 +316,12 @@ Die Datenschutzerklärung ist das Herzstück der DSGVO-Compliance.
 ### 6. Google Analytics datenschutzkonform einbinden
 
 <InfoBox type="warning" title="Achtung bei Google Analytics">
-  Google Analytics darf nur nach expliziter Einwilligung geladen werden. Die IP-Anonymisierung ist Pflicht!
+  Google Analytics darf nur nach expliziter Einwilligung geladen werden. Die IP-Anonymisierung ist
+  Pflicht!
 </InfoBox>
 
 **Anforderungen:**
+
 - Nur nach Einwilligung (Cookie-Banner)
 - IP-Anonymisierung aktiv
 - Auftragsverarbeitungsvertrag (AVV) mit Google
@@ -318,26 +346,26 @@ if (cookieConsentGiven) {
 <ComparisonBlock
   title="Analytics-Alternativen"
   left={{
-    title: "Cookie-freie Alternativen",
-    type: "positive",
+    title: 'Cookie-freie Alternativen',
+    type: 'positive',
     items: [
-      "Matomo (self-hosted): Kostenlos",
-      "Plausible: ab 9 EUR/Monat",
-      "Fathom: ab 14 USD/Monat",
-      "Simple Analytics: ab 19 EUR/Monat",
-      "Keine Einwilligung nötig!"
-    ]
+      'Matomo (self-hosted): Kostenlos',
+      'Plausible: ab 9 EUR/Monat',
+      'Fathom: ab 14 USD/Monat',
+      'Simple Analytics: ab 19 EUR/Monat',
+      'Keine Einwilligung nötig!',
+    ],
   }}
   right={{
-    title: "Google Analytics",
-    type: "negative",
+    title: 'Google Analytics',
+    type: 'negative',
     items: [
-      "Kostenlos verfügbar",
-      "Einwilligung erforderlich",
-      "IP-Anonymisierung Pflicht",
-      "AVV mit Google nötig",
-      "Datenschutz-Bedenken"
-    ]
+      'Kostenlos verfügbar',
+      'Einwilligung erforderlich',
+      'IP-Anonymisierung Pflicht',
+      'AVV mit Google nötig',
+      'Datenschutz-Bedenken',
+    ],
   }}
 />
 
@@ -350,7 +378,8 @@ if (cookieConsentGiven) {
 ### 7. Google Fonts datenschutzkonform einbinden
 
 <InfoBox type="warning" title="Abmahnwelle 2022/2023">
-  Google Fonts von Google-Servern zu laden führte zu tausenden Abmahnungen. Die Lösung: Lokal hosten!
+  Google Fonts von Google-Servern zu laden führte zu tausenden Abmahnungen. Die Lösung: Lokal
+  hosten!
 </InfoBox>
 
 **Problem:** Google Fonts von Google-Servern = Datenübertragung in die USA
@@ -362,13 +391,14 @@ if (cookieConsentGiven) {
 /* ❌ FALSCH: Von Google-Servern */
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 
-/* ✅ RICHTIG: Lokal gehostet */
+/_ ✅ RICHTIG: Lokal gehostet _/
 @font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/roboto.woff2') format('woff2');
-  font-display: swap;
+font-family: 'Roboto';
+src: url('/fonts/roboto.woff2') format('woff2');
+font-display: swap;
 }
-```
+
+````
 </CodeBlock>
 
 **Schritte zur lokalen Einbindung:**
@@ -399,10 +429,12 @@ if (cookieConsentGiven) {
    target="_blank" rel="noopener">
   Auf Facebook teilen
 </a>
-```
+````
+
 </CodeBlock>
 
 **Vorteile einfacher Share-Links:**
+
 - Kein Tracking
 - Keine Einwilligung nötig
 - Schnellere Ladezeiten
@@ -420,11 +452,13 @@ if (cookieConsentGiven) {
 <iframe src="https://www.youtube.com/embed/VIDEO_ID"></iframe>
 
 <!-- ✅ RICHTIG: Erweiteter Datenschutzmodus -->
+
 <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID"></iframe>
 ```
 </CodeBlock>
 
 **Noch besser:** 2-Klick-Lösung mit Vorschaubild
+
 1. Zeige YouTube-Thumbnail
 2. Nutzer klickt → Hinweis auf Datenübertragung
 3. Bestätigung → Video wird geladen
@@ -436,18 +470,21 @@ if (cookieConsentGiven) {
 </InfoBox>
 
 **Double-Opt-In Prozess:**
+
 1. Nutzer trägt E-Mail ein
 2. Bestätigungs-Mail wird versendet
 3. Nutzer klickt Bestätigungslink
 4. Erst jetzt ist Anmeldung aktiv
 
 **Dokumentation speichern:**
+
 - Zeitpunkt der Anmeldung
 - IP-Adresse (umstritten, Anwalt fragen)
 - Bestätigungszeitpunkt
 - Inhalt des Opt-Ins
 
 **DSGVO-konforme Newsletter-Anbieter:**
+
 - Brevo (ehemals Sendinblue) - EU-Server
 - CleverReach - Deutsche Server
 - Rapidmail - DSGVO-konform
@@ -459,30 +496,31 @@ if (cookieConsentGiven) {
 <ComparisonBlock
   title="Hosting-Standort"
   left={{
-    title: "EU-Hosting",
-    type: "positive",
+    title: 'EU-Hosting',
+    type: 'positive',
     items: [
-      "Keine Drittland-Problematik",
-      "DSGVO-konform by default",
-      "Keine zusätzlichen Garantien nötig",
-      "Deutsche Anbieter verfügbar",
-      "Rechtssicherheit garantiert"
-    ]
+      'Keine Drittland-Problematik',
+      'DSGVO-konform by default',
+      'Keine zusätzlichen Garantien nötig',
+      'Deutsche Anbieter verfügbar',
+      'Rechtssicherheit garantiert',
+    ],
   }}
   right={{
-    title: "US-Hosting",
-    type: "negative",
+    title: 'US-Hosting',
+    type: 'negative',
     items: [
-      "Datenübertragung in Drittland",
-      "Standardvertragsklauseln nötig",
-      "Rechtliche Unsicherheit",
-      "Privacy Shield ungültig",
-      "Zusätzliche Dokumentation"
-    ]
+      'Datenübertragung in Drittland',
+      'Standardvertragsklauseln nötig',
+      'Rechtliche Unsicherheit',
+      'Privacy Shield ungültig',
+      'Zusätzliche Dokumentation',
+    ],
   }}
 />
 
 **Empfohlene deutsche Hosting-Anbieter:**
+
 - **Hetzner** - Preis-Leistungs-Sieger
 - **IONOS** - Größter deutscher Anbieter
 - **Netcup** - Günstig und zuverlässig
@@ -492,10 +530,12 @@ if (cookieConsentGiven) {
 ### 12. Auftragsverarbeitungsverträge (AVV) abschließen
 
 <InfoBox type="warning" title="AVV ist Pflicht">
-  Mit JEDEM Dienstleister, der personenbezogene Daten verarbeitet, muss ein AVV abgeschlossen werden.
+  Mit JEDEM Dienstleister, der personenbezogene Daten verarbeitet, muss ein AVV abgeschlossen
+  werden.
 </InfoBox>
 
 **AVV benötigt für:**
+
 - Hosting-Anbieter
 - Newsletter-Tools
 - Analytics-Tools
@@ -507,6 +547,7 @@ if (cookieConsentGiven) {
 - Support-Ticket-Systeme
 
 **Was der AVV regelt:**
+
 - Art und Zweck der Datenverarbeitung
 - Technische und organisatorische Maßnahmen (TOMs)
 - Pflichten des Auftragsverarbeiters
@@ -524,15 +565,16 @@ Nutzer haben umfassende Rechte nach DSGVO:
 <KeyTakeaways
   title="DSGVO-Nutzerrechte"
   items={[
-    "Recht auf Auskunft (Art. 15) - Welche Daten gespeichert sind",
+    'Recht auf Auskunft (Art. 15) - Welche Daten gespeichert sind',
     "Recht auf Löschung (Art. 17) - 'Recht auf Vergessenwerden'",
-    "Recht auf Berichtigung (Art. 16) - Fehlerhafte Daten korrigieren",
-    "Recht auf Datenübertragbarkeit (Art. 20) - Daten mitnehmen",
-    "Recht auf Widerspruch (Art. 21) - Verarbeitung stoppen"
+    'Recht auf Berichtigung (Art. 16) - Fehlerhafte Daten korrigieren',
+    'Recht auf Datenübertragbarkeit (Art. 20) - Daten mitnehmen',
+    'Recht auf Widerspruch (Art. 21) - Verarbeitung stoppen',
   ]}
 />
 
 **Technische Umsetzung:**
+
 - Kontaktformular für Anfragen bereitstellen
 - Prozesse für Löschung/Auskunft definieren
 - Fristen einhalten (max. 30 Tage)
@@ -542,15 +584,18 @@ Nutzer haben umfassende Rechte nach DSGVO:
 ### 14. Keine Daten an Drittländer ohne Garantien
 
 <InfoBox type="info" title="EU-US Data Privacy Framework">
-  Seit 2023 gibt es ein neues Abkommen, aber rechtlich umstritten. EU-Anbieter bleiben die sicherere Wahl.
+  Seit 2023 gibt es ein neues Abkommen, aber rechtlich umstritten. EU-Anbieter bleiben die sicherere
+  Wahl.
 </InfoBox>
 
 **Regeln für Drittland-Transfer:**
+
 - Nur mit Angemessenheitsbeschluss
 - Oder Standardvertragsklauseln
 - Oder explizite Einwilligung nach Information
 
 **Betroffene Services:**
+
 - US-Hosting-Anbieter
 - Mailchimp (ohne EU-Option)
 - US-Cloud-Storage
@@ -560,11 +605,13 @@ Nutzer haben umfassende Rechte nach DSGVO:
 ### 15. Verzeichnis von Verarbeitungstätigkeiten führen
 
 **Pflicht für:**
+
 - Unternehmen mit 250+ Mitarbeitern
 - ODER bei regelmäßiger Datenverarbeitung
 - ODER bei besonderen Datenkategorien
 
 **Inhalt des Verzeichnisses:**
+
 - Zweck der Verarbeitung
 - Kategorien von Daten
 - Empfänger der Daten
@@ -572,9 +619,9 @@ Nutzer haben umfassende Rechte nach DSGVO:
 - Technische Maßnahmen
 
 <InfoBox type="tip" title="Vorlagen nutzen">
-  Download-Vorlagen der Landesdatenschutzbehörden:
-  - [LfDI Baden-Württemberg](https://www.baden-wuerttemberg.datenschutz.de/)
-  - [BayLDA](https://www.lda.bayern.de/)
+  Download-Vorlagen der Landesdatenschutzbehörden: - [LfDI
+  Baden-Württemberg](https://www.baden-wuerttemberg.datenschutz.de/) -
+  [BayLDA](https://www.lda.bayern.de/)
 </InfoBox>
 
 <BlogCTA
@@ -589,30 +636,30 @@ Nutzer haben umfassende Rechte nach DSGVO:
 <ComparisonBlock
   title="Die 7 häufigsten DSGVO-Fehler"
   left={{
-    title: "Falsch",
-    type: "negative",
+    title: 'Falsch',
+    type: 'negative',
     items: [
-      "Cookie-Banner mit voreingestellter Zustimmung",
-      "Fehlende oder unvollständige Datenschutzerklärung",
-      "Google Analytics läuft sofort beim Seitenaufruf",
-      "Google Fonts von Google-Servern laden",
-      "Social Media Plugins ohne Hinweis einbinden",
-      "Impressum schwer auffindbar (>2 Klicks)",
-      "Keine SSL-Verschlüsselung"
-    ]
+      'Cookie-Banner mit voreingestellter Zustimmung',
+      'Fehlende oder unvollständige Datenschutzerklärung',
+      'Google Analytics läuft sofort beim Seitenaufruf',
+      'Google Fonts von Google-Servern laden',
+      'Social Media Plugins ohne Hinweis einbinden',
+      'Impressum schwer auffindbar (>2 Klicks)',
+      'Keine SSL-Verschlüsselung',
+    ],
   }}
   right={{
-    title: "Richtig",
-    type: "positive",
+    title: 'Richtig',
+    type: 'positive',
     items: [
-      "Nutzer muss aktiv zustimmen (Opt-in)",
-      "Vollständige, aktuelle Datenschutzerklärung",
-      "Analytics erst nach Einwilligung laden",
-      "Fonts lokal hosten",
-      "2-Klick-Lösung oder Share-Links",
-      "Impressum im Footer, maximal 2 Klicks",
-      "HTTPS mit gültigem SSL-Zertifikat"
-    ]
+      'Nutzer muss aktiv zustimmen (Opt-in)',
+      'Vollständige, aktuelle Datenschutzerklärung',
+      'Analytics erst nach Einwilligung laden',
+      'Fonts lokal hosten',
+      '2-Klick-Lösung oder Share-Links',
+      'Impressum im Footer, maximal 2 Klicks',
+      'HTTPS mit gültigem SSL-Zertifikat',
+    ],
   }}
 />
 
@@ -621,40 +668,40 @@ Nutzer haben umfassende Rechte nach DSGVO:
 ### DSGVO-Check Tools
 
 <InfoBox type="tip" title="Kostenlose DSGVO-Checks">
-  - [eRecht24 DSGVO-Check](https://www.e-recht24.de/) - Basis-Check Ihrer Webseite
-  - [Website Privacy Check](https://www.websiteprivacycheck.com/) - Cookie-Analyse
-  - [Webbkoll](https://webbkoll.dataskydd.net/) - Datenschutz-Scanner
+  - [eRecht24 DSGVO-Check](https://www.e-recht24.de/) - Basis-Check Ihrer Webseite - [Website
+  Privacy Check](https://www.websiteprivacycheck.com/) - Cookie-Analyse -
+  [Webbkoll](https://webbkoll.dataskydd.net/) - Datenschutz-Scanner
 </InfoBox>
 
 <BlogTable
   title="Premium Compliance-Tools"
   variant="pricing"
   columns={[
-    { header: "Tool", accessor: "tool" },
-    { header: "Funktion", accessor: "funktion" },
-    { header: "Kosten", accessor: "kosten", align: "right", highlight: true }
+    { header: 'Tool', accessor: 'tool' },
+    { header: 'Funktion', accessor: 'funktion' },
+    { header: 'Kosten', accessor: 'kosten', align: 'right', highlight: true },
   ]}
   data={[
     {
-      tool: "Cookiebot",
-      funktion: "Automatischer Cookie-Scan mit KI",
-      kosten: "ab 0 EUR"
+      tool: 'Cookiebot',
+      funktion: 'Automatischer Cookie-Scan mit KI',
+      kosten: 'ab 0 EUR',
     },
     {
-      tool: "OneTrust",
-      funktion: "Enterprise Compliance Suite",
-      kosten: "auf Anfrage"
+      tool: 'OneTrust',
+      funktion: 'Enterprise Compliance Suite',
+      kosten: 'auf Anfrage',
     },
     {
-      tool: "Dataguard",
-      funktion: "DSGVO-Management Platform",
-      kosten: "ab 150 EUR/Monat"
+      tool: 'Dataguard',
+      funktion: 'DSGVO-Management Platform',
+      kosten: 'ab 150 EUR/Monat',
     },
     {
-      tool: "eRecht24 Premium",
-      funktion: "Rechtstexte + Tools + Updates",
-      kosten: "190 EUR/Jahr"
-    }
+      tool: 'eRecht24 Premium',
+      funktion: 'Rechtstexte + Tools + Updates',
+      kosten: '190 EUR/Jahr',
+    },
   ]}
   caption="Preise können je nach Unternehmensgröße und Features variieren"
 />
@@ -664,26 +711,26 @@ Nutzer haben umfassende Rechte nach DSGVO:
 <ComparisonBlock
   title="Rechtstexte-Optionen"
   left={{
-    title: "Kostenlose Generatoren",
-    type: "neutral",
+    title: 'Kostenlose Generatoren',
+    type: 'neutral',
     items: [
-      "Datenschutz-Generator.de",
-      "Impressum-Generator.de",
-      "Basis-Funktionen",
-      "Manuelle Updates nötig",
-      "Keine Haftung"
-    ]
+      'Datenschutz-Generator.de',
+      'Impressum-Generator.de',
+      'Basis-Funktionen',
+      'Manuelle Updates nötig',
+      'Keine Haftung',
+    ],
   }}
   right={{
-    title: "Premium Generatoren",
-    type: "positive",
+    title: 'Premium Generatoren',
+    type: 'positive',
     items: [
-      "eRecht24 Premium: 190 EUR/Jahr",
-      "IT-Recht Kanzlei: ab 9,90 EUR/Monat",
-      "Automatische Updates",
-      "Anwaltsgeprüft",
-      "Haftungsübernahme"
-    ]
+      'eRecht24 Premium: 190 EUR/Jahr',
+      'IT-Recht Kanzlei: ab 9,90 EUR/Monat',
+      'Automatische Updates',
+      'Anwaltsgeprüft',
+      'Haftungsübernahme',
+    ],
   }}
 />
 
@@ -692,38 +739,38 @@ Nutzer haben umfassende Rechte nach DSGVO:
 <KeyTakeaways
   title="Technische Anforderungen Checkliste"
   items={[
-    "SSL-Zertifikat aktiv (HTTPS)",
-    "Cookie-Banner mit echtem Opt-in",
-    "Google Fonts lokal gehostet",
-    "Google Analytics nur mit Einwilligung",
-    "YouTube im Datenschutzmodus",
-    "Social Media 2-Klick-Lösung",
-    "EU-Hosting verwendet",
-    "Regelmäßige verschlüsselte Backups"
+    'SSL-Zertifikat aktiv (HTTPS)',
+    'Cookie-Banner mit echtem Opt-in',
+    'Google Fonts lokal gehostet',
+    'Google Analytics nur mit Einwilligung',
+    'YouTube im Datenschutzmodus',
+    'Social Media 2-Klick-Lösung',
+    'EU-Hosting verwendet',
+    'Regelmäßige verschlüsselte Backups',
   ]}
 />
 
 <KeyTakeaways
   title="Rechtliche Dokumente Checkliste"
   items={[
-    "Impressum vollständig und auffindbar",
-    "Datenschutzerklärung umfassend und aktuell",
-    "Cookie-Policy detailliert",
-    "AGB vorhanden (falls Shop/Dienst)",
-    "Widerrufsbelehrung (bei Verträgen)"
+    'Impressum vollständig und auffindbar',
+    'Datenschutzerklärung umfassend und aktuell',
+    'Cookie-Policy detailliert',
+    'AGB vorhanden (falls Shop/Dienst)',
+    'Widerrufsbelehrung (bei Verträgen)',
   ]}
 />
 
 <KeyTakeaways
   title="Verträge & Prozesse Checkliste"
   items={[
-    "AVV mit allen Dienstleistern",
-    "Verzeichnis der Verarbeitungstätigkeiten",
-    "Dokumentation von Einwilligungen",
-    "Löschkonzept definiert",
-    "Prozess für Auskunftsanfragen",
-    "Datenschutz-Schulung des Teams",
-    "Regelmäßige DSGVO-Audits"
+    'AVV mit allen Dienstleistern',
+    'Verzeichnis der Verarbeitungstätigkeiten',
+    'Dokumentation von Einwilligungen',
+    'Löschkonzept definiert',
+    'Prozess für Auskunftsanfragen',
+    'Datenschutz-Schulung des Teams',
+    'Regelmäßige DSGVO-Audits',
   ]}
 />
 
@@ -734,20 +781,17 @@ Die DSGVO mag komplex erscheinen, aber mit systematischer Herangehensweise ist C
 <BlogStats
   title="Ihre Investition in Compliance"
   stats={[
-    { value: 20, label: "Mio EUR Bußgelder", unit: "vermieden" },
-    { value: 100, label: "Kundenvertrauen", suffix: "%" },
-    { value: 15, label: "Checkpunkte", unit: "erledigt" },
-    { value: 1, label: "Rechtssichere", unit: "Webseite" }
+    { value: 20, label: 'Mio EUR Bußgelder', unit: 'vermieden' },
+    { value: 100, label: 'Kundenvertrauen', suffix: '%' },
+    { value: 15, label: 'Checkpunkte', unit: 'erledigt' },
+    { value: 1, label: 'Rechtssichere', unit: 'Webseite' },
   ]}
 />
 
 <InfoBox type="success" title="Die wichtigsten Sofortmaßnahmen">
-  1. **SSL-Verschlüsselung** aktivieren - ohne geht nichts
-  2. **Cookie-Banner** mit echtem Opt-in implementieren
-  3. **Datenschutzerklärung** vollständig erstellen
-  4. **Google Fonts** lokal hosten
-  5. **AVVs** mit allen Dienstleistern abschließen
-  6. **EU-Hosting** bevorzugen für Rechtssicherheit
+  1. **SSL-Verschlüsselung** aktivieren - ohne geht nichts 2. **Cookie-Banner** mit echtem Opt-in
+  implementieren 3. **Datenschutzerklärung** vollständig erstellen 4. **Google Fonts** lokal hosten
+  5. **AVVs** mit allen Dienstleistern abschließen 6. **EU-Hosting** bevorzugen für Rechtssicherheit
 </InfoBox>
 
 ## HEADON.pro: DSGVO-konforme Webseiten als Standard
@@ -757,13 +801,13 @@ Bei uns ist DSGVO-Konformität kein Extra-Feature, sondern Standard:
 <KeyTakeaways
   title="Unsere DSGVO-Garantie"
   items={[
-    { text: "SSL-Zertifikat inklusive", highlight: false },
-    { text: "DSGVO-konformer Cookie-Banner integriert", highlight: false },
-    { text: "Google Fonts lokal gehostet", highlight: false },
-    { text: "Server in Deutschland (Hetzner)", highlight: false },
-    { text: "AVV mit allen Drittanbietern", highlight: true },
-    { text: "Rechtstexte-Integration (Generator oder Anwalt)", highlight: false },
-    { text: "Regelmäßige Compliance-Updates", highlight: true }
+    { text: 'SSL-Zertifikat inklusive', highlight: false },
+    { text: 'DSGVO-konformer Cookie-Banner integriert', highlight: false },
+    { text: 'Google Fonts lokal gehostet', highlight: false },
+    { text: 'Server in Deutschland (Hetzner)', highlight: false },
+    { text: 'AVV mit allen Drittanbietern', highlight: true },
+    { text: 'Rechtstexte-Integration (Generator oder Anwalt)', highlight: false },
+    { text: 'Regelmäßige Compliance-Updates', highlight: true },
   ]}
 />
 
@@ -779,5 +823,6 @@ Bei uns ist DSGVO-Konformität kein Extra-Feature, sondern Standard:
 - [LfDI Baden-Württemberg: Praxishilfen](https://www.baden-wuerttemberg.datenschutz.de/)
 
 <InfoBox type="info" title="Rechtlicher Hinweis">
-  Dieser Artikel stellt keine Rechtsberatung dar. Bei konkreten rechtlichen Fragen konsultieren Sie bitte einen spezialisierten Datenschutz-Anwalt. Stand: Januar 2025.
+  Dieser Artikel stellt keine Rechtsberatung dar. Bei konkreten rechtlichen Fragen konsultieren Sie
+  bitte einen spezialisierten Datenschutz-Anwalt. Stand: Januar 2025.
 </InfoBox>

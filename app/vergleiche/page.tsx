@@ -68,10 +68,10 @@ export default function VergleichePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(0,0,0)_1px,transparent_0)] [background-size:24px_24px]" />
         </div>
 
-        <div className="container relative mx-auto max-w-6xl px-4">
+        <div className="relative container mx-auto max-w-6xl px-4">
           {/* Section Header */}
           <div className="mb-12 text-center md:mb-16">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-primary-200 bg-primary-50 px-4 py-2">
+            <div className="border-primary-200 bg-primary-50 mb-4 inline-flex items-center gap-2 rounded-full border-2 px-4 py-2">
               <span className="text-primary-700 text-sm font-semibold">
                 {comparisonArticles.length} ausführliche Vergleiche
               </span>
@@ -98,7 +98,7 @@ export default function VergleichePage() {
       <section className="from-primary-600 via-primary-500 to-secondary-500 relative overflow-hidden bg-gradient-to-br py-24">
         {/* Decorative Elements */}
         <div className="pointer-events-none absolute inset-0 opacity-10">
-          <div className="absolute left-10 top-10 h-64 w-64 rounded-full bg-white blur-3xl" />
+          <div className="absolute top-10 left-10 h-64 w-64 rounded-full bg-white blur-3xl" />
           <div className="absolute right-10 bottom-10 h-80 w-80 rounded-full bg-white blur-3xl" />
         </div>
 
@@ -107,7 +107,7 @@ export default function VergleichePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] [background-size:40px_40px]" />
         </div>
 
-        <div className="container relative mx-auto max-w-4xl px-4 text-center">
+        <div className="relative container mx-auto max-w-4xl px-4 text-center">
           <h2 className="font-heading mb-6 text-3xl font-bold text-white md:text-4xl">
             Noch Fragen zur richtigen Technologie?
           </h2>
@@ -118,15 +118,15 @@ export default function VergleichePage() {
           {/* Trust Badges */}
           <div className="mb-8 flex flex-wrap items-center justify-center gap-4 text-sm text-white/90 md:gap-6">
             <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-accent" />
+              <div className="bg-accent h-2 w-2 rounded-full" />
               <span>15min Beratung</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-accent" />
+              <div className="bg-accent h-2 w-2 rounded-full" />
               <span>Unverbindlich</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-accent" />
+              <div className="bg-accent h-2 w-2 rounded-full" />
               <span>Kostenlos</span>
             </div>
           </div>

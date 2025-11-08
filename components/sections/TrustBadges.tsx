@@ -62,10 +62,7 @@ const techStackLogos = [
   { name: 'Supabase', src: '/tech-logos/supabase.svg', width: 120, height: 40 },
 ]
 
-export default function TrustBadges({
-  variant = 'dark',
-  showTechStack = true,
-}: TrustBadgesProps) {
+export default function TrustBadges({ variant = 'dark', showTechStack = true }: TrustBadgesProps) {
   const isDark = variant === 'dark'
 
   return (
@@ -93,9 +90,7 @@ export default function TrustBadges({
               {badge.icon}
             </div>
             <div>
-              <h3
-                className={`mb-1 font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}
-              >
+              <h3 className={`mb-1 font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 {badge.title}
               </h3>
               <p className={`text-sm ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
@@ -114,9 +109,7 @@ export default function TrustBadges({
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className={`rounded-lg border p-8 backdrop-blur-md ${
-            isDark
-              ? 'border-white/20 bg-white/10'
-              : 'border-gray-200 bg-white'
+            isDark ? 'border-white/20 bg-white/10' : 'border-gray-200 bg-white'
           }`}
         >
           <h3

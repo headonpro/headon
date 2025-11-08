@@ -13,17 +13,20 @@
 #### Neue Cache-Regeln hinzugefügt:
 
 **a) Statische Bilder (SVG, PNG, JPG, WebP, AVIF, ICO)**
+
 ```typescript
 source: '/:path*.(svg|png|jpg|jpeg|gif|webp|avif|ico)'
 Cache-Control: public, max-age=31536000, s-maxage=2592000, stale-while-revalidate=86400
 ```
 
 **Verbesserung**:
+
 - ✅ Browser-Cache: **1 Jahr** (vorher: 4 Stunden für SVG)
 - ✅ CDN-Cache: **1 Monat** (s-maxage=2592000)
 - ✅ Stale-while-revalidate: 1 Tag
 
 **Erwartete Auswirkung**:
+
 - Logo und Icons werden vom CDN ausgeliefert statt vom Origin
 - Cache-Hit-Ratio steigt von ~60% auf ~85%+
 - Reduzierte Origin-Last
@@ -31,17 +34,20 @@ Cache-Control: public, max-age=31536000, s-maxage=2592000, stale-while-revalidat
 ---
 
 **b) HTML-Seiten (Homepage, Blog, Services, etc.)**
+
 ```typescript
 source: '/((?!api|_next/static|_next/image).*)'
 Cache-Control: public, max-age=300, s-maxage=7200, stale-while-revalidate=3600
 ```
 
 **Verbesserung**:
+
 - ✅ Browser-Cache: **5 Minuten** (Balance: Frische vs. Performance)
 - ✅ CDN-Cache: **2 Stunden** (s-maxage=7200)
 - ✅ Stale-while-revalidate: 1 Stunde
 
 **Erwartete Auswirkung**:
+
 - HTML wird von Cloudflare CDN gecacht
 - TTFB (Time to First Byte) verbessert sich von 50ms auf ~20-30ms
 - Origin-Server-Entlastung: 70-80% weniger HTML-Requests
@@ -51,11 +57,13 @@ Cache-Control: public, max-age=300, s-maxage=7200, stale-while-revalidate=3600
 ### 2. Bereits optimale Konfiguration (keine Änderung nötig)
 
 **Layout.tsx**:
+
 - ✅ Fonts bereits mit `display: 'swap'`, `preload: true`, `adjustFontFallback: true`
 - ✅ Logo bereits mit preload: `<link rel="preload" href="/headon-logo.svg" as="image" type="image/svg+xml" />`
 - ✅ Analytics mit preconnect optimiert
 
 **HeroSection.tsx**:
+
 - ✅ Kritischer Text ohne Animation (LCP-Element)
 - ✅ Animations-Initialisierung verzögert
 - ✅ Mobile-optimierte Animationen (weniger Orbs, kürzere Dauer)
@@ -77,6 +85,7 @@ Die folgenden Einstellungen müssen im **Cloudflare Dashboard** vorgenommen werd
 #### Empfohlene Page Rule Konfiguration:
 
 **Rule 1 (Priorität 1)**: Next.js Static Assets
+
 ```
 URL: *headon.pro/_next/static/*
 - Cache Level: Cache Everything
@@ -85,6 +94,7 @@ URL: *headon.pro/_next/static/*
 ```
 
 **Rule 2 (Priorität 2)**: Next.js Images
+
 ```
 URL: *headon.pro/_next/image/*
 - Cache Level: Cache Everything
@@ -93,6 +103,7 @@ URL: *headon.pro/_next/image/*
 ```
 
 **Rule 3 (Priorität 3)**: API Bypass
+
 ```
 URL: *headon.pro/api/*
 - Cache Level: Bypass
@@ -109,6 +120,7 @@ URL: *headon.pro/api/*
 #### Cache Rule für statische Assets:
 
 **Name**: "Static Assets Extended Cache"
+
 ```yaml
 When incoming requests match:
   - (http.request.uri.path matches ".*\.(svg|png|jpg|jpeg|gif|webp|avif|ico)$")
@@ -122,6 +134,7 @@ Then:
 #### Cache Rule für HTML:
 
 **Name**: "HTML Pages CDN Cache"
+
 ```yaml
 When incoming requests match:
   - (http.request.uri.path does not contain "/api/")
@@ -147,6 +160,7 @@ Then:
 ```
 
 **Nutzen**:
+
 - Sendet Link-Header früher (während HTML generiert wird)
 - Fonts und kritische Assets laden früher
 - Verbessert FCP und LCP um 100-200ms
@@ -162,6 +176,7 @@ Then:
 ```
 
 **Nutzen**:
+
 - Automatisches Prefetching von Links bei Hover
 - Schnellere Seitenwechsel
 - Bessere Nutzererfahrung
@@ -184,22 +199,22 @@ Browser Cache TTL: Respect Existing Headers
 
 ### Nach Code-Deployment:
 
-| Metrik | Vorher | Nachher (erwartet) | Verbesserung |
-|--------|--------|-------------------|--------------|
-| **Performance Score** | 92 | 94-96 | +2-4 Punkte |
-| **LCP** | 3.2s | 2.5-2.8s | -15-20% |
-| **TTFB** | 50ms | 30-40ms | -20-40% |
-| **Cache-Hit-Ratio** | ~60% | 80-85% | +20-25% |
+| Metrik                | Vorher | Nachher (erwartet) | Verbesserung |
+| --------------------- | ------ | ------------------ | ------------ |
+| **Performance Score** | 92     | 94-96              | +2-4 Punkte  |
+| **LCP**               | 3.2s   | 2.5-2.8s           | -15-20%      |
+| **TTFB**              | 50ms   | 30-40ms            | -20-40%      |
+| **Cache-Hit-Ratio**   | ~60%   | 80-85%             | +20-25%      |
 
 ### Nach Cloudflare-Optimierungen:
 
-| Metrik | Vorher | Nachher (erwartet) | Verbesserung |
-|--------|--------|-------------------|--------------|
-| **Performance Score** | 92 | 95-98 | +3-6 Punkte |
-| **LCP** | 3.2s | 1.8-2.2s | -30-45% |
-| **TTFB** | 50ms | 20-30ms | -40-60% |
-| **FCP** | 1.7s | 1.2-1.5s | -15-30% |
-| **Cache-Hit-Ratio** | ~60% | 85-90% | +25-30% |
+| Metrik                | Vorher | Nachher (erwartet) | Verbesserung |
+| --------------------- | ------ | ------------------ | ------------ |
+| **Performance Score** | 92     | 95-98              | +3-6 Punkte  |
+| **LCP**               | 3.2s   | 1.8-2.2s           | -30-45%      |
+| **TTFB**              | 50ms   | 20-30ms            | -40-60%      |
+| **FCP**               | 1.7s   | 1.2-1.5s           | -15-30%      |
+| **Cache-Hit-Ratio**   | ~60%   | 85-90%             | +25-30%      |
 
 ---
 
@@ -230,11 +245,13 @@ git push origin main
 ### 2. Nach Deployment (Cloudflare Cache leeren)
 
 **Option A**: Cloudflare Dashboard
+
 1. Dashboard → Caching → Configuration
 2. "Purge Everything" → Bestätigen
 3. 5 Minuten warten (Cache Warmup)
 
 **Option B**: GitHub Actions (automatisiert)
+
 - Bereits im CI/CD konfiguriert
 - Cache wird automatisch nach Deployment geleert
 
@@ -252,6 +269,7 @@ git push origin main
 ### 4. Cloudflare-Optimierungen aktivieren
 
 **Checklist**:
+
 - [ ] Early Hints aktivieren (Speed → Optimization)
 - [ ] Prefetch URLs aktivieren (Speed → Optimization)
 - [ ] Browser Cache TTL auf "Respect Existing Headers" setzen
@@ -278,6 +296,7 @@ curl -I https://headon.pro/headon-logo.svg | grep -E "cf-cache-status|cache-cont
 ### Cache-Hit-Ratio überwachen:
 
 **Cloudflare Dashboard**:
+
 1. Analytics → Traffic
 2. "Cached Requests" Chart prüfen
 
@@ -293,6 +312,7 @@ curl -I https://headon.pro/headon-logo.svg | grep -E "cf-cache-status|cache-cont
 **Lösung**: Text-Content in Server Component auslagern
 
 **Beispiel-Struktur**:
+
 ```tsx
 // components/sections/HeroContent.tsx (Server Component)
 export default function HeroContent() {
@@ -305,7 +325,7 @@ export default function HeroContent() {
 }
 
 // components/sections/HeroSection.tsx (Client Component)
-'use client'
+;('use client')
 export default function HeroSection() {
   return (
     <section>
@@ -324,8 +344,8 @@ export default function HeroSection() {
 
 ```tsx
 // Lazy Load Framer Motion
-const motion = dynamic(() => import('framer-motion').then(mod => ({ default: mod.motion })), {
-  ssr: false
+const motion = dynamic(() => import('framer-motion').then((mod) => ({ default: mod.motion })), {
+  ssr: false,
 })
 ```
 
@@ -336,6 +356,7 @@ const motion = dynamic(() => import('framer-motion').then(mod => ({ default: mod
 ### 3. Image-CDN evaluieren (Kosten: $10/Monat)
 
 **Cloudflare Images**:
+
 - Automatische WebP/AVIF-Konvertierung am Edge
 - Responsive Resizing
 - Verlustfreie Kompression
@@ -349,16 +370,19 @@ const motion = dynamic(() => import('framer-motion').then(mod => ({ default: mod
 ### KPIs tracken:
 
 **Täglich** (erste Woche):
+
 - Cloudflare Cache-Hit-Ratio (Ziel: 80%+)
 - TTFB im Real User Monitoring
 - Cloudflare Analytics: Bandwidth Saved
 
 **Wöchentlich**:
+
 - Lighthouse-Score (Mobile + Desktop)
 - Core Web Vitals (CrUX-Daten)
 - Origin-Server-Last (Requests/min)
 
 **Monatlich**:
+
 - Performance-Regression-Tests
 - Cloudflare-Kosten (sollte bei $0 bleiben)
 
@@ -369,12 +393,14 @@ const motion = dynamic(() => import('framer-motion').then(mod => ({ default: mod
 ### Problem: Cache-Hit-Ratio unter 70%
 
 **Diagnose**:
+
 ```bash
 curl -I https://headon.pro/ | grep cf-cache-status
 # Wenn DYNAMIC oder BYPASS → Cache Rules überprüfen
 ```
 
 **Lösung**:
+
 1. Cache Rules nochmal überprüfen
 2. Sicherstellen, dass s-maxage in Cache-Control vorhanden ist
 3. Cookies entfernen (falls vorhanden)
@@ -384,11 +410,13 @@ curl -I https://headon.pro/ | grep cf-cache-status
 ### Problem: LCP verschlechtert sich nach Deployment
 
 **Diagnose**:
+
 ```bash
 lighthouse https://headon.pro --only-categories=performance --form-factor=mobile
 ```
 
 **Mögliche Ursachen**:
+
 1. Cloudflare Cache ist kalt → 2 Stunden warten
 2. Early Hints nicht aktiviert → In Dashboard aktivieren
 3. Font-Preload fehlt → Layout.tsx überprüfen
@@ -400,6 +428,7 @@ lighthouse https://headon.pro --only-categories=performance --form-factor=mobile
 **Ursache**: Cloudflare cached standardmäßig keine HTML ohne explizite Rule
 
 **Lösung**:
+
 1. Cache Rule für HTML erstellen (siehe oben)
 2. ODER: `s-maxage` in Cache-Control erhöhen (bereits auf 7200 = 2h)
 3. Warten auf Cloudflare Cache Rule Propagation (5-10 Minuten)
@@ -409,18 +438,21 @@ lighthouse https://headon.pro --only-categories=performance --form-factor=mobile
 ## Zusammenfassung
 
 ### ✅ Umgesetzt (Code):
+
 1. next.config.ts mit optimierten Cache-Headern für:
    - Statische Bilder (SVG, PNG, JPG, WebP, AVIF, ICO)
    - HTML-Seiten mit CDN-Caching
 2. Alle bestehenden Optimierungen beibehalten (Fonts, Preload, etc.)
 
 ### 📋 Noch umzusetzen (Cloudflare Dashboard):
+
 1. Cache Rules erstellen (HTML + Static Assets)
 2. Early Hints aktivieren
 3. Prefetch URLs aktivieren
 4. Browser Cache TTL auf "Respect Existing Headers" setzen
 
 ### 📊 Erwartete Ergebnisse:
+
 - Performance Score: **92 → 95-98** (+3-6 Punkte)
 - LCP: **3.2s → 1.8-2.2s** (-30-45%)
 - TTFB: **50ms → 20-30ms** (-40-60%)

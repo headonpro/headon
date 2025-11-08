@@ -59,7 +59,9 @@ export function ModernFAQAccordion({
                 {heading}
               </h2>
             )}
-            {description && <p className="mx-auto max-w-2xl text-lg text-gray-600">{description}</p>}
+            {description && (
+              <p className="mx-auto max-w-2xl text-lg text-gray-600">{description}</p>
+            )}
           </div>
         )}
 
@@ -75,9 +77,9 @@ export function ModernFAQAccordion({
             >
               <AccordionItem
                 value={`faq-${index}`}
-                className="group rounded-2xl border border-gray-200/50 bg-white/80 px-6 shadow-lg backdrop-blur-sm transition-all hover:scale-[1.02] hover:border-primary/50 hover:bg-white/90 hover:shadow-xl"
+                className="group hover:border-primary/50 rounded-2xl border border-gray-200/50 bg-white/80 px-6 shadow-lg backdrop-blur-sm transition-all hover:scale-[1.02] hover:bg-white/90 hover:shadow-xl"
               >
-                <AccordionTrigger className="from-primary to-secondary py-5 text-left text-base font-bold hover:no-underline group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:text-transparent md:text-lg">
+                <AccordionTrigger className="from-primary to-secondary py-5 text-left text-base font-bold group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:text-transparent hover:no-underline md:text-lg">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="pb-6 text-gray-700">

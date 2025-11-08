@@ -1,7 +1,17 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Database, Server, Smartphone, Globe, Zap, Lock, Cloud, Code } from 'lucide-react'
+import {
+  ArrowRight,
+  Database,
+  Server,
+  Smartphone,
+  Globe,
+  Zap,
+  Lock,
+  Cloud,
+  Code,
+} from 'lucide-react'
 import { LucideIcon } from 'lucide-react'
 
 export interface DiagramNode {
@@ -42,28 +52,28 @@ const colorClasses = {
   primary: {
     border: 'border-primary-300',
     iconBg: 'bg-primary-100',
-    iconColor: 'text-primary-600'
+    iconColor: 'text-primary-600',
   },
   secondary: {
     border: 'border-secondary-300',
     iconBg: 'bg-secondary-100',
-    iconColor: 'text-secondary-600'
+    iconColor: 'text-secondary-600',
   },
   accent: {
     border: 'border-accent-300',
     iconBg: 'bg-accent-100',
-    iconColor: 'text-accent-600'
+    iconColor: 'text-accent-600',
   },
   gray: {
     border: 'border-gray-300',
     iconBg: 'bg-gray-100',
-    iconColor: 'text-gray-600'
+    iconColor: 'text-gray-600',
   },
   success: {
     border: 'border-green-300',
     iconBg: 'bg-green-100',
-    iconColor: 'text-green-600'
-  }
+    iconColor: 'text-green-600',
+  },
 }
 
 export function ArchitectureDiagram({
@@ -71,7 +81,7 @@ export function ArchitectureDiagram({
   description,
   nodes,
   connections,
-  layout = 'horizontal'
+  layout = 'horizontal',
 }: ArchitectureDiagramProps) {
   const containerClasses = {
     horizontal: 'flex flex-col md:flex-row items-center justify-center gap-8',
@@ -83,14 +93,16 @@ export function ArchitectureDiagram({
     <div className="my-8">
       {/* Title & Description */}
       {(title || description) && (
-        <div className="text-center mb-8">
-          {title && <h3 className="text-2xl font-bold text-gray-900 mb-2">{title}</h3>}
-          {description && <p className="text-gray-600 max-w-2xl mx-auto">{description}</p>}
+        <div className="mb-8 text-center">
+          {title && <h3 className="mb-2 text-2xl font-bold text-gray-900">{title}</h3>}
+          {description && <p className="mx-auto max-w-2xl text-gray-600">{description}</p>}
         </div>
       )}
 
       {/* Diagram Container */}
-      <div className={`relative ${containerClasses[layout]} p-8 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200`}>
+      <div
+        className={`relative ${containerClasses[layout]} rounded-xl border border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 p-8`}
+      >
         {/* Nodes */}
         {nodes.map((node, index) => {
           const Icon = node.icon ? iconMap[node.icon] || Code : Code
@@ -104,54 +116,43 @@ export function ArchitectureDiagram({
               transition={{
                 duration: 0.4,
                 delay: index * 0.15,
-                ease: 'easeOut'
+                ease: 'easeOut',
               }}
               className="group relative"
             >
               {/* Node Card */}
-              <div className={`
-                relative overflow-hidden rounded-xl border-2
-                bg-white ${colors.border}
-                p-6 min-w-[180px] max-w-[240px]
-                shadow-lg hover:shadow-xl
-                transition-all duration-300
-              `}>
+              <div
+                className={`relative overflow-hidden rounded-xl border-2 bg-white ${colors.border} max-w-[240px] min-w-[180px] p-6 shadow-lg transition-all duration-300 hover:shadow-xl`}
+              >
                 {/* Icon */}
-                <div className="flex justify-center mb-3">
-                  <div className={`p-3 rounded-lg ${colors.iconBg}`}>
+                <div className="mb-3 flex justify-center">
+                  <div className={`rounded-lg p-3 ${colors.iconBg}`}>
                     <Icon className={`h-8 w-8 ${colors.iconColor}`} />
                   </div>
                 </div>
 
                 {/* Label */}
-                <h4 className="text-center text-gray-900 font-bold text-lg mb-2">
-                  {node.label}
-                </h4>
+                <h4 className="mb-2 text-center text-lg font-bold text-gray-900">{node.label}</h4>
 
                 {/* Description */}
                 {node.description && (
-                  <p className="text-center text-gray-600 text-sm">
-                    {node.description}
-                  </p>
+                  <p className="text-center text-sm text-gray-600">{node.description}</p>
                 )}
               </div>
 
               {/* Arrow to next node (for horizontal/vertical layouts) */}
               {layout !== 'grid' && index < nodes.length - 1 && (
-                <div className={`
-                  absolute ${layout === 'horizontal' ? 'left-full top-1/2 -translate-y-1/2' : 'top-full left-1/2 -translate-x-1/2'}
-                  ${layout === 'horizontal' ? 'ml-4' : 'mt-4'}
-                  hidden md:flex items-center justify-center
-                `}>
+                <div
+                  className={`absolute ${layout === 'horizontal' ? 'top-1/2 left-full -translate-y-1/2' : 'top-full left-1/2 -translate-x-1/2'} ${layout === 'horizontal' ? 'ml-4' : 'mt-4'} hidden items-center justify-center md:flex`}
+                >
                   <motion.div
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.15 + 0.3 }}
                   >
-                    <ArrowRight className={`
-                      h-8 w-8 text-primary-500
-                      ${layout === 'vertical' ? 'rotate-90' : ''}
-                    `} />
+                    <ArrowRight
+                      className={`text-primary-500 h-8 w-8 ${layout === 'vertical' ? 'rotate-90' : ''} `}
+                    />
                   </motion.div>
                 </div>
               )}
@@ -163,10 +164,10 @@ export function ArchitectureDiagram({
       {/* Connections Legend (if provided) */}
       {connections.length > 0 && (
         <div className="mt-4 text-center">
-          <div className="inline-flex flex-wrap gap-4 justify-center text-sm text-gray-600">
+          <div className="inline-flex flex-wrap justify-center gap-4 text-sm text-gray-600">
             {connections.map((conn, idx) => (
               <span key={idx} className="flex items-center gap-2">
-                <ArrowRight className="h-4 w-4 text-primary-500" />
+                <ArrowRight className="text-primary-500 h-4 w-4" />
                 {conn.label && <span>{conn.label}</span>}
               </span>
             ))}
@@ -189,40 +190,38 @@ export function ComparisonDiagram({
 }) {
   return (
     <div className="my-8">
-      {title && (
-        <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">{title}</h3>
-      )}
+      {title && <h3 className="mb-8 text-center text-2xl font-bold text-gray-900">{title}</h3>}
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Option A */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="rounded-xl border-2 border-primary-300 bg-white p-6 shadow-lg"
+          className="border-primary-300 rounded-xl border-2 bg-white p-6 shadow-lg"
         >
-          <div className="text-center mb-4">
+          <div className="mb-4 text-center">
             {optionA.icon && (
-              <div className="inline-flex p-4 rounded-full bg-primary-100 mb-3">
+              <div className="bg-primary-100 mb-3 inline-flex rounded-full p-4">
                 {(() => {
                   const Icon = iconMap[optionA.icon] || Code
-                  return <Icon className="h-8 w-8 text-primary-600" />
+                  return <Icon className="text-primary-600 h-8 w-8" />
                 })()}
               </div>
             )}
             <h4 className="text-xl font-bold text-gray-900">{optionA.label}</h4>
             {optionA.description && (
-              <p className="text-sm text-gray-600 mt-2">{optionA.description}</p>
+              <p className="mt-2 text-sm text-gray-600">{optionA.description}</p>
             )}
           </div>
 
           {/* Pros */}
           {optionA.pros && optionA.pros.length > 0 && (
             <div className="mt-4">
-              <h5 className="text-sm font-semibold text-green-700 mb-2">Vorteile:</h5>
+              <h5 className="mb-2 text-sm font-semibold text-green-700">Vorteile:</h5>
               <ul className="space-y-1">
                 {optionA.pros.map((pro, idx) => (
-                  <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                    <span className="text-green-500 mt-0.5">✓</span>
+                  <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                    <span className="mt-0.5 text-green-500">✓</span>
                     <span>{pro}</span>
                   </li>
                 ))}
@@ -233,11 +232,11 @@ export function ComparisonDiagram({
           {/* Cons */}
           {optionA.cons && optionA.cons.length > 0 && (
             <div className="mt-4">
-              <h5 className="text-sm font-semibold text-red-700 mb-2">Nachteile:</h5>
+              <h5 className="mb-2 text-sm font-semibold text-red-700">Nachteile:</h5>
               <ul className="space-y-1">
                 {optionA.cons.map((con, idx) => (
-                  <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                    <span className="text-red-500 mt-0.5">✗</span>
+                  <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                    <span className="mt-0.5 text-red-500">✗</span>
                     <span>{con}</span>
                   </li>
                 ))}
@@ -250,31 +249,31 @@ export function ComparisonDiagram({
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="rounded-xl border-2 border-secondary-300 bg-white p-6 shadow-lg"
+          className="border-secondary-300 rounded-xl border-2 bg-white p-6 shadow-lg"
         >
-          <div className="text-center mb-4">
+          <div className="mb-4 text-center">
             {optionB.icon && (
-              <div className="inline-flex p-4 rounded-full bg-secondary-100 mb-3">
+              <div className="bg-secondary-100 mb-3 inline-flex rounded-full p-4">
                 {(() => {
                   const Icon = iconMap[optionB.icon] || Code
-                  return <Icon className="h-8 w-8 text-secondary-600" />
+                  return <Icon className="text-secondary-600 h-8 w-8" />
                 })()}
               </div>
             )}
             <h4 className="text-xl font-bold text-gray-900">{optionB.label}</h4>
             {optionB.description && (
-              <p className="text-sm text-gray-600 mt-2">{optionB.description}</p>
+              <p className="mt-2 text-sm text-gray-600">{optionB.description}</p>
             )}
           </div>
 
           {/* Pros */}
           {optionB.pros && optionB.pros.length > 0 && (
             <div className="mt-4">
-              <h5 className="text-sm font-semibold text-green-700 mb-2">Vorteile:</h5>
+              <h5 className="mb-2 text-sm font-semibold text-green-700">Vorteile:</h5>
               <ul className="space-y-1">
                 {optionB.pros.map((pro, idx) => (
-                  <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                    <span className="text-green-500 mt-0.5">✓</span>
+                  <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                    <span className="mt-0.5 text-green-500">✓</span>
                     <span>{pro}</span>
                   </li>
                 ))}
@@ -285,11 +284,11 @@ export function ComparisonDiagram({
           {/* Cons */}
           {optionB.cons && optionB.cons.length > 0 && (
             <div className="mt-4">
-              <h5 className="text-sm font-semibold text-red-700 mb-2">Nachteile:</h5>
+              <h5 className="mb-2 text-sm font-semibold text-red-700">Nachteile:</h5>
               <ul className="space-y-1">
                 {optionB.cons.map((con, idx) => (
-                  <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                    <span className="text-red-500 mt-0.5">✗</span>
+                  <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                    <span className="mt-0.5 text-red-500">✗</span>
                     <span>{con}</span>
                   </li>
                 ))}

@@ -8,13 +8,13 @@ Dieses Dokument beschreibt die vollständige Einrichtung von Cloudflare als Cont
 
 ### Performance-Verbesserungen (erwartet)
 
-| Metrik | Vorher | Nachher | Verbesserung |
-|--------|--------|---------|--------------|
-| **LCP (Largest Contentful Paint)** | ~2.5s | ~1.2s | -52% |
-| **TTFB (Time to First Byte)** | ~600ms | ~200ms | -67% |
-| **FCP (First Contentful Paint)** | ~1.8s | ~0.9s | -50% |
-| **Bildladezeit** | 3-5s | 0.5-1s | -80% |
-| **VPS-Bandbreite** | 100% | 20-30% | -70% |
+| Metrik                             | Vorher | Nachher | Verbesserung |
+| ---------------------------------- | ------ | ------- | ------------ |
+| **LCP (Largest Contentful Paint)** | ~2.5s  | ~1.2s   | -52%         |
+| **TTFB (Time to First Byte)**      | ~600ms | ~200ms  | -67%         |
+| **FCP (First Contentful Paint)**   | ~1.8s  | ~0.9s   | -50%         |
+| **Bildladezeit**                   | 3-5s   | 0.5-1s  | -80%         |
+| **VPS-Bandbreite**                 | 100%   | 20-30%  | -70%         |
 
 ### Zusätzliche Vorteile
 
@@ -35,6 +35,7 @@ Dieses Dokument beschreibt die vollständige Einrichtung von Cloudflare als Cont
    - E-Mail bestätigen
 
 2. **Domain hinzufügen**:
+
    ```
    Dashboard > Add a Site > "headon.pro" eingeben > Add site
    ```
@@ -56,6 +57,7 @@ CNAME   www         headon.pro              Proxied (🟠)    Auto
 ```
 
 **Wichtig**:
+
 - **Orange Cloud (Proxied)**: Aktiviert CDN + DDoS-Schutz
 - **Grey Cloud (DNS-only)**: Deaktiviert CDN (nicht empfohlen)
 - Für alle Web-Traffic-Records sollte **Proxied** aktiviert sein
@@ -63,6 +65,7 @@ CNAME   www         headon.pro              Proxied (🟠)    Auto
 ### 1.3 Nameserver beim Domain-Registrar ändern
 
 Cloudflare zeigt euch zwei Nameserver an, z.B.:
+
 ```
 dane.ns.cloudflare.com
 uma.ns.cloudflare.com
@@ -71,6 +74,7 @@ uma.ns.cloudflare.com
 **Anleitung je nach Registrar**:
 
 #### Bei IONOS:
+
 1. Einloggen auf https://my.ionos.de
 2. Domains & SSL → Domain verwalten → `headon.pro` auswählen
 3. DNS-Einstellungen → Nameserver
@@ -81,12 +85,14 @@ uma.ns.cloudflare.com
 6. Speichern
 
 #### Bei anderen Registrars:
+
 - Die genauen Schritte findet ihr im Cloudflare Dashboard unter "Quick Start Guide"
 - Cloudflare bietet Anleitungen für alle gängigen Registrars
 
 **Propagationszeit**: 2-24 Stunden (meist innerhalb von 2 Stunden)
 
 **Status überprüfen**:
+
 ```bash
 # Nameserver-Check
 dig headon.pro NS +short
@@ -120,11 +126,13 @@ dig headon.pro NS +short
 ```
 
 **Warum "Full (strict)"?**
+
 - End-to-End-Verschlüsselung (Browser → Cloudflare → VPS)
 - Validiert das SSL-Zertifikat eures VPS
 - Höchste Sicherheit
 
 **Alternative Modi** (nicht empfohlen):
+
 - **Flexible**: Nur Browser → Cloudflare verschlüsselt (unsicher)
 - **Full**: Akzeptiert selbstsignierte Zertifikate (weniger sicher)
 
@@ -135,9 +143,9 @@ dig headon.pro NS +short
 Folgende Einstellungen aktivieren:
 
 ```yaml
-✅ Always Use HTTPS:                ON
-✅ Automatic HTTPS Rewrites:        ON
-✅ Certificate Transparency:        ON
+✅ Always Use HTTPS: ON
+✅ Automatic HTTPS Rewrites: ON
+✅ Certificate Transparency: ON
 ```
 
 **Ergebnis**: Alle HTTP-Requests werden automatisch auf HTTPS umgeleitet.
@@ -161,10 +169,11 @@ Optional für maximale Sicherheit: **TLS 1.3** (kann sehr alte Browser ausschlie
 ```yaml
 Caching Level: Standard
 
-Browser Cache TTL: 4 hours  # Empfohlung für dynamische Inhalte
+Browser Cache TTL: 4 hours # Empfohlung für dynamische Inhalte
 ```
 
 **Was wird gecacht?**
+
 - ✅ Statische Assets (`/_next/static/`, `/images/`, `/fonts/`)
 - ✅ Next.js Image Optimization (`/_next/image/`)
 - ❌ HTML-Seiten (dynamisch, nicht gecacht im Standard Mode)
@@ -236,13 +245,13 @@ Priorität: 3
 **Navigation**: Dashboard → Speed → Optimization
 
 ```yaml
-Auto Minify:
-  ✅ JavaScript
+Auto Minify: ✅ JavaScript
   ✅ CSS
   ✅ HTML
 ```
 
 **Was macht das?**
+
 - Entfernt Whitespace, Kommentare, unnötige Zeichen
 - Reduziert Dateigröße um 10-30%
 - Wird automatisch am Edge angewendet
@@ -258,6 +267,7 @@ Auto Minify:
 ```
 
 **Vorteile**:
+
 - 15-20% bessere Kompression als Gzip
 - Wird automatisch verwendet wenn Browser Brotli unterstützt
 - Fallback auf Gzip für alte Browser
@@ -275,6 +285,7 @@ Auto Minify:
 ```
 
 **HTTP/3 Vorteile**:
+
 - Schnellere Verbindungsaufbau (0-RTT)
 - Bessere Performance bei schlechten Netzwerken
 - Multiplexing ohne Head-of-Line-Blocking
@@ -290,6 +301,7 @@ Auto Minify:
 ```
 
 **Warum deaktiviert?**
+
 - Kann mit Next.js React Hydration kollidieren
 - Next.js hat bereits optimiertes Script-Loading
 - Kann zu "hydration mismatch" Fehlern führen
@@ -303,10 +315,11 @@ Auto Minify:
 **Navigation**: Dashboard → Security → Settings
 
 ```yaml
-Security Level: Medium  # Empfohlen
+Security Level: Medium # Empfohlen
 ```
 
 **Optionen**:
+
 - **Essentially Off**: Nur bekannte Bedrohungen blockieren
 - **Low**: Minimale Herausforderungen
 - **Medium**: Balance zwischen Sicherheit und Nutzerfreundlichkeit ⭐
@@ -324,6 +337,7 @@ Security Level: Medium  # Empfohlen
 ```
 
 **Was macht das?**
+
 - Blockiert bekannte Bots und Scraper
 - Reduziert Server-Last
 - Schützt vor Content-Scraping
@@ -335,7 +349,7 @@ Security Level: Medium  # Empfohlen
 **Navigation**: Dashboard → Security → Settings
 
 ```yaml
-Challenge Passage: 30 minutes  # Empfohlen
+Challenge Passage: 30 minutes # Empfohlen
 ```
 
 **Erklärung**: User, die eine Challenge gelöst haben, müssen 30 Minuten lang keine weiteren Challenges lösen.
@@ -349,6 +363,7 @@ Challenge Passage: 30 minutes  # Empfohlen
 **Navigation**: Dashboard → Analytics & Logs
 
 **Kostenlos verfügbar**:
+
 - Traffic-Übersicht (Requests, Bandbreite)
 - Cache-Ratio (wie viel wurde vom CDN ausgeliefert?)
 - Threat-Übersicht (blockierte Anfragen)
@@ -381,6 +396,7 @@ Challenge Passage: 30 minutes  # Empfohlen
 ```
 
 **Was macht das?**
+
 - Cloudflare speichert statische Kopien eurer Seiten
 - Bei VPS-Ausfall wird gecachte Version ausgeliefert
 - Zeigt "This page is currently offline" Banner
@@ -442,6 +458,7 @@ curl -I https://headon.pro
 ### 8.2 Cache-Status überprüfen
 
 **Browser DevTools**:
+
 1. Chrome DevTools öffnen (F12)
 2. Network-Tab
 3. Seite neu laden
@@ -456,6 +473,7 @@ cf-cache-status: EXPIRED      # Cache abgelaufen, wird neu geladen
 ```
 
 **Kommandozeile**:
+
 ```bash
 # Static Asset (sollte HIT sein nach erstem Request)
 curl -I https://headon.pro/_next/static/css/app/layout.css | grep cf-cache-status
@@ -485,6 +503,7 @@ pnpm dlx lighthouse https://headon.pro --output=html --output-path=./after-cdn.h
 ```
 
 **Erwartete Verbesserungen**:
+
 - Performance Score: +10-20 Punkte
 - LCP: -40-60% Zeit
 - TTFB: -50-70% Zeit
@@ -502,6 +521,7 @@ pnpm dlx lighthouse https://headon.pro --output=html --output-path=./after-cdn.h
 4. Test durchführen (vor und nach CDN)
 
 **Erwartete Verbesserungen**:
+
 - TTFB: < 200ms (von ~600ms)
 - Speed Index: < 1.5s (von ~3s)
 - First Byte Time: < 200ms
@@ -516,6 +536,7 @@ pnpm dlx lighthouse https://headon.pro --output=html --output-path=./after-cdn.h
 4. Test starten
 
 **Erwartete Verbesserungen**:
+
 - Load Time: -40-60%
 - Requests: Gleich (CDN ändert Anzahl nicht)
 - Page Size: -10-20% (durch Kompression)
@@ -525,12 +546,14 @@ pnpm dlx lighthouse https://headon.pro --output=html --output-path=./after-cdn.h
 ### 8.4 Cache-Hit-Ratio überwachen
 
 **Cloudflare Dashboard**:
+
 1. Dashboard → Analytics → Traffic
 2. "Cached Requests" Chart anzeigen
 
 **Ziel**: 70-90% Cache-Hit-Ratio nach 24-48 Stunden
 
 **Interpretation**:
+
 - **> 80%**: Exzellent ✅
 - **60-80%**: Gut, aber Optimierungspotenzial 📊
 - **< 60%**: Cache-Regeln überprüfen ⚠️
@@ -567,6 +590,7 @@ Nach jedem Deployment sollte der Cloudflare-Cache geleert werden, damit neue Inh
 **GitHub Actions Integration**:
 
 Füge das Token als Secret hinzu:
+
 ```bash
 # GitHub Repository → Settings → Secrets → New repository secret
 Name:  CLOUDFLARE_API_TOKEN
@@ -586,6 +610,7 @@ Value: <dein-api-token>
 ```
 
 **Zusätzliche Secrets**:
+
 ```bash
 # Cloudflare Zone ID finden:
 # Dashboard → Domain auswählen → Rechte Sidebar → Zone ID kopieren
@@ -621,16 +646,19 @@ curl -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
 ### 10.1 Regelmäßige Überprüfungen
 
 **Wöchentlich**:
+
 - ✅ Cache-Hit-Ratio im Dashboard prüfen (Ziel: > 70%)
 - ✅ Security-Tab auf blockierte Threats prüfen
 - ✅ Bandwidth-Verbrauch monitoren
 
 **Monatlich**:
+
 - ✅ Performance-Tests durchführen (Lighthouse, WebPageTest)
 - ✅ Cloudflare Analytics mit Umami-Daten abgleichen
 - ✅ Security-Events reviewen (Bots, DDoS-Attempts)
 
 **Quartalsweise**:
+
 - ✅ Page Rules auf Optimierungspotenzial prüfen
 - ✅ Neue Cloudflare-Features evaluieren
 - ✅ SSL-Zertifikate (automatisch erneuert, trotzdem checken)
@@ -642,6 +670,7 @@ curl -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
 #### Problem: Cache-Hit-Ratio zu niedrig (< 50%)
 
 **Diagnose**:
+
 ```bash
 # Verschiedene URLs testen
 for url in \
@@ -656,11 +685,13 @@ done
 ```
 
 **Mögliche Ursachen**:
+
 1. Page Rules falsch konfiguriert → Page Rules überprüfen
 2. Cache-Control Headers fehlen → Sollte durch `next.config.ts` gesetzt sein
 3. Cookies auf allen Requests → Cloudflare cached keine Requests mit Cookies (außer bei "Cache Everything" Page Rule)
 
 **Lösung**:
+
 - Page Rules in der Reihenfolge überprüfen (spezifischste zuerst)
 - Sicherstellen, dass "Cache Everything" für Static Assets aktiv ist
 - Cache-Control Headers in `next.config.ts` überprüfen (bereits implementiert ✅)
@@ -672,6 +703,7 @@ done
 **Ursache**: SSL/TLS-Modus ist auf "Flexible" statt "Full (strict)"
 
 **Lösung**:
+
 1. Dashboard → SSL/TLS → Overview
 2. Modus auf **"Full (strict)"** ändern
 3. 5 Minuten warten
@@ -684,7 +716,9 @@ done
 **Ursache**: VPS leitet HTTP → HTTPS um UND Cloudflare tut das auch
 
 **Lösung**:
+
 1. **Option A**: Nginx auf VPS prüfen - HTTP → HTTPS Redirect entfernen
+
    ```nginx
    # /etc/nginx/sites-available/headon.pro
    # Diese Zeilen entfernen/auskommentieren:
@@ -696,6 +730,7 @@ done
 2. **Option B**: Cloudflare "Always Use HTTPS" deaktivieren (nicht empfohlen)
 
 **Richtige Konfiguration**:
+
 - Cloudflare: "Always Use HTTPS" → **ON**
 - VPS Nginx: HTTP → HTTPS Redirect → **OFF**
 
@@ -706,6 +741,7 @@ done
 **Ursache**: Hotlink-Protection oder Firewall-Regel blockiert Requests
 
 **Lösung**:
+
 1. Dashboard → Security → WAF
 2. Security Events prüfen
 3. Ggf. Regel anpassen oder IP-Adresse whitelisten
@@ -715,6 +751,7 @@ done
 #### Problem: Langsame API-Responses
 
 **Diagnose**:
+
 ```bash
 curl -w "Time: %{time_total}s\n" -o /dev/null -s https://headon.pro/api/health
 ```
@@ -722,6 +759,7 @@ curl -w "Time: %{time_total}s\n" -o /dev/null -s https://headon.pro/api/health
 **Ursache**: Cloudflare cached APIs nicht (by design)
 
 **Lösung**:
+
 - API-Performance auf VPS optimieren (außerhalb Cloudflare)
 - Oder: API auf separater Subdomain hosten ohne Cloudflare Proxy (grauer Cloud)
 
@@ -732,6 +770,7 @@ curl -w "Time: %{time_total}s\n" -o /dev/null -s https://headon.pro/api/health
 ### 11.1 Cloudflare Workers (kostenpflichtig)
 
 **Use Cases**:
+
 - Edge-Side Rendering (ESR)
 - A/B-Testing am Edge
 - Personalisierung ohne Backend-Last
@@ -746,6 +785,7 @@ curl -w "Time: %{time_total}s\n" -o /dev/null -s https://headon.pro/api/health
 ### 11.2 Argo Smart Routing (kostenpflichtig)
 
 **Was macht das?**
+
 - Intelligente Route-Optimierung durch Cloudflare-Netzwerk
 - ~30% schnellere Time-to-First-Byte (TTFB)
 
@@ -758,6 +798,7 @@ curl -w "Time: %{time_total}s\n" -o /dev/null -s https://headon.pro/api/health
 ### 11.3 Load Balancing (kostenpflichtig)
 
 **Use Cases**:
+
 - Mehrere VPS-Server
 - Automatisches Failover
 - Health-Checks
@@ -815,9 +856,9 @@ curl -w "Time: %{time_total}s\n" -o /dev/null -s https://headon.pro/api/health
 
 ## Änderungshistorie
 
-| Datum | Version | Änderung |
-|-------|---------|----------|
-| 2025-10-29 | 1.0 | Initiale Dokumentation erstellt |
+| Datum      | Version | Änderung                        |
+| ---------- | ------- | ------------------------------- |
+| 2025-10-29 | 1.0     | Initiale Dokumentation erstellt |
 
 ---
 

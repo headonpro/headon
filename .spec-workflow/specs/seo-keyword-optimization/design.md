@@ -5,12 +5,14 @@
 This design document specifies the technical implementation of the SEO & Keyword Optimization feature for HEADON.pro. The implementation leverages Next.js 15's App Router, Server Components, and Metadata API to achieve superior SEO performance while maintaining the existing 95+ Lighthouse score.
 
 **Architecture Approach**:
+
 - Server-first rendering for optimal SEO crawlability
 - MDX-based content management for flexibility
 - Component-based design leveraging existing UI patterns
 - Static generation for maximum performance
 
 **Key Design Principles**:
+
 1. **Reuse Existing Patterns**: Follow established regional page patterns (app/regionen/[city])
 2. **Maintainable Content**: MDX frontmatter + content for easy updates
 3. **Performance First**: All new pages target <1.5s LCP, 95+ Lighthouse
@@ -21,32 +23,38 @@ This design document specifies the technical implementation of the SEO & Keyword
 ### Technical Standards (tech.md)
 
 **Language & Framework Compliance**:
+
 - ✅ TypeScript 5.9.2 with strict mode for all components
 - ✅ Next.js 15.5.2 App Router with Server Components as default
 - ✅ React 19.1.1 for UI components
 
 **Styling & UI**:
+
 - ✅ Tailwind CSS 4.1.13 for all styling
 - ✅ shadcn/ui components (Button, Select, Accordion, etc.) where applicable
 - ✅ Framer Motion for animations (if needed on client components)
 
 **Forms & Validation**:
+
 - ✅ React Hook Form 7.62.0 for PriceCalculator interactive form
 - ✅ Zod 4.1.5 for schema validation (if contact forms on landing pages)
 
 **Performance Requirements** (from tech.md):
+
 - ✅ Page Load Time (LCP): < 1.5 seconds ✓
 - ✅ Time to Interactive (TTI): < 3 seconds ✓
 - ✅ Lighthouse Score: 95+ maintained ✓
 - ✅ Initial Bundle Size: < 200KB (no heavy dependencies added) ✓
 
 **SEO Standards** (from tech.md):
+
 - ✅ Next.js Metadata API for all pages
 - ✅ Open Graph tags for social sharing
 - ✅ Schema.org structured data (LocalBusiness, Article)
 - ✅ Automatic sitemap.xml generation via Next.js
 
 **Development Tools**:
+
 - ✅ ESLint 9.35.0 for code quality
 - ✅ Prettier 3.6.2 for consistent formatting
 - ✅ pnpm 10.15.0 as package manager
@@ -54,6 +62,7 @@ This design document specifies the technical implementation of the SEO & Keyword
 ### Project Structure (structure.md)
 
 **File Organization**:
+
 ```
 app/
 ├── branchen/                    # Industry landing pages (NEW)
@@ -99,12 +108,14 @@ lib/content/
 ```
 
 **Naming Conventions** (from structure.md):
+
 - ✅ Route folders: `kebab-case` (branchen, preise, technologie)
 - ✅ Component files: `PascalCase.tsx` (BrancheContent.tsx)
 - ✅ MDX content: `kebab-case.mdx` (gastronomie.mdx)
 - ✅ Utility files: `camelCase.ts` (content-api.ts)
 
 **Import Pattern**:
+
 ```typescript
 // 1. React/Next.js
 import type { Metadata } from 'next'
@@ -126,6 +137,7 @@ import type { BranchePageData } from '@/lib/types/content'
 ```
 
 **Code Size Guidelines**:
+
 - Component files: ≤ 300 lines (target: 100-200)
 - Page files: ≤ 200 lines (compose sections)
 - MDX content: No hard limit (content-driven)
@@ -135,26 +147,31 @@ import type { BranchePageData } from '@/lib/types/content'
 ### Existing Components to Leverage
 
 **1. Layout Components** (components/layout/)
+
 - ✅ **Header.tsx**: Will update navigation to include "Branchen" menu item
 - ✅ **Footer.tsx**: Will add links to new sections (Branchen, Preise, Blog)
 
 **2. UI Primitives** (components/ui/)
+
 - ✅ **Button**: CTA buttons on all landing pages
 - ✅ **Accordion**: FAQ sections on industry pages
 - ✅ **Select**: PriceCalculator form inputs
 - ✅ **Card**: Pricing packages, feature grids
 
 **3. SEO Components** (components/seo/)
+
 - ✅ **StructuredData.tsx**: Extend with Article, Service schema types
 - ✅ **Breadcrumbs.tsx**: Use on all landing pages
 - ✅ **PageHeader.tsx**: Reuse for consistent headers
 
 **4. Section Components** (components/sections/)
+
 - ✅ **IndustryNavigator.tsx**: Update to link to dedicated industry pages
 - ✅ **ProcessSection.tsx**: Reuse on technology pages
 - ✅ **TrustPersonalitySection.tsx**: Reuse on pricing page
 
 **5. Content API** (lib/content/content-api.ts)
+
 - ✅ **getCityPage()**: Pattern for getBranchePage()
 - ✅ **getServicePage()**: Pattern for getTechnologyPage()
 - ✅ **compileMDXContent()**: Reuse for all new MDX content
@@ -162,21 +179,25 @@ import type { BranchePageData } from '@/lib/types/content'
 ### Integration Points
 
 **1. Existing Regional Pages** (app/regionen/[city])
+
 - **Integration**: Industry pages follow identical pattern
 - **Reuse**: Same metadata generation approach
 - **Reuse**: Same MDX + Server Component pattern
 
 **2. Navigation System** (components/layout/Header.tsx)
+
 - **Integration**: Add "Branchen" dropdown with 6 industry links
 - **Integration**: Add "Ratgeber" (Blog) link
 - **Integration**: Add "Preise" link
 
 **3. IndustryNavigator Component** (components/sections/IndustryNavigator.tsx)
+
 - **Current State**: Displays 6 industries (Gastronomie, Handwerk, Einzelhandel, Beratung, Immobilien, Fitness)
 - **Integration**: Update each industry card to link to `/branchen/[id]`
 - **Code Change**: Wrap cards in `<Link href={`/branchen/${industry.id}`}>`
 
 **4. Sitemap Generation** (app/sitemap.ts)
+
 - **Integration**: Add new routes to sitemap
   - /branchen + 6 industry pages
   - /preise
@@ -184,6 +205,7 @@ import type { BranchePageData } from '@/lib/types/content'
   - /technologie + 6 technology pages
 
 **5. Supabase (Optional - Future)**
+
 - **No Integration Required**: All content is static MDX
 - **Future**: Contact form submissions on landing pages use existing Supabase contact table
 
@@ -192,6 +214,7 @@ import type { BranchePageData } from '@/lib/types/content'
 ### Overall Architecture Pattern
 
 **Hybrid Rendering Strategy**:
+
 ```mermaid
 graph TD
     A[User Request] --> B{Route Type}
@@ -216,22 +239,26 @@ graph TD
 ### Modular Design Principles
 
 **1. Single File Responsibility**:
+
 - Each industry page: One `page.tsx` + one `[branche].mdx`
 - Each blog post: One `[slug]/page.tsx` + one `blog-post.mdx`
 - Each component: One clear purpose (BrancheContent only renders industry pages)
 
 **2. Component Isolation**:
+
 - `BrancheContent.tsx`: Renders industry page sections
 - `PricingCalculator.tsx`: Interactive price calculator (isolated state)
 - `PricingTable.tsx`: Static pricing display
 - `BlogPostContent.tsx`: Blog post layout with TOC, author, share buttons
 
 **3. Service Layer Separation**:
+
 - **Data Access**: `lib/content/content-api.ts` (getBranchePage, getBlogPost)
 - **Business Logic**: Frontmatter validation, content compilation
 - **Presentation**: React components in `components/`
 
 **4. Utility Modularity**:
+
 - `lib/validations.ts`: Extend with PriceCalculator schema
 - `lib/utils.ts`: Add `generateBreadcrumbs()` utility
 
@@ -259,6 +286,7 @@ graph LR
 **File**: `components/sections/BrancheContent.tsx`
 
 **Interfaces**:
+
 ```typescript
 interface BrancheContentProps {
   branche: string
@@ -298,12 +326,14 @@ interface FAQ {
 ```
 
 **Dependencies**:
+
 - `@/components/ui/button` (CTA buttons)
 - `@/components/ui/accordion` (FAQ section)
 - `@/components/seo/Breadcrumbs` (navigation)
 - `lucide-react` (icons)
 
 **Reuses**:
+
 - **CityPageContent.tsx pattern**: Similar structure with hero, features, FAQs
 - **Existing section components**: Can embed ProcessSection, TrustSection
 
@@ -318,6 +348,7 @@ interface FAQ {
 **File**: `components/sections/PricingCalculator.tsx`
 
 **Interfaces**:
+
 ```typescript
 'use client'
 
@@ -343,6 +374,7 @@ interface PriceEstimate {
 ```
 
 **Dependencies**:
+
 - `react-hook-form` (form state)
 - `zod` (validation schema)
 - `@/components/ui/select` (dropdowns)
@@ -350,10 +382,11 @@ interface PriceEstimate {
 - `framer-motion` (price update animations)
 
 **State Management**:
+
 ```typescript
 const [estimate, setEstimate] = useState<PriceEstimate | null>(null)
 const form = useForm<CalculatorFormData>({
-  resolver: zodResolver(calculatorSchema)
+  resolver: zodResolver(calculatorSchema),
 })
 
 // Real-time calculation on form change
@@ -367,19 +400,20 @@ useEffect(() => {
 ```
 
 **Calculation Logic**:
+
 ```typescript
 function calculatePrice(data: CalculatorFormData): PriceEstimate {
   const basePrices = {
     website: 5000,
     webapp: 15000,
     app: 20000,
-    ecommerce: 12000
+    ecommerce: 12000,
   }
 
   const complexityMultipliers = {
     simple: 1.0,
     medium: 1.5,
-    complex: 2.5
+    complex: 2.5,
   }
 
   const featureCosts = {
@@ -398,13 +432,14 @@ function calculatePrice(data: CalculatorFormData): PriceEstimate {
     basePrice,
     featuresCost,
     complexityMultiplier: multiplier,
-    total: (basePrice * multiplier) + featuresCost,
-    timeframe: estimateTimeframe(data)
+    total: basePrice * multiplier + featuresCost,
+    timeframe: estimateTimeframe(data),
   }
 }
 ```
 
 **Reuses**:
+
 - **React Hook Form pattern**: Same as contact form
 - **Zod validation**: Same pattern as lib/validations.ts
 
@@ -417,6 +452,7 @@ function calculatePrice(data: CalculatorFormData): PriceEstimate {
 **File**: `components/sections/PricingTable.tsx`
 
 **Interfaces**:
+
 ```typescript
 interface PricingTableProps {
   packages: PricingPackage[]
@@ -435,10 +471,12 @@ interface PricingPackage {
 ```
 
 **Dependencies**:
+
 - `@/components/ui/button` (CTA buttons)
 - `lucide-react` (CheckCircle icons)
 
 **Data Source**:
+
 ```typescript
 // lib/content/pricing-data.ts
 export const pricingPackages: PricingPackage[] = [
@@ -454,13 +492,14 @@ export const pricingPackages: PricingPackage[] = [
       // ...
     ],
     ctaText: 'Jetzt anfragen',
-    ctaLink: '/contact?package=basis'
+    ctaLink: '/contact?package=basis',
   },
   // ... Professional, Premium
 ]
 ```
 
 **Reuses**:
+
 - **Card layout pattern**: Similar to service cards on homepage
 
 ---
@@ -472,6 +511,7 @@ export const pricingPackages: PricingPackage[] = [
 **File**: `components/sections/BlogPostContent.tsx`
 
 **Interfaces**:
+
 ```typescript
 interface BlogPostContentProps {
   post: BlogPostData
@@ -501,11 +541,13 @@ interface TOCItem {
 ```
 
 **Dependencies**:
+
 - `@/components/ui/button` (share buttons)
 - `@/components/seo/Breadcrumbs` (navigation)
 - `lucide-react` (Share2, Clock, Calendar icons)
 
 **Layout Structure**:
+
 ```typescript
 return (
   <article>
@@ -551,6 +593,7 @@ return (
 ```
 
 **Reuses**:
+
 - **Breadcrumbs component**: Existing
 - **Image component**: Next.js Image with optimization
 - **CTA Section**: Existing component
@@ -564,6 +607,7 @@ return (
 **File**: `components/sections/TechnologyPageContent.tsx`
 
 **Interfaces**:
+
 ```typescript
 interface TechnologyPageContentProps {
   tech: string
@@ -597,11 +641,13 @@ interface TechComparison {
 ```
 
 **Dependencies**:
+
 - `@/components/ui/accordion` (FAQ)
 - `@/components/sections/ProcessSection` (reuse)
 - `@/components/showcase/PhoneMockup3D` (showcase)
 
 **Reuses**:
+
 - **Service page pattern**: Similar structure to service pages
 - **Portfolio integration**: Link to projects using this tech
 
@@ -614,6 +660,7 @@ interface TechComparison {
 **File**: `components/sections/IndustryNavigator.tsx` (existing)
 
 **Changes Required**:
+
 ```typescript
 // BEFORE
 <motion.div className="industry-card">
@@ -643,26 +690,27 @@ interface TechComparison {
 **File**: `content/branchen/[branche].mdx`
 
 **Frontmatter Schema**:
+
 ```typescript
 interface BrancheFrontmatter {
-  name: string                    // "Gastronomie & Restaurant"
-  icon: string                    // "UtensilsCrossed" (lucide-react icon name)
-  heroTitle: string               // "Website für Restaurant & Gastronomie"
-  heroSubtitle: string            // "Online-Speisekarte, Reservierung & mehr"
+  name: string // "Gastronomie & Restaurant"
+  icon: string // "UtensilsCrossed" (lucide-react icon name)
+  heroTitle: string // "Website für Restaurant & Gastronomie"
+  heroSubtitle: string // "Online-Speisekarte, Reservierung & mehr"
 
   pricing: {
-    from: number                  // 2500
-    to?: number                   // 4500
-    currency: string              // "EUR"
+    from: number // 2500
+    to?: number // 4500
+    currency: string // "EUR"
   }
 
   features: Array<{
-    title: string                 // "Online-Speisekarte"
-    description: string           // "Digitale Speisekarte mit Bildern..."
-    icon: string                  // "Menu" (lucide icon)
+    title: string // "Online-Speisekarte"
+    description: string // "Digitale Speisekarte mit Bildern..."
+    icon: string // "Menu" (lucide icon)
   }>
 
-  caseStudies?: string[]          // ['restaurant-beispiel-1']
+  caseStudies?: string[] // ['restaurant-beispiel-1']
 
   faqs: Array<{
     question: string
@@ -672,6 +720,7 @@ interface BrancheFrontmatter {
 ```
 
 **Content Structure** (after frontmatter):
+
 ```markdown
 ---
 # Frontmatter here
@@ -689,17 +738,20 @@ Wir kennen die Anforderungen...
 ## Features für Restaurants
 
 ### Online-Speisekarte (Digital Menu)
+
 Präsentieren Sie Ihre Gerichte...
 
 ## Preise für Restaurant-Websites
 
 ### Basis-Paket (2.500 EUR)
+
 - Responsive Website (5-8 Seiten)
 - Digitale Speisekarte mit Bildern
-...
+  ...
 ```
 
 **Validation** (lib/validations.ts):
+
 ```typescript
 export const brancheFrontmatterSchema = z.object({
   name: z.string().min(1),
@@ -709,18 +761,27 @@ export const brancheFrontmatterSchema = z.object({
   pricing: z.object({
     from: z.number().positive(),
     to: z.number().positive().optional(),
-    currency: z.string().length(3)
+    currency: z.string().length(3),
   }),
-  features: z.array(z.object({
-    title: z.string(),
-    description: z.string(),
-    icon: z.string()
-  })).min(3).max(8),
+  features: z
+    .array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        icon: z.string(),
+      })
+    )
+    .min(3)
+    .max(8),
   caseStudies: z.array(z.string()).optional(),
-  faqs: z.array(z.object({
-    question: z.string(),
-    answer: z.string()
-  })).min(3)
+  faqs: z
+    .array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      })
+    )
+    .min(3),
 })
 ```
 
@@ -731,34 +792,36 @@ export const brancheFrontmatterSchema = z.object({
 **File**: `content/blog/[slug].mdx`
 
 **Frontmatter Schema**:
+
 ```typescript
 interface BlogPostFrontmatter {
-  title: string                   // "Website Kosten 2025: Der komplette Guide"
-  description: string             // SEO description (150-160 chars)
-  author: string                  // "HEADON Team"
-  publishDate: string             // "2025-01-15"
-  updateDate?: string             // "2025-01-20" (if updated)
-  readingTime: number             // 8 (minutes)
+  title: string // "Website Kosten 2025: Der komplette Guide"
+  description: string // SEO description (150-160 chars)
+  author: string // "HEADON Team"
+  publishDate: string // "2025-01-15"
+  updateDate?: string // "2025-01-20" (if updated)
+  readingTime: number // 8 (minutes)
 
-  featuredImage: string           // "/images/blog/website-kosten-2025.jpg"
-  featuredImageAlt: string        // "Laptop showing website pricing calculator"
+  featuredImage: string // "/images/blog/website-kosten-2025.jpg"
+  featuredImageAlt: string // "Laptop showing website pricing calculator"
 
-  tags: string[]                  // ["Webdesign", "Preise", "Ratgeber"]
-  category: string                // "Webdesign"
+  tags: string[] // ["Webdesign", "Preise", "Ratgeber"]
+  category: string // "Webdesign"
 
-  keywords: string[]              // ["Website Kosten", "Webdesign Preise", ...]
+  keywords: string[] // ["Website Kosten", "Webdesign Preise", ...]
 
-  relatedPosts?: string[]         // ['website-erstellen-lassen', ...]
-  relatedServices?: string[]      // ['web-development', ...]
+  relatedPosts?: string[] // ['website-erstellen-lassen', ...]
+  relatedServices?: string[] // ['web-development', ...]
 
   seo: {
-    canonical?: string            // If published elsewhere first
-    noindex?: boolean             // Default: false
+    canonical?: string // If published elsewhere first
+    noindex?: boolean // Default: false
   }
 }
 ```
 
 **Content Structure**:
+
 ```markdown
 ---
 # Frontmatter
@@ -781,11 +844,13 @@ interface BlogPostFrontmatter {
 ## Preisübersicht nach Website-Typ
 
 ### Landing Page (1.500 - 3.000 EUR)
+
 - Features
 - Use cases
 - Timeframe
 
 ### Corporate Website (5.000 - 15.000 EUR)
+
 ...
 
 ## Versteckte Kosten
@@ -793,7 +858,7 @@ interface BlogPostFrontmatter {
 - Hosting & Domain
 - SSL-Zertifikat
 - Wartung
-...
+  ...
 
 ## Interaktiver Preis-Rechner
 
@@ -819,25 +884,26 @@ interface BlogPostFrontmatter {
 **File**: `content/technologie/[tech].mdx`
 
 **Frontmatter Schema**:
+
 ```typescript
 interface TechnologyFrontmatter {
-  name: string                    // "Next.js"
-  officialName: string            // "Next.js by Vercel"
-  logo: string                    // "/images/tech/nextjs.svg"
-  version: string                 // "15.x"
+  name: string // "Next.js"
+  officialName: string // "Next.js by Vercel"
+  logo: string // "/images/tech/nextjs.svg"
+  version: string // "15.x"
 
-  description: string             // "React Framework for Production"
+  description: string // "React Framework for Production"
 
-  benefits: string[]              // ["Server-Side Rendering", "SEO-optimiert", ...]
+  benefits: string[] // ["Server-Side Rendering", "SEO-optimiert", ...]
 
   useCases: Array<{
-    title: string                 // "E-Commerce Websites"
+    title: string // "E-Commerce Websites"
     description: string
-    bestFor: string[]             // ["High Traffic", "SEO-critical"]
+    bestFor: string[] // ["High Traffic", "SEO-critical"]
   }>
 
   comparison: {
-    alternatives: string[]        // ["WordPress", "Gatsby", "Remix"]
+    alternatives: string[] // ["WordPress", "Gatsby", "Remix"]
     table: Array<{
       feature: string
       nextjs: string
@@ -846,7 +912,7 @@ interface TechnologyFrontmatter {
     }>
   }
 
-  relatedProjects: string[]       // Portfolio project slugs
+  relatedProjects: string[] // Portfolio project slugs
 
   faqs: Array<{
     question: string
@@ -862,6 +928,7 @@ interface TechnologyFrontmatter {
 **File**: `lib/types/metadata.ts`
 
 **TypeScript Interface**:
+
 ```typescript
 export interface PageMetadata {
   title: string
@@ -881,10 +948,10 @@ export interface PageMetadata {
       height: number
       alt: string
     }>
-    publishedTime?: string        // For blog posts
+    publishedTime?: string // For blog posts
     modifiedTime?: string
     authors?: string[]
-    section?: string              // "Blog", "Services"
+    section?: string // "Blog", "Services"
   }
   twitter: {
     card: 'summary_large_image'
@@ -899,6 +966,7 @@ export interface PageMetadata {
 ```
 
 **Usage Example**:
+
 ```typescript
 // app/branchen/gastronomie/page.tsx
 export const metadata: Metadata = {
@@ -916,16 +984,18 @@ export const metadata: Metadata = {
     siteName: 'HEADON.pro',
     locale: 'de_DE',
     type: 'website',
-    images: [{
-      url: '/og-images/branchen-gastronomie.jpg',
-      width: 1200,
-      height: 630,
-      alt: 'HEADON.pro - Restaurant Websites'
-    }]
+    images: [
+      {
+        url: '/og-images/branchen-gastronomie.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'HEADON.pro - Restaurant Websites',
+      },
+    ],
   },
   alternates: {
-    canonical: 'https://headon.pro/branchen/gastronomie'
-  }
+    canonical: 'https://headon.pro/branchen/gastronomie',
+  },
 }
 ```
 
@@ -938,6 +1008,7 @@ export const metadata: Metadata = {
 **Scenario**: User navigates to `/branchen/invalid-branche`
 
 **Handling**:
+
 ```typescript
 // app/branchen/[branche]/page.tsx
 export default async function BranchePage({ params }) {
@@ -954,6 +1025,7 @@ export default async function BranchePage({ params }) {
 ```
 
 **User Impact**:
+
 - User sees custom 404 page (app/not-found.tsx)
 - Suggested links to valid industry pages
 - Search bar to find content
@@ -965,6 +1037,7 @@ export default async function BranchePage({ params }) {
 **Scenario**: Editor creates MDX file with missing required frontmatter fields
 
 **Handling**:
+
 ```typescript
 // lib/content/content-api.ts
 import { brancheFrontmatterSchema } from '@/lib/validations'
@@ -979,7 +1052,7 @@ export async function getBranchePage(slug: string) {
 
     return {
       frontmatter: validated,
-      content
+      content,
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -998,6 +1071,7 @@ export async function getBranchePage(slug: string) {
 ```
 
 **User Impact**:
+
 - Development: Clear error message in console/terminal
 - Production: Graceful 404, page not rendered
 
@@ -1008,6 +1082,7 @@ export async function getBranchePage(slug: string) {
 **Scenario**: User submits calculator without selecting project type
 
 **Handling**:
+
 ```typescript
 // components/sections/PricingCalculator.tsx
 const onSubmit = (data: CalculatorFormData) => {
@@ -1028,6 +1103,7 @@ const onSubmit = (data: CalculatorFormData) => {
 ```
 
 **User Impact**:
+
 - Red border on invalid field
 - Error message below field: "Bitte wählen Sie einen Projekttyp"
 - Form submit disabled until valid
@@ -1039,6 +1115,7 @@ const onSubmit = (data: CalculatorFormData) => {
 **Scenario**: Featured image for blog post fails to load (404)
 
 **Handling**:
+
 ```typescript
 // components/sections/BlogPostContent.tsx
 <Image
@@ -1055,6 +1132,7 @@ const onSubmit = (data: CalculatorFormData) => {
 ```
 
 **User Impact**:
+
 - Placeholder image shown (generic HEADON branding)
 - No layout shift (dimensions preserved)
 - Page still loads normally
@@ -1066,6 +1144,7 @@ const onSubmit = (data: CalculatorFormData) => {
 **Scenario**: `generateStaticParams()` fails for industry pages
 
 **Handling**:
+
 ```typescript
 // app/branchen/[branche]/page.tsx
 export async function generateStaticParams() {
@@ -1073,9 +1152,7 @@ export async function generateStaticParams() {
     const branchenDir = path.join(process.cwd(), 'content/branchen')
     const files = await fs.readdir(branchenDir)
 
-    return files
-      .filter(f => f.endsWith('.mdx'))
-      .map(f => ({ branche: f.replace('.mdx', '') }))
+    return files.filter((f) => f.endsWith('.mdx')).map((f) => ({ branche: f.replace('.mdx', '') }))
   } catch (error) {
     console.error('Failed to generate static params for branchen:', error)
     // Return empty array - pages will be generated on-demand (SSR)
@@ -1085,6 +1162,7 @@ export async function generateStaticParams() {
 ```
 
 **User Impact**:
+
 - Build continues (doesn't fail)
 - Pages generated on-demand on first request
 - Slower initial load for first visitor (then cached)
@@ -1098,12 +1176,14 @@ export async function generateStaticParams() {
 **Approach**: Test utility functions and price calculation logic
 
 **Framework**: Not currently implemented (per tech.md), but recommendation:
+
 - **Jest** or **Vitest** for unit tests
 - **React Testing Library** for component tests
 
 **Key Components to Test**:
 
 1. **PriceCalculator Logic**:
+
 ```typescript
 // __tests__/lib/pricing.test.ts
 describe('calculatePrice', () => {
@@ -1111,7 +1191,7 @@ describe('calculatePrice', () => {
     const input = {
       projectType: 'website',
       complexity: 'simple',
-      features: []
+      features: [],
     }
     const result = calculatePrice(input)
     expect(result.total).toBe(5000)
@@ -1121,7 +1201,7 @@ describe('calculatePrice', () => {
     const input = {
       projectType: 'website',
       complexity: 'complex',
-      features: []
+      features: [],
     }
     const result = calculatePrice(input)
     expect(result.total).toBe(5000 * 2.5)
@@ -1131,7 +1211,7 @@ describe('calculatePrice', () => {
     const input = {
       projectType: 'website',
       complexity: 'simple',
-      features: ['seo', 'cms']
+      features: ['seo', 'cms'],
     }
     const result = calculatePrice(input)
     expect(result.total).toBe(5000 + 1500 + 2000)
@@ -1140,6 +1220,7 @@ describe('calculatePrice', () => {
 ```
 
 2. **Frontmatter Validation**:
+
 ```typescript
 // __tests__/lib/validations.test.ts
 describe('brancheFrontmatterSchema', () => {
@@ -1153,13 +1234,13 @@ describe('brancheFrontmatterSchema', () => {
       features: [
         { title: 'Feature 1', description: 'Desc', icon: 'Icon1' },
         { title: 'Feature 2', description: 'Desc', icon: 'Icon2' },
-        { title: 'Feature 3', description: 'Desc', icon: 'Icon3' }
+        { title: 'Feature 3', description: 'Desc', icon: 'Icon3' },
       ],
       faqs: [
         { question: 'Q1', answer: 'A1' },
         { question: 'Q2', answer: 'A2' },
-        { question: 'Q3', answer: 'A3' }
-      ]
+        { question: 'Q3', answer: 'A3' },
+      ],
     }
     expect(() => brancheFrontmatterSchema.parse(valid)).not.toThrow()
   })
@@ -1172,11 +1253,14 @@ describe('brancheFrontmatterSchema', () => {
 ```
 
 3. **Metadata Generation**:
+
 ```typescript
 // __tests__/lib/metadata-utils.test.ts
 describe('generateBrancheMetadata', () => {
   it('should generate correct metadata', () => {
-    const frontmatter = { /* mock data */ }
+    const frontmatter = {
+      /* mock data */
+    }
     const metadata = generateBrancheMetadata('gastronomie', frontmatter)
 
     expect(metadata.title).toContain('Gastronomie')
@@ -1197,6 +1281,7 @@ describe('generateBrancheMetadata', () => {
 **Key Flows to Test**:
 
 1. **Industry Page Rendering**:
+
 ```typescript
 // tests/integration/branchen.spec.ts
 import { test, expect } from '@playwright/test'
@@ -1230,6 +1315,7 @@ test.describe('Industry Pages', () => {
 ```
 
 2. **Pricing Calculator**:
+
 ```typescript
 // tests/integration/pricing-calculator.spec.ts
 test('should calculate price correctly', async ({ page }) => {
@@ -1252,6 +1338,7 @@ test('should calculate price correctly', async ({ page }) => {
 ```
 
 3. **Blog Post Navigation**:
+
 ```typescript
 // tests/integration/blog.spec.ts
 test('should display blog post with TOC', async ({ page }) => {
@@ -1283,6 +1370,7 @@ test('should display blog post with TOC', async ({ page }) => {
 **User Scenarios to Test**:
 
 1. **Restaurant Owner Journey**:
+
 ```typescript
 // tests/e2e/restaurant-owner-journey.spec.ts
 test('Restaurant owner finds industry page and requests quote', async ({ page }) => {
@@ -1314,6 +1402,7 @@ test('Restaurant owner finds industry page and requests quote', async ({ page })
 ```
 
 2. **SEO Researcher Journey**:
+
 ```typescript
 // tests/e2e/blog-reader-journey.spec.ts
 test('User finds blog post via Google, reads, and explores services', async ({ page }) => {
@@ -1340,6 +1429,7 @@ test('User finds blog post via Google, reads, and explores services', async ({ p
 ```
 
 3. **Technology Evaluation Journey**:
+
 ```typescript
 // tests/e2e/technology-page.spec.ts
 test('Developer evaluates Next.js expertise and checks portfolio', async ({ page }) => {
@@ -1367,6 +1457,7 @@ test('Developer evaluates Next.js expertise and checks portfolio', async ({ page
 **Approach**: Automated Lighthouse audits on each deployment
 
 **Implementation**:
+
 ```yaml
 # .github/workflows/lighthouse-ci.yml (NEW FILE)
 name: Lighthouse CI
@@ -1412,6 +1503,7 @@ jobs:
 ```
 
 **Lighthouse CI Config**:
+
 ```javascript
 // lighthouserc.js (NEW FILE)
 module.exports = {
@@ -1422,25 +1514,26 @@ module.exports = {
         'http://localhost:3000/',
         'http://localhost:3000/branchen/gastronomie',
         'http://localhost:3000/preise',
-        'http://localhost:3000/blog/website-kosten-2025'
-      ]
+        'http://localhost:3000/blog/website-kosten-2025',
+      ],
     },
     assert: {
       assertions: {
         'categories:performance': ['error', { minScore: 0.95 }],
         'categories:accessibility': ['error', { minScore: 0.95 }],
         'categories:best-practices': ['error', { minScore: 0.95 }],
-        'categories:seo': ['error', { minScore: 0.95 }]
-      }
+        'categories:seo': ['error', { minScore: 0.95 }],
+      },
     },
     upload: {
-      target: 'temporary-public-storage'
-    }
-  }
+      target: 'temporary-public-storage',
+    },
+  },
 }
 ```
 
 **Pass Criteria**:
+
 - Performance: ≥ 95
 - Accessibility: ≥ 95
 - Best Practices: ≥ 95
@@ -1453,6 +1546,7 @@ module.exports = {
 ### Phase 1: Quick Wins (Week 1-2) - Foundation
 
 **Files to Modify**:
+
 - `app/layout.tsx` - Root title update
 - `app/page.tsx` - Homepage metadata update
 - `content/services/web-development.mdx` - Service metadata updates
@@ -1467,6 +1561,7 @@ module.exports = {
 ### Phase 2: Industry Pages (Week 3-6) - Core Content
 
 **New Files**:
+
 ```
 app/branchen/
 ├── page.tsx                                    # Overview
@@ -1489,6 +1584,7 @@ lib/types/
 ```
 
 **Updated Files**:
+
 - `components/sections/IndustryNavigator.tsx` - Add links
 - `components/layout/Header.tsx` - Add "Branchen" menu item
 - `app/sitemap.ts` - Add industry routes
@@ -1498,6 +1594,7 @@ lib/types/
 ### Phase 3: Pricing & Blog (Month 2-3) - Conversion Focus
 
 **New Files**:
+
 ```
 app/preise/
 └── page.tsx                                    # Pricing page
@@ -1520,6 +1617,7 @@ components/sections/
 ```
 
 **Updated Files**:
+
 - `components/layout/Header.tsx` - Add "Preise" link
 - `app/sitemap.ts` - Add /preise and blog routes
 
@@ -1528,6 +1626,7 @@ components/sections/
 ### Phase 4: Content Expansion (Month 4-6) - Authority Building
 
 **New Files**:
+
 ```
 content/blog/
 ├── responsive-webdesign-guide.mdx
@@ -1568,6 +1667,7 @@ content/regionen/
 ### Phase 5: Technology Pages (Month 7-12) - Niche Expertise
 
 **New Files**:
+
 ```
 app/technologie/
 ├── page.tsx                                    # Tech overview
@@ -1592,12 +1692,14 @@ content/technologie/
 ### KPIs to Track
 
 **Google Search Console** (Weekly):
+
 - Impressions (target: +20% month-over-month)
 - Clicks (target: +25% month-over-month)
 - Average CTR (target: >3%)
 - Average Position (target: <20 for main keywords)
 
 **Google Analytics** (Weekly):
+
 - Organic Sessions (target: +200% in 12 months)
 - Pages/Session (target: >2.5)
 - Avg. Session Duration (target: >2 minutes)
@@ -1605,11 +1707,13 @@ content/technologie/
 - Goal Completions (contact form submissions, target: +150%)
 
 **Lighthouse CI** (Every Deploy):
+
 - Performance Score: ≥95
 - Accessibility Score: ≥95
 - SEO Score: ≥95
 
 **Keyword Rankings** (Monthly via Google Search Console):
+
 - Top-3 rankings count (target: 15-20 keywords)
 - Top-10 rankings count (target: 50+ keywords)
 - Top-100 rankings count (target: 200+ keywords)
@@ -1619,6 +1723,7 @@ content/technologie/
 **Tool**: Google Search Console + Google Analytics 4
 
 **Custom Dashboard Widgets**:
+
 1. **Organic Traffic Trend** (last 90 days)
 2. **Top-10 Landing Pages** (by sessions)
 3. **Keyword Rankings** (top 20 keywords tracked)
@@ -1632,6 +1737,7 @@ content/technologie/
 ### Build Verification
 
 **Pre-Deployment Checks**:
+
 ```bash
 # Type checking
 pnpm typecheck
@@ -1647,6 +1753,7 @@ npx @next/bundle-analyzer
 ```
 
 **Automated via GitHub Actions** (existing CI/CD):
+
 ```yaml
 # .github/workflows/deploy.yml (existing, ensure these steps)
 - name: Type Check
@@ -1665,22 +1772,26 @@ npx @next/bundle-analyzer
 ### Gradual Rollout
 
 **Phase 1 Rollout**:
+
 1. Deploy metadata changes
 2. Monitor Google Search Console for 2-4 days
 3. Verify impressions increase
 
 **Phase 2 Rollout**:
+
 1. Deploy 1 industry page first (Gastronomie)
 2. Test in production for 3-7 days
 3. Monitor analytics and fix issues
 4. Deploy remaining 5 industry pages
 
 **Phase 3 Rollout**:
+
 1. Deploy pricing page first
 2. Test calculator functionality
 3. Deploy blog posts (1-2 per week for SEO freshness)
 
 **Rollback Plan**:
+
 - Git revert commit if traffic drops >20%
 - Redeploy previous version via GitHub Actions
 - All routes have no database dependencies (stateless), easy rollback
@@ -1692,6 +1803,7 @@ npx @next/bundle-analyzer
 ### Risk 1: Performance Degradation
 
 **Mitigation**:
+
 - Lighthouse CI blocks merge if score <95
 - Bundle size analysis on each PR
 - Image optimization enforced (Next.js Image component)
@@ -1700,6 +1812,7 @@ npx @next/bundle-analyzer
 ### Risk 2: SEO Ranking Drop
 
 **Mitigation**:
+
 - Keep all existing URLs unchanged
 - Add 301 redirects if any URL changes
 - Maintain keyword density <2% (no over-optimization)
@@ -1708,6 +1821,7 @@ npx @next/bundle-analyzer
 ### Risk 3: Content Quality Issues
 
 **Mitigation**:
+
 - Zod validation for all frontmatter
 - TypeScript strict mode catches type errors
 - Build fails if MDX content invalid
@@ -1716,6 +1830,7 @@ npx @next/bundle-analyzer
 ### Risk 4: Mobile Usability Problems
 
 **Mitigation**:
+
 - Tailwind responsive utilities on all components
 - Mobile-first design approach
 - Test on real devices (iOS 12+, Android 8+)

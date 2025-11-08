@@ -24,14 +24,14 @@ Migration des bestehenden MCP-Systems (6+ aktive Server) zu einem Code Execution
 
 ## Aktuelle MCP-Server Übersicht
 
-| Server | Tools | Aktueller Use Case | Migration Priority |
-|--------|-------|-------------------|-------------------|
-| `task-master` | 40+ | Projektmanagement, Task-Tracking | 🔴 HIGH |
-| `chrome-devtools` | 20+ | Browser-Automation, Testing | 🔴 HIGH |
-| `spec-workflow` | 12+ | Feature-Spezifikation, Implementation Logs | 🟡 MEDIUM |
-| `shadcn` | 7 | UI-Komponenten-Management | 🟢 LOW |
-| `sequential-thinking` | 1 | Problem-Solving | 🟢 LOW |
-| `ide` | 2 | VS Code Integration | 🟡 MEDIUM |
+| Server                | Tools | Aktueller Use Case                         | Migration Priority |
+| --------------------- | ----- | ------------------------------------------ | ------------------ |
+| `task-master`         | 40+   | Projektmanagement, Task-Tracking           | 🔴 HIGH            |
+| `chrome-devtools`     | 20+   | Browser-Automation, Testing                | 🔴 HIGH            |
+| `spec-workflow`       | 12+   | Feature-Spezifikation, Implementation Logs | 🟡 MEDIUM          |
+| `shadcn`              | 7     | UI-Komponenten-Management                  | 🟢 LOW             |
+| `sequential-thinking` | 1     | Problem-Solving                            | 🟢 LOW             |
+| `ide`                 | 2     | VS Code Integration                        | 🟡 MEDIUM          |
 
 ---
 
@@ -69,12 +69,14 @@ Phase 4: Advanced Features (1-2 Wochen)
 **Ziel:** Sicherer Code Execution Server mit MCP-Integration
 
 **Technologie-Stack:**
+
 - **Runtime:** Deno 2.x (secure by default, TypeScript native)
 - **MCP-Client:** `@modelcontextprotocol/sdk` (npm)
 - **Sandbox:** Deno Permissions System
 - **Kommunikation:** stdio-basiertes MCP-Protokoll
 
 **Verzeichnisstruktur:**
+
 ```
 /home/headon/projects/mcp-code-runtime/
 ├── src/
@@ -106,114 +108,112 @@ Phase 4: Advanced Features (1-2 Wochen)
 
 ```typescript
 // src/server.ts
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { executeCodeTool } from "./tools/execute.ts";
-import { listServersTool } from "./tools/list-servers.ts";
+import { Server } from '@modelcontextprotocol/sdk/server/index.js'
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
+import { executeCodeTool } from './tools/execute.ts'
+import { listServersTool } from './tools/list-servers.ts'
 
 const server = new Server(
   {
-    name: "mcp-code-runtime",
-    version: "0.1.0",
+    name: 'mcp-code-runtime',
+    version: '0.1.0',
   },
   {
     capabilities: {
       tools: {},
     },
   }
-);
+)
 
 // Register Tools
-server.setRequestHandler("tools/list", async () => ({
+server.setRequestHandler('tools/list', async () => ({
   tools: [
     {
-      name: "execute_code",
-      description: "Execute TypeScript code with MCP server access",
+      name: 'execute_code',
+      description: 'Execute TypeScript code with MCP server access',
       inputSchema: {
-        type: "object",
+        type: 'object',
         properties: {
           code: {
-            type: "string",
-            description: "TypeScript code to execute",
+            type: 'string',
+            description: 'TypeScript code to execute',
           },
           timeout: {
-            type: "number",
-            description: "Execution timeout in ms (default: 30000)",
+            type: 'number',
+            description: 'Execution timeout in ms (default: 30000)',
             default: 30000,
           },
           mcpServers: {
-            type: "array",
-            items: { type: "string" },
-            description: "MCP servers to make available (default: all)",
+            type: 'array',
+            items: { type: 'string' },
+            description: 'MCP servers to make available (default: all)',
           },
         },
-        required: ["code"],
+        required: ['code'],
       },
     },
     {
-      name: "list_mcp_servers",
-      description: "List available MCP servers and their tools",
+      name: 'list_mcp_servers',
+      description: 'List available MCP servers and their tools',
       inputSchema: {
-        type: "object",
+        type: 'object',
         properties: {},
       },
     },
   ],
-}));
+}))
 
-server.setRequestHandler("tools/call", async (request) => {
-  if (request.params.name === "execute_code") {
-    return await executeCodeTool(request.params.arguments);
-  } else if (request.params.name === "list_mcp_servers") {
-    return await listServersTool();
+server.setRequestHandler('tools/call', async (request) => {
+  if (request.params.name === 'execute_code') {
+    return await executeCodeTool(request.params.arguments)
+  } else if (request.params.name === 'list_mcp_servers') {
+    return await listServersTool()
   }
 
-  throw new Error(`Unknown tool: ${request.params.name}`);
-});
+  throw new Error(`Unknown tool: ${request.params.name}`)
+})
 
 // Start Server
-const transport = new StdioServerTransport();
-await server.connect(transport);
+const transport = new StdioServerTransport()
+await server.connect(transport)
 ```
 
 #### 1.1.2 Code Execution Engine
 
 ```typescript
 // src/executor.ts
-import { MCPClientManager } from "./mcp-client.ts";
+import { MCPClientManager } from './mcp-client.ts'
 
 export interface ExecutionContext {
-  code: string;
-  timeout: number;
-  mcpServers: string[];
+  code: string
+  timeout: number
+  mcpServers: string[]
 }
 
 export interface ExecutionResult {
-  success: boolean;
-  result?: unknown;
-  error?: string;
-  logs: string[];
-  tokensUsed?: number;
+  success: boolean
+  result?: unknown
+  error?: string
+  logs: string[]
+  tokensUsed?: number
 }
 
 export class CodeExecutor {
-  private clientManager: MCPClientManager;
+  private clientManager: MCPClientManager
 
   constructor() {
-    this.clientManager = new MCPClientManager();
+    this.clientManager = new MCPClientManager()
   }
 
   async execute(context: ExecutionContext): Promise<ExecutionResult> {
-    const logs: string[] = [];
+    const logs: string[] = []
 
     try {
       // Initialize requested MCP clients
-      const clients = await this.clientManager.initializeClients(
-        context.mcpServers
-      );
+      const clients = await this.clientManager.initializeClients(context.mcpServers)
 
       // Create execution environment with MCP imports
-      const mcpImports = this.generateMCPImports(clients);
+      const mcpImports = this.generateMCPImports(clients)
 
       // Wrap code in async function
       const wrappedCode = `
@@ -223,31 +223,27 @@ export class CodeExecutor {
         return await (async () => {
           ${context.code}
         })();
-      `;
+      `
 
       // Execute with timeout
-      const result = await this.executeWithTimeout(
-        wrappedCode,
-        context.timeout,
-        logs
-      );
+      const result = await this.executeWithTimeout(wrappedCode, context.timeout, logs)
 
       return {
         success: true,
         result,
         logs,
-      };
+      }
     } catch (error) {
       return {
         success: false,
         error: error.message,
         logs,
-      };
+      }
     }
   }
 
   private generateMCPImports(clients: Map<string, any>): string {
-    let imports = "";
+    let imports = ''
 
     for (const [serverName, client] of clients.entries()) {
       // Create typed interface for each server
@@ -255,24 +251,26 @@ export class CodeExecutor {
         const ${this.serverToVarName(serverName)} = {
           ${this.generateClientMethods(client)}
         };
-      `;
+      `
     }
 
-    return imports;
+    return imports
   }
 
   private serverToVarName(serverName: string): string {
     // chrome-devtools → chrome
     // task-master → taskmaster
-    return serverName.split("-")[0];
+    return serverName.split('-')[0]
   }
 
   private generateClientMethods(client: any): string {
     // Generate typed methods for all tools
-    const tools = client.listTools();
-    return tools.map(tool =>
-      `${tool.name}: async (params) => await client.callTool('${tool.name}', params)`
-    ).join(",\n");
+    const tools = client.listTools()
+    return tools
+      .map(
+        (tool) => `${tool.name}: async (params) => await client.callTool('${tool.name}', params)`
+      )
+      .join(',\n')
   }
 
   private async executeWithTimeout(
@@ -281,24 +279,24 @@ export class CodeExecutor {
     logs: string[]
   ): Promise<unknown> {
     // Deno eval with timeout
-    const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
-    const fn = new AsyncFunction(code);
+    const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor
+    const fn = new AsyncFunction(code)
 
     // Capture console.log
-    const originalLog = console.log;
+    const originalLog = console.log
     console.log = (...args) => {
-      logs.push(args.join(" "));
-      originalLog(...args);
-    };
+      logs.push(args.join(' '))
+      originalLog(...args)
+    }
 
     try {
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Execution timeout")), timeout)
-      );
+        setTimeout(() => reject(new Error('Execution timeout')), timeout)
+      )
 
-      return await Promise.race([fn(), timeoutPromise]);
+      return await Promise.race([fn(), timeoutPromise])
     } finally {
-      console.log = originalLog;
+      console.log = originalLog
     }
   }
 }
@@ -308,103 +306,102 @@ export class CodeExecutor {
 
 ```typescript
 // src/mcp-client.ts
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
-import serverConfig from "../config/mcp-servers.json" with { type: "json" };
+import { Client } from '@modelcontextprotocol/sdk/client/index.js'
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
+import serverConfig from '../config/mcp-servers.json' with { type: 'json' }
 
 export interface MCPServerConfig {
-  name: string;
-  command: string;
-  args: string[];
-  env?: Record<string, string>;
+  name: string
+  command: string
+  args: string[]
+  env?: Record<string, string>
 }
 
 export class MCPClientManager {
-  private clients: Map<string, Client> = new Map();
-  private config: MCPServerConfig[];
+  private clients: Map<string, Client> = new Map()
+  private config: MCPServerConfig[]
 
   constructor() {
-    this.config = serverConfig.mcpServers;
+    this.config = serverConfig.mcpServers
   }
 
   async initializeClients(serverNames: string[]): Promise<Map<string, Client>> {
-    const clients = new Map<string, Client>();
+    const clients = new Map<string, Client>()
 
     for (const serverName of serverNames) {
       // Check if already connected
       if (this.clients.has(serverName)) {
-        clients.set(serverName, this.clients.get(serverName)!);
-        continue;
+        clients.set(serverName, this.clients.get(serverName)!)
+        continue
       }
 
       // Find config
-      const config = this.config.find(c => c.name === serverName);
+      const config = this.config.find((c) => c.name === serverName)
       if (!config) {
-        throw new Error(`MCP server '${serverName}' not found in config`);
+        throw new Error(`MCP server '${serverName}' not found in config`)
       }
 
       // Connect to server
-      const client = await this.connectToServer(config);
-      this.clients.set(serverName, client);
-      clients.set(serverName, client);
+      const client = await this.connectToServer(config)
+      this.clients.set(serverName, client)
+      clients.set(serverName, client)
     }
 
-    return clients;
+    return clients
   }
 
   private async connectToServer(config: MCPServerConfig): Promise<Client> {
     const client = new Client(
       {
-        name: "mcp-code-runtime-client",
-        version: "0.1.0",
+        name: 'mcp-code-runtime-client',
+        version: '0.1.0',
       },
       {
         capabilities: {},
       }
-    );
+    )
 
     const transport = new StdioClientTransport({
       command: config.command,
       args: config.args,
       env: config.env,
-    });
+    })
 
-    await client.connect(transport);
-    return client;
+    await client.connect(transport)
+    return client
   }
 
   async listAllServers(): Promise<Array<{ name: string; tools: string[] }>> {
-    const servers = [];
+    const servers = []
 
     for (const config of this.config) {
       try {
-        const client = await this.initializeClients([config.name]);
-        const tools = await client.get(config.name)!.request(
-          { method: "tools/list" },
-          { timeout: 5000 }
-        );
+        const client = await this.initializeClients([config.name])
+        const tools = await client
+          .get(config.name)!
+          .request({ method: 'tools/list' }, { timeout: 5000 })
 
         servers.push({
           name: config.name,
-          tools: tools.tools.map(t => t.name),
-        });
+          tools: tools.tools.map((t) => t.name),
+        })
       } catch (error) {
-        console.error(`Failed to list tools for ${config.name}:`, error);
+        console.error(`Failed to list tools for ${config.name}:`, error)
       }
     }
 
-    return servers;
+    return servers
   }
 
   async cleanup(): Promise<void> {
     for (const [name, client] of this.clients.entries()) {
       try {
-        await client.close();
+        await client.close()
       } catch (error) {
-        console.error(`Error closing client ${name}:`, error);
+        console.error(`Error closing client ${name}:`, error)
       }
     }
-    this.clients.clear();
+    this.clients.clear()
   }
 }
 ```
@@ -452,32 +449,31 @@ export class MCPClientManager {
 
 ```typescript
 // scripts/generate-types.ts
-import { MCPClientManager } from "../src/mcp-client.ts";
-import { writeFile } from "node:fs/promises";
+import { MCPClientManager } from '../src/mcp-client.ts'
+import { writeFile } from 'node:fs/promises'
 
 async function generateTypes() {
-  const manager = new MCPClientManager();
-  const servers = await manager.listAllServers();
+  const manager = new MCPClientManager()
+  const servers = await manager.listAllServers()
 
   for (const server of servers) {
-    const typeDefs = generateTypeDefinitions(server);
-    await writeFile(
-      `./types/${server.name}.d.ts`,
-      typeDefs
-    );
+    const typeDefs = generateTypeDefinitions(server)
+    await writeFile(`./types/${server.name}.d.ts`, typeDefs)
   }
 
-  console.log(`✅ Generated types for ${servers.length} MCP servers`);
-  await manager.cleanup();
+  console.log(`✅ Generated types for ${servers.length} MCP servers`)
+  await manager.cleanup()
 }
 
 function generateTypeDefinitions(server: { name: string; tools: string[] }): string {
-  const toolInterfaces = server.tools.map(toolName => {
-    const camelCase = toCamelCase(toolName);
-    return `
+  const toolInterfaces = server.tools
+    .map((toolName) => {
+      const camelCase = toCamelCase(toolName)
+      return `
   export function ${camelCase}(params: any): Promise<any>;
-    `.trim();
-  }).join("\n  ");
+    `.trim()
+    })
+    .join('\n  ')
 
   return `
 // Auto-generated type definitions for ${server.name}
@@ -486,15 +482,15 @@ function generateTypeDefinitions(server: { name: string; tools: string[] }): str
 declare module "mcp://${server.name}" {
   ${toolInterfaces}
 }
-  `.trim();
+  `.trim()
 }
 
 function toCamelCase(str: string): string {
-  return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+  return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase())
 }
 
 // Run
-await generateTypes();
+await generateTypes()
 ```
 
 #### 1.1.6 Deno Configuration
@@ -541,20 +537,22 @@ await generateTypes();
   "mcpServers": {
     "code-runtime": {
       "command": "deno",
-      "args": [
-        "run",
-        "--allow-all",
-        "/home/headon/projects/mcp-code-runtime/src/server.ts"
-      ],
+      "args": ["run", "--allow-all", "/home/headon/projects/mcp-code-runtime/src/server.ts"],
       "env": {
         "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
         "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
       }
     },
     // Existing servers bleiben verfügbar für Fallback
-    "task-master": { /* ... */ },
-    "chrome-devtools": { /* ... */ },
-    "spec-workflow": { /* ... */ }
+    "task-master": {
+      /* ... */
+    },
+    "chrome-devtools": {
+      /* ... */
+    },
+    "spec-workflow": {
+      /* ... */
+    }
   }
 }
 ```
@@ -565,23 +563,23 @@ await generateTypes();
 
 ```typescript
 // tests/executor.test.ts
-import { assertEquals } from "@std/assert";
-import { CodeExecutor } from "../src/executor.ts";
+import { assertEquals } from '@std/assert'
+import { CodeExecutor } from '../src/executor.ts'
 
-Deno.test("Simple arithmetic execution", async () => {
-  const executor = new CodeExecutor();
+Deno.test('Simple arithmetic execution', async () => {
+  const executor = new CodeExecutor()
   const result = await executor.execute({
-    code: "return 2 + 2;",
+    code: 'return 2 + 2;',
     timeout: 5000,
     mcpServers: [],
-  });
+  })
 
-  assertEquals(result.success, true);
-  assertEquals(result.result, 4);
-});
+  assertEquals(result.success, true)
+  assertEquals(result.result, 4)
+})
 
-Deno.test("MCP server access - list servers", async () => {
-  const executor = new CodeExecutor();
+Deno.test('MCP server access - list servers', async () => {
+  const executor = new CodeExecutor()
   const result = await executor.execute({
     code: `
       const servers = await listMCPServers();
@@ -589,14 +587,14 @@ Deno.test("MCP server access - list servers", async () => {
     `,
     timeout: 10000,
     mcpServers: [],
-  });
+  })
 
-  assertEquals(result.success, true);
-  assertEquals(result.result, true);
-});
+  assertEquals(result.success, true)
+  assertEquals(result.result, true)
+})
 
-Deno.test("Task Master integration", async () => {
-  const executor = new CodeExecutor();
+Deno.test('Task Master integration', async () => {
+  const executor = new CodeExecutor()
   const result = await executor.execute({
     code: `
       const tasks = await taskmaster.getTasks({
@@ -605,15 +603,16 @@ Deno.test("Task Master integration", async () => {
       return tasks.length;
     `,
     timeout: 15000,
-    mcpServers: ["task-master"],
-  });
+    mcpServers: ['task-master'],
+  })
 
-  assertEquals(result.success, true);
-  assertEquals(typeof result.result, "number");
-});
+  assertEquals(result.success, true)
+  assertEquals(typeof result.result, 'number')
+})
 ```
 
 **Deliverables:**
+
 - ✅ Funktionierender MCP Code Runtime Server
 - ✅ Integration in Claude Code
 - ✅ Type-Safe Tool Interfaces
@@ -639,63 +638,64 @@ Deno.test("Task Master integration", async () => {
  * Token Reduction: ~95% (from 20+ tool calls to 1)
  */
 export async function diagnosticsToTasks(options: {
-  projectRoot: string;
-  maxTasks?: number;
-  severityFilter?: "error" | "warning" | "all";
+  projectRoot: string
+  maxTasks?: number
+  severityFilter?: 'error' | 'warning' | 'all'
 }): Promise<{
-  tasksCreated: number;
-  summary: string;
+  tasksCreated: number
+  summary: string
 }> {
-  const { projectRoot, maxTasks = 10, severityFilter = "error" } = options;
+  const { projectRoot, maxTasks = 10, severityFilter = 'error' } = options
 
   // Import MCP tools dynamically
-  const ide = await import("mcp://ide");
-  const taskmaster = await import("mcp://task-master");
+  const ide = await import('mcp://ide')
+  const taskmaster = await import('mcp://task-master')
 
   // Get diagnostics
-  const diagnostics = await ide.getDiagnostics();
+  const diagnostics = await ide.getDiagnostics()
 
   // Filter by severity
-  let filtered = diagnostics;
-  if (severityFilter !== "all") {
-    filtered = diagnostics.filter(d => d.severity === severityFilter);
+  let filtered = diagnostics
+  if (severityFilter !== 'all') {
+    filtered = diagnostics.filter((d) => d.severity === severityFilter)
   }
 
   // Group by file
-  const groupedByFile = new Map<string, typeof filtered>();
+  const groupedByFile = new Map<string, typeof filtered>()
   for (const diag of filtered) {
-    const file = diag.uri;
+    const file = diag.uri
     if (!groupedByFile.has(file)) {
-      groupedByFile.set(file, []);
+      groupedByFile.set(file, [])
     }
-    groupedByFile.get(file)!.push(diag);
+    groupedByFile.get(file)!.push(diag)
   }
 
   // Create tasks (limited to maxTasks)
-  let tasksCreated = 0;
-  const files = Array.from(groupedByFile.entries()).slice(0, maxTasks);
+  let tasksCreated = 0
+  const files = Array.from(groupedByFile.entries()).slice(0, maxTasks)
 
   for (const [file, diags] of files) {
-    const firstDiag = diags[0];
-    const count = diags.length;
+    const firstDiag = diags[0]
+    const count = diags.length
 
     await taskmaster.addTask({
       projectRoot,
       prompt: `Fix ${count} ${severityFilter}(s) in ${file}:\n${firstDiag.message}`,
-      priority: severityFilter === "error" ? "high" : "medium",
-    });
+      priority: severityFilter === 'error' ? 'high' : 'medium',
+    })
 
-    tasksCreated++;
+    tasksCreated++
   }
 
   return {
     tasksCreated,
     summary: `Created ${tasksCreated} tasks from ${filtered.length} diagnostics across ${groupedByFile.size} files`,
-  };
+  }
 }
 ```
 
 **Usage:**
+
 ```typescript
 // Via execute_code tool
 const result = await execute_code({
@@ -707,8 +707,8 @@ const result = await execute_code({
       severityFilter: "error"
     });
   `,
-  mcpServers: ["ide", "task-master"]
-});
+  mcpServers: ['ide', 'task-master'],
+})
 
 // Returns: { tasksCreated: 5, summary: "..." }
 // Token usage: ~500 tokens (vs. ~10,000 with direct calls)
@@ -723,93 +723,94 @@ const result = await execute_code({
  * Token Reduction: ~90%
  */
 export async function bulkTaskOperations(options: {
-  projectRoot: string;
-  operation: "complete" | "remove" | "scope-up" | "scope-down";
+  projectRoot: string
+  operation: 'complete' | 'remove' | 'scope-up' | 'scope-down'
   filter: {
-    status?: string;
-    search?: string;
-    ids?: string[];
-  };
-  limit?: number;
+    status?: string
+    search?: string
+    ids?: string[]
+  }
+  limit?: number
 }): Promise<{
-  tasksAffected: number;
-  details: string[];
+  tasksAffected: number
+  details: string[]
 }> {
-  const { projectRoot, operation, filter, limit = 50 } = options;
+  const { projectRoot, operation, filter, limit = 50 } = options
 
-  const taskmaster = await import("mcp://task-master");
+  const taskmaster = await import('mcp://task-master')
 
   // Get all tasks
   const allTasks = await taskmaster.getTasks({
     projectRoot,
     status: filter.status,
     withSubtasks: false,
-  });
+  })
 
   // Apply filters
-  let tasks = allTasks;
+  let tasks = allTasks
 
   if (filter.search) {
-    tasks = tasks.filter(t =>
-      t.title.toLowerCase().includes(filter.search!.toLowerCase()) ||
-      t.description?.toLowerCase().includes(filter.search!.toLowerCase())
-    );
+    tasks = tasks.filter(
+      (t) =>
+        t.title.toLowerCase().includes(filter.search!.toLowerCase()) ||
+        t.description?.toLowerCase().includes(filter.search!.toLowerCase())
+    )
   }
 
   if (filter.ids) {
-    tasks = tasks.filter(t => filter.ids!.includes(t.id));
+    tasks = tasks.filter((t) => filter.ids!.includes(t.id))
   }
 
   // Limit
-  tasks = tasks.slice(0, limit);
+  tasks = tasks.slice(0, limit)
 
   // Execute operation
-  const details: string[] = [];
+  const details: string[] = []
 
   for (const task of tasks) {
     switch (operation) {
-      case "complete":
+      case 'complete':
         await taskmaster.setTaskStatus({
           projectRoot,
           id: task.id,
-          status: "done",
-        });
-        details.push(`Completed: ${task.title}`);
-        break;
+          status: 'done',
+        })
+        details.push(`Completed: ${task.title}`)
+        break
 
-      case "remove":
+      case 'remove':
         await taskmaster.removeTask({
           projectRoot,
           id: task.id,
           confirm: true,
-        });
-        details.push(`Removed: ${task.title}`);
-        break;
+        })
+        details.push(`Removed: ${task.title}`)
+        break
 
-      case "scope-up":
+      case 'scope-up':
         await taskmaster.scopeUpTask({
           projectRoot,
           id: task.id,
-          strength: "regular",
-        });
-        details.push(`Scoped up: ${task.title}`);
-        break;
+          strength: 'regular',
+        })
+        details.push(`Scoped up: ${task.title}`)
+        break
 
-      case "scope-down":
+      case 'scope-down':
         await taskmaster.scopeDownTask({
           projectRoot,
           id: task.id,
-          strength: "regular",
-        });
-        details.push(`Scoped down: ${task.title}`);
-        break;
+          strength: 'regular',
+        })
+        details.push(`Scoped down: ${task.title}`)
+        break
     }
   }
 
   return {
     tasksAffected: tasks.length,
     details,
-  };
+  }
 }
 ```
 
@@ -824,51 +825,51 @@ export async function bulkTaskOperations(options: {
  * Token Reduction: ~90%
  */
 export async function runWebTest(options: {
-  url: string;
+  url: string
   checks: {
-    consoleErrors?: boolean;
-    networkErrors?: boolean;
-    performance?: boolean;
-    accessibility?: boolean;
-  };
-  createTasks?: boolean;
-  projectRoot?: string;
+    consoleErrors?: boolean
+    networkErrors?: boolean
+    performance?: boolean
+    accessibility?: boolean
+  }
+  createTasks?: boolean
+  projectRoot?: string
 }): Promise<{
-  url: string;
-  passed: boolean;
+  url: string
+  passed: boolean
   issues: Array<{
-    type: string;
-    severity: "critical" | "warning" | "info";
-    message: string;
-    details?: any;
-  }>;
-  tasksCreated?: number;
+    type: string
+    severity: 'critical' | 'warning' | 'info'
+    message: string
+    details?: any
+  }>
+  tasksCreated?: number
 }> {
-  const { url, checks, createTasks = false, projectRoot } = options;
+  const { url, checks, createTasks = false, projectRoot } = options
 
-  const chrome = await import("mcp://chrome-devtools");
-  const issues: any[] = [];
+  const chrome = await import('mcp://chrome-devtools')
+  const issues: any[] = []
 
   // Navigate to URL
-  await chrome.navigatePage({ type: "url", url });
+  await chrome.navigatePage({ type: 'url', url })
 
   // Wait for page load
-  await chrome.waitFor({ text: "body", timeout: 10000 });
+  await chrome.waitFor({ text: 'body', timeout: 10000 })
 
   // Check 1: Console Errors
   if (checks.consoleErrors) {
     const messages = await chrome.listConsoleMessages({
-      types: ["error", "warn"],
+      types: ['error', 'warn'],
       pageSize: 100,
-    });
+    })
 
-    for (const msg of messages.filter(m => m.type === "error")) {
+    for (const msg of messages.filter((m) => m.type === 'error')) {
       issues.push({
-        type: "console-error",
-        severity: "critical",
+        type: 'console-error',
+        severity: 'critical',
         message: msg.text,
         details: { line: msg.line, url: msg.url },
-      });
+      })
     }
   }
 
@@ -876,93 +877,92 @@ export async function runWebTest(options: {
   if (checks.networkErrors) {
     const requests = await chrome.listNetworkRequests({
       pageSize: 500,
-    });
+    })
 
-    const failed = requests.filter(r => r.status >= 400);
+    const failed = requests.filter((r) => r.status >= 400)
     for (const req of failed) {
       issues.push({
-        type: "network-error",
-        severity: req.status >= 500 ? "critical" : "warning",
+        type: 'network-error',
+        severity: req.status >= 500 ? 'critical' : 'warning',
         message: `${req.method} ${req.url} - ${req.status}`,
         details: { status: req.status, resourceType: req.resourceType },
-      });
+      })
     }
   }
 
   // Check 3: Performance (Core Web Vitals)
   if (checks.performance) {
-    await chrome.performanceStartTrace({ reload: true, autoStop: true });
+    await chrome.performanceStartTrace({ reload: true, autoStop: true })
     // Wait for trace to complete
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    const trace = await chrome.performanceStopTrace();
+    await new Promise((resolve) => setTimeout(resolve, 5000))
+    const trace = await chrome.performanceStopTrace()
 
     // Check CWV thresholds
     if (trace.metrics) {
       if (trace.metrics.LCP > 2500) {
         issues.push({
-          type: "performance",
-          severity: "warning",
+          type: 'performance',
+          severity: 'warning',
           message: `LCP too high: ${trace.metrics.LCP}ms (threshold: 2500ms)`,
           details: trace.metrics,
-        });
+        })
       }
 
       if (trace.metrics.CLS > 0.1) {
         issues.push({
-          type: "performance",
-          severity: "warning",
+          type: 'performance',
+          severity: 'warning',
           message: `CLS too high: ${trace.metrics.CLS} (threshold: 0.1)`,
           details: trace.metrics,
-        });
+        })
       }
     }
   }
 
   // Check 4: Accessibility (basic)
   if (checks.accessibility) {
-    const snapshot = await chrome.takeSnapshot({ verbose: true });
+    const snapshot = await chrome.takeSnapshot({ verbose: true })
 
     // Check for missing alt text on images
-    const imagesWithoutAlt = snapshot.elements.filter(
-      e => e.role === "img" && !e.name
-    );
+    const imagesWithoutAlt = snapshot.elements.filter((e) => e.role === 'img' && !e.name)
 
     if (imagesWithoutAlt.length > 0) {
       issues.push({
-        type: "accessibility",
-        severity: "warning",
+        type: 'accessibility',
+        severity: 'warning',
         message: `${imagesWithoutAlt.length} images missing alt text`,
-        details: imagesWithoutAlt.slice(0, 5).map(e => e.uid),
-      });
+        details: imagesWithoutAlt.slice(0, 5).map((e) => e.uid),
+      })
     }
   }
 
   // Create tasks if requested
-  let tasksCreated = 0;
+  let tasksCreated = 0
   if (createTasks && projectRoot) {
-    const taskmaster = await import("mcp://task-master");
+    const taskmaster = await import('mcp://task-master')
 
-    const criticalIssues = issues.filter(i => i.severity === "critical");
+    const criticalIssues = issues.filter((i) => i.severity === 'critical')
     for (const issue of criticalIssues.slice(0, 10)) {
       await taskmaster.addTask({
         projectRoot,
         prompt: `[${url}] ${issue.type}: ${issue.message}`,
-        priority: "high",
-      });
-      tasksCreated++;
+        priority: 'high',
+      })
+      tasksCreated++
     }
   }
 
   return {
     url,
-    passed: issues.filter(i => i.severity === "critical").length === 0,
+    passed: issues.filter((i) => i.severity === 'critical').length === 0,
     issues,
     tasksCreated,
-  };
+  }
 }
 ```
 
 **Usage:**
+
 ```typescript
 const result = await execute_code({
   code: `
@@ -979,8 +979,8 @@ const result = await execute_code({
       projectRoot: "/home/headon/projects/headon"
     });
   `,
-  mcpServers: ["chrome-devtools", "task-master"]
-});
+  mcpServers: ['chrome-devtools', 'task-master'],
+})
 
 // Returns comprehensive test report + auto-created tasks
 // Token usage: ~2,000 tokens (vs. ~50,000 with direct calls)
@@ -992,55 +992,55 @@ const result = await execute_code({
 
 ```typescript
 // benchmarks/token-usage-comparison.ts
-import { CodeExecutor } from "../src/executor.ts";
+import { CodeExecutor } from '../src/executor.ts'
 
 interface BenchmarkResult {
-  workflow: string;
+  workflow: string
   directCalls: {
-    tokens: number;
-    duration: number;
-  };
+    tokens: number
+    duration: number
+  }
   codeExecution: {
-    tokens: number;
-    duration: number;
-  };
+    tokens: number
+    duration: number
+  }
   improvement: {
-    tokenReduction: string;
-    speedup: string;
-  };
+    tokenReduction: string
+    speedup: string
+  }
 }
 
 async function benchmarkWorkflows(): Promise<BenchmarkResult[]> {
-  const results: BenchmarkResult[] = [];
+  const results: BenchmarkResult[] = []
 
   // Workflow 1: Diagnostics to Tasks
-  results.push(await benchmarkDiagnosticsToTasks());
+  results.push(await benchmarkDiagnosticsToTasks())
 
   // Workflow 2: Web Testing
-  results.push(await benchmarkWebTesting());
+  results.push(await benchmarkWebTesting())
 
   // Workflow 3: Bulk Task Operations
-  results.push(await benchmarkBulkTaskOps());
+  results.push(await benchmarkBulkTaskOps())
 
-  return results;
+  return results
 }
 
 async function benchmarkDiagnosticsToTasks(): Promise<BenchmarkResult> {
   // Simulate direct calls
-  const directStart = performance.now();
-  let directTokens = 0;
+  const directStart = performance.now()
+  let directTokens = 0
 
   // 1. getDiagnostics() - ~5000 tokens result
-  directTokens += 5000;
+  directTokens += 5000
 
   // 2. 10x addTask() - ~500 tokens each
-  directTokens += 10 * 500;
+  directTokens += 10 * 500
 
-  const directDuration = performance.now() - directStart;
+  const directDuration = performance.now() - directStart
 
   // Code execution approach
-  const codeStart = performance.now();
-  const executor = new CodeExecutor();
+  const codeStart = performance.now()
+  const executor = new CodeExecutor()
 
   const result = await executor.execute({
     code: `
@@ -1051,14 +1051,14 @@ async function benchmarkDiagnosticsToTasks(): Promise<BenchmarkResult> {
       });
     `,
     timeout: 30000,
-    mcpServers: ["ide", "task-master"],
-  });
+    mcpServers: ['ide', 'task-master'],
+  })
 
-  const codeDuration = performance.now() - codeStart;
-  const codeTokens = 200 + JSON.stringify(result.result).length; // ~500 tokens
+  const codeDuration = performance.now() - codeStart
+  const codeTokens = 200 + JSON.stringify(result.result).length // ~500 tokens
 
   return {
-    workflow: "Diagnostics to Tasks (10 tasks)",
+    workflow: 'Diagnostics to Tasks (10 tasks)',
     directCalls: {
       tokens: directTokens,
       duration: directDuration,
@@ -1071,12 +1071,12 @@ async function benchmarkDiagnosticsToTasks(): Promise<BenchmarkResult> {
       tokenReduction: `${((1 - codeTokens / directTokens) * 100).toFixed(1)}%`,
       speedup: `${(directDuration / codeDuration).toFixed(2)}x`,
     },
-  };
+  }
 }
 
 // Run benchmarks and generate report
-const results = await benchmarkWorkflows();
-console.table(results);
+const results = await benchmarkWorkflows()
+console.table(results)
 
 // Expected output:
 // ┌─────────┬────────────────────────────────┬────────────┬───────────────┬──────────────────┐
@@ -1089,6 +1089,7 @@ console.table(results);
 ```
 
 **Deliverables:**
+
 - ✅ Task Master Skills (diagnostics-to-tasks, bulk-operations)
 - ✅ Chrome DevTools Skills (web-testing, form-automation)
 - ✅ Performance Benchmarks (>90% token reduction nachgewiesen)
@@ -1111,46 +1112,46 @@ console.table(results);
  * Token Reduction: ~85%
  */
 export async function analyzeImplementationLogs(options: {
-  projectRoot: string;
-  specName: string;
+  projectRoot: string
+  specName: string
   analysis: {
-    findDuplicateAPIs?: boolean;
-    componentUsage?: boolean;
-    integrationPatterns?: boolean;
-    taskStatistics?: boolean;
-  };
+    findDuplicateAPIs?: boolean
+    componentUsage?: boolean
+    integrationPatterns?: boolean
+    taskStatistics?: boolean
+  }
 }): Promise<{
-  findings: string[];
-  recommendations: string[];
-  statistics: Record<string, any>;
+  findings: string[]
+  recommendations: string[]
+  statistics: Record<string, any>
 }> {
-  const { projectRoot, specName, analysis } = options;
+  const { projectRoot, specName, analysis } = options
 
-  const spec = await import("mcp://spec-workflow");
+  const spec = await import('mcp://spec-workflow')
 
   // Get ALL logs (in code, not sent to LLM)
   const allLogs = await spec.getImplementationLogs({
     projectRoot,
     specName,
     all: true,
-  });
+  })
 
-  const findings: string[] = [];
-  const recommendations: string[] = [];
-  const statistics: Record<string, any> = {};
+  const findings: string[] = []
+  const recommendations: string[] = []
+  const statistics: Record<string, any> = {}
 
   // Analysis 1: Duplicate API Detection
   if (analysis.findDuplicateAPIs) {
-    const apiEndpoints = new Map<string, string[]>();
+    const apiEndpoints = new Map<string, string[]>()
 
     for (const log of allLogs.entries) {
       if (log.artifacts?.apiEndpoints) {
         for (const api of log.artifacts.apiEndpoints) {
-          const key = `${api.method} ${api.path}`;
+          const key = `${api.method} ${api.path}`
           if (!apiEndpoints.has(key)) {
-            apiEndpoints.set(key, []);
+            apiEndpoints.set(key, [])
           }
-          apiEndpoints.get(key)!.push(log.taskId);
+          apiEndpoints.get(key)!.push(log.taskId)
         }
       }
     }
@@ -1158,31 +1159,25 @@ export async function analyzeImplementationLogs(options: {
     // Find duplicates
     for (const [endpoint, tasks] of apiEndpoints.entries()) {
       if (tasks.length > 1) {
-        findings.push(
-          `⚠️ Duplicate API: "${endpoint}" implemented in tasks: ${tasks.join(", ")}`
-        );
-        recommendations.push(
-          `Consider consolidating duplicate endpoint: ${endpoint}`
-        );
+        findings.push(`⚠️ Duplicate API: "${endpoint}" implemented in tasks: ${tasks.join(', ')}`)
+        recommendations.push(`Consider consolidating duplicate endpoint: ${endpoint}`)
       }
     }
 
-    statistics.totalAPIs = apiEndpoints.size;
-    statistics.duplicateAPIs = Array.from(apiEndpoints.values())
-      .filter(tasks => tasks.length > 1).length;
+    statistics.totalAPIs = apiEndpoints.size
+    statistics.duplicateAPIs = Array.from(apiEndpoints.values()).filter(
+      (tasks) => tasks.length > 1
+    ).length
   }
 
   // Analysis 2: Component Usage Patterns
   if (analysis.componentUsage) {
-    const componentUsage = new Map<string, number>();
+    const componentUsage = new Map<string, number>()
 
     for (const log of allLogs.entries) {
       if (log.artifacts?.components) {
         for (const comp of log.artifacts.components) {
-          componentUsage.set(
-            comp.name,
-            (componentUsage.get(comp.name) || 0) + 1
-          );
+          componentUsage.set(comp.name, (componentUsage.get(comp.name) || 0) + 1)
         }
       }
     }
@@ -1190,65 +1185,61 @@ export async function analyzeImplementationLogs(options: {
     // Find highly reused components
     const topComponents = Array.from(componentUsage.entries())
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 5);
+      .slice(0, 5)
 
     findings.push(
-      `📦 Most reused components: ${topComponents.map(c => `${c[0]} (${c[1]}x)`).join(", ")}`
-    );
+      `📦 Most reused components: ${topComponents.map((c) => `${c[0]} (${c[1]}x)`).join(', ')}`
+    )
 
-    statistics.totalComponents = componentUsage.size;
-    statistics.topComponents = Object.fromEntries(topComponents);
+    statistics.totalComponents = componentUsage.size
+    statistics.topComponents = Object.fromEntries(topComponents)
   }
 
   // Analysis 3: Integration Patterns
   if (analysis.integrationPatterns) {
-    const patterns = new Map<string, number>();
+    const patterns = new Map<string, number>()
 
     for (const log of allLogs.entries) {
       if (log.artifacts?.integrations) {
         for (const integration of log.artifacts.integrations) {
-          const pattern = `${integration.frontendComponent} → ${integration.backendEndpoint}`;
-          patterns.set(pattern, (patterns.get(pattern) || 0) + 1);
+          const pattern = `${integration.frontendComponent} → ${integration.backendEndpoint}`
+          patterns.set(pattern, (patterns.get(pattern) || 0) + 1)
         }
       }
     }
 
-    findings.push(`🔗 Identified ${patterns.size} unique integration patterns`);
-    statistics.integrationPatterns = patterns.size;
+    findings.push(`🔗 Identified ${patterns.size} unique integration patterns`)
+    statistics.integrationPatterns = patterns.size
   }
 
   // Analysis 4: Task Statistics
   if (analysis.taskStatistics) {
     const stats = {
       totalTasks: allLogs.entries.length,
-      totalFiles: new Set(
-        allLogs.entries.flatMap(e => [...e.filesModified, ...e.filesCreated])
-      ).size,
-      totalLinesAdded: allLogs.entries.reduce(
-        (sum, e) => sum + (e.statistics?.linesAdded || 0),
-        0
-      ),
+      totalFiles: new Set(allLogs.entries.flatMap((e) => [...e.filesModified, ...e.filesCreated]))
+        .size,
+      totalLinesAdded: allLogs.entries.reduce((sum, e) => sum + (e.statistics?.linesAdded || 0), 0),
       totalLinesRemoved: allLogs.entries.reduce(
         (sum, e) => sum + (e.statistics?.linesRemoved || 0),
         0
       ),
       avgLinesPerTask: 0,
-    };
+    }
 
-    stats.avgLinesPerTask = Math.round(stats.totalLinesAdded / stats.totalTasks);
+    stats.avgLinesPerTask = Math.round(stats.totalLinesAdded / stats.totalTasks)
 
     findings.push(
       `📊 ${stats.totalTasks} tasks completed, ${stats.totalFiles} files changed, +${stats.totalLinesAdded}/-${stats.totalLinesRemoved} lines`
-    );
+    )
 
-    statistics.taskStats = stats;
+    statistics.taskStats = stats
   }
 
   return {
     findings,
     recommendations,
     statistics,
-  };
+  }
 }
 ```
 
@@ -1260,51 +1251,51 @@ export async function analyzeImplementationLogs(options: {
  * Comprehensive code quality analysis
  */
 export async function runCodeQualityCheck(options: {
-  projectRoot: string;
-  autoFix?: boolean;
-  createTasks?: boolean;
+  projectRoot: string
+  autoFix?: boolean
+  createTasks?: boolean
 }): Promise<{
   diagnostics: {
-    errors: number;
-    warnings: number;
-    info: number;
-  };
-  fixed?: number;
-  tasksCreated?: number;
+    errors: number
+    warnings: number
+    info: number
+  }
+  fixed?: number
+  tasksCreated?: number
 }> {
-  const { projectRoot, autoFix = false, createTasks = false } = options;
+  const { projectRoot, autoFix = false, createTasks = false } = options
 
-  const ide = await import("mcp://ide");
+  const ide = await import('mcp://ide')
 
   // Get all diagnostics
-  const allDiagnostics = await ide.getDiagnostics();
+  const allDiagnostics = await ide.getDiagnostics()
 
   const categorized = {
-    errors: allDiagnostics.filter(d => d.severity === "error"),
-    warnings: allDiagnostics.filter(d => d.severity === "warning"),
-    info: allDiagnostics.filter(d => d.severity === "info"),
-  };
+    errors: allDiagnostics.filter((d) => d.severity === 'error'),
+    warnings: allDiagnostics.filter((d) => d.severity === 'warning'),
+    info: allDiagnostics.filter((d) => d.severity === 'info'),
+  }
 
-  let fixed = 0;
+  let fixed = 0
 
   // Auto-fix if enabled (placeholder - would need actual fix logic)
   if (autoFix) {
     // This would require more sophisticated analysis and fix generation
-    console.log("Auto-fix not yet implemented");
+    console.log('Auto-fix not yet implemented')
   }
 
   // Create tasks for errors
-  let tasksCreated = 0;
+  let tasksCreated = 0
   if (createTasks) {
-    const taskmaster = await import("mcp://task-master");
+    const taskmaster = await import('mcp://task-master')
 
     for (const error of categorized.errors.slice(0, 10)) {
       await taskmaster.addTask({
         projectRoot,
         prompt: `Fix error in ${error.uri}: ${error.message}`,
-        priority: "high",
-      });
-      tasksCreated++;
+        priority: 'high',
+      })
+      tasksCreated++
     }
   }
 
@@ -1316,11 +1307,12 @@ export async function runCodeQualityCheck(options: {
     },
     fixed,
     tasksCreated,
-  };
+  }
 }
 ```
 
 **Deliverables:**
+
 - ✅ Spec Workflow Analysis Skills
 - ✅ IDE Quality Check Skills
 - ✅ Integration zwischen allen High/Medium Priority Tools
@@ -1339,25 +1331,25 @@ export async function runCodeQualityCheck(options: {
 ```typescript
 // src/cache.ts
 export interface CacheEntry<T> {
-  data: T;
-  timestamp: number;
-  ttl: number;
+  data: T
+  timestamp: number
+  ttl: number
 }
 
 export class CodeRuntimeCache {
-  private cache = new Map<string, CacheEntry<any>>();
+  private cache = new Map<string, CacheEntry<any>>()
 
   get<T>(key: string): T | null {
-    const entry = this.cache.get(key);
-    if (!entry) return null;
+    const entry = this.cache.get(key)
+    if (!entry) return null
 
     // Check expiration
     if (Date.now() - entry.timestamp > entry.ttl) {
-      this.cache.delete(key);
-      return null;
+      this.cache.delete(key)
+      return null
     }
 
-    return entry.data as T;
+    return entry.data as T
   }
 
   set<T>(key: string, data: T, ttl: number = 60000): void {
@@ -1365,19 +1357,19 @@ export class CodeRuntimeCache {
       data,
       timestamp: Date.now(),
       ttl,
-    });
+    })
   }
 
   invalidate(pattern?: string): void {
     if (!pattern) {
-      this.cache.clear();
-      return;
+      this.cache.clear()
+      return
     }
 
     // Invalidate matching keys
     for (const key of this.cache.keys()) {
       if (key.includes(pattern)) {
-        this.cache.delete(key);
+        this.cache.delete(key)
       }
     }
   }
@@ -1386,12 +1378,12 @@ export class CodeRuntimeCache {
     return {
       size: this.cache.size,
       keys: Array.from(this.cache.keys()),
-    };
+    }
   }
 }
 
 // Global cache instance
-export const cache = new CodeRuntimeCache();
+export const cache = new CodeRuntimeCache()
 ```
 
 **Integration in Execution:**
@@ -1412,7 +1404,7 @@ const wrappedCode = `
   return await (async () => {
     ${context.code}
   })();
-`;
+`
 ```
 
 **Usage in Skills:**
@@ -1420,24 +1412,25 @@ const wrappedCode = `
 ```typescript
 // skills/web-testing.ts (updated with caching)
 export async function runWebTest(options) {
-  const chrome = await import("mcp://chrome-devtools");
+  const chrome = await import('mcp://chrome-devtools')
 
-  const cacheKey = `web-test:${options.url}`;
+  const cacheKey = `web-test:${options.url}`
 
   // Check cache first
-  const cached = cache.get(cacheKey);
-  if (cached && Date.now() - cached.timestamp < 300000) { // 5 min
-    console.log("Using cached result");
-    return cached;
+  const cached = cache.get(cacheKey)
+  if (cached && Date.now() - cached.timestamp < 300000) {
+    // 5 min
+    console.log('Using cached result')
+    return cached
   }
 
   // Run actual test
-  const result = await actualWebTest(options);
+  const result = await actualWebTest(options)
 
   // Cache result
-  cache.set(cacheKey, result, 300000);
+  cache.set(cacheKey, result, 300000)
 
-  return result;
+  return result
 }
 ```
 
@@ -1450,18 +1443,18 @@ export async function runWebTest(options) {
 ```typescript
 // src/session-manager.ts
 export interface Session {
-  id: string;
-  type: "chrome" | "task-context" | "custom";
-  data: any;
-  createdAt: number;
-  lastAccessed: number;
+  id: string
+  type: 'chrome' | 'task-context' | 'custom'
+  data: any
+  createdAt: number
+  lastAccessed: number
 }
 
 export class SessionManager {
-  private sessions = new Map<string, Session>();
+  private sessions = new Map<string, Session>()
 
-  create(type: Session["type"], data: any): string {
-    const id = crypto.randomUUID();
+  create(type: Session['type'], data: any): string {
+    const id = crypto.randomUUID()
 
     this.sessions.set(id, {
       id,
@@ -1469,61 +1462,61 @@ export class SessionManager {
       data,
       createdAt: Date.now(),
       lastAccessed: Date.now(),
-    });
+    })
 
-    return id;
+    return id
   }
 
   get(id: string): Session | null {
-    const session = this.sessions.get(id);
-    if (!session) return null;
+    const session = this.sessions.get(id)
+    if (!session) return null
 
-    session.lastAccessed = Date.now();
-    return session;
+    session.lastAccessed = Date.now()
+    return session
   }
 
-  update(id: string, data: Partial<Session["data"]>): void {
-    const session = this.sessions.get(id);
-    if (!session) throw new Error(`Session ${id} not found`);
+  update(id: string, data: Partial<Session['data']>): void {
+    const session = this.sessions.get(id)
+    if (!session) throw new Error(`Session ${id} not found`)
 
-    session.data = { ...session.data, ...data };
-    session.lastAccessed = Date.now();
+    session.data = { ...session.data, ...data }
+    session.lastAccessed = Date.now()
   }
 
   destroy(id: string): void {
-    this.sessions.delete(id);
+    this.sessions.delete(id)
   }
 
   cleanup(maxAge: number = 3600000): void {
-    const now = Date.now();
+    const now = Date.now()
     for (const [id, session] of this.sessions.entries()) {
       if (now - session.lastAccessed > maxAge) {
-        this.sessions.delete(id);
+        this.sessions.delete(id)
       }
     }
   }
 }
 
-export const sessionManager = new SessionManager();
+export const sessionManager = new SessionManager()
 
 // Auto-cleanup every 10 minutes
-setInterval(() => sessionManager.cleanup(), 600000);
+setInterval(() => sessionManager.cleanup(), 600000)
 ```
 
 **Usage:**
 
 ```typescript
 // Persistent Chrome session
-const sessionId = sessionManager.create("chrome", {
+const sessionId = sessionManager.create('chrome', {
   pageIndex: 0,
-  url: "https://headon.pro",
+  url: 'https://headon.pro',
   snapshot: null,
-});
+})
 
 // Later, in another execution
-const session = sessionManager.get(sessionId);
-const chrome = await import("mcp://chrome-devtools");
-await chrome.selectPage({ pageIdx: session.data.pageIndex });
+const session = sessionManager.get(sessionId)
+const chrome = await import('mcp://chrome-devtools')
+await chrome.selectPage({ pageIdx: session.data.pageIndex })
 ```
 
 ### 4.3 Skill Library & Documentation
@@ -1533,22 +1526,22 @@ await chrome.selectPage({ pageIdx: session.data.pageIndex });
 ```typescript
 // skills/registry.ts
 export interface SkillMetadata {
-  name: string;
-  description: string;
-  tokenReduction: string;
-  parameters: Record<string, any>;
-  examples: string[];
-  mcpServers: string[];
+  name: string
+  description: string
+  tokenReduction: string
+  parameters: Record<string, any>
+  examples: string[]
+  mcpServers: string[]
 }
 
 export const skillRegistry: Record<string, SkillMetadata> = {
-  "diagnostics-to-tasks": {
-    name: "Diagnostics to Tasks",
-    description: "Convert IDE diagnostics to Task Master tasks",
-    tokenReduction: "~95%",
+  'diagnostics-to-tasks': {
+    name: 'Diagnostics to Tasks',
+    description: 'Convert IDE diagnostics to Task Master tasks',
+    tokenReduction: '~95%',
     parameters: {
-      projectRoot: "string (required)",
-      maxTasks: "number (default: 10)",
+      projectRoot: 'string (required)',
+      maxTasks: 'number (default: 10)',
       severityFilter: "'error' | 'warning' | 'all' (default: 'error')",
     },
     examples: [
@@ -1557,18 +1550,18 @@ export const skillRegistry: Record<string, SkillMetadata> = {
         maxTasks: 5
       })`,
     ],
-    mcpServers: ["ide", "task-master"],
+    mcpServers: ['ide', 'task-master'],
   },
 
-  "web-testing": {
-    name: "Web Testing Suite",
-    description: "Comprehensive web testing with console, network, performance, and a11y checks",
-    tokenReduction: "~90%",
+  'web-testing': {
+    name: 'Web Testing Suite',
+    description: 'Comprehensive web testing with console, network, performance, and a11y checks',
+    tokenReduction: '~90%',
     parameters: {
-      url: "string (required)",
-      checks: "object { consoleErrors, networkErrors, performance, accessibility }",
-      createTasks: "boolean (default: false)",
-      projectRoot: "string (required if createTasks=true)",
+      url: 'string (required)',
+      checks: 'object { consoleErrors, networkErrors, performance, accessibility }',
+      createTasks: 'boolean (default: false)',
+      projectRoot: 'string (required if createTasks=true)',
     },
     examples: [
       `runWebTest({
@@ -1578,32 +1571,32 @@ export const skillRegistry: Record<string, SkillMetadata> = {
         projectRoot: "/home/headon/projects/headon"
       })`,
     ],
-    mcpServers: ["chrome-devtools", "task-master"],
+    mcpServers: ['chrome-devtools', 'task-master'],
   },
 
   // ... more skills
-};
+}
 
 // Generate documentation
 export function generateSkillDocs(): string {
-  let docs = "# MCP Code Runtime - Skill Library\n\n";
+  let docs = '# MCP Code Runtime - Skill Library\n\n'
 
   for (const [id, skill] of Object.entries(skillRegistry)) {
-    docs += `## ${skill.name}\n\n`;
-    docs += `**Token Reduction:** ${skill.tokenReduction}\n\n`;
-    docs += `**Description:** ${skill.description}\n\n`;
-    docs += `**Required MCP Servers:** ${skill.mcpServers.join(", ")}\n\n`;
-    docs += `**Parameters:**\n`;
+    docs += `## ${skill.name}\n\n`
+    docs += `**Token Reduction:** ${skill.tokenReduction}\n\n`
+    docs += `**Description:** ${skill.description}\n\n`
+    docs += `**Required MCP Servers:** ${skill.mcpServers.join(', ')}\n\n`
+    docs += `**Parameters:**\n`
 
     for (const [param, type] of Object.entries(skill.parameters)) {
-      docs += `- \`${param}\`: ${type}\n`;
+      docs += `- \`${param}\`: ${type}\n`
     }
 
-    docs += `\n**Example:**\n\`\`\`typescript\n${skill.examples[0]}\n\`\`\`\n\n`;
-    docs += `---\n\n`;
+    docs += `\n**Example:**\n\`\`\`typescript\n${skill.examples[0]}\n\`\`\`\n\n`
+    docs += `---\n\n`
   }
 
-  return docs;
+  return docs
 }
 ```
 
@@ -1612,59 +1605,59 @@ export function generateSkillDocs(): string {
 ```typescript
 // src/analytics.ts
 export interface ExecutionMetrics {
-  executionId: string;
-  timestamp: number;
-  code: string;
-  duration: number;
-  success: boolean;
-  tokensEstimated: number;
-  mcpServersUsed: string[];
-  error?: string;
+  executionId: string
+  timestamp: number
+  code: string
+  duration: number
+  success: boolean
+  tokensEstimated: number
+  mcpServersUsed: string[]
+  error?: string
 }
 
 export class AnalyticsCollector {
-  private metrics: ExecutionMetrics[] = [];
+  private metrics: ExecutionMetrics[] = []
 
   record(metric: ExecutionMetrics): void {
-    this.metrics.push(metric);
+    this.metrics.push(metric)
 
     // Keep only last 1000 executions
     if (this.metrics.length > 1000) {
-      this.metrics.shift();
+      this.metrics.shift()
     }
   }
 
   getStats(): {
-    totalExecutions: number;
-    successRate: number;
-    avgDuration: number;
-    totalTokensSaved: number;
-    topSkills: Array<{ skill: string; count: number }>;
+    totalExecutions: number
+    successRate: number
+    avgDuration: number
+    totalTokensSaved: number
+    topSkills: Array<{ skill: string; count: number }>
   } {
-    const total = this.metrics.length;
-    const successes = this.metrics.filter(m => m.success).length;
-    const avgDuration = this.metrics.reduce((sum, m) => sum + m.duration, 0) / total;
+    const total = this.metrics.length
+    const successes = this.metrics.filter((m) => m.success).length
+    const avgDuration = this.metrics.reduce((sum, m) => sum + m.duration, 0) / total
 
     // Estimate tokens saved (assuming 10x reduction on average)
     const totalTokensSaved = this.metrics.reduce(
       (sum, m) => sum + m.tokensEstimated * 9, // 90% reduction
       0
-    );
+    )
 
     // Extract skill names from code
-    const skillCounts = new Map<string, number>();
+    const skillCounts = new Map<string, number>()
     for (const metric of this.metrics) {
-      const match = metric.code.match(/import.*from.*skills\/(.+?)\.ts/);
+      const match = metric.code.match(/import.*from.*skills\/(.+?)\.ts/)
       if (match) {
-        const skill = match[1];
-        skillCounts.set(skill, (skillCounts.get(skill) || 0) + 1);
+        const skill = match[1]
+        skillCounts.set(skill, (skillCounts.get(skill) || 0) + 1)
       }
     }
 
     const topSkills = Array.from(skillCounts.entries())
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5)
-      .map(([skill, count]) => ({ skill, count }));
+      .map(([skill, count]) => ({ skill, count }))
 
     return {
       totalExecutions: total,
@@ -1672,18 +1665,19 @@ export class AnalyticsCollector {
       avgDuration,
       totalTokensSaved,
       topSkills,
-    };
+    }
   }
 
   export(): string {
-    return JSON.stringify(this.metrics, null, 2);
+    return JSON.stringify(this.metrics, null, 2)
   }
 }
 
-export const analytics = new AnalyticsCollector();
+export const analytics = new AnalyticsCollector()
 ```
 
 **Deliverables:**
+
 - ✅ Caching Layer (60s-5min TTL)
 - ✅ Session Management (Browser, Task Context)
 - ✅ Skill Library (10+ reusable skills)
@@ -1716,30 +1710,33 @@ export const analytics = new AnalyticsCollector();
 
 **Decision Matrix - Wann welches System?**
 
-| Szenario | Direct Tools | Code Runtime |
-|----------|--------------|--------------|
-| Einzelner Task-Lookup | ✅ Direkt | ❌ Overhead |
-| 10+ Tasks erstellen | ❌ Ineffizient | ✅ Code |
-| Simple Screenshot | ✅ Direkt | ❌ Overhead |
-| Kompletter Web-Test | ❌ Viele Calls | ✅ Code |
-| Ein Diagnostic | ✅ Direkt | ❌ Overhead |
-| Alle Diagnostics → Tasks | ❌ Ineffizient | ✅ Code |
-| Spec Log Query (filter) | ✅ Direkt (wenn präzise) | ✅ Code (wenn komplex) |
-| Spec Log Aggregation | ❌ Zu viel | ✅ Code |
+| Szenario                 | Direct Tools             | Code Runtime           |
+| ------------------------ | ------------------------ | ---------------------- |
+| Einzelner Task-Lookup    | ✅ Direkt                | ❌ Overhead            |
+| 10+ Tasks erstellen      | ❌ Ineffizient           | ✅ Code                |
+| Simple Screenshot        | ✅ Direkt                | ❌ Overhead            |
+| Kompletter Web-Test      | ❌ Viele Calls           | ✅ Code                |
+| Ein Diagnostic           | ✅ Direkt                | ❌ Overhead            |
+| Alle Diagnostics → Tasks | ❌ Ineffizient           | ✅ Code                |
+| Spec Log Query (filter)  | ✅ Direkt (wenn präzise) | ✅ Code (wenn komplex) |
+| Spec Log Aggregation     | ❌ Zu viel               | ✅ Code                |
 
 ### Gradual Cutover
 
 **Woche 5-6: Soft Launch**
+
 - Code Runtime verfügbar
 - Dokumentation: "Try new code execution for bulk operations"
 - Direct Tools bleiben Default
 
 **Woche 7-8: Promotion**
+
 - Claude Code instruiert: "Prefer code execution for multi-step workflows"
 - Performance-Vergleiche zeigen
 - Success Stories dokumentieren
 
 **Woche 9+: Full Migration**
+
 - Code Runtime wird Default für komplexe Workflows
 - Direct Tools nur noch für Simple Ops
 - Eventuell: Deprecation-Warnings für ineffiziente Patterns
@@ -1750,12 +1747,12 @@ export const analytics = new AnalyticsCollector();
 
 ### Quantitative KPIs
 
-| Metric | Baseline (Direct) | Target (Code Exec) | Measurement |
-|--------|-------------------|-------------------|-------------|
-| Token Usage (avg per workflow) | 15,000 | < 2,000 | -87% |
-| Response Latency | 8-12s | 3-5s | -60% |
-| Successful Multi-Step Workflows | 60% | 95% | +35pp |
-| Context Window Utilization | 85% | 35% | -50pp |
+| Metric                          | Baseline (Direct) | Target (Code Exec) | Measurement |
+| ------------------------------- | ----------------- | ------------------ | ----------- |
+| Token Usage (avg per workflow)  | 15,000            | < 2,000            | -87%        |
+| Response Latency                | 8-12s             | 3-5s               | -60%        |
+| Successful Multi-Step Workflows | 60%               | 95%                | +35pp       |
+| Context Window Utilization      | 85%               | 35%                | -50pp       |
 
 ### Qualitative Goals
 
@@ -1771,6 +1768,7 @@ export const analytics = new AnalyticsCollector();
 ### Risiko 1: Komplexität erhöht Fehleranfälligkeit
 
 **Mitigation:**
+
 - Umfassende Test-Suite (>80% Coverage)
 - Klare Error Messages
 - Fallback zu Direct Tools bei Execution-Fehlern
@@ -1779,6 +1777,7 @@ export const analytics = new AnalyticsCollector();
 ### Risiko 2: Sandbox Security
 
 **Mitigation:**
+
 - Deno Permissions System nutzen
 - Kein Filesystem-Zugriff außer definierte Paths
 - Network-Zugriff nur zu MCP-Servern
@@ -1788,6 +1787,7 @@ export const analytics = new AnalyticsCollector();
 ### Risiko 3: Learning Curve für Entwickler
 
 **Mitigation:**
+
 - Extensive Documentation (Auto-generated)
 - Skill Registry mit Beispielen
 - Video-Tutorials für häufige Workflows
@@ -1796,6 +1796,7 @@ export const analytics = new AnalyticsCollector();
 ### Risiko 4: Migration-Aufwand zu hoch
 
 **Mitigation:**
+
 - Phasenweise Migration (nicht Big Bang)
 - Parallel Operation für 4+ Wochen
 - Nur High-Impact-Workflows zuerst
@@ -1807,34 +1808,38 @@ export const analytics = new AnalyticsCollector();
 
 ### Einmalige Kosten
 
-| Aktivität | Stunden | Stundensatz | Kosten |
-|-----------|---------|-------------|--------|
-| Phase 1: Foundation | 50h | €80 | €4,000 |
-| Phase 2: High-Priority Workflows | 40h | €80 | €3,200 |
-| Phase 3: Medium-Priority | 35h | €80 | €2,800 |
-| Phase 4: Advanced Features | 30h | €80 | €2,400 |
-| Testing & QA | 20h | €60 | €1,200 |
-| Documentation | 15h | €60 | €900 |
-| **Total** | **190h** | | **€14,500** |
+| Aktivität                        | Stunden  | Stundensatz | Kosten      |
+| -------------------------------- | -------- | ----------- | ----------- |
+| Phase 1: Foundation              | 50h      | €80         | €4,000      |
+| Phase 2: High-Priority Workflows | 40h      | €80         | €3,200      |
+| Phase 3: Medium-Priority         | 35h      | €80         | €2,800      |
+| Phase 4: Advanced Features       | 30h      | €80         | €2,400      |
+| Testing & QA                     | 20h      | €60         | €1,200      |
+| Documentation                    | 15h      | €60         | €900        |
+| **Total**                        | **190h** |             | **€14,500** |
 
 ### Laufende Einsparungen (monatlich)
 
 **Annahmen:**
+
 - 100 Workflows/Monat mit Claude Code
 - 60% davon profitieren von Code Execution
 - Durchschnittlich 13,000 Tokens gespart pro Workflow
 - Token-Kosten: $15/1M tokens (Claude Sonnet)
 
 **Berechnung:**
+
 - 100 workflows × 60% × 13,000 tokens = 780,000 tokens/Monat gespart
 - 780,000 / 1,000,000 × $15 = **$11.70/Monat an API-Kosten gespart**
 
 **Zeit-Einsparungen:**
+
 - Schnellere Workflows: ~5s pro Execution
 - 60 Workflows × 5s = 300s = 5 Minuten/Monat
 - Wert der Zeit: Minimal (Hauptvorteil ist Effizienz, nicht Zeit)
 
 **Hauptnutzen:**
+
 - 🚀 Neue Workflow-Möglichkeiten (unbezahlbar)
 - 📈 Höhere Erfolgsrate bei komplexen Tasks
 - 🔄 Wiederverwendbare Skill Library
@@ -1843,6 +1848,7 @@ export const analytics = new AnalyticsCollector();
 **Break-Even:** ~103 Monate (reine API-Kosten)
 
 **Realistischer ROI:** Schwer zu quantifizieren, aber:
+
 - Entwickler-Produktivität +30%
 - Weniger fehlgeschlagene Workflows
 - Neue Use Cases erschließen
@@ -1890,6 +1896,7 @@ Woche 9+: Monitoring & Optimization
 ### Immediate Actions (Diese Woche)
 
 1. **Setup Repo:**
+
    ```bash
    cd ~/projects
    mkdir mcp-code-runtime
@@ -1899,6 +1906,7 @@ Woche 9+: Monitoring & Optimization
    ```
 
 2. **Install Dependencies:**
+
    ```bash
    deno add @modelcontextprotocol/sdk
    ```
@@ -1910,6 +1918,7 @@ Woche 9+: Monitoring & Optimization
    - `config/mcp-servers.json` (Server Registry)
 
 4. **First Test:**
+
    ```bash
    deno task dev
    # Test with simple execution
@@ -1969,12 +1978,12 @@ Woche 9+: Monitoring & Optimization
 
 ```typescript
 // Execute with: execute_code tool
-import { runWebTest } from "./skills/web-testing.ts";
-import { diagnosticsToTasks } from "./skills/diagnostics-to-tasks.ts";
+import { runWebTest } from './skills/web-testing.ts'
+import { diagnosticsToTasks } from './skills/diagnostics-to-tasks.ts'
 
 // 1. Test production site
 const prodTest = await runWebTest({
-  url: "https://headon.pro",
+  url: 'https://headon.pro',
   checks: {
     consoleErrors: true,
     networkErrors: true,
@@ -1982,28 +1991,28 @@ const prodTest = await runWebTest({
     accessibility: true,
   },
   createTasks: true,
-  projectRoot: "/home/headon/projects/headon",
-});
+  projectRoot: '/home/headon/projects/headon',
+})
 
 // 2. Check local diagnostics
 const devDiagnostics = await diagnosticsToTasks({
-  projectRoot: "/home/headon/projects/headon",
+  projectRoot: '/home/headon/projects/headon',
   maxTasks: 10,
-  severityFilter: "error",
-});
+  severityFilter: 'error',
+})
 
 // 3. Return comprehensive report
 return {
   production: {
     passed: prodTest.passed,
-    criticalIssues: prodTest.issues.filter(i => i.severity === "critical").length,
+    criticalIssues: prodTest.issues.filter((i) => i.severity === 'critical').length,
     tasksCreated: prodTest.tasksCreated,
   },
   development: {
     tasksCreated: devDiagnostics.tasksCreated,
   },
   totalTasksCreated: (prodTest.tasksCreated || 0) + devDiagnostics.tasksCreated,
-};
+}
 
 // Token usage: ~2,500 (vs. 60,000+ with direct calls)
 ```
@@ -2011,21 +2020,21 @@ return {
 #### Workflow 2: Implementation Log Analysis
 
 ```typescript
-import { analyzeImplementationLogs } from "./skills/spec-workflow-analyzer.ts";
+import { analyzeImplementationLogs } from './skills/spec-workflow-analyzer.ts'
 
 const analysis = await analyzeImplementationLogs({
-  projectRoot: "/home/headon/projects/headon",
-  specName: "contact-form-enhancement",
+  projectRoot: '/home/headon/projects/headon',
+  specName: 'contact-form-enhancement',
   analysis: {
     findDuplicateAPIs: true,
     componentUsage: true,
     integrationPatterns: true,
     taskStatistics: true,
   },
-});
+})
 
 // Returns detailed findings without sending 100KB of logs to LLM
-return analysis.findings.join("\n");
+return analysis.findings.join('\n')
 
 // Token usage: ~800 (vs. 25,000+ with direct query)
 ```
@@ -2037,6 +2046,7 @@ return analysis.findings.join("\n");
 **Symptom:** `Error: Failed to connect to task-master`
 
 **Solution:**
+
 1. Check server is installed: `which task-master` oder `npx -y @headon/task-master --version`
 2. Verify config: `cat config/mcp-servers.json`
 3. Test manually: `deno run src/mcp-client.ts`
@@ -2047,6 +2057,7 @@ return analysis.findings.join("\n");
 **Symptom:** `Error: Execution timeout after 30000ms`
 
 **Solution:**
+
 1. Increase timeout: `execute_code({ code, timeout: 60000 })`
 2. Optimize code: Reduce unnecessary operations
 3. Check MCP server response times
@@ -2057,6 +2068,7 @@ return analysis.findings.join("\n");
 **Symptom:** TypeScript compilation errors
 
 **Solution:**
+
 1. Regenerate types: `deno task generate-types`
 2. Check import paths: `import * as x from "mcp://server-name"`
 3. Verify MCP server version compatibility

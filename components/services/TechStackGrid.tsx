@@ -78,10 +78,7 @@ const categoryColors: Record<string, string> = {
   design: 'from-pink-500 to-rose-500',
 }
 
-export function TechStackGrid({
-  technologies,
-  columns = 4
-}: TechStackGridProps) {
+export function TechStackGrid({ technologies, columns = 4 }: TechStackGridProps) {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null)
 
   const gridCols = {
@@ -106,18 +103,16 @@ export function TechStackGrid({
             transition={{
               duration: 0.4,
               delay: index * 0.05,
-              ease: 'easeOut'
+              ease: 'easeOut',
             }}
             onHoverStart={() => setHoveredTech(tech.name)}
             onHoverEnd={() => setHoveredTech(null)}
             className="group relative"
           >
             {/* Card */}
-            <div className={`
-              relative overflow-hidden rounded-xl border border-gray-200 bg-white p-6
-              transition-all duration-300
-              ${isHovered ? 'shadow-xl scale-105 border-primary-500' : 'shadow-sm hover:shadow-lg'}
-            `}>
+            <div
+              className={`relative overflow-hidden rounded-xl border border-gray-200 bg-white p-6 transition-all duration-300 ${isHovered ? 'border-primary-500 scale-105 shadow-xl' : 'shadow-sm hover:shadow-lg'} `}
+            >
               {/* Gradient Background on Hover */}
               <motion.div
                 className={`absolute inset-0 bg-gradient-to-br ${categoryColor} opacity-0 transition-opacity duration-300`}
@@ -131,7 +126,7 @@ export function TechStackGrid({
                   <motion.div
                     animate={{
                       scale: isHovered ? 1.1 : 1,
-                      rotate: isHovered ? [0, -5, 5, 0] : 0
+                      rotate: isHovered ? [0, -5, 5, 0] : 0,
                     }}
                     transition={{ duration: 0.3 }}
                   >
@@ -143,17 +138,15 @@ export function TechStackGrid({
                 </div>
 
                 {/* Name */}
-                <h3 className="text-center text-sm font-semibold text-gray-900 mb-1">
+                <h3 className="mb-1 text-center text-sm font-semibold text-gray-900">
                   {tech.name}
                 </h3>
 
                 {/* Category Badge */}
                 <div className="flex justify-center">
-                  <span className={`
-                    inline-block text-xs font-medium px-2 py-0.5 rounded-full
-                    ${isHovered ? 'bg-primary-100 text-primary-700' : 'bg-gray-100 text-gray-600'}
-                    transition-colors duration-300
-                  `}>
+                  <span
+                    className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${isHovered ? 'bg-primary-100 text-primary-700' : 'bg-gray-100 text-gray-600'} transition-colors duration-300`}
+                  >
                     {tech.category}
                   </span>
                 </div>
@@ -164,25 +157,14 @@ export function TechStackGrid({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{
                   opacity: isHovered ? 1 : 0,
-                  y: isHovered ? 0 : 10
+                  y: isHovered ? 0 : 10,
                 }}
-                className={`
-                  absolute top-full left-1/2 -translate-x-1/2 mt-2
-                  w-64 p-3 rounded-lg shadow-xl border border-gray-200
-                  bg-white z-50 pointer-events-none
-                  ${isHovered ? 'block' : 'hidden'}
-                `}
+                className={`pointer-events-none absolute top-full left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-lg border border-gray-200 bg-white p-3 shadow-xl ${isHovered ? 'block' : 'hidden'} `}
               >
                 {/* Arrow */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-0 h-0
-                  border-l-8 border-l-transparent
-                  border-r-8 border-r-transparent
-                  border-b-8 border-b-white"
-                />
+                <div className="absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-r-8 border-b-8 border-l-8 border-r-transparent border-b-white border-l-transparent" />
 
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  {tech.description}
-                </p>
+                <p className="text-xs leading-relaxed text-gray-600">{tech.description}</p>
               </motion.div>
             </div>
           </motion.div>
@@ -195,7 +177,7 @@ export function TechStackGrid({
 // Compact variant for smaller spaces
 export function TechStackCompact({ technologies }: { technologies: Technology[] }) {
   return (
-    <div className="flex flex-wrap gap-3 justify-center">
+    <div className="flex flex-wrap justify-center gap-3">
       {technologies.map((tech, index) => {
         const Icon = iconMap[tech.icon] || SiReact
 
@@ -210,12 +192,7 @@ export function TechStackCompact({ technologies }: { technologies: Technology[] 
             }}
             className="group relative"
           >
-            <div className="
-              flex items-center gap-2 px-4 py-2 rounded-full
-              border border-gray-200 bg-white
-              hover:border-primary-500 hover:shadow-lg
-              transition-all duration-300
-            ">
+            <div className="hover:border-primary-500 flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 transition-all duration-300 hover:shadow-lg">
               <Icon className={`h-5 w-5 ${tech.color || 'text-gray-700'}`} />
               <span className="text-sm font-medium text-gray-900">{tech.name}</span>
             </div>

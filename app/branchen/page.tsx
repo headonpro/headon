@@ -30,7 +30,7 @@ export default async function BranchenPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 py-24 text-white">
+      <section className="from-primary-600 via-primary-500 to-secondary-500 bg-gradient-to-br py-24 text-white">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl">
@@ -60,26 +60,26 @@ export default async function BranchenPage() {
                   className="group"
                   aria-label={`Zur ${branche.frontmatter.name} Seite`}
                 >
-                  <div className="h-full rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all hover:border-primary-500 hover:shadow-xl">
+                  <div className="hover:border-primary-500 h-full rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all hover:shadow-xl">
                     {/* Icon */}
-                    <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-primary-100 text-primary-600 transition-colors group-hover:bg-primary-600 group-hover:text-white">
+                    <div className="bg-primary-100 text-primary-600 group-hover:bg-primary-600 mb-6 flex h-16 w-16 items-center justify-center rounded-xl transition-colors group-hover:text-white">
                       {IconComponent && <IconComponent className="h-8 w-8" />}
                     </div>
 
                     {/* Content */}
-                    <h2 className="mb-3 text-2xl font-bold text-gray-900 transition-colors group-hover:text-primary-600">
+                    <h2 className="group-hover:text-primary-600 mb-3 text-2xl font-bold text-gray-900 transition-colors">
                       {branche.frontmatter.name}
                     </h2>
                     <p className="mb-4 text-gray-600">{branche.frontmatter.description}</p>
 
                     {/* Pricing */}
-                    <div className="mb-6 text-sm font-semibold text-primary-600">
+                    <div className="text-primary-600 mb-6 text-sm font-semibold">
                       ab {branche.frontmatter.pricing.from.toLocaleString('de-DE')}{' '}
                       {branche.frontmatter.pricing.currency}
                     </div>
 
                     {/* CTA */}
-                    <div className="flex items-center text-primary-600 transition-colors group-hover:text-primary-700">
+                    <div className="text-primary-600 group-hover:text-primary-700 flex items-center transition-colors">
                       <span className="font-semibold">Mehr erfahren</span>
                       <Icons.ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                     </div>

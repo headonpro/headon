@@ -16,9 +16,12 @@ const nextConfig: NextConfig = {
     // Remove React properties in production
     reactRemoveProperties: true,
     // Remove console.log in production
-    removeConsole: process.env.NODE_ENV === 'production' ? {
-      exclude: ['error', 'warn']
-    } : false,
+    removeConsole:
+      process.env.NODE_ENV === 'production'
+        ? {
+            exclude: ['error', 'warn'],
+          }
+        : false,
   },
   images: {
     domains: [],
@@ -104,8 +107,7 @@ const nextConfig: NextConfig = {
             // max-age=86400: 1 day browser cache
             // s-maxage=604800: 1 week CDN cache
             // stale-while-revalidate=86400: Serve stale for 1 day while revalidating
-            value:
-              'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
+            value: 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
           },
         ],
       },
@@ -118,8 +120,7 @@ const nextConfig: NextConfig = {
             // max-age=86400: 1 day browser cache
             // s-maxage=604800: 1 week CDN cache
             // stale-while-revalidate=86400: Serve stale for 1 day while revalidating
-            value:
-              'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
+            value: 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
           },
         ],
       },
@@ -142,8 +143,7 @@ const nextConfig: NextConfig = {
             key: 'Cache-Control',
             // Static images: 1 year browser cache, 1 month CDN cache
             // Longer CDN cache for better hit ratio
-            value:
-              'public, max-age=31536000, s-maxage=2592000, stale-while-revalidate=86400',
+            value: 'public, max-age=31536000, s-maxage=2592000, stale-while-revalidate=86400',
           },
         ],
       },

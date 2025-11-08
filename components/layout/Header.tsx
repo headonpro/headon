@@ -40,7 +40,11 @@ export default function Header() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 flex items-center p-1.5" aria-label="HEADON.pro - Zur Startseite">
+          <Link
+            href="/"
+            className="-m-1.5 flex items-center p-1.5"
+            aria-label="HEADON.pro - Zur Startseite"
+          >
             <Logo width={120} height={32} className="h-8" />
           </Link>
         </div>
@@ -77,30 +81,29 @@ export default function Header() {
                     )}
                   >
                     {item.name}
-                    <ChevronDown className={cn(
-                      'h-4 w-4 transition-transform',
-                      branchenOpen && 'rotate-180'
-                    )} />
+                    <ChevronDown
+                      className={cn('h-4 w-4 transition-transform', branchenOpen && 'rotate-180')}
+                    />
                   </Link>
 
                   {/* Dropdown */}
                   {branchenOpen && (
-                    <div className="absolute top-full left-0 z-50 pt-2 w-64">
+                    <div className="absolute top-full left-0 z-50 w-64 pt-2">
                       <div className="rounded-lg py-2">
                         {branchenItems.map((branche) => (
-                        <Link
-                          key={branche.href}
-                          href={branche.href}
-                          className={cn(
-                            'block px-4 py-2 text-sm font-medium transition-colors',
-                            pathname === branche.href
-                              ? 'text-accent-500'
-                              : 'text-white/90 hover:text-accent-500'
-                          )}
-                        >
-                          {branche.name}
-                        </Link>
-                      ))}
+                          <Link
+                            key={branche.href}
+                            href={branche.href}
+                            className={cn(
+                              'block px-4 py-2 text-sm font-medium transition-colors',
+                              pathname === branche.href
+                                ? 'text-accent-500'
+                                : 'hover:text-accent-500 text-white/90'
+                            )}
+                          >
+                            {branche.name}
+                          </Link>
+                        ))}
                       </div>
                     </div>
                   )}
@@ -177,14 +180,16 @@ export default function Header() {
                           )}
                         >
                           {item.name}
-                          <ChevronDown className={cn(
-                            'h-5 w-5 transition-transform',
-                            branchenOpen && 'rotate-180'
-                          )} />
+                          <ChevronDown
+                            className={cn(
+                              'h-5 w-5 transition-transform',
+                              branchenOpen && 'rotate-180'
+                            )}
+                          />
                         </button>
 
                         {branchenOpen && (
-                          <div className="ml-4 mt-2 space-y-1">
+                          <div className="mt-2 ml-4 space-y-1">
                             {branchenItems.map((branche) => (
                               <Link
                                 key={branche.href}

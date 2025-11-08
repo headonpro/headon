@@ -28,8 +28,8 @@ export default function LeadMagnetCTA({ cityName, variant = 'dark' }: LeadMagnet
       transition={{ duration: 0.6 }}
       className={`relative overflow-hidden rounded-2xl border p-8 backdrop-blur-md md:p-12 ${
         isDark
-          ? 'border-white/20 bg-gradient-to-br from-primary-500/20 to-secondary-500/20'
-          : 'border-gray-200 bg-gradient-to-br from-primary-50 to-secondary-50'
+          ? 'from-primary-500/20 to-secondary-500/20 border-white/20 bg-gradient-to-br'
+          : 'from-primary-50 to-secondary-50 border-gray-200 bg-gradient-to-br'
       }`}
     >
       {/* Animated background */}
@@ -112,8 +112,8 @@ export default function LeadMagnetCTA({ cityName, variant = 'dark' }: LeadMagnet
               size="lg"
               className={`group w-full sm:w-auto ${
                 isDark
-                  ? 'bg-white text-primary hover:bg-gray-100'
-                  : 'bg-primary text-white hover:bg-primary-600'
+                  ? 'text-primary bg-white hover:bg-gray-100'
+                  : 'bg-primary hover:bg-primary-600 text-white'
               }`}
             >
               <Download className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />

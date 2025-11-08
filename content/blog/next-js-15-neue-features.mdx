@@ -19,11 +19,14 @@ Next.js 15 markiert einen bedeutenden Meilenstein in der Evolution des React-Fra
 
 <KeyTakeaways
   items={[
-    { text: "Partial Prerendering (PPR) kombiniert SSG und SSR für optimale Performance", highlight: true },
-    { text: "Server Actions vereinfachen Backend-Logik um bis zu 60% weniger Code" },
-    { text: "Turbopack wird Standard: 5x schnellere Dev-Server, 700% schnelleres HMR" },
-    { text: "React 19 Integration bringt moderne Concurrent Features wie use() Hook" },
-    { text: "Image Optimization 2.0 mit AVIF-Support (30% kleinere Dateien als WebP)" }
+    {
+      text: 'Partial Prerendering (PPR) kombiniert SSG und SSR für optimale Performance',
+      highlight: true,
+    },
+    { text: 'Server Actions vereinfachen Backend-Logik um bis zu 60% weniger Code' },
+    { text: 'Turbopack wird Standard: 5x schnellere Dev-Server, 700% schnelleres HMR' },
+    { text: 'React 19 Integration bringt moderne Concurrent Features wie use() Hook' },
+    { text: 'Image Optimization 2.0 mit AVIF-Support (30% kleinere Dateien als WebP)' },
   ]}
 />
 
@@ -38,10 +41,10 @@ Das mit Abstand spannendste Feature ist **Partial Prerendering**. PPR kombiniert
 <BlogStats
   title="PPR Performance Impact"
   stats={[
-    { value: 0.5, label: "First Contentful Paint", unit: "s" },
-    { value: 90, label: "Lighthouse Score", suffix: "+" },
-    { value: 67, label: "LCP Verbesserung", suffix: "%" },
-    { value: 100, label: "SEO Score", suffix: "/100" }
+    { value: 0.5, label: 'First Contentful Paint', unit: 's' },
+    { value: 90, label: 'Lighthouse Score', suffix: '+' },
+    { value: 67, label: 'LCP Verbesserung', suffix: '%' },
+    { value: 100, label: 'SEO Score', suffix: '/100' },
   ]}
 />
 
@@ -66,9 +69,11 @@ export default async function Dashboard() {
         <DynamicUserData />
       </Suspense>
     </div>
-  )
+
+)
 }
-```
+
+````
 </CodeBlock>
 
 <ComparisonBlock
@@ -141,7 +146,8 @@ export async function createPost(formData: FormData) {
 
   return { success: true }
 }
-```
+````
+
 </CodeBlock>
 
 <CodeBlock title="Form-Integration" language="tsx" collapsible>
@@ -162,7 +168,8 @@ export default function NewPost() {
 </CodeBlock>
 
 <InfoBox type="success">
-**Best Practice:** Ersetzen Sie API Routes durch Server Actions wo möglich. Der Code wird deutlich kürzer, type-safer und einfacher zu warten.
+  **Best Practice:** Ersetzen Sie API Routes durch Server Actions wo möglich. Der Code wird deutlich
+  kürzer, type-safer und einfacher zu warten.
 </InfoBox>
 
 ## Performance-Verbesserungen in Next.js 15
@@ -174,20 +181,16 @@ Der Turbopack-basierte Compiler ist nun **Standard in Next.js 15** und bringt ma
 <BlogStats
   title="Turbopack Performance"
   stats={[
-    { value: 5, label: "Schnellerer Dev-Server", suffix: "x" },
-    { value: 700, label: "Schnelleres HMR", suffix: "%" },
-    { value: 40, label: "Weniger RAM", suffix: "%" },
-    { value: 0.7, label: "Server Start", unit: "s" }
+    { value: 5, label: 'Schnellerer Dev-Server', suffix: 'x' },
+    { value: 700, label: 'Schnelleres HMR', suffix: '%' },
+    { value: 40, label: 'Weniger RAM', suffix: '%' },
+    { value: 0.7, label: 'Server Start', unit: 's' },
   ]}
 />
 
 <CodeBlock title="Turbopack aktivieren" language="bash" collapsible>
-```bash
-# Vergleich: Development Server Start
-# Next.js 14: ~3.5 Sekunden
-# Next.js 15: ~0.7 Sekunden (mit Turbopack)
-pnpm dev --turbo
-```
+  ```bash # Vergleich: Development Server Start # Next.js 14: ~3.5 Sekunden # Next.js 15: ~0.7
+  Sekunden (mit Turbopack) pnpm dev --turbo ```
 </CodeBlock>
 
 ### Automatisches Code-Splitting
@@ -195,7 +198,8 @@ pnpm dev --turbo
 Next.js 15 optimiert automatisch das Bundle-Splitting basierend auf tatsächlichen Nutzungsmustern. Resultat: **Initial Bundle-Größen reduziert um 35-45%** in unseren Projekten.
 
 <InfoBox type="info">
-Next.js 15 nutzt intelligente Analyse-Algorithmen, um häufig gemeinsam genutzte Module in optimale Chunks zu gruppieren. Das reduziert Redundanz und verbessert Caching.
+  Next.js 15 nutzt intelligente Analyse-Algorithmen, um häufig gemeinsam genutzte Module in optimale
+  Chunks zu gruppieren. Das reduziert Redundanz und verbessert Caching.
 </InfoBox>
 
 ### Image Optimization 2.0
@@ -244,20 +248,21 @@ import { use, Suspense } from 'react'
 
 // NEU: use() Hook für Promise-Handling
 function UserProfile({ userPromise }) {
-  const user = use(userPromise)
-  return <div>{user.name}</div>
+const user = use(userPromise)
+return <div>{user.name}</div>
 }
 
 export default function Page() {
   const userPromise = fetch('/api/user').then((r) => r.json())
 
-  return (
-    <Suspense fallback={<Skeleton />}>
-      <UserProfile userPromise={userPromise} />
-    </Suspense>
-  )
-}
-```
+return (
+
+<Suspense fallback={<Skeleton />}>
+  <UserProfile userPromise={userPromise} />
+</Suspense>
+) }
+
+````
 </CodeBlock>
 
 Erfahren Sie mehr über [React 19 Features](/blog/react-19-concurrent-features) in unserem detaillierten Guide.
@@ -280,7 +285,8 @@ Die Migration ist **schrittweise möglich** und die Performance-Gewinne sind **m
 <CodeBlock language="bash" collapsible>
 ```bash
 pnpm add next@latest react@rc react-dom@rc
-```
+````
+
 </CodeBlock>
 
 **Schritt 2: Next.js Config anpassen**
@@ -297,7 +303,8 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-```
+
+````
 </CodeBlock>
 
 **Schritt 3: Schrittweise PPR aktivieren**
@@ -308,7 +315,8 @@ Migrieren Sie **nicht alles auf einmal**. Nutzen Sie Partial Prerendering geziel
 ```tsx
 // Opt-in pro Route
 export const experimental_ppr = true // Nur für diese Route
-```
+````
+
 </CodeBlock>
 
 **Schritt 4: Testing & Rollout**
@@ -316,7 +324,8 @@ export const experimental_ppr = true // Nur für diese Route
 Testen Sie kritische User Flows und überwachen Sie Performance-Metriken während der Migration.
 
 <InfoBox type="success">
-Nutzen Sie eine **Feature-Flag-Strategie** für graduelle Rollouts. So können Sie neue Features schrittweise aktivieren und bei Problemen schnell zurückrollen.
+  Nutzen Sie eine **Feature-Flag-Strategie** für graduelle Rollouts. So können Sie neue Features
+  schrittweise aktivieren und bei Problemen schnell zurückrollen.
 </InfoBox>
 
 ## Real-World Performance: Unsere Ergebnisse
@@ -327,19 +336,19 @@ Bei HEADON.pro haben wir mehrere Kundenprojekte auf Next.js 15 migriert. Die Erg
   title="E-Commerce Dashboard - Vorher/Nachher"
   description="Migration von Next.js 14 auf 15 mit PPR"
   stats={[
-    { value: -67, label: "LCP Verbesserung", suffix: "%" },
-    { value: -78, label: "FCP Verbesserung", suffix: "%" },
-    { value: -36, label: "Bundle Size", suffix: "%" },
-    { value: 98, label: "Lighthouse Score", suffix: "/100" }
+    { value: -67, label: 'LCP Verbesserung', suffix: '%' },
+    { value: -78, label: 'FCP Verbesserung', suffix: '%' },
+    { value: -36, label: 'Bundle Size', suffix: '%' },
+    { value: 98, label: 'Lighthouse Score', suffix: '/100' },
   ]}
 />
 
 <BlogStats
   title="Content-Portal - Build Performance"
   stats={[
-    { value: -75, label: "Build Time", suffix: "%" },
-    { value: -57, label: "Server Response", suffix: "%" },
-    { value: 26, label: "Lighthouse Improvement", suffix: "%" }
+    { value: -75, label: 'Build Time', suffix: '%' },
+    { value: -57, label: 'Server Response', suffix: '%' },
+    { value: 26, label: 'Lighthouse Improvement', suffix: '%' },
   ]}
 />
 
@@ -350,25 +359,25 @@ Sehen Sie sich unsere [Portfolio-Projekte](/portfolio) an für weitere Case Stud
 <ComparisonBlock
   title="Upgrade-Entscheidung"
   left={{
-    title: "Upgraden Sie jetzt, wenn:",
-    type: "positive",
+    title: 'Upgraden Sie jetzt, wenn:',
+    type: 'positive',
     items: [
-      "Sie Performance-Probleme haben",
-      "Sie komplexe Dashboards bauen",
-      "Sie TypeScript nutzen",
-      "Sie auf React 19 Features setzen wollen",
-      "Ihr Team mit Suspense vertraut ist"
-    ]
+      'Sie Performance-Probleme haben',
+      'Sie komplexe Dashboards bauen',
+      'Sie TypeScript nutzen',
+      'Sie auf React 19 Features setzen wollen',
+      'Ihr Team mit Suspense vertraut ist',
+    ],
   }}
   right={{
-    title: "Warten Sie noch, wenn:",
-    type: "neutral",
+    title: 'Warten Sie noch, wenn:',
+    type: 'neutral',
     items: [
-      "Kritische Dependencies React 19 noch nicht unterstützen",
-      "Team nicht mit Suspense vertraut ist",
-      "Sehr große Legacy-Codebase (erst testen)",
-      "Keine Zeit für Migration in nächsten 2-3 Monaten"
-    ]
+      'Kritische Dependencies React 19 noch nicht unterstützen',
+      'Team nicht mit Suspense vertraut ist',
+      'Sehr große Legacy-Codebase (erst testen)',
+      'Keine Zeit für Migration in nächsten 2-3 Monaten',
+    ],
   }}
 />
 
@@ -379,12 +388,12 @@ Next.js 15 ist ein **Game-Changer** für moderne Web-Entwicklung:
 <KeyTakeaways
   title="Das Wichtigste in Kürze"
   items={[
-    "Partial Prerendering kombiniert das Beste aus SSG und SSR",
-    "Server Actions vereinfachen Backend-Logik massiv (60% weniger Code)",
-    "Turbopack beschleunigt Development um Faktor 5",
-    "React 19 Integration bringt moderne Concurrent Features",
-    "Image Optimization 2.0 mit AVIF und Smart Lazy Loading",
-    "Migration ist schrittweise möglich - Performance-Gewinne messbar"
+    'Partial Prerendering kombiniert das Beste aus SSG und SSR',
+    'Server Actions vereinfachen Backend-Logik massiv (60% weniger Code)',
+    'Turbopack beschleunigt Development um Faktor 5',
+    'React 19 Integration bringt moderne Concurrent Features',
+    'Image Optimization 2.0 mit AVIF und Smart Lazy Loading',
+    'Migration ist schrittweise möglich - Performance-Gewinne messbar',
   ]}
 />
 

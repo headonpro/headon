@@ -358,11 +358,7 @@ export default function CityPageContent({
             transition={{ duration: 0.6, delay: 0.9 }}
             className="mx-auto mb-24 max-w-5xl"
           >
-            <CityFAQSection
-              faqs={faqs}
-              cityName={cityPage.frontmatter.name}
-              variant="dark"
-            />
+            <CityFAQSection faqs={faqs} cityName={cityPage.frontmatter.name} variant="dark" />
           </motion.div>
 
           {/* Final CTA */}

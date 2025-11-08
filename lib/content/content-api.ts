@@ -168,17 +168,19 @@ export async function getBlogPost(
       // If frontmatter has explicit relatedPosts, load them
       if (blogPost.frontmatter.relatedPosts && blogPost.frontmatter.relatedPosts.length > 0) {
         const relatedResults = await Promise.all(
-          blogPost.frontmatter.relatedPosts.slice(0, 3).map((relatedSlug) => loadMDX(relatedSlug, 'blog'))
+          blogPost.frontmatter.relatedPosts
+            .slice(0, 3)
+            .map((relatedSlug) => loadMDX(relatedSlug, 'blog'))
         )
         relatedPosts = relatedResults
           .filter((post): post is BlogContentResult => post !== null)
-          .map(post => ({ slug: post.slug, frontmatter: post.frontmatter }))
+          .map((post) => ({ slug: post.slug, frontmatter: post.frontmatter }))
       } else {
         // Otherwise, use automatic related post detection
         const fullRelatedPosts = await getRelatedBlogPosts(slug, 3)
-        relatedPosts = fullRelatedPosts.map(post => ({
+        relatedPosts = fullRelatedPosts.map((post) => ({
           slug: post.slug,
-          frontmatter: post.frontmatter
+          frontmatter: post.frontmatter,
         }))
       }
     }
@@ -443,7 +445,9 @@ export async function getAllBranchePages(): Promise<BrancheContentResult[]> {
     }
 
     // Sort by name alphabetically
-    return [...cache.branchePages].sort((a, b) => a.frontmatter.name.localeCompare(b.frontmatter.name))
+    return [...cache.branchePages].sort((a, b) =>
+      a.frontmatter.name.localeCompare(b.frontmatter.name)
+    )
   } catch (error) {
     console.error('Error loading branche pages:', error)
     return []
@@ -480,7 +484,9 @@ export async function getAllTechnologyPages(): Promise<TechnologyContentResult[]
     }
 
     // Sort by name alphabetically
-    return [...cache.technologyPages].sort((a, b) => a.frontmatter.name.localeCompare(b.frontmatter.name))
+    return [...cache.technologyPages].sort((a, b) =>
+      a.frontmatter.name.localeCompare(b.frontmatter.name)
+    )
   } catch (error) {
     console.error('Error loading technology pages:', error)
     return []

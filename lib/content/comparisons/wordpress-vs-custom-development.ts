@@ -118,13 +118,7 @@ export const wordpressVsCustomDevelopment: ComparisonArticle = {
     },
     {
       category: 'Technische Aspekte',
-      features: [
-        'Flexibilität',
-        'Performance',
-        'Skalierbarkeit',
-        'Sicherheit',
-        'Plugin Ecosystem',
-      ],
+      features: ['Flexibilität', 'Performance', 'Skalierbarkeit', 'Sicherheit', 'Plugin Ecosystem'],
     },
     {
       category: 'Usability & SEO',

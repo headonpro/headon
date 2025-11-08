@@ -58,7 +58,13 @@ export default function HeroSection() {
         className="pointer-events-none absolute top-0 left-0 h-0 w-0 overflow-hidden opacity-0"
         aria-hidden="true"
       >
-        <Image src="/headon-logo.svg" alt="HEADON.pro Logo Preload" width={200} height={50} priority />
+        <Image
+          src="/headon-logo.svg"
+          alt="HEADON.pro Logo Preload"
+          width={200}
+          height={50}
+          priority
+        />
       </div>
 
       {/* Static gradient for base */}

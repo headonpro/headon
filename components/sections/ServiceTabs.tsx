@@ -48,9 +48,7 @@ export default function ServiceTabs({ services, variant = 'dark' }: ServiceTabsP
                 ? 'grid-cols-3'
                 : 'grid-cols-2 lg:grid-cols-4'
           } ${
-            isDark
-              ? 'border-white/20 bg-white/10 backdrop-blur-md'
-              : 'border-gray-200 bg-white'
+            isDark ? 'border-white/20 bg-white/10 backdrop-blur-md' : 'border-gray-200 bg-white'
           }`}
         >
           {validServices.map((service) => (
@@ -76,17 +74,13 @@ export default function ServiceTabs({ services, variant = 'dark' }: ServiceTabsP
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               className={`rounded-lg border p-8 backdrop-blur-md ${
-                isDark
-                  ? 'border-white/20 bg-white/10'
-                  : 'border-gray-200 bg-white shadow-xl'
+                isDark ? 'border-white/20 bg-white/10' : 'border-gray-200 bg-white shadow-xl'
               }`}
             >
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3
-                    className={`mb-2 text-2xl font-bold ${
-                      isDark ? 'text-white' : 'text-gray-900'
-                    }`}
+                    className={`mb-2 text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}
                   >
                     {service.frontmatter.title}
                   </h3>
@@ -112,9 +106,7 @@ export default function ServiceTabs({ services, variant = 'dark' }: ServiceTabsP
               {/* Pricing */}
               <div
                 className={`mb-6 rounded-lg border p-4 ${
-                  isDark
-                    ? 'border-white/20 bg-white/5'
-                    : 'border-gray-200 bg-gray-50'
+                  isDark ? 'border-white/20 bg-white/5' : 'border-gray-200 bg-gray-50'
                 }`}
               >
                 <div className="flex flex-wrap items-center justify-between gap-4">
@@ -140,11 +132,7 @@ export default function ServiceTabs({ services, variant = 'dark' }: ServiceTabsP
                       <Button
                         variant={isDark ? 'secondary' : 'default'}
                         size="lg"
-                        className={
-                          isDark
-                            ? 'bg-white text-primary hover:bg-gray-100'
-                            : ''
-                        }
+                        className={isDark ? 'text-primary bg-white hover:bg-gray-100' : ''}
                       >
                         Details ansehen
                       </Button>
@@ -156,40 +144,34 @@ export default function ServiceTabs({ services, variant = 'dark' }: ServiceTabsP
               {/* Key deliverables */}
               {service.frontmatter.deliverables && service.frontmatter.deliverables.length > 0 && (
                 <div>
-                  <h4
-                    className={`mb-4 font-semibold ${
-                      isDark ? 'text-white' : 'text-gray-900'
-                    }`}
-                  >
+                  <h4 className={`mb-4 font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     Was ist enthalten:
                   </h4>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    {service.frontmatter.deliverables.slice(0, 6).map((deliverable: string, index: number) => (
-                      <div key={index} className="flex items-start gap-2">
-                        <svg
-                          className={`mt-1 h-5 w-5 shrink-0 ${
-                            isDark ? 'text-green-400' : 'text-green-600'
-                          }`}
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        <span
-                          className={`text-sm ${
-                            isDark ? 'text-white/80' : 'text-gray-600'
-                          }`}
-                        >
-                          {deliverable}
-                        </span>
-                      </div>
-                    ))}
+                    {service.frontmatter.deliverables
+                      .slice(0, 6)
+                      .map((deliverable: string, index: number) => (
+                        <div key={index} className="flex items-start gap-2">
+                          <svg
+                            className={`mt-1 h-5 w-5 shrink-0 ${
+                              isDark ? 'text-green-400' : 'text-green-600'
+                            }`}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span className={`text-sm ${isDark ? 'text-white/80' : 'text-gray-600'}`}>
+                            {deliverable}
+                          </span>
+                        </div>
+                      ))}
                   </div>
                 </div>
               )}

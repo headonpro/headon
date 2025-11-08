@@ -478,22 +478,22 @@ export async function generateStaticParams() {
 
 ```yaml
 ---
-title: "Blog Post Title"
-description: "SEO-optimized description (50-200 chars)"
-publishedAt: "2025-01-15"
-updatedAt: "2025-01-20"
-author: "HEADON Team"
-category: "web-development"
-tags: ["nextjs", "react", "typescript"]
+title: 'Blog Post Title'
+description: 'SEO-optimized description (50-200 chars)'
+publishedAt: '2025-01-15'
+updatedAt: '2025-01-20'
+author: 'HEADON Team'
+category: 'web-development'
+tags: ['nextjs', 'react', 'typescript']
 featured: false
-image: "/images/blog/post-image.jpg"
-excerpt: "Short excerpt for listings"
+image: '/images/blog/post-image.jpg'
+excerpt: 'Short excerpt for listings'
 ---
-
 # Your MDX content starts here
 ```
 
 **Frontmatter Validation**:
+
 - Zod schema in `lib/content/frontmatter.ts`
 - Validates at build time (fails fast)
 - Each content type has specific schema

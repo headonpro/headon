@@ -33,3 +33,8 @@ next-env.d.ts
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# Generated files
+lighthouse-live.json
+lighthouse-mobile.json
+test.md

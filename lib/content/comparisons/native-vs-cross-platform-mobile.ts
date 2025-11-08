@@ -74,8 +74,7 @@ export const nativeVsCrossPlatformMobile: ComparisonArticle = {
         'Updates können Breaking Changes bringen',
         'Abhängigkeit von Third-Party Libraries',
       ],
-      useCase:
-        'Business Apps, Social Media, E-Commerce, MVP-Entwicklung, schnelle Markteinführung',
+      useCase: 'Business Apps, Social Media, E-Commerce, MVP-Entwicklung, schnelle Markteinführung',
       recommendation:
         'Wählen Sie React Native für Business Apps mit schnellem Time-to-Market und wenn Sie JavaScript-Expertise im Team haben.',
     },

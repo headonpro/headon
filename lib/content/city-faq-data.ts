@@ -56,19 +56,19 @@ export function getCityFAQs(cityName: string, region?: string): FAQ[] {
  */
 export function getIndustryFAQs(industry: string, cityName: string): FAQ[] {
   const industryFAQs: Record<string, FAQ[]> = {
-    'Gesundheitstourismus': [
+    Gesundheitstourismus: [
       {
         question: `Wie kann eine Website Kurkliniken in ${cityName} helfen?`,
         answer: `Eine moderne Website mit Online-Buchungssystem, Therapie-Übersicht und Patientenportal steigert die Buchungsrate um durchschnittlich 40%. Durch lokale SEO-Optimierung erscheinen Sie bei Suchanfragen wie "Kurklinik ${cityName}" ganz oben. Integration von Bewertungen und Zertifikaten schafft Vertrauen. Mehrsprachigkeit erreicht internationale Gesundheitstouristen.`,
       },
     ],
-    'Hotellerie': [
+    Hotellerie: [
       {
         question: `Warum braucht mein Hotel in ${cityName} eine moderne Website?`,
         answer: `Eine professionelle Hotel-Website mit direktem Buchungssystem spart OTA-Provisionen (15-25% pro Buchung), verbessert die Sichtbarkeit bei lokalen Suchanfragen ("Hotel ${cityName}") und ermöglicht höhere Margen durch Direktbuchungen. Moderne Features wie 360°-Rundgänge, Live-Verfügbarkeitscheck und Gästebewertungen steigern die Conversion Rate um bis zu 60%.`,
       },
     ],
-    'Einzelhandel': [
+    Einzelhandel: [
       {
         question: `Lohnt sich ein Online-Shop für mein Geschäft in ${cityName}?`,
         answer: `Definitiv! Ein Online-Shop mit Click & Collect erweitert Ihre Reichweite über ${cityName} hinaus und ermöglicht Verkäufe rund um die Uhr. Lokale Kunden schätzen die Möglichkeit, online zu bestellen und im Laden abzuholen. Mit lokalem SEO erscheinen Sie bei "Geschäft ${cityName}" und gewinnen neue Kunden. Durchschnittlich steigt der Umsatz um 30-50% nach Online-Shop-Launch.`,

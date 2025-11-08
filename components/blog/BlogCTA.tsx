@@ -3,7 +3,12 @@ import { ArrowRight, Code, Smartphone, Palette, Rocket } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
-type ServiceType = 'web-development' | 'mobile-development' | 'ui-ux-design' | 'consulting' | 'general'
+type ServiceType =
+  | 'web-development'
+  | 'mobile-development'
+  | 'ui-ux-design'
+  | 'consulting'
+  | 'general'
 
 interface BlogCTAProps {
   service?: ServiceType
@@ -41,8 +46,7 @@ const serviceConfig = {
   consulting: {
     icon: Rocket,
     defaultTitle: 'Kostenlose Erstberatung',
-    defaultDescription:
-      'Lassen Sie uns über Ihr Projekt sprechen. Unverbindlich und kostenfrei.',
+    defaultDescription: 'Lassen Sie uns über Ihr Projekt sprechen. Unverbindlich und kostenfrei.',
     defaultHref: '/contact',
     defaultButton: 'Beratungstermin buchen',
   },
@@ -77,16 +81,16 @@ export function BlogCTA({
   const displayButtonText = buttonText || config.defaultButton
 
   return (
-    <Card className="my-12 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border-2 border-primary/20 p-8 shadow-lg">
-      <div className="flex flex-col items-center text-center md:flex-row md:text-left md:items-start gap-6">
+    <Card className="from-primary/10 via-primary/5 border-primary/20 my-12 border-2 bg-gradient-to-br to-transparent p-8 shadow-lg">
+      <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:text-left">
         <div className="flex-shrink-0">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-            <Icon className="h-8 w-8 text-primary" />
+          <div className="bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full">
+            <Icon className="text-primary h-8 w-8" />
           </div>
         </div>
         <div className="flex-1">
           <h3 className="mb-2 text-2xl font-bold text-gray-900">{displayTitle}</h3>
-          <p className="mb-4 text-lg text-gray-700 leading-relaxed">{displayDescription}</p>
+          <p className="mb-4 text-lg leading-relaxed text-gray-700">{displayDescription}</p>
           <Button asChild size="lg" className="group">
             <Link href={displayHref}>
               {displayButtonText}

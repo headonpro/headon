@@ -63,15 +63,11 @@ export function InfoBox({ type = 'info', title, children }: InfoBoxProps) {
   const displayTitle = title || config.defaultTitle
 
   return (
-    <Card
-      className={`my-8 border-2 ${config.colors.border} ${config.colors.bg} p-6 shadow-sm`}
-    >
+    <Card className={`my-8 border-2 ${config.colors.border} ${config.colors.bg} p-6 shadow-sm`}>
       <div className="flex items-start gap-4">
         <Icon className={`mt-1 h-6 w-6 flex-shrink-0 ${config.colors.icon}`} />
         <div className="flex-1">
-          <h4 className={`mb-2 text-lg font-semibold ${config.colors.title}`}>
-            {displayTitle}
-          </h4>
+          <h4 className={`mb-2 text-lg font-semibold ${config.colors.title}`}>{displayTitle}</h4>
           <div className="prose prose-sm max-w-none text-gray-700 [&_p]:my-2 [&_p]:leading-relaxed">
             {children}
           </div>

@@ -174,7 +174,9 @@ function StatCard({ stat, index }: { stat: StatsSectionProps['stats'][0]; index:
               {stat.suffix && <span className="text-4xl md:text-5xl">{stat.suffix}</span>}
             </motion.span>
             {stat.unit && (
-              <span className="mt-1 text-base font-medium text-gray-600 md:text-lg">{stat.unit}</span>
+              <span className="mt-1 text-base font-medium text-gray-600 md:text-lg">
+                {stat.unit}
+              </span>
             )}
           </div>
         </div>

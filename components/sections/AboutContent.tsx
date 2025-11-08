@@ -1,44 +1,173 @@
 'use client'
 
-import React from 'react'
-import { Users, Target, Zap, Shield } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import AnimatedRobot from '@/components/icons/AnimatedRobot'
-import Image from 'next/image'
+import Link from 'next/link'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
+import { Button } from '@/components/ui/button'
+import {
+  Code2,
+  Smartphone,
+  Database,
+  Bot,
+  Settings,
+  Globe,
+  Zap,
+  CheckCircle2,
+  GitBranch,
+  Gauge,
+  Shield,
+  MapPin,
+  ArrowRight,
+} from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-const values = [
+const technologyCategories = {
+  web: {
+    icon: Globe,
+    title: 'Web Development',
+    technologies: [
+      'Next.js',
+      'React',
+      'Vue',
+      'Svelte',
+      'Astro',
+      'TypeScript',
+      'JavaScript',
+      'Tailwind CSS',
+      'shadcn/ui',
+      'Framer Motion',
+    ],
+  },
+  mobile: {
+    icon: Smartphone,
+    title: 'Mobile Development',
+    technologies: [
+      'React Native',
+      'Flutter',
+      'Progressive Web Apps',
+      'iOS Development',
+      'Android Development',
+      'Cross-Platform',
+    ],
+  },
+  backend: {
+    icon: Database,
+    title: 'Backend & Database',
+    technologies: [
+      'Node.js',
+      'Python',
+      'Go',
+      'Supabase',
+      'PostgreSQL',
+      'MongoDB',
+      'REST APIs',
+      'GraphQL',
+      'tRPC',
+    ],
+  },
+  ai: {
+    icon: Bot,
+    title: 'AI Integration',
+    technologies: [
+      'OpenAI (GPT)',
+      'Anthropic (Claude)',
+      'Perplexity',
+      'Custom AI Pipelines',
+      'Automation Workflows',
+      'AI-Assisted Development',
+    ],
+  },
+  devops: {
+    icon: Settings,
+    title: 'DevOps & Infrastructure',
+    technologies: [
+      'Docker',
+      'Docker Compose',
+      'CI/CD (GitHub Actions)',
+      'VPS Hosting',
+      'Cloud Deployment',
+      'Edge Computing',
+      'Monitoring',
+    ],
+  },
+}
+
+const services = [
   {
-    name: 'Innovation',
-    description:
-      'Wir nutzen die neuesten Technologien und Methoden, um zukunftssichere Lösungen zu entwickeln.',
-    icon: Zap,
+    title: 'Marketing Websites',
+    description: 'SEO-optimierte Unternehmenswebsites mit modernem Design und Performance',
+    icon: Globe,
   },
   {
-    name: 'Qualität',
-    description:
-      'Höchste Standards in Code-Qualität, Design und User Experience sind unser Anspruch.',
-    icon: Shield,
+    title: 'Web-Applikationen',
+    description: 'SaaS-Plattformen, Dashboards und komplexe Web-Apps',
+    icon: Code2,
   },
   {
-    name: 'Partnerschaft',
-    description:
-      'Wir arbeiten eng mit unseren Kunden zusammen und verstehen uns als Teil Ihres Teams.',
-    icon: Users,
+    title: 'Mobile Apps',
+    description: 'Native und Cross-Platform Apps für iOS und Android',
+    icon: Smartphone,
   },
   {
-    name: 'Ergebnisorientierung',
-    description: 'Ihr Erfolg ist unser Erfolg. Wir fokussieren uns auf messbare Ergebnisse.',
-    icon: Target,
+    title: 'API Development',
+    description: 'RESTful und GraphQL APIs mit sauberer Architektur',
+    icon: Database,
+  },
+  {
+    title: 'AI Integration',
+    description: 'KI-Features in bestehende oder neue Anwendungen integrieren',
+    icon: Bot,
+  },
+  {
+    title: 'DevOps & Hosting',
+    description: 'CI/CD Pipelines, Docker, VPS-Setup und Monitoring',
+    icon: Settings,
   },
 ]
 
-const stats = [
-  { label: 'Jahre Erfahrung', value: '10+' },
-  { label: 'Zufriedenheit', value: '100%' },
-  { label: 'K.I. Modelle', value: '12+' },
-  { label: 'Team', value: '1+', icon: AnimatedRobot },
+const developmentStandards = [
+  {
+    icon: Code2,
+    title: 'TypeScript & Type Safety',
+    description: 'Strikte Typisierung für wartbaren, fehlerfreien Code',
+  },
+  {
+    icon: Settings,
+    title: 'Docker-First Development',
+    description: 'Reproduzierbare Entwicklungsumgebungen und Deployments',
+  },
+  {
+    icon: GitBranch,
+    title: 'CI/CD Pipelines',
+    description: 'Automatisierte Tests, Builds und Deployments',
+  },
+  {
+    icon: Gauge,
+    title: 'Performance-Optimierung',
+    description: 'Core Web Vitals, Lighthouse-Scores, schnelle Ladezeiten',
+  },
+  {
+    icon: Zap,
+    title: 'SEO-Optimierung',
+    description: 'Strukturierte Daten, Meta-Tags, technisches SEO',
+  },
+  {
+    icon: Shield,
+    title: 'Security Best Practices',
+    description: 'Sichere Authentifizierung, Datenverschlüsselung, GDPR-konform',
+  },
+]
+
+const siteFeatures = [
+  { label: 'Next.js 15 + React 19', value: true },
+  { label: 'Tailwind CSS v4 + shadcn/ui', value: true },
+  { label: 'TypeScript (strict mode)', value: true },
+  { label: 'MDX Content Management', value: true },
+  { label: 'Lighthouse Score 90+', value: true },
+  { label: 'Docker + CI/CD', value: true },
+  { label: 'SEO-optimiert', value: true },
+  { label: 'Selbst-gehostet auf VPS', value: true },
 ]
 
 export default function AboutContent() {
@@ -59,7 +188,7 @@ export default function AboutContent() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Animated Gradient Background - same as HeroSection */}
+      {/* Animated Gradient Background */}
       <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
       {/* Animated Gradient Layers */}
@@ -105,33 +234,22 @@ export default function AboutContent() {
             ]}
           />
         </div>
+
         <div className="container mx-auto px-4">
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-24 text-center"
+            className="mb-32 text-center"
           >
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-heading mb-12 text-center text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
+              className="font-heading mb-8 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl"
             >
-              <span className="flex items-center justify-center gap-4">
-                Über{' '}
-                <Image
-                  src="/headon-logo.svg"
-                  alt="HEADON"
-                  width={200}
-                  height={50}
-                  className="h-8 w-auto sm:h-10 md:h-12 lg:h-14"
-                />
-              </span>
-              <span className="mt-4 block text-2xl font-normal text-white/90 sm:text-3xl md:text-4xl">
-                Digitalagentur aus Lauda-Königshofen
-              </span>
+              Moderne Digitalagentur aus Lauda-Königshofen
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -139,192 +257,206 @@ export default function AboutContent() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mx-auto max-w-3xl text-lg text-white/90"
             >
-              Wir sind eine moderne Kreativagentur, die sich auf die Entwicklung innovativer
-              digitaler Lösungen spezialisiert hat. Mit Leidenschaft und Expertise transformieren
-              wir Ideen in erfolgreiche digitale Produkte.
+              Technologie-agnostisch. Performance-fokussiert. Regional verwurzelt.
             </motion.p>
           </motion.div>
 
-          {/* Mission Section */}
-          <motion.div
+          {/* Technology Stack */}
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="mb-32"
           >
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-8 text-center backdrop-blur-md lg:p-12">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-accent-500 mb-8 text-3xl font-bold"
-              >
-                Unsere Mission
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="mx-auto mb-8 max-w-4xl text-lg text-white/90"
-              >
-                Wir glauben daran, dass großartige digitale Produkte Unternehmen transformieren
-                können. Unsere Mission ist es, unseren Kunden dabei zu helfen, durch innovative
-                Technologie und herausragendes Design ihre Ziele zu erreichen und ihre Vision
-                Wirklichkeit werden zu lassen.
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="mx-auto max-w-4xl text-lg text-white/90"
-              >
-                Dabei setzen wir auf modernste Technologien, agile Entwicklungsmethoden und eine
-                enge Zusammenarbeit mit unseren Kunden. Jedes Projekt ist für uns eine neue
-                Herausforderung, der wir uns mit Begeisterung und Professionalität stellen.
-              </motion.p>
-            </div>
-          </motion.div>
-
-          {/* Values Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-32"
-          >
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md lg:p-12">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-accent-500 mb-16 text-center text-3xl font-bold"
-              >
-                Unsere Werte
-              </motion.h2>
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-                {values.map((value, index) => (
-                  <motion.div
-                    key={value.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                    className="flex flex-col text-center"
+            <h2 className="mb-12 text-center text-3xl font-bold text-white">Technology Stack</h2>
+            <Tabs defaultValue="web" className="w-full">
+              <TabsList className="mb-8 grid h-auto w-full grid-cols-2 gap-2 border border-white/20 bg-white/10 p-2 backdrop-blur-md lg:grid-cols-5">
+                {Object.entries(technologyCategories).map(([key, category]) => (
+                  <TabsTrigger
+                    key={key}
+                    value={key}
+                    className="gap-2 text-white/80 data-[state=active]:bg-white/20 data-[state=active]:text-white"
                   >
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-white/20 text-white">
-                      <value.icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="mb-2 text-lg font-semibold text-white">{value.name}</h3>
-                    <p className="mb-8 flex-grow text-sm text-white/80">{value.description}</p>
-                  </motion.div>
+                    <category.icon className="h-4 w-4" />
+                    <span className="hidden sm:inline">{category.title}</span>
+                  </TabsTrigger>
                 ))}
-              </div>
+              </TabsList>
+              {Object.entries(technologyCategories).map(([key, category]) => (
+                <TabsContent key={key} value={key}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="rounded-lg border border-white/20 bg-white/10 p-8 backdrop-blur-md"
+                  >
+                    <div className="mb-6 flex items-center gap-3">
+                      <category.icon className="text-accent-500 h-8 w-8" />
+                      <h3 className="text-2xl font-semibold text-white">{category.title}</h3>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                      {category.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-md bg-white/20 px-4 py-2 text-sm font-medium text-white"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </motion.section>
 
-              {/* Continuous divider line */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-                className="mt-12 border-t border-white/20 pt-12"
-              >
-                <div className="grid gap-8 md:grid-cols-4">
-                  {stats.map((stat, index) => (
-                    <motion.div
-                      key={stat.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
-                      className="text-center"
-                    >
-                      <div className="mb-2 flex items-center justify-center gap-2 text-3xl font-bold text-white">
-                        {stat.value}
-                        {stat.icon &&
-                          React.createElement(stat.icon, { className: 'w-6 h-6 text-accent-500' })}
-                      </div>
-                      <div className="text-xs text-white/80">{stat.label}</div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Process Section */}
-          <motion.div
+          {/* Site Showcase */}
+          <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="mb-32"
           >
-            <div className="rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md lg:p-12">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-accent-500 mb-16 text-center text-3xl font-bold"
-              >
-                Unser Prozess
-              </motion.h2>
-              <div className="grid gap-10 md:grid-cols-3">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="relative"
-                >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur-sm">
-                    1
+            <div className="rounded-lg border border-white/20 bg-white/10 p-8 backdrop-blur-md lg:p-12">
+              <h2 className="mb-4 text-center text-3xl font-bold text-white">
+                Diese Website ist der Beweis
+              </h2>
+              <p className="mb-12 text-center text-white/90">
+                Unsere eigene Website zeigt, was wir können. Mit modernsten Technologien und
+                höchsten Qualitätsstandards gebaut.
+              </p>
+              <div className="grid gap-8 lg:grid-cols-2">
+                <div>
+                  <h3 className="mb-4 text-xl font-semibold text-white">
+                    Tech-Stack dieser Website
+                  </h3>
+                  <div className="space-y-3">
+                    {siteFeatures.map((feature) => (
+                      <div key={feature.label} className="flex items-center gap-3">
+                        <CheckCircle2 className="text-accent-500 h-5 w-5 flex-shrink-0" />
+                        <span className="text-sm text-white/90">{feature.label}</span>
+                      </div>
+                    ))}
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-white">Discover</h3>
-                  <p className="text-sm text-white/80">
-                    Wir verstehen Ihre Vision, analysieren Ihre Anforderungen und entwickeln eine
-                    maßgeschneiderte Strategie.
-                  </p>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="relative"
-                >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur-sm">
-                    2
+                </div>
+                <div className="flex flex-col justify-center">
+                  <div className="rounded-lg bg-white/10 p-6">
+                    <h3 className="mb-4 text-lg font-semibold text-white">
+                      Maßgeschneiderte Lösungen
+                    </h3>
+                    <p className="mb-6 text-sm text-white/80">
+                      Jedes Projekt ist einzigartig. Wir entwickeln individuelle Lösungen, die exakt
+                      auf Ihre Anforderungen zugeschnitten sind - keine vorgefertigten Templates,
+                      sondern echter Custom Code.
+                    </p>
+                    <Button
+                      asChild
+                      variant="ghost"
+                      className="border border-white/30 bg-white/10 text-white hover:bg-white/20"
+                    >
+                      <Link href="/contact" className="inline-flex items-center gap-2">
+                        <ArrowRight className="h-4 w-4" />
+                        Jetzt anfragen
+                      </Link>
+                    </Button>
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-white">Design &amp; Develop</h3>
-                  <p className="text-sm text-white/80">
-                    Mit agilen Methoden setzen wir Ihre Ideen in hochwertige digitale Produkte um.
-                  </p>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="relative"
-                >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur-sm">
-                    3
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold text-white">Deploy &amp; Support</h3>
-                  <p className="text-sm text-white/80">
-                    Nach dem Launch begleiten wir Sie weiter und sorgen für kontinuierliche
-                    Optimierung.
-                  </p>
-                </motion.div>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </motion.section>
+
+          {/* Services Grid */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-32"
+          >
+            <h2 className="mb-4 text-center text-3xl font-bold text-white">Was wir entwickeln</h2>
+            <p className="mb-12 text-center text-white/90">
+              Von Marketing-Websites bis zu komplexen Web-Apps und Mobile-Anwendungen
+            </p>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {services.map((service, index) => (
+                <motion.div
+                  key={service.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="group hover:border-accent-500 rounded-lg border border-white/20 bg-white/10 p-6 backdrop-blur-md transition-all hover:shadow-lg"
+                >
+                  <service.icon className="text-accent-500 mb-4 h-8 w-8" />
+                  <h3 className="mb-2 text-lg font-semibold text-white">{service.title}</h3>
+                  <p className="text-sm text-white/80">{service.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Development Standards */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-32"
+          >
+            <h2 className="mb-4 text-center text-3xl font-bold text-white">
+              Entwicklungsstandards
+            </h2>
+            <p className="mb-12 text-center text-white/90">
+              Moderne Entwicklungspraktiken für wartbaren, performanten Code
+            </p>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {developmentStandards.map((standard, index) => (
+                <motion.div
+                  key={standard.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="rounded-lg border border-white/20 bg-white/10 p-6 backdrop-blur-md"
+                >
+                  <standard.icon className="text-accent-500 mb-4 h-8 w-8" />
+                  <h3 className="mb-2 text-lg font-semibold text-white">{standard.title}</h3>
+                  <p className="text-sm text-white/80">{standard.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Regional & CTA */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <div className="rounded-lg border border-white/20 bg-white/10 p-8 text-center backdrop-blur-md lg:p-12">
+              <MapPin className="text-accent-500 mx-auto mb-6 h-12 w-12" />
+              <h2 className="mb-4 text-3xl font-bold text-white">Regional + Remote</h2>
+              <p className="mx-auto mb-8 max-w-2xl text-lg text-white/90">
+                Ansässig in Lauda-Königshofen, arbeiten wir mit Kunden aus Bad Mergentheim,
+                Tauberbischofsheim, Wertheim und ganz Deutschland zusammen.
+              </p>
+              <Button
+                asChild
+                size="lg"
+                variant="ghost"
+                className="border border-white/30 bg-white/10 text-white hover:bg-white/20"
+              >
+                <Link href="/contact" className="inline-flex items-center gap-2">
+                  Projekt starten
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+          </motion.section>
         </div>
       </div>
     </div>

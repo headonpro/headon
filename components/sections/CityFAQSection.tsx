@@ -23,11 +23,7 @@ interface CityFAQSectionProps {
   variant?: 'light' | 'dark'
 }
 
-export default function CityFAQSection({
-  faqs,
-  cityName,
-  variant = 'dark',
-}: CityFAQSectionProps) {
+export default function CityFAQSection({ faqs, cityName, variant = 'dark' }: CityFAQSectionProps) {
   const isDark = variant === 'dark'
 
   return (
@@ -49,7 +45,9 @@ export default function CityFAQSection({
             <HelpCircle className={`h-8 w-8 ${isDark ? 'text-white' : 'text-primary'}`} />
           </div>
         </div>
-        <h2 className={`mb-4 text-3xl font-bold md:text-4xl ${isDark ? 'text-white' : 'text-gray-900'}`}>
+        <h2
+          className={`mb-4 text-3xl font-bold md:text-4xl ${isDark ? 'text-white' : 'text-gray-900'}`}
+        >
           Häufig gestellte Fragen zu {cityName}
         </h2>
         <p className={`mx-auto max-w-2xl ${isDark ? 'text-white/80' : 'text-gray-600'}`}>
@@ -60,9 +58,7 @@ export default function CityFAQSection({
       {/* Accordion */}
       <div
         className={`mx-auto max-w-3xl rounded-lg border backdrop-blur-md ${
-          isDark
-            ? 'border-white/20 bg-white/10'
-            : 'border-gray-200 bg-white'
+          isDark ? 'border-white/20 bg-white/10' : 'border-gray-200 bg-white'
         }`}
       >
         <Accordion type="single" collapsible className="w-full px-6">
@@ -70,9 +66,7 @@ export default function CityFAQSection({
             <AccordionItem key={index} value={`item-${index}`} className="border-b-0">
               <AccordionTrigger
                 className={`py-6 text-left hover:no-underline ${
-                  isDark
-                    ? 'text-white hover:text-white/80'
-                    : 'text-gray-900 hover:text-gray-700'
+                  isDark ? 'text-white hover:text-white/80' : 'text-gray-900 hover:text-gray-700'
                 }`}
               >
                 <span className="pr-4 text-base font-semibold">{faq.question}</span>

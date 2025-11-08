@@ -17,7 +17,11 @@ import {
   Database,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { CreativeWorkSchema, ReviewSchema, BreadcrumbSchema } from '@/components/seo/SchemaGenerator'
+import {
+  CreativeWorkSchema,
+  ReviewSchema,
+  BreadcrumbSchema,
+} from '@/components/seo/SchemaGenerator'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
 
 // Export metadata generator

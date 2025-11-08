@@ -12,7 +12,14 @@ image:
   url: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&h=630&fit=crop'
   alt: 'Google Maps auf Smartphone - Local SEO für lokale Unternehmen'
 readingTime: 10
-keywords: ['local seo', 'google my business', 'lokale suchmaschinenoptimierung', 'google maps optimierung', 'local pack']
+keywords:
+  [
+    'local seo',
+    'google my business',
+    'lokale suchmaschinenoptimierung',
+    'google maps optimierung',
+    'local pack',
+  ]
 relatedPosts: ['google-business-profile-optimieren', 'seo-texte-schreiben-guide']
 ---
 
@@ -23,6 +30,7 @@ relatedPosts: ['google-business-profile-optimieren', 'seo-texte-schreiben-guide'
 Local SEO (lokale Suchmaschinenoptimierung) umfasst alle Maßnahmen, damit Ihr Unternehmen bei lokalen Suchanfragen gefunden wird.
 
 **Lokale Suchintentionen:**
+
 - "in der Nähe" / "near me"
 - "[Dienstleistung] [Stadt]"
 - "[Branche] [Stadtteil]"
@@ -30,6 +38,7 @@ Local SEO (lokale Suchmaschinenoptimierung) umfasst alle Maßnahmen, damit Ihr U
 - Telefonnummern-Suchen
 
 **Local SEO Vorteile:**
+
 - ✅ 28% der lokalen Suchen führen zu Kauf
 - ✅ 78% lokaler mobiler Suchen führen zu Offline-Kauf
 - ✅ 88% vertrauen Online-Bewertungen wie persönlichen Empfehlungen
@@ -48,6 +57,7 @@ Das Local Pack ist die Box mit 3 Unternehmen, die prominent über den organische
 3. **Prominence** (40%): Wie bekannt/wichtig ist Ihr Unternehmen?
 
 **Prominenz-Faktoren:**
+
 - Google-Bewertungen (Anzahl & Sterne)
 - Website-Autorität (Backlinks)
 - Citations (Branchenverzeichnisse)
@@ -61,6 +71,7 @@ Ihr Google Business Profile (früher Google My Business) ist DAS zentrale Elemen
 ### 1. Profil vollständig ausfüllen
 
 **Pflichtfelder:**
+
 - ✅ Unternehmensname (exakt wie Impressum)
 - ✅ Kategorie (Hauptkategorie + bis zu 9 weitere)
 - ✅ Adresse (nur wenn Laufkundschaft)
@@ -69,6 +80,7 @@ Ihr Google Business Profile (früher Google My Business) ist DAS zentrale Elemen
 - ✅ Öffnungszeiten (inkl. Feiertage)
 
 **Zusatzfelder:**
+
 - ✅ Beschreibung (750 Zeichen, keyword-optimiert)
 - ✅ Gründungsjahr
 - ✅ Attribute (WLAN, Parkplatz, barrierefrei, etc.)
@@ -106,6 +118,7 @@ Zusatzkategorien:
 ```
 
 **Fehler vermeiden:**
+
 - ❌ Keywords im Unternehmensnamen ("Best Pizzeria Pizza Restaurant Lieferservice")
 - ❌ Falsche Kategorie ("Restaurant" statt "Pizzeria")
 - ❌ Ungenaue Adresse
@@ -116,6 +129,7 @@ Zusatzkategorien:
 Unternehmen mit 100+ Fotos erhalten 520% mehr Anrufe und 1.065% mehr Website-Klicks.
 
 **Foto-Typen:**
+
 - Logo (min. 720x720px, quadratisch)
 - Cover-Foto (1200x600px, Querformat)
 - Außenansicht (Laden/Büro von vorne)
@@ -125,6 +139,7 @@ Unternehmen mit 100+ Fotos erhalten 520% mehr Anrufe und 1.065% mehr Website-Kli
 - Kundenprojekte (mit Erlaubnis)
 
 **Foto-Tipps:**
+
 - Hochauflösend (min. 720px)
 - Gutes Licht (natürlich oder professionell)
 - Authentisch (keine Stock-Fotos)
@@ -138,11 +153,13 @@ Bewertungen sind der #1 Local Ranking-Faktor.
 **Bewertungs-Strategie:**
 
 **Schritt 1: Review-Link generieren**
+
 ```
 https://g.page/r/[YOUR_PLACE_ID]/review
 ```
 
 So finden Sie Ihre Place ID:
+
 1. Google "mein unternehmen" als Inhaber
 2. Profil öffnen
 3. URL enthält Place ID
@@ -175,6 +192,7 @@ Vielen Dank und bis bald,
 Antworten Sie IMMER binnen 24 Stunden – positiv wie negativ.
 
 **Positive Bewertung:**
+
 ```
 Vielen Dank für die tolle Bewertung, Herr/Frau [Name]!
 
@@ -188,6 +206,7 @@ Beste Grüße,
 ```
 
 **Negative Bewertung:**
+
 ```
 Vielen Dank für Ihr Feedback, Herr/Frau [Name].
 
@@ -212,17 +231,20 @@ const sendReviewRequest = async (customer) => {
     template: 'review-request',
     data: {
       name: customer.name,
-      reviewLink: `https://g.page/r/${process.env.GOOGLE_PLACE_ID}/review`
-    }
+      reviewLink: `https://g.page/r/${process.env.GOOGLE_PLACE_ID}/review`,
+    },
   })
 }
 
 // Nach 7 Tagen: Follow-up wenn noch keine Bewertung
-setTimeout(() => {
-  if (!customer.hasReviewed) {
-    sendReviewReminder(customer)
-  }
-}, 7 * 24 * 60 * 60 * 1000) // 7 Tage
+setTimeout(
+  () => {
+    if (!customer.hasReviewed) {
+      sendReviewReminder(customer)
+    }
+  },
+  7 * 24 * 60 * 60 * 1000
+) // 7 Tage
 ```
 
 ### 4. Google Posts nutzen
@@ -230,12 +252,14 @@ setTimeout(() => {
 Posts erscheinen prominent im Google Business Profile. Nutzen Sie sie wöchentlich!
 
 **Post-Typen:**
+
 - **Update**: News, Infos (lebt 6 Tage)
 - **Angebot**: Rabatt-Aktionen (Start-/Enddatum)
 - **Event**: Veranstaltungen (Datum/Zeit)
 - **Produkt**: Einzelne Produkte/Services
 
 **Post-Best-Practices:**
+
 - 100-300 Wörter
 - Call-to-Action ("Jetzt anfragen", "Mehr erfahren")
 - Hochwertige Fotos
@@ -254,9 +278,9 @@ NAP = Name, Address, Phone. Muss überall identisch sein.
 ```jsx
 <footer>
   <div className="container mx-auto px-4 py-8">
-    <div className="grid md:grid-cols-3 gap-8">
+    <div className="grid gap-8 md:grid-cols-3">
       <div>
-        <h3 className="font-bold mb-4">Kontakt</h3>
+        <h3 className="mb-4 font-bold">Kontakt</h3>
         <address className="not-italic">
           <p className="font-semibold">Meisterbetrieb Müller GmbH</p>
           <p>Handwerkerstraße 15</p>
@@ -265,9 +289,8 @@ NAP = Name, Address, Phone. Muss überall identisch sein.
             Tel: <a href="tel:+497931123456">07931 123456</a>
           </p>
           <p>
-            E-Mail: <a href="mailto:info@meisterbetrieb-mueller.de">
-              info@meisterbetrieb-mueller.de
-            </a>
+            E-Mail:{' '}
+            <a href="mailto:info@meisterbetrieb-mueller.de">info@meisterbetrieb-mueller.de</a>
           </p>
         </address>
       </div>
@@ -283,7 +306,8 @@ NAP = Name, Address, Phone. Muss überall identisch sein.
 ```jsx
 export const metadata = {
   title: 'Sanitär Bad Mergentheim | Meisterbetrieb Müller | Heizung',
-  description: 'Sanitär & Heizung Meisterbetrieb in Bad Mergentheim ✓ Badsanierung ✓ Heizungsinstallation ✓ 24h-Notdienst ✓ Main-Tauber-Kreis. Jetzt anfragen!',
+  description:
+    'Sanitär & Heizung Meisterbetrieb in Bad Mergentheim ✓ Badsanierung ✓ Heizungsinstallation ✓ 24h-Notdienst ✓ Main-Tauber-Kreis. Jetzt anfragen!',
 }
 
 export default function HomePage() {
@@ -292,17 +316,16 @@ export default function HomePage() {
       <h1>Sanitär & Heizung Meisterbetrieb in Bad Mergentheim</h1>
 
       <p>
-        Willkommen bei Ihrem Sanitär- und Heizungsexperten im Herzen von
-        Bad Mergentheim. Seit über 25 Jahren sind wir für Privat- und
-        Geschäftskunden in Bad Mergentheim, Wertheim, Lauda-Königshofen
-        und im gesamten Main-Tauber-Kreis tätig.
+        Willkommen bei Ihrem Sanitär- und Heizungsexperten im Herzen von Bad Mergentheim. Seit über
+        25 Jahren sind wir für Privat- und Geschäftskunden in Bad Mergentheim, Wertheim,
+        Lauda-Königshofen und im gesamten Main-Tauber-Kreis tätig.
       </p>
 
       <section>
         <h2>Unsere Leistungen in Bad Mergentheim</h2>
         <p>
-          Als Meisterbetrieb bieten wir Ihnen in Bad Mergentheim und Umgebung
-          ein umfassendes Leistungsspektrum...
+          Als Meisterbetrieb bieten wir Ihnen in Bad Mergentheim und Umgebung ein umfassendes
+          Leistungsspektrum...
         </p>
       </section>
     </>
@@ -330,8 +353,8 @@ export default function StandortPage({ params }) {
       <h1>Sanitär & Heizung in {stadt}</h1>
 
       <p>
-        Ihr Meisterbetrieb für Sanitär und Heizung in {stadt}.
-        Wir sind für Sie vor Ort und garantieren schnelle Reaktionszeiten.
+        Ihr Meisterbetrieb für Sanitär und Heizung in {stadt}. Wir sind für Sie vor Ort und
+        garantieren schnelle Reaktionszeiten.
       </p>
 
       {/* Leistungen speziell für diese Stadt */}
@@ -349,51 +372,51 @@ Helfen Sie Google, Ihr Unternehmen zu verstehen:
 
 ```html
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Meisterbetrieb Müller GmbH",
-  "image": "https://meisterbetrieb-mueller.de/logo.jpg",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Handwerkerstraße 15",
-    "addressLocality": "Bad Mergentheim",
-    "addressRegion": "Baden-Württemberg",
-    "postalCode": "97980",
-    "addressCountry": "DE"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 49.4922,
-    "longitude": 9.7736
-  },
-  "url": "https://meisterbetrieb-mueller.de",
-  "telephone": "+497931123456",
-  "priceRange": "€€",
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "07:00",
-      "closes": "17:00"
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Meisterbetrieb Müller GmbH",
+    "image": "https://meisterbetrieb-mueller.de/logo.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Handwerkerstraße 15",
+      "addressLocality": "Bad Mergentheim",
+      "addressRegion": "Baden-Württemberg",
+      "postalCode": "97980",
+      "addressCountry": "DE"
     },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Saturday",
-      "opens": "08:00",
-      "closes": "12:00"
-    }
-  ],
-  "areaServed": {
-    "@type": "GeoCircle",
-    "geoMidpoint": {
+    "geo": {
       "@type": "GeoCoordinates",
       "latitude": 49.4922,
       "longitude": 9.7736
     },
-    "geoRadius": "50000"
+    "url": "https://meisterbetrieb-mueller.de",
+    "telephone": "+497931123456",
+    "priceRange": "€€",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "07:00",
+        "closes": "17:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "08:00",
+        "closes": "12:00"
+      }
+    ],
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 49.4922,
+        "longitude": 9.7736
+      },
+      "geoRadius": "50000"
+    }
   }
-}
 </script>
 ```
 
@@ -402,6 +425,7 @@ Helfen Sie Google, Ihr Unternehmen zu verstehen:
 Citations sind Erwähnungen Ihres Unternehmens (NAP) auf anderen Websites.
 
 **Top-Citation-Quellen Deutschland:**
+
 1. **Branchenverzeichnisse:**
    - gelbeseiten.de
    - dasoertliche.de
@@ -517,6 +541,7 @@ Tracken Sie Ihre Local SEO Performance:
 **Google Business Insights auswerten:**
 
 Loggen Sie sich monatlich ein und tracken Sie:
+
 - Suchanfragen-Trends
 - Best-performing Fotos
 - Post-Performance
@@ -525,6 +550,7 @@ Loggen Sie sich monatlich ein und tracken Sie:
 ## Local SEO Checkliste
 
 **Monatliche Tasks:**
+
 - ✅ Google Posts veröffentlichen (4x)
 - ✅ Neue Fotos hochladen (5+)
 - ✅ Bewertungen beantworten
@@ -532,12 +558,14 @@ Loggen Sie sich monatlich ein und tracken Sie:
 - ✅ Rankings tracken
 
 **Quartalsweise:**
+
 - ✅ Wettbewerber-Analyse
 - ✅ Keyword-Research aktualisieren
 - ✅ Content erweitern
 - ✅ Backlink-Audit
 
 **Jährlich:**
+
 - ✅ Vollständiges Local SEO Audit
 - ✅ Strategie-Review
 - ✅ Tool-Stack evaluieren
@@ -547,6 +575,7 @@ Loggen Sie sich monatlich ein und tracken Sie:
 Local SEO ist für lokale Unternehmen der effektivste Marketing-Kanal. Mit optimiertem Google Business Profile, konsistentem NAP, Citations und lokalem Content gewinnen Sie kontinuierlich neue Kunden aus Ihrer Region – ohne teure Werbung.
 
 **Die 5 wichtigsten Takeaways:**
+
 1. Google Business Profile vollständig optimieren (100%)
 2. Bewertungen aktiv sammeln (Ziel: 50+ mit 4,5+ Sternen)
 3. NAP-Konsistenz auf allen Plattformen sicherstellen
@@ -558,6 +587,7 @@ Bei [HEADON.pro](/services/web-development) optimieren wir Ihre Website und Goog
 ---
 
 **Weitere Ressourcen:**
+
 - [Google Business Profile optimieren](/blog/google-business-profile-optimieren)
 - [SEO Texte schreiben](/blog/seo-texte-schreiben-guide)
 - [Restaurant Website Best Practices](/blog/restaurant-website-best-practices)

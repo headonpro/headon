@@ -6,14 +6,33 @@ author:
   name: 'Onur Cirakoglu'
   avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
   bio: 'Mobile Development Lead bei HEADON.pro – spezialisiert auf React Native, Flutter und Cross-Platform Architekturen'
-tags: ['React Native', 'Flutter', 'Mobile Development', 'Cross-Platform', 'iOS', 'Android', 'App Kosten', 'ROI']
+tags:
+  [
+    'React Native',
+    'Flutter',
+    'Mobile Development',
+    'Cross-Platform',
+    'iOS',
+    'Android',
+    'App Kosten',
+    'ROI',
+  ]
 category: 'mobile'
 image:
   url: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=630&fit=crop'
   alt: 'React Native vs Flutter Vergleich - Entwickler arbeitet an Cross-Platform Mobile App'
 readingTime: 14
 featured: true
-keywords: ['react native vs flutter kosten', 'cross-platform app entwicklung', 'react native flutter vergleich', 'app entwicklung kosten', 'mobile app framework', 'react native roi', 'flutter performance']
+keywords:
+  [
+    'react native vs flutter kosten',
+    'cross-platform app entwicklung',
+    'react native flutter vergleich',
+    'app entwicklung kosten',
+    'mobile app framework',
+    'react native roi',
+    'flutter performance',
+  ]
 ---
 
 Die Entscheidung zwischen React Native und Flutter kann Ihr Budget halbieren – oder verdoppeln. In diesem umfassenden Vergleich zeigen wir Ihnen nicht nur die technischen Unterschiede, sondern vor allem: **Was kostet was? Welcher ROI ist realistisch? Und welches Framework passt zu Ihrem Projekt?**
@@ -22,11 +41,14 @@ Basierend auf Branchen-Analysen, öffentlichen Studien und realistischen Projekt
 
 <KeyTakeaways
   items={[
-    { text: "React Native spart 46% Entwicklungskosten vs. Native Apps (iOS + Android)", highlight: true },
-    { text: "Flutter bietet 15-20% bessere Performance, aber höhere Hiring-Kosten (+25%)" },
-    { text: "70-90% Code-Sharing zwischen Web & Mobile mit React Native möglich" },
-    { text: "Beide Frameworks sind production-ready: Meta (RN) & Google (Flutter) nutzen sie" },
-    { text: "Entscheidung basiert auf 3 Faktoren: Team-Skills, Performance-Anforderungen, Budget" }
+    {
+      text: 'React Native spart 46% Entwicklungskosten vs. Native Apps (iOS + Android)',
+      highlight: true,
+    },
+    { text: 'Flutter bietet 15-20% bessere Performance, aber höhere Hiring-Kosten (+25%)' },
+    { text: '70-90% Code-Sharing zwischen Web & Mobile mit React Native möglich' },
+    { text: 'Beide Frameworks sind production-ready: Meta (RN) & Google (Flutter) nutzen sie' },
+    { text: 'Entscheidung basiert auf 3 Faktoren: Team-Skills, Performance-Anforderungen, Budget' },
   ]}
 />
 
@@ -40,15 +62,17 @@ Native App-Entwicklung bedeutet: Zwei komplett separate Codebases (Swift für iO
   title="Native vs. Cross-Platform: Die harten Zahlen"
   description="Durchschnittliche Entwicklungskosten für eine Standard-App (Login, Profil, Feed, Settings)"
   stats={[
-    { value: 120, label: "Native Apps (iOS + Android)", suffix: "k€" },
-    { value: 65, label: "React Native App", suffix: "k€" },
-    { value: 70, label: "Flutter App", suffix: "k€" },
-    { value: 46, label: "Kostenersparnis vs. Native", suffix: "%" }
+    { value: 120, label: 'Native Apps (iOS + Android)', suffix: 'k€' },
+    { value: 65, label: 'React Native App', suffix: 'k€' },
+    { value: 70, label: 'Flutter App', suffix: 'k€' },
+    { value: 46, label: 'Kostenersparnis vs. Native', suffix: '%' },
   ]}
 />
 
 <InfoBox type="success" title="Typisches Projekt-Szenario">
-Ein E-Commerce-Startup mit Budget von 80.000€ für native iOS/Android Apps wählt **React Native**: Realistische Kosten **58.000€**, Launch **6 Wochen früher**, **70-80% Code-Sharing** möglich bei bestehender React Web-App. ROI-Break-Even typischerweise nach 5-8 Monaten.
+  Ein E-Commerce-Startup mit Budget von 80.000€ für native iOS/Android Apps wählt **React Native**:
+  Realistische Kosten **58.000€**, Launch **6 Wochen früher**, **70-80% Code-Sharing** möglich bei
+  bestehender React Web-App. ROI-Break-Even typischerweise nach 5-8 Monaten.
 </InfoBox>
 
 ## React Native: Der Marktführer mit JavaScript-Power
@@ -62,14 +86,15 @@ Wenn Ihr Team bereits React/JavaScript kennt, ist die Lernkurve **minimal**. Vie
 <BlogStats
   title="React Native: Marktdurchdringung & Community"
   stats={[
-    { value: 2, label: "Verfügbare npm Packages", suffix: "M+" },
-    { value: 42, label: "Prozent aller Cross-Platform Apps", suffix: "%" },
-    { value: 700, label: "React Native Entwickler weltweit", suffix: "k+" },
-    { value: 4.6, label: "Durchschnittlicher App Store Rating", suffix: "/5" }
+    { value: 2, label: 'Verfügbare npm Packages', suffix: 'M+' },
+    { value: 42, label: 'Prozent aller Cross-Platform Apps', suffix: '%' },
+    { value: 700, label: 'React Native Entwickler weltweit', suffix: 'k+' },
+    { value: 4.6, label: 'Durchschnittlicher App Store Rating', suffix: '/5' },
   ]}
 />
 
 **Bekannte Apps mit React Native:**
+
 - Facebook, Instagram, Messenger (Meta)
 - Discord (300M+ Nutzer)
 - Shopify Mobile (E-Commerce)
@@ -83,10 +108,10 @@ React Native nutzt eine **JavaScript-Bridge** zur Kommunikation mit nativen UI-K
   title="React Native Performance-Metriken"
   description="Typische Werte für Standard-Apps (E-Commerce, Social Media, Content)"
   stats={[
-    { value: 60, label: "FPS (Frames per Second)", suffix: "+" },
-    { value: 280, label: "Durchschnittliche Startup-Zeit", unit: "ms" },
-    { value: 155, label: "RAM-Nutzung (typisch)", unit: "MB" },
-    { value: 4.6, label: "App Store Rating (Durchschnitt)", suffix: "/5" }
+    { value: 60, label: 'FPS (Frames per Second)', suffix: '+' },
+    { value: 280, label: 'Durchschnittliche Startup-Zeit', unit: 'ms' },
+    { value: 155, label: 'RAM-Nutzung (typisch)', unit: 'MB' },
+    { value: 4.6, label: 'App Store Rating (Durchschnitt)', suffix: '/5' },
   ]}
 />
 
@@ -94,6 +119,7 @@ React Native nutzt eine **JavaScript-Bridge** zur Kommunikation mit nativen UI-K
 **Performance-Grenzen:** Wenn Ihre App komplexe Animationen (60+ FPS dauerhaft), 3D-Grafiken, Gaming-Features oder hochfrequente Real-Time Updates braucht, könnte Flutter die bessere Wahl sein.
 
 **Perfekt für React Native:** E-Commerce, Social Media, Content-Apps, Standard Business-Apps, MVPs, Prototypen.
+
 </InfoBox>
 
 ### Der versteckte Kostenvorteil: Code-Sharing mit Web
@@ -113,56 +139,57 @@ export function useAuth() {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(false)
 
-  async function login(email: string, password: string) {
-    setLoading(true)
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      })
-      const userData = await response.json()
-      setUser(userData)
-      return userData
-    } finally {
-      setLoading(false)
-    }
-  }
+async function login(email: string, password: string) {
+setLoading(true)
+try {
+const response = await fetch('/api/auth/login', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ email, password })
+})
+const userData = await response.json()
+setUser(userData)
+return userData
+} finally {
+setLoading(false)
+}
+}
 
-  return { user, login, loading }
+return { user, login, loading }
 }
 
 // React Native App
 import { useAuth } from '@shared/hooks/useAuth'
 function LoginScreen() {
-  const { login, loading } = useAuth()
-  return (
-    <View>
-      <TextInput placeholder="Email" />
-      <TextInput placeholder="Password" secureTextEntry />
-      <Button
-        title={loading ? "Loading..." : "Login"}
-        onPress={() => login(email, password)}
-      />
-    </View>
-  )
-}
+const { login, loading } = useAuth()
+return (
+
+<View>
+  <TextInput placeholder="Email" />
+  <TextInput placeholder="Password" secureTextEntry />
+  <Button title={loading ? 'Loading...' : 'Login'} onPress={() => login(email, password)} />
+</View>
+) }
 
 // Next.js Web App (EXAKT GLEICHER HOOK!)
 import { useAuth } from '@shared/hooks/useAuth'
 export default function LoginPage() {
-  const { login, loading } = useAuth()
-  return (
-    <form onSubmit={(e) => { e.preventDefault(); login(email, password) }}>
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
-      <button disabled={loading}>
-        {loading ? "Loading..." : "Login"}
-      </button>
-    </form>
-  )
-}
-```
+const { login, loading } = useAuth()
+return (
+
+<form
+  onSubmit={(e) => {
+    e.preventDefault()
+    login(email, password)
+  }}
+>
+  <input type="email" placeholder="Email" />
+  <input type="password" placeholder="Password" />
+  <button disabled={loading}>{loading ? 'Loading...' : 'Login'}</button>
+</form>
+) }
+
+````
 </CodeBlock>
 
 **Business-Impact von Code-Sharing:**
@@ -401,10 +428,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-```
+````
+
 </CodeBlock>
 
 **Dart Lernkurve:**
+
 - Für Java/Kotlin Entwickler: **2-3 Wo.** produktiv
 - Für JavaScript Entwickler: **4-6 Wo.** produktiv
 - Für komplette Anfänger: **8-12 Wo.** produktiv
@@ -426,30 +455,30 @@ class _LoginScreenState extends State<LoginScreen> {
 <ComparisonBlock
   title="Wählen Sie das Framework basierend auf Ihrem Team"
   left={{
-    title: "React Native ist ideal wenn:",
-    type: "positive",
+    title: 'React Native ist ideal wenn:',
+    type: 'positive',
     items: [
-      "Ihr Team bereits React/JavaScript kennt",
-      "Sie eine bestehende React Web-App haben",
-      "Sie schnell neue Entwickler onboarden müssen",
-      "npm-Ecosystem wichtig ist (2M+ Packages)",
-      "Flexibilität bei Hiring Priorität hat",
-      "Web + Mobile aus ähnlichem Stack gewünscht",
-      "Zeit-Druck: Schneller produktiv (2-4 Wochen)"
-    ]
+      'Ihr Team bereits React/JavaScript kennt',
+      'Sie eine bestehende React Web-App haben',
+      'Sie schnell neue Entwickler onboarden müssen',
+      'npm-Ecosystem wichtig ist (2M+ Packages)',
+      'Flexibilität bei Hiring Priorität hat',
+      'Web + Mobile aus ähnlichem Stack gewünscht',
+      'Zeit-Druck: Schneller produktiv (2-4 Wochen)',
+    ],
   }}
   right={{
-    title: "Flutter ist ideal wenn:",
-    type: "positive",
+    title: 'Flutter ist ideal wenn:',
+    type: 'positive',
     items: [
-      "Ihr Team bereit ist, Dart zu lernen (4-8 Wochen)",
-      "Langfristige Planung > schneller Start",
-      "Performance absolute Priorität hat",
-      "Custom UI/Design im Vordergrund steht",
-      "100% Code-Sharing Mobile wichtig ist",
-      "Budget für höhere Gehälter vorhanden",
-      "Konsistentes Design iOS/Android kritisch"
-    ]
+      'Ihr Team bereit ist, Dart zu lernen (4-8 Wochen)',
+      'Langfristige Planung > schneller Start',
+      'Performance absolute Priorität hat',
+      'Custom UI/Design im Vordergrund steht',
+      '100% Code-Sharing Mobile wichtig ist',
+      'Budget für höhere Gehälter vorhanden',
+      'Konsistentes Design iOS/Android kritisch',
+    ],
   }}
 />
 
@@ -465,22 +494,24 @@ class _LoginScreenState extends State<LoginScreen> {
 - **Performance: 60 FPS, < 300ms Startup**
 
 **Flutter ist besser für:**
+
 - Fintech-Apps (Real-Time Trading, Charts)
 - Gaming oder game-ähnliche Apps
 - Design-heavy Apps (BMW, Alibaba)
 - Apps mit vielen Custom-Animationen
 - IoT Dashboards mit Live-Daten
 - **Performance: 120 FPS, < 250ms Startup**
+
 </InfoBox>
 
 <BlogStats
   title="Performance-Vergleich: Realistische Benchmarks"
   description="Branchen-Durchschnittswerte basierend auf öffentlichen Studien"
   stats={[
-    { value: 60, label: "React Native FPS (Standard-Apps)", suffix: "+" },
-    { value: 120, label: "Flutter FPS (inkl. Animationen)", suffix: "+" },
-    { value: 18, label: "Flutter schneller (Durchschnitt)", suffix: "%" },
-    { value: 90, label: "Apps wo Unterschied egal ist", suffix: "%" }
+    { value: 60, label: 'React Native FPS (Standard-Apps)', suffix: '+' },
+    { value: 120, label: 'Flutter FPS (inkl. Animationen)', suffix: '+' },
+    { value: 18, label: 'Flutter schneller (Durchschnitt)', suffix: '%' },
+    { value: 90, label: 'Apps wo Unterschied egal ist', suffix: '%' },
   ]}
 />
 
@@ -489,32 +520,32 @@ class _LoginScreenState extends State<LoginScreen> {
 <ComparisonBlock
   title="Kosten- & Zeit-Vergleich (Standard-App: Login, Profil, Feed, Settings, Push)"
   left={{
-    title: "React Native Projekt",
-    type: "neutral",
+    title: 'React Native Projekt',
+    type: 'neutral',
     items: [
-      "Setup & Architektur: 5k€",
-      "UI/UX Development: 25k€",
-      "Backend-Integration: 12k€",
-      "Testing & QA: 8k€",
-      "Deployment: 3k€",
-      "Puffer (15%): 8k€",
-      "**Total: ~61k€**",
-      "**Timeline: 10-12 Wo.**"
-    ]
+      'Setup & Architektur: 5k€',
+      'UI/UX Development: 25k€',
+      'Backend-Integration: 12k€',
+      'Testing & QA: 8k€',
+      'Deployment: 3k€',
+      'Puffer (15%): 8k€',
+      '**Total: ~61k€**',
+      '**Timeline: 10-12 Wo.**',
+    ],
   }}
   right={{
-    title: "Flutter Projekt",
-    type: "neutral",
+    title: 'Flutter Projekt',
+    type: 'neutral',
     items: [
-      "Setup & Architektur: 6k€",
-      "UI/UX Development: 28k€",
-      "Backend-Integration: 14k€",
-      "Testing & QA: 9k€",
-      "Deployment: 4k€",
-      "Puffer (15%): 9k€",
-      "**Total: ~70k€** (+15%)",
-      "**Timeline: 12-14 Wo.** (+2 Wo.)"
-    ]
+      'Setup & Architektur: 6k€',
+      'UI/UX Development: 28k€',
+      'Backend-Integration: 14k€',
+      'Testing & QA: 9k€',
+      'Deployment: 4k€',
+      'Puffer (15%): 9k€',
+      '**Total: ~70k€** (+15%)',
+      '**Timeline: 12-14 Wo.** (+2 Wo.)',
+    ],
   }}
 />
 
@@ -527,6 +558,7 @@ class _LoginScreenState extends State<LoginScreen> {
 - Einfacheres Onboarding neuer Entwickler
 
 **Für MVPs und Prototypen:** React Native ist fast immer die schnellere Wahl.
+
 </InfoBox>
 
 ## Projekt-Szenarien: Typische Anwendungsfälle in der Praxis
@@ -537,6 +569,7 @@ class _LoginScreenState extends State<LoginScreen> {
 **Anforderung:** iOS + Android App in 3 Monaten, Budget max. 70.000€
 
 **Projekt-Details:**
+
 - Produkt-Katalog mit 5.000+ Artikeln
 - Warenkorb & Checkout (Stripe Integration)
 - User-Profile mit Favoriten & Bestellhistorie
@@ -545,6 +578,7 @@ class _LoginScreenState extends State<LoginScreen> {
 - In-App Image Sharing
 
 **Warum React Native?**
+
 - Team hatte bereits 2 React-Web-Entwickler
 - Web-Shop existierte (Next.js) → 76% Code-Sharing möglich
 - Schneller Launch kritisch (Fashion Week Deadline)
@@ -554,14 +588,15 @@ class _LoginScreenState extends State<LoginScreen> {
 <BlogStats
   title="Projekt-Ergebnis nach 11 Wochen"
   stats={[
-    { value: 11, label: "Entwicklungszeit (geplant: 12)", suffix: " Wo." },
-    { value: 58, label: "Finale Kosten (Budget: 70k)", suffix: "k€" },
-    { value: 76, label: "Code-Sharing mit Next.js Web", suffix: "%" },
-    { value: 4.7, label: "App Store Rating nach 3 Monaten", suffix: "/5" }
+    { value: 11, label: 'Entwicklungszeit (geplant: 12)', suffix: ' Wo.' },
+    { value: 58, label: 'Finale Kosten (Budget: 70k)', suffix: 'k€' },
+    { value: 76, label: 'Code-Sharing mit Next.js Web', suffix: '%' },
+    { value: 4.7, label: 'App Store Rating nach 3 Monaten', suffix: '/5' },
   ]}
 />
 
 **Business-Impact:**
+
 - **4 Wochen früher** gelauncht als geplant (Fashion Week erreicht)
 - **12.000€ unter Budget** (Code-Sharing Effekt)
 - **22.000 Downloads** in ersten 3 Monaten
@@ -570,7 +605,9 @@ class _LoginScreenState extends State<LoginScreen> {
 - **Maintenance: Nur 1 Entwickler** für Web + Mobile
 
 <InfoBox type="success" title="Typisches Feedback">
-"Hätten wir Native entwickelt, wären die Kosten bei 95.000€ gelegen und der Launch 8 Wochen später gewesen. **Unser Zeitfenster zur Fashion Week hätten wir komplett verpasst.** React Native war die richtige Entscheidung." - Typisches Szenario bei zeitkritischen Launches
+  "Hätten wir Native entwickelt, wären die Kosten bei 95.000€ gelegen und der Launch 8 Wochen später
+  gewesen. **Unser Zeitfenster zur Fashion Week hätten wir komplett verpasst.** React Native war die
+  richtige Entscheidung." - Typisches Szenario bei zeitkritischen Launches
 </InfoBox>
 
 ### Szenario 2: Fintech Trading App (Flutter)
@@ -579,6 +616,7 @@ class _LoginScreenState extends State<LoginScreen> {
 **Anforderung:** Real-Time Trading App, Performance absolut kritisch
 
 **Projekt-Details:**
+
 - Real-Time Charts & Live-Kurse (Websockets)
 - Order-Execution (< 100ms Response-Time kritisch)
 - Biometrische Authentifizierung (Face ID, Touch ID)
@@ -587,6 +625,7 @@ class _LoginScreenState extends State<LoginScreen> {
 - Portfolio-Performance Visualisierung
 
 **Warum Flutter?**
+
 - **Performance kritisch**: Trading-App braucht 120 FPS bei Charts
 - **Custom UI**: Einzigartiges Branding, keine Standard-Komponenten
 - **Konsistenz**: Exakt gleiches Design iOS/Android wichtig
@@ -596,14 +635,15 @@ class _LoginScreenState extends State<LoginScreen> {
 <BlogStats
   title="Projekt-Ergebnis nach 16 Wochen"
   stats={[
-    { value: 16, label: "Entwicklungszeit (geplant: 14)", suffix: " Wo." },
-    { value: 89, label: "Finale Kosten (Budget: 85k)", suffix: "k€" },
-    { value: 120, label: "FPS bei Chart-Animationen", suffix: "+" },
-    { value: 4.8, label: "App Store Rating nach 6 Monaten", suffix: "/5" }
+    { value: 16, label: 'Entwicklungszeit (geplant: 14)', suffix: ' Wo.' },
+    { value: 89, label: 'Finale Kosten (Budget: 85k)', suffix: 'k€' },
+    { value: 120, label: 'FPS bei Chart-Animationen', suffix: '+' },
+    { value: 4.8, label: 'App Store Rating nach 6 Monaten', suffix: '/5' },
   ]}
 />
 
 **Business-Impact:**
+
 - **Smooth 120 FPS** Performance auch bei komplexen Live-Charts
 - **< 80ms Order-Execution** Time (Anforderung: < 100ms)
 - **45.000 Downloads** in ersten 6 Monaten
@@ -612,36 +652,39 @@ class _LoginScreenState extends State<LoginScreen> {
 - **BaFin-Zertifizierung** ohne Performance-Probleme bestanden
 
 <InfoBox type="success" title="Typisches Feedback">
-"Flutter war 100% die richtige Wahl. React Native hätte bei **Real-Time Chart-Animationen** definitiv Probleme gemacht. Die 14.000€ Mehrkosten vs. React Native haben sich **sofort bezahlt gemacht** – sonst hätten wir massive Performance-Probleme gehabt." - Typisches Szenario bei performance-kritischen Fintech-Apps
+  "Flutter war 100% die richtige Wahl. React Native hätte bei **Real-Time Chart-Animationen**
+  definitiv Probleme gemacht. Die 14.000€ Mehrkosten vs. React Native haben sich **sofort bezahlt
+  gemacht** – sonst hätten wir massive Performance-Probleme gehabt." - Typisches Szenario bei
+  performance-kritischen Fintech-Apps
 </InfoBox>
 
 <ComparisonBlock
   title="Beide Szenarien im direkten Vergleich"
   left={{
-    title: "E-Commerce (React Native)",
-    type: "positive",
+    title: 'E-Commerce (React Native)',
+    type: 'positive',
     items: [
-      "Budget: 58k€ (unter Budget)",
-      "Timeline: 11 Wo. (unter Plan)",
-      "Code-Sharing: 76% mit Web",
-      "Team: React-Kenntnisse vorhanden",
-      "Performance: 60 FPS (ausreichend)",
-      "ROI: Break-Even nach 5 Mo.",
-      "**Richtige Wahl**"
-    ]
+      'Budget: 58k€ (unter Budget)',
+      'Timeline: 11 Wo. (unter Plan)',
+      'Code-Sharing: 76% mit Web',
+      'Team: React-Kenntnisse vorhanden',
+      'Performance: 60 FPS (ausreichend)',
+      'ROI: Break-Even nach 5 Mo.',
+      '**Richtige Wahl**',
+    ],
   }}
   right={{
-    title: "Fintech (Flutter)",
-    type: "positive",
+    title: 'Fintech (Flutter)',
+    type: 'positive',
     items: [
-      "Budget: 89k€ (leicht über)",
-      "Timeline: 16 Wo. (leicht über)",
-      "Code-Sharing: 98% iOS/Android",
-      "Team: Dart-Lernkurve (4 Wo.)",
-      "Performance: 120 FPS (kritisch!)",
-      "ROI: Performance = Vertrauen",
-      "**Richtige Wahl**"
-    ]
+      'Budget: 89k€ (leicht über)',
+      'Timeline: 16 Wo. (leicht über)',
+      'Code-Sharing: 98% iOS/Android',
+      'Team: Dart-Lernkurve (4 Wo.)',
+      'Performance: 120 FPS (kritisch!)',
+      'ROI: Performance = Vertrauen',
+      '**Richtige Wahl**',
+    ],
   }}
 />
 
@@ -650,26 +693,32 @@ class _LoginScreenState extends State<LoginScreen> {
 Beantworten Sie diese 5 Fragen, um die richtige Wahl zu treffen:
 
 ### ❓ Frage 1: Kennt Ihr Team React/JavaScript?
+
 - **JA** → +10 Punkte React Native
 - **NEIN** → +5 Punkte Flutter
 
 ### ❓ Frage 2: Haben Sie eine React Web-App?
+
 - **JA** → +15 Punkte React Native (Code-Sharing!)
 - **NEIN** → +0 Punkte
 
 ### ❓ Frage 3: Brauchen Sie 120 FPS Performance?
+
 - **JA** (Gaming, Fintech, Charts) → +15 Punkte Flutter
 - **NEIN** (Standard-App) → +5 Punkte React Native
 
 ### ❓ Frage 4: Ist Time-to-Market kritisch (< 12 Wochen)?
+
 - **JA** → +10 Punkte React Native
 - **NEIN** → +0 Punkte
 
 ### ❓ Frage 5: Ist Custom UI/Design zentral?
+
 - **JA** (Einzigartiges Branding) → +10 Punkte Flutter
 - **NEIN** (Standard UI ok) → +5 Punkte React Native
 
 **Auswertung:**
+
 - **React Native > 30 Punkte:** React Native ist die bessere Wahl
 - **Flutter > 30 Punkte:** Flutter ist die bessere Wahl
 - **Gleichstand:** Beide funktionieren – wählen Sie nach Team-Präferenz
@@ -687,45 +736,45 @@ Beantworten Sie diese 5 Fragen, um die richtige Wahl zu treffen:
 <KeyTakeaways
   title="React Native vs Flutter: Die wichtigsten Erkenntnisse"
   items={[
-    "React Native: 46% günstiger als Native, ideal für E-Commerce/Social/Content/MVPs",
-    "Flutter: 15-20% bessere Performance, perfekt für Fintech/Custom UI/Gaming",
-    "Code-Sharing: React Native 70-90% (mit Web), Flutter 95-100% (nur Mobile)",
-    "Team-Skills entscheidend: React-Kenntnisse → React Native, sonst abwägen",
-    "Hiring: React Native Devs 25% günstiger & 7x verfügbarer als Flutter",
-    "Time-to-Market: React Native 2-4 Wochen schneller (keine Lernkurve)",
-    "Performance: Für 90% der Apps ist React Native ausreichend",
-    "ROI: Beide Break-Even nach 4-8 Monaten vs. Native Development",
-    "Beide sind production-ready: Meta & Google nutzen ihre eigenen Frameworks"
+    'React Native: 46% günstiger als Native, ideal für E-Commerce/Social/Content/MVPs',
+    'Flutter: 15-20% bessere Performance, perfekt für Fintech/Custom UI/Gaming',
+    'Code-Sharing: React Native 70-90% (mit Web), Flutter 95-100% (nur Mobile)',
+    'Team-Skills entscheidend: React-Kenntnisse → React Native, sonst abwägen',
+    'Hiring: React Native Devs 25% günstiger & 7x verfügbarer als Flutter',
+    'Time-to-Market: React Native 2-4 Wochen schneller (keine Lernkurve)',
+    'Performance: Für 90% der Apps ist React Native ausreichend',
+    'ROI: Beide Break-Even nach 4-8 Monaten vs. Native Development',
+    'Beide sind production-ready: Meta & Google nutzen ihre eigenen Frameworks',
   ]}
 />
 
 <ComparisonBlock
   title="Die finale Empfehlung"
   left={{
-    title: "Wählen Sie React Native wenn:",
-    type: "positive",
+    title: 'Wählen Sie React Native wenn:',
+    type: 'positive',
     items: [
-      "Budget < 70k€",
-      "Timeline < 12 Wo.",
-      "Team kennt React/JavaScript",
-      "Web-App existiert (Code-Sharing)",
-      "Standard-Performance reicht",
-      "npm-Ecosystem wichtig",
-      "E-Commerce, Social Media, Content"
-    ]
+      'Budget < 70k€',
+      'Timeline < 12 Wo.',
+      'Team kennt React/JavaScript',
+      'Web-App existiert (Code-Sharing)',
+      'Standard-Performance reicht',
+      'npm-Ecosystem wichtig',
+      'E-Commerce, Social Media, Content',
+    ],
   }}
   right={{
-    title: "Wählen Sie Flutter wenn:",
-    type: "positive",
+    title: 'Wählen Sie Flutter wenn:',
+    type: 'positive',
     items: [
-      "Performance absolut kritisch",
-      "Custom UI/Branding zentral",
-      "Fintech, Gaming, Charts",
-      "Konsistenz iOS/Android wichtig",
-      "Budget für Dart-Learning da",
-      "Langfristige Stabilität > Community",
-      "100% Code-Sharing Mobile wichtig"
-    ]
+      'Performance absolut kritisch',
+      'Custom UI/Branding zentral',
+      'Fintech, Gaming, Charts',
+      'Konsistenz iOS/Android wichtig',
+      'Budget für Dart-Learning da',
+      'Langfristige Stabilität > Community',
+      '100% Code-Sharing Mobile wichtig',
+    ],
   }}
 />
 
@@ -764,11 +813,13 @@ Beide! **React Native** von Meta (Facebook) und **Flutter** von Google sind stra
 ### Option 1: Selbst entscheiden (empfohlen bei klarem Favoriten)
 
 **Sie haben sich für React Native entschieden?**
+
 1. Prüfen Sie [unsere Mobile Development Services](/services/mobile-development)
 2. Fordern Sie ein [kostenloses Angebot an](/contact)
 3. Lesen Sie unseren [React Native Performance Guide](/blog/react-native-performance-optimization)
 
 **Sie haben sich für Flutter entschieden?**
+
 1. Prüfen Sie [unsere Flutter-Expertise](/services/mobile-development)
 2. Buchen Sie eine [kostenlose Beratung](/contact)
 3. Lesen Sie unseren [Flutter Best Practices Guide](/blog/flutter-best-practices)
@@ -786,11 +837,13 @@ Beide! **React Native** von Meta (Facebook) und **Flutter** von Google sind stra
 ## Weiterführende Ressourcen
 
 **Offizielle Dokumentation:**
+
 - [React Native Dokumentation](https://reactnative.dev/)
 - [Flutter Dokumentation](https://flutter.dev/)
 - [Expo Dokumentation](https://docs.expo.dev/)
 
 **Unsere Guides & Services:**
+
 - [Mobile App Entwicklung bei HEADON.pro](/services/mobile-development)
 - [React Native Performance Optimization](/blog/react-native-performance-optimization)
 - [Flutter Best Practices Guide](/blog/flutter-best-practices)
@@ -798,6 +851,7 @@ Beide! **React Native** von Meta (Facebook) und **Flutter** von Google sind stra
 - [Portfolio: Unsere Mobile Apps](/portfolio)
 
 **Community & Learning:**
+
 - [React Native Community](https://github.com/react-native-community)
 - [Flutter Community](https://flutter.dev/community)
 - [Expo Forums](https://forums.expo.dev/)

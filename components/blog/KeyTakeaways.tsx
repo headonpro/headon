@@ -23,7 +23,7 @@ export function KeyTakeaways({ items, title = '🎯 Key Takeaways' }: KeyTakeawa
   )
 
   return (
-    <Card className="my-12 border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-8">
+    <Card className="border-primary/20 from-primary/5 my-12 border-2 bg-gradient-to-br to-transparent p-8">
       <h3 className="mb-6 text-2xl font-bold text-gray-900">{title}</h3>
       <ul className="space-y-4">
         {takeaways.map((takeaway, index) => (

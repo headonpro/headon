@@ -20,8 +20,8 @@ export const pwaVsNativeVsHybridApp: ComparisonArticle = {
         'Push Notifications': 'Ja (begrenzt iOS)',
         'Device Features': 'Begrenzt',
         'Update Process': 'Automatisch (wie Website)',
-        'Discoverability': 'Sehr gut (SEO)',
-        'Distribution': 'URL teilen',
+        Discoverability: 'Sehr gut (SEO)',
+        Distribution: 'URL teilen',
       },
       pros: [
         'Sehr niedrige Entwicklungskosten (eine Web-App)',
@@ -40,8 +40,7 @@ export const pwaVsNativeVsHybridApp: ComparisonArticle = {
         'Weniger prominent als App Store Apps',
         'Push Notifications auf iOS eingeschränkt',
       ],
-      useCase:
-        'Content-Apps, E-Commerce, Tools, B2B-Apps, Budget-limitierte Projekte, MVP',
+      useCase: 'Content-Apps, E-Commerce, Tools, B2B-Apps, Budget-limitierte Projekte, MVP',
       recommendation:
         'Wählen Sie PWA für schnellen Start, niedrige Kosten und wenn App Store Distribution nicht kritisch ist.',
     },
@@ -57,8 +56,8 @@ export const pwaVsNativeVsHybridApp: ComparisonArticle = {
         'Push Notifications': 'Vollständig',
         'Device Features': 'Vollständiger Zugriff',
         'Update Process': 'App Store (User muss updaten)',
-        'Discoverability': 'Gut (App Stores)',
-        'Distribution': 'App Stores',
+        Discoverability: 'Gut (App Stores)',
+        Distribution: 'App Stores',
       },
       pros: [
         'Beste Performance und User Experience',
@@ -87,13 +86,13 @@ export const pwaVsNativeVsHybridApp: ComparisonArticle = {
         'App Store': 'Erforderlich (Review-Prozess)',
         'Development Cost': 'Mittel (1 Codebase)',
         'Platform Coverage': 'iOS + Android',
-        'Performance': 'Hoch (90-95%)',
+        Performance: 'Hoch (90-95%)',
         'Offline Support': 'Ja',
         'Push Notifications': 'Vollständig',
         'Device Features': 'Die meisten (+ Plugins)',
         'Update Process': 'App Store + OTA möglich',
-        'Discoverability': 'Gut (App Stores)',
-        'Distribution': 'App Stores',
+        Discoverability: 'Gut (App Stores)',
+        Distribution: 'App Stores',
       },
       pros: [
         'Hohe Code-Wiederverwendung (70-90%)',

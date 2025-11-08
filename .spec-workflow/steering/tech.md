@@ -197,6 +197,7 @@ Filtered, Sorted, Paginated Content
 #### Umami Analytics Stack (Self-Hosted)
 
 **Docker Services**:
+
 - **Umami Web Service**: Port 3002, Node.js-based analytics dashboard
 - **PostgreSQL 15-alpine**: Dedicated database for analytics data
 - **Docker Compose**: Multi-container orchestration
@@ -204,6 +205,7 @@ Filtered, Sorted, Paginated Content
 - **Health Checks**: Automatic service monitoring
 
 **Features**:
+
 - **Cookie-free Tracking**: GDPR compliant without consent banners
 - **Real-time Visitor Tracking**: Live page views and sessions
 - **Privacy-focused**: No personal data collection
@@ -213,6 +215,7 @@ Filtered, Sorted, Paginated Content
 - **Dashboard Access**: analytics.headon.pro
 
 **Integration**:
+
 - **Script Component**: `components/UmamiScript.tsx` for tracking code injection
 - **Environment Variables**: `NEXT_PUBLIC_UMAMI_URL`, `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
 - **Resource Limits**: 256MB RAM, 0.25 CPU per service
@@ -327,6 +330,7 @@ Filtered, Sorted, Paginated Content
 ### Docker Architecture
 
 **Multi-Stage Dockerfile**:
+
 1. **Stage 1 (deps)**: Install dependencies only, cached layer
 2. **Stage 2 (builder)**: Build Next.js application with standalone output
 3. **Stage 3 (runner)**: Minimal production image with non-root user
@@ -354,6 +358,7 @@ Filtered, Sorted, Paginated Content
    - Network: Connected to web-network
 
 **Network Configuration**:
+
 - **web-network**: External network for Nginx/Caddy reverse proxy
 - **Internal Network**: Docker Compose default for service communication
 
@@ -372,18 +377,21 @@ Filtered, Sorted, Paginated Content
 ### Installation Requirements
 
 **Development Environment**:
+
 - **Node.js**: v22.x or higher (v22.18.0 via NVM)
 - **pnpm**: v10.15.0 (enforced via package.json)
 - **Docker**: v27.5.1+ for local testing
 - **Docker Compose**: v1.29.2+
 
 **Production Environment**:
+
 - **Docker**: v27.5.1+ (required)
 - **Docker Compose**: v1.29.2+ (required)
 - **Reverse Proxy**: Nginx or Caddy for HTTPS termination
 - **PostgreSQL**: Bundled in Umami service (no separate install)
 
 **Environment Variables** (Required):
+
 ```bash
 # Supabase Backend
 NEXT_PUBLIC_SUPABASE_URL=

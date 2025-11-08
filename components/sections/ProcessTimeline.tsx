@@ -30,7 +30,7 @@ export default function ProcessTimeline({ steps, variant = 'dark' }: ProcessTime
     <div className="relative">
       {/* Vertical line */}
       <div
-        className={`absolute left-8 top-8 bottom-8 w-0.5 ${
+        className={`absolute top-8 bottom-8 left-8 w-0.5 ${
           isDark ? 'bg-white/20' : 'bg-gray-200'
         } md:left-1/2 md:-translate-x-px`}
       />
@@ -78,16 +78,16 @@ export default function ProcessTimeline({ steps, variant = 'dark' }: ProcessTime
                   {step.duration && (
                     <span
                       className={`rounded-full px-3 py-1 text-sm ${
-                        isDark
-                          ? 'bg-white/20 text-white/90'
-                          : 'bg-primary-100 text-primary-700'
+                        isDark ? 'bg-white/20 text-white/90' : 'bg-primary-100 text-primary-700'
                       }`}
                     >
                       {step.duration}
                     </span>
                   )}
                 </div>
-                <p className={`text-sm leading-relaxed ${isDark ? 'text-white/80' : 'text-gray-600'}`}>
+                <p
+                  className={`text-sm leading-relaxed ${isDark ? 'text-white/80' : 'text-gray-600'}`}
+                >
                   {step.description}
                 </p>
               </div>

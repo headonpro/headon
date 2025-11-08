@@ -167,13 +167,16 @@ export default function IndustryNavigator() {
             >
               <Link
                 href={`/branchen/${industry.id}`}
-                className="block overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-white/15 hover:scale-[1.02]"
+                className="block overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:bg-white/15"
               >
                 {/* Card Header */}
-                <div className="cursor-pointer p-6" onClick={(e) => {
-                  e.preventDefault()
-                  toggleCard(industry.id)
-                }}>
+                <div
+                  className="cursor-pointer p-6"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    toggleCard(industry.id)
+                  }}
+                >
                   <div className="mb-4 flex justify-center">
                     <div className="from-accent to-secondary rounded-xl bg-gradient-to-br p-3">
                       <industry.icon className="text-primary h-8 w-8" strokeWidth={1.5} />

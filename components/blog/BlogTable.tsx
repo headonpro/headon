@@ -42,14 +42,14 @@ export function BlogTable({
   columns,
   data,
   variant = 'default',
-  responsive = true
+  responsive = true,
 }: BlogTableProps) {
   // Format cell content based on variant
   const formatCell = (value: string | number | boolean | React.ReactNode, column: TableColumn) => {
     if (variant === 'pricing') {
       // Highlight prices
       if (typeof value === 'string' && (value.includes('EUR') || value.includes('€'))) {
-        return <span className="font-semibold text-primary">{value}</span>
+        return <span className="text-primary font-semibold">{value}</span>
       }
       // Free tier
       if (value === '0' || value === 'Kostenlos' || value === '0 EUR') {
@@ -72,10 +72,10 @@ export function BlogTable({
     if (variant === 'features') {
       // Feature checkmarks
       if (value === true || value === '✓' || value === '✅') {
-        return <CheckCircle2 className="h-5 w-5 text-green-600 mx-auto" />
+        return <CheckCircle2 className="mx-auto h-5 w-5 text-green-600" />
       }
       if (value === false || value === '✗' || value === '❌') {
-        return <AlertCircle className="h-5 w-5 text-gray-400 mx-auto" />
+        return <AlertCircle className="mx-auto h-5 w-5 text-gray-400" />
       }
     }
 
@@ -91,9 +91,7 @@ export function BlogTable({
   if (responsive) {
     return (
       <div className="my-8">
-        {title && (
-          <h3 className="mb-4 text-xl font-bold text-gray-900">{title}</h3>
-        )}
+        {title && <h3 className="mb-4 text-xl font-bold text-gray-900">{title}</h3>}
 
         {/* Desktop Table */}
         <div className="hidden md:block">
@@ -106,8 +104,11 @@ export function BlogTable({
                     <TableHead
                       key={column.accessor}
                       className={`font-semibold ${
-                        column.align === 'center' ? 'text-center' :
-                        column.align === 'right' ? 'text-right' : 'text-left'
+                        column.align === 'center'
+                          ? 'text-center'
+                          : column.align === 'right'
+                            ? 'text-right'
+                            : 'text-left'
                       } ${column.highlight ? 'bg-primary/5' : ''}`}
                     >
                       {column.header}
@@ -122,8 +123,11 @@ export function BlogTable({
                       <TableCell
                         key={column.accessor}
                         className={`${
-                          column.align === 'center' ? 'text-center' :
-                          column.align === 'right' ? 'text-right' : 'text-left'
+                          column.align === 'center'
+                            ? 'text-center'
+                            : column.align === 'right'
+                              ? 'text-right'
+                              : 'text-left'
                         } ${column.highlight ? 'bg-primary/5 font-medium' : ''}`}
                       >
                         {formatCell(row[column.accessor], column)}
@@ -137,16 +141,16 @@ export function BlogTable({
         </div>
 
         {/* Mobile Card Layout */}
-        <div className="md:hidden space-y-4">
+        <div className="space-y-4 md:hidden">
           {data.map((row, rowIndex) => (
             <Card key={rowIndex} className="p-4">
               {columns.map((column) => (
                 <div
                   key={column.accessor}
-                  className="flex justify-between items-center py-2 border-b last:border-0"
+                  className="flex items-center justify-between border-b py-2 last:border-0"
                 >
                   <span className="text-sm text-gray-600">{column.header}</span>
-                  <span className="font-medium text-right">
+                  <span className="text-right font-medium">
                     {formatCell(row[column.accessor], column)}
                   </span>
                 </div>
@@ -155,9 +159,7 @@ export function BlogTable({
           ))}
         </div>
 
-        {caption && (
-          <p className="mt-2 text-sm text-gray-600">{caption}</p>
-        )}
+        {caption && <p className="mt-2 text-sm text-gray-600">{caption}</p>}
       </div>
     )
   }
@@ -165,9 +167,7 @@ export function BlogTable({
   // Non-responsive table (classic layout)
   return (
     <div className="my-8">
-      {title && (
-        <h3 className="mb-4 text-xl font-bold text-gray-900">{title}</h3>
-      )}
+      {title && <h3 className="mb-4 text-xl font-bold text-gray-900">{title}</h3>}
       <Card className="overflow-hidden">
         <Table>
           {caption && <TableCaption>{caption}</TableCaption>}
@@ -177,8 +177,11 @@ export function BlogTable({
                 <TableHead
                   key={column.accessor}
                   className={`font-semibold ${
-                    column.align === 'center' ? 'text-center' :
-                    column.align === 'right' ? 'text-right' : 'text-left'
+                    column.align === 'center'
+                      ? 'text-center'
+                      : column.align === 'right'
+                        ? 'text-right'
+                        : 'text-left'
                   }`}
                 >
                   {column.header}
@@ -192,8 +195,13 @@ export function BlogTable({
                 {columns.map((column) => (
                   <TableCell
                     key={column.accessor}
-                    className={column.align === 'center' ? 'text-center' :
-                               column.align === 'right' ? 'text-right' : 'text-left'}
+                    className={
+                      column.align === 'center'
+                        ? 'text-center'
+                        : column.align === 'right'
+                          ? 'text-right'
+                          : 'text-left'
+                    }
                   >
                     {formatCell(row[column.accessor], column)}
                   </TableCell>

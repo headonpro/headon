@@ -14,10 +14,7 @@ interface ComparisonCardProps {
 export function ComparisonCard({ article, index }: ComparisonCardProps) {
   // Determine if this is a two-item comparison (most common)
   const isTwoItemComparison = article.items.length === 2
-  const totalFeatures = article.featureCategories.reduce(
-    (acc, cat) => acc + cat.features.length,
-    0
-  )
+  const totalFeatures = article.featureCategories.reduce((acc, cat) => acc + cat.features.length, 0)
 
   // For two-item comparisons, show split design
   if (isTwoItemComparison) {
@@ -36,7 +33,7 @@ export function ComparisonCard({ article, index }: ComparisonCardProps) {
           href={`/vergleiche/${article.slug}`}
           className={cn(
             'group block overflow-hidden rounded-2xl border-2 border-gray-200 bg-white shadow-md',
-            'transition-all duration-300 hover:border-primary-500 hover:shadow-2xl hover:-translate-y-1'
+            'hover:border-primary-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl'
           )}
         >
           {/* Header with VS Badge */}
@@ -58,7 +55,7 @@ export function ComparisonCard({ article, index }: ComparisonCardProps) {
           {/* Split Comparison View */}
           <div className="grid grid-cols-[1fr_auto_1fr] gap-0">
             {/* Item 1 */}
-            <div className="border-r border-gray-200 bg-gradient-to-br from-primary-50/50 to-white p-6">
+            <div className="from-primary-50/50 border-r border-gray-200 bg-gradient-to-br to-white p-6">
               <h3 className="mb-4 text-xl font-bold text-gray-900">{item1.name}</h3>
               <ul className="space-y-2">
                 {item1Pros.map((pro, i) => (
@@ -78,7 +75,7 @@ export function ComparisonCard({ article, index }: ComparisonCardProps) {
             </div>
 
             {/* Item 2 */}
-            <div className="border-l border-gray-200 bg-gradient-to-br from-secondary-50/50 to-white p-6">
+            <div className="from-secondary-50/50 border-l border-gray-200 bg-gradient-to-br to-white p-6">
               <h3 className="mb-4 text-xl font-bold text-gray-900">{item2.name}</h3>
               <ul className="space-y-2">
                 {item2Pros.map((pro, i) => (
@@ -117,7 +114,7 @@ export function ComparisonCard({ article, index }: ComparisonCardProps) {
         href={`/vergleiche/${article.slug}`}
         className={cn(
           'group block overflow-hidden rounded-2xl border-2 border-gray-200 bg-white shadow-md',
-          'transition-all duration-300 hover:border-primary-500 hover:shadow-2xl hover:-translate-y-1'
+          'hover:border-primary-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl'
         )}
       >
         {/* Header */}
@@ -144,7 +141,7 @@ export function ComparisonCard({ article, index }: ComparisonCardProps) {
           {article.items.map((item, i) => (
             <div
               key={i}
-              className="rounded-lg border border-gray-200 bg-gradient-to-br from-primary-50/30 to-white p-3 text-center"
+              className="from-primary-50/30 rounded-lg border border-gray-200 bg-gradient-to-br to-white p-3 text-center"
             >
               <span className="text-sm font-semibold text-gray-900">{item.name}</span>
             </div>

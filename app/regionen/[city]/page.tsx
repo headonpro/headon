@@ -127,9 +127,7 @@ export default async function CityPage({ params }: CityPageProps) {
   return (
     <>
       {/* Schema markup for SEO */}
-      <Schema
-        schema={[localBusinessSchema, ...serviceSchemas, faqSchema, breadcrumbSchema]}
-      />
+      <Schema schema={[localBusinessSchema, ...serviceSchemas, faqSchema, breadcrumbSchema]} />
 
       <CityPageContent
         cityPage={cityPage}

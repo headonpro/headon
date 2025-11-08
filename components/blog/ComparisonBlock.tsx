@@ -73,7 +73,7 @@ export function ComparisonBlock({ left, right, title }: ComparisonBlockProps) {
             return (
               <li key={index} className="flex items-start gap-3">
                 <Icon className={`mt-0.5 h-5 w-5 flex-shrink-0 ${config.icon}`} />
-                <span className="text-gray-800 leading-relaxed">{item.text}</span>
+                <span className="leading-relaxed text-gray-800">{item.text}</span>
               </li>
             )
           })}

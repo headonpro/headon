@@ -12,7 +12,14 @@ image:
   url: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1200&h=630&fit=crop'
   alt: 'Online-Shopping auf Laptop und Smartphone - E-Commerce Website'
 readingTime: 10
-keywords: ['e-commerce website erstellen', 'online shop aufbauen', 'shopify vs woocommerce', 'conversion optimierung', 'payment integration']
+keywords:
+  [
+    'e-commerce website erstellen',
+    'online shop aufbauen',
+    'shopify vs woocommerce',
+    'conversion optimierung',
+    'payment integration',
+  ]
 relatedPosts: ['website-kosten-2025', 'website-performance-optimieren']
 ---
 
@@ -25,6 +32,7 @@ Die Plattform-Wahl ist die wichtigste Entscheidung beim Shop-Aufbau. Jede Option
 ### 1. Shopify - All-in-One-Lösung
 
 **Vorteile:**
+
 - ✅ Schneller Start (innerhalb Stunden live)
 - ✅ Keine technischen Kenntnisse nötig
 - ✅ Hosting inklusive (99,99% Uptime)
@@ -32,12 +40,14 @@ Die Plattform-Wahl ist die wichtigste Entscheidung beim Shop-Aufbau. Jede Option
 - ✅ Große App-Auswahl (8.000+ Apps)
 
 **Nachteile:**
+
 - ❌ Monatliche Kosten (29-299€)
 - ❌ Transaktionsgebühren (0,5-2% bei externen Payments)
 - ❌ Vendor Lock-in (Wechsel schwierig)
 - ❌ Begrenzte Anpassbarkeit
 
 **Shopify-Kosten:**
+
 - Basic: 29€/Monat
 - Shopify: 79€/Monat
 - Advanced: 299€/Monat
@@ -48,6 +58,7 @@ Die Plattform-Wahl ist die wichtigste Entscheidung beim Shop-Aufbau. Jede Option
 ### 2. WooCommerce - WordPress-Integration
 
 **Vorteile:**
+
 - ✅ Open Source (kostenlos)
 - ✅ Volle Kontrolle und Anpassbarkeit
 - ✅ Riesiges Plugin-Ökosystem
@@ -55,12 +66,14 @@ Die Plattform-Wahl ist die wichtigste Entscheidung beim Shop-Aufbau. Jede Option
 - ✅ Keine Transaktionsgebühren
 
 **Nachteile:**
+
 - ❌ Erfordert WordPress-Hosting
 - ❌ Updates und Wartung nötig
 - ❌ Sicherheit selbst verantworten
 - ❌ Performance-Optimierung aufwendig
 
 **WooCommerce-Kosten:**
+
 - Plugin: 0€ (kostenlos)
 - Hosting: 20-100€/Monat
 - Premium-Erweiterungen: 100-500€/Jahr
@@ -73,12 +86,14 @@ Die Plattform-Wahl ist die wichtigste Entscheidung beim Shop-Aufbau. Jede Option
 Headless Commerce trennt Frontend (Next.js) und Backend (Commerce-API).
 
 **Beliebte Headless-Backends:**
+
 - Commerce.js
 - Saleor
 - Medusa
 - Shopify Storefront API
 
 **Vorteile:**
+
 - ✅ Maximale Performance (Static Generation)
 - ✅ Volle Design-Freiheit
 - ✅ Omnichannel (Web, App, Kiosk)
@@ -86,6 +101,7 @@ Headless Commerce trennt Frontend (Next.js) und Backend (Commerce-API).
 - ✅ Beste SEO
 
 **Nachteile:**
+
 - ❌ Höhere Entwicklungskosten (10.000-50.000€)
 - ❌ Technisches Know-how erforderlich
 - ❌ Längere Entwicklungszeit
@@ -98,12 +114,14 @@ Bei [HEADON.pro](/branchen/einzelhandel) entwickeln wir Headless E-Commerce mit 
 ### 4. Magento - Enterprise-Lösung
 
 **Vorteile:**
+
 - ✅ Extrem skalierbar
 - ✅ Multi-Store-Management
 - ✅ Umfangreiche B2B-Features
 - ✅ Große Enterprise-Community
 
 **Nachteile:**
+
 - ❌ Sehr komplex
 - ❌ Hohe Hosting-Kosten (200-1.000€/Monat)
 - ❌ Teuer in Entwicklung (20.000-100.000€)
@@ -116,6 +134,7 @@ Bei [HEADON.pro](/branchen/einzelhandel) entwickeln wir Headless E-Commerce mit 
 ### 1. Produktkatalog und -verwaltung
 
 **Produktinformationen:**
+
 - Titel (50-70 Zeichen, keyword-optimiert)
 - Beschreibung (200-500 Wörter, SEO-optimiert)
 - Hochwertige Produktfotos (min. 5 Bilder)
@@ -157,6 +176,7 @@ function save_custom_fields($post_id) {
 ### 2. Warenkorb und Checkout-Optimierung
 
 **Checkout Best Practices:**
+
 - ✅ Gast-Checkout ermöglichen (kein Zwang zur Registrierung)
 - ✅ Progress-Indicator (Schritt 1/3)
 - ✅ Autofill unterstützen
@@ -180,9 +200,9 @@ export default function CheckoutPage() {
   const { cart, total } = useCart()
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="mx-auto max-w-4xl px-4 py-8">
       {/* Progress Indicator */}
-      <div className="flex justify-between mb-8">
+      <div className="mb-8 flex justify-between">
         {checkoutSteps.map((step, index) => (
           <div
             key={step}
@@ -190,9 +210,11 @@ export default function CheckoutPage() {
               index <= currentStep ? 'text-primary' : 'text-gray-400'
             }`}
           >
-            <div className={`w-8 h-8 rounded-full mx-auto mb-2 flex items-center justify-center ${
-              index <= currentStep ? 'bg-primary text-white' : 'bg-gray-200'
-            }`}>
+            <div
+              className={`mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full ${
+                index <= currentStep ? 'bg-primary text-white' : 'bg-gray-200'
+              }`}
+            >
               {index + 1}
             </div>
             <p className="text-sm">{step}</p>
@@ -207,11 +229,11 @@ export default function CheckoutPage() {
       {currentStep === 3 && <BestatigungStep />}
 
       {/* Navigation */}
-      <div className="flex justify-between mt-8">
+      <div className="mt-8 flex justify-between">
         {currentStep > 0 && (
           <button
             onClick={() => setCurrentStep(currentStep - 1)}
-            className="px-6 py-2 border rounded"
+            className="rounded border px-6 py-2"
           >
             Zurück
           </button>
@@ -220,7 +242,7 @@ export default function CheckoutPage() {
         {currentStep < 3 && (
           <button
             onClick={() => setCurrentStep(currentStep + 1)}
-            className="px-6 py-2 bg-primary text-white rounded ml-auto"
+            className="bg-primary ml-auto rounded px-6 py-2 text-white"
           >
             Weiter
           </button>
@@ -236,6 +258,7 @@ export default function CheckoutPage() {
 In Deutschland essentiell:
 
 **Must-Have-Zahlungsarten:**
+
 1. **PayPal** (50% nutzen es)
 2. **Kreditkarte** (Visa, Mastercard)
 3. **Rechnung** (besonders B2B)
@@ -255,20 +278,20 @@ export async function POST(request) {
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card', 'sepa_debit', 'sofort'],
-    line_items: items.map(item => ({
+    line_items: items.map((item) => ({
       price_data: {
         currency: 'eur',
         product_data: {
           name: item.name,
-          images: [item.image]
+          images: [item.image],
         },
-        unit_amount: item.price * 100 // Cent
+        unit_amount: item.price * 100, // Cent
       },
-      quantity: item.quantity
+      quantity: item.quantity,
     })),
     mode: 'payment',
     success_url: `${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_URL}/cart`
+    cancel_url: `${process.env.NEXT_PUBLIC_URL}/cart`,
   })
 
   return Response.json({ url: session.url })
@@ -278,6 +301,7 @@ export async function POST(request) {
 ### 4. Versand und Logistik
 
 **Versandoptionen:**
+
 - Standard (3-5 Tage) - kostenlos ab X€
 - Express (1-2 Tage) - Aufpreis
 - Click & Collect (Selbstabholung)
@@ -296,9 +320,11 @@ export function calculateShipping(cart, postalCode) {
   }
 
   // Gewichtsbasiert
-  if (totalWeight < 2000) { // <2kg
+  if (totalWeight < 2000) {
+    // <2kg
     return 4.99
-  } else if (totalWeight < 5000) { // <5kg
+  } else if (totalWeight < 5000) {
+    // <5kg
     return 6.99
   } else {
     return 9.99
@@ -325,6 +351,7 @@ Die durchschnittliche E-Commerce Conversion-Rate liegt bei 2-3%. Mit Optimierung
 ### 2. Trust-Elemente einbauen
 
 **Vertrauen aufbauen:**
+
 - ✅ SSL-Zertifikat (HTTPS)
 - ✅ Trusted Shops Siegel
 - ✅ Kundenbewertungen prominent
@@ -365,6 +392,7 @@ Code: COMEBACK10
 60% des E-Commerce-Traffics kommt von mobilen Geräten.
 
 **Mobile Best Practices:**
+
 - ✅ Große, fingerfreundliche Buttons
 - ✅ Vereinfachter Checkout
 - ✅ Apple Pay / Google Pay Integration
@@ -389,8 +417,8 @@ export async function generateMetadata({ params }) {
       title: product.name,
       description: product.shortDescription,
       images: product.images,
-      type: 'product'
-    }
+      type: 'product',
+    },
   }
 }
 
@@ -409,7 +437,7 @@ export default function ProductPage({ product }) {
             description: product.description,
             brand: {
               '@type': 'Brand',
-              name: product.brand
+              name: product.brand,
             },
             offers: {
               '@type': 'Offer',
@@ -420,15 +448,15 @@ export default function ProductPage({ product }) {
                 : 'https://schema.org/OutOfStock',
               seller: {
                 '@type': 'Organization',
-                name: 'Shop-Name'
-              }
+                name: 'Shop-Name',
+              },
             },
             aggregateRating: {
               '@type': 'AggregateRating',
               ratingValue: product.averageRating,
-              reviewCount: product.reviewCount
-            }
-          })
+              reviewCount: product.reviewCount,
+            },
+          }),
         }}
       />
 
@@ -443,6 +471,7 @@ export default function ProductPage({ product }) {
 E-Commerce in Deutschland hat strenge rechtliche Anforderungen.
 
 **Pflicht-Seiten:**
+
 1. **Impressum** (vollständige Kontaktdaten)
 2. **Datenschutzerklärung** (DSGVO-konform)
 3. **AGB** (Allgemeine Geschäftsbedingungen)
@@ -452,18 +481,19 @@ E-Commerce in Deutschland hat strenge rechtliche Anforderungen.
 
 **Button-Lösung-Gesetz:**
 Der "Jetzt kaufen"-Button muss eindeutig sein:
+
 - "Zahlungspflichtig bestellen" ✅
 - "Jetzt kaufen" ❌ (nicht deutlich genug)
 
 ## E-Commerce-Kosten 2025
 
-| Komponente | Shopify | WooCommerce | Headless |
-|---|---|---|---|
-| **Setup** | 500-2.000€ | 3.000-8.000€ | 10.000-30.000€ |
-| **Hosting** | inkl. | 30-100€/M | 50-200€/M |
-| **Monatlich** | 29-299€ | 0€ | 0€ |
-| **Payment** | 0,5-2% | 0,29€+1,5% | 0,29€+1,5% |
-| **Wartung/Jahr** | 300€ | 800-2.000€ | 1.500-5.000€ |
+| Komponente       | Shopify    | WooCommerce  | Headless       |
+| ---------------- | ---------- | ------------ | -------------- |
+| **Setup**        | 500-2.000€ | 3.000-8.000€ | 10.000-30.000€ |
+| **Hosting**      | inkl.      | 30-100€/M    | 50-200€/M      |
+| **Monatlich**    | 29-299€    | 0€           | 0€             |
+| **Payment**      | 0,5-2%     | 0,29€+1,5%   | 0,29€+1,5%     |
+| **Wartung/Jahr** | 300€       | 800-2.000€   | 1.500-5.000€   |
 
 Bei [HEADON.pro](/branchen/einzelhandel) entwickeln wir E-Commerce-Websites ab 5.000 EUR – mit perfekter Performance, Conversion-Optimierung und deutschem Steuerrecht.
 
@@ -472,6 +502,7 @@ Bei [HEADON.pro](/branchen/einzelhandel) entwickeln wir E-Commerce-Websites ab 5
 Ein erfolgreicher E-Commerce-Shop erfordert die richtige Plattform, optimierte UX, sichere Payment-Integration und kontinuierliche Conversion-Optimierung. Mit diesem Guide haben Sie das Fundament für Ihren Online-Erfolg.
 
 **Die 5 wichtigsten Takeaways:**
+
 1. Plattform basierend auf Budget und Anforderungen wählen
 2. Mobile-First-Design (60% Traffic mobil)
 3. Checkout-Prozess maximal vereinfachen
@@ -481,6 +512,7 @@ Ein erfolgreicher E-Commerce-Shop erfordert die richtige Plattform, optimierte U
 ---
 
 **Weitere Ressourcen:**
+
 - [Einzelhandel Websites](/branchen/einzelhandel)
 - [Website Kosten 2025](/blog/website-kosten-2025)
 - [Conversion-Optimierung Guide](/blog/website-performance-optimieren)

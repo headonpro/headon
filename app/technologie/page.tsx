@@ -30,7 +30,7 @@ export default async function TechnologiePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 py-24 text-white">
+      <section className="from-primary-600 via-primary-500 to-secondary-500 bg-gradient-to-br py-24 text-white">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl">
@@ -55,7 +55,7 @@ export default async function TechnologiePage() {
                 className="group"
                 aria-label={`Zur ${tech.frontmatter.name} Seite`}
               >
-                <div className="h-full rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all hover:border-primary-500 hover:shadow-xl">
+                <div className="hover:border-primary-500 h-full rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all hover:shadow-xl">
                   {/* Logo */}
                   <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-xl bg-white p-3 shadow-md">
                     <Image
@@ -68,7 +68,7 @@ export default async function TechnologiePage() {
                   </div>
 
                   {/* Content */}
-                  <h2 className="mb-2 text-2xl font-bold text-gray-900 transition-colors group-hover:text-primary-600">
+                  <h2 className="group-hover:text-primary-600 mb-2 text-2xl font-bold text-gray-900 transition-colors">
                     {tech.frontmatter.name}
                   </h2>
                   {tech.frontmatter.version && (
@@ -86,7 +86,7 @@ export default async function TechnologiePage() {
                   </div>
 
                   {/* CTA */}
-                  <div className="flex items-center text-primary-600 transition-colors group-hover:text-primary-700">
+                  <div className="text-primary-600 group-hover:text-primary-700 flex items-center transition-colors">
                     <span className="font-semibold">Mehr erfahren</span>
                     <svg
                       className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
@@ -123,13 +123,8 @@ export default async function TechnologiePage() {
 
             <div className="grid gap-8 text-left md:grid-cols-3">
               <div className="rounded-xl bg-white p-6 shadow-sm">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100 text-primary-600">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+                <div className="bg-primary-100 text-primary-600 mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -145,13 +140,8 @@ export default async function TechnologiePage() {
               </div>
 
               <div className="rounded-xl bg-white p-6 shadow-sm">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100 text-primary-600">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+                <div className="bg-primary-100 text-primary-600 mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -167,13 +157,8 @@ export default async function TechnologiePage() {
               </div>
 
               <div className="rounded-xl bg-white p-6 shadow-sm">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100 text-primary-600">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
+                <div className="bg-primary-100 text-primary-600 mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

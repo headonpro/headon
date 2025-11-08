@@ -2,7 +2,17 @@
 
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
 import { useEffect, useRef } from 'react'
-import { LucideIcon, Zap, Clock, Shield, TrendingUp, Users, Award, Target, CheckCircle } from 'lucide-react'
+import {
+  LucideIcon,
+  Zap,
+  Clock,
+  Shield,
+  TrendingUp,
+  Users,
+  Award,
+  Target,
+  CheckCircle,
+} from 'lucide-react'
 
 export interface Metric {
   value: string | number
@@ -91,23 +101,21 @@ function AnimatedCounter({
     const unsubscribe = springValue.on('change', (latest) => {
       if (ref.current) {
         // Check if value has decimal point
-        const displayValue = value % 1 !== 0
-          ? latest.toFixed(1)
-          : Math.floor(latest).toString()
+        const displayValue = value % 1 !== 0 ? latest.toFixed(1) : Math.floor(latest).toString()
         ref.current.textContent = `${prefix}${displayValue}${suffix}`
       }
     })
     return unsubscribe
   }, [springValue, prefix, suffix, value])
 
-  return <span ref={ref}>{prefix}0{suffix}</span>
+  return (
+    <span ref={ref}>
+      {prefix}0{suffix}
+    </span>
+  )
 }
 
-export function ServiceMetrics({
-  metrics,
-  columns = 3,
-  variant = 'default'
-}: ServiceMetricsProps) {
+export function ServiceMetrics({ metrics, columns = 3, variant = 'default' }: ServiceMetricsProps) {
   const gridCols = {
     2: 'grid-cols-1 md:grid-cols-2',
     3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
@@ -119,9 +127,10 @@ export function ServiceMetrics({
       {metrics.map((metric, index) => {
         const Icon = iconMap[metric.icon] || Zap
         const colors = colorClasses[metric.color || 'primary']
-        const numericValue = typeof metric.value === 'string'
-          ? parseFloat(metric.value.replace(/[^0-9.]/g, ''))
-          : metric.value
+        const numericValue =
+          typeof metric.value === 'string'
+            ? parseFloat(metric.value.replace(/[^0-9.]/g, ''))
+            : metric.value
 
         return (
           <motion.div
@@ -132,29 +141,30 @@ export function ServiceMetrics({
             transition={{
               duration: 0.5,
               delay: index * 0.1,
-              ease: 'easeOut'
+              ease: 'easeOut',
             }}
           >
             {variant === 'gradient' ? (
               // Gradient Card Variant
-              <div className={`
-                relative overflow-hidden rounded-2xl
-                bg-gradient-to-br ${colors.gradient}
-                p-8 text-white shadow-xl
-                hover:shadow-2xl transition-shadow duration-300
-              `}>
+              <div
+                className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${colors.gradient} p-8 text-white shadow-xl transition-shadow duration-300 hover:shadow-2xl`}
+              >
                 {/* Background Pattern */}
                 <div className="absolute inset-0 opacity-10">
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-                    backgroundSize: '32px 32px'
-                  }} />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                      backgroundSize: '32px 32px',
+                    }}
+                  />
                 </div>
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <Icon className="h-10 w-10 mb-4 opacity-90" />
-                  <div className="text-4xl font-bold mb-2">
+                  <Icon className="mb-4 h-10 w-10 opacity-90" />
+                  <div className="mb-2 text-4xl font-bold">
                     {!isNaN(numericValue) ? (
                       <AnimatedCounter
                         value={numericValue}
@@ -165,7 +175,7 @@ export function ServiceMetrics({
                       <span>{metric.value}</span>
                     )}
                   </div>
-                  <div className="text-white/90 font-medium">{metric.label}</div>
+                  <div className="font-medium text-white/90">{metric.label}</div>
                   {metric.description && (
                     <div className="mt-2 text-sm text-white/70">{metric.description}</div>
                   )}
@@ -174,10 +184,12 @@ export function ServiceMetrics({
             ) : variant === 'minimal' ? (
               // Minimal Variant
               <div className="text-center">
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${colors.bg} mb-4`}>
+                <div
+                  className={`inline-flex h-16 w-16 items-center justify-center rounded-full ${colors.bg} mb-4`}
+                >
                   <Icon className={`h-8 w-8 ${colors.text}`} />
                 </div>
-                <div className={`text-4xl font-bold mb-2 ${colors.text}`}>
+                <div className={`mb-2 text-4xl font-bold ${colors.text}`}>
                   {!isNaN(numericValue) ? (
                     <AnimatedCounter
                       value={numericValue}
@@ -188,23 +200,22 @@ export function ServiceMetrics({
                     <span>{metric.value}</span>
                   )}
                 </div>
-                <div className="text-gray-600 font-medium">{metric.label}</div>
+                <div className="font-medium text-gray-600">{metric.label}</div>
               </div>
             ) : (
               // Default Card Variant
-              <div className={`
-                relative overflow-hidden rounded-xl border ${colors.border}
-                bg-white p-6 shadow-sm
-                hover:shadow-md transition-all duration-300
-                hover:border-primary-400
-              `}>
+              <div
+                className={`relative overflow-hidden rounded-xl border ${colors.border} hover:border-primary-400 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md`}
+              >
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${colors.bg} mb-4`}>
+                <div
+                  className={`inline-flex h-12 w-12 items-center justify-center rounded-lg ${colors.bg} mb-4`}
+                >
                   <Icon className={`h-6 w-6 ${colors.text}`} />
                 </div>
 
                 {/* Value */}
-                <div className="text-3xl font-bold text-gray-900 mb-1">
+                <div className="mb-1 text-3xl font-bold text-gray-900">
                   {!isNaN(numericValue) ? (
                     <AnimatedCounter
                       value={numericValue}
@@ -217,7 +228,7 @@ export function ServiceMetrics({
                 </div>
 
                 {/* Label */}
-                <div className="text-gray-600 font-medium text-sm">{metric.label}</div>
+                <div className="text-sm font-medium text-gray-600">{metric.label}</div>
 
                 {/* Description */}
                 {metric.description && (
@@ -238,9 +249,10 @@ export function ServiceMetricsRow({ metrics }: { metrics: Metric[] }) {
     <div className="flex flex-wrap justify-center gap-8 md:gap-12">
       {metrics.map((metric, index) => {
         const Icon = iconMap[metric.icon] || Zap
-        const numericValue = typeof metric.value === 'string'
-          ? parseFloat(metric.value.replace(/[^0-9.]/g, ''))
-          : metric.value
+        const numericValue =
+          typeof metric.value === 'string'
+            ? parseFloat(metric.value.replace(/[^0-9.]/g, ''))
+            : metric.value
 
         return (
           <motion.div
@@ -254,8 +266,8 @@ export function ServiceMetricsRow({ metrics }: { metrics: Metric[] }) {
             }}
             className="text-center"
           >
-            <Icon className="h-8 w-8 text-primary-600 mx-auto mb-2" />
-            <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
+            <Icon className="text-primary-600 mx-auto mb-2 h-8 w-8" />
+            <div className="mb-1 text-3xl font-bold text-gray-900 md:text-4xl">
               {!isNaN(numericValue) ? (
                 <AnimatedCounter
                   value={numericValue}
@@ -266,7 +278,7 @@ export function ServiceMetricsRow({ metrics }: { metrics: Metric[] }) {
                 <span>{metric.value}</span>
               )}
             </div>
-            <div className="text-sm text-gray-600 font-medium max-w-[120px]">{metric.label}</div>
+            <div className="max-w-[120px] text-sm font-medium text-gray-600">{metric.label}</div>
           </motion.div>
         )
       })}

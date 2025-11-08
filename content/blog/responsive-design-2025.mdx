@@ -12,7 +12,8 @@ image:
   url: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1200&h=630&fit=crop'
   alt: 'Responsive Website Design auf verschiedenen Geräten - Desktop, Tablet, Smartphone'
 readingTime: 9
-keywords: ['responsive design', 'mobile-first', 'breakpoints', 'css grid', 'flexbox', 'media queries']
+keywords:
+  ['responsive design', 'mobile-first', 'breakpoints', 'css grid', 'flexbox', 'media queries']
 relatedPosts: ['mobile-first-design-strategie', 'website-performance-optimieren']
 ---
 
@@ -86,9 +87,9 @@ CSS Grid eignet sich perfekt für Seitenlayouts mit Zeilen UND Spalten:
   grid-template-columns: 250px 1fr;
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "header header"
-    "sidebar main"
-    "footer footer";
+    'header header'
+    'sidebar main'
+    'footer footer';
   min-height: 100vh;
 }
 
@@ -96,10 +97,10 @@ CSS Grid eignet sich perfekt für Seitenlayouts mit Zeilen UND Spalten:
   .page-layout {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "header"
-      "main"
-      "sidebar"
-      "footer";
+      'header'
+      'main'
+      'sidebar'
+      'footer';
   }
 }
 ```
@@ -135,6 +136,7 @@ Flexbox ist ideal für Komponenten, die sich in eine Richtung ausrichten:
 Mobile-First bedeutet: Erst die mobile Version stylen, dann per Media Queries für größere Screens erweitern.
 
 **Vorteile von Mobile-First:**
+
 - ✅ Zwingt zum Fokus auf das Wesentliche
 - ✅ Bessere Performance (kleinere CSS-Dateien für mobile Nutzer)
 - ✅ Einfacher zu erweitern als zu reduzieren
@@ -205,10 +207,7 @@ Bilder machen oft 50-70% der Ladezeit einer Website aus. Responsive Images sind 
 <!-- Srcset für verschiedene Auflösungen -->
 <img
   src="hero-800w.jpg"
-  srcset="hero-400w.jpg 400w,
-          hero-800w.jpg 800w,
-          hero-1200w.jpg 1200w,
-          hero-1600w.jpg 1600w"
+  srcset="hero-400w.jpg 400w, hero-800w.jpg 800w, hero-1200w.jpg 1200w, hero-1600w.jpg 1600w"
   sizes="(max-width: 640px) 100vw,
          (max-width: 1024px) 80vw,
          1200px"
@@ -297,7 +296,9 @@ Mobile Nutzer verwenden Finger statt Mauszeiger. Ihr Design muss das berücksich
 }
 
 /* Verhindere Zoom bei Focus (iOS) */
-input, select, textarea {
+input,
+select,
+textarea {
   font-size: 16px; /* Mindestens 16px auf iOS */
 }
 ```
@@ -327,11 +328,13 @@ input, select, textarea {
 Moderne Browser bieten leistungsstarke Responsive-Testing-Tools:
 
 **Chrome DevTools:**
+
 1. F12 → Device Toggle (Ctrl/Cmd + Shift + M)
 2. Wähle vordefiniertes Gerät oder custom Größe
 3. Test verschiedene Breakpoints und Touch-Events
 
 **Wichtige Test-Szenarien:**
+
 - ✅ Alle Breakpoints durchgehen (320px bis 2560px)
 - ✅ Landscape und Portrait testen
 - ✅ Touch-Events (Button-Größen, Scrolling)
@@ -356,6 +359,7 @@ Mobile Geräte haben oft langsamere Internetverbindungen und weniger Rechenleist
 ### Kritische Performance-Metriken
 
 **Core Web Vitals für Mobile:**
+
 - **LCP** (Largest Contentful Paint): < 2,5s
 - **FID** (First Input Delay): < 100ms
 - **CLS** (Cumulative Layout Shift): < 0,1
@@ -367,12 +371,22 @@ Mobile Geräte haben oft langsamere Internetverbindungen und weniger Rechenleist
 <head>
   <style>
     /* Critical Above-the-Fold CSS */
-    body { font-family: system-ui; margin: 0; }
-    .hero { min-height: 60vh; }
+    body {
+      font-family: system-ui;
+      margin: 0;
+    }
+    .hero {
+      min-height: 60vh;
+    }
   </style>
 
   <!-- Non-Critical CSS asynchron laden -->
-  <link rel="preload" href="/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link
+    rel="preload"
+    href="/styles.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
 </head>
 ```
 
@@ -418,26 +432,10 @@ Buttons zu klein, Hover-States auf Touch-Geräten – Design immer touch-optimie
 Bei HEADON nutzen wir [Tailwind CSS](/technologie/tailwind-css) für produktives Responsive Design:
 
 ```jsx
-<div className="
-  container
-  px-4 sm:px-6 lg:px-8
-  py-8 lg:py-16
-">
-  <h1 className="
-    text-2xl sm:text-3xl lg:text-5xl
-    font-bold
-    leading-tight
-  ">
-    Responsive Title
-  </h1>
+<div className="container px-4 py-8 sm:px-6 lg:px-8 lg:py-16">
+  <h1 className="text-2xl leading-tight font-bold sm:text-3xl lg:text-5xl">Responsive Title</h1>
 
-  <div className="
-    grid
-    grid-cols-1 md:grid-cols-2 lg:grid-cols-3
-    gap-4 lg:gap-8
-  ">
-    {/* Cards */}
-  </div>
+  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">{/* Cards */}</div>
 </div>
 ```
 
@@ -453,15 +451,11 @@ Responsive Design muss auch barrierefrei sein:
 
 <!-- Semantic HTML für Screen Reader -->
 <nav aria-label="Hauptnavigation">
-  <button aria-expanded="false" aria-controls="mobile-menu">
-    Menu
-  </button>
+  <button aria-expanded="false" aria-controls="mobile-menu">Menu</button>
 </nav>
 
 <!-- Skip-Links für Tastaturnutzer -->
-<a href="#main-content" class="skip-link">
-  Zum Hauptinhalt springen
-</a>
+<a href="#main-content" class="skip-link"> Zum Hauptinhalt springen </a>
 ```
 
 WCAG 2.1 Level AA erfordert responsive UND barrierefreie Websites.
@@ -475,6 +469,7 @@ Bei [HEADON.pro](/services/web-development) entwickeln wir alle Websites respons
 ---
 
 **Weitere Ressourcen:**
+
 - [Mobile-First Design Strategie](/blog/mobile-first-design-strategie)
 - [Website Performance optimieren](/blog/website-performance-optimieren)
 - [UI/UX Design Service](/services/ui-ux-design)

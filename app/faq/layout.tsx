@@ -26,7 +26,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'FAQ - Häufig gestellte Fragen | HEADON',
-    description: 'Antworten auf häufige Fragen zu Web Development, Mobile Apps und Projektabläufen.',
+    description:
+      'Antworten auf häufige Fragen zu Web Development, Mobile Apps und Projektabläufen.',
     images: ['/og-images/services.jpg'],
   },
   alternates: {

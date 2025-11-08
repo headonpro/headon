@@ -13,7 +13,15 @@ image:
   alt: 'Performance-Dashboard mit Geschwindigkeitsmessungen und Optimierungsmetriken'
 readingTime: 11
 featured: true
-keywords: ['website ladezeit optimieren', 'website performance verbessern', 'ladezeit reduzieren', 'core web vitals', 'website schneller machen', 'page speed optimieren']
+keywords:
+  [
+    'website ladezeit optimieren',
+    'website performance verbessern',
+    'ladezeit reduzieren',
+    'core web vitals',
+    'website schneller machen',
+    'page speed optimieren',
+  ]
 relatedPosts: ['next-js-performance-optimization', 'core-web-vitals-optimierung']
 ---
 
@@ -24,17 +32,20 @@ Eine langsame Website kostet Sie Kunden: **53% der mobilen Nutzer** verlassen ei
 ### Die harten Fakten
 
 **Impact auf Business:**
+
 - 1 Sekunde längere Ladezeit = **7% weniger Conversions**
 - 2 Sekunden Ladezeit = **87% Nutzer bleiben**
 - 3 Sekunden Ladezeit = **40% Nutzer springen ab**
 - 5 Sekunden Ladezeit = **90% Nutzer sind weg**
 
 **SEO-Impact:**
+
 - Ladezeit ist **offizieller Google Ranking-Faktor** seit 2018
 - Core Web Vitals werden **ab 2021 noch stärker gewichtet**
 - Langsame Websites werden **aktiv abgestraft** im Ranking
 
 **User Experience:**
+
 - Nutzer erwarten **unter 2 Sekunden** Ladezeit
 - Mobile Nutzer sind noch ungeduldiger
 - 79% unzufriedener Nutzer kaufen **nie wieder** auf langsamen Websites
@@ -50,17 +61,20 @@ Google bewertet Performance anhand von **Core Web Vitals** – drei Kern-Metrike
 **Was ist es?** Zeit bis das größte Element im sichtbaren Bereich geladen ist.
 
 **Zielwerte:**
+
 - ✅ **Gut**: < 2,5 Sekunden
 - ⚠️ **Verbesserungswürdig**: 2,5 - 4 Sekunden
 - ❌ **Schlecht**: > 4 Sekunden
 
 **Typische LCP-Elemente:**
+
 - Hero-Bilder
 - Header-Grafiken
 - Große Text-Blöcke
 - Video-Thumbnails
 
 **Wie man LCP verbessert:**
+
 - Bilder optimieren und komprimieren
 - Server-Response-Time reduzieren
 - Render-blocking Resources eliminieren
@@ -71,16 +85,19 @@ Google bewertet Performance anhand von **Core Web Vitals** – drei Kern-Metrike
 **Was ist es?** Zeit bis die Seite auf erste Nutzer-Interaktion reagiert.
 
 **Zielwerte:**
+
 - ✅ **Gut**: < 100 ms
 - ⚠️ **Verbesserungswürdig**: 100 - 300 ms
 - ❌ **Schlecht**: > 300 ms
 
 **Typische Ursachen für schlechten FID:**
+
 - Zu viel JavaScript
 - Blockierendes JavaScript
 - Lange Tasks im Main-Thread
 
 **Wie man FID verbessert:**
+
 - JavaScript Code-Splitting
 - Defer/Async für nicht-kritisches JS
 - Web Workers für schwere Berechnungen
@@ -91,23 +108,27 @@ Google bewertet Performance anhand von **Core Web Vitals** – drei Kern-Metrike
 **Was ist es?** Wie stark verschiebt sich Content während des Ladens?
 
 **Zielwerte:**
+
 - ✅ **Gut**: < 0,1
 - ⚠️ **Verbesserungswürdig**: 0,1 - 0,25
 - ❌ **Schlecht**: > 0,25
 
 **Typische Ursachen:**
+
 - Bilder ohne Dimensionen
 - Dynamisch eingefügte Ads
 - Webfonts mit FOUT (Flash of Unstyled Text)
 - Nachgeladener Content
 
 **Wie man CLS verbessert:**
+
 - `width` und `height` für alle Bilder setzen
 - `aspect-ratio` CSS-Property nutzen
 - Platz für Ads reservieren
 - `font-display: swap` für Webfonts
 
 **Tools zum Messen:**
+
 - [Google PageSpeed Insights](https://pagespeed.web.dev/)
 - [Google Search Console (Core Web Vitals Report)](https://search.google.com/search-console)
 - [WebPageTest](https://www.webpagetest.org/)
@@ -124,17 +145,18 @@ Mehr Details in unserem [Core Web Vitals Guide](/blog/core-web-vitals-optimierun
 
 **A) Richtige Formate wählen:**
 
-| Format | Verwendung | Kompression |
-|--------|-----------|-------------|
+| Format   | Verwendung         | Kompression             |
+| -------- | ------------------ | ----------------------- |
 | **WebP** | Fotos, Screenshots | 25-35% kleiner als JPEG |
-| **AVIF** | Moderne Browser | 50% kleiner als JPEG |
-| **JPEG** | Fotos (Fallback) | Gut, aber größer |
-| **PNG** | Transparenz, Logos | Verlustfrei, groß |
-| **SVG** | Icons, Logos | Vektorgrafik, klein |
+| **AVIF** | Moderne Browser    | 50% kleiner als JPEG    |
+| **JPEG** | Fotos (Fallback)   | Gut, aber größer        |
+| **PNG**  | Transparenz, Logos | Verlustfrei, groß       |
+| **SVG**  | Icons, Logos       | Vektorgrafik, klein     |
 
 **B) Komprimieren:**
 
 **Tools:**
+
 - [TinyPNG](https://tinypng.com/) - Online-Kompression
 - [Squoosh](https://squoosh.app/) - Google Tool
 - [ImageOptim](https://imageoptim.com/) - Mac App
@@ -148,11 +170,7 @@ Mehr Details in unserem [Core Web Vitals Guide](/blog/core-web-vitals-optimierun
 <!-- Verschiedene Größen für verschiedene Displays -->
 <img
   src="image-800w.webp"
-  srcset="
-    image-400w.webp 400w,
-    image-800w.webp 800w,
-    image-1200w.webp 1200w
-  "
+  srcset="image-400w.webp 400w, image-800w.webp 800w, image-1200w.webp 1200w"
   sizes="(max-width: 768px) 100vw, 800px"
   alt="Beschreibung"
   title="Responsive WebP-Bild für optimale Ladezeiten"
@@ -184,7 +202,12 @@ Mehr Details in unserem [Core Web Vitals Guide](/blog/core-web-vitals-optimierun
   <source srcset="image.webp" type="image/webp" />
 
   <!-- Fallback: JPEG für alte Browser -->
-  <img src="image.jpg" alt="Beschreibung" title="Bild mit modernen Formaten und Fallback" loading="lazy" />
+  <img
+    src="image.jpg"
+    alt="Beschreibung"
+    title="Bild mit modernen Formaten und Fallback"
+    loading="lazy"
+  />
 </picture>
 ```
 
@@ -235,6 +258,7 @@ brotli_types text/css text/javascript application/javascript;
 Content Delivery Network = Server weltweit
 
 **Empfohlene CDNs:**
+
 - **Cloudflare**: Kostenlos, sehr gut
 - **AWS CloudFront**: Enterprise
 - **BunnyCDN**: Günstig, schnell
@@ -264,6 +288,7 @@ Bei [HEADON.pro](/services/web-development) nutzen wir Cloudflare CDN für alle 
 ```
 
 **Faustregel:**
+
 - `defer` für Scripts die DOM brauchen
 - `async` für unabhängige Scripts (Analytics)
 
@@ -276,8 +301,7 @@ Nur laden was benötigt wird:
 import { heavyFunction } from './heavy-module'
 
 // ✅ Lazy Loading
-const loadHeavyFunction = () =>
-  import('./heavy-module').then(module => module.heavyFunction())
+const loadHeavyFunction = () => import('./heavy-module').then((module) => module.heavyFunction())
 
 // Nur bei Bedarf laden
 button.onclick = async () => {
@@ -311,12 +335,17 @@ Inline-CSS für above-the-fold Content:
 <head>
   <style>
     /* Critical CSS: Nur für sichtbaren Bereich */
-    header { background: #000; color: #fff; }
-    .hero { min-height: 100vh; }
+    header {
+      background: #000;
+      color: #fff;
+    }
+    .hero {
+      min-height: 100vh;
+    }
   </style>
 
   <!-- Restliches CSS asynchron laden -->
-  <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'">
+  <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'" />
 </head>
 ```
 
@@ -324,17 +353,18 @@ Inline-CSS für above-the-fold Content:
 
 ```html
 <!-- ❌ Viele Requests -->
-<link rel="stylesheet" href="normalize.css">
-<link rel="stylesheet" href="typography.css">
-<link rel="stylesheet" href="layout.css">
+<link rel="stylesheet" href="normalize.css" />
+<link rel="stylesheet" href="typography.css" />
+<link rel="stylesheet" href="layout.css" />
 
 <!-- ✅ Eine Datei -->
-<link rel="stylesheet" href="styles.min.css">
+<link rel="stylesheet" href="styles.min.css" />
 ```
 
 **C) Unused CSS entfernen:**
 
 **Tools:**
+
 - [PurgeCSS](https://purgecss.com/)
 - [UnCSS](https://github.com/uncss/uncss)
 
@@ -350,14 +380,7 @@ Inline-CSS für above-the-fold Content:
 
 ```css
 body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 }
 ```
 
@@ -420,6 +443,7 @@ Google Analytics lokal hosten (kompliziert, aber möglich)
 **D) Alternativen nutzen:**
 
 Leichtere Tools:
+
 - Plausible Analytics (< 1 KB)
 - Fathom Analytics
 - Simple Analytics
@@ -430,6 +454,7 @@ Leichtere Tools:
 ### 8. HTTP/2 oder HTTP/3 nutzen
 
 **Vorteile von HTTP/2:**
+
 - Multiplexing (mehrere Requests parallel über eine Verbindung)
 - Header-Kompression
 - Server Push
@@ -529,7 +554,7 @@ for (const user of users) {
 
 // ✅ Eager Loading
 const users = await User.findAll({
-  include: [{ model: Post }] // Nur 1 Query!
+  include: [{ model: Post }], // Nur 1 Query!
 })
 ```
 
@@ -542,6 +567,7 @@ const users = await User.findAll({
 **URL:** https://pagespeed.web.dev/
 
 **Misst:**
+
 - Core Web Vitals
 - Performance-Score
 - SEO, Accessibility, Best Practices
@@ -553,6 +579,7 @@ const users = await User.findAll({
 **URL:** https://www.webpagetest.org/
 
 **Features:**
+
 - Multi-Location Testing
 - Waterfall-Diagramme
 - Video-Aufnahmen des Ladevorgangs
@@ -582,6 +609,7 @@ lighthouse https://ihre-domain.de --view
 **URL:** https://gtmetrix.com/
 
 **Features:**
+
 - Performance-Score
 - Wasserfalldiagramm
 - Historische Daten
@@ -591,6 +619,7 @@ lighthouse https://ihre-domain.de --view
 **URL:** https://tools.pingdom.com/
 
 **Features:**
+
 - Uptime-Monitoring
 - Performance-Monitoring
 - Alerting
@@ -603,16 +632,16 @@ Maximale Grenzen für Ladezeit, Dateigröße, etc.
 
 **Beispiel-Budget:**
 
-| Metrik | Budget |
-|--------|--------|
-| Ladezeit | < 2 Sekunden |
-| LCP | < 2,5 Sekunden |
-| FID | < 100 ms |
-| CLS | < 0,1 |
-| Seiten-Größe | < 2 MB |
-| JavaScript | < 500 KB |
-| Bilder | < 1 MB gesamt |
-| Requests | < 50 |
+| Metrik       | Budget         |
+| ------------ | -------------- |
+| Ladezeit     | < 2 Sekunden   |
+| LCP          | < 2,5 Sekunden |
+| FID          | < 100 ms       |
+| CLS          | < 0,1          |
+| Seiten-Größe | < 2 MB         |
+| JavaScript   | < 500 KB       |
+| Bilder       | < 1 MB gesamt  |
+| Requests     | < 50           |
 
 **Budgets automatisch prüfen:**
 
@@ -636,14 +665,15 @@ Maximale Grenzen für Ladezeit, Dateigröße, etc.
 
 **Shared Hosting vs. Performance-Hosting:**
 
-| Typ | TTFB | Kosten/Monat | Geeignet für |
-|-----|------|--------------|--------------|
-| **Shared Hosting** | 800-2000ms | 3-10 EUR | Kleine Websites |
-| **Managed WordPress** | 200-500ms | 15-50 EUR | WordPress-Sites |
-| **VPS** | 100-300ms | 10-50 EUR | Mittelgroße Sites |
-| **Cloud (AWS/GCP)** | 50-200ms | 20-500+ EUR | Enterprise |
+| Typ                   | TTFB       | Kosten/Monat | Geeignet für      |
+| --------------------- | ---------- | ------------ | ----------------- |
+| **Shared Hosting**    | 800-2000ms | 3-10 EUR     | Kleine Websites   |
+| **Managed WordPress** | 200-500ms  | 15-50 EUR    | WordPress-Sites   |
+| **VPS**               | 100-300ms  | 10-50 EUR    | Mittelgroße Sites |
+| **Cloud (AWS/GCP)**   | 50-200ms   | 20-500+ EUR  | Enterprise        |
 
 **Empfehlungen:**
+
 - Kleine Websites: All-Inkl, Netcup
 - WordPress: Raidboxes, Kinsta
 - Custom Apps: Hetzner Cloud, DigitalOcean
@@ -654,6 +684,7 @@ Bei [HEADON.pro](/services/web-development) hosten wir auf **Hetzner** (Deutschl
 ## Mobile Performance: Besondere Herausforderungen
 
 **Mobile Nutzer haben:**
+
 - Langsamere Verbindungen (4G/5G, aber nicht immer)
 - Weniger CPU-Power
 - Weniger RAM
@@ -661,6 +692,7 @@ Bei [HEADON.pro](/services/web-development) hosten wir auf **Hetzner** (Deutschl
 **Mobile-spezifische Optimierungen:**
 
 **1. Responsive Images:**
+
 ```html
 <img
   srcset="small.jpg 400w, large.jpg 1200w"
@@ -672,6 +704,7 @@ Bei [HEADON.pro](/services/web-development) hosten wir auf **Hetzner** (Deutschl
 ```
 
 **2. Touch-optimiert:**
+
 - Mindestens 48×48px Touch-Targets
 - Keine Hover-States (kein Touch-Hover)
 
@@ -690,10 +723,9 @@ Bei [HEADON.pro](/services/web-development) hosten wir auf **Hetzner** (Deutschl
 
 ```javascript
 // PWA: Caching für Offline-Nutzung
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
+    caches.match(event.request).then((response) => response || fetch(event.request))
   )
 })
 ```
@@ -701,11 +733,13 @@ self.addEventListener('fetch', event => {
 ## Wann sollten Sie Hilfe holen?
 
 **Performance-Optimierung selbst machen, wenn:**
+
 - Einfache WordPress-Site
 - Basis-Optimierungen (Bilder komprimieren)
 - Kleine Websites
 
 **Experten beauftragen, wenn:**
+
 - Lighthouse-Score < 70 trotz Basis-Optimierungen
 - Komplexe Web-Apps
 - E-Commerce mit vielen Produkten
@@ -713,6 +747,7 @@ self.addEventListener('fetch', event => {
 - Sie keine Zeit haben
 
 **Kosten:**
+
 - Performance-Audit: 500-2.000 EUR
 - Umfassende Optimierung: 2.000-10.000 EUR
 - Laufendes Monitoring: 200-1.000 EUR/Monat
@@ -736,6 +771,7 @@ Schnelle Ladezeiten sind 2025 kein Luxus, sondern **Pflicht**:
 5. **CSS optimieren** → 60-80% kleinere Dateien
 
 **Starten Sie heute:**
+
 1. Messen Sie mit PageSpeed Insights
 2. Setzen Sie die 10 Tipps um
 3. Messen Sie erneut

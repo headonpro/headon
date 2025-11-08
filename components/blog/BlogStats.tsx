@@ -21,13 +21,13 @@ interface BlogStatsProps {
  */
 export function BlogStats({ stats, title, description, compact = true }: BlogStatsProps) {
   return (
-    <div className="my-12 -mx-4 sm:mx-0">
+    <div className="-mx-4 my-12 sm:mx-0">
       <StatsSection
         stats={stats}
         title={title}
         description={description}
         includeSchema={false}
-        className={compact ? 'py-12 bg-gradient-to-br from-gray-50 to-white' : undefined}
+        className={compact ? 'bg-gradient-to-br from-gray-50 to-white py-12' : undefined}
       />
     </div>
   )

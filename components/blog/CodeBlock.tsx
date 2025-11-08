@@ -71,9 +71,7 @@ export function CodeBlock({
       >
         <div className="flex items-center gap-2">
           <Code2 className="h-5 w-5 text-gray-600" />
-          <span className="font-medium text-gray-900">
-            {title || 'Code anzeigen'}
-          </span>
+          <span className="font-medium text-gray-900">{title || 'Code anzeigen'}</span>
           {language && (
             <span className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
               {language}
@@ -89,9 +87,7 @@ export function CodeBlock({
 
       {isOpen && (
         <div className="group relative border-t border-gray-200">
-          <div className="overflow-x-auto rounded-b-lg bg-gray-900">
-            {children}
-          </div>
+          <div className="overflow-x-auto rounded-b-lg bg-gray-900">{children}</div>
           {textContent && <CopyButton text={textContent} />}
         </div>
       )}

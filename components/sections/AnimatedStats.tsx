@@ -56,7 +56,11 @@ function AnimatedNumber({
     [springValue, suffix, prefix]
   )
 
-  return <span ref={ref}>{prefix}0{suffix}</span>
+  return (
+    <span ref={ref}>
+      {prefix}0{suffix}
+    </span>
+  )
 }
 
 export default function AnimatedStats({ stats, variant = 'dark' }: AnimatedStatsProps) {
@@ -88,9 +92,7 @@ export default function AnimatedStats({ stats, variant = 'dark' }: AnimatedStats
               </div>
             </div>
           )}
-          <div
-            className={`mb-2 text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}
-          >
+          <div className={`mb-2 text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
             <AnimatedNumber value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
           </div>
           <div className={`text-sm ${isDark ? 'text-white/80' : 'text-gray-600'}`}>

@@ -77,9 +77,7 @@ export default function FAQSection({
         <h2 className="from-primary to-secondary mb-4 bg-gradient-to-r bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
           {heading}
         </h2>
-        {description && (
-          <p className="mx-auto max-w-2xl text-lg text-gray-600">{description}</p>
-        )}
+        {description && <p className="mx-auto max-w-2xl text-lg text-gray-600">{description}</p>}
       </motion.div>
 
       {/* FAQ Accordion - Glasmorphism Design */}
@@ -94,9 +92,9 @@ export default function FAQSection({
           >
             <AccordionItem
               value={`faq-item-${index}`}
-              className="group rounded-2xl border border-gray-200/50 bg-white/80 px-6 shadow-lg backdrop-blur-sm transition-all hover:scale-[1.02] hover:border-primary/50 hover:bg-white/90 hover:shadow-xl"
+              className="group hover:border-primary/50 rounded-2xl border border-gray-200/50 bg-white/80 px-6 shadow-lg backdrop-blur-sm transition-all hover:scale-[1.02] hover:bg-white/90 hover:shadow-xl"
             >
-              <AccordionTrigger className="from-primary to-secondary py-5 text-left text-base font-bold hover:no-underline group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:text-transparent md:text-lg">
+              <AccordionTrigger className="from-primary to-secondary py-5 text-left text-base font-bold group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:text-transparent hover:no-underline md:text-lg">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="pb-6">

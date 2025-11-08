@@ -12,7 +12,15 @@ image:
   url: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=630&fit=crop'
   alt: 'Progressive Web App auf Smartphone Display mit App-Icons'
 readingTime: 10
-keywords: ['progressive web app', 'pwa', 'service worker', 'offline funktionalität', 'app manifest', 'installierbare website']
+keywords:
+  [
+    'progressive web app',
+    'pwa',
+    'service worker',
+    'offline funktionalität',
+    'app manifest',
+    'installierbare website',
+  ]
 relatedPosts: ['mobile-first-design-strategie', 'website-performance-optimieren']
 ---
 
@@ -29,6 +37,7 @@ Progressive Web Apps sind Websites, die sich wie native Apps verhalten. Sie kön
 3. **Ansprechend**: Fühlt sich an wie eine native App
 
 **Bekannte PWAs:**
+
 - **Twitter Lite**: 65% mehr Seiten pro Session
 - **Pinterest**: 60% mehr Core Engagement
 - **Starbucks**: 2x tägliche aktive Nutzer
@@ -41,18 +50,21 @@ Bei [HEADON.pro](/services/web-development) entwickeln wir PWAs, die Ihre mobile
 ### Vorteile für Unternehmen
 
 **1. Keine App Store Abhängigkeit**
+
 - Keine 30% App Store Provision
 - Keine langwierigen Review-Prozesse
 - Sofortige Updates ohne Freigabe
 - Ein Codebase für alle Plattformen
 
 **2. Höhere Conversion Rates**
+
 - 36% höhere Conversion (durchschnittlich)
 - Kein Download-Zwang → geringere Einstiegshürde
 - Schnellere Ladezeiten = mehr Käufe
 - Push-Notifications für Re-Engagement
 
 **3. Geringere Entwicklungskosten**
+
 - Eine Codebasis für Web, iOS, Android
 - Nutzung von Web-Technologien (JavaScript, HTML, CSS)
 - Einfachere Wartung und Updates
@@ -61,16 +73,19 @@ Bei [HEADON.pro](/services/web-development) entwickeln wir PWAs, die Ihre mobile
 ### Vorteile für Nutzer
 
 **1. Weniger Speicherplatz**
+
 - PWAs: 1-5 MB Durchschnitt
 - Native Apps: 50-200 MB Durchschnitt
 - Perfekt für Geräte mit wenig Speicher
 
 **2. Funktioniert offline**
+
 - Basis-Funktionen auch ohne Internet
 - Automatische Synchronisation bei Verbindung
 - Keine frustrierenden "Keine Verbindung"-Screens
 
 **3. Immer aktuell**
+
 - Automatische Updates im Hintergrund
 - Keine manuellen App-Updates nötig
 - Nutzer haben immer die neueste Version
@@ -124,6 +139,7 @@ Das Manifest definiert, wie Ihre PWA aussieht, wenn sie installiert wird:
 ```
 
 **Wichtige Manifest-Properties:**
+
 - `display: standalone` → App-Modus ohne Browser-UI
 - `theme_color` → Farbe der Statusleiste
 - `icons` → Minimum: 192x192px und 512x512px
@@ -135,42 +151,33 @@ Der Service Worker ist das Herzstück jeder PWA. Er läuft im Hintergrund und er
 ```javascript
 // sw.js - Basis Service Worker
 const CACHE_NAME = 'headon-v1'
-const urlsToCache = [
-  '/',
-  '/styles/main.css',
-  '/scripts/main.js',
-  '/images/logo.svg'
-]
+const urlsToCache = ['/', '/styles/main.css', '/scripts/main.js', '/images/logo.svg']
 
 // Installation: Cache befüllen
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-  )
+self.addEventListener('install', (event) => {
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)))
 })
 
 // Fetch: Cache-First-Strategie
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache Hit: Gib gecachte Version zurück
-        if (response) {
-          return response
-        }
-        // Cache Miss: Hole von Netzwerk
-        return fetch(event.request)
-      })
+    caches.match(event.request).then((response) => {
+      // Cache Hit: Gib gecachte Version zurück
+      if (response) {
+        return response
+      }
+      // Cache Miss: Hole von Netzwerk
+      return fetch(event.request)
+    })
   )
 })
 
 // Aktivierung: Alte Caches löschen
-self.addEventListener('activate', event => {
+self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map(cacheName => {
+        cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
             return caches.delete(cacheName)
           }
@@ -187,11 +194,12 @@ self.addEventListener('activate', event => {
 // main.js
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then((registration) => {
         console.log('SW registered:', registration)
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('SW registration failed:', error)
       })
   })
@@ -206,11 +214,8 @@ Unterschiedliche Inhalte brauchen unterschiedliche Caching-Strategien:
 
 ```javascript
 // Perfekt für: CSS, JS, Bilder, Fonts
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(cached => cached || fetch(event.request))
-  )
+self.addEventListener('fetch', (event) => {
+  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)))
 })
 ```
 
@@ -218,11 +223,8 @@ self.addEventListener('fetch', event => {
 
 ```javascript
 // Perfekt für: API-Calls, aktuelle Daten
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    fetch(event.request)
-      .catch(() => caches.match(event.request))
-  )
+self.addEventListener('fetch', (event) => {
+  event.respondWith(fetch(event.request).catch(() => caches.match(event.request)))
 })
 ```
 
@@ -230,11 +232,11 @@ self.addEventListener('fetch', event => {
 
 ```javascript
 // Zeige Cache, aktualisiere im Hintergrund
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.match(event.request).then(cached => {
-        const fetched = fetch(event.request).then(response => {
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(event.request).then((cached) => {
+        const fetched = fetch(event.request).then((response) => {
           cache.put(event.request, response.clone())
           return response
         })
@@ -253,19 +255,13 @@ Zeigen Sie eine ansprechende Offline-Seite statt Browser-Fehler:
 // sw.js
 const OFFLINE_URL = '/offline.html'
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.add(OFFLINE_URL))
-  )
+self.addEventListener('install', (event) => {
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.add(OFFLINE_URL)))
 })
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request)
-        .catch(() => caches.match(OFFLINE_URL))
-    )
+    event.respondWith(fetch(event.request).catch(() => caches.match(OFFLINE_URL)))
   }
 })
 ```
@@ -275,22 +271,22 @@ self.addEventListener('fetch', event => {
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Offline - HEADON</title>
-  <style>
-    body {
-      font-family: system-ui;
-      text-align: center;
-      padding: 2rem;
-    }
-  </style>
-</head>
-<body>
-  <h1>📱 Sie sind offline</h1>
-  <p>Diese Seite benötigt eine Internetverbindung.</p>
-  <p>Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.</p>
-  <button onclick="location.reload()">Erneut versuchen</button>
-</body>
+  <head>
+    <title>Offline - HEADON</title>
+    <style>
+      body {
+        font-family: system-ui;
+        text-align: center;
+        padding: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📱 Sie sind offline</h1>
+    <p>Diese Seite benötigt eine Internetverbindung.</p>
+    <p>Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.</p>
+    <button onclick="location.reload()">Erneut versuchen</button>
+  </body>
 </html>
 ```
 
@@ -305,19 +301,19 @@ async function subscribeToPushNotifications() {
 
   const subscription = await registration.pushManager.subscribe({
     userVisibleOnly: true,
-    applicationServerKey: 'YOUR_PUBLIC_VAPID_KEY'
+    applicationServerKey: 'YOUR_PUBLIC_VAPID_KEY',
   })
 
   // Subscription an Backend senden
   await fetch('/api/push-subscribe', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(subscription)
+    body: JSON.stringify(subscription),
   })
 }
 
 // In Service Worker: Push empfangen
-self.addEventListener('push', event => {
+self.addEventListener('push', (event) => {
   const data = event.data.json()
 
   const options = {
@@ -327,13 +323,11 @@ self.addEventListener('push', event => {
     vibrate: [200, 100, 200],
     actions: [
       { action: 'open', title: 'Öffnen' },
-      { action: 'close', title: 'Schließen' }
-    ]
+      { action: 'close', title: 'Schließen' },
+    ],
   }
 
-  event.waitUntil(
-    self.registration.showNotification(data.title, options)
-  )
+  event.waitUntil(self.registration.showNotification(data.title, options))
 })
 ```
 
@@ -344,7 +338,7 @@ Kontrollieren Sie, wann der Install-Prompt erscheint:
 ```javascript
 let deferredPrompt
 
-window.addEventListener('beforeinstallprompt', e => {
+window.addEventListener('beforeinstallprompt', (e) => {
   // Verhindere automatischen Prompt
   e.preventDefault()
   deferredPrompt = e
@@ -381,7 +375,7 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development'
+  disable: process.env.NODE_ENV === 'development',
 })
 
 module.exports = withPWA({
@@ -405,6 +399,7 @@ Chrome DevTools bietet einen umfassenden PWA-Check:
 4. "Generate report"
 
 **PWA-Checklist:**
+
 - ✅ HTTPS aktiv
 - ✅ Service Worker registriert
 - ✅ Manifest vorhanden und valide
@@ -417,22 +412,22 @@ Chrome DevTools bietet einen umfassenden PWA-Check:
 
 ```javascript
 // Service Worker Status prüfen
-navigator.serviceWorker.getRegistrations().then(registrations => {
-  registrations.forEach(registration => {
+navigator.serviceWorker.getRegistrations().then((registrations) => {
+  registrations.forEach((registration) => {
     console.log('Service Worker:', registration)
   })
 })
 
 // Service Worker deregistrieren (für Tests)
-navigator.serviceWorker.getRegistrations().then(registrations => {
-  registrations.forEach(registration => registration.unregister())
+navigator.serviceWorker.getRegistrations().then((registrations) => {
+  registrations.forEach((registration) => registration.unregister())
 })
 
 // Cache-Inhalt prüfen
-caches.keys().then(names => {
-  names.forEach(name => {
-    caches.open(name).then(cache => {
-      cache.keys().then(keys => {
+caches.keys().then((names) => {
+  names.forEach((name) => {
+    caches.open(name).then((cache) => {
+      cache.keys().then((keys) => {
         console.log(`Cache ${name}:`, keys)
       })
     })
@@ -450,18 +445,10 @@ Laden Sie zuerst die Basis-UI (Shell), dann die Inhalte:
 
 ```javascript
 // Cache App Shell bei Installation
-const APP_SHELL = [
-  '/',
-  '/styles/core.css',
-  '/scripts/app.js',
-  '/icons/icon-192x192.png'
-]
+const APP_SHELL = ['/', '/styles/core.css', '/scripts/app.js', '/icons/icon-192x192.png']
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open('app-shell-v1')
-      .then(cache => cache.addAll(APP_SHELL))
-  )
+self.addEventListener('install', (event) => {
+  event.waitUntil(caches.open('app-shell-v1').then((cache) => cache.addAll(APP_SHELL)))
 })
 ```
 
@@ -473,15 +460,15 @@ import dynamic from 'next/dynamic'
 
 const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
   loading: () => <p>Lädt...</p>,
-  ssr: false
+  ssr: false,
 })
 ```
 
 ### Preload kritischer Ressourcen
 
 ```html
-<link rel="preload" href="/fonts/main.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/styles/critical.css" as="style">
+<link rel="preload" href="/fonts/main.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/styles/critical.css" as="style" />
 ```
 
 ## Fallstricke und Best Practices
@@ -503,12 +490,14 @@ const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
 ## PWA vs. Native App: Wann was?
 
 ### PWA ist ideal für:
+
 - ✅ Content-lastige Websites (Blogs, Shops, Portale)
 - ✅ Begrenzte Budgets (günstiger als 2 native Apps)
 - ✅ Schnelle Entwicklung (kürzere Time-to-Market)
 - ✅ SEO-Relevanz (PWAs sind indexierbar)
 
 ### Native App ist besser für:
+
 - ✅ Intensive Hardware-Nutzung (AR, VR, komplexe Spiele)
 - ✅ Tiefe OS-Integration (Kontakte, Kalender, etc.)
 - ✅ Monetarisierung via App Store
@@ -519,16 +508,19 @@ const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
 ## Erfolgsgeschichten: PWAs in der Praxis
 
 ### Starbucks PWA
+
 - **99,84% kleiner** als iOS App (233 KB vs. 148 MB)
 - **2x tägliche Nutzer** nach PWA-Launch
 - **Offline-Bestellung** möglich
 
 ### Twitter Lite
+
 - **65% mehr Seiten** pro Session
 - **75% mehr Tweets** gesendet
 - **20% reduzierte Bounce Rate**
 
 ### Pinterest PWA
+
 - **60% mehr Engagement**
 - **44% mehr Werbeeinnahmen**
 - **50% mehr Core User Retention**
@@ -542,6 +534,7 @@ Bei [HEADON.pro](/services/web-development) entwickeln wir PWAs mit Next.js, die
 ---
 
 **Weitere Ressourcen:**
+
 - [Mobile-First Design Strategie](/blog/mobile-first-design-strategie)
 - [Website Performance optimieren](/blog/website-performance-optimieren)
 - [Next.js Agentur](/technologie/next-js-agentur)

@@ -14,7 +14,15 @@ import {
   BackendTechStack,
   RESTvsGraphQL,
 } from '@/components/services/ServiceComponents'
-import { KeyTakeaways, InfoBox, CodeBlock, ComparisonBlock, BlogCTA, BlogStats, BlogTable } from '@/components/blog'
+import {
+  KeyTakeaways,
+  InfoBox,
+  CodeBlock,
+  ComparisonBlock,
+  BlogCTA,
+  BlogStats,
+  BlogTable,
+} from '@/components/blog'
 // Temporarily import TableOfContents directly to isolate the issue
 // import { TableOfContents } from '@/components/blog/TableOfContents'
 
@@ -129,7 +137,7 @@ function MDXPre(props: React.HTMLAttributes<HTMLPreElement>) {
  */
 export default function MDXContent({ children }: MDXContentProps) {
   return (
-    <div className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-gray-900 prose-p:text-gray-900 prose-p:leading-relaxed prose-a:!text-primary prose-a:!no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-strong:font-semibold prose-code:!bg-gray-900 prose-code:!text-gray-100 prose-code:!px-1.5 prose-code:!py-0.5 prose-code:!rounded prose-pre:!bg-gray-900 prose-pre:!text-gray-100 prose-blockquote:border-l-primary prose-blockquote:text-gray-900 [&_h2]:mt-24 [&_h2]:mb-10 [&_h2]:text-3xl [&_h3]:mt-16 [&_h3]:mb-8 [&_h3]:text-2xl [&_h4]:mt-12 [&_h4]:mb-6 [&_h4]:text-xl [&_p]:mb-10 [&_p]:text-lg [&_ol]:my-10 [&_ol_li]:mb-4 [&_ul]:my-10 [&_ul_li]:mb-4">
+    <div className="prose prose-lg prose-headings:font-heading prose-headings:text-gray-900 prose-p:text-gray-900 prose-p:leading-relaxed prose-a:!text-primary prose-a:!no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-strong:font-semibold prose-code:!bg-gray-900 prose-code:!text-gray-100 prose-code:!px-1.5 prose-code:!py-0.5 prose-code:!rounded prose-pre:!bg-gray-900 prose-pre:!text-gray-100 prose-blockquote:border-l-primary prose-blockquote:text-gray-900 max-w-none [&_h2]:mt-24 [&_h2]:mb-10 [&_h2]:text-3xl [&_h3]:mt-16 [&_h3]:mb-8 [&_h3]:text-2xl [&_h4]:mt-12 [&_h4]:mb-6 [&_h4]:text-xl [&_ol]:my-10 [&_ol_li]:mb-4 [&_p]:mb-10 [&_p]:text-lg [&_ul]:my-10 [&_ul_li]:mb-4">
       {children}
     </div>
   )
@@ -163,5 +171,5 @@ export const mdxComponents = {
   ComparisonBlock,
   BlogCTA,
   BlogStats,
-  BlogTable
+  BlogTable,
 }

@@ -112,7 +112,7 @@ export function FAQPageContent() {
           </div>
 
           {/* Statistics */}
-          <div className="mb-12 grid gap-6 md:grid-cols-3 md:mb-16">
+          <div className="mb-12 grid gap-6 md:mb-16 md:grid-cols-3">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -217,7 +217,7 @@ export function FAQPageContent() {
               <div className="relative">
                 <Button
                   variant="outline"
-                  className="flex h-16 w-full items-center justify-start gap-4 rounded-2xl border border-gray-200/50 bg-white/80 px-6 text-left shadow-lg backdrop-blur-sm transition-all hover:scale-[1.02] hover:border-primary/50 hover:bg-white/90 hover:shadow-xl"
+                  className="hover:border-primary/50 flex h-16 w-full items-center justify-start gap-4 rounded-2xl border border-gray-200/50 bg-white/80 px-6 text-left shadow-lg backdrop-blur-sm transition-all hover:scale-[1.02] hover:bg-white/90 hover:shadow-xl"
                   onClick={() => setShowSearch(!showSearch)}
                 >
                   <div className="from-accent to-secondary rounded-lg bg-gradient-to-br p-2">
@@ -241,7 +241,7 @@ export function FAQPageContent() {
                       <div className="flex items-center border-b px-3">
                         <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
                         <input
-                          className="flex h-14 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                          className="placeholder:text-muted-foreground flex h-14 w-full rounded-md bg-transparent py-3 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50"
                           placeholder="Suche nach Fragen oder Stichwörtern..."
                           value={searchQuery}
                           onChange={(e) => setSearchQuery(e.target.value)}
@@ -260,7 +260,7 @@ export function FAQPageContent() {
                       </div>
                       <div className="max-h-[400px] overflow-y-auto">
                         {searchQuery.trim() === '' ? (
-                          <div className="py-6 text-center text-sm text-muted-foreground">
+                          <div className="text-muted-foreground py-6 text-center text-sm">
                             Geben Sie einen Suchbegriff ein...
                           </div>
                         ) : searchResults.length === 0 ? (
@@ -273,7 +273,7 @@ export function FAQPageContent() {
                             {searchResults.map((faq, idx) => (
                               <CommandItem
                                 key={idx}
-                                className="my-2 cursor-pointer rounded-xl border border-transparent bg-gradient-to-br from-gray-50/50 to-white/50 px-4 py-3 transition-all hover:scale-[1.02] hover:border-primary/30 hover:from-primary/5 hover:to-secondary/5 hover:shadow-lg"
+                                className="hover:border-primary/30 hover:from-primary/5 hover:to-secondary/5 my-2 cursor-pointer rounded-xl border border-transparent bg-gradient-to-br from-gray-50/50 to-white/50 px-4 py-3 transition-all hover:scale-[1.02] hover:shadow-lg"
                                 onSelect={() => {
                                   setShowSearch(false)
                                   setSearchQuery('')
@@ -287,9 +287,7 @@ export function FAQPageContent() {
                                 }}
                               >
                                 <div className="flex flex-col gap-2">
-                                  <div className="text-primary font-semibold">
-                                    {faq.question}
-                                  </div>
+                                  <div className="text-primary font-semibold">{faq.question}</div>
                                   <div className="line-clamp-2 text-xs text-gray-600">
                                     {faq.answer}
                                   </div>
@@ -322,7 +320,7 @@ export function FAQPageContent() {
                       <TabsTrigger
                         key={category.key}
                         value={category.key}
-                        className="group flex flex-col items-center gap-3 rounded-2xl border border-gray-200/50 bg-white/80 p-6 shadow-lg backdrop-blur-sm transition-all hover:scale-105 hover:border-primary/50 hover:bg-white/90 hover:shadow-xl data-[state=active]:border-primary data-[state=active]:bg-gradient-to-br data-[state=active]:from-primary/10 data-[state=active]:to-secondary/10 data-[state=active]:shadow-xl"
+                        className="group hover:border-primary/50 data-[state=active]:border-primary data-[state=active]:from-primary/10 data-[state=active]:to-secondary/10 flex flex-col items-center gap-3 rounded-2xl border border-gray-200/50 bg-white/80 p-6 shadow-lg backdrop-blur-sm transition-all hover:scale-105 hover:bg-white/90 hover:shadow-xl data-[state=active]:bg-gradient-to-br data-[state=active]:shadow-xl"
                       >
                         <div className="from-accent to-secondary rounded-xl bg-gradient-to-br p-3 transition-transform duration-300 group-hover:scale-110">
                           <Icon className="text-primary h-6 w-6" strokeWidth={2} />
@@ -375,9 +373,9 @@ export function FAQPageContent() {
                           >
                             <AccordionItem
                               value={`faq-${category.key}-${index}`}
-                              className="group rounded-2xl border border-gray-200/50 bg-white/80 px-6 shadow-lg backdrop-blur-sm transition-all hover:scale-[1.02] hover:border-primary/50 hover:bg-white/90 hover:shadow-xl"
+                              className="group hover:border-primary/50 rounded-2xl border border-gray-200/50 bg-white/80 px-6 shadow-lg backdrop-blur-sm transition-all hover:scale-[1.02] hover:bg-white/90 hover:shadow-xl"
                             >
-                              <AccordionTrigger className="from-primary to-secondary py-5 text-left text-base font-bold hover:no-underline group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:text-transparent md:text-lg">
+                              <AccordionTrigger className="from-primary to-secondary py-5 text-left text-base font-bold group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:text-transparent hover:no-underline md:text-lg">
                                 {faq.question}
                               </AccordionTrigger>
                               <AccordionContent className="pb-6 text-gray-700">

@@ -20,6 +20,7 @@ Dieses Dokument beschreibt alle verfügbaren Performance-Testing-Tools und Workf
 ```
 
 **Was wird getestet:**
+
 - ✅ Cache-Status für verschiedene Asset-Typen
 - ✅ Response-Zeiten
 - ✅ Cloudflare-Erkennung (DNS, Server-Header)
@@ -27,6 +28,7 @@ Dieses Dokument beschreibt alle verfügbaren Performance-Testing-Tools und Workf
 - ✅ HTTP-Status-Codes
 
 **Erwartete Ausgabe:**
+
 ```
 Testing: Next.js Static (webpack.js)
   Status:        200
@@ -76,21 +78,21 @@ pnpm dlx @unlighthouse/cli --site https://headon.pro --only-categories=performan
 
 #### Core Web Vitals (wichtig für SEO)
 
-| Metrik | Gut | Verbesserungsbedürftig | Schlecht |
-|--------|-----|------------------------|----------|
-| **LCP** (Largest Contentful Paint) | ≤ 2.5s | 2.5s - 4.0s | > 4.0s |
-| **FID** (First Input Delay) | ≤ 100ms | 100ms - 300ms | > 300ms |
-| **CLS** (Cumulative Layout Shift) | ≤ 0.1 | 0.1 - 0.25 | > 0.25 |
+| Metrik                             | Gut     | Verbesserungsbedürftig | Schlecht |
+| ---------------------------------- | ------- | ---------------------- | -------- |
+| **LCP** (Largest Contentful Paint) | ≤ 2.5s  | 2.5s - 4.0s            | > 4.0s   |
+| **FID** (First Input Delay)        | ≤ 100ms | 100ms - 300ms          | > 300ms  |
+| **CLS** (Cumulative Layout Shift)  | ≤ 0.1   | 0.1 - 0.25             | > 0.25   |
 
 #### Weitere wichtige Metriken
 
-| Metrik | Beschreibung | Ziel |
-|--------|--------------|------|
-| **TTFB** | Time to First Byte | < 600ms |
-| **FCP** | First Contentful Paint | < 1.8s |
-| **Speed Index** | Wie schnell Inhalte visuell geladen werden | < 3.4s |
-| **TTI** | Time to Interactive | < 3.8s |
-| **TBT** | Total Blocking Time | < 200ms |
+| Metrik          | Beschreibung                               | Ziel    |
+| --------------- | ------------------------------------------ | ------- |
+| **TTFB**        | Time to First Byte                         | < 600ms |
+| **FCP**         | First Contentful Paint                     | < 1.8s  |
+| **Speed Index** | Wie schnell Inhalte visuell geladen werden | < 3.4s  |
+| **TTI**         | Time to Interactive                        | < 3.8s  |
+| **TBT**         | Total Blocking Time                        | < 200ms |
 
 #### Lighthouse Score Interpretation
 
@@ -133,13 +135,13 @@ curl "https://www.webpagetest.org/runtest.php?url=https://headon.pro&location=Fr
 
 **Erwartete Verbesserungen mit Cloudflare CDN:**
 
-| Metrik | Vor CDN | Nach CDN | Verbesserung |
-|--------|---------|----------|--------------|
-| TTFB | ~600ms | ~200ms | -67% |
-| Start Render | ~1.8s | ~0.9s | -50% |
-| Speed Index | ~3.0s | ~1.5s | -50% |
-| LCP | ~2.5s | ~1.2s | -52% |
-| Document Complete | ~4.5s | ~2.5s | -44% |
+| Metrik            | Vor CDN | Nach CDN | Verbesserung |
+| ----------------- | ------- | -------- | ------------ |
+| TTFB              | ~600ms  | ~200ms   | -67%         |
+| Start Render      | ~1.8s   | ~0.9s    | -50%         |
+| Speed Index       | ~3.0s   | ~1.5s    | -50%         |
+| LCP               | ~2.5s   | ~1.2s    | -52%         |
+| Document Complete | ~4.5s   | ~2.5s    | -44%         |
 
 ---
 
@@ -162,6 +164,7 @@ curl "https://www.webpagetest.org/runtest.php?url=https://headon.pro&location=Fr
 ### Waterfall-Analyse
 
 Pingdom zeigt eine detaillierte Waterfall-Chart:
+
 - 🟢 **Grün**: DNS Lookup
 - 🟡 **Gelb**: Initial Connection (TCP)
 - 🟠 **Orange**: SSL Negotiation
@@ -169,6 +172,7 @@ Pingdom zeigt eine detaillierte Waterfall-Chart:
 - 🟣 **Lila**: Content Download
 
 **Mit CDN solltest du sehen:**
+
 - Deutlich kürzere TTFB (blau)
 - Schnellerer SSL-Handshake (orange)
 - Paralleles Laden von Assets
@@ -196,6 +200,7 @@ Pingdom zeigt eine detaillierte Waterfall-Chart:
 ### PageSpeed Insights Empfehlungen
 
 GTmetrix zeigt konkrete Optimierungsvorschläge:
+
 - Eliminate render-blocking resources
 - Properly size images
 - Efficiently encode images
@@ -216,11 +221,13 @@ GTmetrix zeigt konkrete Optimierungsvorschläge:
 ### Field Data vs Lab Data
 
 **Field Data** (Real User Monitoring):
+
 - Basiert auf echten Chrome-Nutzerdaten (CrUX)
 - Nur verfügbar bei ausreichend Traffic
 - **Wichtig für SEO-Ranking**
 
 **Lab Data** (Lighthouse):
+
 - Simulierte Tests unter kontrollierten Bedingungen
 - Immer verfügbar
 - Gut für Entwicklung und Vergleiche
@@ -251,6 +258,7 @@ GTmetrix zeigt konkrete Optimierungsvorschläge:
 5. "Analyze page load" klicken
 
 **Vorteile**:
+
 - Keine Installation nötig
 - Sofortige Ergebnisse
 - Detaillierte Opportunities & Diagnostics
@@ -262,11 +270,13 @@ GTmetrix zeigt konkrete Optimierungsvorschläge:
 3. Seite lädt und Recording stoppt automatisch
 
 **Analyse**:
+
 - **Flamegraph**: JavaScript Execution Time
 - **Network**: Request-Timeline
 - **Main Thread**: Rendering & Scripting
 
 **Was suchen?**:
+
 - 🔴 Lange Tasks (> 50ms) → JavaScript-Optimierung nötig
 - 🟡 Layout Shifts → CLS-Problem
 - 🟢 Idle Time → Gut!
@@ -278,11 +288,13 @@ GTmetrix zeigt konkrete Optimierungsvorschläge:
 3. **Disable cache** aktivieren für echten Test
 
 **Wichtige Spalten**:
+
 - **Size**: Download-Größe
 - **Time**: Download-Zeit
 - **Waterfall**: Visueller Request-Flow
 
 **Filter nutzen**:
+
 ```
 # Nur Bilder anzeigen
 type:image
@@ -314,6 +326,7 @@ ANALYZE=true pnpm build
 **Output**: Interaktive Treemap im Browser
 
 **Was suchen?**:
+
 - 🔴 Große Pakete (> 100KB) → Code-Splitting prüfen
 - 🟡 Duplicate Dependencies → Deduplizieren
 - 🟢 Tree-Shaking funktioniert
@@ -476,8 +489,8 @@ curl -H "Accept-Encoding: gzip" -I https://headon.pro | grep -i content-encoding
   "ci": {
     "assert": {
       "assertions": {
-        "resource-summary:script:size": ["error", {"maxNumericValue": 300000}],
-        "resource-summary:image:size": ["error", {"maxNumericValue": 500000}]
+        "resource-summary:script:size": ["error", { "maxNumericValue": 300000 }],
+        "resource-summary:image:size": ["error", { "maxNumericValue": 500000 }]
       }
     }
   }
@@ -548,6 +561,7 @@ diff reports/before-cdn-headers.txt reports/after-cdn-headers.txt
 ```
 
 **Erwartete Unterschiede**:
+
 - ✅ `server: cloudflare` (statt nginx/apache)
 - ✅ `cf-cache-status: HIT` (für statische Assets)
 - ✅ Schnellere Response-Zeiten
@@ -562,6 +576,7 @@ diff reports/before-cdn-headers.txt reports/after-cdn-headers.txt
 **Navigation**: Cloudflare Dashboard → Analytics & Logs
 
 **KPIs überwachen**:
+
 - **Cache Hit Ratio**: Ziel > 70%
 - **Bandwidth Saved**: Durch Caching gespart
 - **Threats Mitigated**: Blockierte Anfragen
@@ -570,11 +585,13 @@ diff reports/before-cdn-headers.txt reports/after-cdn-headers.txt
 ### Umami Analytics Integration
 
 Eigene Umami-Installation (bereits vorhanden) trackt:
+
 - Page Load Times (teilweise)
 - User-Flows
 - Bounce-Rate (indirekt Performance-Indikator)
 
 **Performance-Einfluss**:
+
 - Langsame Seiten → höhere Bounce-Rate
 - Schnelle Seiten → mehr Seitenaufrufe/Session
 
@@ -585,11 +602,13 @@ Eigene Umami-Installation (bereits vorhanden) trackt:
 ### Problem: Lighthouse Score < 80
 
 **Diagnose**:
+
 ```bash
 pnpm dlx lighthouse https://headon.pro --only-categories=performance --view
 ```
 
 **Häufige Ursachen**:
+
 1. **Große JavaScript Bundles** → Code-Splitting prüfen
 2. **Unoptimierte Bilder** → Next.js Image-Component verwenden
 3. **Render-Blocking Resources** → Async/Defer für Scripts
@@ -600,11 +619,13 @@ pnpm dlx lighthouse https://headon.pro --only-categories=performance --view
 ### Problem: Cache-Hit-Ratio < 50%
 
 **Diagnose**:
+
 ```bash
 ./scripts/test-cdn-performance.sh https://headon.pro
 ```
 
 **Ursachen**:
+
 - Page Rules falsch konfiguriert
 - Cookies auf allen Requests (verhindert Caching)
 - `Cache-Control: private` Header (siehe next.config.ts)
@@ -616,10 +637,12 @@ pnpm dlx lighthouse https://headon.pro --only-categories=performance --view
 ### Problem: LCP > 2.5s
 
 **Diagnose**:
+
 - Chrome DevTools → Lighthouse → "View Trace"
 - Suche das LCP-Element (meist Hero-Image)
 
 **Lösungen**:
+
 1. **Preload** kritische Ressourcen:
    ```html
    <link rel="preload" as="image" href="/hero-bg.jpg" />
@@ -666,6 +689,7 @@ pnpm dlx lighthouse https://headon.pro --only-categories=performance --view
 ## Nützliche Links
 
 ### Tools
+
 - Lighthouse: https://developers.google.com/web/tools/lighthouse
 - WebPageTest: https://www.webpagetest.org/
 - Pingdom: https://tools.pingdom.com/
@@ -673,11 +697,13 @@ pnpm dlx lighthouse https://headon.pro --only-categories=performance --view
 - PageSpeed Insights: https://pagespeed.web.dev/
 
 ### Dokumentation
+
 - Web Vitals: https://web.dev/vitals/
 - Next.js Performance: https://nextjs.org/docs/advanced-features/measuring-performance
 - Cloudflare Analytics: https://developers.cloudflare.com/analytics/
 
 ### Learning Resources
+
 - Web.dev Learn Performance: https://web.dev/learn/#performance
 - Chrome DevTools Docs: https://developer.chrome.com/docs/devtools/
 

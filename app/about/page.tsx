@@ -5,13 +5,13 @@ import { PersonSchema } from '@/components/seo/SchemaGenerator'
 export const metadata: Metadata = {
   title: 'Über uns - HEADON Digitalagentur aus Lauda-Königshofen',
   description:
-    'Lernen Sie HEADON kennen: Moderne Kreativagentur für innovative digitale Lösungen. 10+ Jahre Erfahrung, KI-gestützte Entwicklung, 100% Kundenzufriedenheit.',
+    'Moderne Digitalagentur für Web, Mobile & KI-Integration. Technologie-agnostisch mit Next.js, React, Vue, Flutter und mehr. Regional verwurzelt in Lauda-Königshofen.',
   keywords:
-    'Über HEADON, Digitalagentur Lauda-Königshofen, Kreativagentur Team, Mission Vision Werte, agile Entwicklung, KI-gestützte Lösungen, Kundenzufriedenheit, Innovation Qualität',
+    'Digitalagentur Lauda-Königshofen, Web Development, Mobile Apps, AI Integration, Next.js, React, Flutter, TypeScript, Docker, DevOps, Bad Mergentheim, Tauberbischofsheim',
   openGraph: {
-    title: 'Über HEADON - Ihre Digitalagentur aus Lauda-Königshofen',
+    title: 'Über HEADON - Moderne Digitalagentur aus Lauda-Königshofen',
     description:
-      'Moderne Kreativagentur mit 10+ Jahren Erfahrung. Innovative digitale Lösungen durch KI-gestützte Entwicklung und agile Methoden.',
+      'Technologie-agnostisch. Performance-fokussiert. Regional verwurzelt. Web, Mobile & KI-Integration mit modernsten Technologien.',
     url: 'https://headon.pro/about',
     siteName: 'HEADON.pro',
     locale: 'de_DE',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Über HEADON - Digitalagentur',
-    description: '10+ Jahre Erfahrung, KI-gestützte Entwicklung, 100% Kundenzufriedenheit',
+    description: 'Moderne Web & Mobile Development mit KI-Integration aus Lauda-Königshofen',
     images: ['/og-images/about.jpg'],
   },
   alternates: {
@@ -43,9 +43,9 @@ export default function AboutPage() {
       <PersonSchema
         person={{
           name: 'Onur Cirakoglu',
-          jobTitle: 'Founder & CEO',
+          jobTitle: 'Founder',
           description:
-            'Founder and CEO of HEADON.pro, a modern digital agency specializing in AI-powered web and mobile development.',
+            'Founder of HEADON.pro, a digital agency for modern web and mobile development with AI integration.',
           url: '/about',
         }}
       />

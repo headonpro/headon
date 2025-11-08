@@ -12,7 +12,13 @@ image:
   url: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=630&fit=crop'
   alt: 'Handwerker bei der Arbeit - Website für Handwerksbetriebe'
 readingTime: 8
-keywords: ['handwerker website', 'handwerksbetrieb online marketing', 'lead generierung handwerker', 'local seo handwerker']
+keywords:
+  [
+    'handwerker website',
+    'handwerksbetrieb online marketing',
+    'lead generierung handwerker',
+    'local seo handwerker',
+  ]
 relatedPosts: ['local-seo-guide-kleine-unternehmen', 'google-business-profile-optimieren']
 ---
 
@@ -23,12 +29,14 @@ Als Handwerker haben Sie volle Auftragsbücher – aber was passiert, wenn die a
 "Ich habe genug Aufträge durch Mundpropaganda" – ein häufiger Irrtum. 73% der Kunden suchen Handwerker heute online. Ohne Website verlieren Sie täglich potenzielle Aufträge an die Konkurrenz.
 
 **Fakten zur Handwerker-Suche:**
+
 - 73% suchen online nach Handwerkern
 - 68% nutzen Google für Handwerker-Suche
 - 54% lesen Online-Bewertungen vor Beauftragung
 - 41% kontaktieren Handwerker über Website-Formular
 
 **Vorteile einer Handwerker-Website:**
+
 - ✅ 24/7 Anfragen (auch außerhalb Geschäftszeiten)
 - ✅ Professioneller erster Eindruck
 - ✅ Referenzen und Projekte zeigen
@@ -44,6 +52,7 @@ Bei [HEADON.pro](/branchen/handwerk) entwickeln wir spezialisierte Handwerker-We
 Ihre bisherigen Projekte sind Ihr bestes Marketing. Zeigen Sie, was Sie können!
 
 **Galerie Best Practices:**
+
 - ✅ Vorher/Nachher-Vergleiche
 - ✅ Hochwertige Fotos (professionell oder gute Smartphone-Kamera)
 - ✅ Kurze Projektbeschreibung
@@ -67,21 +76,21 @@ const projekte = [
     nachher: '/projekte/bad-nachher.jpg',
     leistungen: ['Fliesenarbeiten', 'Sanitärinstallation', 'Elektroinstallation'],
     dauer: '2 Wochen',
-    ort: 'Bad Mergentheim'
-  }
+    ort: 'Bad Mergentheim',
+  },
 ]
 
 export default function ProjektePage() {
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">Unsere Referenzprojekte</h1>
+      <h1 className="mb-8 text-4xl font-bold">Unsere Referenzprojekte</h1>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projekte.map(projekt => (
-          <div key={projekt.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {projekte.map((projekt) => (
+          <div key={projekt.id} className="overflow-hidden rounded-lg bg-white shadow-lg">
             <div className="grid grid-cols-2">
               <div className="relative h-48">
-                <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 text-sm rounded">
+                <div className="absolute top-2 left-2 rounded bg-black/70 px-2 py-1 text-sm text-white">
                   Vorher
                 </div>
                 <Image
@@ -92,7 +101,7 @@ export default function ProjektePage() {
                 />
               </div>
               <div className="relative h-48">
-                <div className="absolute top-2 left-2 bg-green-600 text-white px-2 py-1 text-sm rounded">
+                <div className="absolute top-2 left-2 rounded bg-green-600 px-2 py-1 text-sm text-white">
                   Nachher
                 </div>
                 <Image
@@ -105,11 +114,11 @@ export default function ProjektePage() {
             </div>
 
             <div className="p-6">
-              <span className="text-sm text-primary font-semibold">{projekt.kategorie}</span>
-              <h3 className="text-xl font-bold mt-2 mb-3">{projekt.titel}</h3>
-              <p className="text-gray-600 mb-4">{projekt.beschreibung}</p>
+              <span className="text-primary text-sm font-semibold">{projekt.kategorie}</span>
+              <h3 className="mt-2 mb-3 text-xl font-bold">{projekt.titel}</h3>
+              <p className="mb-4 text-gray-600">{projekt.beschreibung}</p>
 
-              <div className="border-t pt-4 space-y-2">
+              <div className="space-y-2 border-t pt-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Dauer:</span>
                   <span className="font-semibold">{projekt.dauer}</span>
@@ -121,13 +130,10 @@ export default function ProjektePage() {
               </div>
 
               <div className="mt-4">
-                <p className="text-sm text-gray-600 mb-2">Leistungen:</p>
+                <p className="mb-2 text-sm text-gray-600">Leistungen:</p>
                 <div className="flex flex-wrap gap-2">
-                  {projekt.leistungen.map(leistung => (
-                    <span
-                      key={leistung}
-                      className="bg-gray-100 px-3 py-1 rounded-full text-sm"
-                    >
+                  {projekt.leistungen.map((leistung) => (
+                    <span key={leistung} className="rounded-full bg-gray-100 px-3 py-1 text-sm">
                       {leistung}
                     </span>
                   ))}
@@ -147,6 +153,7 @@ export default function ProjektePage() {
 Machen Sie es Kunden einfach, Sie zu kontaktieren – ohne Anruf, ohne E-Mail-Client.
 
 **Anfrageformular Best Practices:**
+
 - ✅ Kurz halten (Name, Kontakt, Projekt-Art, Nachricht)
 - ✅ Projekt-Art als Dropdown (Neubau, Sanierung, Reparatur)
 - ✅ Optional: Datei-Upload für Fotos
@@ -161,35 +168,39 @@ Machen Sie es Kunden einfach, Sie zu kontaktieren – ohne Anruf, ohne E-Mail-Cl
 import { useForm } from 'react-hook-form'
 
 export default function AnfrageFormular() {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
   const onSubmit = async (data) => {
     await fetch('/api/anfrage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
 
     alert('Anfrage gesendet! Wir melden uns innerhalb von 24 Stunden.')
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 rounded-lg bg-white p-8 shadow">
       <h2 className="text-2xl font-bold">Jetzt unverbindlich anfragen</h2>
 
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid gap-4 md:grid-cols-2">
         <input
           {...register('name', { required: true })}
           placeholder="Ihr Name *"
-          className="px-4 py-3 border rounded"
+          className="rounded border px-4 py-3"
         />
-        {errors.name && <span className="text-red-500 text-sm">Name erforderlich</span>}
+        {errors.name && <span className="text-sm text-red-500">Name erforderlich</span>}
 
         <input
           {...register('telefon', { required: true })}
           type="tel"
           placeholder="Telefon *"
-          className="px-4 py-3 border rounded"
+          className="rounded border px-4 py-3"
         />
       </div>
 
@@ -197,12 +208,12 @@ export default function AnfrageFormular() {
         {...register('email', { required: true })}
         type="email"
         placeholder="E-Mail *"
-        className="w-full px-4 py-3 border rounded"
+        className="w-full rounded border px-4 py-3"
       />
 
       <select
         {...register('projektart', { required: true })}
-        className="w-full px-4 py-3 border rounded"
+        className="w-full rounded border px-4 py-3"
       >
         <option value="">Projekt-Art wählen *</option>
         <option value="neubau">Neubau</option>
@@ -211,10 +222,7 @@ export default function AnfrageFormular() {
         <option value="wartung">Wartung</option>
       </select>
 
-      <select
-        {...register('dringlichkeit')}
-        className="w-full px-4 py-3 border rounded"
-      >
+      <select {...register('dringlichkeit')} className="w-full rounded border px-4 py-3">
         <option value="">Dringlichkeit</option>
         <option value="sofort">Sofort / Notfall</option>
         <option value="bald">1-2 Wochen</option>
@@ -225,12 +233,12 @@ export default function AnfrageFormular() {
         {...register('nachricht', { required: true })}
         placeholder="Beschreiben Sie Ihr Projekt *"
         rows={5}
-        className="w-full px-4 py-3 border rounded"
+        className="w-full rounded border px-4 py-3"
       />
 
       <button
         type="submit"
-        className="w-full bg-primary text-white px-8 py-4 rounded font-semibold hover:bg-primary-dark"
+        className="bg-primary hover:bg-primary-dark w-full rounded px-8 py-4 font-semibold text-white"
       >
         Kostenlose Anfrage senden
       </button>
@@ -253,18 +261,21 @@ Zeigen Sie klar, welche Leistungen Sie anbieten. Kunden müssen auf einen Blick 
 ## Unsere Leistungen
 
 ### Sanitärarbeiten
+
 - Badsanierung komplett
 - Heizungsinstallation
 - Rohrleitungsbau
 - Wartung & Reparatur
 
 ### Elektroarbeiten
+
 - Elektroinstallationen Neubau
 - Elektro-Sanierung Altbau
 - Smart Home Integration
 - E-Mobilität / Wallbox
 
 ### Fliesenarbeiten
+
 - Badezimmer-Fliesen
 - Küchen-Fliesen
 - Terrassen & Balkone
@@ -278,23 +289,23 @@ Ihre Telefonnummer und E-Mail müssen sofort sichtbar sein – auf jeder Seite.
 **Header mit Kontakt:**
 
 ```jsx
-<header className="bg-white shadow-sm sticky top-0 z-50">
+<header className="sticky top-0 z-50 bg-white shadow-sm">
   <div className="container mx-auto px-4 py-4">
-    <div className="flex justify-between items-center">
+    <div className="flex items-center justify-between">
       <Logo />
 
       <div className="flex items-center gap-6">
         {/* Telefon */}
         <a
           href="tel:+497931123456"
-          className="flex items-center gap-2 text-lg font-semibold text-primary"
+          className="text-primary flex items-center gap-2 text-lg font-semibold"
         >
           <Phone size={20} />
           <span className="hidden md:inline">07931 123456</span>
         </a>
 
         {/* Öffnungszeiten */}
-        <div className="hidden lg:block text-sm text-gray-600">
+        <div className="hidden text-sm text-gray-600 lg:block">
           <div>Mo-Fr: 7:00 - 17:00</div>
           <div>Sa: 8:00 - 12:00</div>
         </div>
@@ -302,7 +313,7 @@ Ihre Telefonnummer und E-Mail müssen sofort sichtbar sein – auf jeder Seite.
         {/* CTA Button */}
         <a
           href="/anfrage"
-          className="bg-primary text-white px-6 py-3 rounded font-semibold hover:bg-primary-dark"
+          className="bg-primary hover:bg-primary-dark rounded px-6 py-3 font-semibold text-white"
         >
           Jetzt anfragen
         </a>
@@ -345,6 +356,7 @@ Local SEO ist für Handwerker der wichtigste Traffic-Kanal. Sie müssen für "[H
 ### Lokale Keywords integrieren
 
 **Wichtige Local Keywords:**
+
 - "Elektriker Bad Mergentheim"
 - "Sanitär Notdienst Wertheim"
 - "Heizung Reparatur Main-Tauber-Kreis"
@@ -355,7 +367,8 @@ Local SEO ist für Handwerker der wichtigste Traffic-Kanal. Sie müssen für "[H
 ```jsx
 export const metadata = {
   title: 'Meisterbetrieb Müller - Sanitär & Heizung Bad Mergentheim',
-  description: 'Ihr Meisterbetrieb für Sanitär, Heizung und Badsanierung in Bad Mergentheim ✓ 25 Jahre Erfahrung ✓ 24h Notdienst ✓ Festpreisgarantie. Jetzt anfragen!',
+  description:
+    'Ihr Meisterbetrieb für Sanitär, Heizung und Badsanierung in Bad Mergentheim ✓ 25 Jahre Erfahrung ✓ 24h Notdienst ✓ Festpreisgarantie. Jetzt anfragen!',
 }
 
 export default function HomePage() {
@@ -364,16 +377,16 @@ export default function HomePage() {
       <h1>Sanitär & Heizung Meisterbetrieb in Bad Mergentheim</h1>
 
       <p>
-        Willkommen bei Ihrem Meisterbetrieb für Sanitär, Heizung und Badsanierung
-        in Bad Mergentheim und im Main-Tauber-Kreis. Seit 25 Jahren sind wir
-        Ihr zuverlässiger Partner für alle Sanitär- und Heizungsarbeiten.
+        Willkommen bei Ihrem Meisterbetrieb für Sanitär, Heizung und Badsanierung in Bad Mergentheim
+        und im Main-Tauber-Kreis. Seit 25 Jahren sind wir Ihr zuverlässiger Partner für alle
+        Sanitär- und Heizungsarbeiten.
       </p>
 
       <section>
         <h2>Unsere Leistungen in Bad Mergentheim</h2>
         <p>
-          Als Meisterbetrieb bieten wir Ihnen in Bad Mergentheim, Wertheim,
-          Lauda-Königshofen und Umgebung ein umfassendes Leistungsspektrum...
+          Als Meisterbetrieb bieten wir Ihnen in Bad Mergentheim, Wertheim, Lauda-Königshofen und
+          Umgebung ein umfassendes Leistungsspektrum...
         </p>
       </section>
     </>
@@ -385,43 +398,43 @@ export default function HomePage() {
 
 ```html
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Meisterbetrieb Müller GmbH",
-  "image": "https://meisterbetrieb-mueller.de/logo.jpg",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Handwerkerstraße 15",
-    "addressLocality": "Bad Mergentheim",
-    "postalCode": "97980",
-    "addressCountry": "DE"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 49.4922,
-    "longitude": 9.7736
-  },
-  "telephone": "+497931123456",
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "07:00",
-      "closes": "17:00"
-    }
-  ],
-  "priceRange": "€€",
-  "areaServed": {
-    "@type": "GeoCircle",
-    "geoMidpoint": {
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Meisterbetrieb Müller GmbH",
+    "image": "https://meisterbetrieb-mueller.de/logo.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Handwerkerstraße 15",
+      "addressLocality": "Bad Mergentheim",
+      "postalCode": "97980",
+      "addressCountry": "DE"
+    },
+    "geo": {
       "@type": "GeoCoordinates",
       "latitude": 49.4922,
       "longitude": 9.7736
     },
-    "geoRadius": "50000"
+    "telephone": "+497931123456",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "07:00",
+        "closes": "17:00"
+      }
+    ],
+    "priceRange": "€€",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 49.4922,
+        "longitude": 9.7736
+      },
+      "geoRadius": "50000"
+    }
   }
-}
 </script>
 ```
 
@@ -435,6 +448,7 @@ Bewertungen sind für Handwerker entscheidend. 89% der Kunden lesen Bewertungen 
    "Waren Sie zufrieden? Dann würden wir uns über eine Google-Bewertung freuen!"
 
 2. **Review-Link verschicken:**
+
    ```
    https://g.page/r/[IHR_BUSINESS_ID]/review
    ```
@@ -454,46 +468,50 @@ const testimonials = [
     projekt: 'Badsanierung',
     bewertung: 5,
     text: 'Absolut professionelle Arbeit! Von der Planung bis zur Ausführung alles perfekt. Saubere Arbeit, pünktlich fertig. Sehr empfehlenswert!',
-    ort: 'Bad Mergentheim'
-  }
+    ort: 'Bad Mergentheim',
+  },
 ]
 
 export default function Testimonials() {
   return (
     <section className="bg-gray-50 py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Das sagen unsere Kunden
-        </h2>
+        <h2 className="mb-12 text-center text-3xl font-bold">Das sagen unsere Kunden</h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid gap-8 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow">
-              <div className="flex gap-1 mb-4">
+            <div key={index} className="rounded-lg bg-white p-6 shadow">
+              <div className="mb-4 flex gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
                     size={20}
-                    className={i < testimonial.bewertung ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+                    className={
+                      i < testimonial.bewertung
+                        ? 'fill-yellow-400 text-yellow-400'
+                        : 'text-gray-300'
+                    }
                   />
                 ))}
               </div>
 
-              <p className="text-gray-700 mb-4">"{testimonial.text}"</p>
+              <p className="mb-4 text-gray-700">"{testimonial.text}"</p>
 
               <div className="border-t pt-4">
                 <p className="font-semibold">{testimonial.name}</p>
-                <p className="text-sm text-gray-600">{testimonial.projekt} • {testimonial.ort}</p>
+                <p className="text-sm text-gray-600">
+                  {testimonial.projekt} • {testimonial.ort}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-8">
+        <div className="mt-8 text-center">
           <a
             href="https://g.page/r/YOUR_BUSINESS_ID/review"
             target="_blank"
-            className="inline-flex items-center gap-2 text-primary font-semibold"
+            className="text-primary inline-flex items-center gap-2 font-semibold"
           >
             Jetzt auf Google bewerten <ExternalLink size={16} />
           </a>
@@ -509,6 +527,7 @@ export default function Testimonials() {
 62% der Handwerker-Suchen passieren mobil. Ihre Website MUSS mobile perfekt sein.
 
 **Mobile Best Practices:**
+
 - ✅ Click-to-Call Button prominent
 - ✅ Anfahrt / Google Maps Integration
 - ✅ Schnelles Kontaktformular
@@ -517,16 +536,16 @@ export default function Testimonials() {
 
 ## Kosten Handwerker-Website
 
-| Komponente | Basis (3.000€) | Professional (5.000€) | Premium (8.000€) |
-|---|---|---|---|
-| Responsive Design | ✅ | ✅ | ✅ |
-| Leistungsübersicht | ✅ | ✅ | ✅ |
-| Kontaktformular | ✅ | ✅ | ✅ |
-| Projektgalerie | 10 Projekte | 30 Projekte | Unbegrenzt |
-| Blog/News | ❌ | ✅ | ✅ |
-| Online-Terminbuchung | ❌ | ❌ | ✅ |
-| Mehrsprachigkeit | ❌ | ❌ | ✅ |
-| Local SEO Setup | Basis | Professional | Advanced |
+| Komponente           | Basis (3.000€) | Professional (5.000€) | Premium (8.000€) |
+| -------------------- | -------------- | --------------------- | ---------------- |
+| Responsive Design    | ✅             | ✅                    | ✅               |
+| Leistungsübersicht   | ✅             | ✅                    | ✅               |
+| Kontaktformular      | ✅             | ✅                    | ✅               |
+| Projektgalerie       | 10 Projekte    | 30 Projekte           | Unbegrenzt       |
+| Blog/News            | ❌             | ✅                    | ✅               |
+| Online-Terminbuchung | ❌             | ❌                    | ✅               |
+| Mehrsprachigkeit     | ❌             | ❌                    | ✅               |
+| Local SEO Setup      | Basis          | Professional          | Advanced         |
 
 Bei [HEADON.pro](/branchen/handwerk) starten Handwerker-Websites bei 3.000 EUR – mit Projektgalerie, Anfrageformular und Local SEO.
 
@@ -535,6 +554,7 @@ Bei [HEADON.pro](/branchen/handwerk) starten Handwerker-Websites bei 3.000 EUR �
 Eine professionelle Website generiert kontinuierlich neue Anfragen – auch wenn Ihre Auftragsbücher voll sind. Mit Projektgalerie, einfachem Kontakt und Local SEO gewinnen Sie die richtigen Kunden aus Ihrer Region.
 
 **Die 5 wichtigsten Takeaways:**
+
 1. Projektgalerie mit Vorher/Nachher-Fotos
 2. Einfaches Online-Anfrageformular
 3. Local SEO für "[Handwerk] [Stadt]"
@@ -544,6 +564,7 @@ Eine professionelle Website generiert kontinuierlich neue Anfragen – auch wenn
 ---
 
 **Weitere Ressourcen:**
+
 - [Handwerk Websites von HEADON](/branchen/handwerk)
 - [Local SEO Guide](/blog/local-seo-guide-kleine-unternehmen)
 - [Google Business Profile optimieren](/blog/google-business-profile-optimieren)

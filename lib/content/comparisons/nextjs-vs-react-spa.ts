@@ -38,8 +38,7 @@ export const nextjsVsReactSpa: ComparisonArticle = {
         'Mehr Überlegungen zu Rendering-Strategie nötig',
         'Nicht ideal für reine Client-Side Apps',
       ],
-      useCase:
-        'Marketing-Websites, E-Commerce, Blogs, Content-heavy Sites, SEO-kritische Projekte',
+      useCase: 'Marketing-Websites, E-Commerce, Blogs, Content-heavy Sites, SEO-kritische Projekte',
       recommendation:
         'Wählen Sie Next.js für Projekte, bei denen SEO und Initial Load Performance kritisch sind.',
     },

@@ -201,16 +201,12 @@ export default function BlogContent({
                 className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
               >
                 {posts.map((post, index) => (
-                  <Link
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    className="group block"
-                  >
+                  <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
                     <motion.article
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.5 + index * 0.05 }}
-                      className="relative h-full overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-white/30 hover:bg-white/15 hover:shadow-2xl cursor-pointer"
+                      className="relative h-full cursor-pointer overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-white/30 hover:bg-white/15 hover:shadow-2xl"
                     >
                       <div className="p-8">
                         <div className="mb-4 flex flex-wrap items-center gap-4">

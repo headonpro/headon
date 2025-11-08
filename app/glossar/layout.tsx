@@ -26,7 +26,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Glossar - Web Development Fachbegriffe | HEADON',
-    description: 'Verständliche Erklärungen zu 30+ Fachbegriffen aus Webentwicklung und App-Development.',
+    description:
+      'Verständliche Erklärungen zu 30+ Fachbegriffen aus Webentwicklung und App-Development.',
     images: ['/og-images/services.jpg'],
   },
   alternates: {
