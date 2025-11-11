@@ -517,7 +517,7 @@ export const metadata: Metadata = {
 
 ## Preise & Pakete
 
-- Basis-Website: ab 5.000€
+- Basis-Website: ab 2.500€
 - Online-Shop: ab 8.000€
 - All-Inclusive mit Abo-System: ab 12.000€
 

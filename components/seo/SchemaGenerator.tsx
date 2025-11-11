@@ -12,6 +12,8 @@
  * - PersonSchema: Author/team profile wrapper
  * - ReviewSchema: Testimonial wrapper
  * - BreadcrumbSchema: Navigation breadcrumb wrapper
+ * - ServiceSchema: Service page wrapper
+ * - ItemListSchema: Item list wrapper (services, products, etc.)
  */
 
 import Script from 'next/script'
@@ -24,9 +26,13 @@ import {
   buildPersonSchema,
   buildReviewSchema,
   buildBreadcrumbListSchema,
+  buildServiceSchema,
+  buildItemListSchema,
   type PersonInput,
   type ReviewInput,
   type BreadcrumbInput,
+  type ServiceInput,
+  type ItemListInput,
 } from '@/lib/seo/schema-builder'
 
 // ============================================================================
@@ -211,5 +217,45 @@ export function BreadcrumbSchema({ items }: { items: BreadcrumbInput[] }) {
   }
 
   const schema = buildBreadcrumbListSchema(items)
+  return <SchemaGenerator schema={schema} />
+}
+
+/**
+ * Service Schema wrapper for service pages
+ *
+ * @example
+ * ```tsx
+ * <ServiceSchema service={{
+ *   name: 'Web Development',
+ *   description: 'Professional web development services',
+ *   serviceType: 'Web Development',
+ *   url: '/services/web-development',
+ *   areaServed: ['Bad Mergentheim', 'Lauda-Königshofen'],
+ *   price: { from: 2500, currency: 'EUR' }
+ * }} />
+ * ```
+ */
+export function ServiceSchema({ service }: { service: ServiceInput }) {
+  const schema = buildServiceSchema(service)
+  return <SchemaGenerator schema={schema} />
+}
+
+/**
+ * ItemList Schema wrapper for lists of services, products, etc.
+ *
+ * @example
+ * ```tsx
+ * <ItemListSchema itemList={{
+ *   name: 'HEADON Services',
+ *   description: 'Professional digital services',
+ *   items: [
+ *     { name: 'Web Development', url: '/services/web-development', description: '...' },
+ *     { name: 'Mobile Development', url: '/services/mobile-development', description: '...' }
+ *   ]
+ * }} />
+ * ```
+ */
+export function ItemListSchema({ itemList }: { itemList: ItemListInput }) {
+  const schema = buildItemListSchema(itemList)
   return <SchemaGenerator schema={schema} />
 }

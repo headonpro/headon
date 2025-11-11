@@ -83,17 +83,52 @@ export default function ServicesContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mx-auto mb-16 max-w-3xl text-base text-white/90 md:text-lg lg:text-xl"
+            className="mx-auto mb-8 max-w-3xl text-base text-white/90 md:text-lg lg:text-xl"
           >
             Von der Konzeption bis zur Umsetzung – wir bieten End-to-End Lösungen für Ihre digitalen
             Projekte.
           </motion.p>
 
+          {/* SEO Text Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mx-auto mb-16 max-w-4xl rounded-2xl border border-white/20 bg-white/10 p-6 text-left backdrop-blur-sm md:p-8"
+          >
+            <h2 className="mb-4 text-2xl font-bold text-white md:text-3xl">
+              Professionelle Digitallösungen aus dem Main-Tauber-Kreis
+            </h2>
+            <p className="mb-4 text-base leading-relaxed text-white/90 md:text-lg">
+              Als spezialisierte Digitalagentur entwickeln wir maßgeschneiderte Web- und Mobile-Lösungen für
+              Unternehmen in Bad Mergentheim, Lauda-Königshofen, Tauberbischofsheim und der gesamten Region.
+              Unsere Full-Stack Entwickler kombinieren modernste Technologien wie Next.js, React und TypeScript
+              mit user-zentriertem UI/UX Design, um performante und skalierbare digitale Produkte zu schaffen.
+            </p>
+            <p className="text-base leading-relaxed text-white/90 md:text-lg">
+              Von der ersten Konzeption über das Design bis hin zur technischen Umsetzung und dem Launch begleiten
+              wir Sie durch den gesamten Entwicklungsprozess. Ob Unternehmenswebsite, E-Commerce-Plattform,
+              Web-App oder native Mobile App – wir setzen Ihre digitale Vision mit transparenten Festpreisen und
+              agilen Methoden um. Profitieren Sie von kurzen Kommunikationswegen, persönlicher Betreuung vor Ort
+              und DSGVO-konformen Lösungen Made in Germany.
+            </p>
+          </motion.div>
+
+          {/* Services Overview Title */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mb-8 text-3xl font-bold text-white md:text-4xl"
+          >
+            Unsere Services im Überblick
+          </motion.h2>
+
           {/* Service Cards */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
             className="mx-auto mb-16 grid max-w-5xl gap-10 md:grid-cols-2 lg:grid-cols-2"
           >
             {services.map((service, index) => (

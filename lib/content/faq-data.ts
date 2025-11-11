@@ -173,7 +173,7 @@ export const faqData: FAQCollection = {
     {
       question: 'Was kostet professionelles UI/UX Design?',
       answer:
-        'Reines Design-Projekt (ohne Entwicklung) kostet ab 3.000€ für kleinere Websites bis 10.000€+ für komplexe Plattformen. Im Paket mit Entwicklung ist das Design bereits ab 5.000€ Gesamtpreis enthalten. Das Design umfasst: User Research, Wireframes, High-Fidelity Mockups (Figma), Design System, Responsive Designs für alle Bildschirmgrößen und Prototyp zum Testen.',
+        'Reines Design-Projekt (ohne Entwicklung) kostet ab 3.000€ für kleinere Websites bis 10.000€+ für komplexe Plattformen. Im Paket mit Entwicklung ist das Design bereits ab 2.500€ Gesamtpreis enthalten. Das Design umfasst: User Research, Wireframes, High-Fidelity Mockups (Figma), Design System, Responsive Designs für alle Bildschirmgrößen und Prototyp zum Testen.',
     },
     {
       question: 'Kann HEADON mein bestehendes Branding integrieren?',
@@ -209,7 +209,7 @@ export const faqData: FAQCollection = {
     {
       question: 'Was kostet Backend-Entwicklung?',
       answer:
-        'Basis-Backend (User-Auth, Datenbank, REST API) kostet ab 5.000€. Komplexere Systeme mit Business-Logik, Payment-Integration, Admin-Dashboard und erweiterten Features kosten 10.000-25.000€. Die monatlichen Hosting-Kosten für das Backend liegen bei 10-100€ je nach Nutzerzahl und Datenmenge. Nach Anforderungsanalyse erhalten Sie ein transparentes Festpreis-Angebot.',
+        'Basis-Backend (User-Auth, Datenbank, REST API) kostet ab 4.000€. Komplexere Systeme mit Business-Logik, Payment-Integration, Admin-Dashboard und erweiterten Features kosten 10.000-25.000€. Die monatlichen Hosting-Kosten für das Backend liegen bei 10-100€ je nach Nutzerzahl und Datenmenge. Nach Anforderungsanalyse erhalten Sie ein transparentes Festpreis-Angebot.',
     },
     {
       question: 'Kann HEADON bestehende Systeme integrieren (ERP, CRM)?',

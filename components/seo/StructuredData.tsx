@@ -54,6 +54,128 @@ export default function StructuredData({ type = 'organization', data }: Structur
       minValue: 1,
       maxValue: 10,
     },
+    makesOffer: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Webentwicklung',
+          description:
+            'Professionelle Webentwicklung mit Next.js & React. Performant, SEO-optimiert und skalierbar.',
+          url: `${baseUrl}/services/web-development`,
+          serviceType: 'Web Development',
+          provider: {
+            '@type': 'Organization',
+            name: 'HEADON.pro',
+          },
+          areaServed: [
+            { '@type': 'City', name: 'Bad Mergentheim' },
+            { '@type': 'City', name: 'Lauda-Königshofen' },
+            { '@type': 'City', name: 'Tauberbischofsheim' },
+            { '@type': 'City', name: 'Wertheim' },
+          ],
+        },
+        price: '2500',
+        priceCurrency: 'EUR',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          price: '2500',
+          priceCurrency: 'EUR',
+          valueAddedTaxIncluded: false,
+        },
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Mobile App Entwicklung',
+          description:
+            'Native und Cross-Platform Apps für iOS und Android mit React Native und Flutter.',
+          url: `${baseUrl}/services/mobile-development`,
+          serviceType: 'Mobile App Development',
+          provider: {
+            '@type': 'Organization',
+            name: 'HEADON.pro',
+          },
+          areaServed: [
+            { '@type': 'City', name: 'Bad Mergentheim' },
+            { '@type': 'City', name: 'Lauda-Königshofen' },
+            { '@type': 'City', name: 'Tauberbischofsheim' },
+            { '@type': 'City', name: 'Wertheim' },
+          ],
+        },
+        price: '5000',
+        priceCurrency: 'EUR',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          price: '5000',
+          priceCurrency: 'EUR',
+          valueAddedTaxIncluded: false,
+        },
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'UI/UX Design',
+          description:
+            'User-zentriertes Design mit Fokus auf Usability und Ästhetik. Von Wireframes bis zum finalen Design System.',
+          url: `${baseUrl}/services/ui-ux-design`,
+          serviceType: 'UI/UX Design',
+          provider: {
+            '@type': 'Organization',
+            name: 'HEADON.pro',
+          },
+          areaServed: [
+            { '@type': 'City', name: 'Bad Mergentheim' },
+            { '@type': 'City', name: 'Lauda-Königshofen' },
+            { '@type': 'City', name: 'Tauberbischofsheim' },
+            { '@type': 'City', name: 'Wertheim' },
+          ],
+        },
+        price: '1500',
+        priceCurrency: 'EUR',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          price: '1500',
+          priceCurrency: 'EUR',
+          valueAddedTaxIncluded: false,
+        },
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Backend Solutions',
+          description:
+            'Skalierbare Cloud-Infrastruktur und API-Entwicklung mit Supabase, PostgreSQL und Node.js.',
+          url: `${baseUrl}/services/backend-solutions`,
+          serviceType: 'Backend Development',
+          provider: {
+            '@type': 'Organization',
+            name: 'HEADON.pro',
+          },
+          areaServed: [
+            { '@type': 'City', name: 'Bad Mergentheim' },
+            { '@type': 'City', name: 'Lauda-Königshofen' },
+            { '@type': 'City', name: 'Tauberbischofsheim' },
+            { '@type': 'City', name: 'Wertheim' },
+          ],
+        },
+        price: '3000',
+        priceCurrency: 'EUR',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          price: '3000',
+          priceCurrency: 'EUR',
+          valueAddedTaxIncluded: false,
+        },
+        availability: 'https://schema.org/InStock',
+      },
+    ],
   }
 
   // LocalBusiness Schema für lokale SEO

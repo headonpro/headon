@@ -155,8 +155,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
             <Button
               asChild
               size="lg"
-              variant="outline"
-              className="min-w-[200px] border-white/30 text-white hover:bg-white/10"
+              className="min-w-[200px] border-2 border-white/50 bg-transparent text-white hover:bg-white/20 hover:border-white"
             >
               <Link href="/contact">
                 <Mail className="mr-2 h-5 w-5" />

@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { ModernFAQAccordion } from '@/components/seo/ModernFAQAccordion'
 import { faqData } from '@/lib/content/faq-data'
 import Breadcrumbs from '@/components/seo/Breadcrumbs'
-import { BreadcrumbSchema } from '@/components/seo/SchemaGenerator'
+import { BreadcrumbSchema, ServiceSchema } from '@/components/seo/SchemaGenerator'
 import type { FAQ } from '@/lib/types/content'
 
 // Export metadata generator
@@ -73,6 +73,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
   }
   const serviceFaqs = serviceFaqMap[slug] || []
 
+  // Map service slug to service type for Schema
+  const serviceTypeMap: Record<string, string> = {
+    'web-development': 'Web Development',
+    'mobile-development': 'Mobile App Development',
+    'ui-ux-design': 'UI/UX Design',
+    'backend-solutions': 'Backend Development',
+  }
+
   return (
     <main className="min-h-screen">
       {/* Breadcrumb Schema for SEO */}
@@ -82,6 +90,29 @@ export default async function ServicePage({ params }: ServicePageProps) {
           { name: 'Services', url: '/services' },
           { name: service.frontmatter.title, url: `/services/${slug}` },
         ]}
+      />
+
+      {/* Service Schema for SEO */}
+      <ServiceSchema
+        service={{
+          name: service.frontmatter.title,
+          description: service.frontmatter.description,
+          serviceType: serviceTypeMap[slug] || 'Professional Service',
+          url: `/services/${slug}`,
+          areaServed: [
+            'Bad Mergentheim',
+            'Lauda-Königshofen',
+            'Tauberbischofsheim',
+            'Wertheim',
+            'Marktheidenfeld',
+            'Würzburg',
+          ],
+          price: {
+            from: service.frontmatter.pricing.from,
+            currency: service.frontmatter.pricing.currency,
+            priceRange: `ab ${service.frontmatter.pricing.from} ${service.frontmatter.pricing.currency}`,
+          },
+        }}
       />
 
       {/* Hero Section with Animated Gradient Background */}
@@ -262,7 +293,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <p className="text-muted-foreground mx-auto mb-12 max-w-2xl text-center">
               Antworten auf die wichtigsten Fragen zu {service.frontmatter.title.toLowerCase()}
             </p>
-            <ModernFAQAccordion faqs={serviceFaqs} includeSchema={true} />
+            <ModernFAQAccordion faqs={serviceFaqs} includeSchema={true} heading="" />
           </div>
         </section>
       )}

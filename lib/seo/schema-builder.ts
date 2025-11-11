@@ -12,6 +12,8 @@
  * - buildReviewSchema: Testimonials
  * - buildAggregateRatingSchema: Aggregated ratings
  * - buildBreadcrumbListSchema: Navigation breadcrumbs
+ * - buildServiceSchema: Service pages
+ * - buildItemListSchema: Lists of items (services, products, etc.)
  */
 
 import type { FAQ } from '@/lib/types/content'
@@ -402,5 +404,37 @@ export function buildServiceSchema(input: ServiceInput): ServiceSchema {
         ? toAbsoluteUrl(input.image)
         : undefined,
     url: input.url ? toAbsoluteUrl(input.url) : undefined,
+  }
+}
+
+/**
+ * Build ItemList Schema for lists of services, products, etc.
+ * @see https://schema.org/ItemList
+ */
+export interface ItemListInput {
+  name?: string
+  description?: string
+  items: Array<{
+    name: string
+    url?: string
+    description?: string
+    image?: string
+  }>
+}
+
+export function buildItemListSchema(input: ItemListInput) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: input.name,
+    description: input.description,
+    itemListElement: input.items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      url: item.url ? toAbsoluteUrl(item.url) : undefined,
+      description: item.description,
+      image: item.image ? toAbsoluteUrl(item.image) : undefined,
+    })),
   }
 }
