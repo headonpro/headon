@@ -4,8 +4,8 @@ import Script from 'next/script'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import { Toaster } from 'sonner'
 import StructuredData from '@/components/seo/StructuredData'
+import ToasterProvider from '@/components/layout/ToasterProvider'
 import { WebsiteSchema } from '@/components/seo/WebsiteSchema'
 import WebVitalsReporter from '@/components/web-vitals-reporter'
 
@@ -92,7 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <Toaster position="top-right" richColors closeButton duration={5000} />
+        <ToasterProvider />
       </body>
     </html>
   )

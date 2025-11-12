@@ -12,47 +12,105 @@ interface CTAPhrase {
 }
 
 const ctaPhrases: CTAPhrase[] = [
-  // Gastronomie & Restaurants
-  { text: 'Dein Restaurant braucht Online-Reservierungen?', category: 'gastronomie' },
-  { text: 'Lieferservice ohne Kommission einrichten?', category: 'gastronomie' },
-  { text: 'Digitale Speisekarte mit QR-Code erstellen?', category: 'gastronomie' },
-  { text: 'Mehr Tischauslastung durch intelligente Buchungen?', category: 'gastronomie' },
-  { text: 'Kundenbewertungen automatisch sammeln?', category: 'gastronomie' },
+  // === KATEGORIE 1: SERVICE-KEYWORDS (24 Phrasen - 40%) ===
 
-  // Handwerk & Dienstleister
-  { text: 'Terminbuchungen automatisieren für dein Handwerk?', category: 'handwerk' },
-  { text: 'Kunden finden dich nicht online?', category: 'handwerk' },
-  { text: 'Angebote digital erstellen statt per Hand?', category: 'handwerk' },
-  { text: 'Auftragsabwicklung digitalisieren?', category: 'handwerk' },
-  { text: 'Kundenstamm professionell verwalten?', category: 'handwerk' },
+  // Webdesign & Webentwicklung
+  { text: 'Website erstellen lassen ab 2.500€?', category: 'web' },
+  { text: 'Professionelles Webdesign im Main-Tauber-Kreis?', category: 'web' },
+  { text: 'Moderne Website in 2-4 Wochen statt 6 Monaten?', category: 'web' },
+  { text: 'Next.js Website entwickeln lassen?', category: 'web' },
+  { text: 'React Webanwendung für dein Business?', category: 'web' },
+  { text: 'Responsive Webdesign das begeistert?', category: 'web' },
+  { text: 'SEO-optimierte Website erstellen?', category: 'web' },
+  { text: 'Corporate Website zu transparenten Festpreisen?', category: 'web' },
 
-  // Einzelhandel & E-Commerce
-  { text: 'Deinen Shop auch online verkaufen?', category: 'einzelhandel' },
-  { text: 'Kundenkarten digitalisieren?', category: 'einzelhandel' },
-  { text: 'Inventory Management automatisieren?', category: 'einzelhandel' },
-  { text: 'Local SEO für mehr Laufkundschaft?', category: 'einzelhandel' },
-  { text: 'Click & Collect System einführen?', category: 'einzelhandel' },
+  // Mobile Apps
+  { text: 'Mobile App entwickeln lassen ab 5.000€?', category: 'mobile' },
+  { text: 'Flutter App für iOS & Android?', category: 'mobile' },
+  { text: 'Native App Entwicklung in deiner Region?', category: 'mobile' },
+  { text: 'Progressive Web App statt teurer Native App?', category: 'mobile' },
 
-  // Beratung & Coaching
-  { text: 'Online-Kurse verkaufen?', category: 'beratung' },
-  { text: 'Beratungstermine automatisch buchen lassen?', category: 'beratung' },
-  { text: 'Dein Wissen in eine App packen?', category: 'beratung' },
-  { text: 'Klienten-Portal für bessere Betreuung?', category: 'beratung' },
-  { text: 'Webinare professionell durchführen?', category: 'beratung' },
+  // UI/UX & Design
+  { text: 'UI/UX Design das konvertiert?', category: 'design' },
+  { text: 'Corporate Design für dein Unternehmen?', category: 'design' },
+  { text: 'Barrierefreies Webdesign nach WCAG?', category: 'design' },
+  { text: 'Figma Design zu fertigem Code?', category: 'design' },
 
-  // Immobilien & Makler
-  { text: 'Immobilien virtuell besichtigen lassen?', category: 'immobilien' },
-  { text: 'Exposés automatisch generieren?', category: 'immobilien' },
-  { text: 'Interessenten besser verwalten?', category: 'immobilien' },
-  { text: '360°-Rundgänge für Objekte erstellen?', category: 'immobilien' },
-  { text: 'Mieterprozesse digitalisieren?', category: 'immobilien' },
+  // Backend & Tech
+  { text: 'Backend API entwickeln lassen?', category: 'backend' },
+  { text: 'Supabase Datenbank Integration?', category: 'backend' },
+  { text: 'Full-Stack Entwicklung aus einer Hand?', category: 'backend' },
+  { text: 'Cloud-basierte Webanwendung?', category: 'backend' },
 
-  // Fitness & Wellness
-  { text: 'Mitglieder-App für dein Studio?', category: 'fitness' },
-  { text: 'Kurse online buchen lassen?', category: 'fitness' },
-  { text: 'Personal Training digital anbieten?', category: 'fitness' },
-  { text: 'Mitglieder-Community aufbauen?', category: 'fitness' },
-  { text: 'Ernährungspläne digital verwalten?', category: 'fitness' },
+  // Regional
+  { text: 'Digitalagentur in Lauda-Königshofen gesucht?', category: 'regional' },
+  { text: 'Webagentur Main-Tauber-Kreis für dein Projekt?', category: 'regional' },
+  { text: 'Lokale Digitalagentur mit persönlicher Betreuung?', category: 'regional' },
+  { text: 'Webentwickler in deiner Region finden?', category: 'regional' },
+
+  // === KATEGORIE 2: USP & VORTEILE (18 Phrasen - 30%) ===
+
+  // KI & Geschwindigkeit
+  { text: 'KI-gestützte Webentwicklung 4x schneller?', category: 'usp' },
+  { text: '2-4 Wochen statt 3-6 Monate Projektzeit?', category: 'usp' },
+  { text: 'Künstliche Intelligenz für schnellere Results?', category: 'usp' },
+  { text: 'Agile Entwicklung mit wöchentlichen Updates?', category: 'usp' },
+
+  // Preis & Transparenz
+  { text: 'Festpreise ab 2.500€ statt versteckter Kosten?', category: 'usp' },
+  { text: 'Transparente Projektkosten ohne Überraschungen?', category: 'usp' },
+  { text: 'All-Inclusive Webdesign zum Fixpreis?', category: 'usp' },
+  { text: 'Mehr Website für weniger Budget?', category: 'usp' },
+
+  // Qualität & Performance
+  { text: '90+ Lighthouse Score garantiert?', category: 'usp' },
+  { text: 'Core Web Vitals Optimierung inklusive?', category: 'usp' },
+  { text: 'Moderne Tech-Stack statt veraltetes WordPress?', category: 'usp' },
+  { text: 'Performance die deine Konkurrenz überholt?', category: 'usp' },
+
+  // Full Service
+  { text: 'Design + Entwicklung + Hosting aus einer Hand?', category: 'usp' },
+  { text: 'Von der Idee bis zum Launch begleitet werden?', category: 'usp' },
+  { text: 'Kreativagentur für Web, Apps & Design?', category: 'usp' },
+  { text: 'Full-Service Digitalagentur gesucht?', category: 'usp' },
+
+  // Support & Wartung
+  { text: 'Langfristige Betreuung nach dem Launch?', category: 'usp' },
+  { text: 'Wartung & Support von lokaler Agentur?', category: 'usp' },
+
+  // === KATEGORIE 3: PROBLEM & BRANCHEN (18 Phrasen - 30%) ===
+
+  // Generische Probleme
+  { text: 'Deine Website ist veraltet und langsam?', category: 'problem' },
+  { text: 'Kunden finden dich nicht online?', category: 'problem' },
+  { text: 'Online-Präsenz die verkauft aufbauen?', category: 'problem' },
+  { text: 'Mehr Leads durch bessere Website?', category: 'problem' },
+  { text: 'Digitale Prozesse endlich automatisieren?', category: 'problem' },
+  { text: 'Konkurrenz ist digital weiter als du?', category: 'problem' },
+
+  // Gastronomie
+  { text: 'Restaurant Website mit Online-Reservierung?', category: 'gastronomie' },
+  { text: 'Digitale Speisekarte für dein Lokal?', category: 'gastronomie' },
+
+  // Handwerk
+  { text: 'Handwerker Website die Aufträge bringt?', category: 'handwerk' },
+  { text: 'Online Terminbuchung für Handwerksbetriebe?', category: 'handwerk' },
+
+  // E-Commerce
+  { text: 'Online-Shop der wirklich verkauft?', category: 'ecommerce' },
+  { text: 'E-Commerce Lösung ohne Provisionen?', category: 'ecommerce' },
+
+  // Beratung
+  { text: 'Website für Berater & Coaches?', category: 'beratung' },
+  { text: 'Online-Kurse professionell verkaufen?', category: 'beratung' },
+
+  // Immobilien
+  { text: 'Immobilien-Website mit virtuellen Rundgängen?', category: 'immobilien' },
+  { text: 'Makler-Portal für bessere Leadgenerierung?', category: 'immobilien' },
+
+  // Fitness
+  { text: 'Fitness-Studio Website mit Mitglieder-Bereich?', category: 'fitness' },
+  { text: 'Online-Kursbuchung für dein Studio?', category: 'fitness' },
 ]
 
 export default function TypewriterCTA() {
@@ -69,6 +127,16 @@ export default function TypewriterCTA() {
 
   const typewriterRef = useRef<NodeJS.Timeout | null>(null)
   const pauseRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Helper function to get a random phrase index (but not the current one)
+  const getRandomPhraseIndex = (currentIndex: number): number => {
+    let nextIndex = Math.floor(Math.random() * ctaPhrases.length)
+    // Ensure we don't get the same phrase twice in a row
+    while (nextIndex === currentIndex && ctaPhrases.length > 1) {
+      nextIndex = Math.floor(Math.random() * ctaPhrases.length)
+    }
+    return nextIndex
+  }
 
   // Delay the start of the animation
   useEffect(() => {
@@ -107,10 +175,10 @@ export default function TypewriterCTA() {
           setDisplayedText(displayedText.slice(0, -1))
         }, 30) // Faster deletion
       } else {
-        // Finished deleting, move to next phrase
+        // Finished deleting, move to random next phrase
         setIsDeleting(false)
         setIsTyping(true)
-        setCurrentPhraseIndex((prev) => (prev + 1) % ctaPhrases.length)
+        setCurrentPhraseIndex((prev) => getRandomPhraseIndex(prev))
       }
     } else if (isPaused && !isDeleting && !isTyping) {
       // We're in pause state - set the timeout to start deleting
