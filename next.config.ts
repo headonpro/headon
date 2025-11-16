@@ -149,6 +149,26 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  // Redirects for deleted blog posts to prevent 404 errors
+  async redirects() {
+    return [
+      {
+        source: '/blog/responsive-design-2025',
+        destination: '/blog/mobile-first-design',
+        permanent: true, // 301 redirect
+      },
+      {
+        source: '/blog/responsive-design-tailwind',
+        destination: '/blog/mobile-first-design',
+        permanent: true,
+      },
+      {
+        source: '/blog/website-ladezeit-optimieren',
+        destination: '/blog/core-web-vitals-optimierung',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig
