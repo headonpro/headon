@@ -60,7 +60,7 @@ export default async function TechnologiePage() {
                   <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-xl bg-white p-3 shadow-md">
                     <Image
                       src={tech.frontmatter.logo}
-                      alt={tech.frontmatter.officialName}
+                      alt={`${tech.frontmatter.officialName} Logo - ${tech.frontmatter.description}`}
                       width={64}
                       height={64}
                       className="h-full w-full object-contain"

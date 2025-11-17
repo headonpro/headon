@@ -36,9 +36,14 @@ interface MDXContentProps {
  * Uses next/image for automatic optimization (WebP/AVIF)
  */
 function MDXImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
-  const { src, alt = '', width, height } = props
+  const { src, alt, width, height } = props
 
   if (!src || typeof src !== 'string') return null
+
+  // Warn in development if alt text is missing
+  if (!alt && process.env.NODE_ENV === 'development') {
+    console.warn(`[MDXContent] Missing alt attribute for image: ${src}`)
+  }
 
   // Parse width and height
   const imgWidth = width ? parseInt(String(width), 10) : 1200
@@ -48,7 +53,7 @@ function MDXImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
     <span className="my-8 block">
       <Image
         src={src}
-        alt={alt}
+        alt={alt || 'Abbildung im Artikel'}
         width={imgWidth}
         height={imgHeight}
         className="rounded-lg"

@@ -107,7 +107,7 @@ export default function TechnologyPageContent({
                 <div className="flex h-24 w-24 items-center justify-center rounded-2xl border-2 border-white/30 bg-white/90 p-4 backdrop-blur-md">
                   <Image
                     src={technologyPage.frontmatter.logo}
-                    alt={technologyPage.frontmatter.officialName}
+                    alt={`${technologyPage.frontmatter.officialName} Logo - ${technologyPage.frontmatter.description}`}
                     width={80}
                     height={80}
                     className="h-full w-full object-contain"

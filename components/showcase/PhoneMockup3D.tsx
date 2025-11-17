@@ -97,7 +97,7 @@ export default function PhoneMockup3D({
               <div className="relative h-full w-full overflow-hidden rounded-[24px] bg-white">
                 <Image
                   src={appScreenshot}
-                  alt={appName}
+                  alt={`${appName} - Mobile App Screenshot auf iPhone Mockup`}
                   fill
                   className="object-cover object-top"
                   priority

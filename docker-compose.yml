@@ -77,6 +77,7 @@ services:
       - APP_SECRET=${UMAMI_APP_SECRET}
       - HOSTNAME=0.0.0.0
       - DISABLE_TELEMETRY=1
+      - CLIENT_IP_HEADER=CF-Connecting-IP
     depends_on:
       umami-db:
         condition: service_healthy

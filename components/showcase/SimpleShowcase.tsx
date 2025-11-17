@@ -80,7 +80,7 @@ function BeforeAfterSlider() {
         <div className="absolute inset-0">
           <Image
             src={isDarkMode ? '/images/viktoria-dark.png' : '/images/viktoria-new.png'}
-            alt="Neue Website"
+            alt="SV Viktoria Wertheim - Moderne Vereinswebsite mit responsivem Design und Dark Mode"
             fill
             className="object-cover object-top"
             priority
@@ -99,7 +99,7 @@ function BeforeAfterSlider() {
         >
           <Image
             src="/images/viktoria-old.png"
-            alt="Alte Website"
+            alt="SV Viktoria Wertheim - Alte Website vor der Modernisierung"
             fill
             className="object-cover object-top"
             priority
