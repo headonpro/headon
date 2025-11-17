@@ -149,9 +149,10 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-  // Redirects for deleted blog posts to prevent 404 errors
+  // Redirects for deleted blog posts and legacy routes to prevent 404 errors
   async redirects() {
     return [
+      // Blog post redirects
       {
         source: '/blog/responsive-design-2025',
         destination: '/blog/mobile-first-design',
@@ -166,6 +167,17 @@ const nextConfig: NextConfig = {
         source: '/blog/website-ladezeit-optimieren',
         destination: '/blog/core-web-vitals-optimierung',
         permanent: true,
+      },
+      // Legacy route redirects
+      {
+        source: '/team',
+        destination: '/about',
+        permanent: true, // 301 redirect - team info is on about page
+      },
+      {
+        source: '/terms',
+        destination: '/imprint',
+        permanent: true, // 301 redirect - legal terms in imprint
       },
     ]
   },

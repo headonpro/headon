@@ -598,6 +598,31 @@ Agile Entwicklung hat sich als Standard in der Softwareentwicklung etabliert. St
     keywords: ['agile', 'scrum', 'sprint', 'iterativ', 'entwicklung'],
   },
 
+  {
+    id: 'scrum',
+    term: 'Scrum',
+    category: 'development',
+    shortDefinition:
+      'Scrum ist ein agiles Framework für Projektmanagement mit festen Rollen, Ereignissen und Artefakten.',
+    fullExplanation: `Scrum ist das weltweit am weitesten verbreitete agile Framework für Projektmanagement und Produktentwicklung. Es strukturiert die Arbeit in feste Zeiträume (Sprints), typischerweise 2 Wochen, in denen ein funktionsfähiges Produkt-Inkrement erstellt wird. Scrum definiert drei Rollen: Product Owner (definiert Was gebaut wird), Scrum Master (facilitiert Prozess), Development Team (baut das Produkt).
+
+Der Scrum-Prozess umfasst fünf zentrale Ereignisse: Sprint Planning (Was wird im Sprint gebaut?), Daily Standup (15-Min-Sync), Sprint Review (Präsentation fertiger Features), Sprint Retrospective (Prozessverbesserung) und der Sprint selbst. Drei Artefakte strukturieren die Arbeit: Product Backlog (priorisierte Feature-Liste), Sprint Backlog (ausgewählte Sprint-Aufgaben) und Product Increment (funktionierende Software).
+
+Scrum ist besonders effektiv für komplexe Projekte mit sich ändernden Anforderungen. Die klare Struktur und Transparenz reduziert Chaos, während die Flexibilität schnelle Anpassungen ermöglicht. Unternehmen wie Spotify, Microsoft und Amazon nutzen Scrum-basierte Frameworks. Die Scrum-Zertifizierung (Certified Scrum Master) ist eine der gefragtesten im IT-Bereich.`,
+    benefits: [
+      'Klare Rollen und Verantwortlichkeiten für effiziente Zusammenarbeit',
+      'Regelmäßige Auslieferung funktionsfähiger Software (alle 2 Wochen)',
+      'Hohe Transparenz durch Daily Standups und Sprint Reviews',
+      'Kontinuierliche Verbesserung durch Sprint Retrospectives',
+    ],
+    relatedTerms: [
+      { term: 'Agile Entwicklung', id: 'agile' },
+      { term: 'MVP', id: 'mvp' },
+      { term: 'Kanban', id: 'kanban' },
+    ],
+    keywords: ['scrum', 'agile', 'sprint', 'projektmanagement', 'framework'],
+  },
+
   // ============================================================================
   // Data & Infrastructure Terms
   // ============================================================================
@@ -752,6 +777,63 @@ Ein Design System ist mehr als eine Component Library. Es definiert Prinzipien, 
       { term: 'Atomic Design', id: 'atomic-design' },
     ],
     keywords: ['design system', 'component library', 'design tokens', 'ui kit'],
+  },
+
+  {
+    id: 'component-library',
+    term: 'Component Library',
+    category: 'design',
+    shortDefinition:
+      'Eine Component Library ist eine Sammlung wiederverwendbarer UI-Komponenten für konsistente Entwicklung.',
+    fullExplanation: `Eine Component Library ist eine organisierte Sammlung vorgefertigter, wiederverwendbarer UI-Komponenten (Buttons, Inputs, Cards, Modals, etc.), die in Projekten eingesetzt werden können. Im Gegensatz zu kompletten Frameworks wie Bootstrap bietet eine Component Library meist grundlegende Bausteine, die flexibel kombiniert werden können. Libraries wie shadcn/ui, Radix UI oder Headless UI sind Beispiele moderner Component Libraries.
+
+Der Hauptvorteil liegt in Konsistenz und Entwicklungsgeschwindigkeit. Statt jeden Button neu zu designen und zu programmieren, werden vordefinierte Komponenten genutzt, die bereits getestet, accessible und responsive sind. Dies reduziert Entwicklungszeit erheblich und stellt sicher, dass alle Komponenten dem gleichen Design-System folgen. Updates an einer Komponente wirken sich automatisch auf alle Verwendungsorte aus.
+
+Moderne Component Libraries sind oft framework-agnostisch oder speziell für React/Vue/Angular optimiert. Sie bieten Features wie Dark Mode Support, Accessibility (ARIA), Keyboard Navigation und Theme-Anpassung. Tools wie Storybook ermöglichen es, alle Komponenten in einem interaktiven Katalog zu dokumentieren. Für professionelle Projekte ist eine gut gepflegte Component Library ein Produktivitäts-Booster.`,
+    benefits: [
+      'Drastisch reduzierte Entwicklungszeit durch Wiederverwendung',
+      'Garantierte Konsistenz über alle Screens und Features',
+      'Eingebaute Accessibility und Cross-Browser-Kompatibilität',
+      'Einfaches Theming und Brand-Anpassung',
+    ],
+    relatedTerms: [
+      { term: 'Design System', id: 'design-system' },
+      { term: 'Atomic Design', id: 'atomic-design' },
+      { term: 'UI/UX Design', id: 'ui-ux-design' },
+    ],
+    keywords: [
+      'component library',
+      'ui components',
+      'design system',
+      'react',
+      'shadcn',
+      'radix',
+    ],
+  },
+
+  {
+    id: 'atomic-design',
+    term: 'Atomic Design',
+    category: 'design',
+    shortDefinition:
+      'Atomic Design ist eine Methodik zum Aufbau von UI-Systemen aus kleinsten Bausteinen (Atome) zu komplexen Strukturen.',
+    fullExplanation: `Atomic Design ist eine von Brad Frost entwickelte Methodik zum systematischen Aufbau von Design Systems. Die Metapher aus der Chemie strukturiert UI-Komponenten in fünf hierarchische Ebenen: Atoms (kleinste Bausteine wie Buttons, Labels), Molecules (Kombinationen von Atoms wie ein Search-Field mit Button), Organisms (komplexe UI-Abschnitte wie eine Header-Navigation), Templates (Seitenlayouts mit Platzhaltern) und Pages (konkrete Instanzen mit echtem Inhalt).
+
+Der Vorteil dieser Hierarchie liegt in Modularität und Wiederverwendbarkeit. Atoms können in verschiedenen Molecules kombiniert werden, Molecules in verschiedenen Organisms. Änderungen an einem Atom (z.B. Button-Styling) propagieren automatisch durch alle übergeordneten Komponenten. Dies macht Design Systems wartbar und skalierbar, selbst bei Hunderten von Komponenten.
+
+Atomic Design wird oft mit Tools wie Storybook kombiniert, wo jede Ebene separat dokumentiert und getestet wird. Frameworks wie React sind ideal für Atomic Design, da Komponenten natürlich hierarchisch komponierbar sind. Große Unternehmen wie Airbnb, IBM und Salesforce nutzen Atomic Design für ihre Design Systems. Für komplexe Produkte mit vielen Screens ist Atomic Design Best Practice.`,
+    benefits: [
+      'Systematischer, skalierbarer Aufbau von Design Systems',
+      'Maximale Wiederverwendbarkeit durch klare Hierarchie',
+      'Einfachere Wartung durch modulare Struktur',
+      'Bessere Zusammenarbeit zwischen Designern und Entwicklern',
+    ],
+    relatedTerms: [
+      { term: 'Design System', id: 'design-system' },
+      { term: 'Component Library', id: 'component-library' },
+      { term: 'React', id: 'react' },
+    ],
+    keywords: ['atomic design', 'design system', 'komponenten', 'modular', 'ui'],
   },
 
   // ============================================================================

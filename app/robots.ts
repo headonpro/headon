@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/', '/_next/', '/private/'],
+        disallow: ['/api/', '/admin/', '/dashboard/', '/_next/', '/private/'],
       },
       // Spezielle Regeln für Googlebot
       {
