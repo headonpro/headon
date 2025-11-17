@@ -179,6 +179,12 @@ const nextConfig: NextConfig = {
         destination: '/imprint',
         permanent: true, // 301 redirect - legal terms in imprint
       },
+      // Invalid/malformed URL redirects (from external sources or crawlers)
+      {
+        source: '/$',
+        destination: '/',
+        permanent: true, // 301 redirect - invalid slug to homepage
+      },
     ]
   },
 }
