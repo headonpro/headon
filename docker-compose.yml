@@ -3,7 +3,6 @@ services:
     image: ghcr.io/headonpro/headon:latest
     container_name: headon
     restart: unless-stopped
-    user: node
     ports:
       - '3001:3000'
     environment:
@@ -66,7 +65,7 @@ services:
 
   # Umami Analytics - Web Analytics Platform
   umami:
-    image: ghcr.io/umami-software/umami:postgresql-latest
+    image: ghcr.io/umami-software/umami:latest
     container_name: umami
     restart: unless-stopped
     ports:
@@ -87,7 +86,7 @@ services:
       test:
         [
           'CMD-SHELL',
-          'wget --no-verbose --tries=1 --spider http://localhost:3000/api/heartbeat || exit 1',
+          'wget --no-verbose --tries=1 --spider http://127.0.0.1:3000/api/heartbeat || exit 1',
         ]
       interval: 30s
       timeout: 10s
