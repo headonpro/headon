@@ -49,25 +49,23 @@ export function CalculatorProgress({
               {/* Step Circle */}
               <motion.div
                 initial={{ scale: 0 }}
-                animate={{
-                  scale: currentStep >= step ? 1 : 0.8,
-                  backgroundColor: currentStep >= step ? '#ffffff' : 'rgba(255,255,255,0.2)',
-                }}
+                animate={{ scale: currentStep >= step ? 1 : 0.8 }}
                 transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
                 className={cn(
                   'flex h-12 w-12 items-center justify-center rounded-full font-bold transition-all',
                   isAccessible && 'cursor-pointer hover:scale-105',
-                  currentStep >= step
-                    ? 'text-primary-600 shadow-lg'
-                    : 'text-white/60',
-                  isCurrent && 'ring-4 ring-primary-200 ring-offset-2'
+                  isCurrent
+                    ? 'bg-accent-500 text-white shadow-lg'
+                    : currentStep > step
+                    ? 'bg-white/20 text-white shadow-lg'
+                    : 'bg-white/20 text-white/60'
                 )}
                 onClick={() => handleStepClick(step)}
                 whileHover={isAccessible ? { scale: 1.05 } : {}}
                 whileTap={isAccessible ? { scale: 0.95 } : {}}
               >
                 {isCompleted ? (
-                  <CheckCircle2 className="h-7 w-7 text-primary-600" />
+                  <CheckCircle2 className="h-7 w-7 text-accent-500" />
                 ) : (
                   <span className="text-lg">{step}</span>
                 )}
@@ -82,7 +80,7 @@ export function CalculatorProgress({
                   transition={{ duration: 0.5, delay: step * 0.1 }}
                 >
                   <motion.div
-                    className="h-full bg-gradient-to-r from-primary-500 to-primary-400"
+                    className="h-full bg-gradient-to-r from-accent-500 to-accent-400"
                     initial={{ width: '0%' }}
                     animate={{ width: currentStep > step ? '100%' : '0%' }}
                     transition={{ duration: 0.5, ease: 'easeInOut' }}
