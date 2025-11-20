@@ -44,7 +44,7 @@ export function PriceBreakdown({ breakdown }: PriceBreakdownProps) {
       <AccordionItem value="breakdown">
         {/* Accordion Trigger (Calculator icon + title) */}
         <AccordionTrigger>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-white">
             <Calculator className="h-5 w-5" />
             <span>Detaillierte Aufschlüsselung</span>
           </div>
@@ -57,7 +57,7 @@ export function PriceBreakdown({ breakdown }: PriceBreakdownProps) {
             {breakdown.map((category, categoryIndex) => (
               <div key={category.category}>
                 {/* Category Name (font-semibold as per spec) */}
-                <h4 className="font-semibold mb-3">{category.category}</h4>
+                <h4 className="font-semibold mb-3 text-white">{category.category}</h4>
 
                 {/* Line Items within category (text-sm as per spec) */}
                 <div className="space-y-2">
@@ -66,35 +66,35 @@ export function PriceBreakdown({ breakdown }: PriceBreakdownProps) {
                       key={`${item.label}-${itemIndex}`}
                       className="flex justify-between text-sm"
                     >
-                      <span className="text-muted-foreground">{item.label}</span>
-                      <span className="font-medium">{formatCurrency(item.value)}</span>
+                      <span className="text-white/70">{item.label}</span>
+                      <span className="font-medium text-white">{formatCurrency(item.value)}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Separator */}
-                <div className="border-t border-gray-200 my-3" />
+                <div className="border-t border-white/20 my-3" />
 
                 {/* Category Subtotal (font-semibold as per spec) */}
-                <div className="flex justify-between font-semibold">
+                <div className="flex justify-between font-semibold text-white">
                   <span>Zwischensumme</span>
                   <span>{formatCurrency(category.subtotal)}</span>
                 </div>
 
                 {/* Separator between categories (not after last category) */}
                 {categoryIndex < breakdown.length - 1 && (
-                  <div className="border-t border-gray-300 my-6" />
+                  <div className="border-t border-white/30 my-6" />
                 )}
               </div>
             ))}
 
             {/* Final Grand Total Separator */}
-            <div className="border-t border-gray-400 my-4" />
+            <div className="border-t border-white/40 my-4" />
 
-            {/* Grand Total (text-lg font-bold text-primary-600 as per spec) */}
-            <div className="flex justify-between text-lg font-bold">
+            {/* Grand Total */}
+            <div className="flex justify-between text-lg font-bold text-white">
               <span>Gesamtkosten (HEADON)</span>
-              <span className="text-primary-600">{formatCurrency(grandTotal)}</span>
+              <span>{formatCurrency(grandTotal)}</span>
             </div>
           </div>
         </AccordionContent>

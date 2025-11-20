@@ -76,10 +76,10 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
           {/* Flexible */}
           <div
             className={cn(
-              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer',
+              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.projectStart === 'flexible'
-                ? 'border-primary-600 bg-primary-50'
-                : 'border-gray-200 hover:border-primary-300'
+                ? 'border-white/40 bg-white/20'
+                : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('projectStart', 'flexible')}
           >
@@ -92,7 +92,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
               <div className="flex-1">
                 <Label
                   htmlFor="start-flexible"
-                  className="font-semibold cursor-pointer"
+                  className="font-semibold cursor-pointer text-white"
                 >
                   Flexibel
                 </Label>
@@ -109,17 +109,17 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
           {/* Normal */}
           <div
             className={cn(
-              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer',
+              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.projectStart === 'normal'
-                ? 'border-primary-600 bg-primary-50'
-                : 'border-gray-200 hover:border-primary-300'
+                ? 'border-white/40 bg-white/20'
+                : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('projectStart', 'normal')}
           >
             <div className="flex items-start gap-3">
               <RadioGroupItem value="normal" id="start-normal" className="mt-0.5" />
               <div className="flex-1">
-                <Label htmlFor="start-normal" className="font-semibold cursor-pointer">
+                <Label htmlFor="start-normal" className="font-semibold cursor-pointer text-white">
                   Normal
                 </Label>
                 <p className="text-sm text-white/70 mt-1">
@@ -145,7 +145,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
             <div className="flex items-start gap-3">
               <RadioGroupItem value="urgent" id="start-urgent" className="mt-0.5" />
               <div className="flex-1">
-                <Label htmlFor="start-urgent" className="font-semibold cursor-pointer">
+                <Label htmlFor="start-urgent" className="font-semibold cursor-pointer text-white">
                   Dringend 🔥
                 </Label>
                 <p className="text-sm text-white/70 mt-1">
@@ -178,17 +178,17 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
           {/* None */}
           <div
             className={cn(
-              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer',
+              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.maintenance === 'none'
-                ? 'border-primary-600 bg-primary-50'
-                : 'border-gray-200 hover:border-primary-300'
+                ? 'border-white/40 bg-white/20'
+                : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('maintenance', 'none')}
           >
             <div className="flex items-start gap-3">
               <RadioGroupItem value="none" id="maint-none" className="mt-0.5" />
               <div className="flex-1">
-                <Label htmlFor="maint-none" className="font-semibold cursor-pointer">
+                <Label htmlFor="maint-none" className="font-semibold cursor-pointer text-white">
                   Keine
                 </Label>
                 <p className="text-sm text-white/70 mt-1">
@@ -204,17 +204,17 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
           {/* Basic */}
           <div
             className={cn(
-              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer',
+              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.maintenance === 'basic'
-                ? 'border-primary-600 bg-primary-50'
-                : 'border-gray-200 hover:border-primary-300'
+                ? 'border-white/40 bg-white/20'
+                : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('maintenance', 'basic')}
           >
             <div className="flex items-start gap-3">
               <RadioGroupItem value="basic" id="maint-basic" className="mt-0.5" />
               <div className="flex-1">
-                <Label htmlFor="maint-basic" className="font-semibold cursor-pointer">
+                <Label htmlFor="maint-basic" className="font-semibold cursor-pointer text-white">
                   Basic
                 </Label>
                 <p className="text-sm text-white/70 mt-1">
@@ -230,10 +230,10 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
           {/* Premium */}
           <div
             className={cn(
-              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer',
+              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.maintenance === 'premium'
-                ? 'border-primary-600 bg-primary-50'
-                : 'border-gray-200 hover:border-primary-300'
+                ? 'border-white/40 bg-white/20'
+                : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('maintenance', 'premium')}
           >
@@ -246,7 +246,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
               <div className="flex-1">
                 <Label
                   htmlFor="maint-premium"
-                  className="font-semibold cursor-pointer"
+                  className="font-semibold cursor-pointer text-white"
                 >
                   Premium
                 </Label>

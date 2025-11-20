@@ -131,10 +131,10 @@ export function StepDesignScope({
                 })
               }
               className={cn(
-                'relative cursor-pointer rounded-lg p-4 border-2 transition-all',
+                'relative cursor-pointer rounded-lg p-4 border-2 transition-all backdrop-blur-md',
                 designLevel === level.value
-                  ? 'border-primary-600 bg-primary-50'
-                  : 'border-gray-200 hover:border-primary-300'
+                  ? 'border-white/40 bg-white/20'
+                  : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
               )}
             >
               <div className="flex items-center gap-2 mb-2">
@@ -142,14 +142,14 @@ export function StepDesignScope({
                 <div
                   className={cn(
                     'h-4 w-4 rounded-full border-2 flex items-center justify-center',
-                    designLevel === level.value ? 'border-primary-600' : 'border-gray-300'
+                    designLevel === level.value ? 'border-white' : 'border-white/40'
                   )}
                 >
                   {designLevel === level.value && (
-                    <div className="h-2 w-2 rounded-full bg-primary-600" />
+                    <div className="h-2 w-2 rounded-full bg-white" />
                   )}
                 </div>
-                <span className="font-semibold">{level.label}</span>
+                <span className="font-semibold text-white">{level.label}</span>
               </div>
               <p className="text-sm text-white/70">{level.description}</p>
             </div>
@@ -249,10 +249,10 @@ export function StepDesignScope({
             <div
               key={option.value}
               className={cn(
-                'flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer',
+                'flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                 uxComplexity === option.value
-                  ? 'border-primary-600 bg-primary-50'
-                  : 'border-gray-200 hover:border-primary-300'
+                  ? 'border-white/40 bg-white/20'
+                  : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
               )}
               onClick={() =>
                 onChange({
@@ -269,7 +269,7 @@ export function StepDesignScope({
               <div className="flex-1">
                 <Label
                   htmlFor={`ux-${option.value}`}
-                  className="font-medium cursor-pointer"
+                  className="font-medium cursor-pointer text-white"
                 >
                   {option.label}
                 </Label>

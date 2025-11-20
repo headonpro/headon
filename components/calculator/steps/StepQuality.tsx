@@ -58,8 +58,8 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
         <AccordionItem value="seo">
           <AccordionTrigger>
             <div className="flex items-center gap-3">
-              <Search className="h-5 w-5 text-primary-600" />
-              <span className="font-medium">SEO-Optimierung</span>
+              <Search className="h-5 w-5 text-white" />
+              <span className="font-medium text-white">SEO-Optimierung</span>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -70,16 +70,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
             >
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.seo === 'none'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('seo', 'none')}
               >
                 <RadioGroupItem value="none" id="seo-none" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="seo-none" className="font-medium cursor-pointer">
+                  <Label htmlFor="seo-none" className="font-medium cursor-pointer text-white">
                     Keine
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -90,16 +90,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.seo === 'basic'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('seo', 'basic')}
               >
                 <RadioGroupItem value="basic" id="seo-basic" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="seo-basic" className="font-medium cursor-pointer">
+                  <Label htmlFor="seo-basic" className="font-medium cursor-pointer text-white">
                     Basic
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -110,16 +110,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.seo === 'advanced'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('seo', 'advanced')}
               >
                 <RadioGroupItem value="advanced" id="seo-advanced" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="seo-advanced" className="font-medium cursor-pointer">
+                  <Label htmlFor="seo-advanced" className="font-medium cursor-pointer text-white">
                     Advanced
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -130,16 +130,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.seo === 'enterprise'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('seo', 'enterprise')}
               >
                 <RadioGroupItem value="enterprise" id="seo-enterprise" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="seo-enterprise" className="font-medium cursor-pointer">
+                  <Label htmlFor="seo-enterprise" className="font-medium cursor-pointer text-white">
                     Enterprise
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -155,8 +155,8 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
         <AccordionItem value="performance">
           <AccordionTrigger>
             <div className="flex items-center gap-3">
-              <Zap className="h-5 w-5 text-primary-600" />
-              <span className="font-medium">Performance-Optimierung</span>
+              <Zap className="h-5 w-5 text-white" />
+              <span className="font-medium text-white">Performance-Optimierung</span>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -167,16 +167,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
             >
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.performance === 'standard'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('performance', 'standard')}
               >
                 <RadioGroupItem value="standard" id="perf-standard" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="perf-standard" className="font-medium cursor-pointer">
+                  <Label htmlFor="perf-standard" className="font-medium cursor-pointer text-white">
                     Standard
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -187,16 +187,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.performance === 'optimized'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('performance', 'optimized')}
               >
                 <RadioGroupItem value="optimized" id="perf-optimized" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="perf-optimized" className="font-medium cursor-pointer">
+                  <Label htmlFor="perf-optimized" className="font-medium cursor-pointer text-white">
                     Optimized
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -207,16 +207,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.performance === 'premium'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('performance', 'premium')}
               >
                 <RadioGroupItem value="premium" id="perf-premium" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="perf-premium" className="font-medium cursor-pointer">
+                  <Label htmlFor="perf-premium" className="font-medium cursor-pointer text-white">
                     Premium
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -232,8 +232,8 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
         <AccordionItem value="security">
           <AccordionTrigger>
             <div className="flex items-center gap-3">
-              <Shield className="h-5 w-5 text-primary-600" />
-              <span className="font-medium">Security & DSGVO</span>
+              <Shield className="h-5 w-5 text-white" />
+              <span className="font-medium text-white">Security & DSGVO</span>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -250,7 +250,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                 >
                   <div
                     className={cn(
-                      'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                      'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                       quality.security === 'ssl-only'
                         ? 'border-primary-600 bg-primary-50'
                         : 'border-gray-200 hover:border-primary-300'
@@ -259,7 +259,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                   >
                     <RadioGroupItem value="ssl-only" id="sec-ssl" className="mt-1" />
                     <div className="flex-1">
-                      <Label htmlFor="sec-ssl" className="font-medium cursor-pointer">
+                      <Label htmlFor="sec-ssl" className="font-medium cursor-pointer text-white">
                         SSL Only
                       </Label>
                       <p className="text-sm text-white/70 mt-1">
@@ -270,7 +270,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
                   <div
                     className={cn(
-                      'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                      'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                       quality.security === 'advanced'
                         ? 'border-primary-600 bg-primary-50'
                         : 'border-gray-200 hover:border-primary-300'
@@ -279,7 +279,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                   >
                     <RadioGroupItem value="advanced" id="sec-advanced" className="mt-1" />
                     <div className="flex-1">
-                      <Label htmlFor="sec-advanced" className="font-medium cursor-pointer">
+                      <Label htmlFor="sec-advanced" className="font-medium cursor-pointer text-white">
                         Advanced
                       </Label>
                       <p className="text-sm text-white/70 mt-1">
@@ -290,7 +290,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
                   <div
                     className={cn(
-                      'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                      'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                       quality.security === 'penetration-testing'
                         ? 'border-primary-600 bg-primary-50'
                         : 'border-gray-200 hover:border-primary-300'
@@ -303,7 +303,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                       className="mt-1"
                     />
                     <div className="flex-1">
-                      <Label htmlFor="sec-pentest" className="font-medium cursor-pointer">
+                      <Label htmlFor="sec-pentest" className="font-medium cursor-pointer text-white">
                         Penetration Testing
                       </Label>
                       <p className="text-sm text-white/70 mt-1">
@@ -334,7 +334,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                   <div className="flex items-start gap-3 flex-1">
                     <Lock className="h-5 w-5 text-primary-600 flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
-                      <Label className="font-medium cursor-pointer">
+                      <Label className="font-medium cursor-pointer text-white">
                         DSGVO-Compliance
                       </Label>
                       <p className="text-sm text-white/70 mt-1">
@@ -353,8 +353,8 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
         <AccordionItem value="testing">
           <AccordionTrigger>
             <div className="flex items-center gap-3">
-              <TestTube className="h-5 w-5 text-primary-600" />
-              <span className="font-medium">Testing & Quality Assurance</span>
+              <TestTube className="h-5 w-5 text-white" />
+              <span className="font-medium text-white">Testing & Quality Assurance</span>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -365,16 +365,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
             >
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.testing === 'none'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('testing', 'none')}
               >
                 <RadioGroupItem value="none" id="test-none" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="test-none" className="font-medium cursor-pointer">
+                  <Label htmlFor="test-none" className="font-medium cursor-pointer text-white">
                     Keine
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -385,16 +385,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.testing === 'unit'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('testing', 'unit')}
               >
                 <RadioGroupItem value="unit" id="test-unit" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="test-unit" className="font-medium cursor-pointer">
+                  <Label htmlFor="test-unit" className="font-medium cursor-pointer text-white">
                     Unit Tests
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -405,16 +405,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.testing === 'e2e'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('testing', 'e2e')}
               >
                 <RadioGroupItem value="e2e" id="test-e2e" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="test-e2e" className="font-medium cursor-pointer">
+                  <Label htmlFor="test-e2e" className="font-medium cursor-pointer text-white">
                     E2E Tests
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -425,16 +425,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.testing === 'qa-process'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('testing', 'qa-process')}
               >
                 <RadioGroupItem value="qa-process" id="test-qa" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="test-qa" className="font-medium cursor-pointer">
+                  <Label htmlFor="test-qa" className="font-medium cursor-pointer text-white">
                     Full QA Process
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -450,8 +450,8 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
         <AccordionItem value="accessibility">
           <AccordionTrigger>
             <div className="flex items-center gap-3">
-              <Eye className="h-5 w-5 text-primary-600" />
-              <span className="font-medium">Barrierefreiheit (Accessibility)</span>
+              <Eye className="h-5 w-5 text-white" />
+              <span className="font-medium text-white">Barrierefreiheit (Accessibility)</span>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -462,16 +462,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
             >
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.accessibility === 'none'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('accessibility', 'none')}
               >
                 <RadioGroupItem value="none" id="a11y-none" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="a11y-none" className="font-medium cursor-pointer">
+                  <Label htmlFor="a11y-none" className="font-medium cursor-pointer text-white">
                     Keine
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -482,16 +482,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.accessibility === 'wcag-aa'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('accessibility', 'wcag-aa')}
               >
                 <RadioGroupItem value="wcag-aa" id="a11y-aa" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="a11y-aa" className="font-medium cursor-pointer">
+                  <Label htmlFor="a11y-aa" className="font-medium cursor-pointer text-white">
                     WCAG 2.1 AA
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
@@ -502,16 +502,16 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
 
               <div
                 className={cn(
-                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer',
+                  'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                   quality.accessibility === 'wcag-aaa'
-                    ? 'border-primary-600 bg-primary-50'
-                    : 'border-gray-200 hover:border-primary-300'
+                    ? 'border-white/40 bg-white/20'
+                    : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                 )}
                 onClick={() => updateQualityField('accessibility', 'wcag-aaa')}
               >
                 <RadioGroupItem value="wcag-aaa" id="a11y-aaa" className="mt-1" />
                 <div className="flex-1">
-                  <Label htmlFor="a11y-aaa" className="font-medium cursor-pointer">
+                  <Label htmlFor="a11y-aaa" className="font-medium cursor-pointer text-white">
                     WCAG 2.1 AAA
                   </Label>
                   <p className="text-sm text-white/70 mt-1">
