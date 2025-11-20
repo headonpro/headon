@@ -125,7 +125,8 @@ export function PriceCounter({ value, range, className }: PriceCounterProps) {
         clearInterval(animationIntervalRef.current)
       }
     }
-  }, [value, displayedValue])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]) // FIXED: displayedValue intentionally excluded to prevent animation loops
 
   // ============================================================================
   // Cleanup on Unmount
