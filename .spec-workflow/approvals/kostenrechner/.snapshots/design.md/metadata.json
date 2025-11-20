@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/kostenrechner/design.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-11-20T12:28:17.681Z",
+      "trigger": "initial",
+      "approvalId": "approval_1763641697677_pg5yjp7in",
+      "approvalTitle": "Design Document - Kostenrechner"
+    }
+  ]
+}

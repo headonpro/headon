@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/kostenrechner/tasks.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-11-20T13:03:11.933Z",
+      "trigger": "initial",
+      "approvalId": "approval_1763643791930_diwarxiqy",
+      "approvalTitle": "Tasks Document - Kostenrechner (43 Tasks)"
+    }
+  ]
+}

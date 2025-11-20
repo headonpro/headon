@@ -12,7 +12,7 @@ import WebVitalsReporter from '@/components/web-vitals-reporter'
 const outfit = Outfit({
   weight: ['400', '600', '700'], // Optimiert: nur benötigte Weights
   subsets: ['latin'],
-  display: 'swap',
+  display: 'optional', // LCP-Optimierung: Rendert sofort mit Fallback
   variable: '--font-outfit',
   preload: true,
   adjustFontFallback: true,
@@ -21,7 +21,7 @@ const outfit = Outfit({
 const lato = Lato({
   weight: ['400', '700'], // Optimiert: nur Regular & Bold
   subsets: ['latin'],
-  display: 'swap',
+  display: 'optional', // LCP-Optimierung: Rendert sofort mit Fallback
   variable: '--font-lato',
   preload: true,
   adjustFontFallback: true,

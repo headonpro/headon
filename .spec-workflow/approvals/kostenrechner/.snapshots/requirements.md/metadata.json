@@ -1,0 +1,14 @@
+{
+  "filePath": ".spec-workflow/specs/kostenrechner/requirements.md",
+  "currentVersion": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-11-20T12:22:24.385Z",
+      "trigger": "initial",
+      "approvalId": "approval_1763641344377_20rbkzyc0",
+      "approvalTitle": "Requirements Document - Kostenrechner"
+    }
+  ]
+}

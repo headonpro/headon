@@ -1,0 +1,74 @@
+# HEADON.pro
+
+> Digital agency specializing in modern web development, mobile apps, and UI/UX design for businesses in Main-Tauber-Kreis region (Germany). We build with Next.js, React, TypeScript, and React Native.
+
+HEADON.pro is a digital agency based in Bad Mergentheim, Germany, serving the Main-Tauber-Kreis region and beyond. We specialize in performance-optimized, SEO-first web applications and cross-platform mobile apps. Our tech stack focuses on Next.js 15, React 19, TypeScript, Tailwind CSS, and Supabase for backend services.
+
+**Core Services:**
+- Web Development: Next.js/React web applications with SEO optimization, starting at €2,500
+- Mobile App Development: iOS & Android apps using React Native or Flutter, starting at €8,000
+- UI/UX Design: User research, wireframing, prototyping, and responsive design systems
+- Backend Solutions: REST/GraphQL APIs, authentication, database design, and cloud infrastructure
+
+**Regional Focus:**
+Primary service areas include Bad Mergentheim, Lauda-Königshofen, Tauberbischofsheim, Wertheim, Würzburg, Heilbronn, and surrounding Main-Tauber-Kreis municipalities. We provide local, German-speaking support for businesses in these regions.
+
+**Industry Expertise:**
+Handwerk (tradespeople), Gastronomie (restaurants), Einzelhandel (retail), Fitness & wellness, Immobilien (real estate), Beratung (consulting), and local service businesses.
+
+## Technical Documentation
+
+- [Web Development Service](https://headon.pro/services/web-development): Complete guide to our web development process, tech stack, pricing, and deliverables
+- [Mobile App Development](https://headon.pro/services/mobile-development): Native & cross-platform mobile app development with React Native/Flutter
+- [UI/UX Design Service](https://headon.pro/services/ui-ux-design): Design process from research to prototyping and design systems
+- [Backend Solutions](https://headon.pro/services/backend-solutions): API development, database design, authentication, and cloud infrastructure
+- [Technology Glossary](https://headon.pro/glossar): Detailed explanations of 30+ technical terms (API, React, Next.js, TypeScript, SEO, etc.)
+
+## Blog & Knowledge Base
+
+- [Next.js 15 Complete Guide](https://headon.pro/blog/next-js-15-neue-features): In-depth overview of Next.js 15 features, App Router, Server Components
+- [Core Web Vitals Optimization](https://headon.pro/blog/core-web-vitals-optimierung): Performance optimization guide for LCP, FID, CLS
+- [Local SEO for Small Businesses](https://headon.pro/blog/local-seo-guide-kleine-unternehmen): Complete local SEO strategy for regional businesses
+- [React Native vs Flutter Comparison](https://headon.pro/blog/react-native-vs-flutter): Technical comparison for cross-platform mobile development
+- [Website Cost Guide 2025](https://headon.pro/blog/website-kosten-2025): Transparent pricing breakdown for web development projects
+
+## Industry-Specific Solutions
+
+- [Websites for Tradespeople](https://headon.pro/branchen/handwerk): Handwerker-focused web solutions with appointment booking
+- [Restaurant Websites](https://headon.pro/branchen/gastronomie): Online menus, reservations, delivery integration
+- [Retail E-Commerce](https://headon.pro/branchen/einzelhandel): Online shops with inventory, payments, and local pickup
+- [Fitness Studio Websites](https://headon.pro/branchen/fitness): Class schedules, membership management, online booking
+- [Real Estate Platforms](https://headon.pro/branchen/immobilien): Property listings, search filters, contact management
+
+## Regional Landing Pages
+
+- [Web Agency Bad Mergentheim](https://headon.pro/regionen/bad-mergentheim): Local web development for Bad Mergentheim businesses
+- [Web Agency Wertheim](https://headon.pro/regionen/wertheim): Web and mobile development for Wertheim region
+- [Web Agency Tauberbischofsheim](https://headon.pro/regionen/tauberbischofsheim): Digital solutions for Tauberbischofsheim area
+- [Web Agency Lauda-Königshofen](https://headon.pro/regionen/lauda-koenigshofen): Web development for Lauda-Königshofen companies
+
+## Tech Stack & Tools
+
+**Frontend:** Next.js 15, React 19, TypeScript, Tailwind CSS v4, Framer Motion
+**Backend:** Supabase (PostgreSQL), Node.js, REST/GraphQL APIs
+**Mobile:** React Native, Expo
+**Design:** Figma, shadcn/ui components, Radix UI primitives
+**DevOps:** Docker, GitHub Actions, Vercel/self-hosted VPS
+**Analytics:** Umami (self-hosted), privacy-focused
+**Forms:** React Hook Form, Zod validation
+**SEO:** Automatic sitemap generation, Schema.org markup, Open Graph tags
+
+## Project Info
+
+**Content Management:**
+Content stored in MDX files with frontmatter (gray-matter). Blog posts, portfolio projects, service pages, and regional landing pages all use MDX for structured content with TypeScript validation.
+
+**SEO Strategy:**
+Server-Side Rendering (SSR) for all pages, automatic sitemap at `/sitemap.xml`, structured data with Schema.org JSON-LD, optimized meta tags, and Core Web Vitals optimization (90+ Lighthouse scores).
+
+**Development Approach:**
+Agile methodology with 2-week sprints, MVP-first development, transparent fixed-price or phase-based pricing, local German-speaking support, and comprehensive documentation.
+
+## Contact & Quotes
+
+For project inquiries, contact us at hallo@headon.pro or through our [contact form](https://headon.pro/contact). We provide free consultations and detailed project quotes within 48 hours.
