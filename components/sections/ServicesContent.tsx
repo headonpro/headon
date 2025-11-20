@@ -210,6 +210,46 @@ export default function ServicesContent() {
         </div>
       </section>
 
+      {/* Cost Calculator Call-out */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="border-accent-500 from-accent-50 to-secondary-50 mx-auto max-w-4xl rounded-lg border-l-4 bg-gradient-to-br p-8 shadow-md">
+          <div className="mb-4 flex items-center gap-3">
+            <div className="from-accent-500 to-secondary-500 rounded-lg bg-gradient-to-br p-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-foreground text-2xl font-bold">Was kostet Ihr Projekt?</h3>
+          </div>
+          <p className="text-muted-foreground mb-6 text-lg">
+            Nutzen Sie unseren interaktiven Kostenrechner für eine erste, realistische Einschätzung
+            Ihres Projekts – basierend auf Umfang, Features und gewünschten Technologien.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild className="from-accent-500 to-secondary-500 bg-gradient-to-r">
+              <Link href="/webseite-erstellen-lassen-kosten">Website Kosten berechnen →</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/homepage-kosten">Homepage Kosten →</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/website-kosten">Technologie Kosten →</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
       <PricingSection />
     </>

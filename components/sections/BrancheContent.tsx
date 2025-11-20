@@ -218,6 +218,50 @@ export default function BrancheContent({
             </motion.div>
           )}
 
+          {/* Cost Calculator Hint */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55 }}
+            className="mx-auto mb-12 max-w-4xl"
+          >
+            <div className="rounded-lg border border-white/30 bg-white/20 p-6 backdrop-blur-md">
+              <div className="flex flex-col items-center gap-4 md:flex-row md:items-start">
+                <div className="from-accent-500 to-secondary-500 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br">
+                  <Icons.Calculator className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="mb-2 text-xl font-bold text-white">
+                    Was kostet eine Website für {branchePage.frontmatter.name}?
+                  </h3>
+                  <p className="mb-4 text-white/90">
+                    Nutzen Sie unseren Kostenrechner für eine erste, realistische Einschätzung Ihres
+                    Projekts – speziell angepasst an Ihre Branche.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-2 md:justify-start">
+                    <Link href="/homepage-kosten">
+                      <Button
+                        size="sm"
+                        className="from-accent-500 to-secondary-500 bg-gradient-to-r text-white"
+                      >
+                        Kosten berechnen →
+                      </Button>
+                    </Link>
+                    <Link href="/webseite-erstellen-lassen-kosten">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-white/30 bg-white/10 text-white hover:bg-white/20"
+                      >
+                        Detaillierter Rechner →
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Final CTA Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

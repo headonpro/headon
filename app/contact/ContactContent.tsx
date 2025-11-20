@@ -412,9 +412,31 @@ export default function ContactContent() {
                         </Badge>
                       )}
                     </div>
-                    <p className="mb-6 text-white/80">
+                    <p className="mb-4 text-white/80">
                       Beschreiben Sie Ihr Projekt und wir melden uns schnellstmöglich
                     </p>
+
+                    {/* Cost Calculator Hint */}
+                    <div className="mb-6 rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm">
+                      <div className="flex items-start gap-2">
+                        <AlertCircle className="text-accent-500 mt-0.5 h-5 w-5 flex-shrink-0" />
+                        <div>
+                          <p className="text-sm text-white/90">
+                            <strong>Noch unsicher über Ihr Budget?</strong>
+                          </p>
+                          <p className="mt-1 text-xs text-white/70">
+                            Nutzen Sie unseren{' '}
+                            <a
+                              href="/webseite-erstellen-lassen-kosten"
+                              className="text-accent-400 hover:text-accent-300 underline transition-colors"
+                            >
+                              kostenlosen Kostenrechner
+                            </a>{' '}
+                            für eine erste Einschätzung Ihres Projekts.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
 
                     {/* Multi-Step Form */}
                     <MultiStepForm

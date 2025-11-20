@@ -20,6 +20,7 @@ const branchenItems = [
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services' },
+  { name: 'Kostenrechner', href: '/webseite-erstellen-lassen-kosten' },
   { name: 'Blog', href: '/blog' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Branchen', href: '/branchen', hasDropdown: true },

@@ -14,6 +14,11 @@ const navigation = {
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Regionen', href: '/regionen' },
   ],
+  tools: [
+    { name: 'Website Kosten', href: '/webseite-erstellen-lassen-kosten' },
+    { name: 'Homepage Kosten', href: '/homepage-kosten' },
+    { name: 'Technologie Kosten', href: '/website-kosten' },
+  ],
   resources: [
     { name: 'Blog', href: '/blog' },
     { name: 'FAQ', href: '/faq' },
@@ -30,7 +35,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-50">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7">
           {/* Logo & Description */}
           <div className="space-y-4 md:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-block" aria-label="HEADON.pro - Zur Startseite">
@@ -96,6 +101,23 @@ export default function Footer() {
             <h3 className="text-foreground text-sm font-semibold">Unternehmen</h3>
             <ul role="list" className="mt-4 space-y-2">
               {navigation.company.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tools */}
+          <div>
+            <h3 className="text-foreground text-sm font-semibold">Tools</h3>
+            <ul role="list" className="mt-4 space-y-2">
+              {navigation.tools.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
