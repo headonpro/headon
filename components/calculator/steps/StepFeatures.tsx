@@ -91,21 +91,21 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                   onValueChange={(val) => handleSubOptionChange('cmsType', val)}
                   className="space-y-2"
                 >
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="strapi" id="cms-strapi" />
-                    <Label htmlFor="cms-strapi" className="text-sm cursor-pointer">
+                    <Label htmlFor="cms-strapi" className="text-sm cursor-pointer text-white">
                       Strapi (Headless CMS)
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="sanity" id="cms-sanity" />
-                    <Label htmlFor="cms-sanity" className="text-sm cursor-pointer">
+                    <Label htmlFor="cms-sanity" className="text-sm cursor-pointer text-white">
                       Sanity (Cloud-basiert)
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="custom" id="cms-custom" />
-                    <Label htmlFor="cms-custom" className="text-sm cursor-pointer">
+                    <Label htmlFor="cms-custom" className="text-sm cursor-pointer text-white">
                       Custom CMS (Maßgeschneidert)
                     </Label>
                   </div>
@@ -136,10 +136,10 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
               >
                 <div
                   className={cn(
-                    'flex items-center gap-3 p-3 rounded border cursor-pointer',
+                    'flex items-center gap-3 p-3 rounded border cursor-pointer backdrop-blur-md',
                     features.auth2FA
-                      ? 'border-primary-600 bg-primary-50'
-                      : 'border-gray-200 hover:border-primary-300'
+                      ? 'border-accent-500 bg-accent-500/10'
+                      : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                   )}
                   onClick={() => handleSubOptionChange('auth2FA', !features.auth2FA)}
                 >
@@ -148,17 +148,17 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                     onCheckedChange={(checked) => handleSubOptionChange('auth2FA', checked)}
                     onClick={(e) => e.stopPropagation()}
                   />
-                  <Label className="text-sm cursor-pointer flex-1">
+                  <Label className="text-sm cursor-pointer flex-1 text-white">
                     Two-Factor Authentication (2FA)
                   </Label>
                 </div>
 
                 <div
                   className={cn(
-                    'flex items-center gap-3 p-3 rounded border cursor-pointer',
+                    'flex items-center gap-3 p-3 rounded border cursor-pointer backdrop-blur-md',
                     features.authSocial
-                      ? 'border-primary-600 bg-primary-50'
-                      : 'border-gray-200 hover:border-primary-300'
+                      ? 'border-accent-500 bg-accent-500/10'
+                      : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                   )}
                   onClick={() => handleSubOptionChange('authSocial', !features.authSocial)}
                 >
@@ -167,7 +167,7 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                     onCheckedChange={(checked) => handleSubOptionChange('authSocial', checked)}
                     onClick={(e) => e.stopPropagation()}
                   />
-                  <Label className="text-sm cursor-pointer flex-1">
+                  <Label className="text-sm cursor-pointer flex-1 text-white">
                     Social Login (Google, Facebook, etc.)
                   </Label>
                 </div>
@@ -203,15 +203,15 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                   onValueChange={(val) => handleSubOptionChange('databaseComplexity', val)}
                   className="space-y-2"
                 >
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="simple" id="db-simple" />
-                    <Label htmlFor="db-simple" className="text-sm cursor-pointer">
+                    <Label htmlFor="db-simple" className="text-sm cursor-pointer text-white">
                       Einfach (wenige Tabellen)
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="complex" id="db-complex" />
-                    <Label htmlFor="db-complex" className="text-sm cursor-pointer">
+                    <Label htmlFor="db-complex" className="text-sm cursor-pointer text-white">
                       Komplex (viele Relationen, Joins)
                     </Label>
                   </div>
@@ -246,21 +246,21 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                   onValueChange={(val) => handleSubOptionChange('paymentProvider', val)}
                   className="space-y-2"
                 >
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="stripe" id="pay-stripe" />
-                    <Label htmlFor="pay-stripe" className="text-sm cursor-pointer">
+                    <Label htmlFor="pay-stripe" className="text-sm cursor-pointer text-white">
                       Stripe (International)
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="paypal" id="pay-paypal" />
-                    <Label htmlFor="pay-paypal" className="text-sm cursor-pointer">
+                    <Label htmlFor="pay-paypal" className="text-sm cursor-pointer text-white">
                       PayPal (Weit verbreitet)
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="mollie" id="pay-mollie" />
-                    <Label htmlFor="pay-mollie" className="text-sm cursor-pointer">
+                    <Label htmlFor="pay-mollie" className="text-sm cursor-pointer text-white">
                       Mollie (EU-fokussiert)
                     </Label>
                   </div>
@@ -295,15 +295,15 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                   onValueChange={(val) => handleSubOptionChange('apiType', val)}
                   className="space-y-2"
                 >
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="rest" id="api-rest" />
-                    <Label htmlFor="api-rest" className="text-sm cursor-pointer">
+                    <Label htmlFor="api-rest" className="text-sm cursor-pointer text-white">
                       REST API (Standard)
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 text-white">
                     <RadioGroupItem value="graphql" id="api-graphql" />
-                    <Label htmlFor="api-graphql" className="text-sm cursor-pointer">
+                    <Label htmlFor="api-graphql" className="text-sm cursor-pointer text-white">
                       GraphQL API (Flexibler)
                     </Label>
                   </div>
@@ -332,7 +332,7 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden ml-8 mt-3"
               >
-                <Label htmlFor="integrations-count" className="text-sm font-medium mb-2 block">
+                <Label htmlFor="integrations-count" className="text-sm font-medium mb-2 block text-white">
                   Anzahl der Integrationen
                 </Label>
                 <Input
@@ -344,7 +344,7 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                   onChange={(e) =>
                     handleSubOptionChange('integrationsCount', parseInt(e.target.value) || 1)
                   }
-                  className="max-w-[200px]"
+                  className="max-w-[200px] bg-white/10 border-white/20 text-white backdrop-blur-md hover:bg-white/15 focus:bg-white/20 placeholder:text-white/50"
                 />
               </motion.div>
             )}
@@ -379,7 +379,7 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden ml-8 mt-3"
               >
-                <Label htmlFor="language-count" className="text-sm font-medium mb-2 block">
+                <Label htmlFor="language-count" className="text-sm font-medium mb-2 block text-white">
                   Anzahl der Sprachen
                 </Label>
                 <Input
@@ -391,7 +391,7 @@ export function StepFeatures({ features, onChange }: StepFeaturesProps) {
                   onChange={(e) =>
                     handleSubOptionChange('i18nLanguages', parseInt(e.target.value) || 2)
                   }
-                  className="max-w-[200px]"
+                  className="max-w-[200px] bg-white/10 border-white/20 text-white backdrop-blur-md hover:bg-white/15 focus:bg-white/20 placeholder:text-white/50"
                 />
               </motion.div>
             )}

@@ -53,7 +53,7 @@ export function ProjectTypeCard({
       className={cn(
         'relative cursor-pointer rounded-xl p-6 border-2 transition-all backdrop-blur-md',
         selected
-          ? 'border-white/40 bg-white/20 shadow-lg'
+          ? 'border-accent-500 bg-accent-500/10 shadow-lg'
           : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
       )}
     >
@@ -62,7 +62,7 @@ export function ProjectTypeCard({
         <div
           className={cn(
             'h-14 w-14 rounded-lg flex items-center justify-center backdrop-blur-sm',
-            selected ? 'bg-white/30 text-white' : 'bg-white/20 text-white/80'
+            selected ? 'bg-accent-500/20 text-accent-500' : 'bg-white/20 text-white/80'
           )}
         >
           <Icon className="h-7 w-7" />
@@ -83,7 +83,7 @@ export function ProjectTypeCard({
 
         {/* Selection Indicator */}
         {selected && (
-          <CheckCircle2 className="h-6 w-6 text-white flex-shrink-0" />
+          <CheckCircle2 className="h-6 w-6 text-accent-500 flex-shrink-0" />
         )}
       </div>
     </motion.div>

@@ -6,14 +6,17 @@
  *
  * Features:
  * - Animated scale entrance (0.9 → 1.0)
- * - Green gradient background for positive emphasis
+ * - Glassmorphism design for consistent styling
  * - Large, prominent numbers for savings
- * - Emoji for visual appeal
+ * - Lucide icon for visual appeal
+ * - HEADON logo for brand recognition
  */
 
 'use client'
 
 import { motion } from 'framer-motion'
+import { TrendingDown } from 'lucide-react'
+import Logo from '@/components/ui/Logo'
 import { formatCurrency } from '@/lib/calculator/utils'
 import type { ComparisonResult } from '@/lib/calculator/types'
 
@@ -44,24 +47,29 @@ export function SavingsHighlight({ savings }: SavingsHighlightProps) {
         duration: 0.5,
         ease: 'easeOut',
       }}
-      // Styling: Green gradient background, centered text, prominent border
-      className="text-center py-8 px-6 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl"
+      // Styling: Glassmorphism design with backdrop blur
+      className="text-center py-8 px-6 bg-white/10 border-2 border-white/20 rounded-xl backdrop-blur-md"
     >
-      {/* Emoji (text-4xl as per spec) */}
-      <div className="text-4xl mb-2">💰</div>
+      {/* Lucide Icon (TrendingDown for savings) */}
+      <div className="flex justify-center mb-4">
+        <TrendingDown className="h-12 w-12 text-white" />
+      </div>
 
-      {/* Heading (text-2xl font-bold as per spec) */}
-      <h3 className="text-2xl font-bold text-green-900 mb-2">
-        Sie sparen mit HEADON:
-      </h3>
+      {/* Heading with Logo */}
+      <div className="flex items-center justify-center gap-2 mb-2">
+        <h3 className="text-2xl font-bold text-white">
+          Sie sparen mit
+        </h3>
+        <Logo width={90} height={24} className="!h-[24px] !w-auto" />
+      </div>
 
-      {/* Savings Numbers (text-3xl font-extrabold text-green-700 as per spec) */}
-      <div className="text-3xl font-extrabold text-green-700">
+      {/* Savings Numbers (text-3xl font-extrabold) */}
+      <div className="text-3xl font-extrabold text-white">
         {formatCurrency(totalSavingsVsAgency)} & {timeSavingsVsAgency} Wochen
       </div>
 
       {/* Context Text */}
-      <p className="text-sm text-green-800 mt-4">
+      <p className="text-sm text-white/70 mt-4">
         Im Vergleich zu traditionellen Agenturen
       </p>
     </motion.div>

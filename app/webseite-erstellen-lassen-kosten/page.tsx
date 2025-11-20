@@ -71,15 +71,15 @@ export default function WebseiteErstellenLassenKostenPage() {
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm md:text-base text-white/90 font-medium">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-white" />
+                <CheckCircle2 className="h-5 w-5 text-accent-500" />
                 <span>KI-gestützte Entwicklung</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-white" />
+                <CheckCircle2 className="h-5 w-5 text-accent-500" />
                 <span>4x schnellere Umsetzung</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-white" />
+                <CheckCircle2 className="h-5 w-5 text-accent-500" />
                 <span>40% günstiger als Agenturen</span>
               </div>
             </div>

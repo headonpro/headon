@@ -78,7 +78,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
             className={cn(
               'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.projectStart === 'flexible'
-                ? 'border-white/40 bg-white/20'
+                ? 'border-accent-500 bg-accent-500/10'
                 : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('projectStart', 'flexible')}
@@ -111,7 +111,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
             className={cn(
               'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.projectStart === 'normal'
-                ? 'border-white/40 bg-white/20'
+                ? 'border-accent-500 bg-accent-500/10'
                 : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('projectStart', 'normal')}
@@ -135,10 +135,10 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
           {/* Urgent */}
           <div
             className={cn(
-              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer relative',
+              'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer relative backdrop-blur-md',
               timeline.projectStart === 'urgent'
-                ? 'border-orange-600 bg-orange-50'
-                : 'border-gray-200 hover:border-orange-300'
+                ? 'border-accent-500 bg-accent-500/10'
+                : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('projectStart', 'urgent')}
           >
@@ -151,7 +151,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
                 <p className="text-sm text-white/70 mt-1">
                   Schnellstmöglicher Start
                 </p>
-                <p className="text-xs text-orange-600 mt-2 font-bold">
+                <p className="text-xs text-white/70 mt-2 font-bold">
                   Express-Zuschlag
                 </p>
               </div>
@@ -180,7 +180,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
             className={cn(
               'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.maintenance === 'none'
-                ? 'border-white/40 bg-white/20'
+                ? 'border-accent-500 bg-accent-500/10'
                 : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('maintenance', 'none')}
@@ -206,7 +206,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
             className={cn(
               'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.maintenance === 'basic'
-                ? 'border-white/40 bg-white/20'
+                ? 'border-accent-500 bg-accent-500/10'
                 : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('maintenance', 'basic')}
@@ -232,7 +232,7 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
             className={cn(
               'flex flex-col p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
               timeline.maintenance === 'premium'
-                ? 'border-white/40 bg-white/20'
+                ? 'border-accent-500 bg-accent-500/10'
                 : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
             )}
             onClick={() => updateTimelineField('maintenance', 'premium')}
@@ -276,13 +276,13 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
           value={timeline.support}
           onValueChange={(val) => updateTimelineField('support', val)}
         >
-          <SelectTrigger className="w-full h-auto p-4">
+          <SelectTrigger className="w-full h-auto p-4 bg-white/10 border-white/20 text-white backdrop-blur-md hover:bg-white/15 [&>svg]:text-white/70">
             <SelectValue placeholder="Support-Dauer wählen" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">
+          <SelectContent className="bg-white/10 backdrop-blur-lg border-white/20">
+            <SelectItem value="none" className="focus:bg-white/20 cursor-pointer text-white">
               <div className="flex flex-col items-start py-1">
-                <span className="font-medium">Kein Support</span>
+                <span className="font-medium text-white">Kein Support</span>
                 <span className="text-sm text-white/70">
                   Nur Entwicklungsphase
                 </span>
@@ -290,9 +290,9 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
               </div>
             </SelectItem>
 
-            <SelectItem value="3-months">
+            <SelectItem value="3-months" className="focus:bg-white/20 cursor-pointer text-white">
               <div className="flex flex-col items-start py-1">
-                <span className="font-medium">3 Monate Support</span>
+                <span className="font-medium text-white">3 Monate Support</span>
                 <span className="text-sm text-white/70">
                   3 Monate kostenloser Support nach Launch
                 </span>
@@ -302,9 +302,9 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
               </div>
             </SelectItem>
 
-            <SelectItem value="6-months">
+            <SelectItem value="6-months" className="focus:bg-white/20 cursor-pointer text-white">
               <div className="flex flex-col items-start py-1">
-                <span className="font-medium">6 Monate Support</span>
+                <span className="font-medium text-white">6 Monate Support</span>
                 <span className="text-sm text-white/70">
                   6 Monate Priority Support nach Launch
                 </span>
@@ -314,9 +314,9 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
               </div>
             </SelectItem>
 
-            <SelectItem value="12-months">
+            <SelectItem value="12-months" className="focus:bg-white/20 cursor-pointer text-white">
               <div className="flex flex-col items-start py-1">
-                <span className="font-medium">12 Monate Support</span>
+                <span className="font-medium text-white">12 Monate Support</span>
                 <span className="text-sm text-white/70">
                   1 Jahr Premium Support nach Launch
                 </span>
@@ -338,10 +338,10 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
 
         <div
           className={cn(
-            'flex items-center justify-between p-4 rounded-lg border-2 transition-all cursor-pointer',
+            'flex items-center justify-between p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
             timeline.hosting
-              ? 'border-primary-600 bg-primary-50'
-              : 'border-gray-200 hover:border-primary-300'
+              ? 'border-white/40 bg-white/20'
+              : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
           )}
           onClick={() => updateTimelineField('hosting', !timeline.hosting)}
         >
@@ -368,10 +368,10 @@ export function StepTimeline({ timeline, onChange }: StepTimelineProps) {
       {/* 5. Training */}
       <div
         className={cn(
-          'flex items-start gap-3 p-4 rounded-lg border-2 transition-all cursor-pointer',
+          'flex items-start gap-3 p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
           timeline.training
-            ? 'border-primary-600 bg-primary-50'
-            : 'border-gray-200 hover:border-primary-300'
+            ? 'border-white/40 bg-white/20'
+            : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
         )}
         onClick={() => updateTimelineField('training', !timeline.training)}
       >

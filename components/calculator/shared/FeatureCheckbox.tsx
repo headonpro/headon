@@ -56,7 +56,7 @@ export function FeatureCheckbox({
       className={cn(
         'flex items-center gap-4 p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
         checked
-          ? 'border-white/40 bg-white/20'
+          ? 'border-accent-500 bg-accent-500/10'
           : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
       )}
       onClick={() => onChange(!checked)}
@@ -70,7 +70,10 @@ export function FeatureCheckbox({
 
       {/* Optional Icon */}
       {Icon && (
-        <div className="h-10 w-10 rounded-lg bg-white/30 text-white flex items-center justify-center flex-shrink-0">
+        <div className={cn(
+          "h-10 w-10 rounded-lg flex items-center justify-center flex-shrink-0",
+          checked ? "bg-accent-500/20 text-accent-500" : "bg-white/30 text-white"
+        )}>
           <Icon className="h-5 w-5" />
         </div>
       )}
@@ -85,7 +88,13 @@ export function FeatureCheckbox({
 
       {/* Price Badge */}
       {priceDisplay && (
-        <Badge variant={checked ? 'default' : 'secondary'} className="flex-shrink-0 bg-white/30 text-white border-white/20">
+        <Badge
+          variant={checked ? 'default' : 'secondary'}
+          className={cn(
+            "flex-shrink-0 border-white/20",
+            checked ? "bg-accent-500/20 text-accent-500" : "bg-white/30 text-white"
+          )}
+        >
           {priceDisplay}
         </Badge>
       )}

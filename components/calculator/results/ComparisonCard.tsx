@@ -6,7 +6,7 @@
  * Supports highlighting for the recommended option (HEADON).
  */
 
-import { Clock, Star, Check, AlertCircle } from 'lucide-react'
+import { Clock, Star, Check, AlertCircle, Award } from 'lucide-react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { formatCurrency, formatDuration } from '@/lib/calculator/utils'
@@ -37,8 +37,9 @@ export function ComparisonCard({ provider, highlight = false }: ComparisonCardPr
     >
       {/* Best Choice Badge (absolute positioned) */}
       {highlight && (
-        <div className="absolute top-0 right-0 bg-white/30 backdrop-blur-sm text-white px-4 py-1 text-sm font-bold">
-          ⭐ BESTE WAHL
+        <div className="absolute top-0 right-0 bg-white/30 backdrop-blur-sm text-white px-4 py-1 text-sm font-bold flex items-center gap-1.5">
+          <Award className="h-4 w-4" />
+          BESTE WAHL
         </div>
       )}
 

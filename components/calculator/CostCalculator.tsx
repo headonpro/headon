@@ -366,30 +366,46 @@ export function CostCalculator({ className }: CostCalculatorProps) {
           </AnimatePresence>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-between items-center mt-8 gap-4">
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              onClick={handlePrev}
-              disabled={!canGoPrev}
-              className="gap-2"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Zurück
-            </Button>
+          {state.currentStep < totalSteps ? (
+            <div className="flex justify-between items-center mt-8 gap-4">
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={handlePrev}
+                disabled={!canGoPrev}
+                className="gap-2"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Zurück
+              </Button>
 
-            <Button
-              type="button"
-              size="lg"
-              onClick={handleNext}
-              disabled={!canGoNext}
-              className="gap-2"
-            >
-              {state.currentStep === totalSteps ? 'Abschließen' : 'Weiter'}
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
+              <Button
+                type="button"
+                size="lg"
+                onClick={handleNext}
+                disabled={!canGoNext}
+                className="gap-2"
+              >
+                Weiter
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          ) : (
+            // Step 6: Only show back button
+            <div className="flex justify-start mt-8">
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={handlePrev}
+                className="gap-2"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Zurück
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Price Preview Sidebar (Desktop only, hidden on step 6) */}

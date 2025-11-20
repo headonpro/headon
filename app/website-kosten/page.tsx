@@ -66,15 +66,15 @@ export default function WebsiteKostenPage() {
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm md:text-base text-white/90 font-medium">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-white" />
+                <CheckCircle2 className="h-5 w-5 text-accent-500" />
                 <span>Technologie-unabhängig</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-white" />
+                <CheckCircle2 className="h-5 w-5 text-accent-500" />
                 <span>Komplexität bewertet</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-white" />
+                <CheckCircle2 className="h-5 w-5 text-accent-500" />
                 <span>Zukunftssicher</span>
               </div>
             </div>

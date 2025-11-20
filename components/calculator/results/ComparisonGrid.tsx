@@ -82,7 +82,7 @@ export function ComparisonGrid({ comparison, isMobile: forceMobile }: Comparison
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="freelancer">Freelancer</TabsTrigger>
           <TabsTrigger value="agency">Agentur</TabsTrigger>
-          <TabsTrigger value="headon">HEADON ⭐</TabsTrigger>
+          <TabsTrigger value="headon">HEADON</TabsTrigger>
         </TabsList>
 
         {/* Tab Content Panels */}

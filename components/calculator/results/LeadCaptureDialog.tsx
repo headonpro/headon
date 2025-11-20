@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { Mail } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -87,8 +88,9 @@ export function LeadCaptureDialog({ onSubmit }: LeadCaptureDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button size="lg" className="w-full">
-          📧 Detailliertes Angebot per E-Mail
+        <Button size="lg" className="w-full gap-2">
+          <Mail className="h-5 w-5" />
+          Detailliertes Angebot per E-Mail
         </Button>
       </DialogTrigger>
 

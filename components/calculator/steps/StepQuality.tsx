@@ -240,7 +240,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
             <div className="space-y-4 mt-2">
               {/* Security Level */}
               <div>
-                <Label className="text-sm font-semibold mb-3 block">
+                <Label className="text-sm font-semibold mb-3 block text-white">
                   Security-Level
                 </Label>
                 <RadioGroup
@@ -252,8 +252,8 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                     className={cn(
                       'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                       quality.security === 'ssl-only'
-                        ? 'border-primary-600 bg-primary-50'
-                        : 'border-gray-200 hover:border-primary-300'
+                        ? 'border-accent-500 bg-accent-500/10'
+                        : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                     )}
                     onClick={() => updateQualityField('security', 'ssl-only')}
                   >
@@ -272,8 +272,8 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                     className={cn(
                       'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                       quality.security === 'advanced'
-                        ? 'border-primary-600 bg-primary-50'
-                        : 'border-gray-200 hover:border-primary-300'
+                        ? 'border-accent-500 bg-accent-500/10'
+                        : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                     )}
                     onClick={() => updateQualityField('security', 'advanced')}
                   >
@@ -292,8 +292,8 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                     className={cn(
                       'flex items-start space-x-3 p-3 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                       quality.security === 'penetration-testing'
-                        ? 'border-primary-600 bg-primary-50'
-                        : 'border-gray-200 hover:border-primary-300'
+                        ? 'border-accent-500 bg-accent-500/10'
+                        : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                     )}
                     onClick={() => updateQualityField('security', 'penetration-testing')}
                   >
@@ -315,13 +315,13 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
               </div>
 
               {/* DSGVO Checkbox (separate) */}
-              <div className="pt-3 border-t">
+              <div className="pt-3 border-t border-white/20">
                 <div
                   className={cn(
-                    'flex items-start gap-3 p-4 rounded-lg border-2 transition-all cursor-pointer',
+                    'flex items-start gap-3 p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                     quality.dsgvo
-                      ? 'border-primary-600 bg-primary-50'
-                      : 'border-gray-200 hover:border-primary-300'
+                      ? 'border-accent-500 bg-accent-500/10'
+                      : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
                   )}
                   onClick={() => updateQualityField('dsgvo', !quality.dsgvo)}
                 >
@@ -332,7 +332,7 @@ export function StepQuality({ quality, onChange }: StepQualityProps) {
                     className="mt-0.5"
                   />
                   <div className="flex items-start gap-3 flex-1">
-                    <Lock className="h-5 w-5 text-primary-600 flex-shrink-0 mt-0.5" />
+                    <Lock className="h-5 w-5 text-white flex-shrink-0 mt-0.5" />
                     <div className="flex-1">
                       <Label className="font-medium cursor-pointer text-white">
                         DSGVO-Compliance

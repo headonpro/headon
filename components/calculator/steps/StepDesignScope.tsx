@@ -133,7 +133,7 @@ export function StepDesignScope({
               className={cn(
                 'relative cursor-pointer rounded-lg p-4 border-2 transition-all backdrop-blur-md',
                 designLevel === level.value
-                  ? 'border-white/40 bg-white/20'
+                  ? 'border-accent-500 bg-accent-500/10'
                   : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
               )}
             >
@@ -142,11 +142,11 @@ export function StepDesignScope({
                 <div
                   className={cn(
                     'h-4 w-4 rounded-full border-2 flex items-center justify-center',
-                    designLevel === level.value ? 'border-white' : 'border-white/40'
+                    designLevel === level.value ? 'border-accent-500' : 'border-white/40'
                   )}
                 >
                   {designLevel === level.value && (
-                    <div className="h-2 w-2 rounded-full bg-white" />
+                    <div className="h-2 w-2 rounded-full bg-accent-500" />
                   )}
                 </div>
                 <span className="font-semibold text-white">{level.label}</span>
@@ -196,29 +196,29 @@ export function StepDesignScope({
             })
           }
         >
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full bg-white/10 border-white/20 text-white backdrop-blur-md hover:bg-white/15 [&>svg]:text-white/70">
             <SelectValue placeholder="Wählen Sie Responsiveness-Level" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="desktop-only">
+          <SelectContent className="bg-white/10 backdrop-blur-lg border-white/20">
+            <SelectItem value="desktop-only" className="focus:bg-white/20 cursor-pointer text-white">
               <div>
-                <div className="font-medium">Nur Desktop</div>
+                <div className="font-medium text-white">Nur Desktop</div>
                 <div className="text-xs text-white/70">
                   Optimiert für Desktop-Browser
                 </div>
               </div>
             </SelectItem>
-            <SelectItem value="responsive">
+            <SelectItem value="responsive" className="focus:bg-white/20 cursor-pointer text-white">
               <div>
-                <div className="font-medium">Responsive (empfohlen)</div>
+                <div className="font-medium text-white">Responsive (empfohlen)</div>
                 <div className="text-xs text-white/70">
                   Optimiert für alle Geräte (Desktop, Tablet, Mobile)
                 </div>
               </div>
             </SelectItem>
-            <SelectItem value="pwa">
+            <SelectItem value="pwa" className="focus:bg-white/20 cursor-pointer text-white">
               <div>
-                <div className="font-medium">Progressive Web App (PWA)</div>
+                <div className="font-medium text-white">Progressive Web App (PWA)</div>
                 <div className="text-xs text-white/70">
                   Voll responsive + App-Funktionen (Offline, Push)
                 </div>
@@ -251,7 +251,7 @@ export function StepDesignScope({
               className={cn(
                 'flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer backdrop-blur-md',
                 uxComplexity === option.value
-                  ? 'border-white/40 bg-white/20'
+                  ? 'border-accent-500 bg-accent-500/10'
                   : 'border-white/20 bg-white/10 hover:border-white/30 hover:bg-white/15'
               )}
               onClick={() =>

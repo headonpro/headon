@@ -58,8 +58,8 @@ export function RangeSlider({
               <span
                 key={i}
                 className={cn(
-                  'text-muted-foreground transition-colors',
-                  isActive && 'text-primary-600 font-semibold'
+                  'text-white/70 transition-colors',
+                  isActive && 'text-accent-500 font-semibold'
                 )}
               >
                 {label}
@@ -81,7 +81,7 @@ export function RangeSlider({
 
       {/* Formatted Current Value Display */}
       <div className="text-center">
-        <div className="text-2xl font-bold text-primary-600">
+        <div className="text-2xl font-bold text-white">
           {formatLabel(value)}
         </div>
       </div>
