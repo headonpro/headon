@@ -1,21 +1,17 @@
 import { notFound } from 'next/navigation'
 import { getBranchePage } from '@/lib/content/content-api'
 import { compileMDXContent } from '@/lib/content/mdx-compiler'
+import { listContentSlugs } from '@/lib/content/mdx-loader'
 import BrancheContent from '@/components/sections/BrancheContent'
 import type { Metadata } from 'next'
 
 /**
  * Generate static params for all branche pages at build time
+ * Dynamically loads all slugs from content/branchen/
  */
 export async function generateStaticParams() {
-  return [
-    { branche: 'gastronomie' },
-    { branche: 'handwerk' },
-    { branche: 'einzelhandel' },
-    { branche: 'beratung' },
-    { branche: 'immobilien' },
-    { branche: 'fitness' },
-  ]
+  const slugs = await listContentSlugs('branchen')
+  return slugs.map((branche) => ({ branche }))
 }
 
 interface BranchePageProps {

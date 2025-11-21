@@ -1,87 +1,70 @@
 import Link from 'next/link'
-import { Calculator, Euro, TrendingUp, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-
-const calculators = [
-  {
-    title: 'Website Kosten',
-    description: 'Berechnen Sie die Kosten für Ihre neue Website basierend auf Umfang und Features',
-    href: '/webseite-erstellen-lassen-kosten',
-    icon: Calculator,
-    color: 'from-blue-500 to-blue-600',
-  },
-  {
-    title: 'Homepage Kosten',
-    description: 'Kostenrechner speziell für kleine Homepages und Unternehmenswebsites',
-    href: '/homepage-kosten',
-    icon: Euro,
-    color: 'from-green-500 to-green-600',
-  },
-  {
-    title: 'Technologie Kosten',
-    description: 'Vergleichen Sie Kosten verschiedener Technologie-Stacks für Ihr Projekt',
-    href: '/website-kosten',
-    icon: TrendingUp,
-    color: 'from-purple-500 to-purple-600',
-  },
-]
+import { Calculator, ArrowRight } from 'lucide-react'
 
 export default function CostCalculatorCTA() {
   return (
-    <section className="bg-gray-50 py-16 md:py-24">
+    <section className="relative -mt-1 bg-gradient-to-b from-white via-gray-50 to-white py-24 pb-32">
       <div className="container mx-auto px-4">
         <div className="mb-12 text-center">
-          <h2 className="text-foreground mb-4 text-3xl font-bold md:text-4xl">
+          <h2 className="from-primary to-secondary font-heading mb-4 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
             Was kostet Ihre Website?
           </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-            Nutzen Sie unsere kostenlosen Kostenrechner für eine realistische Einschätzung Ihres
-            Projekts
+          <p className="mx-auto max-w-3xl text-xl text-gray-600">
+            Nutzen Sie unseren kostenlosen Kostenrechner für eine realistische Einschätzung Ihres
+            Projekts – transparent und in nur 2 Minuten
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
-          {calculators.map((calculator) => {
-            const Icon = calculator.icon
-            return (
-              <div
-                key={calculator.href}
-                className="group relative overflow-hidden rounded-xl border bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg"
-              >
-                <div
-                  className={`bg-gradient-to-br ${calculator.color} mb-4 inline-flex rounded-lg p-3`}
-                >
-                  <Icon className="h-6 w-6 text-white" />
-                </div>
-
-                <h3 className="text-foreground mb-2 text-xl font-semibold">
-                  {calculator.title}
-                </h3>
-                <p className="text-muted-foreground mb-6 text-sm">{calculator.description}</p>
-
-                <Button
-                  asChild
-                  variant="outline"
-                  className="group-hover:border-accent-500 group-hover:text-accent-600 w-full transition-colors"
-                >
-                  <Link href={calculator.href} className="inline-flex items-center justify-center">
-                    Kosten berechnen
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
+        <div className="mx-auto max-w-2xl">
+          <div className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white p-8 shadow-xl transition-all duration-300 hover:border-gray-300 hover:shadow-2xl">
+            <div className="mb-6 flex justify-center">
+              <div className="bg-gradient-to-br from-primary-500 to-primary-700 inline-flex rounded-xl p-5 shadow-lg">
+                <Calculator className="h-10 w-10 text-white" strokeWidth={2.5} />
               </div>
-            )
-          })}
+            </div>
+
+            <h3 className="mb-4 text-center text-2xl font-bold text-gray-900">
+              Interaktiver Kostenrechner
+            </h3>
+            <p className="mb-8 text-center text-gray-600 leading-relaxed">
+              Berechnen Sie die Kosten für Ihre Website basierend auf Projekttyp, Design, Features
+              und Funktionsumfang. Vergleichen Sie Freelancer-, Agentur- und HEADON-Preise direkt.
+            </p>
+
+            <Link
+              href="/webseite-erstellen-lassen-kosten"
+              className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary inline-flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r px-8 py-4 text-lg font-semibold shadow-lg transition-all duration-300 hover:shadow-xl"
+            >
+              Jetzt Kosten berechnen
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
 
-        <div className="mt-12 text-center">
-          <p className="text-muted-foreground text-sm">
-            Unsicher, welcher Rechner für Sie passend ist?{' '}
+        <div className="mt-10 text-center">
+          <p className="text-sm text-gray-600">
+            Oder lesen Sie unsere Ratgeber:{' '}
+            <Link
+              href="/homepage-kosten"
+              className="from-primary to-secondary bg-gradient-to-r bg-clip-text font-semibold text-transparent hover:opacity-80"
+            >
+              Homepage für KMUs
+            </Link>
+            {' · '}
+            <Link
+              href="/website-kosten"
+              className="from-primary to-secondary bg-gradient-to-r bg-clip-text font-semibold text-transparent hover:opacity-80"
+            >
+              Technischer Guide
+            </Link>
+          </p>
+          <p className="mt-4 text-sm text-gray-600">
+            Persönliche Beratung gewünscht?{' '}
             <Link
               href="/contact"
-              className="text-accent-600 hover:text-accent-700 font-medium underline"
+              className="from-primary to-secondary bg-gradient-to-r bg-clip-text font-semibold text-transparent underline hover:opacity-80"
             >
-              Kontaktieren Sie uns für eine persönliche Beratung
+              Kontaktieren Sie uns
             </Link>
           </p>
         </div>

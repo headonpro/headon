@@ -17,7 +17,7 @@ const problemSolutions = [
       'Core Web Vitals optimiert',
       'Lokale Keywords für Main-Tauber-Kreis',
     ],
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-primary-500 to-primary-700',
   },
   {
     icon: Clock,
@@ -30,7 +30,7 @@ const problemSolutions = [
       'E-Mail-Benachrichtigungen',
       'CRM-Integration möglich',
     ],
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-secondary-500 to-secondary-700',
   },
   {
     icon: TrendingUp,
@@ -43,7 +43,7 @@ const problemSolutions = [
       'Vertrauen durch Professionalität',
       'Messbare Conversion-Optimierung',
     ],
-    color: 'from-orange-500 to-red-500',
+    color: 'from-accent-500 to-accent-700',
   },
 ]
 
@@ -52,6 +52,14 @@ const techStack = [
   { name: 'React', icon: Code },
   { name: 'TypeScript', icon: Code },
   { name: 'Supabase', icon: Code },
+  { name: 'Nest.js', icon: Code },
+  { name: 'Astro', icon: Code },
+  { name: 'TanStack', icon: Code },
+  { name: 'Tailwind CSS', icon: Code },
+  { name: 'Node.js', icon: Code },
+  { name: 'PostgreSQL', icon: Code },
+  { name: 'Prisma', icon: Code },
+  { name: 'Docker', icon: Code },
 ]
 
 const guarantees = [
@@ -79,7 +87,7 @@ export default function ProblemSolutionSection() {
           transition={{ duration: 0.6 }}
           className="mb-20 text-center"
         >
-          <h2 className="from-primary to-secondary font-heading mb-4 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-6xl">
+          <h2 className="from-primary to-secondary font-heading mb-4 bg-gradient-to-r bg-clip-text text-4xl font-bold leading-tight text-transparent md:text-5xl lg:text-6xl lg:leading-tight">
             Deine nächsten Kunden suchen dich gerade online
           </h2>
           <p className="mx-auto max-w-3xl text-xl text-gray-600 md:text-2xl">
@@ -88,7 +96,7 @@ export default function ProblemSolutionSection() {
         </motion.div>
 
         {/* Problem-Solution Cards */}
-        <div className="mb-28 grid gap-8 md:grid-cols-3">
+        <div className="mb-28 grid gap-12 md:grid-cols-3 md:gap-8">
           {problemSolutions.map((item, index) => (
             <motion.div
               key={index}
@@ -98,23 +106,22 @@ export default function ProblemSolutionSection() {
               transition={{ duration: 0.6, delay: index * 0.15 }}
               className="relative"
             >
-              {/* Icon */}
-              <div className="mb-4 flex justify-center">
-                <motion.div
-                  className={`inline-flex rounded-xl bg-gradient-to-br ${item.color} p-4 shadow-lg`}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                >
-                  <item.icon className="h-8 w-8 text-white" strokeWidth={2.5} />
-                </motion.div>
-              </div>
-
               {/* Card */}
               <motion.div
-                className="h-full rounded-2xl border border-gray-200/50 bg-white p-6 shadow-xl transition-all duration-300 hover:border-gray-300 hover:shadow-2xl"
+                className="h-full rounded-2xl border border-gray-200/50 bg-white p-6 pt-8 shadow-xl transition-all duration-300 hover:border-gray-300 hover:shadow-2xl"
                 whileHover={{ y: -8 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               >
+                {/* Icon - now inside card */}
+                <div className="mb-6 flex justify-center">
+                  <motion.div
+                    className={`inline-flex rounded-xl bg-gradient-to-br ${item.color} p-4 shadow-lg`}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                  >
+                    <item.icon className="h-8 w-8 text-white" strokeWidth={2.5} />
+                  </motion.div>
+                </div>
                 {/* Problem */}
                 <h3 className="mb-3 text-center text-xl font-bold text-gray-900">
                   {item.problem}

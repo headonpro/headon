@@ -1,21 +1,17 @@
 import { notFound } from 'next/navigation'
 import { getTechnologyPage } from '@/lib/content/content-api'
 import { compileMDXContent } from '@/lib/content/mdx-compiler'
+import { listContentSlugs } from '@/lib/content/mdx-loader'
 import TechnologyPageContent from '@/components/sections/TechnologyPageContent'
 import type { Metadata } from 'next'
 
 /**
  * Generate static params for all technology pages at build time
+ * Dynamically loads all slugs from content/technologie/
  */
 export async function generateStaticParams() {
-  return [
-    { tech: 'next-js-agentur' },
-    { tech: 'react-entwicklung' },
-    { tech: 'typescript-entwicklung' },
-    { tech: 'supabase-backend' },
-    { tech: 'headless-cms' },
-    { tech: 'tailwind-css' },
-  ]
+  const slugs = await listContentSlugs('technologie')
+  return slugs.map((tech) => ({ tech }))
 }
 
 interface TechnologyPageProps {
