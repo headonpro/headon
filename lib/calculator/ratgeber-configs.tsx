@@ -10,7 +10,6 @@ import { type RatgeberPageConfig } from '@/components/calculator/RatgeberPageTem
 import { FeatureGrid, type Feature } from '@/components/ui/feature-grid'
 import { InfoBox } from '@/components/ui/info-box'
 import { ComparisonTable, type ComparisonColumn } from '@/components/ui/comparison-table'
-import { IconList } from '@/components/ui/icon-list'
 import {
   Lightbulb,
   Palette,
@@ -18,7 +17,6 @@ import {
   Database,
   Shield,
   Euro,
-  Clock,
   Wrench
 } from 'lucide-react'
 
