@@ -76,7 +76,12 @@ services:
       - APP_SECRET=${UMAMI_APP_SECRET}
       - HOSTNAME=0.0.0.0
       - DISABLE_TELEMETRY=1
-      - CLIENT_IP_HEADER=CF-Connecting-IP
+      # IP Detection: Cloudflare primary, X-Forwarded-For fallback
+      - CLIENT_IP_HEADER=CF-Connecting-IP,X-Forwarded-For
+      # Tracker script renamed to bypass ad-blockers
+      - TRACKER_SCRIPT_NAME=insights.js
+      # Exclude own IPs from tracking (comma-separated)
+      - IGNORE_IP=${UMAMI_IGNORE_IP:-}
     depends_on:
       umami-db:
         condition: service_healthy
