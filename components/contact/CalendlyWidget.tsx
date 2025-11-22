@@ -27,7 +27,7 @@ export default function CalendlyWidget() {
     script.onload = () => {
       if (window.Calendly) {
         window.Calendly.initInlineWidget({
-          url: process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/cirakoglu-onur/30min',
+          url: process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/cirakoglu-onur/15min',
           parentElement: document.getElementById('calendly-embed'),
           prefill: {},
           utm: {},

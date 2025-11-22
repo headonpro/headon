@@ -174,9 +174,9 @@ export default function MultiStepForm({
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200 }}
-                  className="from-primary-400 to-primary-600 mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br"
+                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md"
                 >
-                  <Mail className="h-10 w-10 text-white" />
+                  <Mail className="text-accent-400 h-10 w-10" />
                 </motion.div>
                 <h3 className="mb-2 text-2xl font-bold text-white">
                   Wie können wir Sie erreichen?
@@ -191,7 +191,7 @@ export default function MultiStepForm({
                   transition={{ delay: 0.1 }}
                 >
                   <Label htmlFor="name" className="mb-2 flex items-center gap-2 text-white/90">
-                    <Sparkles className="h-4 w-4 text-yellow-400" />
+                    <Sparkles className="text-accent-400 h-4 w-4" />
                     Name *
                   </Label>
                   <Input
@@ -209,7 +209,7 @@ export default function MultiStepForm({
                   transition={{ delay: 0.2 }}
                 >
                   <Label htmlFor="email" className="mb-2 flex items-center gap-2 text-white/90">
-                    <Mail className="h-4 w-4 text-blue-400" />
+                    <Mail className="text-accent-400 h-4 w-4" />
                     Email *
                   </Label>
                   <Input
@@ -228,7 +228,7 @@ export default function MultiStepForm({
                   transition={{ delay: 0.3 }}
                 >
                   <Label htmlFor="company" className="mb-2 flex items-center gap-2 text-white/90">
-                    <Briefcase className="h-4 w-4 text-green-400" />
+                    <Briefcase className="text-accent-400 h-4 w-4" />
                     Unternehmen
                   </Label>
                   <Input
@@ -245,7 +245,7 @@ export default function MultiStepForm({
                   transition={{ delay: 0.4 }}
                 >
                   <Label htmlFor="phone" className="mb-2 flex items-center gap-2 text-white/90">
-                    <Phone className="h-4 w-4 text-purple-400" />
+                    <Phone className="text-accent-400 h-4 w-4" />
                     Telefon (optional)
                   </Label>
                   <Input
@@ -276,9 +276,9 @@ export default function MultiStepForm({
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200 }}
-                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-purple-600"
+                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md"
                 >
-                  <Rocket className="h-10 w-10 text-white" />
+                  <Rocket className="text-accent-400 h-10 w-10" />
                 </motion.div>
                 <h3 className="mb-2 text-2xl font-bold text-white">
                   Was möchten Sie entwickeln lassen?
@@ -292,35 +292,30 @@ export default function MultiStepForm({
                     value: 'website-simple',
                     icon: FileText,
                     label: 'Website (einfach)',
-                    color: 'from-blue-500 to-blue-600',
                     desc: 'Präsenz-Website mit statischen Inhalten',
                   },
                   {
                     value: 'website-complex',
                     icon: Zap,
                     label: 'Website (komplex)',
-                    color: 'from-purple-500 to-purple-600',
                     desc: 'Dynamische Website mit Backend-Funktionen',
                   },
                   {
                     value: 'mobile-app',
                     icon: Phone,
                     label: 'Mobile App',
-                    color: 'from-green-500 to-green-600',
                     desc: 'Native oder Cross-Platform App',
                   },
                   {
                     value: 'ecommerce',
                     icon: TrendingUp,
                     label: 'E-Commerce',
-                    color: 'from-orange-500 to-orange-600',
                     desc: 'Online-Shop mit Zahlungssystem',
                   },
                   {
                     value: 'custom',
                     icon: Target,
                     label: 'Custom Lösung',
-                    color: 'from-pink-500 to-pink-600',
                     desc: 'Maßgeschneiderte Software-Lösung',
                   },
                 ].map((type, index) => (
@@ -332,22 +327,20 @@ export default function MultiStepForm({
                     onClick={() => handleProjectTypeChange(type.value)}
                     className={`relative cursor-pointer rounded-xl p-4 transition-all ${
                       formData.projectType === type.value
-                        ? 'border-2 border-white bg-white/20 shadow-lg'
+                        ? 'border-2 border-white/40 bg-white/20 shadow-lg'
                         : 'border-2 border-white/20 bg-white/10 hover:bg-white/15'
                     }`}
                   >
                     <div className="flex items-center gap-4">
-                      <div
-                        className={`h-12 w-12 rounded-lg bg-gradient-to-br ${type.color} flex items-center justify-center`}
-                      >
-                        <type.icon className="h-6 w-6 text-white" />
+                      <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/20 bg-white/10">
+                        <type.icon className="text-accent-400 h-6 w-6" />
                       </div>
                       <div className="flex-1">
                         <h4 className="font-semibold text-white">{type.label}</h4>
                         <p className="text-sm text-white/60">{type.desc}</p>
                       </div>
                       {formData.projectType === type.value && (
-                        <CheckCircle2 className="h-6 w-6 text-white" />
+                        <CheckCircle2 className="text-accent-400 h-6 w-6" />
                       )}
                     </div>
                   </motion.div>
@@ -371,9 +364,9 @@ export default function MultiStepForm({
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200 }}
-                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-green-600"
+                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md"
                 >
-                  <DollarSign className="h-10 w-10 text-white" />
+                  <DollarSign className="text-accent-400 h-10 w-10" />
                 </motion.div>
                 <h3 className="mb-2 text-2xl font-bold text-white">Budget & Zeitrahmen</h3>
                 <p className="text-white/70">Damit wir das perfekte Angebot erstellen können</p>
@@ -382,7 +375,7 @@ export default function MultiStepForm({
               <div className="space-y-6">
                 <div>
                   <Label className="mb-3 flex items-center gap-2 text-white/90">
-                    <DollarSign className="h-4 w-4 text-green-400" />
+                    <DollarSign className="text-accent-400 h-4 w-4" />
                     Budget-Rahmen *
                   </Label>
                   <div className="grid grid-cols-2 gap-3">
@@ -412,30 +405,15 @@ export default function MultiStepForm({
 
                 <div>
                   <Label className="mb-3 flex items-center gap-2 text-white/90">
-                    <Clock className="h-4 w-4 text-blue-400" />
+                    <Clock className="text-accent-400 h-4 w-4" />
                     Wann soll es losgehen? *
                   </Label>
                   <div className="grid grid-cols-2 gap-3">
                     {[
-                      { value: 'immediately', label: 'Sofort', icon: Zap, color: 'text-red-400' },
-                      {
-                        value: 'next-month',
-                        label: 'Nächster Monat',
-                        icon: Calendar,
-                        color: 'text-orange-400',
-                      },
-                      {
-                        value: '2-3-months',
-                        label: 'In 2-3 Monaten',
-                        icon: Clock,
-                        color: 'text-blue-400',
-                      },
-                      {
-                        value: 'planning',
-                        label: 'Noch in Planung',
-                        icon: Target,
-                        color: 'text-purple-400',
-                      },
+                      { value: 'immediately', label: 'Sofort', icon: Zap },
+                      { value: 'next-month', label: 'Nächster Monat', icon: Calendar },
+                      { value: '2-3-months', label: 'In 2-3 Monaten', icon: Clock },
+                      { value: 'planning', label: 'Noch in Planung', icon: Target },
                     ].map((timeline) => (
                       <motion.div
                         key={timeline.value}
@@ -444,12 +422,12 @@ export default function MultiStepForm({
                         onClick={() => setFormData({ ...formData, timeline: timeline.value })}
                         className={`cursor-pointer rounded-lg p-4 transition-all ${
                           formData.timeline === timeline.value
-                            ? 'border-2 border-white bg-white/20'
+                            ? 'border-2 border-white/40 bg-white/20'
                             : 'border-2 border-white/20 bg-white/10 hover:bg-white/15'
                         }`}
                       >
                         <div className="flex items-center gap-2">
-                          <timeline.icon className={`h-4 w-4 ${timeline.color}`} />
+                          <timeline.icon className="text-accent-400 h-4 w-4" />
                           <span className="font-semibold text-white">{timeline.label}</span>
                         </div>
                       </motion.div>
@@ -475,9 +453,9 @@ export default function MultiStepForm({
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200 }}
-                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-indigo-400 to-indigo-600"
+                  className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md"
                 >
-                  <MessageSquare className="h-10 w-10 text-white" />
+                  <MessageSquare className="text-accent-400 h-10 w-10" />
                 </motion.div>
                 <h3 className="mb-2 text-2xl font-bold text-white">Erzählen Sie uns mehr</h3>
                 <p className="text-white/70">Je mehr Details, desto besser können wir helfen</p>
@@ -486,7 +464,7 @@ export default function MultiStepForm({
               <div className="space-y-4">
                 <div>
                   <Label htmlFor="message" className="mb-2 flex items-center gap-2 text-white/90">
-                    <MessageSquare className="h-4 w-4 text-indigo-400" />
+                    <MessageSquare className="text-accent-400 h-4 w-4" />
                     Projektbeschreibung *
                   </Label>
                   <Textarea
@@ -512,7 +490,7 @@ export default function MultiStepForm({
                   className="rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur-sm"
                 >
                   <h4 className="mb-3 flex items-center gap-2 font-semibold text-white">
-                    <CheckCircle2 className="h-5 w-5 text-green-400" />
+                    <CheckCircle2 className="text-accent-400 h-5 w-5" />
                     Zusammenfassung
                   </h4>
                   <div className="space-y-2 text-sm">
@@ -560,7 +538,7 @@ export default function MultiStepForm({
               type="button"
               onClick={handleNext}
               disabled={!isStepValid(currentStep)}
-              className={`flex-1 ${currentStep === 1 ? 'w-full' : ''} from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 bg-gradient-to-r`}
+              className={`flex-1 ${currentStep === 1 ? 'w-full' : ''} border border-white/30 bg-white/20 text-white backdrop-blur-md hover:bg-white/30 disabled:opacity-50`}
             >
               Weiter
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -569,7 +547,7 @@ export default function MultiStepForm({
             <Button
               type="submit"
               disabled={isSubmitting || !isStepValid(currentStep)}
-              className="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+              className="flex-1 border border-white/30 bg-white/20 text-white backdrop-blur-md hover:bg-white/30 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
