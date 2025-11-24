@@ -2,7 +2,7 @@ import type { ComparisonArticle } from '@/lib/types/content'
 
 export const nextjsVsReactSpa: ComparisonArticle = {
   slug: 'nextjs-vs-react-spa',
-  title: 'Next.js vs React SPA: Server-Side vs Client-Side Rendering',
+  title: 'Next.js vs React SPA: SSR vs CSR Vergleich 2025',
   description:
     'Next.js mit SSR/SSG vs traditionelle React Single-Page App: Performance, SEO, Entwicklung. Welcher Ansatz ist der richtige für Ihr Projekt?',
   publishedAt: '2025-01-22',

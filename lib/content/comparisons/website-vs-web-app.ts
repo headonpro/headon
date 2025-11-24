@@ -2,7 +2,7 @@ import type { ComparisonArticle } from '@/lib/types/content'
 
 export const websiteVsWebApp: ComparisonArticle = {
   slug: 'website-vs-web-app',
-  title: 'Website vs Web-App: Der Unterschied und wann Sie was brauchen',
+  title: 'Website vs Web-App: Unterschiede & Wann Was?',
   description:
     'Website oder Web-App? Verstehen Sie die Unterschiede in Funktionalität, Kosten und Use Cases. Welche Lösung ist die richtige für Ihr Unternehmen?',
   publishedAt: '2025-01-20',

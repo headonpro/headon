@@ -2,7 +2,7 @@ import type { ComparisonArticle } from '@/lib/types/content'
 
 export const wordpressVsCustomDevelopment: ComparisonArticle = {
   slug: 'wordpress-vs-custom-development',
-  title: 'WordPress vs Custom Development: CMS vs Maßentwicklung 2025',
+  title: 'WordPress vs Custom Development Vergleich 2025',
   description:
     'WordPress CMS vs Custom Development mit Next.js/React: Kosten, Flexibilität, Performance. Welche Lösung ist die richtige für Ihr Projekt?',
   publishedAt: '2025-01-25',
