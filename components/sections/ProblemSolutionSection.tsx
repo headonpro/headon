@@ -1,9 +1,7 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { Search, Clock, TrendingUp, Shield, Code, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { FadeIn, HoverLift, HoverScale, AnimatedArrow } from '@/components/ui/motion-wrapper'
 
 const problemSolutions = [
   {
@@ -48,18 +46,18 @@ const problemSolutions = [
 ]
 
 const techStack = [
-  { name: 'Next.js', icon: Code },
-  { name: 'React', icon: Code },
-  { name: 'TypeScript', icon: Code },
-  { name: 'Supabase', icon: Code },
-  { name: 'Nest.js', icon: Code },
-  { name: 'Astro', icon: Code },
-  { name: 'TanStack', icon: Code },
-  { name: 'Tailwind CSS', icon: Code },
-  { name: 'Node.js', icon: Code },
-  { name: 'PostgreSQL', icon: Code },
-  { name: 'Prisma', icon: Code },
-  { name: 'Docker', icon: Code },
+  'Next.js',
+  'React',
+  'TypeScript',
+  'Supabase',
+  'Nest.js',
+  'Astro',
+  'TanStack',
+  'Tailwind CSS',
+  'Node.js',
+  'PostgreSQL',
+  'Prisma',
+  'Docker',
 ]
 
 const guarantees = [
@@ -75,98 +73,74 @@ const industryStats = [
   { stat: '68%', label: 'der Website-Besuche kommen vom Smartphone' },
 ]
 
+// Server Component - alle Texte werden sofort gerendert
 export default function ProblemSolutionSection() {
   return (
     <section className="relative -mt-1 bg-gradient-to-b from-white via-gray-50 to-white py-24 pb-32">
       <div className="container mx-auto px-4">
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-20 text-center"
-        >
+        {/* Headline - SEO wichtig */}
+        <FadeIn className="mb-20 text-center">
           <h2 className="from-primary to-secondary font-heading mb-4 bg-gradient-to-r bg-clip-text text-4xl font-bold leading-tight text-transparent md:text-5xl lg:text-6xl lg:leading-tight">
             Deine nächsten Kunden suchen dich gerade online
           </h2>
           <p className="mx-auto max-w-3xl text-xl text-gray-600 md:text-2xl">
             Wir bauen dir eine Webseite, die gefunden wird - und verkauft
           </p>
-        </motion.div>
+        </FadeIn>
 
         {/* Problem-Solution Cards */}
         <div className="mb-28 grid gap-12 md:grid-cols-3 md:gap-8">
           {problemSolutions.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="relative"
-            >
-              {/* Card */}
-              <motion.div
-                className="h-full rounded-2xl border border-gray-200/50 bg-white p-6 pt-8 shadow-xl transition-all duration-300 hover:border-gray-300 hover:shadow-2xl"
-                whileHover={{ y: -8 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-              >
-                {/* Icon - now inside card */}
+            <FadeIn key={index} delay={index * 0.15} className="relative">
+              <HoverLift className="h-full rounded-2xl border border-gray-200/50 bg-white p-6 pt-8 shadow-xl transition-all duration-300 hover:border-gray-300 hover:shadow-2xl">
+                {/* Icon */}
                 <div className="mb-6 flex justify-center">
-                  <motion.div
-                    className={`inline-flex rounded-xl bg-gradient-to-br ${item.color} p-4 shadow-lg`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                  >
-                    <item.icon className="h-8 w-8 text-white" strokeWidth={2.5} />
-                  </motion.div>
+                  <HoverScale scale={1.1}>
+                    <div
+                      className={`inline-flex rounded-xl bg-gradient-to-br ${item.color} p-4 shadow-lg`}
+                    >
+                      <item.icon className="h-8 w-8 text-white" strokeWidth={2.5} />
+                    </div>
+                  </HoverScale>
                 </div>
-                {/* Problem */}
-                <h3 className="mb-3 text-center text-xl font-bold text-gray-900">
-                  {item.problem}
-                </h3>
-                <p className="mb-6 text-center text-gray-600 leading-relaxed">
-                  {item.description}
-                </p>
+
+                {/* Problem - SEO relevant */}
+                <h3 className="mb-3 text-center text-xl font-bold text-gray-900">{item.problem}</h3>
+                <p className="mb-6 text-center leading-relaxed text-gray-600">{item.description}</p>
 
                 {/* Divider */}
-                <div className={`mx-auto mb-6 h-1 w-16 rounded-full bg-gradient-to-r ${item.color}`}></div>
+                <div
+                  className={`mx-auto mb-6 h-1 w-16 rounded-full bg-gradient-to-r ${item.color}`}
+                />
 
                 {/* Solution */}
                 <div className="mb-4">
                   <p className="mb-3 text-center text-sm font-semibold uppercase tracking-wider text-gray-500">
                     HEADON-Lösung
                   </p>
-                  <p className="mb-4 text-center text-lg font-bold text-gray-900">
-                    {item.solution}
-                  </p>
+                  <p className="mb-4 text-center text-lg font-bold text-gray-900">{item.solution}</p>
                 </div>
 
                 {/* Features */}
                 <ul className="space-y-2">
                   {item.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start text-sm text-gray-700">
-                      <span className={`mr-2 mt-0.5 text-lg bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}>
+                      <span
+                        className={`mr-2 mt-0.5 text-lg bg-gradient-to-r ${item.color} bg-clip-text text-transparent`}
+                      >
                         ✓
                       </span>
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
-              </motion.div>
-            </motion.div>
+              </HoverLift>
+            </FadeIn>
           ))}
         </div>
 
         {/* Trust Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-24"
-        >
+        <FadeIn delay={0.3} className="mb-24">
           {/* Tech Stack */}
           <div className="mb-16 text-center">
             <p className="mb-8 text-sm font-semibold uppercase tracking-wider text-gray-500">
@@ -174,13 +148,11 @@ export default function ProblemSolutionSection() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               {techStack.map((tech, idx) => (
-                <motion.div
-                  key={idx}
-                  className="rounded-lg border border-gray-200 bg-white px-4 py-2 shadow-sm"
-                  whileHover={{ scale: 1.05, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
-                >
-                  <span className="text-sm font-semibold text-gray-700">{tech.name}</span>
-                </motion.div>
+                <HoverScale key={idx} scale={1.05}>
+                  <div className="rounded-lg border border-gray-200 bg-white px-4 py-2 shadow-sm transition-shadow hover:shadow-md">
+                    <span className="text-sm font-semibold text-gray-700">{tech}</span>
+                  </div>
+                </HoverScale>
               ))}
             </div>
             <p className="mt-6 text-sm text-gray-500">
@@ -195,81 +167,49 @@ export default function ProblemSolutionSection() {
             </p>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {guarantees.map((guarantee, idx) => (
-                <motion.div
-                  key={idx}
-                  className="flex items-start gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
-                  whileHover={{ scale: 1.03 }}
-                >
-                  <guarantee.icon className="from-primary to-secondary mt-0.5 h-5 w-5 flex-shrink-0 bg-gradient-to-br bg-clip-text text-transparent" />
-                  <p className="text-sm text-gray-700">{guarantee.text}</p>
-                </motion.div>
+                <HoverScale key={idx} scale={1.03}>
+                  <div className="flex items-start gap-3 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+                    <guarantee.icon className="from-primary to-secondary mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
+                    <p className="text-sm text-gray-700">{guarantee.text}</p>
+                  </div>
+                </HoverScale>
               ))}
             </div>
           </div>
-        </motion.div>
+        </FadeIn>
 
         {/* Industry Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-20"
-        >
+        <FadeIn delay={0.4} className="mb-20">
           <div className="mx-auto max-w-4xl rounded-2xl border border-gray-200 bg-gradient-to-br from-gray-50 to-white p-10 shadow-xl">
-            <p className="mb-10 text-center text-lg font-bold text-gray-900">
-              Wusstest du?
-            </p>
+            <p className="mb-10 text-center text-lg font-bold text-gray-900">Wusstest du?</p>
             <div className="grid gap-8 md:grid-cols-3">
               {industryStats.map((item, idx) => (
                 <div key={idx} className="text-center">
-                  <motion.p
-                    className="from-primary to-secondary mb-2 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 + idx * 0.1 }}
-                  >
+                  <p className="from-primary to-secondary mb-2 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
                     {item.stat}
-                  </motion.p>
-                  <p className="text-sm text-gray-600 leading-snug">{item.label}</p>
+                  </p>
+                  <p className="text-sm leading-snug text-gray-600">{item.label}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-8 text-center text-xs text-gray-400">
-              Quelle: Google & Statista 2024
-            </p>
+            <p className="mt-8 text-center text-xs text-gray-400">Quelle: Google & Statista 2024</p>
           </div>
-        </motion.div>
+        </FadeIn>
 
         {/* Dual CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center"
-        >
+        <FadeIn delay={0.5} className="text-center">
           <div className="mx-auto max-w-2xl">
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              {/* Primary CTA */}
               <Link href="/contact">
                 <Button
                   size="lg"
                   className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary bg-gradient-to-r px-8 py-6 text-lg font-semibold shadow-xl transition-all duration-300 hover:shadow-2xl"
                 >
                   Kostenloses Strategie-Gespräch
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="ml-2 inline-block"
-                  >
-                    →
-                  </motion.span>
+                  <AnimatedArrow className="ml-2 inline-block" />
                 </Button>
               </Link>
 
-              {/* Secondary CTA */}
               <Link href="/portfolio">
                 <Button
                   variant="outline"
@@ -284,7 +224,7 @@ export default function ProblemSolutionSection() {
               Kein Verkaufsgespräch - nur ehrliche Beratung
             </p>
           </div>
-        </motion.div>
+        </FadeIn>
       </div>
     </section>
   )

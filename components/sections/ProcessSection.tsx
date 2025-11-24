@@ -1,7 +1,5 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { Phone, Target, Rocket, CheckCircle2 } from 'lucide-react'
+import { FadeIn, HoverScale, AnimatedArrow } from '@/components/ui/motion-wrapper'
 
 const processSteps = [
   {
@@ -45,25 +43,20 @@ const processSteps = [
   },
 ]
 
+// Server Component - SEO-optimiert
 export default function ProcessSection() {
   return (
     <section className="relative -mt-1 overflow-hidden bg-white py-24 pb-32">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
+        <FadeIn className="mb-16 text-center">
           <h2 className="from-primary to-secondary font-heading mb-4 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
             Wie wir arbeiten
           </h2>
           <p className="mx-auto max-w-3xl text-xl text-gray-600">
             Von der ersten Idee bis zum fertigen Projekt - in nur drei einfachen Schritten
           </p>
-        </motion.div>
+        </FadeIn>
 
         {/* Timeline */}
         <div className="relative">
@@ -76,14 +69,7 @@ export default function ProcessSection() {
           {/* Process Steps */}
           <div className="relative grid gap-8 lg:grid-cols-3 lg:gap-4">
             {processSteps.map((step, index) => (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="relative"
-              >
+              <FadeIn key={step.id} delay={index * 0.2} className="relative">
                 {/* Mobile Step Number */}
                 <div className="absolute top-8 left-0 z-10 flex h-16 w-16 items-center justify-center rounded-full border-4 border-gray-100 bg-white lg:hidden">
                   <span
@@ -97,13 +83,11 @@ export default function ProcessSection() {
                 <div className="ml-20 lg:ml-0 lg:text-center">
                   {/* Desktop Icon */}
                   <div className="mb-6 hidden justify-center lg:flex">
-                    <motion.div
-                      className="bg-accent-500 inline-flex rounded-xl p-4 shadow-lg"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                    >
-                      <step.icon className="text-primary-600 h-8 w-8" strokeWidth={2.5} />
-                    </motion.div>
+                    <HoverScale scale={1.1}>
+                      <div className="bg-accent-500 inline-flex rounded-xl p-4 shadow-lg">
+                        <step.icon className="text-primary-600 h-8 w-8" strokeWidth={2.5} />
+                      </div>
+                    </HoverScale>
                   </div>
 
                   {/* Glasmorphism Content Card */}
@@ -130,53 +114,30 @@ export default function ProcessSection() {
                     </ul>
 
                     {/* Subtle accent line */}
-                    <div className="from-primary to-secondary mt-6 h-1 w-full rounded-full bg-gradient-to-r opacity-60 lg:mx-auto"></div>
+                    <div className="from-primary to-secondary mt-6 h-1 w-full rounded-full bg-gradient-to-r opacity-60 lg:mx-auto" />
                   </div>
                 </div>
-              </motion.div>
+              </FadeIn>
             ))}
           </div>
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
+        <FadeIn delay={0.6} className="mt-16 text-center">
           <div className="mx-auto max-w-2xl">
-            <motion.div
-              animate={{
-                y: [0, -5, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: 3, // 3 cycles * 2 seconds = 6 seconds total
-                ease: 'easeInOut',
-              }}
-            >
-              <h3 className="from-primary to-secondary mb-6 bg-gradient-to-r bg-clip-text text-3xl font-bold text-transparent">
-                Bereit, Ihr Projekt zu starten?
-              </h3>
-            </motion.div>
+            <h3 className="from-primary to-secondary mb-6 bg-gradient-to-r bg-clip-text text-3xl font-bold text-transparent">
+              Bereit, Ihr Projekt zu starten?
+            </h3>
 
             <a
               href="/contact"
               className="from-accent-500 to-secondary-500 hover:from-accent-600 hover:to-secondary-600 text-primary inline-flex items-center gap-2 rounded-lg bg-gradient-to-r px-8 py-4 text-lg font-semibold shadow-xl transition-all duration-300 hover:shadow-2xl"
             >
               Kostenloses Erstgespräch vereinbaren
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="ml-2 inline-block"
-              >
-                →
-              </motion.span>
+              <AnimatedArrow className="ml-2 inline-block" />
             </a>
           </div>
-        </motion.div>
+        </FadeIn>
       </div>
     </section>
   )

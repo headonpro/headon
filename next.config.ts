@@ -152,11 +152,13 @@ const nextConfig: NextConfig = {
   // Redirects for deleted blog posts and legacy routes to prevent 404 errors
   async redirects() {
     return [
-      // Blog post redirects
+      // ========================================
+      // Blog post redirects - 404 fixes
+      // ========================================
       {
         source: '/blog/responsive-design-2025',
         destination: '/blog/mobile-first-design',
-        permanent: true, // 301 redirect
+        permanent: true,
       },
       {
         source: '/blog/responsive-design-tailwind',
@@ -168,22 +170,145 @@ const nextConfig: NextConfig = {
         destination: '/blog/core-web-vitals-optimierung',
         permanent: true,
       },
+      // New 404 fixes from SEO audit
+      {
+        source: '/blog/app-performance-best-practices',
+        destination: '/blog/next-js-performance-optimization',
+        permanent: true,
+      },
+      {
+        source: '/blog/cms-vergleich-2025',
+        destination: '/vergleiche/headless-cms-vergleich-contentful-sanity-strapi',
+        permanent: true,
+      },
+      {
+        source: '/blog/google-business-profile-optimieren',
+        destination: '/blog/local-seo-guide-kleine-unternehmen',
+        permanent: true,
+      },
+      {
+        source: '/blog/headless-cms-vorteile',
+        destination: '/vergleiche/headless-cms-vergleich-contentful-sanity-strapi',
+        permanent: true,
+      },
+      {
+        source: '/blog/mobile-first-design-strategie',
+        destination: '/blog/mobile-first-design',
+        permanent: true,
+      },
+      {
+        source: '/blog/react-native-vs-native',
+        destination: '/vergleiche/native-vs-cross-platform-mobile',
+        permanent: true,
+      },
+      {
+        source: '/blog/seo-texte-schreiben-guide',
+        destination: '/blog/local-seo-guide-kleine-unternehmen',
+        permanent: true,
+      },
+      {
+        source: '/blog/website-performance-optimieren',
+        destination: '/blog/core-web-vitals-optimierung',
+        permanent: true,
+      },
+      // ========================================
+      // Glossar redirects - missing entries
+      // ========================================
+      {
+        source: '/glossar/html',
+        destination: '/glossar/css', // Closest related term
+        permanent: true,
+      },
+      {
+        source: '/glossar/json-ld',
+        destination: '/glossar/structured-data',
+        permanent: true,
+      },
+      {
+        source: '/glossar/kanban',
+        destination: '/glossar/agile',
+        permanent: true,
+      },
+      {
+        source: '/glossar/lean-startup',
+        destination: '/glossar/mvp',
+        permanent: true,
+      },
+      {
+        source: '/glossar/native-app',
+        destination: '/glossar/mobile-app',
+        permanent: true,
+      },
+      {
+        source: '/glossar/offline-first',
+        destination: '/glossar/pwa',
+        permanent: true,
+      },
+      {
+        source: '/glossar/orm',
+        destination: '/glossar/datenbank',
+        permanent: true,
+      },
+      {
+        source: '/glossar/performance-optimization',
+        destination: '/glossar/core-web-vitals',
+        permanent: true,
+      },
+      {
+        source: '/glossar/progressive-enhancement',
+        destination: '/glossar/responsive-design',
+        permanent: true,
+      },
+      {
+        source: '/glossar/rich-snippets',
+        destination: '/glossar/structured-data',
+        permanent: true,
+      },
+      {
+        source: '/glossar/service-worker',
+        destination: '/glossar/pwa',
+        permanent: true,
+      },
+      {
+        source: '/glossar/sprint',
+        destination: '/glossar/scrum',
+        permanent: true,
+      },
+      {
+        source: '/glossar/ssg',
+        destination: '/glossar/ssr',
+        permanent: true,
+      },
+      // ========================================
+      // Other 404 fixes
+      // ========================================
+      {
+        source: '/preise',
+        destination: '/website-kosten',
+        permanent: true,
+      },
+      {
+        source: '/downloads/agentur-auswahl-paket',
+        destination: '/blog/welche-agentur-webentwicklung-empfehlung',
+        permanent: true,
+      },
+      // ========================================
       // Legacy route redirects
+      // ========================================
       {
         source: '/team',
         destination: '/about',
-        permanent: true, // 301 redirect - team info is on about page
+        permanent: true,
       },
       {
         source: '/terms',
         destination: '/imprint',
-        permanent: true, // 301 redirect - legal terms in imprint
+        permanent: true,
       },
-      // Invalid/malformed URL redirects (from external sources or crawlers)
       {
         source: '/$',
         destination: '/',
-        permanent: true, // 301 redirect - invalid slug to homepage
+        permanent: true,
       },
     ]
   },

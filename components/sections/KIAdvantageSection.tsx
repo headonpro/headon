@@ -1,10 +1,8 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { Zap, Trophy, CheckCircle2, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
+import { FadeIn, HoverScale } from '@/components/ui/motion-wrapper'
 
 const advantages = [
   {
@@ -57,6 +55,7 @@ const advantages = [
   },
 ]
 
+// Server Component - SEO-optimiert
 export default function KIAdvantageSection() {
   return (
     <section className="relative -mt-1 overflow-hidden pt-40 pb-52">
@@ -71,18 +70,12 @@ export default function KIAdvantageSection() {
         </svg>
       </div>
 
-      {/* Static gradient background similar to HeroSection */}
+      {/* Static gradient background */}
       <div className="from-primary-600 via-primary-500 to-secondary-500 absolute inset-0 bg-gradient-to-br" />
 
       <div className="relative z-10 container mx-auto px-4">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
+        <FadeIn className="mb-16 text-center">
           <h2 className="font-heading mb-12 flex flex-wrap items-center justify-center gap-4 text-5xl font-bold text-white md:mb-16 md:text-6xl">
             <span className="from-accent to-secondary bg-gradient-to-r bg-clip-text text-transparent">
               Warum
@@ -100,80 +93,56 @@ export default function KIAdvantageSection() {
             KI-gestützte Entwicklung revolutioniert, wie wir Projekte umsetzen. Schneller, günstiger
             und besser - das ist kein Versprechen, sondern messbare Realität.
           </p>
-        </motion.div>
+        </FadeIn>
 
         {/* Advantages Grid */}
         <div className="mt-16 mb-16 grid gap-8 md:mt-24 lg:grid-cols-3">
           {advantages.map((advantage, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              whileHover={{ scale: 1.02 }}
-              className="group relative"
-            >
-              <div
-                className={`${index === 1 ? 'from-accent-500/20 to-secondary-500/20 border-accent-500/30 shadow-accent-500/20 bg-gradient-to-br shadow-2xl lg:-mt-8 lg:mb-8 lg:py-10' : 'border-white/20 bg-white/10'} relative h-full overflow-hidden rounded-2xl border p-8 backdrop-blur-sm transition-all duration-300 hover:bg-white/15`}
-              >
-                {/* Background Gradient on Hover */}
-                <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${advantage.gradient} opacity-0 transition-opacity duration-300 group-hover:opacity-5`}
-                />
-
-                {/* Icon */}
-                <div className="mb-6 flex justify-center">
-                  <div className={`inline-flex rounded-xl p-4 ${advantage.bgColor}`}>
-                    <advantage.icon className={`h-8 w-8 ${advantage.color}`} strokeWidth={1.5} />
+            <FadeIn key={index} delay={index * 0.2} className="group relative">
+              <HoverScale scale={1.02}>
+                <div
+                  className={`${index === 1 ? 'from-accent-500/20 to-secondary-500/20 border-accent-500/30 shadow-accent-500/20 bg-gradient-to-br shadow-2xl lg:-mt-8 lg:mb-8 lg:py-10' : 'border-white/20 bg-white/10'} relative h-full overflow-hidden rounded-2xl border p-8 backdrop-blur-sm transition-all duration-300 hover:bg-white/15`}
+                >
+                  {/* Icon */}
+                  <div className="mb-6 flex justify-center">
+                    <div className={`inline-flex rounded-xl p-4 ${advantage.bgColor}`}>
+                      <advantage.icon className={`h-8 w-8 ${advantage.color}`} strokeWidth={1.5} />
+                    </div>
                   </div>
+
+                  {/* Title & Subtitle */}
+                  <h3 className="mb-2 text-center text-2xl font-bold text-white">
+                    {advantage.title}
+                  </h3>
+                  <p className="mb-6 text-center text-white/80">{advantage.subtitle}</p>
+
+                  {/* Main Metric */}
+                  <div className="mb-6 rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                    <div className="text-accent text-center text-3xl font-bold">
+                      {advantage.mainMetric}
+                    </div>
+                    <div className="mt-1 text-center text-sm text-white/70">
+                      {advantage.comparison}
+                    </div>
+                  </div>
+
+                  {/* Features List */}
+                  <ul className="space-y-3">
+                    {advantage.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 className="text-accent-500 mt-0.5 h-5 w-5 flex-shrink-0" />
+                        <span className="text-sm leading-relaxed text-white/90">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                {/* Title & Subtitle */}
-                <h3 className="mb-2 text-center text-2xl font-bold text-white">
-                  {advantage.title}
-                </h3>
-                <p className="mb-6 text-center text-white/80">{advantage.subtitle}</p>
-
-                {/* Main Metric */}
-                <div className="mb-6 rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
-                  <div className="text-accent text-center text-3xl font-bold">
-                    {advantage.mainMetric}
-                  </div>
-                  <div className="mt-1 text-center text-sm text-white/70">
-                    {advantage.comparison}
-                  </div>
-                </div>
-
-                {/* Features List */}
-                <ul className="space-y-3">
-                  {advantage.features.map((feature, idx) => (
-                    <motion.li
-                      key={idx}
-                      className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: index * 0.1 + idx * 0.05 }}
-                    >
-                      <CheckCircle2 className="text-accent-500 mt-0.5 h-5 w-5 flex-shrink-0" />
-                      <span className="text-sm leading-relaxed text-white/90">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+              </HoverScale>
+            </FadeIn>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center"
-        >
+        <FadeIn delay={0.6} className="text-center">
           <div className="mx-auto max-w-2xl">
             <p className="mb-8 text-lg text-white/90">
               Während traditionelle Agenturen noch Konzepte erstellen, haben wir Ihr Projekt bereits
@@ -193,20 +162,14 @@ export default function KIAdvantageSection() {
             </div>
 
             {/* Trust Badge */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-8"
-            >
+            <FadeIn delay={0.8} className="mt-8">
               <div className="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-medium text-green-800">
                 <CheckCircle2 className="h-4 w-4" />
                 100% Zufrieden oder Geld zurück
               </div>
-            </motion.div>
+            </FadeIn>
           </div>
-        </motion.div>
+        </FadeIn>
       </div>
 
       {/* Wave transition to next section */}
