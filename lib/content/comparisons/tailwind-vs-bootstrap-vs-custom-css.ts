@@ -2,7 +2,7 @@ import type { ComparisonArticle } from '@/lib/types/content'
 
 export const tailwindVsBootstrapVsCustomCss: ComparisonArticle = {
   slug: 'tailwind-vs-bootstrap-vs-custom-css',
-  title: 'Tailwind CSS vs Bootstrap vs Custom CSS: CSS-Framework Vergleich',
+  title: 'Tailwind vs Bootstrap vs Custom CSS 2025',
   description:
     'Utility-First vs Component-Framework vs Custom CSS: Performance, Developer Experience, Flexibilität. Welcher CSS-Ansatz ist der richtige?',
   publishedAt: '2025-02-01',

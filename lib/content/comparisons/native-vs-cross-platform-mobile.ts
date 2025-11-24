@@ -2,7 +2,7 @@ import type { ComparisonArticle } from '@/lib/types/content'
 
 export const nativeVsCrossPlatformMobile: ComparisonArticle = {
   slug: 'native-vs-cross-platform-mobile',
-  title: 'Native vs Cross-Platform: Mobile App Entwicklung im Vergleich 2025',
+  title: 'Native vs Cross-Platform App-Entwicklung 2025',
   description:
     'Native Apps (Swift/Kotlin) vs Cross-Platform (React Native/Flutter): Performance, Kosten, Entwicklungszeit. Welcher Ansatz ist der richtige für Ihre App?',
   publishedAt: '2025-01-18',

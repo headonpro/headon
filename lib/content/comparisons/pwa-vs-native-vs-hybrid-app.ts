@@ -2,7 +2,7 @@ import type { ComparisonArticle } from '@/lib/types/content'
 
 export const pwaVsNativeVsHybridApp: ComparisonArticle = {
   slug: 'pwa-vs-native-vs-hybrid-app',
-  title: 'PWA vs Native App vs Hybrid App: Der komplette Mobile-Vergleich',
+  title: 'PWA vs Native vs Hybrid App Vergleich 2025',
   description:
     'Progressive Web App vs Native vs Hybrid: Installation, Performance, Features, Kosten. Welche Lösung ist die richtige für Ihre Mobile-Strategie?',
   publishedAt: '2025-02-07',

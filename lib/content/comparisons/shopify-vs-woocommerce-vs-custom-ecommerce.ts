@@ -2,7 +2,7 @@ import type { ComparisonArticle } from '@/lib/types/content'
 
 export const shopifyVsWoocommerceVsCustomEcommerce: ComparisonArticle = {
   slug: 'shopify-vs-woocommerce-vs-custom-ecommerce',
-  title: 'Shopify vs WooCommerce vs Custom E-Commerce: Online-Shop Vergleich',
+  title: 'Shopify vs WooCommerce vs Custom Shop 2025',
   description:
     'E-Commerce Plattformen im Vergleich: Hosted vs Self-Hosted vs Maßentwicklung. Kosten, Flexibilität, Features für Ihren Online-Shop.',
   publishedAt: '2025-02-03',
