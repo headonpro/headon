@@ -4,15 +4,24 @@ import { Mail, MapPin, Phone } from 'lucide-react'
 
 const navigation = {
   services: [
-    { name: 'Web Development', href: '/services#web' },
-    { name: 'Mobile Development', href: '/services#mobile' },
-    { name: 'UI/UX Design', href: '/services#design' },
-    { name: 'Backend Solutions', href: '/services#backend' },
+    { name: 'Web Development', href: '/services/web-development' },
+    { name: 'Mobile Development', href: '/services/mobile-development' },
+    { name: 'UI/UX Design', href: '/services/ui-ux-design' },
+    { name: 'Backend Solutions', href: '/services/backend-solutions' },
   ],
   company: [
     { name: 'About', href: '/about' },
     { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Regionen', href: '/regionen' },
+    { name: 'Branchen', href: '/branchen' },
+    { name: 'Technologie', href: '/technologie' },
+  ],
+  regionen: [
+    { name: 'Bad Mergentheim', href: '/regionen/bad-mergentheim' },
+    { name: 'Wertheim', href: '/regionen/wertheim' },
+    { name: 'Tauberbischofsheim', href: '/regionen/tauberbischofsheim' },
+    { name: 'Lauda-Königshofen', href: '/regionen/lauda-koenigshofen' },
+    { name: 'Würzburg', href: '/regionen/wuerzburg' },
+    { name: 'Alle Regionen', href: '/regionen' },
   ],
   tools: [
     { name: 'Website Kosten', href: '/webseite-erstellen-lassen-kosten' },
@@ -35,7 +44,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-50">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
           {/* Logo & Description */}
           <div className="space-y-4 md:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-block" aria-label="HEADON.pro - Zur Startseite">
@@ -101,6 +110,23 @@ export default function Footer() {
             <h3 className="text-foreground text-sm font-semibold">Unternehmen</h3>
             <ul role="list" className="mt-4 space-y-2">
               {navigation.company.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Regionen */}
+          <div>
+            <h3 className="text-foreground text-sm font-semibold">Regionen</h3>
+            <ul role="list" className="mt-4 space-y-2">
+              {navigation.regionen.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}

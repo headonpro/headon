@@ -33,13 +33,18 @@ export async function generateMetadata({ params }: TechnologyPageProps): Promise
     }
   }
 
+  const canonicalUrl = `https://headon.pro/technologie/${tech}`
+
   return {
     title: `${technologyPage.frontmatter.officialName} Agentur | HEADON`,
     description: technologyPage.frontmatter.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: `${technologyPage.frontmatter.officialName} Agentur | HEADON`,
       description: technologyPage.frontmatter.description,
-      url: `https://headon.pro/technologie/${tech}`,
+      url: canonicalUrl,
       type: 'website',
       images: [
         {

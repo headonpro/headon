@@ -361,11 +361,60 @@ export default function CityPageContent({
             <CityFAQSection faqs={faqs} cityName={cityPage.frontmatter.name} variant="dark" />
           </motion.div>
 
-          {/* Final CTA */}
+          {/* Weitere Regionen - Internal Linking */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.0 }}
+            className="mx-auto mb-24 max-w-6xl"
+          >
+            <h2 className="mb-4 text-center text-3xl font-bold text-white md:text-4xl">
+              Weitere Service-Regionen
+            </h2>
+            <p className="mx-auto mb-12 max-w-2xl text-center text-white/80">
+              Wir betreuen Kunden in der gesamten Region Main-Tauber-Kreis und darüber hinaus
+            </p>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+              {[
+                { name: 'Bad Mergentheim', slug: 'bad-mergentheim' },
+                { name: 'Lauda-Königshofen', slug: 'lauda-koenigshofen' },
+                { name: 'Tauberbischofsheim', slug: 'tauberbischofsheim' },
+                { name: 'Wertheim', slug: 'wertheim' },
+                { name: 'Würzburg', slug: 'wuerzburg' },
+                { name: 'Heilbronn', slug: 'heilbronn' },
+                { name: 'Aschaffenburg', slug: 'aschaffenburg' },
+                { name: 'Crailsheim', slug: 'crailsheim' },
+                { name: 'Mosbach', slug: 'mosbach' },
+                { name: 'Marktheidenfeld', slug: 'marktheidenfeld' },
+              ]
+                .filter((region) => region.slug !== cityPage.slug)
+                .slice(0, 5)
+                .map((region) => (
+                  <Link
+                    key={region.slug}
+                    href={`/regionen/${region.slug}`}
+                    className="group rounded-lg border border-white/20 bg-white/10 p-4 text-center backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/20"
+                  >
+                    <MapPin className="mx-auto mb-2 h-5 w-5 text-white/70 transition-colors group-hover:text-white" />
+                    <span className="text-sm font-medium text-white">{region.name}</span>
+                  </Link>
+                ))}
+            </div>
+            <div className="mt-6 text-center">
+              <Link
+                href="/regionen"
+                className="text-white/80 underline transition-colors hover:text-white"
+              >
+                Alle Regionen ansehen →
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Final CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.1 }}
             className="mx-auto max-w-4xl"
           >
             <div className="rounded-2xl border border-white/20 bg-white/10 p-12 text-center shadow-2xl backdrop-blur-md">

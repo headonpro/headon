@@ -33,13 +33,18 @@ export async function generateMetadata({ params }: BranchePageProps): Promise<Me
     }
   }
 
+  const canonicalUrl = `https://headon.pro/branchen/${branche}`
+
   return {
     title: `${branchePage.frontmatter.heroTitle} | HEADON`,
     description: branchePage.frontmatter.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: `${branchePage.frontmatter.heroTitle} | HEADON`,
       description: branchePage.frontmatter.description,
-      url: `https://headon.pro/branchen/${branche}`,
+      url: canonicalUrl,
       type: 'website',
       images: [
         {

@@ -56,7 +56,7 @@ export async function generateMetadata({
   const pageUrl = `${baseUrl}/vergleiche/${slug}`
 
   return {
-    title: article.title,
+    title: `${article.title} | HEADON.pro`,
     description: article.description,
     keywords: article.keywords.join(', '),
     authors: [{ name: article.author.name }],
@@ -165,7 +165,7 @@ export default async function ComparisonArticlePage({
 
             {/* Title */}
             <h1 className="font-heading mb-6 text-3xl font-bold text-white md:text-5xl">
-              {article.title}
+              {itemNames}: Welche Technologie passt zu Ihrem Projekt?
             </h1>
 
             {/* Meta Info */}
