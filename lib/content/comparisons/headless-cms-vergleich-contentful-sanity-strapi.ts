@@ -2,7 +2,7 @@ import type { ComparisonArticle } from '@/lib/types/content'
 
 export const headlessCmsVergleich: ComparisonArticle = {
   slug: 'headless-cms-vergleich-contentful-sanity-strapi',
-  title: 'Headless CMS Vergleich: Contentful vs Sanity vs Strapi 2025',
+  title: 'Headless CMS: Contentful vs Sanity vs Strapi',
   description:
     'Die besten Headless CMS im Vergleich: SaaS vs Open Source, Features, Kosten, Developer Experience. Welches CMS ist das richtige?',
   publishedAt: '2025-02-05',

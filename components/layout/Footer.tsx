@@ -17,11 +17,15 @@ const navigation = {
   ],
   regionen: [
     { name: 'Bad Mergentheim', href: '/regionen/bad-mergentheim' },
-    { name: 'Wertheim', href: '/regionen/wertheim' },
-    { name: 'Tauberbischofsheim', href: '/regionen/tauberbischofsheim' },
     { name: 'Lauda-Königshofen', href: '/regionen/lauda-koenigshofen' },
+    { name: 'Tauberbischofsheim', href: '/regionen/tauberbischofsheim' },
+    { name: 'Wertheim', href: '/regionen/wertheim' },
     { name: 'Würzburg', href: '/regionen/wuerzburg' },
-    { name: 'Alle Regionen', href: '/regionen' },
+    { name: 'Heilbronn', href: '/regionen/heilbronn' },
+    { name: 'Aschaffenburg', href: '/regionen/aschaffenburg' },
+    { name: 'Crailsheim', href: '/regionen/crailsheim' },
+    { name: 'Mosbach', href: '/regionen/mosbach' },
+    { name: 'Marktheidenfeld', href: '/regionen/marktheidenfeld' },
   ],
   tools: [
     { name: 'Website Kosten', href: '/webseite-erstellen-lassen-kosten' },
