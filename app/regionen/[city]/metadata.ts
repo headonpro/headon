@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: GenerateMetadataProps): Promi
   const ogImageUrl = `${baseUrl}/headon-logo.svg`
 
   // Create SEO-optimized title with city name and main keyword
-  const title = `Webentwicklung ${frontmatter.name} | HEADON.pro`
+  const title = `SEO & Webdesign ${frontmatter.name} | Agentur Ab 2.500€`
 
   // Create description with local keywords
   const description = `Professionelle Webentwicklung in ${frontmatter.name}, ${frontmatter.state}. ${frontmatter.description}`

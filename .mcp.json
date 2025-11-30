@@ -2,19 +2,17 @@
   "mcpServers": {
     "chrome-devtools": {
       "command": "npx",
-      "args": ["chrome-devtools-mcp@latest", "--executablePath=/usr/bin/chromium"]
+      "args": [
+        "chrome-devtools-mcp@latest",
+        "--executablePath=/usr/bin/chromium"
+      ]
     },
     "shadcn": {
       "command": "npx",
-      "args": ["shadcn@latest", "mcp"]
-    },
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
-    },
-    "spec-workflow": {
-      "command": "npx",
-      "args": ["-y", "@pimzino/spec-workflow-mcp@latest", "/home/headon/projects/headon"]
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ]
     }
   }
 }

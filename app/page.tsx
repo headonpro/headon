@@ -7,6 +7,7 @@ import ProcessSection from '@/components/sections/ProcessSection'
 import TechnologyTrustSection from '@/components/sections/TechnologyTrustSection'
 import TrustPersonalitySection from '@/components/sections/TrustPersonalitySection'
 import CostCalculatorCTA from '@/components/sections/CostCalculatorCTA'
+import RegionalLinksSection from '@/components/sections/RegionalLinksSection'
 
 export const metadata: Metadata = {
   title: 'Kreativ- & Digitalagentur für Web, Apps & Design | Ab 2.500€',
@@ -77,6 +78,7 @@ export default function Home() {
       <KIAdvantageSection />
       <TechnologyTrustSection />
       <CostCalculatorCTA />
+      <RegionalLinksSection />
       <TrustPersonalitySection />
     </>
   )
