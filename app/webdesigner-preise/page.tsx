@@ -12,6 +12,16 @@ const faqItems: FAQItem[] = [
       'Freelancer verlangen typischerweise 60-120€/Stunde, abhängig von Erfahrung, Spezialisierung und Region. Junior-Entwickler starten bei 40-60€/h, Senior-Entwickler mit 10+ Jahren Erfahrung liegen bei 100-150€/h. Agenturen rechnen intern mit 100-200€/h (Verrechnungssatz), wobei der Client-Stundensatz oft höher liegt durch Overhead. HEADON liegt bei effektiv 70-110€/h bei Festpreis-Projekten.',
   },
   {
+    question: 'Wie hoch ist der Stundensatz für Webentwickler?',
+    answer:
+      'Der Stundensatz für Webentwickler liegt 2025 zwischen 50€ und 150€ pro Stunde. Junior-Webentwickler starten bei 50-70€/h, Mid-Level-Entwickler bei 70-100€/h, und Senior-Webentwickler mit Spezialisierung (React, Node.js, etc.) verlangen 100-150€/h. Der Stundensatz Webentwickler ist meist 10-20% höher als beim reinen Webdesigner, da Backend-Entwicklung und technische Architektur mehr Fachwissen erfordern.',
+  },
+  {
+    question: 'Was kostet Webdesign pro Stunde bei einem Freelancer?',
+    answer:
+      'Der Freelancer Webdesign Stundensatz liegt in Deutschland zwischen 60€ und 120€ pro Stunde. Faktoren: Erfahrungslevel (Junior 40-60€, Senior 100-150€), Spezialisierung (UI/UX-Designer oft teurer), Region (Großstadt vs. ländlich), und Projektart. Bei Festpreis-Projekten ist der effektive Stundensatz oft günstiger. Vergleichen Sie immer Gesamtkosten, nicht nur Stundensätze.',
+  },
+  {
     question: 'Warum sind Agentur-Preise so viel höher als Freelancer-Preise?',
     answer:
       'Agenturen haben hohe Fixkosten: Büroräume (Miete, Nebenkosten), Management und Administration (Projektmanager, Controller, HR), Vertrieb und Marketing, sowie Gewinnmargen für Gesellschafter. Diese Overhead-Kosten werden auf Projekte umgelegt – oft 40-60% der Projektkosten. Ein Freelancer hat nur seine eigene Arbeitszeit und minimale Fixkosten, daher die niedrigeren Preise. Remote-Teams wie HEADON eliminieren Bürokosten und haben schlanke Strukturen, daher Mittelweg-Preise.',
@@ -59,8 +69,8 @@ export default function WebdesignerPreisePage() {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Webdesigner Preise 2025 –{' '}
-              <span className="text-white/90">Transparent vergleichen</span>
+              Webdesigner Preise & Stundensätze 2025 –{' '}
+              <span className="text-white/90">Kosten transparent vergleichen</span>
             </h1>
 
             <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
@@ -225,6 +235,67 @@ export default function WebdesignerPreisePage() {
             </div>
           </div>
 
+          <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">
+            Stundensatz Webdesign & Webentwicklung 2025
+          </h2>
+
+          <p className="text-gray-700 leading-relaxed mb-6">
+            Der <strong>Stundensatz für Webdesigner</strong> und <strong>Webentwickler</strong> variiert
+            stark je nach Erfahrung, Spezialisierung und Anstellungsart. Hier die aktuellen Marktpreise
+            für Deutschland:
+          </p>
+
+          <div className="overflow-x-auto my-8 not-prose">
+            <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-sm">
+              <thead className="bg-primary-600 text-white">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold">Anbieter-Typ</th>
+                  <th className="px-4 py-3 text-left font-semibold">Stundensatz</th>
+                  <th className="px-4 py-3 text-left font-semibold">Besonderheiten</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                <tr className="hover:bg-gray-50">
+                  <td className="px-4 py-3 font-medium">Junior Webdesigner/Entwickler</td>
+                  <td className="px-4 py-3">40–60 €/h</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">1-3 Jahre Erfahrung, einfache Projekte</td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-4 py-3 font-medium">Mid-Level Freelancer</td>
+                  <td className="px-4 py-3">60–90 €/h</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">3-7 Jahre, breites Skillset</td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-4 py-3 font-medium">Senior Webentwickler</td>
+                  <td className="px-4 py-3">90–150 €/h</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">7+ Jahre, Spezialist oder Full-Stack</td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-4 py-3 font-medium">Freelancer Webdesign (Durchschnitt)</td>
+                  <td className="px-4 py-3">60–120 €/h</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">Direkte Kommunikation, flexibel</td>
+                </tr>
+                <tr className="hover:bg-gray-50 bg-primary-50">
+                  <td className="px-4 py-3 font-medium text-primary-700">HEADON (Remote-Team)</td>
+                  <td className="px-4 py-3 font-semibold text-primary-700">70–110 €/h effektiv</td>
+                  <td className="px-4 py-3 text-sm text-primary-600">Festpreise, Team-Backup, modern</td>
+                </tr>
+                <tr className="hover:bg-gray-50">
+                  <td className="px-4 py-3 font-medium">Agentur (intern)</td>
+                  <td className="px-4 py-3">100–200 €/h</td>
+                  <td className="px-4 py-3 text-sm text-gray-600">Overhead, Projektmanagement inkl.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-gray-700 leading-relaxed mb-6">
+            <strong>Wichtig:</strong> Der <strong>Stundensatz Webentwickler</strong> liegt oft 10-20% höher
+            als beim reinen Webdesigner, da technische Implementierung (Backend, APIs, Datenbanken)
+            spezialisiertes Know-how erfordert. Bei Festpreis-Projekten ist der effektive Stundensatz
+            meist günstiger, da effizient gearbeitet wird.
+          </p>
+
           <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">
             Preismodelle im Webdesign: Was Sie wissen sollten
           </h3>
@@ -291,7 +362,35 @@ export default function WebdesignerPreisePage() {
               </p>
             </div>
 
-            {/* FAQ 2 */}
+            {/* FAQ 2 - NEU: Stundensatz Webentwickler */}
+            <div className="border-b border-gray-200 pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Wie hoch ist der Stundensatz für Webentwickler?
+              </h3>
+              <p className="text-gray-700 leading-relaxed">
+                Der Stundensatz für Webentwickler liegt 2025 zwischen 50€ und 150€ pro Stunde.
+                Junior-Webentwickler starten bei 50-70€/h, Mid-Level-Entwickler bei 70-100€/h,
+                und Senior-Webentwickler mit Spezialisierung (React, Node.js, etc.) verlangen
+                100-150€/h. Der Stundensatz Webentwickler ist meist 10-20% höher als beim reinen
+                Webdesigner, da Backend-Entwicklung und technische Architektur mehr Fachwissen erfordern.
+              </p>
+            </div>
+
+            {/* FAQ 3 - NEU: Freelancer Webdesign Stundensatz */}
+            <div className="border-b border-gray-200 pb-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Was kostet Webdesign pro Stunde bei einem Freelancer?
+              </h3>
+              <p className="text-gray-700 leading-relaxed">
+                Der Freelancer Webdesign Stundensatz liegt in Deutschland zwischen 60€ und 120€
+                pro Stunde. Faktoren: Erfahrungslevel (Junior 40-60€, Senior 100-150€),
+                Spezialisierung (UI/UX-Designer oft teurer), Region (Großstadt vs. ländlich),
+                und Projektart. Bei Festpreis-Projekten ist der effektive Stundensatz oft günstiger.
+                Vergleichen Sie immer Gesamtkosten, nicht nur Stundensätze.
+              </p>
+            </div>
+
+            {/* FAQ 4 */}
             <div className="border-b border-gray-200 pb-6">
               <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 Warum sind Agentur-Preise so viel höher als Freelancer-Preise?

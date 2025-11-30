@@ -1,12 +1,5 @@
 {
   "mcpServers": {
-    "chrome-devtools": {
-      "command": "npx",
-      "args": [
-        "chrome-devtools-mcp@latest",
-        "--executablePath=/usr/bin/chromium"
-      ]
-    },
     "shadcn": {
       "command": "npx",
       "args": [
