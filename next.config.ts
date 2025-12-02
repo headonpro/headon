@@ -211,6 +211,16 @@ const nextConfig: NextConfig = {
         destination: '/blog/core-web-vitals-optimierung',
         permanent: true,
       },
+      {
+        source: '/blog/react-native-performance-optimization',
+        destination: '/blog/react-native-vs-flutter',
+        permanent: true,
+      },
+      {
+        source: '/blog/webentwicklung-agentur-auswahl',
+        destination: '/blog/welche-agentur-webentwicklung-empfehlung',
+        permanent: true,
+      },
       // ========================================
       // Glossar redirects - missing entries
       // ========================================
@@ -285,6 +295,11 @@ const nextConfig: NextConfig = {
       {
         source: '/preise',
         destination: '/website-kosten',
+        permanent: true,
+      },
+      {
+        source: '/kostenrechner',
+        destination: '/webseite-erstellen-lassen-kosten',
         permanent: true,
       },
       {
