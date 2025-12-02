@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WebVitalsReporter />
         <Script
           defer
-          src="https://analytics.headon.pro/script.js"
+          src="https://analytics.headon.pro/insights.js"
           data-website-id="4d2d852f-7617-4bd2-9e80-7dbacf1c5d24"
           strategy="lazyOnload"
         />
